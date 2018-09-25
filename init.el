@@ -67,11 +67,15 @@
 (require 'evil)
 (evil-mode t)
 ;; (define-key key-translation-map (kbd "ch") (kbd "C-h"))
-(define-key evil-normal-state-map "gl" 'move-end-of-line)
-(define-key evil-normal-state-map "gh" 'move-beginning-of-line)
-(define-key evil-normal-state-map "gtt" 'make-frame-command)
 ;; (define-key evil-normal-state-map "c" nil)
 ;; (define-key evil-motion-state-map "cu" 'universal-argument)
+;; Movements
+(define-key evil-normal-state-map "gl" 'move-end-of-line)
+(define-key evil-normal-state-map "gh" 'move-beginning-of-line)
+;;Frams Controls
+(define-key evil-normal-state-map "gtt" 'make-frame-command)
+(define-key evil-normal-state-map "gtf" 'find-file-other-frame)
+(define-key evil-normal-state-map "gtb" 'switch-to-buffer-other-frame)
 
 ;; init.el ends here
 
