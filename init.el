@@ -76,6 +76,16 @@
 (define-key evil-normal-state-map "gtt" 'make-frame-command)
 (define-key evil-normal-state-map "gtf" 'find-file-other-frame)
 (define-key evil-normal-state-map "gtb" 'switch-to-buffer-other-frame)
+(define-key evil-normal-state-map "gtj" 'other-frame)
+(define-key evil-normal-state-map "gthk" 'describe-key)
+;; Frams Close
+
+(defun kill-buffer-and-frame ()
+  "kill buffer and cloze frame"
+  (interactive)
+  (kill-buffer-and-window) 
+  (evil-quit))
+(define-key evil-normal-state-map "ZX" 'kill-buffer-and-frame)
 
 ;; init.el ends here
 
@@ -88,7 +98,7 @@
   (interactive)
   (toggle-frame-fullscreen)
 )
-(defun Toggle-fonte-lage-size ()
+(defun toggle-fonte-lage-size ()
   "Toggle betwin fullscrin font size and normal"
   (interactive)
   ;; use a property “state”. Value is t or nil
