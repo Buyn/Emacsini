@@ -78,6 +78,7 @@
 (define-key evil-normal-state-map "gtb" 'switch-to-buffer-other-frame)
 (define-key evil-normal-state-map "gtj" 'other-frame)
 (define-key evil-normal-state-map "gthk" 'describe-key)
+(define-key evil-normal-state-map "gthf" 'describe-function)
 ;; Frams Close
 
 (defun kill-buffer-and-frame ()
@@ -89,6 +90,11 @@
 
 ;; init.el ends here
 
+;; --------------------------------------
+;; AUTO-COMPLETE  CUSTOMIZATION
+;; --------------------------------------
+(setq tab-always-indent 'complete)
+(add-to-list 'completion-styles 'initials t)
 ;; --------------------------------------
 ;; FULLSCREEN-MOD CUSTOMIZATION
 ;; --------------------------------------
