@@ -1,0 +1,11 @@
+;; --------------------- 
+;; open comand on new frame 
+;; --------------------- 
+(defun run-command-in-new-frame (prefixarg command-name)
+ (interactive (list current-prefix-arg (read-extended-command)))
+ (let ((command (intern-soft command-name)))
+   (unless command
+    (error "%s is not a valid command name" command-name))
+  (select-frame (make-frame))
+  (let ((prefix-arg prefixarg))
+    (command-execute command))))

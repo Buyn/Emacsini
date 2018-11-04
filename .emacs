@@ -44,7 +44,11 @@
 (load-theme 'material t) ;; load material theme
 ;;(global-linum-mode t) ;; enable line numbers globally
 ;;(set-frame-font "Trebuchet MS")
-(set-frame-font "Ubuntu Mono")
+;;(set-frame-font "Ubuntu Mono")
+;;(set-default-font "Ubuntu Mono")
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono"))
+
 
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
@@ -84,12 +88,14 @@
 ;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
 (define-key evil-normal-state-map "gthk" 'describe-key)
 (define-key evil-normal-state-map "gthf" 'describe-function)
+(load "~/INI/org_agend_cfg.el")
 ;; Frams Close
 
 (defun kill-buffer-and-frame ()
   "kill buffer and cloze frame"
   (interactive)
-  (kill-buffer-and-window) 
+  (kill-buffer-and-window)
+  (kill-this-buffer)
   (evil-quit))
 (define-key evil-normal-state-map "ZX" 'kill-buffer-and-frame)
 
@@ -116,8 +122,9 @@
 	(text-scale-set 0)
         (put 'toggle-font-lage-size 'state nil))
     (progn
-	(text-scale-set +5)
+	(text-scale-set +3)
 	(put 'toggle-font-lage-size 'state t))))
+
 
 (defun toggle-bars ()
   "Toggles bars visibility."
@@ -136,14 +143,37 @@
 ;;(global-set-key (kbd "C-M-f") 'toggle-full-screen-and-bars)
 ;;(define-key evil-normal-state-map [(control shift f)] 'toggle-full-screen-and-bars)
 (global-set-key [(control shift f)]  'toggle-full-screen-and-bars)
+(global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
 
 ;; --------------------------------------
-;; FOLDING CUSTOMIZATION
+;; ORG-MODE CUSTOMIZATION
 ;; --------------------------------------
-;;(load "folding" 'nomessage 'noerror)
-;;(folding-mode-add-find-file-hook)
-;;(folding-add-to-marks-list 'php-mode                "//{"  "//}"  nil t)
-;; (folding-add-to-marks-list 'lisp-mode                ";;{"  ";;}"  nil t)
-;; (folding-add-to-marks-list 'prolog-mode             "%{{{" "%}}}" nil t)
-;;(folding-add-to-marks-list 'html-mode               "<!-- {{{ " "<!-- }}} -->" " -->" nil t)
-;; init.el ends here
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(setq org-enforce-todo-dependencies t)
+;; Should unfinished children block state changes in the parent? 
+(setq org-enforce-todo-checkbox-dependencies t)
+;; Should unfinished checkboxes block state changes in the parent?
+(setq org-use-property-inheritance t)
+;; DEADLINE является одним из этих свойств, которые по умолчанию не наследуются. Вы можете изменить это, настроив переменную
+(load "~/INI/org_agend_cfg.el")
+;; --------------------------------------
+;; End of manual file
+;; --------------------------------------
+;; --------------------------------------
+;; START OF AUTOMATION 
+;; --------------------------------------
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   (quote
+    ("~/ORG/start.org" "D:/tools.win/Fast/Evol_fast/vadim/tradomat/Toch/ORG/plan.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

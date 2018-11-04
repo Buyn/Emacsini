@@ -1,0 +1,207 @@
+#-*- mode: org -*-
+#+STARTUP: content
+#+TODO: TODO IN-PROGRESS WAITING DONE
+
+* IN-PROGRESS Оргаизовать Org Mod
+** DONE Понять что работает а что нет
+   SCHEDULED: <2018-10-26 Пт 16:50>
+** DONE Понять как настраивать 
+- много разных хелпов
+- понял обшие принципы и вообще новерное разобрался
+   SCHEDULED: <2018-10-26 Пт 15:10>
+** IN-PROGRESS Разобратся с агендой
+   SCHEDULED: <2018-10-27 Сб 09:50>
+*** keys add agenda file
+   C-c [     (org-agenda-file-to-front)
+
+    Add current file to the list of agenda files. The file is added to the front of the list. If it was already in the list, it is moved to the front. With a prefix argument, file is added/moved to the end. 
+C-c ]     (org-remove-file)
+
+    Remove current file from the list of agenda files. 
+   SCHEDULED: <2018-10-25 Чт 09:40>
+*** comands to add agenda file
+   (setq org-agenda-files '("~/org"))
+   (setq org-agenda-files '("~/ORG/start.org"))
+   (setq org-agenda-files (quote ("~/ORG/start.org")))
+** TODO Понять что делать с языком 
+   - по аналогии с вайм
+   - как сделать чтоб команды работали и на руской раскладке
+   - поискать помошь для всех языков
+    - команды для емака в основном работают
+    - видемо раскладка должна остоватся но при этом емак должен слать символы на другом языке
+* TODO Настроить емак для работы с Си 
+1) сварачивание
+2) авто дополнение
+3) снипиты
+4) подсветка
+   + кода
+   + скобок
+   + курсора при альттабинге
+5) квикфикс
+6) оргмод литпрограминг
+   - импор сорса в один файл
+   - создание нового файла на основе
+   - создание структуры папок
+   - создание всего проеката на основе стуктурного описания (файлов и папок). с возможностью открытия следуших файлов.
+* WAITING работа с серийным портом
+- Передовать команды из буфера в открытый порт
+- посмотреть как настроен емак в видео с форсом
+- понять как реконектится наиболее быстро
+  - командой
+  - сочетание кнопок
+  - строкой из скреч буфера
+* Help Docs 
+** Welcome to Org mode
+*** Marker sibols  
+ You can make words 
+ *bold*, /italic/, _underlined_, =code= and ~verbatim sdfsdfs~, 
+ and, if you must, +strike-through+.
+*** Lord of the Rings
+    My favorite scenes are (in this order)
+    1. Eowyn's fight with the witch king
+       + this was already my favorite scene in the book
+       + I really like Miranda Otto.
+    2. The attack of the Rohirrim
+    3. Peter Jackson being shot by Legolas
+       - on DVD only
+       He makes a really funny face when it happens.
+    But in the end, no individual scenes matter but the film as a whole.
+    Important actors in this film are:
+    - Elijah Wood :: He plays Frodo
+    - Sean Austin :: He plays Sam, Frodo's friend.  I still remember
+      him very well from his role as Mikey Walsh in The Goonies.
+** Tree Notes 
+*** Help keys
+    Visibility cycling
+Tab – show current
+S-tab – show all children
+C-u C-u C-u Tab – show all including drawers
+Startup options
+Editting
+M-Ret – add element on the same level
+M-S-Ret – insert TODO element
+M-Right – demote current element
+M-S-Right – deomote current subtree
+M-Left – promote current element
+M-S-Left – promote current subtree
+M-S-Up – move current tree up
+M-S-Down – move current tree down
+C-c C-x C-w – kill current subtree
+C-c C-x M-w – copy current subtree
+C-c C-x C-y – yank subtree
+Plain lists
+Use M-Ret to add list item
+Ordered list:
+
+    First
+    Second
+    Third
+
+Unordered lists
+
+    abc
+    efg
+
+List with checkboxes (M-S-Ret)
+
+    [ ] First element
+    [X] Second element (C-c C-c – toggle checkbox state)
+    [X] Third element
+
+More devices
+C-c C-z – time-stamped drawer
+
+    Note taken on [2013-09-02 Mon 23:54]
+    My note here
+
+[fn:2]
+C-c C-x f – footnote[fn:1]
+ToDo functionality
+C-c C-t – rotate TODO state
+S-Left, S-Right – rotate TODO state
+S-M-Ret – insert new TODO note
+(setq org-todo-keywords’((sequence “TODO” “FEEDBACK” “VERIFY” “|” “DONE” “DELEGATED”)))
+Footnotes
+
+*** Exempls
+  - Note taken on [2018-10-29 Пн 20:19] \\
+    ladfdfd
+    fdf
+    df
+    df
+    ts add anoser note
+    - sdfsdf sdf sdf sdfsd \\
+    sdfsdfsdf
+    sdfsdf sd fsd fd
+    - some note?
+	Intrasting where it puting this
+    - d
+    - sdf
+    - sdfsdfsf
+    - [X] 
+    - [X] sdf
+    - 
+    - sdfsdfs sdf sdf sd[fn:1] 
+    - 
+*** Footnotes
+
+[fn:1] The footnote.
+
+[fn:2] Second footnote.
+[fn:1] I not undestend ecthakli how this must work
+** Tabels
+   | freeman | 1 | hucker |
+   | max     | 1 | humen  |
+   |---------+---+--------|
+   |         |   |        |
+  
+   |---------+---+--------|
+   |         |   |        |
+** Tags 
+Two: Which tags do you use most?
+You can always add tags freely and by hand, but if you configure the most important ones along with fast-access keys, life will be better. Configure the variable org-tags-alist or simply do this right in the file with1
+#+TAGS: home(h) work(w) @computer(c) @phone(p) errants(e)
+** агендa
+*** keys add agenda file
+   C-c [     (org-agenda-file-to-front)
+
+    Add current file to the list of agenda files. The file is added to the front of the list. If it was already in the list, it is moved to the front. With a prefix argument, file is added/moved to the end. 
+C-c ]     (org-remove-file)
+
+    Remove current file from the list of agenda files. 
+*** comands to add agenda file
+   (setq org-agenda-files '("~/org"))
+   (setq org-agenda-files '("~/ORG/start.org"))
+   (setq org-agenda-files (quote ("~/ORG/start.org")))
+** Todos 
+*** Dependantistis 
+**** TODO Blocked until (two) is done
+***** DONE one
+***** TODO two
+**** Parent
+     :PROPERTIES:
+     :ORDERED:  t
+     :END:
+***** TODO a
+***** TODO b, needs to wait for (a)
+***** TODO c, needs to wait for (a) and (b)
+
+   You can ensure an entry is never blocked by using the NOBLOCKING property:
+
+**** This entry is never blocked
+     :PROPERTIES:
+     :NOBLOCKING: t
+     :END:
+
+   C-c C-x o     (org-toggle-ordered-property)
+*** Status 
+  One: More TODO keywords
+  Define the TODO states you find useful and single letters for fast selection. Customize the variable org-todo-keywords or simply do this right in the file with1:
+  #+TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELED(c)
+** Links 
+   [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
+* This is a headline, it starts with one or more stars
+  A heading has one star, a sub-heading two, etc.
+* Working with lists
+** Moving around headlines
+** Moving around in our outline

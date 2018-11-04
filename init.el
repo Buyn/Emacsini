@@ -43,6 +43,12 @@
 (tool-bar-mode -1)
 (load-theme 'material t) ;; load material theme
 ;;(global-linum-mode t) ;; enable line numbers globally
+;;(set-frame-font "Trebuchet MS")
+;;(set-frame-font "Ubuntu Mono")
+;;(set-default-font "Ubuntu Mono")
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono"))
+
 
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
@@ -77,6 +83,9 @@
 (define-key evil-normal-state-map "gtf" 'find-file-other-frame)
 (define-key evil-normal-state-map "gtb" 'switch-to-buffer-other-frame)
 (define-key evil-normal-state-map "gtj" 'other-frame)
+(define-key evil-normal-state-map "gtk" 'previous-multiframe-window)
+;;(define-key evil-normal-state-map "gth" 'other-frame -2)
+;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
 (define-key evil-normal-state-map "gthk" 'describe-key)
 (define-key evil-normal-state-map "gthf" 'describe-function)
 ;; Frams Close
@@ -84,11 +93,10 @@
 (defun kill-buffer-and-frame ()
   "kill buffer and cloze frame"
   (interactive)
-  (kill-buffer-and-window) 
+  (kill-buffer-and-window)
+  (kill-this-buffer)
   (evil-quit))
 (define-key evil-normal-state-map "ZX" 'kill-buffer-and-frame)
-
-;; init.el ends here
 
 ;; --------------------------------------
 ;; AUTO-COMPLETE  CUSTOMIZATION
@@ -116,6 +124,7 @@
 	(text-scale-set +5)
 	(put 'toggle-font-lage-size 'state t))))
 
+
 (defun toggle-bars ()
   "Toggles bars visibility."
   (interactive)
@@ -126,10 +135,21 @@
   "Toggles full-screen mode and bars."
   (interactive)
   (toggle-bars)
-  (Toggle-fonte-lage-size)
+  (toggle-fonte-lage-size)
   (toggle-full-screen))
 
 ;; Use F11 to switch between windowed and full-screen modes
 ;;(global-set-key (kbd "C-M-f") 'toggle-full-screen-and-bars)
 ;;(define-key evil-normal-state-map [(control shift f)] 'toggle-full-screen-and-bars)
 (global-set-key [(control shift f)]  'toggle-full-screen-and-bars)
+
+;; --------------------------------------
+;; FOLDING CUSTOMIZATION
+;; --------------------------------------
+;;(load "folding" 'nomessage 'noerror)
+;;(folding-mode-add-find-file-hook)
+;;(folding-add-to-marks-list 'php-mode                "//{"  "//}"  nil t)
+;; (folding-add-to-marks-list 'lisp-mode                ";;{"  ";;}"  nil t)
+;; (folding-add-to-marks-list 'prolog-mode             "%{{{" "%}}}" nil t)
+;;(folding-add-to-marks-list 'html-mode               "<!-- {{{ " "<!-- }}} -->" " -->" nil t)
+;; init.el ends here
