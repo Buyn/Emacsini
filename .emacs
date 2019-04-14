@@ -88,7 +88,7 @@
 ;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
 (define-key evil-normal-state-map "gthk" 'describe-key)
 (define-key evil-normal-state-map "gthf" 'describe-function)
-(load "~/INI/org_agend_cfg.el")
+;;(load "~/INI/org_agend_cfg.el")
 ;; Frams Close
 
 (defun kill-buffer-and-frame ()

@@ -1,12 +1,6 @@
 ;; --------------------- 
 ;; open ageda on new frame 
 ;; --------------------- 
-
-(defun simple-run-command-in-new-frame (command)
-  (select-frame (make-frame))
-  (funcall command)
-  (delete-other-windows))
-
 ;;(setq org-agenda-files (quote ("~/ORG/start.org")))
 ;;(defun simple-run-command-in-new-frame (command)
 ;; (select-frame (make-frame))
