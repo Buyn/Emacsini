@@ -48,8 +48,6 @@
 ;;(set-default-font "Ubuntu Mono")
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
-
-
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
 ;;  (lambda ()
@@ -62,9 +60,9 @@
 ;; (add-hook 'foo-mode-hook #'display-line-numbers-mode)
 ;; or enabling global-display-line-numbers-mode if you want them everywhere,
 (global-display-line-numbers-mode 1)
+(show-paren-mode 1)
 ;; and to set display-line-numbers-type to the desired style:
 (setq display-line-numbers-type 'relative)
-
 ;;Relative line numbers enabled
 
 ;; --------------------------------------
@@ -170,7 +168,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/ORG/start.org" "D:/tools.win/Fast/Evol_fast/vadim/tradomat/Toch/ORG/plan.org"))))
+    ("~/ORG/start.org" "D:/tools.win/Fast/Evol_fast/vadim/tradomat/Toch/ORG/plan.org")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

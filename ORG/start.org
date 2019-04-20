@@ -20,7 +20,6 @@
 - [ ] энтер2
 - [ ] 2пробел
 - [ ] пробел + i\a(I\A)
-*** TODO jump to end\bagen visual line 
 ** TODO Разобратся с агендой
    SCHEDULED: <2018-10-27 Сб 09:50>
 *** разобрать фаил по подфайлам
@@ -39,6 +38,9 @@ C-c ]     (org-remove-file)
    (setq org-agenda-files '("~/org"))
    (setq org-agenda-files '("~/ORG/start.org"))
    (setq org-agenda-files (quote ("~/ORG/start.org")))
+* TODO настроить для работы с JS
+  Найти файил с туториалом по настройке
+  [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html]]
 * TODO Настроить емак для работы с Си 
 1) сварачивание
 2) авто дополнение
@@ -60,7 +62,41 @@ C-c ]     (org-remove-file)
   - командой
   - сочетание кнопок
   - строкой из скреч буфера
-* Help Docs 
+  
+* Help Docs Emacs 
+** Options
+*** Visual
+*** Text Eltments
+**** Parenthesis
+***** 5.27 How do I show which parenthesis matches the one I’m looking at?
+  Call show-paren-mode in your .emacs file:
+  (show-paren-mode 1)
+
+  You can also enable this mode by selecting the ‘Paren Match Highlighting’ option from the ‘Options’ menu of the Emacs menu bar at the top of any Emacs frame.
+
+  Alternatives to this mode include:
+
+  If you’re looking at a right parenthesis (or brace or bracket) you can delete it and reinsert it. Emacs will momentarily move the cursor to the matching parenthesis.
+
+  C-M-f (forward-sexp) and C-M-b (backward-sexp) will skip over one set of balanced parentheses, so you can see which parentheses match. (You can train it to skip over balanced brackets and braces at the same time by modifying the syntax table.)
+
+  Here is some Emacs Lisp that will make the % key show the matching parenthesis, like in vi. In addition, if the cursor isn’t over a parenthesis, it simply inserts a % like normal.
+  #+BEGIN_SRC elisp
+;; By an unknown contributor
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+"Go to the matching paren if on a paren; otherwise insert %."
+    (interactive "p")
+    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+	    (t (self-insert-command (or arg 1)))))
+  #+END_SRC
+
+
+** Lisp
+** REPL 
+** DeBug
+* Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
  You can make words 

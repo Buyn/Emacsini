@@ -15,7 +15,7 @@
 ;; --------------------- 
 ;; Agend ADD new case
 ;; --------------------- 
-(custom-set-variables
+
  (setq org-agenda-custom-commands 
       '(("c" "Desk Work" tags-todo "computer" ;; (1) (2) (3) (4)
 ;; the key to trigger the search ("c")
@@ -28,7 +28,7 @@
 	 ;;         ("~/computer.html"))
 	 ;; specifies that this agenda view should be exported as HTML to "~/computer.html" when the agenda export function is called (C-c a e). 
         ;; ...other commands here
-        ))
+        )))
 
 (setq org-agenda-custom-commands
       '(("Q" . "Custom queries") ;; gives label to "Q" 
