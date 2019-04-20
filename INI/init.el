@@ -1,5 +1,7 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
+;; --------------------------------------
+;; --------------------------------------
 ;; INSTALL PACKAGES
 ;; --------------------------------------
 (require 'package)
@@ -48,8 +50,6 @@
 ;;(set-default-font "Ubuntu Mono")
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
-
-
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
 ;;  (lambda ()
@@ -62,9 +62,9 @@
 ;; (add-hook 'foo-mode-hook #'display-line-numbers-mode)
 ;; or enabling global-display-line-numbers-mode if you want them everywhere,
 (global-display-line-numbers-mode 1)
+(show-paren-mode 1)
 ;; and to set display-line-numbers-type to the desired style:
 (setq display-line-numbers-type 'relative)
-
 ;;Relative line numbers enabled
 
 ;; --------------------------------------
@@ -88,6 +88,7 @@
 ;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
 (define-key evil-normal-state-map "gthk" 'describe-key)
 (define-key evil-normal-state-map "gthf" 'describe-function)
+;;(load "~/INI/org_agend_cfg.el")
 ;; Frams Close
 
 (defun kill-buffer-and-frame ()
@@ -121,7 +122,7 @@
 	(text-scale-set 0)
         (put 'toggle-font-lage-size 'state nil))
     (progn
-	(text-scale-set +5)
+	(text-scale-set +3)
 	(put 'toggle-font-lage-size 'state t))))
 
 
@@ -142,14 +143,21 @@
 ;;(global-set-key (kbd "C-M-f") 'toggle-full-screen-and-bars)
 ;;(define-key evil-normal-state-map [(control shift f)] 'toggle-full-screen-and-bars)
 (global-set-key [(control shift f)]  'toggle-full-screen-and-bars)
+(global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
 
 ;; --------------------------------------
-;; FOLDING CUSTOMIZATION
+;; ORG-MODE CUSTOMIZATION
 ;; --------------------------------------
-;;(load "folding" 'nomessage 'noerror)
-;;(folding-mode-add-find-file-hook)
-;;(folding-add-to-marks-list 'php-mode                "//{"  "//}"  nil t)
-;; (folding-add-to-marks-list 'lisp-mode                ";;{"  ";;}"  nil t)
-;; (folding-add-to-marks-list 'prolog-mode             "%{{{" "%}}}" nil t)
-;;(folding-add-to-marks-list 'html-mode               "<!-- {{{ " "<!-- }}} -->" " -->" nil t)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(setq org-enforce-todo-dependencies t)
+;; Should unfinished children block state changes in the parent? 
+(setq org-enforce-todo-checkbox-dependencies t)
+;; Should unfinished checkboxes block state changes in the parent?
+(setq org-use-property-inheritance t)
+;; DEADLINE является одним из этих свойств, которые по умолчанию не наследуются. Вы можете изменить это, настроив переменную
+(load "~/INI/org_agend_cfg.el")
+
+;; --------------------------------------
 ;; init.el ends here
