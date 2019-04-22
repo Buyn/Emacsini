@@ -4,69 +4,11 @@
 ;; --------------------------------------
 ;; INSTALL PACKAGES
 ;; --------------------------------------
-(require 'package)
-(add-to-list 'package-archives
-;;        '("melpa" . "http://melpa.org/packages/") t)
-       '("melpa" . "http://melpa.org/packages/") )
-(add-to-list 'package-archives 
-		 '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives 
-		 '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(load "~/INI/inpak.el")
 ;; --------------------------------------
-;; Automatically Installing Packages
+;; VANILA CUSTOMIZATION
 ;; --------------------------------------
-;; D:\Development\lisp\doc\Cfg\use-pac.txt
-
-;; --------------------------------------
-;; M-x package-refresh-contents
-;; before
-;; M-x package-install RET evil
-;; if you're going to call (package-initialize) yourself.
-;;(setq package-enable-at-startup nil)
-
-(package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defvar myPackages
-  '(better-defaults
-    material-theme))
-
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      myPackages)
-
-;; --------------------------------------
-;; BASIC CUSTOMIZATION
-;; --------------------------------------
-;; Disables the startup message (this is the screen with all the tutorial information)
-(setq inhibit-startup-message t) ;; hide the startup message
-(tool-bar-mode -1)
-(load-theme 'material t) ;; load material theme
-;;(global-linum-mode t) ;; enable line numbers globally
-;;(set-frame-font "Trebuchet MS")
-;;(set-frame-font "Ubuntu Mono")
-;;(set-default-font "Ubuntu Mono")
-(add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono"))
-;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
-;;
-;;  (lambda ()
-;;    (interactive)
-;;    (menu-bar-display-line-numbers-mode 'relative)
-;;    (message "Relative line numbers enabled"))
-
-;; (menu-bar-display-line-numbers-mode 'relative)
-;; The canonical way to set this is adding display-line-numbers-mode to a mode hook,
-;; (add-hook 'foo-mode-hook #'display-line-numbers-mode)
-;; or enabling global-display-line-numbers-mode if you want them everywhere,
-(global-display-line-numbers-mode 1)
-(show-paren-mode 1)
-;; and to set display-line-numbers-type to the desired style:
-(setq display-line-numbers-type 'relative)
-;;Relative line numbers enabled
-
+(load "~/INI/vanila_cfg.el")
 ;; --------------------------------------
 ;; EVIL-MOD CUSTOMIZATION
 ;; --------------------------------------
