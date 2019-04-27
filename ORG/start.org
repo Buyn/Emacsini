@@ -9,17 +9,6 @@
 - много разных хелпов
 - понял обшие принципы и вообще новерное разобрался
    SCHEDULED: <2018-10-26 Пт 15:10>
-** TODO настроить редактор 
-*** TODO Понять что делать с языком 
-    - по аналогии с вайм
-    - как сделать чтоб команды работали и на руской раскладке
-    - поискать помошь для всех языков
-     - команды для емака в основном работают
-     - видемо раскладка должна остоватся но при этом емак должен слать символы на другом языке
-*** TODO добовлять один символ
-- [ ] энтер2
-- [ ] 2пробел
-- [ ] пробел + i\a(I\A)
 ** TODO Разобратся с агендой
    SCHEDULED: <2018-10-27 Сб 09:50>
 *** разобрать фаил по подфайлам
@@ -38,31 +27,163 @@ C-c ]     (org-remove-file)
    (setq org-agenda-files '("~/org"))
    (setq org-agenda-files '("~/ORG/start.org"))
    (setq org-agenda-files (quote ("~/ORG/start.org")))
-* TODO настроить для работы с JS
-  Найти файил с туториалом по настройке
-  [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html]]
-* TODO Настроить емак для работы с Си 
-1) сварачивание
-2) авто дополнение
-3) снипиты
-4) подсветка
-   + кода
-   + скобок
-   + курсора при альттабинге
-5) квикфикс
-6) оргмод литпрограминг
-   - импор сорса в один файл
-   - создание нового файла на основе
-   - создание структуры папок
-   - создание всего проеката на основе стуктурного описания (файлов и папок). с возможностью открытия следуших файлов.
-* TODO работа с серийным портом
-- Передовать команды из буфера в открытый порт
-- посмотреть как настроен емак в видео с форсом
-- понять как реконектится наиболее быстро
-  - командой
-  - сочетание кнопок
-  - строкой из скреч буфера
-  
+* натройка емака
+** TODO Vims Tabs
+** TODO Vims Folding 
+** TODO настроить для работы с JS
+   Найти файил с туториалом по настройке
+   [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html]]
+*** Mods
+**** Indium
+     https://github.com/NicolasPetton/Indium
+A JavaScript development environment for Emacs.
+
+Indium connects to a browser tab or nodejs process and provides many features for JavaScript development, including:
+
+    a REPL (with auto completion) & object inspection;
+    an inspector, with history and navigation;
+    a scratch buffer (M-x indium-scratch);
+    JavaScript evaluation in JS buffers with indium-interaction-mode;
+    a stepping Debugger, similar to edebug, or cider.
+
+** TODO настроить редактор 
+*** TODO Понять что делать с языком 
+    - по аналогии с вайм
+    - как сделать чтоб команды работали и на руской раскладке
+    - поискать помошь для всех языков
+     - команды для емака в основном работают
+     - видемо раскладка должна остоватся но при этом емак должен слать символы на другом языке
+*** TODO добовлять один символ
+- [ ] энтер2
+- [ ] 2пробел
+- [ ] пробел + i\a(I\A)
+** TODO Настроить емак для работы с Си 
+ 1) сварачивание
+ 2) авто дополнение
+ 3) снипиты
+ 4) подсветка
+    + кода
+    + скобок
+    + курсора при альттабинге
+ 5) квикфикс
+ 6) оргмод литпрограминг
+    - импор сорса в один файл
+    - создание нового файла на основе
+    - создание структуры папок
+    - создание всего проеката на основе стуктурного описания (файлов и папок). с возможностью открытия следуших 
+*** примеры удачных реализаций
+**** Run shell command and jump to error workflow
+
+ Hi all,
+
+ I have recently started using Emacs(Doom) more and more seriously and really liking the experience. I have come so far that I feel pretty comfortable to use it at work without slowing down my efficiency that much. One aspect of my Vim workflow that I haven't found a good solution to however is building my project (C++) and running unit tests.
+
+ With Vim I am used to using the plugin Asyncrun, https://github.com/skywind3000/asyncrun.vim. This plugin makes it possible to execute shell commands, typically calling the python script that runs build/ or the unit tests and printing the progress in the quickfix window. It would automatically parse the text and find errors and where they are located making it possible to use my keybinding for navigating the quickfix list to easily jump to an error, solve the issue and jump to the next one.
+
+ So far I have only figured out a solution where I open a multiterm window and enable compilation-shell-minor-mode. Run the build command, go back to evil normal mode, M-x compilation-next-error-function. Switch window to the window with the code, fix the error, go to normal mode, switch back to shell window and repeat the process. This seems a little inefficient so I am sure there are better solutions out there but my Emacs skills are very low :)
+
+ So I wonder what your workflows are like in Emacs? :)
+
+ Cheers!
+ 4 comments
+ 100% Upvoted
+ This thread is archived
+ New comments cannot be posted and votes cannot be cast
+ Sort by
+ level 1
+ rskiad
+ 12 points ·
+ 1 year ago
+ · edited 1 year ago
+
+ How about
+
+ M-x compile RET whatever-command
+ C-x `
+
+ There is also projectile that provides projectile-compile-project and projectile-test-project that also work with next-error (C-x `)
+ level 2
+ squirelpower
+ 2 points ·
+ 1 year ago
+
+ That's perfect, works exactly like I want it, many thanks! :)
+ level 2
+ oantolin
+ 1 point ·
+ 1 year ago
+ · edited 1 year ago
+
+ I prefer the keybinding M-g M-n for next-error and its companion M-g M-p for previous-error.
+ level 2
+ TabCompletion
+ 1 point ·
+ 1 year ago
+ · edited 1 year ago
+
+ I bound F6 for my next-error command. I also have a mondo compilation-error-regexp-alist regex to match errors:
+** TODO Добавить функционал 
+*** пробел символ
+*** ентер для пост символа
+*** сдвиг строк
+*** копия строк
+** TODO работа с серийным портом
+ - Передовать команды из буфера в открытый порт
+ - посмотреть как настроен емак в видео с форсом
+ - понять как реконектится наиболее быстро
+   - командой
+   - сочетание кнопок
+   - строкой из скреч буфера
+** Моды для емака
+*** Ivy mods 
+    [[https://www.youtube.com/watch?v=AaUlOH4GTCs]] youtube from where I get this 
+    https://truthseekers.io/lessons/how-to-use-ivy-swiper-counsel-in-emacs-for-noobs/ text version lesson
+    Ivy, Counsel, and Swiper are great if you can figure out how to use them!
+ Luckily they are all pretty simple. In fact, you can just... install them and copy/paste some stuff and be on your way!
+ I wanted to understand these emacs packages though, and that's a little more challenging.
+    - ~Ivy~     :: is a package that helps you search. It helps you do things in M-x, or find file, and Dired, etc... Anything where you look for something in Emacs, Ivy can come to the rescue and help you type less. For example. Let's say I want to look through some Melpa packages. No longer do I have to type package-list-packages. Instead, I can just type "pa li packa" and Ivy will find all the results that match the search terms. Using spaces, you can target certain parts of what you're looking for. It just helps you type less. Ivy doesn't rely on anything, but
+    - ~Swiper~  :: will automatically pull in Ivy when it's installed, because Swiper needs Ivy. Swiper does the same thing as Ivy, but replaces isearch, so you can use ivy features when searching through text.
+    - ~Counsel~ :: gives you extra functions that aren't normally available. For example: You can open a buffer or file in a new window.
+*** hidra mod 
+    https://github.com/abo-abo/hydra
+This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
+*** Mover mods
+**** Avy mods
+     - Avy :: is one of my favorite packages in Emacs.
+     https://truthseekers.io/lessons/avy-emacs-tutorial-moving-around-emacs-quickly/
+     Learning how to use Avy is one of the easiest and fastest ways to improve your efficiency in Emacs. The Avy Emacs package allows you to quickly get to any visible point in an Emacs buffer, window, or frame. By using one of the functions Avy provides, you define a search term, and Avy provides a "Tree" list of options to choose from. You choose the point you want your cursor to move to by typing one or two characters and BOOM, your cursor is exactly where you need it. The best part about Avy is how simple it is. You only need one or two key bindings, and you're good to go.
+**** Fast Emacs Window & Frame switching with WindMove & FrameMove 
+https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
+;; Remap windmove keys to home keys
+(global-set-key (kbd "M-h") 'windmove-left)
+(global-set-key (kbd "M-j") 'windmove-down)
+(global-set-key (kbd "M-k") 'windmove-up)
+(global-set-key (kbd "M-l") 'windmove-right)
+*** quickfix-mode 
+https://github.com/emacsmirror/quickfix-mode
+    quickfix-mode consists of a series of quickfixes registered for your favourite programming mode. 
+These will suggest a possible suggestion depending on the error (or warning) reported for flymake.
+ Oh yes, _quickfix-mode depends_ on ~flymake~ (and ~popup~).
+ https://github.com/auto-complete/popup-el
+    Quickfix in action
+Let's say flymake reports some errors in your code (in this case in erlang)
+flymake errors and warnings
+bar is undefined
+C-c C-f to the rescue...
+quickfix suggest it could define the function for us
+selecting...and voila!
+and the function is defined so that we can work on it
+Exporting unused functions works too.
+foo is unused :-o
+quickfix to the rescue
+and we're good!
+*** Emacs Support for reStructuredText
+    reStructuredText is a syntax for simple text files that allows a tool set - docutils - to extract generic document structure. For people who use Emacs, there is a package that adds a major mode that supports editing the syntax of reStructuredText: rst.el. This document describes the features it provides, and how to setup your Emacs to use them and how to invoke them.
+    ~reStructuredText~ is an easy-to-read, what-you-see-is-what-you-get plaintext markup syntax and parser system. It is useful for in-line program documentation (such as Python docstrings), for quickly creating simple web pages, and for standalone documents. reStructuredText is designed for extensibility for specific application domains. The reStructuredText parser is a component of Docutils. reStructuredText is a revision and reinterpretation of the StructuredText and Setext lightweight markup systems.
+
+The primary goal of reStructuredText is to define and implement a markup syntax for use in Python docstrings and other documentation domains, that is readable and simple, yet powerful enough for non-trivial use. The intended purpose of the markup is the conversion of reStructuredText documents into useful structured data formats.
+
+See statemachine.py for an example of a Python module fully documented using reStructuredText.
 * Help Docs Emacs 
 ** Options
 *** Visual
@@ -249,6 +370,9 @@ C-c ]     (org-remove-file)
   #+TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELED(c)
 ** Links 
    [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
+* Help Docs Gnus
+  The Emacs news and email reader.
+
 * This is a headline, it starts with one or more stars
   A heading has one star, a sub-heading two, etc.
 * Working with lists

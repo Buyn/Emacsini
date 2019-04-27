@@ -12,6 +12,8 @@
 ;; Movements
 (define-key evil-normal-state-map "gl" 'move-end-of-line)
 (define-key evil-normal-state-map "gh" 'move-beginning-of-line)
+(define-key evil-normal-state-map (kbd "gj") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "gk") 'evil-previous-visual-line)
 ;;Frams Controls
 (define-key evil-normal-state-map "gtt" 'make-frame-command)
 (define-key evil-normal-state-map "gtf" 'find-file-other-frame)
