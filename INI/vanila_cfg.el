@@ -30,3 +30,5 @@
 ;; and to set display-line-numbers-type to the desired style:
 (setq display-line-numbers-type 'relative)
 ;;Relative line numbers enabled
+;; Warp line on visula line end
+(global-visual-line-mode word-wrap)
