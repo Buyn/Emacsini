@@ -16,7 +16,6 @@
 ;; Automatically Installing Packages
 ;; --------------------------------------
 ;; D:\Development\lisp\doc\Cfg\use-pac.txt
-
 ;; --------------------------------------
 ;; M-x package-refresh-contents
 ;; before

@@ -1,23 +1,3 @@
-
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
 ;;
 ;; Window &amp; Frame Switching with WindMove and FrameMove
 ;;
@@ -30,6 +10,8 @@
 (global-set-key (kbd "M-k") 'windmove-up)
 (global-set-key (kbd "M-l") 'windmove-right)
  
+(load "~/.emacs.d/Els/framemove/framemove.el")
+
 (require 'framemove)
     (windmove-default-keybindings)
     (setq framemove-hook-into-windmove t) ;;Hook framemove into windmove keys
