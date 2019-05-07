@@ -16,3 +16,6 @@ emacs_demon.cmd~
 emacs_demon.cmd~
 emacs_demon.cmd~
 *.el~
+.emacs~
+emacs_demon.cmd~
+.emacs~
