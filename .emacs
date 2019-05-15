@@ -28,4 +28,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-tabs ## material-theme evil dash better-defaults))))
+    (wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
