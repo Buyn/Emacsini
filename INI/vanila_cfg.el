@@ -7,6 +7,7 @@
 ;; Disables the startup message (this is the screen with all the tutorial information)
 (setq inhibit-startup-message t) ;; hide the startup message
 (tool-bar-mode -1)
+(setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
 (load-theme 'material t) ;; load material theme
 ;;(global-linum-mode t) ;; enable line numbers globally
 ;;(set-frame-font "Trebuchet MS")

@@ -26,6 +26,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(js2-strict-missing-semi-warning nil)
  '(package-selected-packages
    (quote
-    (wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
+    (company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
