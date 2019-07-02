@@ -4,12 +4,14 @@
 ;; --------------------------------------
 ;; ORG-MODE CUSTOMIZATION
 ;; --------------------------------------
+(require 'org)
 (global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 ;; (global-set-key (kbd "C-c l") 'org-store-link)
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
+;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
 ;; ---------------     ORG Capures
 ;; --------------------------------------
 (global-set-key (kbd "C-c c") 'org-capture)

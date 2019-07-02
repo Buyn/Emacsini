@@ -51,5 +51,5 @@
 (load "~/ELs/Evil/onecharadd.el")
 (define-key evil-normal-state-map (kbd "SPC") 'addone-char-into-normal-evil)
 (define-key evil-normal-state-map (kbd "RET") 'addone-char-after-normal-evil)
-;; :tabnew
+;; --------------------------------------
 

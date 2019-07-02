@@ -354,6 +354,14 @@ M-S-Down – move current tree down
 C-c C-x C-w – kill current subtree
 C-c C-x M-w – copy current subtree
 C-c C-x C-y – yank subtree
+C-x n s     (org-narrow-to-subtree)
+    Narrow buffer to current subtree.
+C-x n b     (org-narrow-to-block)
+    Narrow buffer to current block.
+C-x n w     (widen)
+    Widen buffer to remove narrowing.
+C-c *     (org-toggle-heading)
+    Turn a normal line or plain list item into a headline (so that it becomes a subheading at its location). Also turn a headline into a normal line by removing the stars. If there is an active region, turn all lines in the region into headlines. If the first line in the region was an item, turn only the item lines into headlines. Finally, if the first line is a headline, remove the stars from all headlines in the region. 
 *** Plain lists
 Use M-Ret to add list item
 Ordered list:
