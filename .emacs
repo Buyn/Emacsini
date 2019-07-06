@@ -29,4 +29,5 @@
  '(js2-strict-missing-semi-warning nil)
  '(package-selected-packages
    (quote
-    (company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
+    (yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
+(put 'set-goal-column 'disabled nil)

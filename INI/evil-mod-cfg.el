@@ -7,6 +7,10 @@
 (require 'evil)
 (evil-mode t)
 ;; --------------------------------------
+;; (setq evil-mode-line-format nil
+;;       evil-insert-state-cursor '(bar "White")
+;;       evil-visual-state-cursor '(box "#F86155"))
+;; --------------------------------------
 ;; (define-key key-translation-map (kbd "ch") (kbd "C-h"))
 ;; (define-key evil-normal-state-map "c" nil)
 ;; (define-key evil-motion-state-map "cu" 'universal-argument)

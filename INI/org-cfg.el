@@ -29,6 +29,9 @@
         ("j" "Journal" entry
 	    (file+datetree "~/org/journal.org")
 	    "* %?\nEntered on %U\n  %i\n  %a")))
+(setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
+                           ("~/org/gtd/someday.org" :level . 1)
+                           ("~/org/gtd/tickler.org" :maxlevel . 2)))
 ;; To define special keys to capture to a particular template without going through the interactive template selection, you can create your key binding like this:
 ;; (define-key global-map "\C-cx"
 ;;   (lambda () (interactive) (org-capture nil "x")))
