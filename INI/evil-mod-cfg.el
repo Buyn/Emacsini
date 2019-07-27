@@ -38,6 +38,10 @@
 (define-key evil-normal-state-map (kbd " M-g M-t M-h M-f") 'describe-function)
 (define-key evil-normal-state-map (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
 ;; --------------------------------------
+;; ORIGAMI-MOD CUSTOMIZATION
+(require 'origami)
+(load "~/INI/origami_cfg.el")
+;; --------------------------------------
 ;; Frams Close
 (defun kill-buffer-and-frame ()
   "kill buffer and cloze frame"

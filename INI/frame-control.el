@@ -5,9 +5,13 @@
   (windmove-default-keybindings))
  
 ;; Remap windmove keys to home keys
+(global-set-key (kbd "M-h") nil)
 (global-set-key (kbd "M-h") 'windmove-left)
+(global-set-key (kbd "M-j") nil)
 (global-set-key (kbd "M-j") 'windmove-down)
+(global-set-key (kbd "M-k") nil)
 (global-set-key (kbd "M-k") 'windmove-up)
+(global-set-key (kbd "M-l") nil)
 (global-set-key (kbd "M-l") 'windmove-right)
  
 (load "~/.emacs.d/Els/framemove/framemove.el")
