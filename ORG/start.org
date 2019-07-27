@@ -185,6 +185,9 @@ C-c ]     (org-remove-file)
    (setq org-agenda-files '("~/ORG/start.org"))
    (setq org-agenda-files (quote ("~/ORG/start.org")))
 * Help Docs Emacs 
+** info\help
+   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
+   удобная систе показиваюшая мануалки по всем установленым модам
 ** Options
 *** Visual
 *** Text Eltments
@@ -309,6 +312,14 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
     - Elijah Wood :: He plays Frodo
     - Sean Austin :: He plays Sam, Frodo's friend.  I still remember
       him very well from his role as Mikey Walsh in The Goonies.
+** Help
+*** info\manual
+    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
+    удобная систе показиваюшая мануалки по всем установленым модам
+*** links
+**** Org Mode - Organize Your Life In Plain Text!
+     http://doc.norang.ca/org-mode.html   
+     очень последовательнвый манул по всему оргу с кучей примеров
 ** Tree Notes 
 *** Exempls
   - Note taken on [2018-10-29 Пн 20:19] \\
@@ -408,18 +419,6 @@ C-c C-z – time-stamped drawer
 Two: Which tags do you use most?
 You can always add tags freely and by hand, but if you configure the most important ones along with fast-access keys, life will be better. Configure the variable org-tags-alist or simply do this right in the file with1
 #+TAGS: home(h) work(w) @computer(c) @phone(p) errants(e)
-** агендa
-*** keys add agenda file
-   C-c [     (org-agenda-file-to-front)
-
-    Add current file to the list of agenda files. The file is added to the front of the list. If it was already in the list, it is moved to the front. With a prefix argument, file is added/moved to the end. 
-C-c ]     (org-remove-file)
-
-    Remove current file from the list of agenda files. 
-*** comands to add agenda file
-   (setq org-agenda-files '("~/org"))
-   (setq org-agenda-files '("~/ORG/start.org"))
-   (setq org-agenda-files (quote ("~/ORG/start.org")))
 ** Todos 
 *** Dependantistis 
 **** TODO Blocked until (two) is done
@@ -448,7 +447,58 @@ C-c ]     (org-remove-file)
   One: More TODO keywords
   Define the TODO states you find useful and single letters for fast selection. Customize the variable org-todo-keywords or simply do this right in the file with1:
   #+TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELED(c)
+*** arhiv 
+    c+c $ 
+you can move them to an archive file with C-c $ (org-archive-subtree)отправляет в архи таким путём чистя агенду и лист
+момет отправки помечается временени поидееии
+и соответственно его скорй всего потом оможно будет от туда выташить и использовать 
+*** shadule
+    С+с С+s
+  Next, we're going to schedule some tasks. Go to a task that you want to do today. Press C-c C-s (org-schedule) and accept the default. Schedule a couple of other tasks for today.
+
+Schedule some tasks for tomorrow, too. This time, when you schedule it, type +1 for the date. You can specify +2 for the day after tomorrow, etc. The 28th? 28. If you want to schedule something for next Saturday, you can type sat. Two Tuesdays from now? 2thu. A month from now? 1m. It's really flexible. 
+*** агендa
+**** keys add agenda file
+    C-c [     (org-agenda-file-to-front)
+
+     Add current file to the list of agenda files. The file is added to the front of the list. If it was already in the list, it is moved to the front. With a prefix argument, file is added/moved to the end. 
+ C-c ]     (org-remove-file)
+
+     Remove current file from the list of agenda files. 
+**** comands to add agenda file
+    (setq org-agenda-files '("~/org"))
+    (setq org-agenda-files '("~/ORG/start.org"))
+    (setq org-agenda-files (quote ("~/ORG/start.org")))
+*** *add a :CATEGORY: property to the top-level, non-TODO heading that identifies the project.  Using your example:
+
+ * Project ABC
+  :PROPERTIES:
+  :CATEGORY: ABC
+  :END:
+
+ ** TODO A task related to Project ABC
+ ** TODO Another task related to ABC
+ *** TODO Subtask
+SCHEDULED: 
+
+In my bog-standard org-mode setup, this results in “ABC” being displayed in the far-left column of the agenda instead of just “todo” (which seems to be the default). This is great — it means that, in the text of the “Subtask” todo entry itself, I don’t need to include a reminder of what project the todo entry is associated with.
+
+Here’s an agenda mockup to illustrate the point, augmented with a “default” entry from my own to-do list:
+
+  todo:       Scheduled:  Follow up on expense reimbursement request
+  ABC:        Scheduled:  Subtask
+
 ** Links 
+   (define-key global-map "\C-cl" 'org-store-link)
+Для того что бы создать ссылку достаточно использовать такой шаблон — [[ссылка][описание]].
+  [ {] [] ]
+
+Для создания ссылки можно ещё использовать комбинацию C+c C+l. В мини-буфере emacs предложит сначала написать ссылку, затем после нажатия RET — её создать. Находясь в мини-буфере так же можно нажать TAB, для просмотра, какие виды ссылок бывают.
+
+Что бы открыть вновь созданные ссылки необходимо навести точку на ссылку и тыкнуть C+c C+o. Или C+u C+c C+o — если Вы хотите открыть её в другом окне.
+
+Ради интереса, можно перейти в другой файл, нажать там C+c l. И ссылка на этот файл поместится в хранилище ссылок. Перейдя в любой наш файл .org мы можем извлечь из этого хранилища любые сохраненные ссылки, с помощью той же команды C+c C+l.
+Самые наблюдательные читатели уже могли заметить, что эта команда как раз и есть та, которую мы вписали в ~/.emacs, в начале.
    [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
 * Help Docs Gnus
   The Emacs news and email reader.

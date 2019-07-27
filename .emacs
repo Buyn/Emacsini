@@ -27,6 +27,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js2-strict-missing-semi-warning nil)
+ '(org-agenda-files
+   (quote
+    ("d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org" "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")))
  '(package-selected-packages
    (quote
     (yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
