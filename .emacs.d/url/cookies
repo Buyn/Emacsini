@@ -2,18 +2,20 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".google.com"
-  [url-cookie "1P_JAR" "2019-07-21-23" "Tue, 20-Aug-2019 23:59:52 GMT" "/" ".google.com" nil]
-  [url-cookie "NID" "188=LqdQVXa7TDFm5WxtPc_yUvgyU16JE_H5BftYMWzqksDpe8z0Vg2jCEbGL1B8vsJcydPOnjwKIPnyEMM6HwOhxclrXJYSILJqBGGANg1LqR35onkmWL1AL6XiaZ6aHVvq4BGAnrN_H2xOxAFw1T1ZL_dOYgacOPVHn76Oh0BA4Hg" "Mon, 20-Jan-2020 23:56:25 GMT" "/" ".google.com" nil]
-  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/complete/search" ".google.com" nil]
-  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/search" ".google.com" nil])
+ '(("emackandboliohk.com"
+  [url-cookie "cart_sig" "" "Mon, 05 Aug 2019 00:03:38 -0000" "/" "emackandboliohk.com" nil]
+  [url-cookie "_landing_page" "%2F" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
+  [url-cookie "_orig_referrer" "" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
+  [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil])
  (".emackandboliohk.com"
   [url-cookie "__cfduid" "d017b2a6376811768fa30ece8f015d70e1563753674" "Tue, 21-Jul-20 00:01:14 GMT" "/" ".emackandboliohk.com" nil])
- ("emackandboliohk.com"
-  [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]
-  [url-cookie "_orig_referrer" "" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
-  [url-cookie "_landing_page" "%2F" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
-  [url-cookie "cart_sig" "" "Mon, 05 Aug 2019 00:03:38 -0000" "/" "emackandboliohk.com" nil]))
+ (".stackoverflow.com"
+  [url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
+ (".google.com"
+  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/search" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "NID" "188=LqdQVXa7TDFm5WxtPc_yUvgyU16JE_H5BftYMWzqksDpe8z0Vg2jCEbGL1B8vsJcydPOnjwKIPnyEMM6HwOhxclrXJYSILJqBGGANg1LqR35onkmWL1AL6XiaZ6aHVvq4BGAnrN_H2xOxAFw1T1ZL_dOYgacOPVHn76Oh0BA4Hg" "Mon, 20-Jan-2020 23:56:25 GMT" "/" ".google.com" nil]
+  [url-cookie "1P_JAR" "2019-07-29-16" "Wed, 28-Aug-2019 16:56:57 GMT" "/" ".google.com" nil]))
 )
 (setq url-cookie-secure-storage
  '(("emackandboliohk.com"

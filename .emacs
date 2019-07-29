@@ -29,12 +29,8 @@
  '(js2-strict-missing-semi-warning nil)
  '(org-agenda-files
    (quote
-    ("d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org" "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")))
+	("d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org" "d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org" "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")))
  '(package-selected-packages
    (quote
-<<<<<<< HEAD
-    (yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
+	(yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
 (put 'set-goal-column 'disabled nil)
-=======
-    (origami company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
->>>>>>> 8e2fce59e084293a9564550f46e1cb8cdd84f990

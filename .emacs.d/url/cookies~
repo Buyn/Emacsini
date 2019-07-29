@@ -2,18 +2,23 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".youtube.com"
-  [url-cookie "GPS" "1" "Wed, 24-Oct-2018 15:39:09 GMT" "/" ".youtube.com" nil]
-  [url-cookie "PREF" "f1=50000000" "Tue, 25-Jun-2019 03:02:09 GMT" "/" ".youtube.com" nil]
-  [url-cookie "VISITOR_INFO1_LIVE" "IaSSLQn8Lnw" "Mon, 22-Apr-2019 15:09:09 GMT" "/" ".youtube.com" nil])
- (".google.com"
-  [url-cookie "CGIC" "IgMqLyo" "Wed, 24-Apr-2019 02:20:59 GMT" "/search" ".google.com" nil]
-  [url-cookie "CGIC" "IgMqLyo" "Wed, 24-Apr-2019 02:20:59 GMT" "/complete/search" ".google.com" nil]
-  [url-cookie "NID" "142=ixwHtjkrgfMeWVwbcWOi_0PrMABUKsT6nIxFc4lSB_KBQ2ns-G3IeemCKsbChHOkR1mpOX4_We2FaHSiU9PLzdN6oWUdtG7X5jRQicqnYs11IpvCXanEroMUk0trulFk5m-Tq0mcy6Z-NDmMDYpKE1Rpbjbmv7H_iRch1NE7q5g" "Wed, 24-Apr-2019 11:26:23 GMT" "/" ".google.com" nil]
-  [url-cookie "1P_JAR" "2018-10-24-15" "Fri, 23-Nov-2018 15:08:51 GMT" "/" ".google.com" nil]))
+ '((".google.com"
+  [url-cookie "1P_JAR" "2019-07-21-23" "Tue, 20-Aug-2019 23:59:52 GMT" "/" ".google.com" nil]
+  [url-cookie "NID" "188=LqdQVXa7TDFm5WxtPc_yUvgyU16JE_H5BftYMWzqksDpe8z0Vg2jCEbGL1B8vsJcydPOnjwKIPnyEMM6HwOhxclrXJYSILJqBGGANg1LqR35onkmWL1AL6XiaZ6aHVvq4BGAnrN_H2xOxAFw1T1ZL_dOYgacOPVHn76Oh0BA4Hg" "Mon, 20-Jan-2020 23:56:25 GMT" "/" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Fri, 17-Jan-2020 23:56:25 GMT" "/search" ".google.com" nil])
+ (".emackandboliohk.com"
+  [url-cookie "__cfduid" "d017b2a6376811768fa30ece8f015d70e1563753674" "Tue, 21-Jul-20 00:01:14 GMT" "/" ".emackandboliohk.com" nil])
+ ("emackandboliohk.com"
+  [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]
+  [url-cookie "_orig_referrer" "" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
+  [url-cookie "_landing_page" "%2F" "Mon, 05-Aug-19 00:01:14 GMT" "/" "emackandboliohk.com" nil]
+  [url-cookie "cart_sig" "" "Mon, 05 Aug 2019 00:03:38 -0000" "/" "emackandboliohk.com" nil]))
 )
 (setq url-cookie-secure-storage
- 'nil)
+ '(("emackandboliohk.com"
+  [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
+)
 
 ;; Local Variables:
 ;; version-control: never

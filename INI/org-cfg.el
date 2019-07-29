@@ -9,6 +9,7 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
+(setq org-log-done t)
 ;; (global-set-key (kbd "C-c l") 'org-store-link)
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
@@ -16,8 +17,8 @@
 ;; --------------------------------------
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
-(setq org-capture-templates
-      '(("t" "Todo" entry
+(setq org-capture-templates '(
+	("t" "Todo" entry
 	    (file+headline "~/org/gtd/gtd.org" "Tasks")
 	    "* TODO %?\n  %i\n  %a")
 	("i" "Todo [inbox]" entry
@@ -26,11 +27,13 @@
 	("T" "Tickler" entry
 	    (file+headline "~/org/gtd/tickler.org" "Tickler")
 	    "* %i%? \n %U")
-        ("j" "Journal" entry
+	("j" "Journal" entry
 	    (file+datetree "~/org/journal.org")
 	    "* %?\nEntered on %U\n  %i\n  %a")))
 (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                            ("~/org/gtd/someday.org" :level . 1)
+                           ("d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org" :level . 4)
+                           ("d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org" :level . 5)
                            ("~/org/gtd/tickler.org" :maxlevel . 2)))
 ;; To define special keys to capture to a particular template without going through the interactive template selection, you can create your key binding like this:
 ;; (define-key global-map "\C-cx"

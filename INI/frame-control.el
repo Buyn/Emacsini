@@ -7,8 +7,10 @@
 ;; Remap windmove keys to home keys
 (global-set-key (kbd "M-h") nil)
 (global-set-key (kbd "M-h") 'windmove-left)
+(define-key org-mode-map (kbd "M-h") 'windmove-left)
 (global-set-key (kbd "M-j") nil)
 (global-set-key (kbd "M-j") 'windmove-down)
+(define-key org-mode-map (kbd "M-j") 'windmove-down)
 (global-set-key (kbd "M-k") nil)
 (global-set-key (kbd "M-k") 'windmove-up)
 (global-set-key (kbd "M-l") nil)
