@@ -2,7 +2,26 @@
 #+STARTUP: content
 #+TODO: TODO DONE
 
-* натройка емака
+* Pathes
+** org files
+[[file:weekly.org][weekly file]]
+[[file:todo_plan.org][ToDo Plan org]]
+[[file:monthly.org][Monthly file]]
+[[file:GTD.org][GTD file]]
+[[file:~/ORG/gtd/inbox.org][Inbox GTD File]]
+[[file:~/ORG/gtd/tickler.org][Tikler Todo File]]
+[[file:today.org][Today org file]]
+
+(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org")
+(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org")
+(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org")
+(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/GTD.org")
+(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")
+
+(find-file "~/ORG/gtd/gtd.org")
+(find-file "~/ORG/gtd/inbox.org")
+(find-file "~/ORG/gtd/tickler.org")
+* TODO натройка емака
 ** TODO Vims Tabs
 ** TODO Vims Folding 
 ** TODO настроить для работы с JS
@@ -23,11 +42,7 @@ Indium connects to a browser tab or nodejs process and provides many features fo
 
 ** TODO настроить редактор 
 *** TODO Понять что делать с языком 
-    - по аналогии с вайм
-    - как сделать чтоб команды работали и на руской раскладке
-    - поискать помошь для всех языков
-     - команды для емака в основном работают
-     - видемо раскладка должна остоватся но при этом емак должен слать символы на другом языке
+- заменить в ивеле команду замены чтоб она понимала язык
 *** TODO добовлять один символ
 - [ ] энтер2
 - [ ] 2пробел
@@ -503,8 +518,3 @@ Here’s an agenda mockup to illustrate the point, augmented with a “default�
 * Help Docs Gnus
   The Emacs news and email reader.
 
-* This is a headline, it starts with one or more stars
-  A heading has one star, a sub-heading two, etc.
-* Working with lists
-** Moving around headlines
-** Moving around in our outline

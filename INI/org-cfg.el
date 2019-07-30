@@ -32,8 +32,9 @@
 	    "* %?\nEntered on %U\n  %i\n  %a")))
 (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                            ("~/org/gtd/someday.org" :level . 1)
-                           ("d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org" :level . 4)
-                           ("d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org" :level . 5)
+                           ("d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org" :level . 1)
+                           ("d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org" :level . 1)
+                           ("d:/My_Docs/Ofice/PaperFlow/TODO/GTD.org" :level . 1)
                            ("~/org/gtd/tickler.org" :maxlevel . 2)))
 ;; To define special keys to capture to a particular template without going through the interactive template selection, you can create your key binding like this:
 ;; (define-key global-map "\C-cx"
