@@ -53,7 +53,9 @@
 ;; --------------------------------------
 ;; EVIL TABS
 (global-evil-tabs-mode t)
+;; TODO set display off
 ;; :tabnew
+;; :tabclone
 ;; --------------------------------------
 ;; ONE CHAR ADD
 (load "~/ELs/Evil/onecharadd.el")

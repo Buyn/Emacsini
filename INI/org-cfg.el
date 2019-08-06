@@ -48,5 +48,11 @@
 ;; Should unfinished checkboxes block state changes in the parent?
 (setq org-use-property-inheritance t)
 ;; DEADLINE является одним из этих свойств, которые по умолчанию не наследуются. Вы можете изменить это, настроив переменную
+;; User Option: org-confirm-shell-link-function
+;;     Function that prompts the user before executing a shell link. 
+(setq org-confirm-shell-link-function nil)
+;; User Option: org-confirm-elisp-link-function
+;;     Function that prompts the user before executing an Emacs Lisp link. 
+(setq org-confirm-elisp-link-function nil)
 (load "~/INI/org_agend_cfg.el")
 

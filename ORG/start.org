@@ -21,6 +21,42 @@
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
+** init files
+(find-file "~/INI/frame-control.el")
+(find-file "~/INI/vanila_cfg.el")
+(find-file "~/INI/c-mode-cfg.el")
+(find-file "~/INI/evil-mod-cfg.el")
+    (find-file "~/INI/origami_cfg.el")
+(find-file "~/INI/init.el")
+* Команды
+** init files
+(load "~/INI/frame-control.el")
+(load "~/INI/vanila_cfg.el")
+** открыть
+(find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
+(org-agenda nil "a")
+
+** линкс команды
+   C+c C+o
+	[[shell:echo%20"hi%20Max"][Hello?]]
+	[[shell:dir][Whera are u?]]
+[[
+shell:echo "dfgdfg max"
+] [
+Working?
+]]
+[[shell:echo "dfgdfg max"][Working?]]
+
+[[shell:echo "dfgdfg max"]
+[Working?]]
+**  сорс комады
+   C+c C+c
+#+BEGIN_SRC sh :shcmd "cmdproxy.exe"
+dir
+#+END_SRC
+#+BEGIN_SRC sh :exports both
+ls
+#+END_SRC
 * TODO натройка емака
 ** TODO Vims Tabs
 ** TODO Vims Folding 

@@ -24,9 +24,9 @@
 
 (define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
 (define-key evil-normal-state-map "zR" 'origami-close-all-nodes)
-(define-key evil-normal-state-map "zM" 'origami-open-all-nodes)
+;; (define-key evil-normal-state-map "zM" 'origami-open-all-nodes)
 (define-key evil-normal-state-map "zr" 'origami-close-node-recursively)
-(define-key evil-normal-state-map "zm" 'origami-open-node-recursively)
+;; (define-key evil-normal-state-map "zm" 'origami-open-node-recursively)
 (define-key evil-normal-state-map "zo" 'origami-show-node)
 (define-key evil-normal-state-map "zc" 'origami-close-node)
 (define-key evil-normal-state-map "zj" 'origami-forward-fold)

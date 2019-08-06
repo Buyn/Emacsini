@@ -1,0 +1,81 @@
+# Этот файл viminfo автоматически создан Vim 8.0.
+# Его можно (осторожно!) редактировать.
+
+# Viminfo version
+|1,4
+
+# Значение опции 'encoding' в момент записи файла
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~H
+# Командная строка, история (начиная от свежего к старому):
+
+# Строка поиска, история (начиная от свежего к старому):
+
+# Выражение, история (начиная от свежего к старому):
+
+# Строка ввода, история (начиная от свежего к старому):
+
+# Debug Line, история (начиная от свежего к старому):
+
+# Регистры:
+
+# Глобальные отметки:
+'0  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,48,6,0,1564751786,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'1  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,49,6,0,1564751646,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'2  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,50,6,0,1564751600,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'3  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,51,6,0,1564751600,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'4  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,52,6,0,1564506887,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'5  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,53,6,0,1564506887,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'6  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,54,6,0,1564506887,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'7  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,55,6,0,1564506887,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'8  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,56,1,0,1564505185,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+'9  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,57,1,0,1564505185,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+
+# Список прыжков (сначала более свежие):
+-'  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,6,0,1564751786,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,6,0,1564751646,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,6,0,1564751600,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  6  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,6,0,1564506887,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564506822,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564506822,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564506822,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564506822,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505185,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505097,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505096,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505093,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505091,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+-'  1  0  /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+|4,39,1,0,1564505087,"/cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt"
+
+# История местных отметок (от более свежих к старым):
+
+> /cygdrive/d/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/GreenTea.txt
+	*	1564751770	0
+	"	6	0

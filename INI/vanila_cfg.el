@@ -7,8 +7,12 @@
 ;; Disables the startup message (this is the screen with all the tutorial information)
 (setq inhibit-startup-message t) ;; hide the startup message
 (tool-bar-mode -1)
+;; (menu-bar-mode -1)
 ;; ------------------------------------------------------
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
+;; ------------------------------------------------------
+(add-to-list 'default-frame-alist '(height . 35))
+(add-to-list 'default-frame-alist '(width . 75))
 ;; ------------------------------------------------------
 (load-theme 'material t) ;; load material theme
 ;;(global-linum-mode t) ;; enable line numbers globally
