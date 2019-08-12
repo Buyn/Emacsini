@@ -27,6 +27,8 @@
 (define-key evil-normal-state-map (kbd " M-g M-t M-f") 'find-file-other-frame)
 (define-key evil-normal-state-map (kbd " M-g M-t M-b") 'switch-to-buffer-other-frame)
 (define-key evil-normal-state-map (kbd " M-g M-t M-d") 'ido-dired-other-frame)
+(define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
+			(display-buffer (last-buffer))))
 ;; --------------------------------------
 ;;   ***   Help in New Frame   ***
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
@@ -43,13 +45,10 @@
 (load "~/INI/origami_cfg.el")
 ;; --------------------------------------
 ;; Frams Close
-(defun kill-buffer-and-frame ()
-  "kill buffer and cloze frame"
-  (interactive)
-  (kill-buffer-and-window)
-  (kill-this-buffer)
-  (evil-quit))
-(define-key evil-normal-state-map "ZX" 'kill-buffer-and-frame)
+(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
+					(kill-this-buffer)
+					(evil-quit)))
+
 ;; --------------------------------------
 ;; EVIL TABS
 (global-evil-tabs-mode t)

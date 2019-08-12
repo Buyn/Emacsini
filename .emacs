@@ -32,5 +32,5 @@
 	("d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org" "d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org" "d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org" "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")))
  '(package-selected-packages
    (quote
-	(yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
+	(ojjli irony yasnippet-snippets emacs-snippets yasnippet company-tern xref-js2 js2-refactor js2-mode wakatime-mode evil-tabs ## material-theme evil dash better-defaults))))
 (put 'set-goal-column 'disabled nil)

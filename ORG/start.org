@@ -22,6 +22,8 @@
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
+(find-file "~/INI/init.el")
+(find-file "~/INI/inpak.el")
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
 (find-file "~/INI/c-mode-cfg.el")
@@ -30,6 +32,7 @@
 (find-file "~/INI/init.el")
 * Команды
 ** init files
+(load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
 (load "~/INI/vanila_cfg.el")
 ** открыть
@@ -57,9 +60,40 @@ dir
 #+BEGIN_SRC sh :exports both
 ls
 #+END_SRC
+** Install
+tar not found when trying to install from melpa 
+You probably have an outdated package database
+(package-refresh-contents)
+(package-install company-irony)
+** setings
+*** systems paths
+(setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
+	неменяет системную переменую только переменая емака взятая при запуске
+(setenv "PATH" (concat (getenv "PATH") ";c:\\sw\\bin"))
+(setq exec-path (append exec-path '("d:/sw/bin")))
+	;; example of setting env var named “path”, by appending a new path to existing path
+
+(setenv "PATH"
+  (concat
+   "C:/cygwin/usr/local/bin" ";"
+   "C:/cygwin/usr/bin" ";"
+   "C:/cygwin/bin" ";"
+   (getenv "PATH")
+  )
+)
+    You can use slash / and you don't have to use backslash \.
+    Dir path may end with a path separator /, or without.
+    the builtin variable path-separator can be used instead of ;.
+;; show env var named path
+(getenv "PATH")
 * TODO натройка емака
 ** TODO Vims Tabs
-** TODO Vims Folding 
+*** Таб должен взаимодействоать с полнооконым режимом
+если фул скри добовляет окна 4 с права
+и помнит для каждого что в нём было
+по доп нажатию фула в окне меняет местами содержания из доп окна и основного
+** DONE Vims Folding 
+   CLOSED: [2019-08-06 Вт 05:59]
 ** TODO настроить для работы с JS
    Найти файил с туториалом по настройке
    [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html]]
@@ -149,7 +183,8 @@ Indium connects to a browser tab or nodejs process and provides many features fo
 
  I bound F6 for my next-error command. I also have a mondo compilation-error-regexp-alist regex to match errors:
 ** TODO Добавить функционал 
-*** пробел символ
+*** DONE пробел символ
+	CLOSED: [2019-08-06 Вт 06:03]
 *** ентер для пост символа
 *** сдвиг строк
 *** копия строк
@@ -170,6 +205,34 @@ Indium connects to a browser tab or nodejs process and provides many features fo
     - ~Ivy~     :: is a package that helps you search. It helps you do things in M-x, or find file, and Dired, etc... Anything where you look for something in Emacs, Ivy can come to the rescue and help you type less. For example. Let's say I want to look through some Melpa packages. No longer do I have to type package-list-packages. Instead, I can just type "pa li packa" and Ivy will find all the results that match the search terms. Using spaces, you can target certain parts of what you're looking for. It just helps you type less. Ivy doesn't rely on anything, but
     - ~Swiper~  :: will automatically pull in Ivy when it's installed, because Swiper needs Ivy. Swiper does the same thing as Ivy, but replaces isearch, so you can use ivy features when searching through text.
     - ~Counsel~ :: gives you extra functions that aren't normally available. For example: You can open a buffer or file in a new window.
+*** use-package
+
+
+The easiest way is to install use-package.
+
+(package-initialize)
+(require 'package)
+(add-to-list 'package-archives
+    '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(dolist (package '(use-package))
+   (unless (package-installed-p package)
+       (package-install package)))
+
+Then
+
+ (use-package paredit
+   :ensure t)
+
+The :ensure t is what ensures that the package is installed.
+
+To just load ensure multiple packages are install
+
+(dolist (package '(package-a package-b package-c))
+ (unless (package-installed-p package)
+   (package-install package))
+   (require package))))
+   
 *** hidra mod 
     https://github.com/abo-abo/hydra
 This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
@@ -178,7 +241,8 @@ This is a package for GNU Emacs that can be used to tie related commands into a 
      - Avy :: is one of my favorite packages in Emacs.
      https://truthseekers.io/lessons/avy-emacs-tutorial-moving-around-emacs-quickly/
      Learning how to use Avy is one of the easiest and fastest ways to improve your efficiency in Emacs. The Avy Emacs package allows you to quickly get to any visible point in an Emacs buffer, window, or frame. By using one of the functions Avy provides, you define a search term, and Avy provides a "Tree" list of options to choose from. You choose the point you want your cursor to move to by typing one or two characters and BOOM, your cursor is exactly where you need it. The best part about Avy is how simple it is. You only need one or two key bindings, and you're good to go.
-**** Fast Emacs Window & Frame switching with WindMove & FrameMove 
+**** DONE Fast Emacs Window & Frame switching with WindMove & FrameMove 
+	 CLOSED: [2019-08-06 Вт 05:49]
 https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
 ;; Remap windmove keys to home keys
 (global-set-key (kbd "M-h") 'windmove-left)
@@ -218,11 +282,13 @@ See statemachine.py for an example of a Python module fully documented using reS
 - понял обшие принципы и вообще новерное разобрался
    SCHEDULED: <2018-10-26 Пт 15:10>
 ** TODO Разобратся с агендой
-   SCHEDULED: <2018-10-27 Сб 09:50>
-*** разобрать фаил по подфайлам
-*** понять как разбить на карты повторного выполнения
+*** DONE разобрать фаил по подфайлам
+	CLOSED: [2019-08-06 Вт 06:05]
+*** DONE понять как разбить на карты повторного выполнения
+	CLOSED: [2019-08-06 Вт 06:04]
 *** настроить агеду чтоб показывать только глаыный фаили и зависиый родитель
-*** что делать с выполненыемт заданиями чтоб не замусоривать 
+*** DONE что делать с выполненыемт заданиями чтоб не замусоривать 
+	CLOSED: [2019-08-06 Вт 06:04]
 *** keys add agenda file
    C-c [     (org-agenda-file-to-front)
 
