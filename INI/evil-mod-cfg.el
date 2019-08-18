@@ -21,6 +21,10 @@
 (define-key evil-normal-state-map (kbd "gj") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "gk") 'evil-previous-visual-line)
 ;; --------------------------------------
+;; Grabing
+(define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
+(define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
+;; --------------------------------------
 ;; *** Frams Controls ***
 (define-key evil-normal-state-map (kbd "M-g M-t M-t") 'make-frame-command)
 ;; (define-key evil-normal-state-map "gtt" 'make-frame-command)
@@ -52,6 +56,9 @@
 ;; --------------------------------------
 ;; EVIL TABS
 (global-evil-tabs-mode t)
+(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
+(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
+(elscreen-toggle-display-tab)
 ;; TODO set display off
 ;; :tabnew
 ;; :tabclone

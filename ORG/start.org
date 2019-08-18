@@ -87,6 +87,7 @@ You probably have an outdated package database
 ;; show env var named path
 (getenv "PATH")
 * TODO натройка емака
+  
 ** TODO Vims Tabs
 *** Таб должен взаимодействоать с полнооконым режимом
 если фул скри добовляет окна 4 с права
@@ -274,6 +275,19 @@ and we're good!
 The primary goal of reStructuredText is to define and implement a markup syntax for use in Python docstrings and other documentation domains, that is readable and simple, yet powerful enough for non-trivial use. The intended purpose of the markup is the conversion of reStructuredText documents into useful structured data formats.
 
 See statemachine.py for an example of a Python module fully documented using reStructuredText.
+** TODO Add lisp code
+*** Folding on Org Mode vs C mode
+If you want to exclude one specific mode, you can do the following:
+
+(global-set-key (kbd "<C-S-down>") 'move-line-down) 
+
+to make it globally available, and
+
+(define-key KEYMAP (kbd "<C-S-down>") nil) 
+
+to exclude one mode where KEYMAP is the name name of the mode, followed by "mode-map" (e.g. ess-mode-map). You could also bind the original thing to the key instead of nil.
+shareimprove this answer
+
 * TODO Оргаизовать Org Mod
 ** DONE Понять что работает а что нет
    SCHEDULED: <2018-10-26 Пт 16:50>

@@ -45,7 +45,7 @@
 	 (indent-according-to-mode)
 	 (insert comment-start)
 	 (setq start (point))
-	 (insert "Folding" " {{{")
+	 (insert " " " {{{")
 	 (newline-and-indent)
 	 (goto-char end)
 	 (end-of-line)
