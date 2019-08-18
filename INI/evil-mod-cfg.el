@@ -25,6 +25,14 @@
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
 ;; --------------------------------------
+;; Insert State
+(define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)))
+(define-key evil-replace-state-map(quote [f2]) '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)))
+;; --------------------------------------
 ;; *** Frams Controls ***
 (define-key evil-normal-state-map (kbd "M-g M-t M-t") 'make-frame-command)
 ;; (define-key evil-normal-state-map "gtt" 'make-frame-command)
