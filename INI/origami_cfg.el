@@ -60,3 +60,21 @@
 	 (newline-and-indent)
 	 (goto-char start)
 	 ))
+(define-key evil-normal-state-map "zf";  {{{ 
+  '(lambda ()
+	 "create fold and add comment to it"
+	 (interactive)
+	 (end-of-line) 
+	 (insert comment-start)
+	 ;; (indent-according-to-mode)
+	 (setq start (point))
+	 (insert " " " {{{")
+	 (newline-and-indent)
+	 (indent-according-to-mode)
+	 (if (equal comment-end "")
+		 (insert comment-start " }}}")
+	   (insert comment-end "}}}"))
+	 (goto-char start)
+	 ))
+	; }}}
+

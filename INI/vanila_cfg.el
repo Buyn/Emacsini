@@ -22,6 +22,7 @@
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
 (setq-default tab-width 4)
+(set-input-method "russian-computer")
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
 ;;  (lambda ()
