@@ -88,7 +88,6 @@ You probably have an outdated package database
 ;; show env var named path
 (getenv "PATH")
 * TODO натройка емака
-  
 ** TODO Vims Tabs
 *** Таб должен взаимодействоать с полнооконым режимом
 если фул скри добовляет окна 4 с права
@@ -290,12 +289,6 @@ to exclude one mode where KEYMAP is the name name of the mode, followed by "mode
 shareimprove this answer
 
 * TODO Оргаизовать Org Mod
-** DONE Понять что работает а что нет
-   SCHEDULED: <2018-10-26 Пт 16:50>
-** DONE Понять как настраивать 
-- много разных хелпов
-- понял обшие принципы и вообще новерное разобрался
-   SCHEDULED: <2018-10-26 Пт 15:10>
 ** TODO Разобратся с агендой
 *** DONE разобрать фаил по подфайлам
 	CLOSED: [2019-08-06 Вт 06:05]
@@ -348,8 +341,9 @@ C-c ]     (org-remove-file)
 	    (t (self-insert-command (or arg 1)))))
   #+END_SRC
 
-
-** Lisp
+** eLisp
+*** Cool guid
+https://github.com/chrisdone/elisp-guide
 ** Keyborde help 
 *** evaluate
     27.9 Evaluating Emacs Lisp Expressions
