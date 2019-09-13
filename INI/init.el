@@ -8,6 +8,9 @@
 ;; VANILA CUSTOMIZATION
 (load "~/INI/vanila_cfg.el")
 ;; --------------------------------------
+;; INTERFACE-MODS CUSTOMIZATION
+(load "~/INI/interface-mods.el")
+;; --------------------------------------
 ;; EVIL-MOD CUSTOMIZATION
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
@@ -22,6 +25,9 @@
 ;; --------------------------------------
 ;; AUTO-COMPLETE  CUSTOMIZATION
 (load "~/INI/autocomplete-cfg.el")
+;; --------------------------------------
+;; PYTHON-MOD CUSTOMIZATION
+;; (load "~/INI/python-cfg.el")
 ;; --------------------------------------
 ;; FRAMEs AND WINDOWs-MOD CUSTOMIZATION
 (load "~/INI/frame-control.el")

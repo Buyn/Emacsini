@@ -628,4 +628,272 @@ Here’s an agenda mockup to illustrate the point, augmented with a “default�
    [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
 * Help Docs Gnus
   The Emacs news and email reader.
+* Help Docs Mods 
+** use-package
+*** Getting started
+;; This is only needed once, near the top of the file
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (add-to-list 'load-path "<path where use-package is installed>")
+  (require 'use-package))
 
+(use-package foo)
+This loads in the package foo, but only if foo is available on your system. If not, a warning is logged to the *Messages* buffer.
+*** :init :config
+Use the :init keyword to execute code before a package is loaded. It accepts one or more forms, up to the next keyword:
+
+(use-package foo
+  :init
+  (setq foo-variable t))
+Similarly, :config can be used to execute code after a package is loaded. In cases where loading is done lazily (see more about autoloading below), this execution is deferred until after the autoload occurs:
+
+(use-package foo
+  :init
+  (setq foo-variable t)
+  :config
+  (foo-mode 1))
+As you might expect, you can use :init and :config together:
+
+(use-package color-moccur
+  :commands (isearch-moccur isearch-all)
+  :bind (("M-s O" . moccur)
+         :map isearch-mode-map
+         ("M-o" . isearch-moccur)
+         ("M-O" . isearch-moccur-all))
+  :init
+  (setq isearch-lazy-highlight t)
+  :config
+  (use-package moccur-edit))
+In this case, I want to autoload the commands isearch-moccur and isearch-all from color-moccur.el, and bind keys both at the global level and within the isearch-mode-map (see next section). When the package is actually loaded (by using one of these commands), moccur-edit is also loaded, to allow editing of the moccur buffer.
+*** Key-binding
+Another common thing to do when loading a module is to bind a key to primary commands within that module:
+
+(use-package ace-jump-mode
+  :bind ("C-." . ace-jump-mode))
+This does two things: first, it creates an autoload for the ace-jump-mode command and defers loading of ace-jump-mode until you actually use it. Second, it binds the key C-. to that command. After loading, you can use M-x describe-personal-keybindings to see all such keybindings you've set throughout your .emacs file.
+
+A more literal way to do the exact same thing is:
+
+(use-package ace-jump-mode
+  :commands ace-jump-mode
+  :init
+  (bind-key "C-." 'ace-jump-mode))
+When you use the :commands keyword, it creates autoloads for those commands and defers loading of the module until they are used. Since the :init form is always run -- even if ace-jump-mode might not be on your system -- remember to restrict :init code to only what would succeed either way.
+
+The :bind keyword takes either a cons or a list of conses:
+
+(use-package hi-lock
+  :bind (("M-o l" . highlight-lines-matching-regexp)
+         ("M-o r" . highlight-regexp)
+         ("M-o w" . highlight-phrase)))
+The :commands keyword likewise takes either a symbol or a list of symbols.
+
+NOTE: inside strings, special keys like tab or F1-Fn have to be written inside angle brackets, e.g. "C-<up>". Standalone special keys (and some combinations) can be written in square brackets, e.g. [tab] instead of "<tab>". The syntax for the keybindings is similar to the "kbd" syntax: see https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-Rebinding.html for more information.
+
+Examples:
+
+(use-package helm
+  :bind (("M-x" . helm-M-x)
+         ("M-<f5>" . helm-find-files)
+         ([f10] . helm-buffers-list)
+         ([S-f10] . helm-recentf)))
+Furthermore, remapping commands with :bind and bind-key works as expected, because when the binding is a vector, it is passed straight to define-key. So the following example will rebind M-q (originally fill-paragraph) to unfill-toggle:
+
+(use-package unfill
+  :bind ([remap fill-paragraph] . unfill-toggle))
+Binding to keymaps
+
+Normally :bind expects that commands are functions that will be autoloaded from the given package. However, this does not work if one of those commands is actually a keymap, since keymaps are not functions, and cannot be autoloaded using Emacs' autoload mechanism.
+
+To handle this case, use-package offers a special, limited variant of :bind called :bind-keymap. The only difference is that the "commands" bound to by :bind-keymap must be keymaps defined in the package, rather than command functions. This is handled behind the scenes by generating custom code that loads the package containing the keymap, and then re-executes your keypress after the first load, to reinterpret that keypress as a prefix key.
+
+For example:
+
+(use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+Binding within local keymaps
+
+Slightly different from binding a key to a keymap, is binding a key within a local keymap that only exists after the package is loaded. use-package supports this with a :map modifier, taking the local keymap to bind to:
+
+(use-package helm
+  :bind (:map helm-command-map
+         ("C-c h" . helm-execute-persistent-action)))
+The effect of this statement is to wait until helm has loaded, and then to bind the key C-c h to helm-execute-persistent-action within Helm's local keymap, helm-mode-map.
+
+Multiple uses of :map may be specified. Any binding occurring before the first use of :map are applied to the global keymap:
+
+(use-package term
+  :bind (("C-c t" . term)
+         :map term-mode-map
+         ("M-p" . term-send-up)
+         ("M-n" . term-send-down)
+         :map term-raw-map
+         ("M-o" . other-window)
+         ("M-p" . term-send-up)
+         ("M-n" . term-send-down)))
+*** Modes and interpreters
+Similar to :bind, you can use :mode and :interpreter to establish a deferred binding within the auto-mode-alist and interpreter-mode-alist variables. The specifier to either keyword can be a cons cell, a list of cons cells, or a string or regexp:
+
+(use-package ruby-mode
+  :mode "\\.rb\\'"
+  :interpreter "ruby")
+
+;; The package is "python" but the mode is "python-mode":
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode))
+If you aren't using :commands, :bind, :bind*, :bind-keymap, :bind-keymap*, :mode, :interpreter, or :hook (all of which imply :defer; see the docstring for use-package for a brief description of each), you can still defer loading with the :defer keyword:
+
+(use-package ace-jump-mode
+  :defer t
+  :init
+  (autoload 'ace-jump-mode "ace-jump-mode" nil t)
+  (bind-key "C-." 'ace-jump-mode))
+This does exactly the same thing as the following:
+
+(use-package ace-jump-mode
+  :bind ("C-." . ace-jump-mode))
+*** Magic handlers
+
+Similar to :mode and :interpreter, you can also use :magic and :magic-fallback to cause certain function to be run if the beginning of a file matches a given regular expression. The difference between the two is that :magic-fallback has a lower priority than :mode. For example:
+
+(use-package pdf-tools
+  :load-path "site-lisp/pdf-tools/lisp"
+  :magic ("%PDF" . pdf-view-mode)
+  :config
+  (pdf-tools-install :no-query))
+This registers an autoloaded command for pdf-view-mode, defers loading of pdf-tools, and runs pdf-view-mode if the beginning of a buffer matches the string "%PDF".
+
+*** Hooks
+
+The :hook keyword allows adding functions onto hooks, here only the basename of the hook is required. Thus, all of the following are equivalent:
+
+(use-package ace-jump-mode
+  :hook prog-mode)
+
+(use-package ace-jump-mode
+  :hook (prog-mode . ace-jump-mode))
+
+(use-package ace-jump-mode
+  :commands ace-jump-mode
+  :init
+  (add-hook 'prog-mode-hook #'ace-jump-mode))
+And likewise, when multiple hooks should be applied, the following are also equivalent:
+
+(use-package ace-jump-mode
+  :hook (prog-mode text-mode))
+
+(use-package ace-jump-mode
+  :hook ((prog-mode text-mode) . ace-jump-mode))
+
+(use-package ace-jump-mode
+  :hook ((prog-mode . ace-jump-mode)
+         (text-mode . ace-jump-mode)))
+
+(use-package ace-jump-mode
+  :commands ace-jump-mode
+  :init
+  (add-hook 'prog-mode-hook #'ace-jump-mode)
+  (add-hook 'text-mode-hook #'ace-jump-mode))
+The use of :hook, as with :bind, :mode, :interpreter, etc., causes the functions being hooked to implicitly be read as :commands (meaning they will establish interactive autoload definitions for that module, if not already defined as functions), and so :defer t is also implied by :hook.
+*** Conditional loading
+**** :if
+You can use the :if keyword to predicate the loading and initialization of modules.
+For example, I only want edit-server running for my main, graphical Emacs, not for other Emacsen I may start at the command line:
+
+(use-package edit-server
+  :if window-system
+  :init
+  (add-hook 'after-init-hook 'server-start t)
+  (add-hook 'after-init-hook 'edit-server-start t))
+In another example, we can load things conditional on the operating system:
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+**** :disable
+The :disabled keyword can turn off a module you're having difficulties with, or stop loading something you're not using at the present time:
+
+(use-package ess-site
+  :disabled
+  :commands R)
+When byte-compiling your .emacs file, disabled declarations are omitted from the output entirely, to accelerate startup times.
+**** :when
+NOTE: :when is provided as an alias for :if, and :unless foo means the same thing as :if (not foo). For example, the following will also stop :ensure from happening on Mac systems:
+
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))
+Conditional loading before :preface
+
+If you need to conditionalize a use-package form so that the condition occurs before even the :preface is executed, simply use when around the use-package form itself:
+*** Loading packages in sequence
+Sometimes it only makes sense to configure a package after another has been loaded, because certain variables or functions are not in scope until that time. This can achieved using an :after keyword that allows a fairly rich description of the exact conditions when loading should occur. Here is an example:
+
+(use-package hydra
+  :load-path "site-lisp/hydra")
+
+(use-package ivy
+  :load-path "site-lisp/swiper")
+
+(use-package ivy-hydra
+  :after (ivy hydra))
+In this case, because all of these packages are demand-loaded in the order they occur, the use of :after is not strictly necessary. By using it, however, the above code becomes order-independent, without an implicit depedence on the nature of your init file.
+
+By default, :after (foo bar) is the same as :after (:all foo bar), meaning that loading of the given package will not happen until both foo and bar have been loaded. Here are some of the other possibilities:
+
+:after (foo bar)
+:after (:all foo bar)
+:after (:any foo bar)
+:after (:all (:any foo bar) (:any baz quux))
+:after (:any (:all foo bar) (:all baz quux))
+When you nest selectors, such as (:any (:all foo bar) (:all baz quux)), it means that the package will be loaded when either both foo and bar have been loaded, or both baz and quux have been loaded.
+
+NOTE: pay attention if you set use-package-always-defer to t, and also use the :after keyword, as you will need to specify how the declared package is to be loaded: e.g., by some :bind. If you're not using one of tho mechanisms that registers autoloads, such as :bind or :hook, and your package manager does not provide autoloads, it's possible that without adding :demand t to those declarations, your package will never be loaded.
+
+*** Prevent loading if dependencies are missing
+
+While the :after keyword delays loading until the dependencies are loaded, the somewhat simpler :requires keyword simply never loads the package if the dependencies are not available at the time the use-package declaration is encountered. By "available" in this context it means that foo is available if (featurep 'foo) evaluates to a non-nil value. For example:
+
+(use-package abbrev
+  :requires foo)
+This is the same as:
+
+(use-package abbrev
+  :if (featurep 'foo))
+As a convenience, a list of such packages may be specified:
+
+(use-package abbrev
+  :requires (foo bar baz))
+For more complex logic, such as that supported by :after, simply use :if and the appropriate Lisp expression.
+*** Gathering Statistics
+
+If you'd like to see how many packages you've loaded, what stage of initialization they've reached, and how much aggregate time they've spent (roughly), you can enable use-package-compute-statistics after loading use-package but before any use-package forms, and then run the command M-x use-package-report to see the results. The buffer displayed is a tabulated list. You can use S in a column to sort the rows based on it.
+*** (use-package-chords)
+The :chords keyword allows you to define key-chord bindings for use-package declarations in the same manner as the :bind keyword.
+
+To enable the extension:
+
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+Then you can define your chord bindings in the same manner as :bind using a cons or a list of conses:
+
+(use-package ace-jump-mode
+  :chords (("jj" . ace-jump-char-mode)
+           ("jk" . ace-jump-word-mode)
+           ("jl" . ace-jump-line-mode)))
+*** Some timing results
+On my Retina iMac, the "Mac port" variant of Emacs 24.4 loads in 0.57s, with around 218 packages configured (nearly all of them lazy-loaded). However, I experience no loss of functionality, just a bit of latency when I'm first starting to use Emacs (due to the autoloading). Since I also use idle-loading for many packages, perceived latency is typically reduced overall.
+
+On Linux, the same configuration loads in 0.32s.
+
+If I don't use Emacs graphically, I can test the absolute minimum times. This is done by running:
+
+time emacs -l init.elc -batch --eval '(message "Hello, world!")'
+On the Mac I see an average of 0.36s for the same configuration, and on Linux 0.26s.

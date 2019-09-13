@@ -65,7 +65,7 @@
 (define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
 			(display-buffer (last-buffer))))
 ;; --------------------------------------  }}}
-;;   ***   Help in New Frame   ***  {{{
+;; *** Help in New Frame   ***  {{{
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-k") 'previous-multiframe-window)
 ;; ;;(define-key evil-normal-state-map "gth" 'other-frame -2)
@@ -76,8 +76,8 @@
 (global-set-key (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
 ;; --------------------------------------  }}}
 ;; ORIGAMI-MOD CUSTOMIZATION {{{
-(require 'origami)
-(load "~/INI/origami_cfg.el")
+;; (require 'origami)
+;; (load "~/INI/origami_cfg.el")
 ;; -------------------------------------- }}}
 ;; Frams Close  {{{
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)

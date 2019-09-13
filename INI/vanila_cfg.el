@@ -40,8 +40,12 @@
 ;;Relative line numbers enabled
 ;; Warp line on visula line end
 (global-visual-line-mode word-wrap)
-;; ------------------------------------------------------
 (show-paren-mode 1)
+;; ------------------------------------------------------
+;; “Interactively Do Things” (a.k.a. ido)
+(require 'ido)
+(ido-mode t)
+;; ------------------------------------------------------
 ;; Wrapping selecting text in enclosing characters
 ;; For parens you can do M-(. For brackets/braces/quotes you could do:
 (global-set-key (kbd "M-[") 'insert-pair)

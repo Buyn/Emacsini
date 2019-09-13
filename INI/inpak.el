@@ -5,7 +5,7 @@
 ;; INSTALL PACKAGES
 ;; --------------------------------------
 (require 'package)
-;; add from melpa site
+;; add from melpa site;  {{{
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -22,6 +22,7 @@ There are two things you can do about this warning:
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+; }}}
 ;; (add-to-list 'package-archives
 ;; ;;        '("melpa" . "http://melpa.org/packages/") t)
 ;;        '("melpa" . "http://melpa.org/packages/") )
@@ -46,9 +47,23 @@ There are two things you can do about this warning:
 
 (defvar myPackages
   '(better-defaults
+	use-package
     material-theme))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
       myPackages)
+;; (require 'use-package)
+
+;; tar not found when trying to install from melpa 
+;; You probably have an outdated package database
+;; (package-refresh-contents)
+;; ;; This is only needed once, near the top of the file
+;; (eval-when-compile
+;;   ;; Following line is not needed if use-package.el is in ~/.emacs.d
+;;   (add-to-list 'load-path "<path where use-package is installed>")
+;;   (require 'use-package))
+
+;; (require 'use-package)
+;; (use-package foo)
