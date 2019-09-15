@@ -47,51 +47,16 @@
 ;; Grabing  {{{
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
+;FIXME: move selected
+;TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
-;; Insert State {{{
+;; Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
 								(evil-normal-state)))
 (define-key evil-replace-state-map(quote [f2]) '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)))
-;; -------------------------------------- }}}
-;; *** Frams Controls ***  {{{
-(global-set-key (kbd "M-g M-t M-t") 'make-frame-command)
-;; (define-key evil-normal-state-map "gtt" 'make-frame-command)
-(global-set-key (kbd " M-g M-t M-f") 'find-file-other-frame)
-(global-set-key (kbd " M-g M-t M-b") 'switch-to-buffer-other-frame)
-(global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
-(define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
-			(display-buffer (last-buffer))))
-;; --------------------------------------  }}}
-;; *** Help in New Frame   ***  {{{
-;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
-;; (define-key evil-normal-state-map (kbd " M-g M-t M-k") 'previous-multiframe-window)
-;; ;;(define-key evil-normal-state-map "gth" 'other-frame -2)
-;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
-(global-set-key (kbd " M-g M-t M-h M-l") 'find-function-on-key-other-frame)
-(global-set-key (kbd " M-g M-t M-h M-k") 'find-function-on-key-other-frame)
-(global-set-key (kbd " M-g M-t M-h M-f") 'describe-function)
-(global-set-key (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
-;; --------------------------------------  }}}
-;; ORIGAMI-MOD CUSTOMIZATION {{{
-;; (require 'origami)
-;; (load "~/INI/origami_cfg.el")
-;; -------------------------------------- }}}
-;; Frams Close  {{{
-(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
-					(kill-this-buffer)
-					(evil-quit)))
-;; -------------------------------------- }}}
-;; EVIL TABS  {{{
-(global-evil-tabs-mode t)
-(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
-(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
-(elscreen-toggle-display-tab)
-;; TODO set display off
-;; :tabnew
-;; :tabclone
 ;; -------------------------------------- }}}
 ;; ONE CHAR ADD  {{{
 (load "~/ELs/Evil/onecharadd.el")

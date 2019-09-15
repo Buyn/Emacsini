@@ -28,14 +28,15 @@
 (find-file "~/INI/vanila_cfg.el")
 (find-file "~/INI/c-mode-cfg.el")
 (find-file "~/INI/evil-mod-cfg.el")
-    (find-file "~/INI/origami_cfg.el")
-(find-file "~/INI/init.el")
+(find-file "~/INI/origami_cfg.el")
+(find-file "~/INI/org-cfg.el")
 * Команды
 ** init files
 (load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
 (load "~/INI/vanila_cfg.el")
 (load "~/INI/origami_cfg.el")
+(load "~/INI/org-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")
@@ -93,8 +94,6 @@ You probably have an outdated package database
 если фул скри добовляет окна 4 с права
 и помнит для каждого что в нём было
 по доп нажатию фула в окне меняет местами содержания из доп окна и основного
-** DONE Vims Folding 
-   CLOSED: [2019-08-06 Вт 05:59]
 ** TODO настроить для работы с JS
    Найти файил с туториалом по настройке
    [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html]]
@@ -145,18 +144,6 @@ Indium connects to a browser tab or nodejs process and provides many features fo
 
  So I wonder what your workflows are like in Emacs? :)
 
- Cheers!
- 4 comments
- 100% Upvoted
- This thread is archived
- New comments cannot be posted and votes cannot be cast
- Sort by
- level 1
- rskiad
- 12 points ·
- 1 year ago
- · edited 1 year ago
-
  How about
 
  M-x compile RET whatever-command
@@ -197,7 +184,8 @@ Indium connects to a browser tab or nodejs process and provides many features fo
    - сочетание кнопок
    - строкой из скреч буфера
 ** Моды для емака
-*** Ivy mods 
+*** DONE Ivy mods 
+	CLOSED: [2019-09-13 Пт 05:52]
     [[https://www.youtube.com/watch?v=AaUlOH4GTCs]] youtube from where I get this 
     https://truthseekers.io/lessons/how-to-use-ivy-swiper-counsel-in-emacs-for-noobs/ text version lesson
     Ivy, Counsel, and Swiper are great if you can figure out how to use them!
@@ -205,8 +193,8 @@ Indium connects to a browser tab or nodejs process and provides many features fo
  I wanted to understand these emacs packages though, and that's a little more challenging.
     - ~Ivy~     :: is a package that helps you search. It helps you do things in M-x, or find file, and Dired, etc... Anything where you look for something in Emacs, Ivy can come to the rescue and help you type less. For example. Let's say I want to look through some Melpa packages. No longer do I have to type package-list-packages. Instead, I can just type "pa li packa" and Ivy will find all the results that match the search terms. Using spaces, you can target certain parts of what you're looking for. It just helps you type less. Ivy doesn't rely on anything, but
     - ~Swiper~  :: will automatically pull in Ivy when it's installed, because Swiper needs Ivy. Swiper does the same thing as Ivy, but replaces isearch, so you can use ivy features when searching through text.
-    - ~Counsel~ :: gives you extra functions that aren't normally available. For example: You can open a buffer or file in a new window.
-*** use-package
+*** DONE use-package
+	CLOSED: [2019-09-13 Пт 05:52]
 
 
 The easiest way is to install use-package.
@@ -233,6 +221,13 @@ To just load ensure multiple packages are install
  (unless (package-installed-p package)
    (package-install package))
    (require package))))
+*** emacs-purpose
+https://github.com/bmag/emacs-purpose
+Purpose ("window-purpose" on MELPA) provides a new window management system for Emacs, which gives you a better control over where Emacs displays buffers.
+
+With Purpose, each buffer has a configurable "purpose" and each window can interactively be dedicated to a certain "purpose". When you dedicate a window (C-c , d), Purpose makes sure that this window will be used only for buffers which have the same purpose as the buffer that is currently displayed in that window. The purpose of a buffer can be customized via the variables purpose-user-mode-purposes, purpose-user-name-purposes, purpose-user-regexp-purposes and purpose-use-default-configuration (see the wiki).
+*** ~Counsel~ 
+:: gives you extra functions that aren't normally available. For example: You can open a buffer or file in a new window.
    
 *** hidra mod 
     https://github.com/abo-abo/hydra
@@ -275,6 +270,19 @@ and we're good!
 The primary goal of reStructuredText is to define and implement a markup syntax for use in Python docstrings and other documentation domains, that is readable and simple, yet powerful enough for non-trivial use. The intended purpose of the markup is the conversion of reStructuredText documents into useful structured data formats.
 
 See statemachine.py for an example of a Python module fully documented using reStructuredText.
+*** Helm
+http://tuhdo.github.io/helm-intro.html
+https://github.com/emacs-helm/helm/wiki
+
+Helm is the successor of Anything. It’s a generic framework for quickly accessing stuff within Emacs. Or: an “incremental completion and selection narrowing framework for Emacs.”
+
+    Source available from GitHub
+    Documentation on its own Helm Wiki
+    This article is a nice introduction to Helm's many features
+
+Other packages:
+
+    HelmSwoop – like occur, but live
 ** TODO Add lisp code
 *** Folding on Org Mode vs C mode
 If you want to exclude one specific mode, you can do the following:
@@ -287,6 +295,327 @@ to make it globally available, and
 
 to exclude one mode where KEYMAP is the name name of the mode, followed by "mode-map" (e.g. ess-mode-map). You could also bind the original thing to the key instead of nil.
 shareimprove this answer
+** Exempls of cofig 
+*** класная визуальная тема
+**** Jessica Hamrick
+  http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/
+  ;--------------------;
+  ;;; User Interface ;;;
+  ;--------------------;
+
+  ; always use spaces, not tabs, when indenting
+  (setq indent-tabs-mode nil)
+
+  ; ignore case when searching
+  (setq case-fold-search t)
+
+  ; require final newlines in files when they are saved
+  (setq require-final-newline t)
+
+  ; window modifications
+  (global-set-key (kbd "S-C-") 'shrink-window-horizontally)
+  (global-set-key (kbd "S-C-") 'enlarge-window-horizontally)
+  (global-set-key (kbd "S-C-") 'shrink-window)
+  (global-set-key (kbd "S-C-") 'enlarge-window)
+
+  ; set the keybinding so that you can use f4 for goto line
+  (global-set-key &#91;f4&#93; 'goto-line)
+
+  ;----------------------;
+  ;;; Windows & Frames ;;;
+  ;----------------------;
+
+  ; language
+  (setq current-language-environment "English")
+
+  ; don't show the startup screen
+  (setq inhibit-startup-screen t)
+  ; don't show the menu bar
+  (menu-bar-mode nil)
+  ; don't show the tool bar
+  (require 'tool-bar)
+  (tool-bar-mode nil)
+  ; don't show the scroll bar
+  (scroll-bar-mode nil)
+
+  ; number of characters until the fill column
+  (setq fill-column 70)
+
+  ; specify the fringe width for windows -- this sets both the left and
+  ; right fringes to 10
+  (require 'fringe)
+  (fringe-mode 10)
+
+  ; lines which are exactly as wide as the window (not counting the
+  ; final newline character) are not continued. Instead, when point is
+  ; at the end of the line, the cursor appears in the right fringe.
+  (setq overflow-newline-into-fringe t)
+
+  ; each line of text gets one line on the screen (i.e., text will run
+  ; off the left instead of wrapping around onto a new line)
+  (setq truncate-lines t)
+  ; truncate lines even in partial-width windows
+  (setq truncate-partial-width-windows t)
+
+  ; display line numbers to the right of the window
+  (global-linum-mode t)
+  ; show the current line and column numbers in the stats bar as well
+  (line-number-mode t)
+  (column-number-mode t)
+
+  ;------------;
+  ;;; Cursor ;;;
+  ;--------------------;
+  ;;; User Interface ;;;
+  ;--------------------;
+
+  ; always use spaces, not tabs, when indenting
+  (setq indent-tabs-mode nil)
+
+  ; ignore case when searching
+  (setq case-fold-search t)
+
+  ; require final newlines in files when they are saved
+  (setq require-final-newline t)
+
+  ; window modifications
+  (global-set-key (kbd "S-C-") 'shrink-window-horizontally)
+  (global-set-key (kbd "S-C-") 'enlarge-window-horizontally)
+  (global-set-key (kbd "S-C-") 'shrink-window)
+  (global-set-key (kbd "S-C-") 'enlarge-window)
+
+  ; set the keybinding so that you can use f4 for goto line
+  (global-set-key &#91;f4&#93; 'goto-line)
+
+  ;----------------------;
+  ;;; Windows & Frames ;;;
+  ;----------------------;
+
+  ; language
+  (setq current-language-environment "English")
+
+  ; don't show the startup screen
+  (setq inhibit-startup-screen t)
+  ; don't show the menu bar
+  (menu-bar-mode nil)
+  ; don't show the tool bar
+  (require 'tool-bar)
+  (tool-bar-mode nil)
+  ; don't show the scroll bar
+  (scroll-bar-mode nil)
+
+  ; number of characters until the fill column
+  (setq fill-column 70)
+
+  ; specify the fringe width for windows -- this sets both the left and
+  ; right fringes to 10
+  (require 'fringe)
+  (fringe-mode 10)
+
+  ; lines which are exactly as wide as the window (not counting the
+  ; final newline character) are not continued. Instead, when point is
+  ; at the end of the line, the cursor appears in the right fringe.
+  (setq overflow-newline-into-fringe t)
+
+  ; each line of text gets one line on the screen (i.e., text will run
+  ; off the left instead of wrapping around onto a new line)
+  (setq truncate-lines t)
+  ; truncate lines even in partial-width windows
+  (setq truncate-partial-width-windows t)
+
+  ; display line numbers to the right of the window
+  (global-linum-mode t)
+  ; show the current line and column numbers in the stats bar as well
+  (line-number-mode t)
+  (column-number-mode t)
+
+  ;------------;
+  ;;; Cursor ;;;
+  ;------------;
+
+  ; highlight the current line
+  (require 'highlight-current-line)
+  (global-hl-line-mode t)
+  (setq highlight-current-line-globally t)
+  (setq highlight-current-line-high-faces nil)
+  (setq highlight-current-line-whole-line nil)
+  (setq hl-line-face (quote highlight))
+
+  ; don't blink the cursor
+  (blink-cursor-mode nil)
+
+  ; make sure transient mark mode is enabled (it should be by default,
+  ; but just in case)
+  (transient-mark-mode t)
+
+  ; turn on mouse wheel support for scrolling
+  (require 'mwheel)
+  (mouse-wheel-mode t)
+
+  ;-------------------------;
+  ;;; Syntax Highlighting ;;;
+  ;-------------------------;
+
+  ; text decoration
+  (require 'font-lock)
+  (setq font-lock-maximum-decoration t)
+  (global-font-lock-mode t)
+  (global-hi-lock-mode nil)
+  (setq jit-lock-contextually t)
+  (setq jit-lock-stealth-verbose t)
+
+  ; if there is size information associated with text, change the text
+  ; size to reflect it
+  (size-indication-mode t)
+
+  ; highlight parentheses when the cursor is next to them
+  (require 'paren)
+  (show-paren-mode t)
+
+  ;-----------------;
+  ;;; Color Theme ;;;
+  ;-----------------;
+
+  ; use the "Subtle Hacker" color theme as a base for the custom scheme
+  (require 'color-theme)
+  (color-theme-initialize)
+  (setq color-theme-is-global t)
+  (color-theme-subtle-hacker)
+
+  (custom-set-faces
+   '(default ((t (:overline nil :inherit nil :stipple nil :background "gray2"
+                  :foreground "#FFF991" :inverse-video nil :box nil
+                  :strike-through nil :underline nil
+                  :slant normal :weight normal :height 83 :width normal
+                  :foundry "unknown" :family "DejaVu Sans Mono"))))
+   '(border ((t nil)))
+   '(cursor ((t (:background "firebrick1" :foreground "black"))))
+   '(font-lock-comment-delimiter-face
+      ((default (:inherit font-lock-comment-face :weight ultra-bold))
+      (((class color) (min-colors 16)) nil)))
+   '(font-lock-comment-face ((t (:foreground "lime green"))))
+   '(font-lock-doc-face ((t (:foreground "tomato" :slant italic))))
+   '(font-lock-function-name-face
+      ((t (:foreground "deep sky blue" :underline t :weight bold))))
+   '(font-lock-keyword-face ((t (:foreground "gold" :weight bold))))
+   '(font-lock-string-face ((t (:foreground "tomato" :slant italic))))
+   '(fringe ((nil (:background "black"))))
+   '(highlight ((t (:background "khaki1" :foreground "black"
+					:box (:line-width -1 :color "firebrick1")))))
+   '(highlight-current-line-face ((t (:inherit highlight))))
+   '(lazy-highlight ((t (:background "paleturquoise" :foreground "black"))))
+   '(link ((t (:foreground "DodgerBlue3" :underline t))))
+   '(menu ((t (:background "gray2" :foreground "#FFF991"))))
+   '(minibuffer-prompt ((t (:foreground "royal blue"))))
+   '(mode-line ((t (:background "dark olive green"
+					:foreground "dark blue"
+					:box (:line-width -1 :color "gray75")
+					:weight bold))))
+   '(mode-line-buffer-id ((t (:background "dark olive green" :foreground "beige"))))
+   '(mode-line-highlight ((((class color) (min-colors 88)) nil)))
+   '(mode-line-inactive ((t (:background "dark olive green"
+							 :foreground "dark khaki" :weight light))))
+   '(mouse ((t (:background "Grey" :foreground "black"))))
+   '(trailing-whitespace ((((class color) (background dark))
+							(:background "firebrick1")))))
+
+  ; make sure the frames have the dark background mode by default
+  (setq default-frame-alist (quote (
+	(frame-background-mode . dark)
+  )))
+
+  ;------------;
+
+  ; highlight the current line
+  (require 'highlight-current-line)
+  (global-hl-line-mode t)
+  (setq highlight-current-line-globally t)
+  (setq highlight-current-line-high-faces nil)
+  (setq highlight-current-line-whole-line nil)
+  (setq hl-line-face (quote highlight))
+
+  ; don't blink the cursor
+  (blink-cursor-mode nil)
+
+  ; make sure transient mark mode is enabled (it should be by default,
+  ; but just in case)
+  (transient-mark-mode t)
+
+  ; turn on mouse wheel support for scrolling
+  (require 'mwheel)
+  (mouse-wheel-mode t)
+
+  ;-------------------------;
+  ;;; Syntax Highlighting ;;;
+  ;-------------------------;
+
+  ; text decoration
+  (require 'font-lock)
+  (setq font-lock-maximum-decoration t)
+  (global-font-lock-mode t)
+  (global-hi-lock-mode nil)
+  (setq jit-lock-contextually t)
+  (setq jit-lock-stealth-verbose t)
+
+  ; if there is size information associated with text, change the text
+  ; size to reflect it
+  (size-indication-mode t)
+
+  ; highlight parentheses when the cursor is next to them
+  (require 'paren)
+  (show-paren-mode t)
+
+  ;-----------------;
+  ;;; Color Theme ;;;
+  ;-----------------;
+
+  ; use the "Subtle Hacker" color theme as a base for the custom scheme
+  (require 'color-theme)
+  (color-theme-initialize)
+  (setq color-theme-is-global t)
+  (color-theme-subtle-hacker)
+
+  (custom-set-faces
+   '(default ((t (:overline nil :inherit nil :stipple nil :background "gray2"
+                  :foreground "#FFF991" :inverse-video nil :box nil
+                  :strike-through nil :underline nil
+                  :slant normal :weight normal :height 83 :width normal
+                  :foundry "unknown" :family "DejaVu Sans Mono"))))
+   '(border ((t nil)))
+   '(cursor ((t (:background "firebrick1" :foreground "black"))))
+   '(font-lock-comment-delimiter-face
+      ((default (:inherit font-lock-comment-face :weight ultra-bold))
+      (((class color) (min-colors 16)) nil)))
+   '(font-lock-comment-face ((t (:foreground "lime green"))))
+   '(font-lock-doc-face ((t (:foreground "tomato" :slant italic))))
+   '(font-lock-function-name-face
+      ((t (:foreground "deep sky blue" :underline t :weight bold))))
+   '(font-lock-keyword-face ((t (:foreground "gold" :weight bold))))
+   '(font-lock-string-face ((t (:foreground "tomato" :slant italic))))
+   '(fringe ((nil (:background "black"))))
+   '(highlight ((t (:background "khaki1" :foreground "black"
+					:box (:line-width -1 :color "firebrick1")))))
+   '(highlight-current-line-face ((t (:inherit highlight))))
+   '(lazy-highlight ((t (:background "paleturquoise" :foreground "black"))))
+   '(link ((t (:foreground "DodgerBlue3" :underline t))))
+   '(menu ((t (:background "gray2" :foreground "#FFF991"))))
+   '(minibuffer-prompt ((t (:foreground "royal blue"))))
+   '(mode-line ((t (:background "dark olive green"
+					:foreground "dark blue"
+					:box (:line-width -1 :color "gray75")
+					:weight bold))))
+   '(mode-line-buffer-id ((t (:background "dark olive green" :foreground "beige"))))
+   '(mode-line-highlight ((((class color) (min-colors 88)) nil)))
+   '(mode-line-inactive ((t (:background "dark olive green"
+							 :foreground "dark khaki" :weight light))))
+   '(mouse ((t (:background "Grey" :foreground "black"))))
+   '(trailing-whitespace ((((class color) (background dark))
+							(:background "firebrick1")))))
+
+  ; make sure the frames have the dark background mode by default
+  (setq default-frame-alist (quote (
+	(frame-background-mode . dark)
+  )))
 
 * TODO Оргаизовать Org Mod
 ** TODO Разобратся с агендой
@@ -310,40 +639,6 @@ C-c ]     (org-remove-file)
    (setq org-agenda-files '("~/ORG/start.org"))
    (setq org-agenda-files (quote ("~/ORG/start.org")))
 * Help Docs Emacs 
-** info\help
-   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
-   удобная систе показиваюшая мануалки по всем установленым модам
-** Options
-*** Visual
-*** Text Eltments
-**** Parenthesis
-***** 5.27 How do I show which parenthesis matches the one I’m looking at?
-  Call show-paren-mode in your .emacs file:
-  (show-paren-mode 1)
-
-  You can also enable this mode by selecting the ‘Paren Match Highlighting’ option from the ‘Options’ menu of the Emacs menu bar at the top of any Emacs frame.
-
-  Alternatives to this mode include:
-
-  If you’re looking at a right parenthesis (or brace or bracket) you can delete it and reinsert it. Emacs will momentarily move the cursor to the matching parenthesis.
-
-  C-M-f (forward-sexp) and C-M-b (backward-sexp) will skip over one set of balanced parentheses, so you can see which parentheses match. (You can train it to skip over balanced brackets and braces at the same time by modifying the syntax table.)
-
-  Here is some Emacs Lisp that will make the % key show the matching parenthesis, like in vi. In addition, if the cursor isn’t over a parenthesis, it simply inserts a % like normal.
-  #+BEGIN_SRC elisp
-;; By an unknown contributor
-(global-set-key "%" 'match-paren)
-(defun match-paren (arg)
-"Go to the matching paren if on a paren; otherwise insert %."
-    (interactive "p")
-    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
-	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
-	    (t (self-insert-command (or arg 1)))))
-  #+END_SRC
-
-** eLisp
-*** Cool guid
-https://github.com/chrisdone/elisp-guide
 ** Keyborde help 
 *** evaluate
     27.9 Evaluating Emacs Lisp Expressions
@@ -416,6 +711,39 @@ You can also use M-; to align an existing comment. If a line already contains th
 C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
 The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
 For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
+** info\help
+   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
+   удобная систе показиваюшая мануалки по всем установленым модам
+** Options
+*** Visual
+*** Text Eltments
+**** Parenthesis
+***** 5.27 How do I show which parenthesis matches the one I’m looking at?
+  Call show-paren-mode in your .emacs file:
+  (show-paren-mode 1)
+
+  You can also enable this mode by selecting the ‘Paren Match Highlighting’ option from the ‘Options’ menu of the Emacs menu bar at the top of any Emacs frame.
+
+  Alternatives to this mode include:
+
+  If you’re looking at a right parenthesis (or brace or bracket) you can delete it and reinsert it. Emacs will momentarily move the cursor to the matching parenthesis.
+
+  C-M-f (forward-sexp) and C-M-b (backward-sexp) will skip over one set of balanced parentheses, so you can see which parentheses match. (You can train it to skip over balanced brackets and braces at the same time by modifying the syntax table.)
+
+  Here is some Emacs Lisp that will make the % key show the matching parenthesis, like in vi. In addition, if the cursor isn’t over a parenthesis, it simply inserts a % like normal.
+  #+BEGIN_SRC elisp
+;; By an unknown contributor
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+"Go to the matching paren if on a paren; otherwise insert %."
+    (interactive "p")
+    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+	    (t (self-insert-command (or arg 1)))))
+  #+END_SRC
+** eLisp
+*** Cool guid
+https://github.com/chrisdone/elisp-guide
 ** REPL 
 ** DeBug
 * Help Docs Org
@@ -517,13 +845,18 @@ List with checkboxes (M-S-Ret)
     [ ] First element
     [X] Second element (C-c C-c – toggle checkbox state)
     [X] Third element
-*** ToDo functionality
+*** ToDo functionalityt
 C-c C-t – rotate TODO state
 S-Left, S-Right – rotate TODO state
-S-M-Ret – insert new TODO note
+**** S-M-Ret – insert new TODO note
 (setq org-todo-keywords’((sequence “TODO” “FEEDBACK” “VERIFY” “|” “DONE” “DELEGATED”)))
 Footnotes
+**** C-c / t     (org-show-todo-tree)
 
+    View TODO items in a sparse tree (see Sparse trees). Folds the entire buffer, but shows all TODO items (with not-DONE state) and the headings hierarchy above them. With a prefix argument (or by using C-c / T), search for a specific TODO. You will be prompted for the keyword, and you can also give a list of keywords like KWD1|KWD2|... to list entries that match any one of these keywords. With a numeric prefix argument N, show the tree for the Nth keyword in the option org-todo-keywords. With two prefix arguments, find all TODO states, both un-done and done. 
+**** C-c a t     (org-todo-list)
+
+    Show the global TODO list. Collects the TODO items (with not-DONE states) from all agenda files (see Agenda views) into a single buffer. The new buffer will be in agenda-mode, which provides commands to examine and manipulate the TODO entries from the new buffer (see Agenda commands). See Global TODO list, for more information. 
 *** unsort
 More devices
 C-c C-z – time-stamped drawer

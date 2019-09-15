@@ -10,4 +10,7 @@
 	:init
 	(elpy-enable)
 	:config
-	(ivy-mode 1))
+	(ivy-mode 1)
+	(global-origami-mode nil)
+	)
+;; --------------------------------------

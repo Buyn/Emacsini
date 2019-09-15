@@ -13,8 +13,16 @@
 ;; (global-set-key (kbd "C-c l") 'org-store-link)
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
-;; ---------------     ORG Capures
 ;; --------------------------------------
+;; ---------------     ORG TODOs
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "DONE(d)")
+        ;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "NEXT(x)" "WAITING(w)" "VERIFY(v)" "|" "CANCELED(c)" "DELEGATED(g)")))
+;; (setq org-agenda-custom-commands
+;;       '(("n" occur-tree "NEXT")))
+;; --------------------------------------
+;; ---------------     ORG Capures
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
 (setq org-capture-templates '(

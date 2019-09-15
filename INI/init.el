@@ -8,17 +8,20 @@
 ;; VANILA CUSTOMIZATION
 (load "~/INI/vanila_cfg.el")
 ;; --------------------------------------
-;; INTERFACE-MODS CUSTOMIZATION
-(load "~/INI/interface-mods.el")
-;; --------------------------------------
 ;; EVIL-MOD CUSTOMIZATION
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
-;; FULLSCREEN-MOD CUSTOMIZATION
-(load "~/INI/fullscreen-cfg.el")
+;; INTERFACE-MODS CUSTOMIZATION
+(load "~/INI/interface-mods.el")
 ;; --------------------------------------
 ;; ORG-MODE CUSTOMIZATION
 (load "~/INI/org-cfg.el")
+;; --------------------------------------
+;; FRAME & WINDOWS CONTROL-MODS CUSTOMIZATION
+(load "~/INI/frame-control.el")
+;; --------------------------------------
+;; FOLDING-MODS CUSTOMIZATION
+(load "~/INI/folding-cfg.el")
 ;; --------------------------------------
 ;; JS-MOD CUSTOMIZATION
 (load "~/INI/js-cfg.el")
@@ -27,10 +30,7 @@
 (load "~/INI/autocomplete-cfg.el")
 ;; --------------------------------------
 ;; PYTHON-MOD CUSTOMIZATION
-;; (load "~/INI/python-cfg.el")
-;; --------------------------------------
-;; FRAMEs AND WINDOWs-MOD CUSTOMIZATION
-(load "~/INI/frame-control.el")
+(load "~/INI/python-cfg.el")
 ;; --------------------------------------
 ;; TIME TRACKING-MODs CUSTOMIZATION
 ;; (load "~/INI/time-tracking-cfg.el")

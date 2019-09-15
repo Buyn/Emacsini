@@ -1,6 +1,14 @@
-;;
-;; Window &amp; Frame Switching with WindMove and FrameMove
-;;
+;; --------------------------------------
+;; init.el --- Emacs configuration
+;; --------------------------------------
+;; WINDMOVE&FRAMEMOVE SETUP{{{
+;; --------------------------------------
+(require 'cl) ;;used to Fix error if theres an error with above code
+(load "~/.emacs.d/Els/framemove/framemove.el")
+(require 'framemove)
+    (windmove-default-keybindings)
+    (setq framemove-hook-into-windmove t) ;;Hook framemove into windmove keys
+;; Common lisp stuff to fix windmove/framemove 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 ;; --------------------------------------
@@ -11,13 +19,26 @@
 (global-set-key (kbd "M-j") nil)
 (global-set-key (kbd "M-j") 'windmove-down)
 (define-key org-mode-map (kbd "M-j") 'windmove-down)
-(define-key c-mode-base-map (kbd "M-j") 'windmove-down)
-(define-key c++-mode-map  (kbd "M-j") 'windmove-down)
+;; no  such variables error
+;; (define-key c-mode-base-map (kbd "M-j") 'windmove-down)
+;; (define-key c++-mode-map  (kbd "M-j") 'windmove-down)
 (global-set-key (kbd "M-k") nil)
 (global-set-key (kbd "M-k") 'windmove-up)
 (global-set-key (kbd "M-l") nil)
 (global-set-key (kbd "M-l") 'windmove-right)
 ;; --------------------------------------
+; }}}
+;; --------------------------------------
+;; EVIL TABS  {{{
+(global-evil-tabs-mode t)
+(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
+(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
+(elscreen-toggle-display-tab)
+;; :tabnew
+;; :tabclone
+;; -------------------------------------- }}}
+;; --------------------------------------
+;; FRAME SIZE&POSITION CONTROL KEYS;  {{{
 (global-set-key (kbd "M-<kp-7>") '(lambda() (interactive)
 				  (set-frame-position (selected-frame) 0 0)))
 (global-set-key (kbd "M-<kp-9>") '(lambda() (interactive)
@@ -40,21 +61,48 @@
 				(set-frame-size (selected-frame) 75 25)))
 (global-set-key (kbd "C-M-<kp-subtract>") '(lambda() (interactive)
 				(set-frame-size (selected-frame) 75 35)))
+;; --------------------------------------
+; }}}
+;; --------------------------------------
+;; *** Frams Controls ***  {{{
+(global-set-key (kbd "M-g M-t M-t") 'make-frame-command)
+;; (define-key evil-normal-state-map "gtt" 'make-frame-command)
+(global-set-key (kbd " M-g M-t M-f") 'find-file-other-frame)
+(global-set-key (kbd " M-g M-t M-b") 'switch-to-buffer-other-frame)
+(global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
+(define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
+			(display-buffer (last-buffer))))
+;; --------------------------------------  }}}
+;; --------------------------------------
+;; *** Help in New Frame   ***  {{{
+;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
+;; (define-key evil-normal-state-map (kbd " M-g M-t M-k") 'previous-multiframe-window)
+;; ;;(define-key evil-normal-state-map "gth" 'other-frame -2)
+;;(define-key evil-normal-state-map "gtl" 'other-frame 2)
+(global-set-key (kbd " M-g M-t M-h M-l") 'find-function-on-key-other-frame)
+(global-set-key (kbd " M-g M-t M-h M-k") 'find-function-on-key-other-frame)
+(global-set-key (kbd " M-g M-t M-h M-f") 'describe-function)
+(global-set-key (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
+;; --------------------------------------  }}}
+;; --------------------------------------
+;; Frams Close  {{{
+(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
+					(kill-this-buffer)
+					(evil-quit)))
+;; -------------------------------------- }}}
+;; --------------------------------------
+;; FULLSCREEN-MOD CUSTOMIZATION;  {{{
+(load "~/INI/fullscreen-cfg.el")
+;; --------------------------------------
+; }}}
+;; --------------------------------------
+;; NOT USED;  {{{
 ;; (global-set-key (kbd "<kp-subtract>") 'xah-close-current-buffer)
 ;; (global-set-key (kbd "<kp-divide>") 'xah-previous-user-buffer)
 ;; (global-set-key (kbd "<kp-multiply>") 'xah-next-user-buffer)
 ;; (global-set-key (kbd "<kp-decimal>") 'other-window)
 ;; (global-set-key (kbd "<C-kp-divide>") 'xah-previous-emacs-buffer)
 ;; (global-set-key (kbd "<C-kp-multiply>") 'xah-next-emacs-buffer)
-
-
 ;; --------------------------------------
-(load "~/.emacs.d/Els/framemove/framemove.el")
-(require 'framemove)
-    (windmove-default-keybindings)
-    (setq framemove-hook-into-windmove t) ;;Hook framemove into windmove keys
-;; Common lisp stuff to fix windmove/framemove 
-(require 'cl) ;;used to Fix error if theres an error with above code
-;;
-;; End of Windmove &amp; Framemove setup
-;;
+; }}}
+;; --------------------------------------
