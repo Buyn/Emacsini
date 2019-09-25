@@ -39,7 +39,9 @@
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
 (find-file "~/INI/init.el")
+(find-file "~/../hi.txt")
 (find-file "~/INI/inpak.el")
+(find-file "~/INI/autocomplete-cfg.el")
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
 (find-file "~/INI/c-mode-cfg.el")
