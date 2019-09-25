@@ -9,4 +9,6 @@ alias gig="echo >>.gitignore"
 alias ac="git commit *"
 alias gmme="git checkout master; git merge experemental; git checkout experemental"
 alias gmem="git checkout experemental; git merge master; git checkout master"
+alias gmte="git checkout test; git merge experemental; git checkout experemental"
+alias gmmt="git checkout master; git merge test; git checkout experemental"
 

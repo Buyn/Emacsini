@@ -6,7 +6,7 @@
 ;; --------------------------------------
 (use-package origami :ensure t
   :config
-    (add-hook 'prog-mode-hook
+    (add-hook 'prog-mode-hook 
       (lambda ()
         (setq-local origami-fold-style 'triple-braces)
 		; one of this slowepoking elpy

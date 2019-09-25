@@ -27,7 +27,7 @@
 (load "~/INI/js-cfg.el")
 ;; --------------------------------------
 ;; AUTO-COMPLETE  CUSTOMIZATION
-(load "~/INI/autocomplete-cfg.el")
+;; (load "~/INI/autocomplete-cfg.el")
 ;; --------------------------------------
 ;; PYTHON-MOD CUSTOMIZATION
 (load "~/INI/python-cfg.el")

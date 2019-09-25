@@ -1,7 +1,23 @@
 #-*- mode: org -*-
 #+STARTUP: content
 #+TODO: TODO DONE
-
+ _   _   _             _   _   _
+| |_| |_| |           | |_| |_| |
+ \ _____ /      o_     \ _____ /
+  |     |       |_|     |     |
+  |  |  |       |       |  |  |
+  |   _ } _   _ | _   _ { _   |
+  |  | |_| |_| ||| |_| |_| |  |
+  |  |                     |  |
+  || |                     | ||
+  |  |        _____        |  |
+  |  |       /_|_|_\       |  |
+  |  |      /|_|_|_|\      |  |
+  |  |      ||_|_|_||      |  |
+  |  |      ||_|_|_||      |  |
+  |__|      ||_|_|_||      |__|
+ /   |      ||_|_|_||      |   \
+=================================
 * Pathes
 ** org files
 [[file:weekly.org][weekly file]]
@@ -184,7 +200,8 @@ Indium connects to a browser tab or nodejs process and provides many features fo
    - сочетание кнопок
    - строкой из скреч буфера
 ** Моды для емака
-*** DONE Ivy mods 
+*** org-journal 
+*** Done Ivy mods 
 	CLOSED: [2019-09-13 Пт 05:52]
     [[https://www.youtube.com/watch?v=AaUlOH4GTCs]] youtube from where I get this 
     https://truthseekers.io/lessons/how-to-use-ivy-swiper-counsel-in-emacs-for-noobs/ text version lesson
@@ -270,6 +287,7 @@ and we're good!
 The primary goal of reStructuredText is to define and implement a markup syntax for use in Python docstrings and other documentation domains, that is readable and simple, yet powerful enough for non-trivial use. The intended purpose of the markup is the conversion of reStructuredText documents into useful structured data formats.
 
 See statemachine.py for an example of a Python module fully documented using reStructuredText.
+*** org-id  
 *** Helm
 http://tuhdo.github.io/helm-intro.html
 https://github.com/emacs-helm/helm/wiki
@@ -617,6 +635,14 @@ shareimprove this answer
 	(frame-background-mode . dark)
   )))
 
+** Exempls of Code 
+*** archive todos from org agenda
+(defun mark-done-and-archive ()
+   (interactive)
+   (org-todo 'done)
+   (org-archive-subtree))
+ (define-key org-mode-map "\C-c\C-x\C-s" 'mark-done-and-archive)
+ 
 * TODO Оргаизовать Org Mod
 ** TODO Разобратся с агендой
 *** DONE разобрать фаил по подфайлам
@@ -1034,8 +1060,7 @@ Furthermore, remapping commands with :bind and bind-key works as expected, becau
 
 (use-package unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
-Binding to keymaps
-
+*** Binding to keymaps
 Normally :bind expects that commands are functions that will be autoloaded from the given package. However, this does not work if one of those commands is actually a keymap, since keymaps are not functions, and cannot be autoloaded using Emacs' autoload mechanism.
 
 To handle this case, use-package offers a special, limited variant of :bind called :bind-keymap. The only difference is that the "commands" bound to by :bind-keymap must be keymaps defined in the package, rather than command functions. This is handled behind the scenes by generating custom code that loads the package containing the keymap, and then re-executes your keypress after the first load, to reinterpret that keypress as a prefix key.
