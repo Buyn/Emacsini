@@ -106,6 +106,7 @@ You probably have an outdated package database
     the builtin variable path-separator can be used instead of ;.
 ;; show env var named path
 (getenv "PATH")
+** ielm 
 * TODO натройка емака
 ** TODO Vims Tabs
 *** Таб должен взаимодействоать с полнооконым режимом
