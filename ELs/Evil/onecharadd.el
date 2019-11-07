@@ -2,11 +2,16 @@
     "add one char into normal evil"
     (interactive)
     (setq chartoadd (read-char "enter char"))
-    (insert chartoadd))
+	(if (= chartoadd 13)
+		(open-line 1)
+		(insert chartoadd)))
 
 (defun addone-char-after-normal-evil()
     "add one char after normal evil"
     (interactive)
     (setq chartoadd (read-char "enter char"))
-    (save-excursion (insert chartoadd)))
+	(if (= chartoadd 13)
+		(open-line 1)
+		(save-excursion (insert chartoadd))))
     ;;(save-excursion (insert chartoadd)))
+

@@ -1,6 +1,7 @@
 #-*- mode: org -*-
 #+STARTUP: content
 #+TODO: TODO DONE
+* Welcom! Don`t panic!
  _   _   _             _   _   _
 | |_| |_| |           | |_| |_| |
  \ _____ /      o_     \ _____ /
@@ -20,19 +21,18 @@
 =================================
 * Pathes
 ** org files
-[[file:weekly.org][weekly file]]
-[[file:todo_plan.org][ToDo Plan org]]
-[[file:monthly.org][Monthly file]]
+[[file:~/../Dropbox/orgs/weekly.org][weekly file]]
+[[file:~/../Dropbox/orgs/todo_plan.org][ToDo Plan org]]
+[[file:~/../Dropbox/orgs/monthly.org][Monthly file]]
 [[file:GTD.org][GTD file]]
+[[file:today.org][Today org file]]
 [[file:~/ORG/gtd/inbox.org][Inbox GTD File]]
 [[file:~/ORG/gtd/tickler.org][Tikler Todo File]]
-[[file:today.org][Today org file]]
 
-(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/todo_plan.org")
-(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/weekly.org")
-(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/monthly.org")
-(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/GTD.org")
-(find-file "d:/My_Docs/Ofice/PaperFlow/TODO/today.org")
+(find-file "D:/Development/lisp/Dropbox/orgs/weekly.org")
+(find-file "~/../Dropbox/orgs/todo_main.org")
+(find-file "~/../Dropbox/orgs/todo_plan.org")
+(find-file "~/../Dropbox/orgs/todo_LongRun.org")
 
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")
@@ -45,7 +45,8 @@
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
 (find-file "~/INI/c-mode-cfg.el")
-(find-file "~/INI/evil-mod-cfg.el")
+	(find-file "~/ELs/Evil/onecharadd.el")
+(load "~/ELs/Evil/onecharadd.el")
 (find-file "~/INI/origami_cfg.el")
 (find-file "~/INI/org-cfg.el")
 * Команды
@@ -771,6 +772,32 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 	    (t (self-insert-command (or arg 1)))))
   #+END_SRC
 ** eLisp
+*** show maseges
+(message "Load of init.el is ended")
+(if nil "yes" "no")
+*** varible
+**** show type
+(type-of chartoadd)
+**** chek type
+(typep *x* 'integer)
+**** chege type 
+***** From number to string:
+(number-to-string 5)
+"5"
+you may transform a string to any numerical notation:
+(number-to-string 341 :base 10)
+"341"
+***** From string to number:
+(parse-integer "5")
+5
+with some trash
+(parse-integer " 5 something not a number" :junk-allowed t)
+5
+Or use this:
+(read-from-string "23 absd")
+23
+***** FORMAT 
+(format nil "~A" 1)
 *** Cool guid
 https://github.com/chrisdone/elisp-guide
 ** REPL 
@@ -803,6 +830,8 @@ https://github.com/chrisdone/elisp-guide
 **** Org Mode - Organize Your Life In Plain Text!
      http://doc.norang.ca/org-mode.html   
      очень последовательнвый манул по всему оргу с кучей примеров
+*** мануал пдф
+ [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
 ** Tree Notes 
 *** Exempls
   - Note taken on [2018-10-29 Пн 20:19] \\
@@ -977,17 +1006,134 @@ Here’s an agenda mockup to illustrate the point, augmented with a “default�
   ABC:        Scheduled:  Subtask
 
 ** Links 
-   (define-key global-map "\C-cl" 'org-store-link)
-Для того что бы создать ссылку достаточно использовать такой шаблон — [[ссылка][описание]].
+*** общее
+(define-key global-map "\C-cl" 'org-store-link)
+Для того что бы создать ссылку достаточно использовать такой шаблон — [[%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0][описание]].
   [ {] [] ]
 
 Для создания ссылки можно ещё использовать комбинацию C+c C+l. В мини-буфере emacs предложит сначала написать ссылку, затем после нажатия RET — её создать. Находясь в мини-буфере так же можно нажать TAB, для просмотра, какие виды ссылок бывают.
+редактировать повторно тойже комбинацией C+c C+l. 
 
 Что бы открыть вновь созданные ссылки необходимо навести точку на ссылку и тыкнуть C+c C+o. Или C+u C+c C+o — если Вы хотите открыть её в другом окне.
 
 Ради интереса, можно перейти в другой файл, нажать там C+c l. И ссылка на этот файл поместится в хранилище ссылок. Перейдя в любой наш файл .org мы можем извлечь из этого хранилища любые сохраненные ссылки, с помощью той же команды C+c C+l.
 Самые наблюдательные читатели уже могли заметить, что эта команда как раз и есть та, которую мы вписали в ~/.emacs, в начале.
-   [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
+‘file:/home/dominik/images/jupiter.jpg’ file, absolute path
+‘/home/dominik/images/jupiter.jpg’ same as above
+‘file:papers/last.pdf’ file, relative path
+‘./papers/last.pdf’ same as above
+‘file:/ssh:me@some.where:papers/last.pdf’ file, path on remote machine
+‘/ssh:me@some.where:papers/last.pdf’ same as above
+‘file:sometextfile::NNN’ file, jump to line number
+‘file:projects.org’ another Org file
+‘file:projects.org::some words’ text search in Org file5
+‘file:projects.org::*task title’ heading search in Org file
+‘file+sys:/path/to/file’ open via OS, like double-click
+‘file+emacs:/path/to/file’ force opening by Emacs
+‘docview:papers/last.pdf::NNN’ open in doc-view mode at page
+‘id:B7423F4D-2E8A-471B-8810-C40F074717E9’ link to heading by ID
+‘mailto:adent@galaxy.net’ mail link
+‘irc:/irc.com/#emacs/bob’ IRC link
+‘info:org#External links’ Info node link
+‘shell:ls *.org’ shell command
+‘elisp:org-agenda’ interactive Elisp command
+‘elisp:(find-file "Elisp.org")’ Elisp form to evaluate
+‘http://www.astro.uva.nl/=dominik’ on the web
+*** мануал пдф
+[[https://orgmode.org/org.pdf][Link to 304p doc about org]]
+*** 4.2 Internal Link
+If the link does not look like a URL, it is considered to be internal in the current file.
+The most important case is a link like ‘[[#my-custom-id]]’ which links to the entry with
+the ‘CUSTOM_ID’ property ‘my-custom-id’. You are responsible yourself to make sure these
+custom IDs are unique in a file.
+Links such as ‘[[My Target]]’ or ‘[[My Target][Find my target]]’ lead to a text
+‘[[My Target]}’ or ‘[[My Target][Find my target]}’
+search in the current file.
+
+The link can be followed with C-c C-o when point is on the link, or with a mouse click
+(see Section 4.5 [Handling Links], page 39). Links to custom IDs point to the corresponding
+headline. The preferred match for a text link is a dedicated target: the same string in double
+
+angular brackets, like ‘<<My Target>>’.
+If no dedicated target exists, the link tries to match the exact name of an element within
+the buffer. Naming is done with the ‘NAME’ keyword, which has to be put in the line before
+the element it refers to, as in the following example
+#+NAME: My Target
+| a | table |
+|----+------------|
+| of | four cells |
+If none of the above succeeds, Org searches for a headline that is exactly the link text
+but may also include a TODO keyword and tags3
+1. one item
+2. <<target>>another item
+Here we refer to item [[target]] \ [[target]} .
+The last sentence will appear as ‘Here we refer to item 2’ when exported.
+In non-Org files, the search looks for the words in the link text. In the above example
+the search would be for ‘target’.
+Following a link pushes a mark onto Org’s own mark ring. You can return to the previous
+position with C-c &. Using this command several times in direct succession goes back to
+positions recorded earlier.
+*** 4.7 Link Abbreviations 
+[[linkword:tag][description]}
+where the tag is optional. The linkword must be a word, starting with a letter, followed by
+letters, numbers, ‘-’, and ‘_’. Abbreviations are resolved according to the information in
+the variable org-link-abbrev-alist that relates the linkwords to replacement text. Here
+is an example:
+(setq org-link-abbrev-alist
+'(("bugzilla" . "http://10.1.2.9/bugzilla/show_bug.cgi?id=")
+("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")
+("google" . "http://www.google.com/search?q=")
+("gmap" . "http://maps.google.com/maps?q=%s")
+("omap" . "http://nominatim.openstreetmap.org/search?q=%s&polygon=1")
+("ads" . "https://ui.adsabs.harvard.edu/search/q=%20author%3A\"%s\"")))
+If the replacement text contains the string ‘%s’, it is replaced with the tag. Using ‘%h’
+instead of ‘%s’ percent-encodes the tag (see the example above, where we need to encode
+the URL parameter). Using ‘%(my-function)’ passes the tag to a custom Lisp function,
+and replace it by the resulting string.
+If the replacement text do not contain any specifier, it is simply appended to the string
+in order to create the link.
+Instead of a string, you may also specify a Lisp function to create the link. Such a
+function will be called with the tag as the only argument.
+With the above setting, you could link to a specific bug with ‘[[bugzilla:129]]’,
+search the web for ‘OrgMode’ with ‘[[google:OrgMode]]’, show the map location of the
+Free Software Foundation ‘[[gmap:51 Franklin Street, Boston]]’
+
+If you need special abbreviations just for a single Org buffer, you can define them in the
+file with
+#+LINK: bugzilla http://10.1.2.9/bugzilla/show_bug.cgi?id=
+#+LINK: google http://www.google.com/search?q=%s
+In-buffer completion (see Section 15.1 [Completion], page 228) can be used after ‘[’ to
+complete link abbreviations. You may also define a Lisp function that implements special
+(e.g., completion) support for inserting such a link with C-c C-l. Such a function should
+not accept any arguments, and should return the full link with a prefix. You can set the
+link completion function like this:
+(org-link-set-parameter "type" :complete #'some-completion-function)
+*** 4.8 Search Options in File Links 
+
+[[file:~/code/main.c::255]}
+[[file:~/xx.org::My Target]}
+[[file:~/xx.org::*My Target]}
+[[file:~/xx.org::#my-custom-id]}
+[[file:~/xx.org::/regexp/]}
+‘255’ Jump to line 255.
+‘My Target’
+Search for a link target ‘<<My Target>>’, or do a text search for ‘my target’,
+similar to the search in internal links, see Section 4.2 [Internal Links], page 36.
+In HTML export (see Section 12.9 [HTML Export], page 151), such a file link
+becomes a HTML reference to the corresponding named anchor in the linked
+file.
+‘*My Target’
+In an Org file, restrict search to headlines.
+‘#my-custom-id’
+Link to a heading with a ‘CUSTOM_ID’ property
+‘/REGEXP/’
+Do a regular expression search for REGEXP. This uses the Emacs command
+occur to list all matches in a separate window. If the target file is in Org mode,
+org-occur is used to create a sparse tree with the matches.
+
+  As a degenerate case, a file link with an empty file name can be used to search the
+current file. For example, ‘[[file:::find me]}’ does a search for ‘find me’ in the current
+file, just as ‘[[find me]}’ would.
 * Help Docs Gnus
   The Emacs news and email reader.
 * Help Docs Mods 
