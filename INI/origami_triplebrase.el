@@ -13,12 +13,12 @@
   (if (equal major-mode 'org-mode)
 		(org-cycle)
 		(save-excursion ;; leave point where it is
-		(goto-char (point-at-eol)) ;; then go to the endi of line
+		(goto-char (point-at-eol)) ;; then go to the end of line
 		;; (origami-toggle-node (current-buffer) (point))
 		;; and try to fold
 		(origami-forward-toggle-node)
 		)))
-  )
+  
 
 (defun triple-braces-create-and-comment-on-rigion ()
 		"create fold and add comment to it
@@ -34,19 +34,20 @@
 	 (indent-according-to-mode)
 	 (insert comment-start)
 	 (setq start (point))
-	 (insert " " " {{{")
+	 (insert "  {{{")
 	 (newline-and-indent)
 	 (goto-char end)
 	 (end-of-line)
+	 (newline-and-indent)
 	 (and (not (bolp))
 		  (eq 0 (forward-line))
 		  (eobp)
 		  (insert ?\n))
 	 (indent-according-to-mode)
 	 (if (equal comment-end "")
-		 (insert comment-start " ;; }}}")
+		 (insert comment-start "  }}}")
 	   (insert comment-end "}}}"))
-	 (newline-and-indent)
+	 ;; (newline-and-indent)
 	 (goto-char start)
 	 )
 
