@@ -6,7 +6,7 @@
 ;; --------------------------------------
 (require 'origami)
 (global-origami-mode 1)
-
+(load-file "~/INI/origami_triplebrase.el")
 (defun nin-origami-toggle-node ()
   (interactive)
   (if (equal major-mode 'org-mode)

@@ -48,6 +48,7 @@
 	(find-file "~/ELs/Evil/onecharadd.el")
 (load "~/ELs/Evil/onecharadd.el")
 (find-file "~/INI/origami_cfg.el")
+	(find-file "~/INI/origami_triplebrase.el")
 (find-file "~/INI/org-cfg.el")
 * Команды
 ** init files
