@@ -37,6 +37,7 @@
 	 (insert "  {{{")
 	 (newline-and-indent)
 	 (goto-char end)
+	 (forward-line 2)
 	 (end-of-line)
 	 (newline-and-indent)
 	 (and (not (bolp))
