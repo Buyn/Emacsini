@@ -1,5 +1,7 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
+;; not used - commented in
+;; (find-file "~/INI/folding-cfg.el")
 ;; --------------------------------------
 ;; --------------------------------------
 ;; ORIGAMI-MOD CUSTOMIZATION
@@ -22,7 +24,8 @@
 			(origami-close-all-nodes (current-buffer))))
 (evil-define-key 'normal prog-mode-map (kbd "TAB") 'nin-origami-toggle-node)
 
-(define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
+(define-key evil-normal-state-map "za" 'triple-braces-forward-togle)
+;; (define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
 (define-key evil-normal-state-map "zR" 'origami-close-all-nodes)
 ;; (define-key evil-normal-state-map "zM" 'origami-open-all-nodes)
 (define-key evil-normal-state-map "zr" 'origami-close-node-recursively)

@@ -10,16 +10,21 @@
 	and open it
 	if no found then use standart origami standart forward togling"
   (interactive)
-  (if (equal major-mode 'org-mode)
-		(org-cycle)
-		(save-excursion ;; leave point where it is
-		(goto-char (point-at-eol)) ;; then go to the end of line
+  ;; (if (equal major-mode 'org-mode)
+		;; (org-cycle)
+	(save-excursion ;; leave point where it is
+		(if (search-forward "{{{" (line-end-position) t) ;fo1x in or out
+			(origami-toggle-node (current-buffer) (point))
+			(origami-toggle-node (current-buffer) (point)))
+		;; (goto-char (point-at-eol)) ;; then go to the end of line
+		;; (search-forward "fox") ;fo1x in or out
 		;; (origami-toggle-node (current-buffer) (point))
 		;; and try to fold
-		(origami-forward-toggle-node)
-		)))
+		;; (origami-forward-toggle-node)
+		))
   
 
+(message "load togler")
 (defun triple-braces-create-and-comment-on-rigion ()
 		"create fold and add comment to it
 		 on sellected region"

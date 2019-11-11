@@ -47,8 +47,9 @@
 (find-file "~/INI/c-mode-cfg.el")
 	(find-file "~/ELs/Evil/onecharadd.el")
 (load "~/ELs/Evil/onecharadd.el")
-(find-file "~/INI/origami_cfg.el")
-	(find-file "~/INI/origami_triplebrase.el")
+(find-file "~/INI/folding-cfg.el")
+	(find-file "~/INI/origami_cfg.el")
+		(find-file "~/INI/origami_triplebrase.el")
 (find-file "~/INI/org-cfg.el")
 * Команды
 ** init files
@@ -801,6 +802,36 @@ Or use this:
 (format nil "~A" 1)
 *** Cool guid
 https://github.com/chrisdone/elisp-guide
+*** compile
+Emacs 24.3 or below
+
+There's no built-in way of preventing these old files from being loaded, but there are easy ways to get rid of them.
+
+****    You can recompile the entire elpa directory by calling:
+    M-x byte-recompile-directory RET ~/.emacs.d/elpa/.
+    This should get rid of outdated files.
+****    You can use the auto-compile package
+and activate auto-compile-on-load-mode which can compile files before they are loaded.
+
+Emacs 24.4
+
+Yes, and it turns out to be rather simple. The
+****    load-prefer-newer
+variable serves precisely this purpose.
+
+(setq load-prefer-newer t)
+
+Unfortunately, it won't work when some code specifically targets the .elc file, such as (load "server.elc"). But it should be enough as long as you're using requires or calling load without a suffix, which you should.
+
+From the doc:
+
+    load-prefer-newer is a variable defined in lread.c.
+    Its value is nil
+
+    Documentation:
+    Non-nil means load prefers the newest version of a file.
+    This applies when a filename suffix is not explicitly specified and load is trying various possible suffixes (see load-suffixes and load-file-rep-suffixes). Normally, it stops at the first file that exists unless you explicitly specify one or the other. If this option is non-nil, it checks all suffixes and uses whichever file is newest.
+    Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
 ** REPL 
 ** DeBug
 * Help Docs Org
