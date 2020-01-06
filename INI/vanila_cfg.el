@@ -22,7 +22,6 @@
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
 (setq-default tab-width 4)
-(set-input-method "russian-computer")
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
 ;;  (lambda ()
@@ -45,6 +44,10 @@
 ;; “Interactively Do Things” (a.k.a. ido)
 (require 'ido)
 (ido-mode t)
+;; ------------------------------------------------------
+;; change input method
+(set-input-method "russian-computer")
+(global-set-key (kbd "C-^") 'toggle-input-method)
 ;; ------------------------------------------------------
 ;; Wrapping selecting text in enclosing characters
 ;; For parens you can do M-(. For brackets/braces/quotes you could do:

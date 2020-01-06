@@ -7,21 +7,14 @@
 ;; --------------------------------------
 (defun triple-braces-forward-togle ()
 	"trying to find triple-braces in line 
+	forward then backward
 	and open it
-	if no found then use standart origami standart forward togling"
+	if no found then use standart evil toggle fold"
   (interactive)
-  ;; (if (equal major-mode 'org-mode)
-		;; (org-cycle)
 	(save-excursion ;; leave point where it is
-		(if (search-forward "{{{" (line-end-position) t) ;fo1x in or out
-			(origami-toggle-node (current-buffer) (point))
-			(origami-toggle-node (current-buffer) (point)))
-		;; (goto-char (point-at-eol)) ;; then go to the end of line
-		;; (search-forward "fox") ;fo1x in or out
-		;; (origami-toggle-node (current-buffer) (point))
-		;; and try to fold
-		;; (origami-forward-toggle-node)
-		))
+		(search-forward "{{{" (line-end-position) t)
+		(search-backward "}}}" (line-beginning-position) t) 
+		(evil-toggle-fold)))
   
 
 (message "load togler")

@@ -1,5 +1,5 @@
 #-*- mode: org -*-
-#+STARTUP: content
+#+STARTUP: overview 
 #+TODO: TODO DONE
 * Welcom! Don`t panic!
  _   _   _             _   _   _
@@ -45,11 +45,14 @@
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
 (find-file "~/INI/c-mode-cfg.el")
+(find-file "~/INI/evil-mod-cfg.el")
 	(find-file "~/ELs/Evil/onecharadd.el")
-(load "~/ELs/Evil/onecharadd.el")
+	(find-file "~/ELs/Evil/copylines.el") пока нет
 (find-file "~/INI/folding-cfg.el")
-	(find-file "~/INI/origami_cfg.el")
-		(find-file "~/INI/origami_triplebrase.el")
+	не используется (find-file "~/INI/origami_cfg.el")
+	неплохобы перенести в
+	(find-file "~/ELs/Evil/origami_triplebrase.el") пока нет
+	(find-file "~/INI/origami_triplebrase.el")
 (find-file "~/INI/org-cfg.el")
 * Команды
 ** init files
@@ -57,6 +60,8 @@
 (load "~/INI/frame-control.el")
 (load "~/INI/vanila_cfg.el")
 (load "~/INI/origami_cfg.el")
+(load "~/INI/folding-cfg.el")
+	(load "~/INI/origami_triplebrase.el")
 (load "~/INI/org-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
@@ -775,8 +780,8 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
   #+END_SRC
 ** eLisp
 *** show maseges
-(message "Load of init.el is ended")
-(if nil "yes" "no")
+	(message "Load of init.el is ended")
+	(if nil "yes" "no")
 *** varible
 **** show type
 (type-of chartoadd)
@@ -834,6 +839,9 @@ From the doc:
     Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
 ** REPL 
 ** DeBug
+** Folding 
+*** HideShow
+Invoke HideShow mode with M-x hs-minor-mode.
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
@@ -957,6 +965,7 @@ C-c C-z – time-stamped drawer
 [fn:2]
  C-c C-x f – footnote[fn:1]**
 ** Tabels
+*** exempl
    | freeman | 1 | hucker |
    | max     | 1 | humen  |
    |---------+---+--------|
@@ -964,6 +973,77 @@ C-c C-z – time-stamped drawer
   
    |---------+---+--------|
    |         |   |        |
+*** keys 
+**** new
+c-c | - generet new table
+‘C-c |     (org-table-create-or-convert-from-region)’
+
+**** ‘C-c <SPC>     (org-table-blank-field)’
+**** ‘M-a     (org-table-beginning-of-field)’
+     Move to beginning of the current table field, or on to the previous
+     field.
+**** ‘M-e     (org-table-end-of-field)’
+     Move to end of the current table field, or on to the next field.
+     Blank the field at point.
+**** move 
+‘M-<LEFT>     (org-table-move-column-left)’
+‘M-<RIGHT>     (org-table-move-column-right)’
+     Move the current column left/right.
+‘M-<UP>     (org-table-move-row-up)’
+‘M-<DOWN>     (org-table-move-row-down)’
+     Move the current row up/down.
+**** add \\ remove
+‘M-S-<LEFT>     (org-table-delete-column)’
+     Kill the current column.
+‘M-S-<RIGHT>     (org-table-insert-column)’
+     Insert a new column to the left of the cursor position.
+‘M-S-<UP>     (org-table-kill-row)’
+     Kill the current row or horizontal line.
+‘M-S-<DOWN>     (org-table-insert-row)’
+**** ‘C-c -     (org-table-insert-hline)’
+     Insert a horizontal line below current row.  With a prefix
+     argument, the line is created above the current line.
+**** ‘C-c <RET>     (org-table-hline-and-move)’
+     Insert a horizontal line below current row, and move the cursor
+     into the row below that line.
+**** ‘C-c ^     (org-table-sort-lines)’
+     Sort the table lines in the region.  The position of point
+     indicates the column to be used for sorting, and the range of lines
+     is the range between the nearest horizontal separator lines, or the
+     entire table.  If point is before the first column, you will be
+     prompted for the sorting column.  If there is an active region, the
+     mark specifies the first line and the sorting column, while point
+     should be in the last line to be included into the sorting.  The
+     command prompts for the sorting type (alphabetically, numerically,
+     or by time).  You can sort in normal or reverse order.  You can
+     also supply your own key extraction and comparison functions.  When
+     called with a prefix argument, alphabetic sorting will be
+     case-sensitive.
+**** ‘M-<RET>     (org-table-wrap-region)’
+     Split the current field at the cursor position and move the rest to
+     the line below.  If there is an active region, and both point and
+     mark are in the same column, the text in the column is wrapped to
+     minimum width for the given number of lines.  A numeric prefix
+     argument may be used to change the number of desired lines.  If
+     there is no region, but you specify a prefix argument, the current
+     field is made blank, and the content is appended to the field
+     above.
+**** ‘C-c +     (org-table-sum)’
+     Sum the numbers in the current column, or in the rectangle defined
+     by the active region.  The result is shown in the echo area and can
+     be inserted with ‘C-y’.
+**** ‘S-<RET>     (org-table-copy-down)’
+     When current field is empty, copy from first non-empty field above.
+     When not empty, copy current field down to next row and move cursor
+     along with it.  Depending on the option ‘org-table-copy-increment’,
+     integer field values will be incremented during copy.  Integers
+     that are too large will not be incremented.  Also, a ‘0’ prefix
+     argument temporarily disables the increment.  This key is also used
+     by shift-selection and related modes (*note Conflicts::).
+**** ‘C-c |     (org-table-create-or-convert-from-region)’
+     Tables can also be imported by pasting tabular text into the Org
+     buffer, selecting the pasted text with ‘C-x C-x’ and then using the
+     ‘C-c |’ command (see above under Creation and conversion).
 ** Tags 
 Two: Which tags do you use most?
 You can always add tags freely and by hand, but if you configure the most important ones along with fast-access keys, life will be better. Configure the variable org-tags-alist or simply do this right in the file with1

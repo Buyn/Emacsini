@@ -65,6 +65,8 @@
 ;; Grabing  {{{
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
+(define-key evil-normal-state-map (kbd "M-m M-p") 'move-line-down)
+(define-key evil-normal-state-map (kbd "M-m M-;") 'move-line-down)
 ;FIXME: move selected
 ;TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
