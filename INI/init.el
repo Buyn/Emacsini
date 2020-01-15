@@ -32,6 +32,9 @@
 ;; PYTHON-MOD CUSTOMIZATION
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------
+;; LUA-MOD CUSTOMIZATION
+(load "~/INI/lua-cfg.el")
+;; --------------------------------------
 ;; TIME TRACKING-MODs CUSTOMIZATION
 ;; (load "~/INI/time-tracking-cfg.el")
 ;; --------------------------------------

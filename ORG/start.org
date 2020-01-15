@@ -39,12 +39,10 @@
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
 (find-file "~/INI/init.el")
-(find-file "~/../hi.txt")
 (find-file "~/INI/inpak.el")
 (find-file "~/INI/autocomplete-cfg.el")
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
-(find-file "~/INI/c-mode-cfg.el")
 (find-file "~/INI/evil-mod-cfg.el")
 	(find-file "~/ELs/Evil/onecharadd.el")
 	(find-file "~/ELs/Evil/copylines.el") пока нет
@@ -54,6 +52,11 @@
 	(find-file "~/ELs/Evil/origami_triplebrase.el") пока нет
 	(find-file "~/INI/origami_triplebrase.el")
 (find-file "~/INI/org-cfg.el")
+(find-file "~/INI/c-mode-cfg.el")
+(find-file "~/INI/lua-cfg.el")
+(find-file "~/INI/python-cfg.el")
+** exempl
+(find-file "~/../hi.txt")
 * Команды
 ** init files
 (load "~/INI/evil-mod-cfg.el")
