@@ -10,6 +10,7 @@
     (add-hook 'prog-mode-hook 
       (lambda ()
         (setq-local origami-fold-style 'triple-braces)
+        ;; (setq-local origami-fold-style 'lisp-interaction-mode)
 		; one of this slowepoking elpy
         ;; (origami-close-all-nodes (current-buffer))
         ;; (origami-mode)

@@ -58,7 +58,7 @@
 ** exempl
 (find-file "~/../hi.txt")
 * Команды
-** init files
+** reload init files
 (load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
 (load "~/INI/vanila_cfg.el")
@@ -117,6 +117,9 @@ You probably have an outdated package database
     the builtin variable path-separator can be used instead of ;.
 ;; show env var named path
 (getenv "PATH")
+*** for Source
+(origami-mode)
+(outline-minor-mode)
 ** ielm 
 * TODO натройка емака
 ** TODO Vims Tabs
@@ -783,8 +786,11 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
   #+END_SRC
 ** eLisp
 *** show maseges
-	(message "Load of init.el is ended")
+**** message
+(message "Load of init.el is ended")
 	(if nil "yes" "no")
+**** format
+	(format "sdfsdf")
 *** varible
 **** show type
 (type-of chartoadd)

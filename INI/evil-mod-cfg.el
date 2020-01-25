@@ -83,8 +83,6 @@
 		(evil-delete-char (point) (+ (point) 1))				
 		(backward-char)
 		(evil-paste-before 1)
-		;; (message "end past")
-		;; (message "set region")
 		))
 ;FIXME: move selected
 ;TODO: meta m+p copy line \ selection
