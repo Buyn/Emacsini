@@ -5,4 +5,6 @@
 ;; --------------------------------------
 ;; OUTSHINE-MOD CUSTOMIZATION {{{
 ;; --------------------------------------
+(use-package outshine :ensure t
+  :quelpa (outshine :fetcher github :repo "alphapapa/outshine"))
 ;; -------------------------------------- }}}

@@ -65,5 +65,6 @@ There are two things you can do about this warning:
 ;;   (add-to-list 'load-path "<path where use-package is installed>")
 ;;   (require 'use-package))
 
-;; (require 'use-package)
+(require 'use-package)
+(use-package quelpa-use-package :ensure t)
 ;; (use-package foo)

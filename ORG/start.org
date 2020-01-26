@@ -38,8 +38,8 @@
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
-*** vanila
 (find-file "~/INI/init.el")
+*** vanila
 (find-file "~/INI/inpak.el")
 (find-file "~/INI/vanila_cfg.el")
 *** Evil
@@ -49,8 +49,8 @@
 *** Folding
 (find-file "~/INI/folding-cfg.el")
 	(find-file "~/INI/origami_cfg.el")
-		(find-file "~/ELs/Evil/origami_triplebrase.el") 
-	(find-file "~/INI/outshine_cfg.el") 
+		(find-file "~/ELs/Evil/origami_triplebrase.el")
+	(find-file "~/INI/outshine_cfg.el")
 *** Other 
 (find-file "~/INI/autocomplete-cfg.el")
 (find-file "~/INI/frame-control.el")
