@@ -38,20 +38,24 @@
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
+*** vanila
 (find-file "~/INI/init.el")
 (find-file "~/INI/inpak.el")
-(find-file "~/INI/autocomplete-cfg.el")
-(find-file "~/INI/frame-control.el")
 (find-file "~/INI/vanila_cfg.el")
+*** Evil
 (find-file "~/INI/evil-mod-cfg.el")
 	(find-file "~/ELs/Evil/onecharadd.el")
 	(find-file "~/ELs/Evil/copylines.el") пока нет
+*** Folding
 (find-file "~/INI/folding-cfg.el")
-	не используется (find-file "~/INI/origami_cfg.el")
-	неплохобы перенести в
-	(find-file "~/ELs/Evil/origami_triplebrase.el") пока нет
-	(find-file "~/INI/origami_triplebrase.el")
+	(find-file "~/INI/origami_cfg.el")
+		(find-file "~/ELs/Evil/origami_triplebrase.el") 
+	(find-file "~/INI/outshine_cfg.el") 
+*** Other 
+(find-file "~/INI/autocomplete-cfg.el")
+(find-file "~/INI/frame-control.el")
 (find-file "~/INI/org-cfg.el")
+*** Programing
 (find-file "~/INI/c-mode-cfg.el")
 (find-file "~/INI/lua-cfg.el")
 (find-file "~/INI/python-cfg.el")
