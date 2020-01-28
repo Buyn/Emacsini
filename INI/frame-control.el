@@ -92,6 +92,14 @@
 (define-key evil-normal-state-map "ZA" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					))
+(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					))
+;; Buffer switch  {{{
+(define-key evil-normal-state-map "ZO" '(lambda() (interactive)
+					(ivy-switch-buffer)))
+(define-key evil-normal-state-map "ZI" '(lambda() (interactive)
+					(ivy-switch-buffer)))
 ;; -------------------------------------- }}}
 ;; --------------------------------------
 ;; FULLSCREEN-MOD CUSTOMIZATION;  {{{
