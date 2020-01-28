@@ -40,6 +40,17 @@
 ;; Warp line on visula line end
 (global-visual-line-mode word-wrap)
 (show-paren-mode 1)
+;; for working with pair-able characters
+;; lightweight package electric, which provided by Emacs out of the box.
+(electric-pair-mode 1)
+;; It supports, by default, ACSI pairs {}, [], () and Unicode ‘’, “”,
+;; Let's add the org-emphasises markers.
+;; (setq electric-pair-pairs
+;;       '(
+;;         (?~ . ?~)
+;;         (?* . ?*)
+;;         (?/ . ?/)
+;;        ))
 ;; ------------------------------------------------------
 ;; “Interactively Do Things” (a.k.a. ido)
 (require 'ido)
@@ -61,3 +72,16 @@
 (global-set-key (kbd "M-]") 'delete-pair)
 (global-set-key (kbd "M->") 'delete-pair)
 ;; ------------------------------------------------------
+;; Backups
+;; By default, Emacs saves backup files – those ending in ~ – in the current directory, thereby cluttering it up.
+;; Let's place them in ~/.emacs.d/backups, in case we need to look for a backup; moreover, let's keep old versions since there's disk space to go around
+;;–what am I going to do with 500gigs when nearly all my ‘software’ is textfiles interpreted within Emacs 
+;; New location for backups.
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+;; Never silently delete old backups.
+;; (setq delete-old-versions -1)
+;; Use version numbers for backup files.
+(setq version-control t)
+;; Even version controlled files get to be backed up.
+;; (setq vc-make-backup-files t)
+
