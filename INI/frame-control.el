@@ -87,8 +87,11 @@
 ;; --------------------------------------
 ;; Frams Close  {{{
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)
-					(kill-this-buffer)
+					(kill-buffer (current-buffer))
 					(evil-quit)))
+(define-key evil-normal-state-map "ZA" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					))
 ;; -------------------------------------- }}}
 ;; --------------------------------------
 ;; FULLSCREEN-MOD CUSTOMIZATION;  {{{
