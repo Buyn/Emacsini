@@ -97,9 +97,17 @@
 					))
 ;; Buffer switch  {{{
 (define-key evil-normal-state-map "ZO" '(lambda() (interactive)
-					(ivy-switch-buffer)))
+					(evil-buffer-new)))
 (define-key evil-normal-state-map "ZI" '(lambda() (interactive)
 					(ivy-switch-buffer)))
+(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
+					(previous-buffer)))
+(define-key evil-normal-state-map "ZL" '(lambda() (interactive)
+					(evil-next-buffer)))
+(define-key evil-normal-state-map "ZK" '(lambda() (interactive)
+					(unbury-buffer)))
+(define-key evil-normal-state-map "ZJ" '(lambda() (interactive)
+					(bury-buffer)))
 ;; -------------------------------------- }}}
 ;; --------------------------------------
 ;; FULLSCREEN-MOD CUSTOMIZATION;  {{{
