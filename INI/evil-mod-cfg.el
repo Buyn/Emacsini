@@ -2,12 +2,12 @@
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
 ;; --------------------------------------
-;; EVIL-MOD CUSTOMIZATION
+;; * EVIL-MOD CUSTOMIZATION
 ;; --------------------------------------
 (require 'evil)
 (evil-mode t)
 ;; --------------------------------------
-;; Setings  {{{
+;; ** Setings  {{{
 ;; (setq evil-mode-line-format nil
 ;;       evil-insert-state-cursor '(bar "White")
 ;;       evil-visual-state-cursor '(box "#F86155"))
@@ -16,7 +16,7 @@
 ;; (define-key evil-normal-state-map "c" nil)
 ;; (define-key evil-motion-state-map "cu" 'universal-argument)
 ;; -------------------------------------- }}}
-;; Clipboard  {{{
+;; ** Clipboard  {{{
 (setq x-select-enable-clipboard nil)
 ;; (fset 'evil-visual-update-x-selection 'ignore)
 ;; (setq save-interprogram-paste-before-kill t)
@@ -66,13 +66,13 @@
 								lambda() (interactive)
 								(setq x-select-enable-clipboard (not x-select-enable-clipboard))))
 ;; -------------------------------------- }}}
-;; Movements  {{{
+;; ** Movements  {{{
 (define-key evil-normal-state-map "gl" 'move-end-of-line)
 (define-key evil-normal-state-map "gh" 'move-beginning-of-line)
 (define-key evil-normal-state-map (kbd "gj") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "gk") 'evil-previous-visual-line)
 ;; --------------------------------------  }}}
-;; Grabing  {{{
+;; ** Grabing  {{{
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
 (define-key evil-normal-state-map (kbd "M-m M-l") '(lambda() (interactive)
@@ -87,7 +87,7 @@
 ;FIXME: move selected
 ;TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
-;; Insert State F2 save {{{
+;; ** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
 								(evil-normal-state)))
@@ -98,9 +98,24 @@
 								(org-save-all-org-buffers)
 								(evil-normal-state)))
 ;; -------------------------------------- }}}
-;; ONE CHAR ADD  {{{
+;; * EVIL COMMANDS RESPECT INPUT METHOD  
+;; ** load el
+(load "~/ELs/Evil/evil-respect-input.el")
+;; --------------------------------------  
+;; ** Rebind commands that don't respect input method
+  (define-key evil-normal-state-map (kbd "r") 'khaoos-evil-replace)
+  (define-key evil-motion-state-map (kbd "f") 'khaoos-evil-find-char)
+  (define-key evil-motion-state-map (kbd "t") 'khaoos-evil-find-char-to)
+  (define-key evil-motion-state-map (kbd "F") 'khaoos-evil-find-char-backward)
+  (define-key evil-motion-state-map (kbd "T") 'khaoos-evil-find-char-to-backward)
+;; --------------------------------------
+
+;; * ONE CHAR ADD  {{{
+;; ** load el
 (load "~/ELs/Evil/onecharadd.el")
+;; ** Rebind commands 
 (define-key evil-normal-state-map (kbd "SPC") 'addone-char-into-normal-evil)
 (define-key evil-normal-state-map (kbd "RET") 'addone-char-after-normal-evil)
 ;; --------------------------------------  }}}
-;; --------------------------------------
+;; ** TODO
+;; *** установть функции из ханоса респект

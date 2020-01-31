@@ -1,8 +1,9 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
-;; WINDMOVE&FRAMEMOVE SETUP{{{
+;; * WINDMOVE&FRAMEMOVE SETUP{{{
 ;; --------------------------------------
+;; ** Seting up
 (require 'cl) ;;used to Fix error if theres an error with above code
 (load "~/.emacs.d/Els/framemove/framemove.el")
 (require 'framemove)
@@ -12,7 +13,7 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 ;; --------------------------------------
-;; Remap windmove keys to home keys
+;; ** Remap windmove keys to home keys
 (global-set-key (kbd "M-h") nil)
 (global-set-key (kbd "M-h") 'windmove-left)
 (define-key org-mode-map (kbd "M-h") 'windmove-left)
@@ -27,18 +28,17 @@
 (global-set-key (kbd "M-l") nil)
 (global-set-key (kbd "M-l") 'windmove-right)
 ;; --------------------------------------
-; }}}
 ;; --------------------------------------
-;; EVIL TABS  {{{
+;; * EVIL TABS  {{{
 (global-evil-tabs-mode t)
 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
 (evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
 (elscreen-toggle-display-tab)
 ;; :tabnew
 ;; :tabclone
-;; -------------------------------------- }}}
 ;; --------------------------------------
-;; FRAME SIZE&POSITION CONTROL KEYS;  {{{
+;; --------------------------------------
+;; * FRAME SIZE&POSITION CONTROL KEYS;  {{{
 (global-set-key (kbd "M-<kp-7>") '(lambda() (interactive)
 				  (set-frame-position (selected-frame) 0 0)))
 (global-set-key (kbd "M-<kp-9>") '(lambda() (interactive)
@@ -62,19 +62,18 @@
 (global-set-key (kbd "C-M-<kp-subtract>") '(lambda() (interactive)
 				(set-frame-size (selected-frame) 75 35)))
 ;; --------------------------------------
-; }}}
-;; --------------------------------------
-;; *** Frams Controls ***  {{{
+;; * FRAMES&BUFFER OPEN\CLOSE\SWITCH   {{{
+;; ** Open new frames 
 (global-set-key (kbd "M-g M-t M-t") 'make-frame-command)
 ;; (define-key evil-normal-state-map "gtt" 'make-frame-command)
 (global-set-key (kbd " M-g M-t M-f") 'find-file-other-frame)
 (global-set-key (kbd " M-g M-t M-b") 'switch-to-buffer-other-frame)
+(define-key evil-normal-state-map "ZO" 'switch-to-buffer-other-frame)
 (global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
 (define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
 			(display-buffer (last-buffer))))
-;; --------------------------------------  }}}
 ;; --------------------------------------
-;; *** Help in New Frame   ***  {{{
+;; ** Help in New Frame   ***  {{{
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-k") 'previous-multiframe-window)
 ;; ;;(define-key evil-normal-state-map "gth" 'other-frame -2)
@@ -83,9 +82,8 @@
 (global-set-key (kbd " M-g M-t M-h M-k") 'find-function-on-key-other-frame)
 (global-set-key (kbd " M-g M-t M-h M-f") 'describe-function)
 (global-set-key (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
-;; --------------------------------------  }}}
 ;; --------------------------------------
-;; Frams Close  {{{
+;; ** FRAMS CLOSE  {{{
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
@@ -95,9 +93,7 @@
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					))
-;; Buffer switch  {{{
-(define-key evil-normal-state-map "ZO" '(lambda() (interactive)
-					(evil-buffer-new)))
+;; ** Buffer control  {{{
 (define-key evil-normal-state-map "ZI" '(lambda() (interactive)
 					(ivy-switch-buffer)))
 (define-key evil-normal-state-map "ZH" '(lambda() (interactive)
@@ -108,14 +104,15 @@
 					(unbury-buffer)))
 (define-key evil-normal-state-map "ZJ" '(lambda() (interactive)
 					(bury-buffer)))
-;; -------------------------------------- }}}
+(define-key evil-normal-state-map "ZN" '(lambda() (interactive)
+					(evil-buffer-new 0 "*new*")))
 ;; --------------------------------------
-;; FULLSCREEN-MOD CUSTOMIZATION;  {{{
+;; * FULLSCREEN-MOD CUSTOMIZATION;  {{{
 (load "~/INI/fullscreen-cfg.el")
 ;; --------------------------------------
 ; }}}
 ;; --------------------------------------
-;; NOT USED;  {{{
+;; * NOT USED;  {{{
 ;; (global-set-key (kbd "<kp-subtract>") 'xah-close-current-buffer)
 ;; (global-set-key (kbd "<kp-divide>") 'xah-previous-user-buffer)
 ;; (global-set-key (kbd "<kp-multiply>") 'xah-next-user-buffer)
@@ -123,5 +120,4 @@
 ;; (global-set-key (kbd "<C-kp-divide>") 'xah-previous-emacs-buffer)
 ;; (global-set-key (kbd "<C-kp-multiply>") 'xah-next-emacs-buffer)
 ;; --------------------------------------
-; }}}
 ;; --------------------------------------
