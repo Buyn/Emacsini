@@ -110,12 +110,12 @@
   (define-key evil-motion-state-map (kbd "T") 'khaoos-evil-find-char-to-backward)
 ;; --------------------------------------
 
-;; * ONE CHAR ADD  {{{
+;; * ONE CHAR ADD  
 ;; ** load el
-(load "~/ELs/Evil/onecharadd.el")
+;; (load "~/ELs/Evil/onecharadd.el")
 ;; ** Rebind commands 
-(define-key evil-normal-state-map (kbd "SPC") 'addone-char-into-normal-evil)
-(define-key evil-normal-state-map (kbd "RET") 'addone-char-after-normal-evil)
-;; --------------------------------------  }}}
-;; ** TODO
-;; *** установть функции из ханоса респект
+;; (define-key evil-normal-state-map (kbd "SPC") 'addone-char-into-normal-evil)
+(define-key evil-normal-state-map (kbd "SPC") 'khaoos-insert-one-char)
+;; (define-key evil-normal-state-map (kbd "RET") 'addone-char-after-normal-evil)
+(define-key evil-normal-state-map (kbd "RET") 'khaoos-append-one-char)
+;; --------------------------------------  

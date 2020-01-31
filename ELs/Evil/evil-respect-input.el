@@ -12,8 +12,8 @@
 ;; https://github.com/khaoos-abominable/dotfiles/blob/master/spacemacs/dotspacemacs
 ;; --------------------------------------
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  
-;; --------------------------------------
 ;; ** capture input key
+;; --------------------------------------
 (defvar khaoos-input-method-last-raw-key nil
   "The last key pressed with an input method switched on but ignoring conversion
 of the input method.")
@@ -165,27 +165,34 @@ evil-read-key-result))
   (evil-define-motion khaoos-evil-find-char-to-backward ()
     (interactive)
     (khaoos-run-evil-command-respect-input-method 'evil-find-char-to-backward))
-;; ** khaoos-insert-one-char
-;; *** insert-one-char
+;; * khaoos-insert-one-char
+;; ** insert-one-char
   (evil-define-operator khaoos--insert-one-char ()
     "Switches to insert mode just to input one character"
     (interactive)
     (let ((a (read-char "Input a character to insert:" t)))
-      (insert-char a)))
+		(if (= a 13)
+			(open-line 1)
+			(insert-char a)
+			)
+		))
 
   (evil-define-operator khaoos-insert-one-char ()
     "Switches to insert mode just to input one character"
     (interactive)
     (khaoos-run-evil-command-respect-input-method 'khaoos--insert-one-char))
 
-;; *** append-one-char
+;; ** append-one-char
   (evil-define-operator khaoos--append-one-char ()
     "Switches to insert mode just to append one character"
     (interactive)
     (let ((a (read-char "Input a character to append:" t)))
-      (unless (eolp) (forward-char))
-      (insert-char a)
-		  (unless (eolp) (backward-char))))
+		(unless (eolp) (forward-char))
+		(if (= a 13)
+			(open-line 1)
+			(insert-char a)
+			)
+		(unless (eolp) (backward-char))))
 
   (evil-define-operator khaoos-append-one-char ()
     "Switches to insert mode just to input one character"

@@ -1,3 +1,9 @@
+;; --------------------------------------
+;; init.el --- Emacs configuration
+;; --------------------------------------
+;; * not used in
+;; (find-file "~/INI/evil-mod-cfg.el")
+;; --------------------------------------
 (defun addone-char-into-normal-evil()
     "add one char into normal evil"
     (interactive)
@@ -14,4 +20,4 @@
 		(open-line 1)
 		(save-excursion (insert chartoadd))))
     ;;(save-excursion (insert chartoadd)))
-
+;; --------------------------------------
