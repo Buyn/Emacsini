@@ -13,8 +13,8 @@
 	;; (defvar outline-minor-mode-prefix "\M-#")
 	(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
 	(add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
-	;; (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
 	(add-hook 'python-mode-hook 'outline-minor-mode)
+	;; (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
 	;; (custom-theme-set-faces
 	;; 'material
 	;; `(outline-1 ((t (:height 1.25 :weight bold))))

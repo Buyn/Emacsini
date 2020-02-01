@@ -33,7 +33,7 @@
 (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
 ;; * HYDRA CUSTOMIZATION
-;; (load "~/INI/hydra-cfg.el")
+(load "~/INI/hydra-cfg.el")
 ;; --------------------------------------
 ;; * NOT USED
 ;; ** TIME TRACKING-MODs CUSTOMIZATION
