@@ -1,12 +1,14 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
-;; used in
+;; * used in
 ;; (find-file "~/INI/folding-cfg.el")
 ;; --------------------------------------
-;; OUTSHINE-MOD CUSTOMIZATION {{{
+;; * OUTSHINE-MOD CUSTOMIZATION 
 ;; --------------------------------------
+;; ** use-package outshine 
 (use-package outshine :ensure t
   :quelpa (outshine :fetcher github :repo "alphapapa/outshine")
+;; **  outshine config
   :config
 	;; (defvar outline-minor-mode-prefix "\M-#")
 	(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
@@ -22,5 +24,6 @@
 	;; `(outline-5 ((t (:height 1.85 :weight bold))))
 	;; `(outline-6 ((t (:height 1.75 :weight bold))))
 	;; `(outline-7 ((t (:height 1.65 :weight bold))))
-	;; )
+;; ** END of use-package outshine 
+	)
 ;; -------------------------------------- }}}

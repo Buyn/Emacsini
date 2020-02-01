@@ -2,32 +2,29 @@
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
 ;; --------------------------------------
-;; INSTALL PACKAGES
+;; * INSTALL PACKAGES
 (load "~/INI/inpak.el")
 ;; --------------------------------------
-;; VANILA CUSTOMIZATION
+;; * VANILA CUSTOMIZATION
 (load "~/INI/vanila_cfg.el")
 ;; --------------------------------------
-;; EVIL-MOD CUSTOMIZATION
+;; * EVIL-MOD CUSTOMIZATION
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
-;; INTERFACE-MODS CUSTOMIZATION
+;; * INTERFACE-MODS CUSTOMIZATION
 (load "~/INI/interface-mods.el")
 ;; --------------------------------------
-;; ORG-MODE CUSTOMIZATION
+;; * ORG-MODE CUSTOMIZATION
 (load "~/INI/org-cfg.el")
 ;; --------------------------------------
-;; FRAME & WINDOWS CONTROL-MODS CUSTOMIZATION
+;; * FRAME & WINDOWS CONTROL-MODS CUSTOMIZATION
 (load "~/INI/frame-control.el")
 ;; --------------------------------------
-;; FOLDING-MODS CUSTOMIZATION
+;; * FOLDING-MODS CUSTOMIZATION
 (load "~/INI/folding-cfg.el")
 ;; --------------------------------------
-;; JS-MOD CUSTOMIZATION
+;; * JS-MOD CUSTOMIZATION
 (load "~/INI/js-cfg.el")
-;; --------------------------------------
-;; AUTO-COMPLETE  CUSTOMIZATION
-;; (load "~/INI/autocomplete-cfg.el")
 ;; --------------------------------------
 ;; PYTHON-MOD CUSTOMIZATION
 (load "~/INI/python-cfg.el")
@@ -35,9 +32,18 @@
 ;; LUA-MOD CUSTOMIZATION
 (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
-;; TIME TRACKING-MODs CUSTOMIZATION
+;; * HYDRA CUSTOMIZATION
+;; (load "~/INI/hydra-cfg.el")
+;; --------------------------------------
+;; * NOT USED
+;; ** TIME TRACKING-MODs CUSTOMIZATION
 ;; (load "~/INI/time-tracking-cfg.el")
 ;; --------------------------------------
+;; ** AUTO-COMPLETE  CUSTOMIZATION
+;; (load "~/INI/autocomplete-cfg.el")
+;; --------------------------------------
+;; --------------------------------------
+;; * END OF LOAD
 (message "Load of init.el is ended")
 ;; --------------------------------------
 ;; init.el ends here
