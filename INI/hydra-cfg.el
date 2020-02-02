@@ -20,13 +20,12 @@
 ;; ***** hint
     "
     ^
-    ^main^             ^Do^             ^Menus^          
-    ^─────^────────────^──^─────────────^─────^─────────
+    ^Main^             ^Do^             ^  Menus^          
+    ^─────^────────────^──^─────────────^───────^─────────
     _q_ quit            _c_ cancel      _o_ outline 
-    ^^                  _d_ display
-    ^^                  _e_ effort
-    ^^                  _i_ in
-    ^^                  _j_ jump
+    ^^                  _e_ effort      _d_ hydra-ediff
+    ^^                  _i_ in          _t_ hydra-transpose
+    ^^                  _j_ jump        _f_ occur-dwim
     ^^                  _SPC_ insert  
     ^^                  _r_ report
     ^^                  ^^
@@ -35,13 +34,15 @@
     ("q" nil)
     ("c" org-clock-cancel :color pink)
     ("SPC" khaoos-insert-one-char :color pink)
-    ("d" org-clock-display)
     ("e" org-clock-modify-effort-estimate)
     ("i" org-clock-in)
     ("j" org-clock-goto)
     ("o" org-clock-out)
     ("r" org-clock-report)
 	("o" hydra-outline/body) 
+	("d" hydra-ediff/body) 
+	("t" hydra-transpose/body) 
+	("f" hydra-occur-dwim/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -95,5 +96,146 @@ _d_: subtree
 ;; --------------------------------------
 
 ;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+;; *** hydra-ediff
+(defhydra hydra-ediff (:color blue :hint nil)
+  "
+;; **** Hint
+^Buffers           Files           VC                     Ediff regions
+----------------------------------------------------------------------
+_b_uffers           _f_iles (_=_)       _r_evisions              _l_inewise
+_B_uffers (3-way)   _F_iles (3-way)                           _w_ordwise
+_?_ help            _c_urrent file                            
+"
+;; **** Keys
+  ("b" ediff-buffers)
+  ("B" ediff-buffers3)
+  ("=" ediff-files)
+  ("f" ediff-files)
+  ("F" ediff-files3)
+  ("c" ediff-current-file)
+  ("r" ediff-revision)
+  ("l" ediff-regions-linewise)
+  ("w" ediff-regions-wordwise)
+  ("?" (info "(ediff) Introduction"))
+;; **** END )
+	)
+;; **** doc
+;; (info "(ediff) Introduction")
+;; --------------------------------------
+
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+;; *** hydra-transpose
+(defhydra hydra-transpose (:color red)
+;; **** Hint
+    "Transpose"
+;; **** Keys
+     ("c" transpose-chars "characters")
+     ("w" transpose-words "words")
+     ("o" org-transpose-words "Org mode words")
+     ("l" transpose-lines "lines")
+     ("s" transpose-sentences "sentences")
+     ("e" org-transpose-elements "Org mode elements")
+     ("p" transpose-paragraphs "paragraphs")
+     ("t" org-table-transpose-table-at-point "Org mode table")
+     ("q" nil "cancel" :color blue)
+;; **** END )
+	)
+;; **** doc
+;; --------------------------------------
+
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+;; *** "Apropos"
+(defhydra hydra-apropos (:color blue)
+  "Apropos"
+;; **** Keys
+  ("a" apropos "apropos")
+  ("c" apropos-command "cmd")
+  ("d" apropos-documentation "doc")
+  ("e" apropos-value "val")
+  ("l" apropos-library "lib")
+  ("o" apropos-user-option "option")
+  ("u" apropos-user-option "option")
+  ("v" apropos-variable "var")
+  ("i" info-apropos "info")
+  ("t" tags-apropos "tags")
+  ("z" hydra-customize-apropos/body "customize")
+;; **** END )
+	)
+;; **** doc
+;; --------------------------------------
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+;; **** "Apropos (customize)"
+(defhydra hydra-customize-apropos (:color blue)
+  "Apropos (customize)"
+;; ***** Keys
+  ("a" customize-apropos "apropos")
+  ("f" customize-apropos-faces "faces")
+  ("g" customize-apropos-groups "groups")
+  ("o" customize-apropos-options "options")
+;; ***** END )
+  )
+
+;; *** occur
+;; **** Defuns
+;; ***** Defun (defun occur-dwim ()
+(defun occur-dwim ()
+  "Call `occur' with a sane default, chosen as the thing under point or selected region"
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (let ((sym (thing-at-point 'symbol)))
+            (when (stringp sym)
+              (regexp-quote sym))))
+        regexp-history)
+  (call-interactively 'occur))
+
+;; ***** (defadvice occur-mode-goto-occurrence
+;; Keeps focus on *Occur* window, even when when target is visited via RETURN key.
+;; See hydra-occur-dwim for more options.
+(defadvice occur-mode-goto-occurrence (after occur-mode-goto-occurrence-advice activate)
+  (other-window 1)
+  (hydra-occur-dwim/body))
+
+;; ***** add-hook
+;; Focus on *Occur* window right away.
+(add-hook 'occur-hook (lambda () (other-window 1)))
+
+;; ***** (defun reattach-occur ()
+(defun reattach-occur ()
+  (if (get-buffer "*Occur*")
+    (switch-to-buffer-other-window "*Occur*")
+    (hydra-occur-dwim/body) ))
+
+;; **** defhydra hydra-occur-dwim 
+;; Used in conjunction with occur-mode-goto-occurrence-advice this helps keep
+;; focus on the *Occur* window and hides upon request in case needed later.
+(defhydra hydra-occur-dwim ()
+;; **** Hint
+  "Occur mode"
+;; **** Keys
+  ("o" occur-dwim "Start occur-dwim" :color red)
+  ("j" occur-next "Next" :color red)
+  ("k" occur-prev "Prev":color red)
+  ("h" delete-window "Hide" :color blue)
+  ("r" (reattach-occur) "Re-attach" :color red)
+;; **** END )
+	)
+;; **** doc
+;; --------------------------------------
+;; **** bind 
+;; (global-set-key (kbd "C-x o") 'hydra-occur-dwim/body)
 ;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
 ;; --------------------------------------
