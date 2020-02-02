@@ -26,8 +26,8 @@
     ^^                  _e_ effort      _d_ hydra-ediff
     ^^                  _i_ in          _t_ hydra-transpose
     ^^                  _j_ jump        _f_ occur-dwim
-    ^^                  _SPC_ insert  
-    ^^                  _r_ report
+    ^^                  _SPC_ insert    _p_ elpy-hydra
+    ^^                  _r_ report      _y_ yasnippet
     ^^                  ^^
     "
 ;; ***** keys
@@ -43,6 +43,8 @@
 	("d" hydra-ediff/body) 
 	("t" hydra-transpose/body) 
 	("f" hydra-occur-dwim/body)
+	("p" elpy-hydra/body)
+	("y" hydra-yasnippet/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -237,5 +239,79 @@ _?_ help            _c_urrent file
 ;; --------------------------------------
 ;; **** bind 
 ;; (global-set-key (kbd "C-x o") 'hydra-occur-dwim/body)
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+;; *** elpy-hydra
+(defhydra elpy-hydra (:color red)
+;; **** doc
+;; Two hydras for Elpy to ease the running of tests:
+;;     elpy-hydra shows a menu to run the current unit test we are in with two test runners, Django and Pytest. The current virtualenv is shown in the header and we can change it (w, "workon").
+;;     once the test is launched the second hydra shows a menu to navigate the errors and to switch to the compilation buffer.
+;; --------------------------------------
+
+;; **** Hint
+  "
+  Elpy in venv: %`venv-current-name
+  "
+;; **** Keys
+  ("d" (progn (call-interactively 'elpy-test-django-runner) (elpy-nav-errors/body)) "current test, Django runner" :color blue)
+  ("t" (progn (call-interactively 'elpy-test-pytest-runner) (elpy-nav-errors/body)) "current test, pytest runner" :color blue)
+  ("w" (venv-workon) "workon venv…")
+  ("q" nil "quit")
+  ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
+;; **** END )
+	)
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+;; **** defhydra elpy-nav-errors
+(defhydra elpy-nav-errors (:color red)
+;; ***** Hint
+  "
+  Navigate errors
+  "
+;; ***** Keys
+  ("n" next-error "next error")
+  ("p" previous-error "previous error")
+  ("s" (progn
+         (switch-to-buffer-other-window "*compilation*")
+         (goto-char (point-max))) "switch to compilation buffer" :color blue)
+  ("w" (venv-workon) "Workon venv…")
+  ("q" nil "quit")
+  ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
+;; ***** END )
+	)
+
+;; *** yasnippet
+(defhydra hydra-yasnippet (:color blue :hint nil)
+;; **** Hint
+  "
+              ^YASnippets^
+--------------------------------------------
+  Modes:    Load/Visit:    Actions:
+
+ _g_lobal  _d_irectory    _i_nsert
+ _m_inor   _f_ile         _t_ryout
+ _e_xtra   _l_ist         _n_ew
+         _a_ll
+"
+;; **** Keys
+  ("d" yas-load-directory)
+  ("e" yas-activate-extra-mode)
+  ("i" yas-insert-snippet)
+  ("f" yas-visit-snippet-file :color blue)
+  ("n" yas-new-snippet)
+  ("t" yas-tryout-snippet)
+  ("l" yas-describe-tables)
+  ("g" yas/global-mode)
+  ("m" yas/minor-mode)
+  ("a" yas-reload-all)
+;; **** END )
+	)
+;; **** doc
+;; --------------------------------------
+
+;; **** bind 
 ;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
 ;; --------------------------------------
