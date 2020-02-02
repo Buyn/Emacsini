@@ -11,6 +11,9 @@
 ;; * EVIL-MOD CUSTOMIZATION
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
+;; * ADVNSED SELECTIONS CUSTOMIZATION
+(load "~/INI/advnsed-selections-cfg.el")
+;; --------------------------------------
 ;; * INTERFACE-MODS CUSTOMIZATION
 (load "~/INI/interface-mods.el")
 ;; --------------------------------------
@@ -31,6 +34,9 @@
 ;; --------------------------------------
 ;; * LUA-MOD CUSTOMIZATION
 (load "~/INI/lua-cfg.el")
+;; --------------------------------------
+;; * HYDRA CUSTOMIZATION
+(load "~/INI/hydra-cfg.el")
 ;; --------------------------------------
 ;; * HYDRA CUSTOMIZATION
 (load "~/INI/hydra-cfg.el")

@@ -47,8 +47,8 @@
 ;; **** Bind
 (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
 ;; *** hydra-zoom
-(defhydra hydra-zoom (global-map "C-c")
-  "zoom"
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out"))
+;; (defhydra hydra-zoom (global-map "C-c")
+;;   "zoom"
+;;   ("g" text-scale-increase "in")
+;;   ("l" text-scale-decrease "out"))
 ;; --------------------------------------

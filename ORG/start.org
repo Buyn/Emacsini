@@ -53,9 +53,10 @@
 		(find-file "~/ELs/Evil/origami_triplebrase.el")
 	(find-file "~/INI/outshine_cfg.el")
 *** Other 
-(find-file "~/INI/autocomplete-cfg.el")
+(find-file "~/INI/autocomplete-cfg.el") NOTUSED
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/org-cfg.el")
+(find-file "~/INI/advnsed-selections-cfg.el")
 (find-file "~/INI/hydra-cfg.el")
 *** Programing
 (find-file "~/INI/js-cfg.el")
