@@ -30,6 +30,13 @@
 ;; --------------------------------------
 ;; --------------------------------------
 ;; * EVIL TABS  {{{
+;; ** use-package evil
+(use-package evil-tabs :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
+;; --------------------------------------
 (global-evil-tabs-mode t)
 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
 (evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)

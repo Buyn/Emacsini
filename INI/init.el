@@ -26,10 +26,10 @@
 ;; * JS-MOD CUSTOMIZATION
 (load "~/INI/js-cfg.el")
 ;; --------------------------------------
-;; PYTHON-MOD CUSTOMIZATION
+;; * PYTHON-MOD CUSTOMIZATION
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------
-;; LUA-MOD CUSTOMIZATION
+;; * LUA-MOD CUSTOMIZATION
 (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
 ;; * HYDRA CUSTOMIZATION

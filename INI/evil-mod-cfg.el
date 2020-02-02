@@ -4,6 +4,12 @@
 ;; --------------------------------------
 ;; * EVIL-MOD CUSTOMIZATION
 ;; --------------------------------------
+;; ** use-package evil
+(use-package evil :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'evil)
 (evil-mode t)
 ;; --------------------------------------
@@ -74,7 +80,9 @@
 ;; --------------------------------------  }}}
 ;; ** Grabing  {{{
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
+;; (define-key evil-normal-state-map (kbd "M-m M-k") 'move-text-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
+;; (define-key evil-normal-state-map (kbd "M-m M-j") 'move-text-down)
 (define-key evil-normal-state-map (kbd "M-m M-l") '(lambda() (interactive)
 		(evil-delete-char (point) (+ (point) 1))				
 		(evil-paste-after 1)

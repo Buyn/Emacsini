@@ -58,7 +58,8 @@
 (find-file "~/INI/org-cfg.el")
 (find-file "~/INI/hydra-cfg.el")
 *** Programing
-(find-file "~/INI/c-mode-cfg.el")
+(find-file "~/INI/js-cfg.el")
+(find-file "~/INI/c-mode-cfg.el") not used
 (find-file "~/INI/lua-cfg.el")
 (find-file "~/INI/python-cfg.el")
 ** exempl

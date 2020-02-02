@@ -1,13 +1,32 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
-;; Setting up js2-mode
+;; * Setting up js2-mode
+;; ** use-package js2-mode
+(use-package js2-mode :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'js2-mode)
+;; --------------------------------------
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; Better imenu
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 ;; js2-refactor and xref-js2
+;; ** use-package js2-refactor
+(use-package js2-refactor :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'js2-refactor)
+;; ** use-package xref-js2
+(use-package xref-js2 :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'xref-js2)
 (add-hook 'js2-mode-hook #'js2-refactor-mode)
 (js2r-add-keybindings-with-prefix "C-c C-r")
@@ -18,7 +37,7 @@
 (add-hook 'js2-mode-hook (lambda ()
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 ;; --------------------------------------
-;; ---------      Tern & Company     ----
+;; * ---------      Tern & Company     ----
 ;; may need add this commands for node.js
 ;; set "PATH=%PATH%;D:\Development\JS\nodejs\"
 ;; (setenv "PATH" (concat (getenv "PATH") "D:/Development/JS/nodejs"))
@@ -26,7 +45,19 @@
 (add-to-list 'load-path "~/.emacs.d/Els/Tern/emacs/")
 ;; (autoload 'tern-mode "tern.el" nil t)
 ;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+;; ** use-package company
+(use-package company :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'company)
+;; ** use-package company-tern
+(use-package company-tern :ensure t
+  ;; :defer 2
+  ;; :bind ("C-c c" hydra-clock/body)
+;; *** END of use-package hydra
+  )
 (require 'company-tern)
 (add-to-list 'company-backends 'company-tern)
 ;; (add-hook 'js2-mode-hook (lambda ()
@@ -36,7 +67,7 @@
                            (tern-mode)
                            (company-mode)))
 ;; --------------------------------------
-;; ------Snippets------------------------
+;; * ------Snippets------------------------
 (unless (package-installed-p 'yasnippet)
   (package-install 'yasnippet))
 ;; только если устанавливать в ручную
@@ -57,9 +88,9 @@
 ;; ;; Let's have snippets in the auto-complete dropdown
 ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
 ;; --------------------------------------
-;; JS-MOD CUSTOMIZATION
+;; * JS-MOD CUSTOMIZATION
 ;; --------------------------------------
-;; Docs
+;; ** Docs
 ;; --------------------------------------
 ;; Refactorings
 ;;     ee is expand-node-at-point: Expand bracketed list according to node type at point (array, object, function, call args).
