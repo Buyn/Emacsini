@@ -1,8 +1,19 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
+;; * used in
+;; (find-file "~/INI/init.el")
 ;; --------------------------------------
-;; ORG-MODE CUSTOMIZATION
+;; --------------------------------------
+;; * ORG-MODE CUSTOMIZATION
+;; --------------------------------------
+;; ** ---------------     ORG setup
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "DONE(d)")
+        ;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "NEXT(x)" "WAITING(w)" "VERIFY(v)" "|" "CANCELED(c)" "DELEGATED(g)")))
+;; (setq org-agenda-custom-commands
+;;       '(("n" occur-tree "NEXT")))
 ;; --------------------------------------
 (require 'org)
 (global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
@@ -14,7 +25,7 @@
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
 ;; --------------------------------------
-;; ---------------     ORG TODOs
+;; ** ---------------     ORG TODOs
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
         ;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
@@ -22,7 +33,7 @@
 ;; (setq org-agenda-custom-commands
 ;;       '(("n" occur-tree "NEXT")))
 ;; --------------------------------------
-;; ---------------     ORG Capures
+;; ** ---------------     ORG Capures
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
 (setq org-capture-templates '(
@@ -48,7 +59,7 @@
 ;; (define-key global-map "\C-cx"
 ;;   (lambda () (interactive) (org-capture nil "x")))
 ;; https://orgmode.org/manual/Capture-templates.html#Capture-templates
-;; --------------     Defult Propertys
+;; ** --------------     Defult Propertys
 ;; --------------------------------------
 (setq org-enforce-todo-dependencies t)
 ;; Should unfinished children block state changes in the parent? 
@@ -62,5 +73,8 @@
 ;; User Option: org-confirm-elisp-link-function
 ;;     Function that prompts the user before executing an Emacs Lisp link. 
 (setq org-confirm-elisp-link-function nil)
+;; ** ORG agenda customization
 (load "~/INI/org_agend_cfg.el")
+;; ** ORG babel 
+(load "~/INI/babel-cfg.el")
 

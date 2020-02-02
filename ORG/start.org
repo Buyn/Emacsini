@@ -55,9 +55,12 @@
 *** Other 
 (find-file "~/INI/autocomplete-cfg.el") NOTUSED
 (find-file "~/INI/frame-control.el")
-(find-file "~/INI/org-cfg.el")
 (find-file "~/INI/advnsed-selections-cfg.el")
 (find-file "~/INI/hydra-cfg.el")
+*** Orgs
+(find-file "~/INI/org-cfg.el")
+	(find-file "~/INI/org_agend_cfg.el")
+	(find-file "~/INI/babel-cfg.el")
 *** Programing
 (find-file "~/INI/js-cfg.el")
 (find-file "~/INI/c-mode-cfg.el") not used
@@ -856,6 +859,61 @@ From the doc:
     Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
 ** REPL 
 ** DeBug
+** eShell
+*** doc
+**** commands
+***** [so] Is it therefore possible to see what actual elisp is being invoked...
+https://emacs.stackexchange.com/questions/14979/access-to-the-elisp-commands-behind-eshell-commands/14981#14981
+
+Yes. They are all located in the eshell folder under Resources/elisp in the Emacs app folder. See screenshot of files on my computer. 
+
+
+  So I'd like to have the actual elisp...
+
+
+Open any of those files to see the actual elisp code. For example, ls command with its normal switches is implemented in em-ls.el file by John Wiegley and its core uses expand-file-name function.
+
+How to find which lisp file provides what shell command? Open eshell prompt and then type, say you want to know where kill is in elisp:
+
+which kill
+
+
+will tell you that 
+
+eshell/kill is a compiled Lisp function in `esh-proc.el'
+
+
+What other commands are available in eshell?
+
+see the [manual][2]
+
+
+
+  there is no way I know of running eshell commands as Babel "code blocks."
+
+
+There are no special eshell commands per se. Eshell mimics standard unix shell commands using existing lisp functions. You can invoke those same functions in org-babel lisp blocks without any mediating functions implemented in eshell. 
+    
+***** so find-function
+        e.g.: M-x find-function RET eshell/ls RET
+
+I like having find-function bound to C-hC-f as a variant on the standard describe-function binding (via which you can also indirectly get to the code, FYI).
+
+You could also use the following:
+#+BEGIN_SRC shell
+(defun eshell/goto (name)
+  "Visit the source code for the specified eshell command."
+  (let ((func (eshell-find-alias-function name)))
+    (if func
+        (find-function func)
+      (error "%s is not an elisp function" name))))
+#+END_SRC
+$ goto ls
+
+
+If you want to know what's implemented in elisp and what isn't, you could just ask Emacs to complete on eshell/
+
+e.g.: C-uC-ha eshell/ RET
 ** Folding 
 *** HideShow
 Invoke HideShow mode with M-x hs-minor-mode.

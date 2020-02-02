@@ -11,3 +11,4 @@
 .emacs~
 emacs_demon.cmd~
 *.el~
+.bash_history
