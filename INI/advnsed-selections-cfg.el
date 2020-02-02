@@ -11,17 +11,22 @@
   :config
 ;; *** hydra-expand-region
 ;; **** defhydra
-(defhydra hydra-expand-region (:color blue)
+  (defhydra hydra-expand-region
+	;; (:color blue)
+	(:body-pre 'er/expand-region)
   "expand-region"
+;; ***** key list
   ("C-=" er/expand-region "more")
   ("=" er/expand-region "more")
-  ;; ("-" text-scale-decrease "less")
-  ;; ("C--" er/expand-region "less")
+  ("m" er/expand-region "more")
+  ("-" er/contract-region "less")
+  ("l" er/contract-region "less")
+  ("C--" er/contract-region "less")
   ("w" er/mark-word "wrd")
   ("s" er/mark-symbol "smbl")
   ;; ("=" er/mark-symbol-with-prefix "more")
   ;; ("=" er/mark-next-accessor "more")
-  ("m" er/mark-method-call "methd")
+  ("f" er/mark-method-call "methd")
   ("'" er/mark-inside-quotes "iq")
   ("\"" er/mark-outside-quotes "oq")
   ("(" er/mark-inside-pairs "i(")
@@ -30,6 +35,7 @@
   ("u" er/mark-url "url")
   ;; ("=" er/mark-email "more")
   ("d" er/mark-defun "def")
+;; ***** END )
   )
 ;; **** Bind
 (global-set-key (kbd "C-=") 'hydra-expand-region/body)
