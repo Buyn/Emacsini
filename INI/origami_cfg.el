@@ -1,6 +1,6 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
-;; used in
+;; not used in
 ;; (find-file "~/INI/folding-cfg.el")
 ;; --------------------------------------
 ;; ORIGAMI-MOD CUSTOMIZATION {{{

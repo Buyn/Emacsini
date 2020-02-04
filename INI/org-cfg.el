@@ -73,8 +73,36 @@
 ;; User Option: org-confirm-elisp-link-function
 ;;     Function that prompts the user before executing an Emacs Lisp link. 
 (setq org-confirm-elisp-link-function nil)
+;; ** ---------------     ORG Foldings
+;; *** foldings on lavel navigations
+(define-key evil-normal-state-map "zj" 'org-forward-element)
+(define-key evil-normal-state-map "zk" 'org-backward-element)
+(define-key evil-normal-state-map "zh" 'org-up-element)
+(define-key evil-normal-state-map "zl" 'org-down-element)
+;; *** z[
+(define-key evil-normal-state-map "z[" '(lambda() (interactive)
+					(outline-up-heading 3)
+					))
+;; *** z]
+(define-key evil-normal-state-map "z]" '(lambda() (interactive)
+					(show-branches)
+					(dotimes (i 3)
+						(org-down-element)
+						)))
+;; *** zc
+(define-key evil-normal-state-map "zc" '(lambda() (interactive)
+					(outline-previous-visible-heading 1)
+					(hide-subtree)
+					))
+;; *** zC
+(define-key evil-normal-state-map "zC" '(lambda() (interactive)
+					(outline-up-heading 3)
+					(hide-subtree)
+					))
+;; (define-key evil-normal-state-map "z]" 'origami-previous-fold)
 ;; ** ORG agenda customization
 (load "~/INI/org_agend_cfg.el")
 ;; ** ORG babel 
 (load "~/INI/babel-cfg.el")
 
+;; --------------------------------------

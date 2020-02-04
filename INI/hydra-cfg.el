@@ -12,7 +12,6 @@
   ;; :bind ("C-c c" hydra-clock/body)
 ;; *** END of use-package hydra
   )
-
 ;; ** Menus
 ;; *** Main Menu
 ;; **** defhydra
@@ -23,10 +22,10 @@
     ^Main^             ^Do^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
     _q_ quit            _c_ cancel      _o_ outline 
-    ^^                  _e_ effort      _d_ hydra-ediff
-    ^^                  _i_ in          _t_ hydra-transpose
+    ^^                  _e_ effort      _d_ ediff
+    ^^                  _i_ in          _t_ transpose
     ^^                  _j_ jump        _f_ occur-dwim
-    ^^                  _SPC_ insert    _p_ elpy-hydra
+    ^^                  _SPC_ insert    _p_ elpy
     ^^                  _r_ report      _y_ yasnippet
     ^^                  ^^
     "
