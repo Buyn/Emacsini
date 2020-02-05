@@ -7,7 +7,9 @@
 ;; --------------------------------------
 ;; ** use-package outshine 
 (use-package outshine :ensure t
-  :quelpa (outshine :fetcher github :repo "alphapapa/outshine")
+  ;; uncoment to instal
+  ;; loding each time - resrch how to setup right
+  ;; :quelpa (outshine :fetcher github :repo "alphapapa/outshine")
 ;; **  outshine config
   :config
 ;; *** binds

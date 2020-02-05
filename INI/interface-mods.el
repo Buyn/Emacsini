@@ -4,8 +4,7 @@
 ;; --------------------------------------
 ;; IVY CUSTOMIZATION
 (require 'use-package)
-(use-package ivy
-	:ensure t
+(use-package ivy :ensure t
 	;; :init
 	;; (elpy-enable)
 	:config

@@ -58,6 +58,7 @@
 (find-file "~/INI/autocomplete-cfg.el") NOTUSED
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/advnsed-selections-cfg.el")
+(find-file "~/INI/interface-mods.el")
 (find-file "~/INI/hydra-cfg.el")
 *** Orgs
 (find-file "~/INI/org-cfg.el")
@@ -65,10 +66,13 @@
 	(find-file "~/INI/babel-cfg.el")
 	(find-file "~/ELs/Org/Babel/ob-eshell.el")
 *** Programing
-(find-file "~/INI/js-cfg.el")
-(find-file "~/INI/c-mode-cfg.el") not used
-(find-file "~/INI/lua-cfg.el")
-(find-file "~/INI/python-cfg.el")
+(find-file "~/INI/dev-cfg.el")
+	(find-file "~/INI/autocomplete-cfg.el")
+	(find-file "~/INI/snippets-cfg.el")
+	(find-file "~/INI/js-cfg.el") not used
+	(find-file "~/INI/lua-cfg.el")
+	(find-file "~/INI/python-cfg.el") load flycheck
+	(find-file "~/INI/c-mode-cfg.el") not used
 ** exempl
 (find-file "~/../hi.txt")
 * Команды

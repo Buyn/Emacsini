@@ -26,14 +26,8 @@
 ;; * FOLDING-MODS CUSTOMIZATION
 (load "~/INI/folding-cfg.el")
 ;; --------------------------------------
-;; * JS-MOD CUSTOMIZATION
-(load "~/INI/js-cfg.el")
-;; --------------------------------------
-;; * PYTHON-MOD CUSTOMIZATION
-(load "~/INI/python-cfg.el")
-;; --------------------------------------
-;; * LUA-MOD CUSTOMIZATION
-(load "~/INI/lua-cfg.el")
+;; * DEVELOPMENT-MODs CUSTOMIZATION
+(load "~/INI/dev-cfg.el")
 ;; --------------------------------------
 ;; * HYDRA CUSTOMIZATION
 (load "~/INI/hydra-cfg.el")

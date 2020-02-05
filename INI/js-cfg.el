@@ -1,12 +1,16 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
+;; --------------------------------------
+;; * not used in
+;; (find-file "~/INI/dev-cfg.el")
+;; --------------------------------------
 ;; * Setting up js2-mode
 ;; ** use-package js2-mode
 (use-package js2-mode :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
-;; *** END of use-package hydra
+;; *** END of use-package 
   )
 (require 'js2-mode)
 ;; --------------------------------------
@@ -43,21 +47,17 @@
 ;; (setenv "PATH" (concat (getenv "PATH") "D:/Development/JS/nodejs"))
 ;; (setq exec-path (append exec-path '("D:/Development/JS/nodejs/")))
 ;; ** terns 
+;; This is Tern. Tern is a stand-alone, editor-independent
+;; JavaScript analyzer that can be used to improve the JavaScript
+;; integration of existing editors.
 (add-to-list 'load-path "~/.emacs.d/Els/Tern/emacs/")
 ;; (autoload 'tern-mode "tern.el" nil t)
 ;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
-;; ** use-package company
-(use-package company :ensure t
-  ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
-;; *** END use-package company
-  )
-(require 'company)
-;; ** use-package company-tern
+;; ** company-tern
 (use-package company-tern :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
-;; *** END of use-package hydra
+;; ***  END of use-package hydra
   )
 (require 'company-tern)
 (add-to-list 'company-backends 'company-tern)
@@ -67,27 +67,6 @@
 (add-hook 'js-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode)))
-;; --------------------------------------
-;; * ------Snippets------------------------
-(unless (package-installed-p 'yasnippet)
-  (package-install 'yasnippet))
-;; только если устанавливать в ручную
-;; (add-to-list 'load-path
-;;               "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 1)
-;; (unless (package-installed-p 'emacs-snippets)
-;;   (package-install 'emacs-snippets))
-(unless (package-installed-p 'yasnippet-snippets)
-  (package-install 'yasnippet-snippets))
-;; (add-to-list 'load-path "~/path/to/yasnippet")
-;; ;; Load the library
-;; (require 'yasnippet)
-;; (yas/initialize)
-;; ;; Load the snippet files themselves
-;; (yas/load-directory "~/path/to/yasnippet/snippets/text-mode")
-;; ;; Let's have snippets in the auto-complete dropdown
-;; (add-to-list 'ac-sources 'ac-source-yasnippet)
 ;; --------------------------------------
 ;; * JS-MOD CUSTOMIZATION
 ;; --------------------------------------
