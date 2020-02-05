@@ -698,7 +698,7 @@ C-c ]     (org-remove-file)
 * Help Docs Emacs 
 ** Keyborde help 
 *** evaluate
-    27.9 Evaluating Emacs Lisp Expressions
+****    27.9 Evaluating Emacs Lisp Expressions
 Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
 Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
 M-:
@@ -735,6 +735,10 @@ There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp fo
     Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
     You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
     The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
+**** python
+***** run unit test
+ C-c C-t [elpy-test]
+
 *** get help 
 *** get menu command 
     Some of the commands in the menu bar have ordinary key bindings as well;

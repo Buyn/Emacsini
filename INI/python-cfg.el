@@ -1,8 +1,11 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
+;; * used in
+;; (find-file "~/INI/init.el")
 ;; --------------------------------------
-;; PYTHON-MOD CUSTOMIZATION
+;; --------------------------------------
+;; * PYTHON-MOD CUSTOMIZATION
 ;; --------------------------------------
 (require 'use-package)
 (use-package elpy
@@ -25,6 +28,7 @@
 	(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 	(add-hook 'elpy-mode-hook 'flycheck-mode)
 	)
+;; ** (use-package company-jedi 
 (use-package company-jedi 
 	:ensure t
 	;; :init
@@ -34,6 +38,5 @@
 	(add-to-list 'company-backends 'company-jedi))
 	(add-hook 'python-mode-hook 'my/python-mode-hook)
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-jedi)
-
 	)
 ;; --------------------------------------

@@ -42,6 +42,7 @@
 ;; set "PATH=%PATH%;D:\Development\JS\nodejs\"
 ;; (setenv "PATH" (concat (getenv "PATH") "D:/Development/JS/nodejs"))
 ;; (setq exec-path (append exec-path '("D:/Development/JS/nodejs/")))
+;; ** terns 
 (add-to-list 'load-path "~/.emacs.d/Els/Tern/emacs/")
 ;; (autoload 'tern-mode "tern.el" nil t)
 ;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
@@ -49,7 +50,7 @@
 (use-package company :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
-;; *** END of use-package hydra
+;; *** END use-package company
   )
 (require 'company)
 ;; ** use-package company-tern

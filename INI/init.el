@@ -38,9 +38,6 @@
 ;; * HYDRA CUSTOMIZATION
 (load "~/INI/hydra-cfg.el")
 ;; --------------------------------------
-;; * HYDRA CUSTOMIZATION
-(load "~/INI/hydra-cfg.el")
-;; --------------------------------------
 ;; * NOT USED
 ;; ** TIME TRACKING-MODs CUSTOMIZATION
 ;; (load "~/INI/time-tracking-cfg.el")
