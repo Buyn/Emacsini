@@ -768,6 +768,10 @@ You can also use M-; to align an existing comment. If a line already contains th
 C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
 The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
 For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
+*** Rebind keys
+**** keys to keys
+(global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
+
 ** info\help
    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
    удобная систе показиваюшая мануалки по всем установленым модам

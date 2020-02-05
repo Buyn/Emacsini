@@ -12,6 +12,12 @@
   :config
 ;; *** binds
 	;; (defvar outline-minor-mode-prefix "\M-#")
+	(define-key evil-normal-state-map "zf" 'outshine-insert-heading)
+;; **** zF
+	(define-key evil-normal-state-map "zF" '(lambda() (interactive)
+			(outshine-insert-comment-subtree (read-string "comment: "))
+			))
+
 ;; *** autoload
 	;; (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
 	(add-hook 'outline-minor-mode-hook 'outshine-mode)
