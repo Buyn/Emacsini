@@ -15,6 +15,10 @@
 ;; (find-file "~/INI/snippets-cfg.el")
 (load "~/INI/snippets-cfg.el")
 ;; --------------------------------------
+;; ** DELIMITERS-MOD CUSTOMIZATION
+;; (find-file "~/INI/delimiters-cfg.el")
+(load "~/INI/delimiters-cfg.el")
+;; --------------------------------------
 ;; ** PYTHON-MOD CUSTOMIZATION
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------

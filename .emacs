@@ -1,12 +1,14 @@
 ;; --------------------------------------
 ;; .emacs --- Emacs configuration
 ;; --------------------------------------
+;; * Start of manual file
+;; --------------------------------------
 (load "~/INI/init.el")
 ;; --------------------------------------
-;; End of manual file
+;; ** End of manual file
 ;; --------------------------------------
 ;; --------------------------------------
-;; START OF AUTOMATION 
+;; * START OF AUTOMATION 
 ;; --------------------------------------
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -16,8 +16,9 @@
 	:config
 	;; (ivy-mode 1)
 	;; (global-origami-mode nil)
-	(setq python-shell-interpreter "python"
-	python-shell-interpreter-args "-i")
+	;; (setq python-shell-interpreter "python"
+	;; python-shell-interpreter-args "-i")
+	;; findout what it do
 	;; (global-set-key (kbd "C-SPC") nil)
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 	;; (com)
@@ -43,3 +44,5 @@
 ;; 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-jedi)
 ;; 	)
 ;; --------------------------------------
+
+;; * --------------------------------------
