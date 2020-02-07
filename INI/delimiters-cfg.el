@@ -18,6 +18,9 @@
 ;; *** END )
 	)
 ;; *** Docs 
+;; **** links:
+;; https://github.com/Fanael/rainbow-delimiters
+;; http://emacs-fu.blogspot.com/2011/05/toward-balanced-and-colorful-delimiters.html
 ;; **** Customization:
 ;; To customize rainbow-delimiters mode, you can use:
 

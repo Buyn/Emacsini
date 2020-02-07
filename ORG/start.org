@@ -85,6 +85,7 @@
 (load "~/INI/origami_cfg.el")
 (load "~/INI/folding-cfg.el")
 (load "~/INI/org-cfg.el")
+(load "~/INI/dev-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")

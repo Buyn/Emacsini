@@ -95,6 +95,12 @@
 ;FIXME: move selected
 ;TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
+;; ** Devolopment  {{{
+(define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
+(define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
+(define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
+(define-key evil-normal-state-map (kbd "M-e M-l ") 'eval-last-sexp)
+;; -------------------------------------- }}}
 ;; ** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
