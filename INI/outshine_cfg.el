@@ -24,9 +24,9 @@
 ;; **** visual add zf
 	(define-key evil-visual-state-map "zf" '(lambda() (interactive)
 			(setq region-text (buffer-substring (region-beginning) (region-end)))
-			(beginning-of-line)
-			(newline-and-indent)
+			(evil-open-above 1)
 			(outshine-insert-heading)
+			(backward-char)
 			(save-excursion
 				(insert " ")
 				(insert region-text)
