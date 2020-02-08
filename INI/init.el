@@ -36,10 +36,6 @@
 ;; ** TIME TRACKING-MODs CUSTOMIZATION
 ;; (load "~/INI/time-tracking-cfg.el")
 ;; --------------------------------------
-;; ** AUTO-COMPLETE  CUSTOMIZATION
-;; (load "~/INI/autocomplete-cfg.el")
-;; --------------------------------------
-;; --------------------------------------
 ;; * END OF LOAD
 (message "Load of init.el is ended")
 ;; --------------------------------------

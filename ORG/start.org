@@ -48,6 +48,11 @@
 	(find-file "~/ELs/Evil/evil-respect-input.el")
 	(find-file "~/ELs/Evil/onecharadd.el")
 	(find-file "~/ELs/Evil/copylines.el") пока нет
+*** Orgs
+(find-file "~/INI/org-cfg.el")
+	(find-file "~/INI/org_agend_cfg.el")
+	(find-file "~/INI/babel-cfg.el")
+	(find-file "~/ELs/Org/Babel/ob-eshell.el")
 *** Folding
 (find-file "~/INI/folding-cfg.el")
 	(find-file "~/INI/origami_cfg.el") not usibg
@@ -56,16 +61,14 @@
 		(find-file "~/ELs/Evil/origami_triplebrase.el")
 	(find-file "~/INI/outshine_cfg.el")
 *** Other 
-(find-file "~/INI/autocomplete-cfg.el") NOTUSED
 (find-file "~/INI/frame-control.el")
 (find-file "~/INI/advnsed-selections-cfg.el")
 (find-file "~/INI/interface-mods.el")
 (find-file "~/INI/hydra-cfg.el")
-*** Orgs
-(find-file "~/INI/org-cfg.el")
-	(find-file "~/INI/org_agend_cfg.el")
-	(find-file "~/INI/babel-cfg.el")
-	(find-file "~/ELs/Org/Babel/ob-eshell.el")
+*** literary 
+(find-file "~/INI/lit-cfg.el") not et
+	(find-file "~/INI/translate-cfg.el") not et
+	(find-file "~/INI/grammer-cfg.el") not et)
 *** Programing
 (find-file "~/INI/dev-cfg.el")
 	(find-file "~/INI/autocomplete-cfg.el")
@@ -75,73 +78,11 @@
 	(find-file "~/INI/lua-cfg.el")
 	(find-file "~/INI/python-cfg.el") load flycheck
 	(find-file "~/INI/c-mode-cfg.el") not used
+*** literary 
+(find-file "~/INI/lit-cfg.el") not et
 ** exempl
-(find-file "~/../hi.txt")
-* Команды
-** reload init files
-(load "~/INI/evil-mod-cfg.el")
-(load "~/INI/frame-control.el")
-(load "~/INI/vanila_cfg.el")
-(load "~/INI/origami_cfg.el")
-(load "~/INI/folding-cfg.el")
-(load "~/INI/org-cfg.el")
-(load "~/INI/dev-cfg.el")
-** открыть
-(find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
-(org-agenda nil "a")
-
-** линкс команды
-   C+c C+o
-	[[shell:echo%20"hi%20Max"][Hello?]]
-	[[shell:dir][Whera are u?]]
-[[
-shell:echo "dfgdfg max"
-] [
-Working?
-]]
-[[shell:echo "dfgdfg max"][Working?]]
-
-[[shell:echo "dfgdfg max"]
-[Working?]]
-**  сорс комады
-   C+c C+c
-#+BEGIN_SRC sh :shcmd "cmdproxy.exe"
-dir
-#+END_SRC
-#+BEGIN_SRC sh :exports both
-ls
-#+END_SRC
-** Install
-tar not found when trying to install from melpa 
-You probably have an outdated package database
-(package-refresh-contents)
-(package-install company-irony)
-** setings
-*** systems paths
-(setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
-	неменяет системную переменую только переменая емака взятая при запуске
-(setenv "PATH" (concat (getenv "PATH") ";c:\\sw\\bin"))
-(setq exec-path (append exec-path '("d:/sw/bin")))
-	;; example of setting env var named “path”, by appending a new path to existing path
-
-(setenv "PATH"
-  (concat
-   "C:/cygwin/usr/local/bin" ";"
-   "C:/cygwin/usr/bin" ";"
-   "C:/cygwin/bin" ";"
-   (getenv "PATH")
-  )
-)
-    You can use slash / and you don't have to use backslash \.
-    Dir path may end with a path separator /, or without.
-    the builtin variable path-separator can be used instead of ;.
-;; show env var named path
-(getenv "PATH")
-*** for Source
-(origami-mode)
-(outline-minor-mode)
-** ielm 
-* Help Docs Emacs 
+(find-file "~/../hi.txt"))
+*Help Docs Emacs 
 ** Keyborde help 
 *** evaluate
 ****    27.9 Evaluating Emacs Lisp Expressions
