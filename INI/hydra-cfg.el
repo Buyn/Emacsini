@@ -321,11 +321,11 @@ _?_ help            _c_urrent file
     "
                 ^OrphoGrammus  Menus^          
     ────────────^───────────────────^───────────────────
-     _[_ prev err    _]_ next err        
-     _p_rev cor err  _n_ext cor err
-     _f_lyspell      _d_ictonar chenge   _c_omment chek
+     _[_ prev err    _]_ next err    _=_ word
+     _p_rev cor err  _n_ext cor err  
+     _f_lyspell      _c_omment chek  _q_uit
      _a_ll buffer    _r_egion cheak
-     _q_uit          _=_ word
+     _r_u-RU    _d_ictonar chenge    _e_n-US
     "
 ;; ***** keys
     ("[" evil-prev-flyspell-error :color pink)
@@ -333,9 +333,11 @@ _?_ help            _c_urrent file
     ("n" flyspell-auto-correct-word :color pink)
     ("p" flyspell-auto-correct-previous-word :color pink)
     ("f" flyspell-mode :color pink)
-    ("d" ispell-change-dictionary)
     ("c" flyspell-prog-mode)
     ("a" flyspell-buffer)
+    ("r" ispell-change-dictionary "ru_RU")
+    ("d" ispell-change-dictionary)
+    ("e" ispell-change-dictionary "en_US")
     ("r" ispell-region)
     ("=" ispell-word :color pink)
 	("q" nil) 

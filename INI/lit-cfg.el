@@ -11,8 +11,14 @@
 ;; **** use-package ob-translate 
 (use-package ob-translate :ensure t
 ;; (package-refresh-contents)
-;; M-x package-refresh-contents
-;; M-x package-install RET ob-translate
+  :init
+  (add-to-list 'org-babel-load-languages '(translate . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  ;; add translate special block into structure template alist.
+  ;; (add-to-list 'org-structure-template-alist '("t" . "src translate"))
+  ;; (add-to-list 'org-structure-template-alist '("tr" . "src translate :dest ru"))
+	(add-to-list 'org-structure-template-alist '("t" "#+BEGIN_SRC translate ? \n\n#+END_SRC\n"))
+	(add-to-list 'org-structure-template-alist '("tr" "#+BEGIN_SRC translate :dest ru ? \n\n#+END_SRC\n"))
   )
 ;; **** Docs
 ;; ***** Options
