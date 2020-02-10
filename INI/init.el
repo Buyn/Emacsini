@@ -26,6 +26,9 @@
 ;; * FOLDING-MODS CUSTOMIZATION
 (load "~/INI/folding-cfg.el")
 ;; --------------------------------------
+;; * LITERARY-MODS CUSTOMIZATION
+(load "~/INI/lit-cfg.el")
+;; --------------------------------------
 ;; * DEVELOPMENT-MODs CUSTOMIZATION
 (load "~/INI/dev-cfg.el")
 ;; --------------------------------------

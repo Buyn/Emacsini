@@ -314,3 +314,33 @@ _?_ help            _c_urrent file
 ;; **** bind 
 ;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
 ;; --------------------------------------
+;; *** Lit menu
+;; **** defhydra
+(defhydra lit-menu (:color pink)
+;; ***** hint
+    "
+                ^OrphoGrammus  Menus^          
+    ────────────^───────────────────^───────────────────
+     _[_ prev err    _]_ next err        
+     _p_rev cor err  _n_ext cor err
+     _f_lyspell      _d_ictonar chenge   _c_omment chek
+     _a_ll buffer    _r_egion cheak
+     _q_uit          _=_ word
+    "
+;; ***** keys
+    ("[" evil-prev-flyspell-error :color pink)
+    ("]" evil-next-flyspell-error :color pink)
+    ("n" flyspell-auto-correct-word :color pink)
+    ("p" flyspell-auto-correct-previous-word :color pink)
+    ("f" flyspell-mode :color pink)
+    ("d" ispell-change-dictionary)
+    ("c" flyspell-prog-mode)
+    ("a" flyspell-buffer)
+    ("r" ispell-region)
+    ("=" ispell-word :color pink)
+	("q" nil) 
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+(define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)

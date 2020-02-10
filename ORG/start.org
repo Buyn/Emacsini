@@ -89,7 +89,9 @@
 (load "~/INI/origami_cfg.el")
 (load "~/INI/folding-cfg.el")
 (load "~/INI/org-cfg.el")
+(load "~/INI/lit-cfg.el")
 (load "~/INI/dev-cfg.el")
+(load "~/INI/hydra-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")
@@ -107,14 +109,42 @@ Working?
 
 [[shell:echo "dfgdfg max"]
 [Working?]]
-**  сорс комады
-   C+c C+c
-#+BEGIN_SRC sh :shcmd "cmdproxy.exe"
-dir
-#+END_SRC
-#+BEGIN_SRC sh :exports both
-ls
-#+END_SRC
+** сорс комады
+*** для всех 
+	C+c C+c
+(setq org-confirm-babel-evaluate nil)
+*** шелл 
+ #+BEGIN_SRC sh :shcmd "cmdproxy.exe"
+ dir
+ #+END_SRC
+ #+BEGIN_SRC sh :exports both
+ ls
+ #+END_SRC
+
+ #+BEGIN_SRC sh :exports both
+ ls
+ #+END_SRC
+
+*** translate 
+**** пример 
+  #+BEGIN_SRC translate
+  Чтобы поймать психа нужен Псих
+  #+END_SRC
+
+  #+RESULTS:
+  : To catch psycho Psycho needed
+
+**** Docs
+***** Options
+ Each block supports the following arguments:
+ Argument	Description	Example	Default
+****** :src	Source language.
+  +BEGIN_SRC translate :src de	‘auto’ (for auto detection).
+****** :dest	Destination language(s).
+  +BEGIN_SRC translate :dest it,fr	‘en’ (for English).
+  :dest may be a single country-code, or a comma-separated list.
+****** All defaults are customizable 
+  with M-x customize-group RET ob-translate.
 ** Install
 tar not found when trying to install from melpa 
 You probably have an outdated package database
@@ -145,8 +175,6 @@ You probably have an outdated package database
 (origami-mode)
 (outline-minor-mode)
 ** ielm 
-
-
 * Help Docs Emacs 
 ** Keyborde help 
 *** evaluate
