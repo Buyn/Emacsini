@@ -20,9 +20,11 @@
 (load "~/INI/delimiters-cfg.el")
 ;; --------------------------------------
 ;; ** PYTHON-MOD CUSTOMIZATION
+;; (find-file "~/INI/python-cfg.el") 
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------
 ;; ** LUA-MOD CUSTOMIZATION
+;; (find-file "~/INI/lua-cfg.el")
 (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
 ;; ** JS-MOD CUSTOMIZATION

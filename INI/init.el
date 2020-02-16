@@ -11,9 +11,6 @@
 ;; * EVIL-MOD CUSTOMIZATION
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
-;; * ADVNSED SELECTIONS CUSTOMIZATION
-(load "~/INI/advnsed-selections-cfg.el")
-;; --------------------------------------
 ;; * INTERFACE-MODS CUSTOMIZATION
 (load "~/INI/interface-mods.el")
 ;; --------------------------------------
@@ -34,6 +31,9 @@
 ;; --------------------------------------
 ;; * HYDRA CUSTOMIZATION
 (load "~/INI/hydra-cfg.el")
+;; --------------------------------------
+;; * ADVNSED SELECTIONS CUSTOMIZATION
+(load "~/INI/advnsed-selections-cfg.el")
 ;; --------------------------------------
 ;; * NOT USED
 ;; ** TIME TRACKING-MODs CUSTOMIZATION

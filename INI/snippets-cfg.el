@@ -12,13 +12,13 @@
 ;; только если устанавливать в ручную
 ;; (add-to-list 'load-path
 ;;               "~/.emacs.d/plugins/yasnippet")
-;; ** yasnippet 
+;; ** yasnippet-snippets 
+(unless (package-installed-p 'yasnippet-snippets)
+  (package-install 'yasnippet-snippets))
 (require 'yasnippet-snippets)
 (yas-global-mode 1)
 ;; (unless (package-installed-p 'emacs-snippets)
 ;;   (package-install 'emacs-snippets))
-(unless (package-installed-p 'yasnippet-snippets)
-  (package-install 'yasnippet-snippets))
 ;; (add-to-list 'load-path "~/path/to/yasnippet")
 ;; ;; Load the library
 ;; (require 'yasnippet)

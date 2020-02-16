@@ -11,9 +11,10 @@
 (require 'use-package)
 (use-package elpy :ensure t
 	:defer t
-	:init
-	(elpy-enable)
+	;; :init
+	;; (elpy-enable)
 	:config
+	(elpy-enable)
 	;; (ivy-mode 1)
 	;; (global-origami-mode nil)
 	;; (setq python-shell-interpreter "python"
