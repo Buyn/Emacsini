@@ -21,8 +21,8 @@
     ^
     ^Main^             ^Do^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit            _c_ cancel      _o_ outline 
-    ^^                  _e_ effort      _d_ ediff
+    _q_ quit            _c_ Company     _o_ outline 
+    ^^                  _a_ autshine    _d_ ediff
     ^^                  _i_ in          _t_ transpose
     ^^                  _j_ jump        _f_ occur-dwim
     ^^                  _SPC_ insert    _p_ elpy
@@ -31,9 +31,9 @@
     "
 ;; ***** keys
     ("q" nil)
-    ("c" org-clock-cancel :color pink)
     ("SPC" khaoos-insert-one-char :color pink)
-    ("e" org-clock-modify-effort-estimate)
+    ("c" company-mode)
+    ("a" outshine-mode)
     ("i" org-clock-in)
     ("j" org-clock-goto)
     ("o" org-clock-out)
