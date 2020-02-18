@@ -22,22 +22,23 @@
     ^Main^             ^Do^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
     _q_ quit            _c_ Company     _o_ outline 
-    ^^                  _a_ autshine    _d_ ediff
+   O_r_G-mode           _a_ autshine    _d_ ediff
     ^^                  _i_ in          _t_ transpose
     ^^                  _j_ jump        _f_ occur-dwim
     ^^                  _SPC_ insert    _p_ elpy
-    ^^                  _r_ report      _y_ yasnippet
+    ^^                                  _y_ yasnippet
     ^^                  ^^
     "
 ;; ***** keys
     ("q" nil)
+    ("r" org-menu/body)
     ("SPC" khaoos-insert-one-char :color pink)
     ("c" company-mode)
     ("a" outshine-mode)
     ("i" org-clock-in)
     ("j" org-clock-goto)
     ("o" org-clock-out)
-    ("r" org-clock-report)
+    ;; ("r" org-clock-report)
 	("o" hydra-outline/body) 
 	("d" hydra-ediff/body) 
 	("t" hydra-transpose/body) 
@@ -346,3 +347,25 @@ _?_ help            _c_urrent file
 ;; --------------------------------------
 ;; **** Bind
 (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+
+;; *** Org menu
+;; **** defhydra
+(defhydra org-menu (:color pink)
+;; ***** hint
+    "
+                ^Org-mode  Menus^          
+    ────────────^───────────────^───────────────────
+     _d_one TODO    A_r_hiv TODO  _t_odo set
+     a_g_enda   _q_uit
+    "
+;; ***** keys
+    ("d" org-todo "DONE")
+    ("r" org-archive-subtree)
+    ("t" org-todo "TODO")
+    ("g" org-agenda :color blue)
+	("q" nil) 
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)

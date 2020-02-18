@@ -21,6 +21,7 @@
 =================================
 * Pathes
 ** org files
+*** lincks
 [[file:~/../Dropbox/orgs/weekly.org][weekly file]]
 [[file:~/../Dropbox/orgs/todo_plan.org][ToDo Plan org]]
 [[file:~/../Dropbox/orgs/monthly.org][Monthly file]]
@@ -29,11 +30,17 @@
 [[file:~/ORG/gtd/inbox.org][Inbox GTD File]]
 [[file:~/ORG/gtd/tickler.org][Tikler Todo File]]
 
+*** main todos
 (find-file "D:/Development/lisp/Dropbox/orgs/weekly.org")
 (find-file "~/../Dropbox/orgs/todo_main.org")
 (find-file "~/../Dropbox/orgs/todo_plan.org")
 (find-file "~/../Dropbox/orgs/todo_LongRun.org")
 
+*** uptown todos
+файлы для Вышгорода
+(find-file "~/../Dropbox/orgs/uptown/todo_rasps.org")
+
+*** gts 
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
