@@ -25,7 +25,7 @@
 ;; To customize rainbow-delimiters mode, you can use:
 
 ;; M-x customize-group rainbow-delimiters
-
+;; (customize-group "rainbow-delimiters")
 ;; Color Scheme
 
 ;; customize-group rainbow-delimiters-faces has the faces for successive nested pairs of delimiters. You can change them through emacs customize or in your color theme or dot-emacs.

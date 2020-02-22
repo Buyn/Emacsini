@@ -166,7 +166,7 @@ Working?
 tar not found when trying to install from melpa 
 You probably have an outdated package database
 (package-refresh-contents)
-(package-install company-irony)
+(package-install "company-irony")
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))

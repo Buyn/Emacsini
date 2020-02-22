@@ -25,8 +25,7 @@
 	(define-key evil-normal-state-map (kbd "M-e M-f M-P") 'elpy-goto-definition-other-window)
 	)
 ;; ** (use-package flycheck 
-(use-package flycheck 
-	:ensure t
+(use-package flycheck :ensure t
 	;; :init
 	;; (elpy-enable)
 	:config
