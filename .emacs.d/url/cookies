@@ -3,17 +3,25 @@
 
 (setq url-cookie-storage
  '((".google.com"
-  [url-cookie "NID" "197=Cyq8vTHwEX9LyeFC58rCBUXj4uaBXwBuvaiOLqJ4IYmTqam6PPRTtMs64WhzMmns7ot1kJEq1Ru6hp7TWXffjl_HvLO-8jhoUR9FGhxXYN8h0nrc-qbuYt5Qa4Ae-vaqNYwdmvuhfq_-KAEcn-AvrJLRP7ah3EunHM9DSvWWeZQ" "Sun, 09-Aug-2020 21:59:11 GMT" "/" ".google.com" nil])
+  [url-cookie "NID" "198=Sp6PMrJb_TnQfHE4ErWcMYm5SL4Vgqg9eqdVTAGMGaz120Vu4uLZNXXuO1x8luSMmdjAqMG1pyZPru_zDI8Wlul2BiCl0BJ0eUeviYJz4CEDFtqHvNBLkDEQl0T9UaH02Inz2_ycj1e-6Eu0zqWmhzYespQOZFxTJK6Z-h9-67g" "Thu, 20-Aug-2020 18:14:37 GMT" "/" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/search" ".google.com" nil])
  (".stackoverflow.com"
   [url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
  (".emackandboliohk.com"
   [url-cookie "__cfduid" "d017b2a6376811768fa30ece8f015d70e1563753674" "Tue, 21-Jul-20 00:01:14 GMT" "/" ".emackandboliohk.com" nil])
+ (".stackexchange.com"
+  [url-cookie "prov" "c8152363-e55b-e345-a9d5-1eae219a8821" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
  ("emackandboliohk.com"
   [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]))
 )
 (setq url-cookie-secure-storage
  '(("emackandboliohk.com"
-  [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
+  [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
+ (".google.com"
+  [url-cookie "1P_JAR" "2020-02-20-12" "Sat, 21-Mar-2020 12:02:58 GMT" "/" ".google.com" t])
+ (".lexicanum.com"
+  [url-cookie "__cfduid" "dbceb9b5de7fd9fd2363c53f0bed4532c1582134396" "Fri, 20-Mar-20 17:46:36 GMT" "/" ".lexicanum.com" t]))
 )
 
 ;; Local Variables:

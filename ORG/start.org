@@ -39,12 +39,20 @@
 *** uptown todos
 файлы для Вышгорода
 (find-file "~/../Dropbox/orgs/uptown/todo_rasps.org")
-
+(find-file "~/../Dropbox/orgs/uptown/todo_uplan.org")
+*** captures
+(find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
+(find-file "~/../Desktop/orgs/capture/Pensieve.org")
+(find-file-other-frame "~/../Desktop/orgs/capture/astronomicon.org")
+(find-file "~/../Desktop/orgs/capture/astronomicon.org")
+(find-file-other-frame "~/../Desktop/orgs/capture/emagus.org")
+(find-file "~/../Desktop/orgs/capture/emagus.org")
 *** gts 
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
 ** init files
+*** root
 (find-file "~/.emacs")
 	(find-file "~/INI/init.el")
 *** vanila

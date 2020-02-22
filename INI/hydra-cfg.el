@@ -13,43 +13,84 @@
 ;; *** END of use-package hydra
   )
 ;; ** Menus
-;; *** Main Menu
+;; *** Main Menu 00
 ;; **** defhydra
-(defhydra spc-main-menu (:color blue)
+(defhydra spc-main-menu00 (:color blue)
 ;; ***** hint
     "
-    ^
-    ^Main^             ^Do^             ^  Menus^          
-    ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit            _c_ Company     _o_ outline 
-   O_r_G-mode           _a_ autshine    _d_ ediff
-    ^^                  _i_ in          _t_ transpose
-    ^^                  _j_ jump        _f_ occur-dwim
-    ^^                  _SPC_ insert    _p_ elpy
-    ^^                                  _y_ yasnippet
-    ^^                  ^^
+    ^Main^         00             ^Menus^          
+    ^─────^───────────────────────^─────^─────────
+    _q_ quit            _c_ Company     _e_ elpy      
+    _o_rg-mode          _a_ autshine    _y_ yasnippet
+    ^^                  _SPC_ insert    
+    _p_rev-menu         _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
-    ("r" org-menu/body)
+    ("o" org-menu/body)
     ("SPC" khaoos-insert-one-char :color pink)
     ("c" company-mode)
     ("a" outshine-mode)
-    ("i" org-clock-in)
-    ("j" org-clock-goto)
-    ("o" org-clock-out)
-    ;; ("r" org-clock-report)
-	("o" hydra-outline/body) 
-	("d" hydra-ediff/body) 
-	("t" hydra-transpose/body) 
-	("f" hydra-occur-dwim/body)
-	("p" elpy-hydra/body)
+	("e" elpy-hydra/body)
 	("y" hydra-yasnippet/body)
+	("n" spc-main-menu01/body)
+	("p" spc-main-menu99/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
 ;; **** Bind
-(global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+(global-set-key (kbd "M-<SPC>") 'spc-main-menu00/body)
+;; *** Main Menu 01
+;; **** defhydra
+(defhydra spc-main-menu01 (:color blue)
+;; ***** hint
+    "
+    ^Main^       01        ^Menus^          
+    ^────^─────────────────^─────^─────────
+    _q_ quit              _o_ outline 
+                          _d_ ediff
+    _t_ transpose
+    _f_ occur-dwim        _SPC_ insert    
+    _p_rev-menu           _n_ext-menu    
+    "
+;; ***** keys
+    ("q" nil)
+    ("SPC" khaoos-insert-one-char :color pink)
+	("o" hydra-outline/body) 
+	("d" hydra-ediff/body) 
+	("t" hydra-transpose/body) 
+	("f" hydra-occur-dwim/body)
+	("p" spc-main-menu00/body)
+	("n" spc-main-menu99/body)
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+;; *** Main Menu 99
+;; **** defhydra
+(defhydra spc-main-menu99 (:color blue)
+;; ***** hint
+    "
+    ^Main^             ^99^             ^  Menus^          
+    ^─────^────────────^──^─────────────^───────^─────────
+    _q_ quit            _i_ in      
+    ^^                  _j_ jump    
+    _p_rev-menu         _n_ext-menu    
+    "
+;; ***** keys
+    ("q" nil)
+    ("i" org-clock-in)
+    ("j" org-clock-goto)
+    ("o" org-clock-out)
+    ;; ("r" org-clock-report)
+	("n" spc-main-menu00/body)
+	("p" spc-main-menu01/body)
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
 ;; *** hydra-zoom
 ;; (defhydra hydra-zoom (global-map "C-c")
 ;;   "zoom"
