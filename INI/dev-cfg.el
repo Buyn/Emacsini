@@ -30,4 +30,8 @@
 ;; ** JS-MOD CUSTOMIZATION
 ;; (load "~/INI/js-cfg.el")
 ;; --------------------------------------
+;; ** FLYCHECK CUSTOMIZATION
+(load "~/INI/flycheck-cfg.el")
+;; (find-file "~/INI/flycheck-cfg.el") 
+;; --------------------------------------
 ;; *  --------------------------------------

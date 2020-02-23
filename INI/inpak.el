@@ -45,8 +45,8 @@ There are two things you can do about this warning:
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar myPackages
-  '(better-defaults
+(defvar myPackages '(
+	better-defaults
 	use-package
     material-theme))
 
@@ -67,4 +67,3 @@ There are two things you can do about this warning:
 
 (require 'use-package)
 (use-package quelpa-use-package :ensure t)
-;; (use-package foo)

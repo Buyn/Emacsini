@@ -93,6 +93,7 @@
 	(find-file "~/INI/lua-cfg.el")
 	(find-file "~/INI/python-cfg.el") load flycheck
 	(find-file "~/INI/c-mode-cfg.el") not used
+	(find-file "~/INI/flycheck-cfg.el") not used
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
