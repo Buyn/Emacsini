@@ -40,6 +40,8 @@
 файлы для Вышгорода
 (find-file "~/../Dropbox/orgs/uptown/todo_rasps.org")
 (find-file "~/../Dropbox/orgs/uptown/todo_uplan.org")
+*** tools
+(find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
 *** captures
 (find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
 (find-file "~/../Desktop/orgs/capture/Pensieve.org")

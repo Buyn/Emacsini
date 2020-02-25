@@ -20,17 +20,18 @@
     "
     ^Main^         00             ^Menus^          
     ^─────^───────────────────────^─────^─────────
-    _q_ quit            _c_ Company     _e_ elpy      
-    _o_rg-mode          _a_ autshine    _y_ yasnippet
-    ^^                  _SPC_ insert    
+    _q_ quit            _c_ompany     _e_ elpy      
+    _o_rg-mode          out_s_hine    _y_ yasnippet
+    _w_ww               _SPC_ insert    
     _p_rev-menu         _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
     ("o" org-menu/body)
+    ("w" www-menu/body)
     ("SPC" khaoos-insert-one-char :color pink)
     ("c" company-mode)
-    ("a" outshine-mode)
+    ("s" outshine-mode)
 	("e" elpy-hydra/body)
 	("y" hydra-yasnippet/body)
 	("n" spc-main-menu01/body)
@@ -418,21 +419,26 @@ _?_ help            _c_urrent file
 
 ;; *** www menu
 ;; **** defhydra
-(defhydra www-menu (:color pink)
+(defhydra www-menu (:color blue)
 ;; ***** hint
     "
                 ^WWW  Menus^          
     ────────────^──────────^───────────────────
-     _d_el buffer   _l_ist    _b_ookmarks
-                    _s_witch  _b_ookmarks
-     _z_oom         _q_uit    _y_ank url
+     _d_el buffer   _L_ist    _B_ookmarks
+     _s_earch       _S_witch             
+     _z_oom         _q_uit    _Y_ank page url
     "
 ;; ***** keys
-    ("l" (eww-list-buffers))
-    ("s" (eww-switch-to-buffer))
-    ("b" (eww-list-bookmarks))
-    ("y" org-todo "TODO")
-    ("d" (kill-buffer (current-buffer)))
+    ("L" (eww-list-buffers))
+    ("S" (eww-switch-to-buffer))
+    ("B" (eww-list-bookmarks))
+    ("Y" (progn  
+			(setq x-select-enable-clipboard t)
+			(eww-copy-page-url)
+			(setq x-select-enable-clipboard nil)
+			))
+    ("s" (eww (buffer-substring (region-beginning) (region-end))))
+    ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
 	("q" nil) 
 ;; ***** END of def
