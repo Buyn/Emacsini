@@ -92,10 +92,14 @@
 ;; **** Bind
 ;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
 ;; *** hydra-zoom
-;; (defhydra hydra-zoom (global-map "C-c")
-;;   "zoom"
-;;   ("g" text-scale-increase "in")
-;;   ("l" text-scale-decrease "out"))
+(defhydra hydra-zoom (:color pink)
+  ;; (global-map "C-c")
+  "zoom"
+  ("i" text-scale-increase "in")
+  ("o" text-scale-decrease "out")
+  ("p" www-menu/body "prev")
+  ("q" nil "quit")
+  )
 ;; --------------------------------------
 
 ;; *** hydra-outline
@@ -405,6 +409,31 @@ _?_ help            _c_urrent file
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
+	("q" nil) 
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+
+;; *** www menu
+;; **** defhydra
+(defhydra www-menu (:color pink)
+;; ***** hint
+    "
+                ^WWW  Menus^          
+    ────────────^──────────^───────────────────
+     _d_el buffer   _l_ist    _b_ookmarks
+                    _s_witch  _b_ookmarks
+     _z_oom         _q_uit    _y_ank url
+    "
+;; ***** keys
+    ("l" (eww-list-buffers))
+    ("s" (eww-switch-to-buffer))
+    ("b" (eww-list-bookmarks))
+    ("y" org-todo "TODO")
+    ("d" (kill-buffer (current-buffer)))
+    ("z" hydra-zoom/body)
 	("q" nil) 
 ;; ***** END of def
 	)

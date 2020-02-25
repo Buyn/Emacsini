@@ -26,10 +26,12 @@
 (setq x-select-enable-clipboard nil)
 ;; (fset 'evil-visual-update-x-selection 'ignore)
 ;; (setq save-interprogram-paste-before-kill t)
+;; *** M-c M-y : 
 (define-key evil-normal-state-map (kbd "M-c M-y") '(lambda() (interactive)
 					(setq x-select-enable-clipboard t)
 					(kill-ring-save (region-beginning) (region-end))
 					(setq x-select-enable-clipboard nil)))
+;; *** M-c M-a : 
 (define-key evil-normal-state-map (kbd "M-c M-a") '(lambda() (interactive)
 					(setq start (point))
 					(mark-whole-buffer)
@@ -39,6 +41,7 @@
 					(message "Buffer in Clipbord")
 					(goto-char start)
 					))
+;; *** M-c M-x : 
 (define-key evil-normal-state-map (kbd "M-c M-x") '(lambda() (interactive)
 					(message "no shift is prest")
 					(setq x-select-enable-clipboard t)
@@ -52,25 +55,29 @@
 					(setq tmp-region-end nil)
 					(setq x-select-enable-clipboard nil)
 					))
+;; *** M-c M-X : 
 (define-key evil-normal-state-map (kbd "M-c M-X") '(lambda() (interactive)
 					(message "shift is prest")
 					(setq x-select-enable-clipboard t)
 					(evil-delete-whole-line nil  nil)
 					(setq x-select-enable-clipboard nil)
 					))
+;; *** M-c M-p : 
 (define-key evil-normal-state-map (kbd "M-c M-p") '(lambda() (interactive)
 								(setq x-select-enable-clipboard 1)
 								(yank)
 								(setq x-select-enable-clipboard nil)))
-(define-key evil-normal-state-map (kbd "M-c M-o") '(
-					lambda() (interactive)
-								(setq x-select-enable-clipboard 1)
-								(evil-insert-newline-below)
-								(yank)
-								(setq x-select-enable-clipboard nil)))
-(define-key evil-normal-state-map (kbd "M-c M-t") '(
-								lambda() (interactive)
-								(setq x-select-enable-clipboard (not x-select-enable-clipboard))))
+;; *** M-c M-o : 
+;; *** M-c M-o : 
+(define-key evil-normal-state-map (kbd "M-c M-o") '(lambda() (interactive)
+				(setq x-select-enable-clipboard 1)
+				(evil-insert-newline-below)
+				(yank)
+				(setq x-select-enable-clipboard nil)))
+;; *** M-c M-t : 
+(define-key evil-normal-state-map (kbd "M-c M-t") '(lambda() (interactive)
+				  (setq x-select-enable-clipboard
+						(not x-select-enable-clipboard))))
 ;; -------------------------------------- }}}
 ;; ** Movements  {{{
 (define-key evil-normal-state-map "gl" 'move-end-of-line)
@@ -79,14 +86,38 @@
 (define-key evil-normal-state-map (kbd "gk") 'evil-previous-visual-line)
 ;; --------------------------------------  }}}
 ;; ** Grabing  {{{
+;; *** move-line : 
+;; **** save-column : 
+(defmacro save-column (&rest body)
+  `(let ((column (current-column)))
+     (unwind-protect
+         (progn ,@body)
+       (move-to-column column))))
+(put 'save-column 'lisp-indent-function 0)
+;; ****  move-line-up : 
+(defun move-line-up ()
+  (interactive)
+  (save-column
+    (transpose-lines 1)
+    (forward-line -2)))
+
+;; **** move-line-down : 
+(defun move-line-down ()
+  (interactive)
+  (save-column
+    (forward-line 1)
+    (transpose-lines 1)
+    (forward-line -1)))
+;; **** define-key : 
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
-;; (define-key evil-normal-state-map (kbd "M-m M-k") 'move-text-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
-;; (define-key evil-normal-state-map (kbd "M-m M-j") 'move-text-down)
+;; *** move-char : 
+;; **** M-m M-l : 
 (define-key evil-normal-state-map (kbd "M-m M-l") '(lambda() (interactive)
 		(evil-delete-char (point) (+ (point) 1))				
 		(evil-paste-after 1)
 		))
+;; **** M-m M-h : 
 (define-key evil-normal-state-map (kbd "M-m M-h") '(lambda() (interactive)
 		(evil-delete-char (point) (+ (point) 1))				
 		(backward-char)
