@@ -80,6 +80,7 @@
 (find-file "~/INI/advnsed-selections-cfg.el")
 (find-file "~/INI/interface-mods.el")
 (find-file "~/INI/hydra-cfg.el")
+(find-file "~/INI/www-cfg.el") not used
 *** literary 
 (find-file "~/INI/lit-cfg.el") not et
 	(find-file "~/INI/translate-cfg.el") not et
@@ -93,7 +94,7 @@
 	(find-file "~/INI/lua-cfg.el")
 	(find-file "~/INI/python-cfg.el") load flycheck
 	(find-file "~/INI/c-mode-cfg.el") not used
-	(find-file "~/INI/flycheck-cfg.el") not used
+	(find-file "~/INI/flycheck-cfg.el") 
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -194,6 +195,10 @@ You probably have an outdated package database
 (outline-minor-mode)
 ** ielm 
 * Help Docs Emacs 
+** To set on a file by file 
+To set the VisualLineMode on a file by file basis using emacs local variables, try:
+    #  local variables:
+    #    eval: (visual-line-mode t)
 ** Keyborde help 
 *** evaluate
 ****    27.9 Evaluating Emacs Lisp Expressions

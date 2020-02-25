@@ -22,7 +22,6 @@
 ;; a description of the search for the agenda dispatcher ("Desk Work")
 ;; the type of search (todo items matching a tag)
 ;; the tag to search for ("computer")
-
          ((org-agenda-files '("~/org/widgets.org" "~/org/clients.org")) ;; (5)
           (org-agenda-sorting-strategy '(priority-up effort-down))) ;; (5) cont.
 	 ;;         ("~/computer.html"))

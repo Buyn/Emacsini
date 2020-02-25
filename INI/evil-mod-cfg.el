@@ -110,6 +110,7 @@
 								(evil-normal-state)))
 (define-key evil-insert-state-map(kbd "M-<f2>") '(lambda() (interactive)
 								(org-save-all-org-buffers)
+								(save-some-buffers 'no-confirm)
 								(evil-normal-state)))
 ;; -------------------------------------- }}}
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  

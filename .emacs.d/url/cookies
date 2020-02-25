@@ -2,38 +2,38 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".google.com"
-  [url-cookie "NID" "198=Sp6PMrJb_TnQfHE4ErWcMYm5SL4Vgqg9eqdVTAGMGaz120Vu4uLZNXXuO1x8luSMmdjAqMG1pyZPru_zDI8Wlul2BiCl0BJ0eUeviYJz4CEDFtqHvNBLkDEQl0T9UaH02Inz2_ycj1e-6Eu0zqWmhzYespQOZFxTJK6Z-h9-67g" "Thu, 20-Aug-2020 18:14:37 GMT" "/" ".google.com" nil]
-  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/complete/search" ".google.com" nil]
-  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/search" ".google.com" nil])
+ '(("emackandboliohk.com"
+  [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil])
+ (".stackexchange.com"
+  [url-cookie "prov" "c8152363-e55b-e345-a9d5-1eae219a8821" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
+ (".emackandboliohk.com"
+  [url-cookie "__cfduid" "d017b2a6376811768fa30ece8f015d70e1563753674" "Tue, 21-Jul-20 00:01:14 GMT" "/" ".emackandboliohk.com" nil])
+ (".stackoverflow.com"
+  [url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
  ("megogo.net"
-  [url-cookie "AB" "e30%3D"
-			  #("Вс фев 23 14:38:27 2020 GMT" 0 27
-				(charset windows-1251))
-			  "/" "megogo.net" nil]
   [url-cookie "megogo_web_device_id" "d2ViX1R5Mk51ZlpQQWNtYU5NcjdFdUh0OGhZcHlPZ2JKc3RW"
 			  #("Пт фев 22 00:50:27 2030 GMT" 0 27
 				(charset windows-1251))
+			  "/" "megogo.net" nil]
+  [url-cookie "AB" "e30%3D"
+			  #("Вс фев 23 14:38:27 2020 GMT" 0 27
+				(charset windows-1251))
 			  "/" "megogo.net" nil])
- (".stackoverflow.com"
-  [url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
- (".emackandboliohk.com"
-  [url-cookie "__cfduid" "d017b2a6376811768fa30ece8f015d70e1563753674" "Tue, 21-Jul-20 00:01:14 GMT" "/" ".emackandboliohk.com" nil])
- (".stackexchange.com"
-  [url-cookie "prov" "c8152363-e55b-e345-a9d5-1eae219a8821" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
- ("emackandboliohk.com"
-  [url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]))
+ (".google.com"
+  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/search" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Mon, 17-Aug-2020 18:15:53 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "NID" "198=ZxWHCK8QshAXUyj8sVTELNbi1sPCpRMYTLvqSsIq8vSaG1ivw4fBiPgr9YyctIMpvkB8tiaLP1Jb8i-hy6YVkl5tqQf_sGW_-QAWSi3T7BSWOhKCoEfMeHrR2b98uZqGuv5b8VNsUM10lmiBfJGXSZRAuQZYUjvbRnGjX0j9Xvo" "Wed, 26-Aug-2020 08:14:43 GMT" "/" ".google.com" nil]))
 )
 (setq url-cookie-secure-storage
- '(("emackandboliohk.com"
-  [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
+ '((".lexicanum.com"
+  [url-cookie "__cfduid" "dbceb9b5de7fd9fd2363c53f0bed4532c1582134396" "Fri, 20-Mar-20 17:46:36 GMT" "/" ".lexicanum.com" t])
+ (".github.com"
+  [url-cookie "logged_in" "no" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t]
+  [url-cookie "_octo" "GH1.1.1253637579.1582393222" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t])
  (".google.com"
   [url-cookie "1P_JAR" "2020-02-20-12" "Sat, 21-Mar-2020 12:02:58 GMT" "/" ".google.com" t])
- (".github.com"
-  [url-cookie "_octo" "GH1.1.1253637579.1582393222" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t]
-  [url-cookie "logged_in" "no" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t])
- (".lexicanum.com"
-  [url-cookie "__cfduid" "dbceb9b5de7fd9fd2363c53f0bed4532c1582134396" "Fri, 20-Mar-20 17:46:36 GMT" "/" ".lexicanum.com" t]))
+ ("emackandboliohk.com"
+  [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
 )
 
 ;; Local Variables:

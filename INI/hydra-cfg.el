@@ -293,8 +293,9 @@ _?_ help            _c_urrent file
 
 ;; **** Hint
   "
-  Elpy in venv: %`venv-current-name
+  Elpy in venv:
   "
+  ;; Elpy in venv: %`venv-current-name
 ;; **** Keys
   ("d" (progn (call-interactively 'elpy-test-django-runner) (elpy-nav-errors/body)) "current test, Django runner" :color blue)
   ("t" (progn (call-interactively 'elpy-test-pytest-runner) (elpy-nav-errors/body)) "current test, pytest runner" :color blue)
