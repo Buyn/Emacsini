@@ -18,22 +18,19 @@
 (defhydra spc-main-menu00 (:color blue)
 ;; ***** hint
     "
-    ^Main^         00             ^Menus^          
-    ^─────^───────────────────────^─────^─────────
-    _q_ quit            _c_ompany     _e_ elpy      
-    _o_rg-mode          out_s_hine    _y_ yasnippet
-    _w_ww               _SPC_ insert    
-    _p_rev-menu         _n_ext-menu    
+    ^Main^             00             ^Menus^          
+    ^─────^───────────────────────────^─────^─────────
+    _q_ quit          _d_ev menu      _o_rg-mode                                      
+    _w_ww             _SPC_ insert    _y_nke-menu 
+    _p_rev-menu                       _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
     ("o" org-menu/body)
+    ("d" hydra-dev-menu/body)
     ("w" www-menu/body)
     ("SPC" khaoos-insert-one-char :color pink)
-    ("c" company-mode)
-    ("s" outshine-mode)
-	("e" elpy-hydra/body)
-	("y" hydra-yasnippet/body)
+	("y" hydra-yank-menu/body)
 	("n" spc-main-menu01/body)
 	("p" spc-main-menu99/body)
 ;; ***** END of def
@@ -425,7 +422,7 @@ _?_ help            _c_urrent file
                 ^WWW  Menus^          
     ────────────^──────────^───────────────────
      _d_el buffer   _L_ist    _B_ookmarks
-     _s_earch       _S_witch             
+     _s_earch       _S_witch  _p_ast&go          
      _z_oom         _q_uit    _Y_ank page url
     "
 ;; ***** keys
@@ -437,6 +434,11 @@ _?_ help            _c_urrent file
 			(eww-copy-page-url)
 			(setq x-select-enable-clipboard nil)
 			))
+	("p" (progn  
+			(setq x-select-enable-clipboard t)
+			(eww (current-kill 0 "DO-NOT-MOVE"))
+			(setq x-select-enable-clipboard nil)
+			))
     ("s" (eww (buffer-substring (region-beginning) (region-end))))
     ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
@@ -446,3 +448,29 @@ _?_ help            _c_urrent file
 ;; --------------------------------------
 ;; **** Bind
 ;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+;; *** hydra-yank-menu
+(defhydra hydra-yank-menu (:color blue)
+  ;; (global-map "C-c")
+  "yank menu"
+  ("y" (progn  
+			(setq x-select-enable-clipboard t)
+			(kill-new (current-kill 0 "DO-NOT-MOVE"))
+			(setq x-select-enable-clipboard nil)
+			)
+		"reg2clipbord")
+  ("q" nil "quit")
+  )
+;; --------------------------------------
+
+
+;; *** hydra-dev-menu
+(defhydra hydra-dev-menu (:color pink)
+  ;; (global-map "C-c")
+  "dev menu"
+	("c" company-mode "company")
+	("o" outshine-mode "outshine")
+	("e" elpy-hydra/body "elpy")
+	("y" hydra-yasnippet/body "yasnippet")
+	("q" nil "quit")
+	)
+;; --------------------------------------

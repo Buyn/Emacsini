@@ -20,9 +20,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(display-line-numbers-type (quote relative))
+ '(global-display-line-numbers-mode t)
  '(package-selected-packages
    (quote
-	(elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults))))
+	(elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults)))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(transient-mark-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

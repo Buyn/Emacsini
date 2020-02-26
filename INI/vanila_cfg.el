@@ -29,6 +29,7 @@
              '(font . "Ubuntu Mono"))
 ;; ** tab-width : 
 (setq-default tab-width 4)
+(setq tab-width 4)
 ;; ** line-numbers-mode : 
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
@@ -51,12 +52,12 @@
 
 ;; This can also be turned on using the menu bar, via
 ;; Options -> Line Wrapping in this Buffer -> Word Wrap
-;; (setq truncate-lines nil)
-;; (setq line-move-visual t)
-;; (setq word-wrap t)
 (setq-default truncate-lines nil)
 (setq-default line-move-visual t)
 (setq-default word-wrap t)
+(setq truncate-lines nil)
+(setq line-move-visual t)
+(setq word-wrap t)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 ;; ** paren : 
 (show-paren-mode 1)
