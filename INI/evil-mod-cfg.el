@@ -8,7 +8,7 @@
 (use-package evil :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
-;; *** END of use-package hydra
+;; *** END of use-package evil
   )
 (require 'evil)
 (evil-mode t)
@@ -67,6 +67,14 @@
 								(setq x-select-enable-clipboard 1)
 								(yank)
 								(setq x-select-enable-clipboard nil)))
+(define-key evil-visual-state-map (kbd "M-c M-p") '(lambda() (interactive)
+		(setq x-select-enable-clipboard 1)
+		(let ((last-clip (current-kill 0 "DO-NOT-MOVE")))
+			(kill-region (region-beginning) (region-end))
+			(insert last-clip)
+			)
+		(setq x-select-enable-clipboard nil)
+		))
 ;; *** M-c M-o : 
 ;; *** M-c M-o : 
 (define-key evil-normal-state-map (kbd "M-c M-o") '(lambda() (interactive)
@@ -78,6 +86,10 @@
 (define-key evil-normal-state-map (kbd "M-c M-t") '(lambda() (interactive)
 				  (setq x-select-enable-clipboard
 						(not x-select-enable-clipboard))))
+;; -------------------------------------- }}}
+;; *** M-p : 
+(define-key evil-insert-state-map (kbd "M-p ") '(lambda() (interactive)
+				(yank)))
 ;; -------------------------------------- }}}
 ;; ** Movements  {{{
 (define-key evil-normal-state-map "gl" 'move-end-of-line)
@@ -94,7 +106,7 @@
          (progn ,@body)
        (move-to-column column))))
 (put 'save-column 'lisp-indent-function 0)
-;; ****  move-line-up : 
+;; **** move-line-up : 
 (defun move-line-up ()
   (interactive)
   (save-column
