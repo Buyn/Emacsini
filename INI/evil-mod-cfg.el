@@ -144,6 +144,18 @@
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
 (define-key evil-normal-state-map (kbd "M-e M-l ") 'eval-last-sexp)
 ;; -------------------------------------- }}}
+;; ** find&replace  {{{
+(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(evil-normal-state)
+		(query-replace
+			region-text
+			(read-string (concat "replace("  (current-kill 0 "DO-NOT-MOVE") "):")
+						nil
+						nil
+						(current-kill 0 "DO-NOT-MOVE"))
+			))))
+;; -------------------------------------- }}}
 ;; ** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)

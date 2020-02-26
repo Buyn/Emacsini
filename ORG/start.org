@@ -94,7 +94,7 @@
 	(find-file "~/INI/delimiters-cfg.el")
 	(find-file "~/INI/js-cfg.el") not used
 	(find-file "~/INI/lua-cfg.el")
-	(find-file "~/INI/python-cfg.el") load flycheck
+	(find-file "~/INI/python-cfg.el")
 	(find-file "~/INI/c-mode-cfg.el") not used
 	(find-file "~/INI/flycheck-cfg.el") 
 ** exempl

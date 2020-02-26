@@ -18,7 +18,8 @@
 	(define-key evil-normal-state-map "zf" 'outshine-insert-heading)
 ;; **** zF
 	(define-key evil-normal-state-map "zF" '(lambda() (interactive)
-			(outshine-insert-comment-subtree (read-string "comment: "))
+			(outshine-insert-comment-subtree )
+			(insert (read-string "comment : "))
 			))
 
 ;; **** visual add zf
