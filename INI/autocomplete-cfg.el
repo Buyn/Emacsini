@@ -15,6 +15,7 @@
 (use-package company :ensure t
   ;; :defer 2
 	:config
+	(add-hook 'prog-mode-hook 'company-mode)
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 	;; :bind ("C-c c" hydra-clock/body)
 ;; *** old setings

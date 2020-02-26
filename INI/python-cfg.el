@@ -11,13 +11,15 @@
 (require 'use-package)
 (use-package elpy :ensure t
 	:defer t
-	;; :init
-	;; (elpy-enable)
-	:config
+	:init
 	(elpy-enable)
+	:config
+	;; (elpy-enable)
 	;; (ivy-mode 1)
 	(company-mode 1)
-	;; (global-origami-mode nil)
+	;; not working from config onli from init and not from hooks
+	;; (add-hook 'python-mode-hook 'elpy-mode)
+	;; (add-hook 'python-mode-hook 'elpy-enable)
 	;; (setq python-shell-interpreter "python"
 	;; python-shell-interpreter-args "-i")
 	;; findout what it do

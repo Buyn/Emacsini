@@ -470,6 +470,8 @@ _?_ help            _c_urrent file
 	("c" company-mode "company")
 	("o" outshine-mode "outshine")
 	("e" elpy-hydra/body "elpy")
+	("p" elpy-enable "pyton")
+	("d" rainbow-delimiters-mode "delimiters")
 	("y" hydra-yasnippet/body "yasnippet")
 	("q" nil "quit")
 	)
