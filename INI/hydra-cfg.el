@@ -429,20 +429,30 @@ _?_ help            _c_urrent file
     ("L" (eww-list-buffers))
     ("S" (eww-switch-to-buffer))
     ("B" (eww-list-bookmarks))
+    ("d" (kill-buffer (current-buffer)) :color red)
+    ("z" hydra-zoom/body)
+	("q" nil) 
+;; ***** "s" : 
+    ("s"  (progn
+			(if (use-region-p)
+					(eww (buffer-substring
+							(region-beginning)
+							(region-end)))
+					(eww (buffer-substring
+							(line-beginning-position)
+							(line-beginning-position 2))))))
+;; ****** "Y" : 
     ("Y" (progn  
 			(setq x-select-enable-clipboard t)
 			(eww-copy-page-url)
 			(setq x-select-enable-clipboard nil)
 			))
+;; ****** "p" : 
 	("p" (progn  
 			(setq x-select-enable-clipboard t)
 			(eww (current-kill 0 "DO-NOT-MOVE"))
 			(setq x-select-enable-clipboard nil)
 			))
-    ("s" (eww (buffer-substring (region-beginning) (region-end))))
-    ("d" (kill-buffer (current-buffer)) :color red)
-    ("z" hydra-zoom/body)
-	("q" nil) 
 ;; ***** END of def
 	)
 ;; --------------------------------------
