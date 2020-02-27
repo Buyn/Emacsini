@@ -73,28 +73,38 @@
 ;; User Option: org-confirm-elisp-link-function
 ;;     Function that prompts the user before executing an Emacs Lisp link. 
 (setq org-confirm-elisp-link-function nil)
-;; ** ---------------     ORG Foldings
-;; *** foldings on lavel navigations
+;; ** ORG binding : 
+;; *** ORG heders : 
+(define-key evil-normal-state-map
+			[C-S-return] 'org-insert-subheading)
+(define-key org-mode-map
+			[C-S-return] 'org-insert-subheading)
+(define-key evil-normal-state-map
+			[C-M-return] 'org-insert-todo-heading-respect-content)
+(define-key org-mode-map
+			[C-M-return] 'org-insert-todo-heading-respect-content)
+;; *** ORG Foldings
+;; **** foldings on lavel navigations
 (define-key evil-normal-state-map "zj" 'org-forward-element)
 (define-key evil-normal-state-map "zk" 'org-backward-element)
 (define-key evil-normal-state-map "zh" 'org-up-element)
 (define-key evil-normal-state-map "zl" 'org-down-element)
-;; *** z[
+;; **** z[
 (define-key evil-normal-state-map "z[" '(lambda() (interactive)
 					(outline-up-heading 3)
 					))
-;; *** z]
+;; **** z]
 (define-key evil-normal-state-map "z]" '(lambda() (interactive)
 					(show-branches)
 					(dotimes (i 3)
 						(org-down-element)
 						)))
-;; *** zc
+;; **** zc
 (define-key evil-normal-state-map "zc" '(lambda() (interactive)
 					(outline-previous-visible-heading 1)
 					(hide-subtree)
 					))
-;; *** zC
+;; **** zC
 (define-key evil-normal-state-map "zC" '(lambda() (interactive)
 					(outline-up-heading 3)
 					(hide-subtree)

@@ -432,7 +432,7 @@ _?_ help            _c_urrent file
     ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
 	("q" nil) 
-;; ***** "s" : 
+;; ****** "s" : 
     ("s"  (progn
 			(if (use-region-p)
 					(eww (buffer-substring
