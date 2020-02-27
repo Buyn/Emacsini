@@ -48,7 +48,7 @@
 ;;Relative line numbers enabled
 ;; ** Warp line : 
 ;; Warp line on visula line end
-;; (global-visual-line-mode word-wrap)
+(global-visual-line-mode t)
 
 ;; This can also be turned on using the menu bar, via
 ;; Options -> Line Wrapping in this Buffer -> Word Wrap

@@ -29,7 +29,17 @@
 ;; *** M-c M-y : 
 (define-key evil-normal-state-map (kbd "M-c M-y") '(lambda() (interactive)
 					(setq x-select-enable-clipboard t)
+					;; (kill-ring-save (region-beginning) (region-end))
+					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
+					(setq x-select-enable-clipboard nil)))
+(define-key evil-visual-state-map (kbd "M-c M-y") '(lambda() (interactive)
+					(setq x-select-enable-clipboard t)
 					(kill-ring-save (region-beginning) (region-end))
+					(setq x-select-enable-clipboard nil)))
+;; *** M-c M-Y : 
+(define-key evil-normal-state-map (kbd "M-c M-Y") '(lambda() (interactive)
+					(setq x-select-enable-clipboard t)
+					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
 					(setq x-select-enable-clipboard nil)))
 ;; *** M-c M-a : 
 (define-key evil-normal-state-map (kbd "M-c M-a") '(lambda() (interactive)

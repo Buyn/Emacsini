@@ -95,6 +95,10 @@
 (global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
 (define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
 			(display-buffer (last-buffer))))
+(define-key evil-normal-state-map "ZT" '(lambda() (interactive)
+			(let (buffer-name-to-close (buffer-name))
+			(evil-quit)
+			(switch-to-buffer-other-frame buffer-name-to-close))))
 ;; --------------------------------------
 ;; ** Help in New Frame   ***  {{{
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)

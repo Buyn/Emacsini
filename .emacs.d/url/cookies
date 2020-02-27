@@ -35,7 +35,7 @@
   [url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
  ("realpython.com"
   [url-cookie "csrftoken" "DOjfeQYiRqe3S73Vl6XJ6r3OEY91q2GxPEu6X5Win7KPUegn1vNjxLAfcP0IMYQW"
-			  #("Вт фев 23 21:39:38 2021 GMT" 0 27
+			  #("Чт фев 25 06:53:26 2021 GMT" 0 27
 				(charset windows-1251))
 			  "/" "realpython.com" t])
  (".google.com"
@@ -45,8 +45,8 @@
   [url-cookie "logged_in" "no" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t])
  (".torrents.io"
   [url-cookie "__cfduid" "db47de7f0c00380f6d69e6acc0308f1c61582658091" "Thu, 26-Mar-20 19:14:51 GMT" "/" ".torrents.io" t])
- ("emacs.stackexchange.com"
-  [url-cookie "rk-3280" "h2=76:3:622,16:b761c3478729dd27,10:1582708801,16:39bc36d6223b5b32,3:115,5:16425,0:,860e8ab50b9e916a5c10f5d87eca29a4b46b91221b5be95d625a5b539e910702" "Wed, 26-Feb-2020 09:25:01 GMT" "/" "emacs.stackexchange.com" t])
+ (".timothybramlett.com"
+  [url-cookie "__cfduid" "dbb0aed8cf5a224d0571bf7cde41b22011582799264" "Sat, 28-Mar-20 10:27:44 GMT" "/" ".timothybramlett.com" t])
  (".lexicanum.com"
   [url-cookie "__cfduid" "dbceb9b5de7fd9fd2363c53f0bed4532c1582134396" "Fri, 20-Mar-20 17:46:36 GMT" "/" ".lexicanum.com" t]))
 )
