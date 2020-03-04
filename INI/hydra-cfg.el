@@ -46,7 +46,7 @@
     ^Main^       01        ^Menus^          
     ^────^─────────────────^─────^─────────
     _q_ quit              _o_ outline 
-                          _d_ ediff
+    _c_calculus           _d_ ediff
     _t_ transpose
     _f_ occur-dwim        _SPC_ insert    
     _p_rev-menu           _n_ext-menu    
@@ -54,6 +54,7 @@
 ;; ***** keys
     ("q" nil)
     ("SPC" khaoos-insert-one-char :color pink)
+    ("c" calc :color pink)
 	("o" hydra-outline/body) 
 	("d" hydra-ediff/body) 
 	("t" hydra-transpose/body) 
@@ -72,7 +73,7 @@
     "
     ^Main^             ^99^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit            _i_ in      
+    _q_ quit            _i_ in       _h_elp 
     ^^                  _j_ jump    
     _p_rev-menu         _n_ext-menu    
     "
@@ -81,6 +82,7 @@
     ("i" org-clock-in)
     ("j" org-clock-goto)
     ("o" org-clock-out)
+	("h" hydra-help-menu/body)
     ;; ("r" org-clock-report)
 	("n" spc-main-menu00/body)
 	("p" spc-main-menu01/body)
@@ -433,9 +435,16 @@ _?_ help            _c_urrent file
     ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
 	("q" nil) 
+;; ****** "v" : 
+    ("v" (progn
+			;; (global-visual-line-mode t)
+			(setq truncate-lines nil)
+			(setq line-move-visual t)
+			(setq word-wrap t)
+		   )
+	 )
 ;; ****** "s" : 
-    ("s"  (progn
-			(if (use-region-p)
+    ("s"  (progn (if (use-region-p)
 					(eww (buffer-substring
 							(region-beginning)
 							(region-end)))
@@ -484,6 +493,16 @@ _?_ help            _c_urrent file
 	("p" elpy-enable "pyton")
 	("d" rainbow-delimiters-mode "delimiters")
 	("y" hydra-yasnippet/body "yasnippet")
+	("q" nil "quit")
+	)
+;; --------------------------------------
+
+;; *** hydra-help-menu
+(defhydra hydra-help-menu (:color blue)
+  ;; (global-map "C-c")
+  "help menu"
+	("a" apropos "apropos")
+	("f" describe-face "describe-face")
 	("q" nil "quit")
 	)
 ;; --------------------------------------

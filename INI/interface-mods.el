@@ -1,8 +1,11 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
+;; * used in
+;; (find-file "~/INI/init.el")
+;; * --------------------------------------
+;; * IVY CUSTOMIZATION
 ;; --------------------------------------
-;; IVY CUSTOMIZATION
 (require 'use-package)
 (use-package ivy :ensure t
 	;; :init
@@ -11,4 +14,15 @@
 	(ivy-mode 1)
 	(ido-mode nil)
 	)
+;; * --------------------------------------
+;; * AVY CUSTOMIZATION
 ;; --------------------------------------
+(use-package avy :ensure t
+	;; :init
+	;; (elpy-enable)
+	:config
+	(define-key evil-normal-state-map (kbd "M-f") 'avy-goto-word-1)
+	)
+;; --------------------------------------
+
+;; * --------------------------------------

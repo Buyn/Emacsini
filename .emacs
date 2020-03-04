@@ -24,7 +24,7 @@
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
    (quote
-	(elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults)))
+	(avy elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(transient-mark-mode nil))

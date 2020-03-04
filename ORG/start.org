@@ -110,6 +110,7 @@
 (load "~/INI/org-cfg.el")
 (load "~/INI/lit-cfg.el")
 (load "~/INI/dev-cfg.el")
+(load "~/INI/interface-mods.el")
 (load "~/INI/hydra-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
