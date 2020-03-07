@@ -85,6 +85,27 @@
 	("h" hydra-help-menu/body)
     ;; ("r" org-clock-report)
 	("n" spc-main-menu00/body)
+	("p" spc-main-menu98/body)
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+;; *** Main Menu 98
+;; **** defhydra
+(defhydra spc-main-menu98 (:color blue)
+;; ***** hint
+    "
+    ^Main^             ^98^             ^  Menus^          
+    ^─────^────────────^──^─────────────^───────^─────────
+    _q_ quit         _R_evert-buffer
+                    
+    _p_rev-menu                        _n_ext-menu    
+    "
+;; ***** keys
+    ("q" nil)
+	("R" revert-buffer)
+	("n" spc-main-menu99/body)
 	("p" spc-main-menu01/body)
 ;; ***** END of def
 	)
