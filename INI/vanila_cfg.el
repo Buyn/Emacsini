@@ -28,8 +28,8 @@
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
 ;; ** tab-width : 
-(setq-default tab-width 4)
-(setq tab-width 4)
+(setq-default tab-width 2)
+(setq tab-width 2)
 ;; ** line-numbers-mode : 
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;

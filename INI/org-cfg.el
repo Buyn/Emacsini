@@ -91,25 +91,23 @@
 (define-key evil-normal-state-map "zl" 'org-down-element)
 ;; **** z[
 (define-key evil-normal-state-map "z[" '(lambda() (interactive)
-					(outline-up-heading 3)
+					(outline-up-heading 1)
 					))
 ;; **** z]
 (define-key evil-normal-state-map "z]" '(lambda() (interactive)
-					(show-branches)
-					(dotimes (i 3)
-						(org-down-element)
-						)))
+					(outline-up-heading 3)
+					))
 ;; **** zc
 (define-key evil-normal-state-map "zc" '(lambda() (interactive)
-					(outline-previous-visible-heading 1)
+					;; (outline-previous-visible-heading 1)
+					(org-up-element)
 					(hide-subtree)
 					))
 ;; **** zC
 (define-key evil-normal-state-map "zC" '(lambda() (interactive)
-					(outline-up-heading 3)
+					(outline-up-heading 1)
 					(hide-subtree)
 					))
-;; (define-key evil-normal-state-map "z]" 'origami-previous-fold)
 ;; ** ORG agenda customization
 (load "~/INI/org_agend_cfg.el")
 ;; ** ORG babel 

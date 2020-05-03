@@ -351,7 +351,9 @@ _?_ help            _c_urrent file
 	)
 
 ;; *** yasnippet
-(defhydra hydra-yasnippet (:color blue :hint nil)
+(defhydra hydra-yasnippet ( :color pink
+							;; :hint nil
+							)
 ;; **** Hint
   "
               ^YASnippets^
@@ -361,7 +363,7 @@ _?_ help            _c_urrent file
  _g_lobal  _d_irectory    _i_nsert
  _m_inor   _f_ile         _t_ryout
  _e_xtra   _l_ist         _n_ew
-         _a_ll
+ _q_uit    _a_ll
 "
 ;; **** Keys
   ("d" yas-load-directory)
@@ -374,6 +376,7 @@ _?_ help            _c_urrent file
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all)
+  ("q" nil "quit")
 ;; **** END )
 	)
 ;; **** doc
@@ -513,7 +516,7 @@ _?_ help            _c_urrent file
 	("e" elpy-hydra/body "elpy")
 	("p" elpy-enable "pyton")
 	("d" rainbow-delimiters-mode "delimiters")
-	("y" hydra-yasnippet/body "yasnippet")
+	("y" hydra-yasnippet/body "yasnippet" :color blue)
 	("q" nil "quit")
 	)
 ;; --------------------------------------

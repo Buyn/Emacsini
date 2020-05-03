@@ -63,7 +63,7 @@
 *** Evil
 (find-file "~/INI/evil-mod-cfg.el")
 	(find-file "~/ELs/Evil/evil-respect-input.el")
-	(find-file "~/ELs/Evil/onecharadd.el")
+	(find-file "~/ELs/Evil/onecharadd.el") not used
 	(find-file "~/ELs/Evil/copylines.el") пока нет
 *** Orgs
 (find-file "~/INI/org-cfg.el")
@@ -197,6 +197,34 @@ You probably have an outdated package database
 (origami-mode)
 (outline-minor-mode)
 ** ielm 
+** Tmp 
+    (setq exec-path (append exec-path '("D:/Development/Lua/5.1/" )))
+
+  (setenv "PATH"
+	(concat
+	  "D:\\Development\\Lua\\5.1\\" ";"
+	 (getenv "PATH")
+	)
+  )
+
+(progn
+(define-key evil-normal-state-map "z[" '(lambda() (interactive)
+					(outline-up-heading 1)
+					))
+(define-key evil-normal-state-map "z]" '(lambda() (interactive)
+					(outline-up-heading 3)
+					))
+(define-key evil-normal-state-map "zc" '(lambda() (interactive)
+					;; (outline-previous-visible-heading 1)
+					(org-up-element)
+					(hide-subtree)
+					))
+(define-key evil-normal-state-map "zC" '(lambda() (interactive)
+					(outline-up-heading 1)
+					(hide-subtree)
+					))
+ )
+
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
@@ -281,6 +309,282 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 *** Rebind keys
 **** keys to keys
 (global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
+** Environment Variable 
+*** "PATH" : 
+**** Описание бага\фичи
+	 переменая енворемент обновляется только после перезапуска системы
+ тоесть после установки нового софта - он не виден даже после перезапуска емак
+ ещё могут быть проблемы посколько есть переменая пути систему
+ а есть переменая запуска емака и есть переменая рабочей деректории емака
+***** решение:
+	  установить инворемнт перемуную в ручную для запушеного еворемента
+	  из емака
+***** фича
+	  есть возможность поексмеремтиовать 
+	  если нет уверености что всё настроено как надо
+**** setenv "PATH" : 
+  ;; example of setting env var named “path”, by appending a new path to existing path
+  (setenv "PATH"
+	(concat
+	 "C:/cygwin/usr/local/bin" ";"
+	 "C:/cygwin/usr/bin" ";"
+	 "C:/cygwin/bin" ";"
+	 (getenv "PATH")
+	)
+  )
+**** getenv "PATH" : 
+ (to evaluate elisp code, select it and Alt+x eval-region.
+ [see Evaluate Emacs Lisp Code])
+	 (getenv "PATH")
+**** edit in file
+	 copy to *scratch*
+(progn
+(forward-line 3)
+(insert (getenv "PATH"))
+)
+  (setenv "PATH"
+"
+
+"
+)
+*** SHELL : 
+If the path printed by evaluating (getenv "SHELL") in Emacs points at bash
+or zsh, this should work fine.
+**** getenv : 
+(getenv "SHELL")
+"D:/Development/lisp/Emacs/libexec/emacs/26.2/x86_64-w64-mingw32/cmdproxy.exe"
+
+*** exec-path
+**** Difference between exec-path and PATH
+	 The value of environment variable “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
+	 The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
+
+(when (string-equal system-type "windows-nt")
+  (setq exec-path
+'(
+"C:/Program Files (x86)/Emacs/emacs/bin/"
+"C:/Program Files (x86)/Emacs/EmacsW32/gnuwin32/bin/"
+"C:/Windows/system32/"
+"C:/Windows/"
+"C:/Windows/System32/Wbem/"
+"C:/Windows/system32/WindowsPowerShell/v1.0/"
+)
+ ))
+**** показать exec-path
+(message exec-path)
+  (setq exec-path)
+**** set
+    (setq exec-path (append exec-path '("/sw/bin")))
+    (setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
+**** Emacs Lisp Code for Setting PATH and exec-path in sync
+(when (string-equal system-type "windows-nt")
+  (let (
+        (mypaths
+         '(
+           "C:/Python27"
+           ;; "C:/Python32"
+           "C:/strawberry/c/bin"
+           "C:/strawberry/perl/site/bin"
+           "C:/strawberry/perl/bin"
+
+           "C:/Users/h3/AppData/Roaming/npm"
+           "C:/Program Files (x86)/nodejs/"
+
+           "C:/cygwin/usr/local/bin"
+           "C:/cygwin/usr/bin"
+           "C:/cygwin/bin"
+
+           "C:/Program Files (x86)/ErgoEmacs/msys/bin"
+           "C:/Program Files (x86)/Mozilla Firefox/"
+           "C:/Program Files (x86)/Opera"
+           "C:/Program Files (x86)/Safari"
+           "C:/Users/h3/AppData/Local/Google/Chrome/Application"
+           ) )
+        )
+
+    (setenv "PATH" (mapconcat 'identity mypaths ";") )
+
+    (setq exec-path (append mypaths (list "." exec-directory)) )
+    ) )
+*** Operating System Environment
+Emacs provides access to variables in the operating system environment
+through various functions.  These variables include the name of the
+system, the user’s UID, and so on.
+**** Variable: system-configuration
+ This variable holds the standard GNU configuration name for the
+ hardware/software configuration of your system, as a string.  For
+ example, a typical value for a 64-bit GNU/Linux system is
+ ‘"x86_64-unknown-linux-gnu"’.
+**** Variable: system-type
+ The value of this variable is a symbol indicating the type of operating
+ system Emacs is running on.  The possible values are:
+	We do not wish to add new symbols to make finer distinctions unless it
+	is absolutely necessary!  In fact, we hope to eliminate some of these
+	alternatives in the future.  If you need to make a finer distinction
+	than system-type allows for, you can test
+	system-configuration, e.g., against a regexp.
+***** aix
+  IBM’s AIX.
+***** berkeley-unix
+   Berkeley BSD and its variants.
+***** cygwin
+	Cygwin, a Posix layer on top of MS-Windows.
+***** 	darwin
+	 Darwin (Mac OS X).
+***** 	gnu
+	 The GNU system (using the GNU kernel, which consists of the HURD and Mach).
+***** 	gnu/linux
+	 A GNU/Linux system—that is, a variant GNU system, using the Linux
+	 kernel.  (These systems are the ones people often call “Linux”, but
+	 actually Linux is just the kernel, not the whole system.)
+***** 	gnu/kfreebsd
+	 A GNU (glibc-based) system with a FreeBSD kernel.
+***** 	hpux
+	 Hewlett-Packard HPUX operating system.
+***** 	irix
+	 Silicon Graphics Irix system.
+***** 	nacl
+	 Google Native Client (NaCl) sandboxing system.
+***** 	ms-dos
+	 Microsoft’s DOS.  Emacs compiled with DJGPP for MS-DOS binds
+	 system-type to ms-dos even when you run it on MS-Windows.
+***** 	usg-unix-v
+	 AT&T Unix System V.
+***** 	windows-nt
+	 Microsoft Windows NT, 9X and later.  The value of system-type
+	 is always windows-nt, e.g., even on Windows 10.
+**** Function: system-name
+ This function returns the name of the machine you are running on, as a
+ string.
+**** User Option: mail-host-address
+ If this variable is non-nil, it is used instead of
+ system-name for purposes of generating email addresses.  For
+ example, it is used when constructing the default value of
+ user-mail-address.  See User Identification.  (Since this is
+ done when Emacs starts up, the value actually used is the one saved when
+ Emacs was dumped.  See Building Emacs.)
+**** Command: getenv var &optional frame
+
+ This function returns the value of the environment variable var,
+ as a string.  var should be a string.  If var is undefined
+ in the environment, getenv returns nil.  It returns
+ ‘""’ if var is set but null.  Within Emacs, a list of environment
+ variables and their values is kept in the variable process-environment.
+
+
+ (getenv "USER")
+      ⇒ "lewis"
+
+
+ The shell command printenv prints all or part of the environment:
+
+
+ bash$ printenv
+ PATH=/usr/local/bin:/usr/bin:/bin
+ USER=lewis
+ TERM=xterm
+ SHELL=/bin/bash
+ HOME=/home/lewis
+ …
+**** Command: setenv variable &optional value substitute
+ This command sets the value of the environment variable named
+ variable to value.  variable should be a string.
+ Internally, Emacs Lisp can handle any string.  However, normally
+ variable should be a valid shell identifier, that is, a sequence
+ of letters, digits and underscores, starting with a letter or
+ underscore.  Otherwise, errors may occur if subprocesses of Emacs try
+ to access the value of variable.  If value is omitted or
+ nil (or, interactively, with a prefix argument), setenv
+ removes variable from the environment.  Otherwise, value
+ should be a string.
+
+ If the optional argument substitute is non-nil, Emacs
+ calls the function substitute-env-vars to expand any
+ environment variables in value.
+
+ setenv works by modifying process-environment; binding
+ that variable with let is also reasonable practice.
+
+ setenv returns the new value of variable, or nil
+ if it removed variable from the environment.
+**** Variable: process-environment
+ This variable is a list of strings, each describing one environment
+ variable.  The functions getenv and setenv work by means
+ of this variable.
+
+
+ process-environment
+ => ("PATH=/usr/local/bin:/usr/bin:/bin"
+     "USER=lewis"
+     "TERM=xterm"
+     "SHELL=/bin/bash"
+     "HOME=/home/lewis"
+     …)
+
+
+ If process-environment contains multiple elements that
+ specify the same environment variable, the first of these elements
+ specifies the variable, and the others are ignored.
+**** Variable: initial-environment
+ This variable holds the list of environment variables Emacs inherited
+ from its parent process when Emacs started.
+**** Variable: path-separator
+ This variable holds a string that says which character separates
+ directories in a search path (as found in an environment variable).  Its
+ value is ":" for Unix and GNU systems, and ";" for MS systems.
+**** Function: parse-colon-path path
+ This function takes a search path string such as the value of
+ the PATH environment variable, and splits it at the separators,
+ returning a list of directory names.  nil in this list means
+ the current directory.  Although the function’s name says
+ “colon”, it actually uses the value of path-separator.
+ (parse-colon-path ":/foo:/bar")
+      => (nil "/foo/" "/bar/")
+**** Variable: invocation-name
+ This variable holds the program name under which Emacs was invoked.  The
+ value is a string, and does not include a directory name.
+**** Variable: invocation-directory
+ This variable holds the directory from which the Emacs executable was
+ invoked, or nil if that directory cannot be determined.
+**** Variable: installation-directory
+ If non-nil, this is a directory within which to look for the
+ lib-src and etc subdirectories.  In an installed Emacs,
+ it is normally nil.  It is non-nil
+ when Emacs can’t find those directories in their standard installed
+ locations, but can find them in a directory related somehow to the one
+ containing the Emacs executable (i.e., invocation-directory).
+**** Function: load-average &optional use-float
+ This function returns the current 1-minute, 5-minute, and 15-minute
+ system load averages, in a list.  The load average indicates the
+ number of processes trying to run on the system.
+
+ By default, the values are integers that are 100 times the system load
+ averages, but if use-float is non-nil, then they are
+ returned as floating-point numbers without multiplying by 100.
+
+ If it is impossible to obtain the load average, this function signals
+ an error.  On some platforms, access to load averages requires
+ installing Emacs as setuid or setgid so that it can read kernel
+ information, and that usually isn’t advisable.
+
+ If the 1-minute load average is available, but the 5- or 15-minute
+ averages are not, this function returns a shortened list containing
+ the available averages.
+
+
+ (load-average)
+      ⇒ (169 48 36)
+ (load-average t)
+      ⇒ (1.69 0.48 0.36)
+
+
+ The shell command uptime returns similar information.
+**** Function: emacs-pid
+ This function returns the process ID of the Emacs process,
+ as an integer.
+**** Variable: tty-erase-char
+ This variable holds the erase character that was selected
+ in the system’s terminal driver, before Emacs was started.
 ** Customize 
 *** by menu
 To customize rainbow-delimiters mode, you can use:
@@ -312,6 +616,97 @@ You can disable highlighting of any of the supported delimiter types through the
 ** info\help
    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
    удобная систе показиваюшая мануалки по всем установленым модам
+** Subprocesses
+*** 36.1 Functions that Create Subprocesses
+http://ergoemacs.org/emacs_manual/elisp/Shell-Arguments.html#Shell-Arguments
+**** three primitives : 
+ There are three primitives that create a new subprocess in which to run
+ a program.  One of them, ~make-process~, creates an asynchronous
+ process and returns a process object (see Asynchronous Processes).
+ The other two, =call-process= and =call-process-region=,
+ create a synchronous process and do not return a process object
+ (see Synchronous Processes).  There are various higher-level
+ functions that make use of these primitives to run particular types of
+ process.
+
+ Synchronous and asynchronous processes are explained in the following
+ sections.  Since the three functions are all called in a similar
+ fashion, their common arguments are described here.
+
+ In all cases, the functions specify the program to be run.  An error
+ is signaled if the file is not found or cannot be executed.  If the
+ file name is relative, the variable exec-path contains a list
+ of directories to search.  Emacs initializes exec-path when it
+ starts up, based on the value of the environment variable PATH.
+ The standard file name constructs, ‘~’, ‘.’, and ‘..’,
+ are interpreted as usual in exec-path, but environment variable
+ substitutions (‘$HOME’, etc.) are not recognized; use
+ substitute-in-file-name to perform them (see File Name Expansion).  nil in this list refers to
+ default-directory.
+
+ Executing a program can also try adding suffixes to the specified
+ name:
+**** User Option: exec-suffixes
+  This variable is a list of suffixes (strings) to try adding to the
+  specified program file name.  The list should include "" if you
+  want the name to be tried exactly as specified.  The default value is
+  system-dependent.
+
+  Please note: The argument program contains only the
+  name of the program file; it may not contain any command-line
+  arguments.  You must use a separate argument, args, to provide
+  those, as described below.
+
+  Each of the subprocess-creating functions has a buffer-or-name
+  argument that specifies where the output from the program will go.  It
+  should be a buffer or a buffer name; if it is a buffer name, that will
+  create the buffer if it does not already exist.  It can also be
+  nil, which says to discard the output, unless a custom filter
+  function handles it.  (See Filter Functions, and Read and Print.)  Normally, you should avoid having multiple processes send
+  output to the same buffer because their output would be intermixed
+  randomly.  For synchronous processes, you can send the output to a
+  file instead of a buffer (and the corresponding argument is therefore
+  more appropriately called destination).  By default, both
+  standard output and standard error streams go to the same destination,
+  but all the 3 primitives allow optionally to direct the standard error
+  stream to a different destination.
+
+  All three of the subprocess-creating functions allow to specify
+  command-line arguments for the process to run. For call-process
+  and call-process-region, these come in the form of a
+  &rest argument, args.  For make-process, both the
+  program to run and its command-line arguments are specified as a list
+  of strings.  The command-line arguments must all be strings, and they
+  are supplied to the program as separate argument strings.  Wildcard
+  characters and other shell constructs have no special meanings in
+  these strings, since the strings are passed directly to the specified
+  program.
+
+  The subprocess inherits its environment from Emacs, but you can
+  specify overrides for it with process-environment.  See System Environment.  The subprocess gets its current directory from the
+  value of default-directory.
+**** Variable: exec-directory
+  The value of this variable is a string, the name of a directory that
+  contains programs that come with GNU Emacs and are intended for Emacs
+  to invoke.  The program movemail is an example of such a program;
+  Rmail uses it to fetch new mail from an inbox.
+**** User Option: exec-path
+  The value of this variable is a list of directories to search for
+  programs to run in subprocesses.  Each element is either the name of a
+  directory (i.e., a string), or nil, which stands for the default
+  directory (which is the value of default-directory).
+  See executable-find, for the details of this search.
+
+
+  The value of exec-path is used by call-process and
+  start-process when the program argument is not an absolute
+  file name.
+
+  Generally, you should not modify exec-path directly.  Instead,
+  ensure that your PATH environment variable is set appropriately
+  before starting Emacs.  Trying to modify exec-path
+  independently of PATH can lead to confusing results.
+
 ** Options
 *** Visual
 *** Home 
@@ -357,68 +752,8 @@ Within Emacs, ~ at the beginning of a file name is expanded to your HOME directo
 	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	    (t (self-insert-command (or arg 1)))))
   #+END_SRC
-** eLisp
-*** show maseges
-**** message
-(message "Load of init.el is ended")
-	(if nil "yes" "no")
-**** format
-	(format "sdfsdf")
-*** varible
-**** show type
-(type-of chartoadd)
-**** chek type
-(typep *x* 'integer)
-**** chege type 
-***** From number to string:
-(number-to-string 5)
-"5"
-you may transform a string to any numerical notation:
-(number-to-string 341 :base 10)
-"341"
-***** From string to number:
-(parse-integer "5")
-5
-with some trash
-(parse-integer " 5 something not a number" :junk-allowed t)
-5
-Or use this:
-(read-from-string "23 absd")
-23
-***** FORMAT 
-(format nil "~A" 1)
-*** Cool guid
-https://github.com/chrisdone/elisp-guide
-*** compile
-Emacs 24.3 or below
-
-There's no built-in way of preventing these old files from being loaded, but there are easy ways to get rid of them.
-
-****    You can recompile the entire elpa directory by calling:
-    M-x byte-recompile-directory RET ~/.emacs.d/elpa/.
-    This should get rid of outdated files.
-****    You can use the auto-compile package
-and activate auto-compile-on-load-mode which can compile files before they are loaded.
-
-Emacs 24.4
-
-Yes, and it turns out to be rather simple. The
-****    load-prefer-newer
-variable serves precisely this purpose.
-
-(setq load-prefer-newer t)
-
-Unfortunately, it won't work when some code specifically targets the .elc file, such as (load "server.elc"). But it should be enough as long as you're using requires or calling load without a suffix, which you should.
-
-From the doc:
-
-    load-prefer-newer is a variable defined in lread.c.
-    Its value is nil
-
-    Documentation:
-    Non-nil means load prefers the newest version of a file.
-    This applies when a filename suffix is not explicitly specified and load is trying various possible suffixes (see load-suffixes and load-file-rep-suffixes). Normally, it stops at the first file that exists unless you explicitly specify one or the other. If this option is non-nil, it checks all suffixes and uses whichever file is newest.
-    Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
+** dired
+*** запуск dired
 ** REPL 
 ** DeBug
 ** eShell
@@ -476,10 +811,159 @@ $ goto ls
 If you want to know what's implemented in elisp and what isn't, you could just ask Emacs to complete on eshell/
 
 e.g.: C-uC-ha eshell/ RET
+** Shell
+*** Описание 
+используется для запуска других процесов
+может сильно влиять на работу режимов
+поскольку процес может запускатся из eshell
+но при этом глючить в шеле
+и как результат нечего не будет работать
+просто потому что в винде
+нужно заменить на чтонить другое
+*** explicit-shell-file-name : 
+You can start an interactive shell in Emacs by typing M-x shell. 
+By default, this will start the standard Windows shell cmd.exe. 
+Emacs uses the SHELL environment variable to determine which
+program to use as the shell.  To instruct Emacs to use a non-default
+shell, you can either set this environment variable, or customize
+explicit-shell-file-name.  You can also customize
+*** shell-file-name : 
+shell-file-name to change the shell that will be used by
+subprocesses that are started with shell-command and
+related non-interactive shell commands.
+
+"D:/Development/lisp/Emacs/libexec/emacs/26.2/x86_64-w64-mingw32/cmdproxy.exe"
+Original value was 
+"C:/msys64/home/Administrator/emacs-build/build/emacs-26.2/x86_64/nt/cmdproxy.exe"
+*** to git hub
+(setq explicit-shell-file-name "d:/Development/version-control.APP/Git/bin/sh.exe")
+(setq shell-file-name "sh")
+(setq explicit-sh.exe-args '("--noediting" "--login" "-i"))
+(setenv "SHELL" shell-file-name)
+
+# (setq explicit-sh.exe-args '("--login" "-i"))
+# (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+
 ** Folding 
 *** HideShow
 Invoke HideShow mode with M-x hs-minor-mode.
 
+* Help Docs eLisp
+** show maseges
+*** message
+(message "Load of init.el is ended")
+показывает сообшение прям из проверки
+(if nil "yes" "no")
+*** format
+   (format "sdfsdf")
+** varible
+*** show type
+(type-of chartoadd)
+*** chek type
+(typep *x* 'integer)
+*** chege type 
+**** From number to string:
+(number-to-string 5)
+"5"
+you may transform a string to any numerical notation:
+(number-to-string 341 :base 10)
+"341"
+**** From string to number:
+(parse-integer "5")
+5
+with some trash
+(parse-integer " 5 something not a number" :junk-allowed t)
+5
+Or use this:
+(read-from-string "23 absd")
+23
+**** FORMAT 
+(format nil "~A" 1)
+*** Seeing the Current Value of a Variable
+	c-h v
+describe-variable
+
+(progn
+(evil-open-below 3)
+(insert (getenv "PATH"))
+)
+
+(describe-variable exec-path)
+(symbol-value exec-path)
+*** 12.7 Accessing Variable Values determined at run time
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Accessing-Variables.html
+The usual way to reference a variable is to write the symbol which
+names it.  See Symbol Forms.
+
+   Occasionally, you may want to reference a variable which is only
+determined at run time.  In that case, you cannot specify the variable
+name in the text of the program.  You can use the symbol-value
+function to extract the value.
+
+
+— Function: symbol-value symbol
+This function returns the value stored in symbol's value cell. 
+This is where the variable's current (dynamic) value is stored.  If
+the variable has no local binding, this is simply its global value. 
+If the variable is void, a void-variable error is signaled.
+
+        If the variable is lexically bound, the value reported by
+symbol-value is not necessarily the same as the variable's
+lexical value, which is determined by the lexical environment rather
+than the symbol's value cell.  See Variable Scoping.
+
+               (setq abracadabra 5)
+               => 5
+          (setq foo 9)
+               => 9
+          
+          ;; Here the symbol abracadabra
+          ;;   is the symbol whose value is examined.
+          (let ((abracadabra 'foo))
+            (symbol-value 'abracadabra))
+               =>foo
+          
+          ;; Here, the value of abracadabra,
+          ;;   which is foo,
+          ;;   is the symbol whose value is examined.
+          (let ((abracadabra 'foo))
+            (symbol-value abracadabra))
+              => 9
+          
+          (symbol-value 'abracadabra)
+              => 5
+** Cool guid
+https://github.com/chrisdone/elisp-guide
+** compile
+Emacs 24.3 or below
+
+There's no built-in way of preventing these old files from being loaded, but there are easy ways to get rid of them.
+
+***    You can recompile the entire elpa directory by calling:
+   M-x byte-recompile-directory RET ~/.emacs.d/elpa/.
+   This should get rid of outdated files.
+***    You can use the auto-compile package
+and activate auto-compile-on-load-mode which can compile files before they are loaded.
+
+Emacs 24.4
+
+Yes, and it turns out to be rather simple. The
+***    load-prefer-newer
+variable serves precisely this purpose.
+
+(setq load-prefer-newer t)
+
+Unfortunately, it won't work when some code specifically targets the .elc file, such as (load "server.elc"). But it should be enough as long as you're using requires or calling load without a suffix, which you should.
+
+From the doc:
+
+    load-prefer-newer is a variable defined in lread.c.
+    Its value is nil
+
+    Documentation:
+    Non-nil means load prefers the newest version of a file.
+    This applies when a filename suffix is not explicitly specified and load is trying various possible suffixes (see load-suffixes and load-file-rep-suffixes). Normally, it stops at the first file that exists unless you explicitly specify one or the other. If this option is non-nil, it checks all suffixes and uses whichever file is newest.
+    Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
