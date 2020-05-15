@@ -22,13 +22,14 @@
     ^─────^───────────────────────────^─────^─────────
     _q_ quit          _d_ev menu      _o_rg-mode                                      
     _w_ww             _SPC_ insert    _y_nke-menu 
-    _p_rev-menu                       _n_ext-menu    
+    _p_rev-menu       _e_macs-menu    _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
     ("o" org-menu/body)
     ("d" hydra-dev-menu/body)
     ("w" www-menu/body)
+    ("e" hydra-emacs-menu/body)
     ("SPC" khaoos-insert-one-char :color pink)
 	("y" hydra-yank-menu/body)
 	("n" spc-main-menu01/body)
@@ -433,6 +434,41 @@ _?_ help            _c_urrent file
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
+	("q" nil) 
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+
+;; *** emacs menu
+;; **** defhydra
+(defhydra hydra-emacs-menu (:color pink)
+;; ***** hint
+    "
+                ^Emacs-mode  Menus^          
+    ────────────^───────────────^───────────────────
+     To _w_in Format    To _u_nix Format
+     _q_uit
+    "
+;; ***** keys
+;; ****** w : 
+    ("w" (query-replace
+								"\\"
+								"/"
+								nil
+								nil
+								(current-kill 0 "DO-NOT-MOVE"))
+								)
+;; ****** u : 
+    ("u" (query-replace
+								"\\"
+								"/"
+								nil
+								nil
+								(current-kill 0 "DO-NOT-MOVE"))
+								)
+;; ****** q : 
 	("q" nil) 
 ;; ***** END of def
 	)
