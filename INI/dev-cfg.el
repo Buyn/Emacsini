@@ -34,4 +34,14 @@
 (load "~/INI/flycheck-cfg.el")
 ;; (find-file "~/INI/flycheck-cfg.el") 
 ;; --------------------------------------
+;; ** DEVELOPMENT-KEY CUSTOMIZATION
+;; *** save & recompile
+(global-set-key(kbd "<f7>") '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)
+								(with-current-buffer "*compilation*"
+										(recompile))
+								(delete-other-windows)
+								))
+;; --------------------------------------
 ;; *  --------------------------------------

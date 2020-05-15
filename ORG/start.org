@@ -198,6 +198,19 @@ You probably have an outdated package database
 (outline-minor-mode)
 ** ielm 
 ** Tmp 
+
+(progn
+(define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
+
+(global-set-key(kbd "<f7>") '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)
+								(with-current-buffer "*compilation*"
+										(recompile))
+								(delete-other-windows)
+								))
+ )
+
     (setq exec-path (append exec-path '("D:/Development/Lua/5.1/" )))
 
   (setenv "PATH"
@@ -206,25 +219,6 @@ You probably have an outdated package database
 	 (getenv "PATH")
 	)
   )
-
-(progn
-(define-key evil-normal-state-map "z[" '(lambda() (interactive)
-					(outline-up-heading 1)
-					))
-(define-key evil-normal-state-map "z]" '(lambda() (interactive)
-					(outline-up-heading 3)
-					))
-(define-key evil-normal-state-map "zc" '(lambda() (interactive)
-					;; (outline-previous-visible-heading 1)
-					(org-up-element)
-					(hide-subtree)
-					))
-(define-key evil-normal-state-map "zC" '(lambda() (interactive)
-					(outline-up-heading 1)
-					(hide-subtree)
-					))
- )
-
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:

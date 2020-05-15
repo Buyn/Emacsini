@@ -178,6 +178,9 @@
 								(save-some-buffers 'no-confirm)
 								(evil-normal-state)))
 ;; -------------------------------------- }}}
+;; ** toggle input method in evil normal state
+(define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
+;; -------------------------------------- 
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  
 ;; ** load el
 (load "~/ELs/Evil/evil-respect-input.el")
