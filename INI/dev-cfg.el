@@ -43,5 +43,20 @@
 										(recompile))
 								(delete-other-windows)
 								))
+(global-set-key(kbd "M-<f7>") '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)
+								(compile
+								 (read-string
+										(concat
+														"defult("
+														(buffer-name)
+														"):"
+														)
+										nil
+										nil
+										(buffer-name))
+									)
+								))
 ;; --------------------------------------
 ;; *  --------------------------------------

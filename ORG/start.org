@@ -200,25 +200,28 @@ You probably have an outdated package database
 ** Tmp 
 
 (progn
-(define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
 
-(global-set-key(kbd "<f7>") '(lambda() (interactive)
+(global-set-key(kbd "M-<f7>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
-								(with-current-buffer "*compilation*"
-										(recompile))
-								(delete-other-windows)
+								(compile
+								 (read-string
+										(concat
+														"defult("
+														(buffer-name)
+														"):"
+														)
+										nil
+										nil
+										(buffer-name))
+									)
 								))
+
+(define-key evil-normal-state-map "ZF" 'find-file-other-frame)
+(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
+					(evil-prev-buffer)))
  )
 
-    (setq exec-path (append exec-path '("D:/Development/Lua/5.1/" )))
-
-  (setenv "PATH"
-	(concat
-	  "D:\\Development\\Lua\\5.1\\" ";"
-	 (getenv "PATH")
-	)
-  )
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
