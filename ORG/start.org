@@ -201,19 +201,35 @@ You probably have an outdated package database
 
 (progn
 
-(global-set-key(kbd "M-<f7>") '(lambda() (interactive)
+(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(evil-normal-state)
+		(query-replace
+			region-text
+			(read-string (concat "replace("  (current-kill 0 "DO-NOT-MOVE") "):")
+						nil
+						nil
+						(current-kill 0 "DO-NOT-MOVE"))
+			))))
+
+(global-set-key(kbd "<f8>") '(lambda() (interactive)
+								(save-buffer)
+								(evil-normal-state)
+								(with-current-buffer "*compilation*"
+										(recompile))
+								(delete-other-windows)
+								))
+(global-set-key(kbd "M-<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
 								(compile
 								 (read-string
 										(concat
-														"defult("
-														(buffer-name)
-														"):"
-														)
+											"defult(" (buffer-name) "):")
+										(buffer-file-name)
 										nil
-										nil
-										(buffer-name))
+										(buffer-name)
+										)
 									)
 								))
 

@@ -177,6 +177,10 @@
 								(org-save-all-org-buffers)
 								(save-some-buffers 'no-confirm)
 								(evil-normal-state)))
+(define-key evil-normal-state-map(kbd "<f2>i") '(lambda() (interactive)
+								(org-save-all-org-buffers)
+								(save-some-buffers 'no-confirm)
+								(evil-normal-state)))
 ;; -------------------------------------- }}}
 ;; ** toggle input method in evil normal state
 (define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)

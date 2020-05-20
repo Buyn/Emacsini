@@ -36,26 +36,24 @@
 ;; --------------------------------------
 ;; ** DEVELOPMENT-KEY CUSTOMIZATION
 ;; *** save & recompile
-(global-set-key(kbd "<f7>") '(lambda() (interactive)
+(global-set-key(kbd "<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
 								(with-current-buffer "*compilation*"
 										(recompile))
 								(delete-other-windows)
 								))
-(global-set-key(kbd "M-<f7>") '(lambda() (interactive)
+(global-set-key(kbd "M-<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
 								(compile
 								 (read-string
 										(concat
-														"defult("
-														(buffer-name)
-														"):"
-														)
+											"defult(" (buffer-name) "):")
+										(buffer-file-name)
 										nil
-										nil
-										(buffer-name))
+										(buffer-name)
+										)
 									)
 								))
 ;; --------------------------------------
