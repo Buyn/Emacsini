@@ -116,57 +116,6 @@
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")
 
-** линкс команды
-   C+c C+o
-	[[shell:echo%20"hi%20Max"][Hello?]]
-	[[shell:dir][Whera are u?]]
-[[
-shell:echo "dfgdfg max"
-] [
-Working?
-]]
-[[shell:echo "dfgdfg max"][Working?]]
-
-[[shell:echo "dfgdfg max"]
-[Working?]]
-** сорс комады
-*** для всех 
-	C+c C+c
-(setq org-confirm-babel-evaluate nil)
-*** шелл 
- #+BEGIN_SRC sh :shcmd "cmdproxy.exe"
- dir
- #+END_SRC
- #+BEGIN_SRC sh :exports both
- ls
- #+END_SRC
-
- #+BEGIN_SRC sh :exports both
- ls
- #+END_SRC
-
-*** translate 
-**** пример 
-  #+BEGIN_SRC translate
-  Чтобы поймать психа нужен Псих
-  #+END_SRC
-
-  #+RESULTS:
-  : To catch psycho Psycho needed
-
-<t
-
-**** Docs
-***** Options
- Each block supports the following arguments:
- Argument	Description	Example	Default
-****** :src	Source language.
-  +BEGIN_SRC translate :src de	‘auto’ (for auto detection).
-****** :dest	Destination language(s).
-  +BEGIN_SRC translate :dest it,fr	‘en’ (for English).
-  :dest may be a single country-code, or a comma-separated list.
-****** All defaults are customizable 
-  with M-x customize-group RET ob-translate.
 ** Install
 tar not found when trying to install from melpa 
 You probably have an outdated package database
@@ -196,10 +145,28 @@ You probably have an outdated package database
 *** for Source
 (origami-mode)
 (outline-minor-mode)
-** ielm 
+** линкс команды
+	 C+c C+o
+	[[shell:echo%20"hi%20Max"][Hello?]]
+	[[shell:dir][Whera are u?]]
+[[
+shell:echo "dfgdfg max"
+] [
+Working?
+]]
+[[shell:echo "dfgdfg max"][Working?]]
+
+[[shell:echo "dfgdfg max"]
+[Working?]]
+
 ** Tmp 
 
 (progn
+
+(define-key evil-normal-state-map(kbd "<f2>i") '(lambda() (interactive)
+								(org-save-all-org-buffers)
+								(save-some-buffers 'no-confirm)
+								(evil-normal-state)))
 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
@@ -237,7 +204,6 @@ You probably have an outdated package database
 (define-key evil-normal-state-map "ZH" '(lambda() (interactive)
 					(evil-prev-buffer)))
  )
-
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
@@ -1287,7 +1253,13 @@ old
 **** new
 c-c | - generet new table
 ‘C-c |     (org-table-create-or-convert-from-region)’
-
+**** learn about references is to type C-c ? : 
+ Before being able to insert a formula in [Formula], you need to know how to refer to a row, a column or a single field.
+The easiest way to learn about references is to type C-c ? while you are in a field.
+For example, if you are in the [Formula] field, C-c ? will tell you: line @2, col $4, ref @2$4 or D2, meaning that you are on the second row (or line) of the fourth column, and the reference for this field is either @2$4 or D2. 
+**** turn on the reference visualization grid with C-c } : 
+At any moment, if you are lost in rows and columns, you can always turn on the reference visualization grid with C-c }: 
+**** formula debahen c-c c-{
 **** ‘C-c <SPC>     (org-table-blank-field)’
 **** ‘M-a     (org-table-beginning-of-field)’
      Move to beginning of the current table field, or on to the previous
@@ -1354,6 +1326,27 @@ c-c | - generet new table
      Tables can also be imported by pasting tabular text into the Org
      buffer, selecting the pasted text with ‘C-x C-x’ and then using the
      ‘C-c |’ command (see above under Creation and conversion).
+**** C-c = for editing column formulas : 
+ If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
+**** C-u C-c = for field formulas : 
+ If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
+**** edit formulas interactively in a dedicated buffer C-c ' 
+But you can also edit formulas more interactively in a dedicated buffer by typing C-c '. This new buffer lists all the formulas for the table at point and provides facilities to edit the references.
+
+When the cursor is above a reference, the corresponding field in the table get highlighted. Nice! But you can do more than that: you can actually select the reference by using the S-<left/right/up/down> keys. 
+*** Outer exempl
+**** GANTT
+https://www.youtube.com/watch?time_continue=791&v=5ViUBaarsbw&feature=emb_title
+*** formuls 
+**** :=vmean($2..$3) 
+in this field. This formula means: calculate the mean for fields from the second ($2) to the third ($3) field in this row. If you prefer to use the other notation, type
+**** :=vmean(B&..C&)
+ where the & character stands for "in this row", which is implicit in the previous notation. 
+**** prefixed by = instead of :=  
+Note that the only difference with what you've inserted previously is that the formula is prefixed by = instead of :=. When you're done, do a C-c C-c in the field: you should be prompted whether you want to replace the formula with a column formula, which is precisely what we want.
+
+Once you agree with this, the value in the field should be the same than before (namely 11) and you can now update all the fields in this column by reapplying all formulas with C-u C-c * (or C-c C-c if you're on the #+TBLFM line.) 
+For now we have been defining formulas by inserting them directly in the table cells: typing = in a field starts the definition for a column formula and typing := starts a definition for a field formula. 
 ** Tags 
 Two: Which tags do you use most?
 You can always add tags freely and by hand, but if you configure the most important ones along with fast-access keys, life will be better. Configure the variable org-tags-alist or simply do this right in the file with1
@@ -1556,6 +1549,211 @@ org-occur is used to create a sparse tree with the matches.
   As a degenerate case, a file link with an empty file name can be used to search the
 current file. For example, ‘[[file:::find me]}’ does a search for ‘find me’ in the current
 file, just as ‘[[find me]}’ would.
+** сорс комады
+*** для всех 
+	C+c C+c
+(setq org-confirm-babel-evaluate nil)
+*** шелл 
+ #+BEGIN_SRC sh :shcmd "cmdproxy.exe"
+ dir
+ #+END_SRC
+ #+BEGIN_SRC sh :exports both
+ ls
+ #+END_SRC
+
+ #+BEGIN_SRC sh :exports both
+ ls
+ #+END_SRC
+
+*** translate 
+**** пример 
+  #+BEGIN_SRC translate
+  Чтобы поймать психа нужен Псих
+  #+END_SRC
+
+  #+RESULTS:
+	: To catch psycho Psycho needed
+
+<t
+<tr
+
+**** Docs
+***** Options
+ Each block supports the following arguments:
+ Argument	Description	Example	Default
+****** :src	Source language.
+  +BEGIN_SRC translate :src de	‘auto’ (for auto detection).
+****** :dest	Destination language(s).
+  +BEGIN_SRC translate :dest it,fr	‘en’ (for English).
+  :dest may be a single country-code, or a comma-separated list.
+****** All defaults are customizable 
+  with M-x customize-group RET ob-translate.
+*** Docs
+**** 14.1 Structure of code blocks
+https://www.gnu.org/software/emacs/manual/html_node/org/Structure-of-code-blocks.html#Structure-of-code-blocks
+***** structure source code  : 
+Org offers two ways to structure source code in Org documents: in a ‘src’ block, and directly inline. Both specifications are shown below.
+
+A ‘src’ block conforms to this structure:
+
+     #+NAME: <name>
+     #+BEGIN_SRC <language> <switches> <header arguments>
+       <body>
+     #+END_SRC
+
+		 
+***** templates system : 
+Org mode's templates system (see Easy templates) speeds up creating ‘src’ code blocks with just three keystrokes. Do not be put-off by having to remember the source block syntax. Org also works with other completion systems in Emacs, some of which predate Org and have custom domain-specific languages for defining templates. Regular use of templates reduces errors, increases accuracy, and maintains consistency.
+
+An inline code block conforms to this structure:
+
+     src_<language>{<body>}
+
+or
+
+     src_<language>[<header arguments>]{<body>}
+
+***** Names the ‘src’ block : 
+#+NAME: <name>
+    Optional. Names the ‘src’ block so it can be called, like a function, from other ‘src’ blocks or inline blocks to evaluate or to capture the results. Code from other blocks, other files, and from table formulas (see The spreadsheet) can use the name to reference a ‘src’ block. This naming serves the same purpose as naming Org tables. Org mode requires unique names. For duplicate names, Org mode's behavior is undefined.
+***** mark the start and end : 
+#+BEGIN_SRC
+#+END_SRC
+    Mandatory. They mark the start and end of a block that Org requires. The #+BEGIN_SRC line takes additional arguments, as described next.
+<language>
+    Mandatory for live code blocks. It is the identifier of the source code language in the block. See Languages, for identifiers of supported languages.
+<switches>
+    Optional. Switches provide finer control of the code execution, export, and format (see the discussion of switches in Literal examples)
+<header arguments>
+    Optional. Heading arguments control many aspects of evaluation, export and tangling of code blocks (see Header arguments). Using Org's properties feature, header arguments can be selectively applied to the entire buffer or specific sub-trees of the Org document.
+source code, header arguments
+<body>
+    Source code in the dialect of the specified language identifier. 
+**** 14.8.2 Specific header arguments
+https://www.gnu.org/software/emacs/manual/html_node/org/Specific-header-arguments.html#Specific-header-arguments
+Org comes with many header arguments common to all languages. New header arguments are added for specific languages as they become available for use in ‘src’ code blocks. A header argument is specified with an initial colon followed by the argument's name in lowercase. Common header arguments are:
+
+    var: Pass arguments to ‘src’ code blocks
+    results: Specify results type; how to collect
+    file: Specify a path for output file
+    file-desc: Specify a description for file results
+    file-ext: Specify an extension for file output
+    output-dir: Specify a directory for output file
+    dir: Specify the default directory for code block execution
+    exports: Specify exporting code, results, both, none
+    tangle: Toggle tangling; or specify file name
+    mkdirp: Toggle for parent directory creation for target files during tangling
+    comments: Toggle insertion of comments in tangled code files
+    padline: Control insertion of padding lines in tangled code files
+    no-expand: Turn off variable assignment and noweb expansion during tangling
+    session: Preserve the state of code evaluation
+    noweb: Toggle expansion of noweb references
+    noweb-ref: Specify block's noweb reference resolution target
+    noweb-sep: String to separate noweb references
+    cache: Avoid re-evaluating unchanged code blocks
+    sep: Delimiter for writing tabular results outside Org
+    hlines: Handle horizontal lines in tables
+    colnames: Handle column names in tables
+    rownames: Handle row names in tables
+    shebang: Make tangled files executable
+    tangle-mode: Set permission of tangled files
+    eval: Limit evaluation of specific code blocks
+    wrap: Mark source block evaluation results
+    post: Post processing of results of code block evaluation
+    prologue: Text to prepend to body of code block
+    epilogue: Text to append to body of code block 
+
+For language-specific header arguments, see Languages. 
+
+**** 14.10 Noweb reference syntax
+https://www.gnu.org/software/emacs/manual/html_node/org/Noweb-reference-syntax.html#Noweb-reference-syntax
+***** Org supports named blocks in Noweb style syntax.
+For Noweb literate programming details, see http://www.cs.tufts.edu/~nr/noweb/).
+
+			 <<code-block-name>>
+
+	For the header argument :noweb yes, Org expands Noweb style references in the ‘src’ code block before evaluation.
+
+	For the header argument :noweb no, Org does not expand Noweb style references in the ‘src’ code block before evaluation.
+
+	The default is :noweb no. Org defaults to :noweb no so as not to cause errors in languages where Noweb syntax is ambiguous. Change Org's default to :noweb yes for languages where there is no risk of confusion.
+
+	Org offers a more flexible way to resolve Noweb style references (see noweb-ref).
+
+	Org can include the results of a code block rather than its body. To that effect, append parentheses, possibly including arguments, to the code block name, as show below.
+
+			 <<code-block-name(optional arguments)>>
+
+	Note that when using the above approach to a code block's results, the code block name set by #+NAME keyword is required; the reference set by :noweb-ref will not work.
+
+ 
+***** example : 
+ Here is an example that demonstrates how the exported content changes when Noweb style references are used with parentheses versus without.
+
+ With:
+
+			#+NAME: some-code
+			#+BEGIN_SRC python :var num=0 :results output :exports none
+			print(num*10)
+			#+END_SRC
+
+ this code block:
+
+			#+BEGIN_SRC text :noweb yes
+			<<some-code>>
+			#+END_SRC
+
+ expands to:
+
+			print(num*10)
+
+			
+***** with parentheses : 
+ Below, a similar Noweb style reference is used, but with parentheses, while setting a variable num to 10:
+
+			#+BEGIN_SRC text :noweb yes
+			<<some-code(num=10)>>
+			#+END_SRC
+
+ Note that now the expansion contains the results of the code block some-code, not the code block itself:
+
+			100
+
+ For faster tangling of large Org mode files, set org-babel-use-quick-and-dirty-noweb-expansion variable to t. The speedup comes at the expense of not correctly resolving inherited values of the :noweb-ref header argument. 
+**** 14.11 Key bindings and useful functions
+https://www.gnu.org/software/emacs/manual/html_node/org/Key-bindings-and-useful-functions.html#Key-bindings-and-useful-functions
+Many common Org mode key sequences are re-bound depending on the context.
+***** Active key bindings in code blocks:
+
+ C-c C-c 	org-babel-execute-src-block
+ C-c C-o 	org-babel-open-src-block-result
+ M-<UP> 	org-babel-load-in-session
+ M-<DOWN> 	org-babel-switch-to-session
+***** Active key bindings in Org mode buffer:
+
+	C-c C-v p or C-c C-v C-p 	org-babel-previous-src-block
+	C-c C-v n or C-c C-v C-n 	org-babel-next-src-block
+	C-c C-v e or C-c C-v C-e 	org-babel-execute-maybe
+	C-c C-v o or C-c C-v C-o 	org-babel-open-src-block-result
+	C-c C-v v or C-c C-v C-v 	org-babel-expand-src-block
+	C-c C-v u or C-c C-v C-u 	org-babel-goto-src-block-head
+	C-c C-v g or C-c C-v C-g 	org-babel-goto-named-src-block
+	C-c C-v r or C-c C-v C-r 	org-babel-goto-named-result
+	C-c C-v b or C-c C-v C-b 	org-babel-execute-buffer
+	C-c C-v s or C-c C-v C-s 	org-babel-execute-subtree
+	C-c C-v d or C-c C-v C-d 	org-babel-demarcate-block
+	C-c C-v t or C-c C-v C-t 	org-babel-tangle
+	C-c C-v f or C-c C-v C-f 	org-babel-tangle-file
+	C-c C-v c or C-c C-v C-c 	org-babel-check-src-block
+	C-c C-v j or C-c C-v C-j 	org-babel-insert-header-arg
+	C-c C-v l or C-c C-v C-l 	org-babel-load-in-session
+	C-c C-v i or C-c C-v C-i 	org-babel-lob-ingest
+	C-c C-v I or C-c C-v C-I 	org-babel-view-src-block-info
+	C-c C-v z or C-c C-v C-z 	org-babel-switch-to-session-with-code
+	C-c C-v a or C-c C-v C-a 	org-babel-sha1-hash
+	C-c C-v h or C-c C-v C-h 	org-babel-describe-bindings
+	C-c C-v x or C-c C-v C-x 	org-babel-do-key-sequence-in-edit-buffer
+
 * Help Docs Gnus
   The Emacs news and email reader.
 * Help Docs Mods 

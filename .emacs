@@ -22,9 +22,12 @@
  ;; If there is more than one, they won't work right.
  '(display-line-numbers-type (quote relative))
  '(global-display-line-numbers-mode t)
+ '(org-agenda-files
+	 (quote
+		("d:/Development/lisp/Dropbox/orgs/capture/Necronomicon.org")))
  '(package-selected-packages
-   (quote
-	(avy elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults)))
+	 (quote
+		(avy elpy yasnippet-snippets s rainbow-delimiters quelpa-use-package pyvenv python-environment pkg-info outshine ob-translate material-theme lua-mode hydra highlight-indentation find-file-in-project expand-region evil-tabs epc company better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(transient-mark-mode nil))

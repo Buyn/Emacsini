@@ -187,6 +187,7 @@
 ;; -------------------------------------- 
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  
 ;; ** load el
+;; (find-file "~/ELs/Evil/evil-respect-input.el")
 (load "~/ELs/Evil/evil-respect-input.el")
 ;; --------------------------------------  
 ;; ** Rebind commands that don't respect input method
