@@ -171,7 +171,7 @@
 		(let (
 						(start-region-beginning (region-beginning))
 						(start-region-end (+ (region-end) 1))
-						(char-to-wrap (read-char "enter char to wrap(~-_+=)")))
+						(char-to-wrap (read-char "enter char to wrap(/~*_+=)")))
 				(unless (= char-to-wrap 27)
 						(evil-normal-state)
 						(goto-char start-region-beginning)

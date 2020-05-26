@@ -162,6 +162,12 @@ Working?
 ** Tmp 
 
 (progn
+
+		(define-key evil-normal-state-map "zJ" 'org-metadown)
+		(define-key evil-normal-state-map "zK" 'org-metaup)
+		(define-key evil-normal-state-map "zH" 'org-shiftmetaleft)
+		(define-key evil-normal-state-map "zL" 'org-shiftmetaright)
+
 		(define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
 				(let (
 								(start-region-beginning (region-beginning))

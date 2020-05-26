@@ -89,6 +89,11 @@
 (define-key evil-normal-state-map "zk" 'org-backward-element)
 (define-key evil-normal-state-map "zh" 'org-up-element)
 (define-key evil-normal-state-map "zl" 'org-down-element)
+;; **** foldings manipulate
+(define-key evil-normal-state-map "zJ" 'org-metadown)
+(define-key evil-normal-state-map "zK" 'org-metaup)
+(define-key evil-normal-state-map "zH" 'org-shiftmetaleft)
+(define-key evil-normal-state-map "zL" 'org-shiftmetaright)
 ;; **** z[
 (define-key evil-normal-state-map "z[" '(lambda() (interactive)
 					(outline-up-heading 1)
