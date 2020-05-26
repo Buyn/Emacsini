@@ -162,47 +162,51 @@ Working?
 ** Tmp 
 
 (progn
-
-(define-key evil-normal-state-map(kbd "<f2>i") '(lambda() (interactive)
-								(org-save-all-org-buffers)
-								(save-some-buffers 'no-confirm)
-								(evil-normal-state)))
-
-(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
-	(let ((region-text (buffer-substring (region-beginning) (region-end))))
-		(evil-normal-state)
-		(query-replace
-			region-text
-			(read-string (concat "replace("  (current-kill 0 "DO-NOT-MOVE") "):")
-						nil
-						nil
-						(current-kill 0 "DO-NOT-MOVE"))
-			))))
-
-(global-set-key(kbd "<f8>") '(lambda() (interactive)
-								(save-buffer)
+		(define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
+				(let (
+								(start-region-beginning (region-beginning))
+								(start-region-end (+ (region-end) 1))
+								(char-to-wrap (read-char "enter char to wrap(~-_+=)")))
+						(unless (= char-to-wrap 27)
 								(evil-normal-state)
-								(with-current-buffer "*compilation*"
-										(recompile))
-								(delete-other-windows)
-								))
-(global-set-key(kbd "M-<f8>") '(lambda() (interactive)
-								(save-buffer)
-								(evil-normal-state)
-								(compile
-								 (read-string
-										(concat
-											"defult(" (buffer-name) "):")
-										(buffer-file-name)
-										nil
-										(buffer-name)
-										)
-									)
-								))
+								(goto-char start-region-beginning)
+								(insert-char char-to-wrap)
+								(goto-char start-region-end)
+								(insert-char char-to-wrap)
+								)
+						)))
 
-(define-key evil-normal-state-map "ZF" 'find-file-other-frame)
-(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
-					(evil-prev-buffer)))
+  (evil-define-operator khaoos--insert-one-char ()
+    "Switches to insert mode just to input one character"
+    (interactive)
+    (let ((a (read-char "Input a character to insert:" t)))
+				(when (= a 13)
+						(open-line 1)
+						)
+				(when (= a 27)
+						(message "cancel!")
+						(setq a 13)
+						)
+				(unless (= a 13)
+						(insert-char a)
+						)
+		))
+
+
+;; ** append-one-char
+  (evil-define-operator khaoos--append-one-char ()
+    "Switches to insert mode just to append one character"
+    (interactive)
+    (let ((a (read-char "Input a character to append:" t)))
+				(unless (eolp) (forward-char))
+				(when (= a 13)
+						(open-line 1))
+				(when (= a 27)
+						(message "cancel!")
+						(setq a 13))
+				(unless (= a 13)
+						(insert-char a))
+				(unless (eolp) (backward-char))))
  )
 * Help Docs Emacs 
 ** To set on a file by file 

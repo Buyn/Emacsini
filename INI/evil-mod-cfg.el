@@ -166,6 +166,21 @@
 						(current-kill 0 "DO-NOT-MOVE"))
 			))))
 ;; -------------------------------------- }}}
+;; ** Wrape by one char  {{{
+(define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
+		(let (
+						(start-region-beginning (region-beginning))
+						(start-region-end (+ (region-end) 1))
+						(char-to-wrap (read-char "enter char to wrap(~-_+=)")))
+				(unless (= char-to-wrap 27)
+						(evil-normal-state)
+						(goto-char start-region-beginning)
+						(insert-char char-to-wrap)
+						(goto-char start-region-end)
+						(insert-char char-to-wrap)
+						)
+				)))
+;; -------------------------------------- }}}
 ;; ** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
@@ -201,6 +216,7 @@
 ;; * ONE CHAR ADD  
 ;; ** load el
 ;; (load "~/ELs/Evil/onecharadd.el")
+;; (find-file "~/ELs/Evil/onecharadd.el")
 ;; ** Rebind commands 
 ;; (define-key evil-normal-state-map (kbd "SPC") 'addone-char-into-normal-evil)
 (define-key evil-normal-state-map (kbd "SPC") 'khaoos-insert-one-char)
