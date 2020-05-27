@@ -2,7 +2,8 @@
 #+STARTUP: overview 
 #+TODO: TODO DONE
 * Welcom! Don`t panic!
- _   _   _             _   _   _
+** 
+_   _   _             _   _   _
 | |_| |_| |           | |_| |_| |
  \ _____ /      o_     \ _____ /
   |     |       |_|     |     |
@@ -19,6 +20,61 @@
   |__|      ||_|_|_||      |__|
  /   |      ||_|_|_||      |   \
 =================================
+** Tmp 
+
+(progn
+
+		(define-key evil-normal-state-map "zJ" 'org-metadown)
+		(define-key evil-normal-state-map "zK" 'org-metaup)
+		(define-key evil-normal-state-map "zH" 'org-shiftmetaleft)
+		(define-key evil-normal-state-map "zL" 'org-shiftmetaright)
+
+		(define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
+				(let (
+								(start-region-beginning (region-beginning))
+								(start-region-end (+ (region-end) 1))
+								(char-to-wrap (read-char "enter char to wrap(~-_+=)")))
+						(unless (= char-to-wrap 27)
+								(evil-normal-state)
+								(goto-char start-region-beginning)
+								(insert-char char-to-wrap)
+								(goto-char start-region-end)
+								(insert-char char-to-wrap)
+								)
+						)))
+
+  (evil-define-operator khaoos--insert-one-char ()
+    "Switches to insert mode just to input one character"
+    (interactive)
+    (let ((a (read-char "Input a character to insert:" t)))
+				(when (= a 13)
+						(open-line 1)
+						)
+				(when (= a 27)
+						(message "cancel!")
+						(setq a 13)
+						)
+				(unless (= a 13)
+						(insert-char a)
+						)
+		))
+
+
+;; ** append-one-char
+  (evil-define-operator khaoos--append-one-char ()
+    "Switches to insert mode just to append one character"
+    (interactive)
+    (let ((a (read-char "Input a character to append:" t)))
+				(unless (eolp) (forward-char))
+				(when (= a 13)
+						(open-line 1))
+				(when (= a 27)
+						(message "cancel!")
+						(setq a 13))
+				(unless (= a 13)
+						(insert-char a))
+				(unless (eolp) (backward-char))))
+ )
 * Pathes
 ** org files
 *** lincks
@@ -159,61 +215,6 @@ Working?
 [[shell:echo "dfgdfg max"]
 [Working?]]
 
-** Tmp 
-
-(progn
-
-		(define-key evil-normal-state-map "zJ" 'org-metadown)
-		(define-key evil-normal-state-map "zK" 'org-metaup)
-		(define-key evil-normal-state-map "zH" 'org-shiftmetaleft)
-		(define-key evil-normal-state-map "zL" 'org-shiftmetaright)
-
-		(define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
-				(let (
-								(start-region-beginning (region-beginning))
-								(start-region-end (+ (region-end) 1))
-								(char-to-wrap (read-char "enter char to wrap(~-_+=)")))
-						(unless (= char-to-wrap 27)
-								(evil-normal-state)
-								(goto-char start-region-beginning)
-								(insert-char char-to-wrap)
-								(goto-char start-region-end)
-								(insert-char char-to-wrap)
-								)
-						)))
-
-  (evil-define-operator khaoos--insert-one-char ()
-    "Switches to insert mode just to input one character"
-    (interactive)
-    (let ((a (read-char "Input a character to insert:" t)))
-				(when (= a 13)
-						(open-line 1)
-						)
-				(when (= a 27)
-						(message "cancel!")
-						(setq a 13)
-						)
-				(unless (= a 13)
-						(insert-char a)
-						)
-		))
-
-
-;; ** append-one-char
-  (evil-define-operator khaoos--append-one-char ()
-    "Switches to insert mode just to append one character"
-    (interactive)
-    (let ((a (read-char "Input a character to append:" t)))
-				(unless (eolp) (forward-char))
-				(when (= a 13)
-						(open-line 1))
-				(when (= a 27)
-						(message "cancel!")
-						(setq a 13))
-				(unless (= a 13)
-						(insert-char a))
-				(unless (eolp) (backward-char))))
- )
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:

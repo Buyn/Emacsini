@@ -40,7 +40,9 @@
 								(save-buffer)
 								(evil-normal-state)
 								(with-current-buffer "*compilation*"
-										(recompile))
+									(recompile)
+									(setq compilation-scroll-output 'first-error)
+									)
 								(delete-other-windows)
 								))
 (global-set-key(kbd "M-<f8>") '(lambda() (interactive)

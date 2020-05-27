@@ -454,8 +454,8 @@ _?_ help            _c_urrent file
 ;; ***** keys
 ;; ****** w : 
     ("w" (query-replace
-								"\\"
 								"/"
+								"\\"
 								nil
 								nil
 								(current-kill 0 "DO-NOT-MOVE"))
