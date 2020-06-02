@@ -744,6 +744,97 @@ Within Emacs, ~ at the beginning of a file name is expanded to your HOME directo
   #+END_SRC
 ** dired
 *** запуск dired
+** eww 
+**** other
+*** 2 Basic Usage
+ You can open a URL or search the web with the command ‘M-x eww’.  If the
+ input doesn’t look like a URL or domain name the web will be searched
+ via ‘eww-search-prefix’.  The default search engine is DuckDuckGo
+ (https://duckduckgo.com).  If you want to open a file either prefix the
+ file name with ‘file://’ or use the command ‘M-x eww-open-file’.
+If loading the URL was successful the buffer ‘*eww*’ is opened and
+*** keys
+**** ‘q’ :  eww-quit : 
+ the web page is rendered in it.  You can leave EWW by pressing ‘q’ or
+ 
+ exit the browser by calling ‘eww-quit’. 
+**** ‘g’ : (‘eww-reload’). 
+ To reload the web page hit ‘g’
+ (‘eww-reload’). 
+**** ‘w’ : (‘eww-copy-page-url’) : 
+ Pressing ‘w’ (‘eww-copy-page-url’) will copy the
+ current URL to the kill ring.
+**** M-<RET> : ‘eww-open-in-new-buffer’
+		The ‘M-<RET>’ command (‘eww-open-in-new-buffer’) opens the URL at
+ point in a new EWW buffer, akin to opening a link in a new “tab” in
+ other browsers.
+**** ‘R’ command (‘eww-readable’) : 
+		The ‘R’ command (‘eww-readable’) will attempt to determine which part
+ of the document contains the “readable” text, and will only display this
+ part.  This usually gets rid of menus and the like.
+**** ‘F’ command (‘eww-toggle-fonts’) : 
+		The ‘F’ command (‘eww-toggle-fonts’) toggles whether to use
+ variable-pitch fonts or not.  This sets the ‘shr-use-fonts’ variable.
+**** ‘M-C’ command (‘eww-toggle-colors’) : 
+		The ‘M-C’ command (‘eww-toggle-colors’) toggles whether to use
+ HTML-specified colors or not.  This sets the ‘shr-use-colors’ variable.
+**** ‘d’ (‘eww-download’) : 
+		A URL under the point can be downloaded with ‘d’ (‘eww-download’).
+ The file will be written to the directory specified in
+ ‘eww-download-directory’ (Default: ‘~/Downloads/’).
+
+**** ‘l’ (‘eww-back-url’) : 
+		EWW remembers the URLs you have visited to allow you to go back and
+ forth between them.  By pressing ‘l’ (‘eww-back-url’) you go to the
+ previous URL. 
+**** ‘r’ (‘eww-forward-url’) : 
+ You can go forward again with ‘r’ (‘eww-forward-url’).
+**** ‘H’ (‘eww-list-histories’) : 
+ If you want an overview of your browsing history press ‘H’
+ (‘eww-list-histories’) to open the history buffer ‘*eww history*’.  The
+ history is lost when EWW is quit. 
+****  can use bookmarks.
+ If you want to remember websites you
+ can use bookmarks.
+		Along with the URLs visited, EWW also remembers both the rendered
+ page (as it appears in the buffer) and its source.  This can take a
+ considerable amount of memory, so EWW discards the history entries to
+ keep their number within a set limit, as specified by
+ ‘eww-history-limit’; the default being 50.  This variable could also be
+ set to ‘nil’ to allow for the history list to grow indefinitely.
+**** ‘b’ (‘eww-add-bookmark’)  : 
+		EWW allows you to “bookmark” URLs.  Simply hit ‘b’
+		
+ (‘eww-add-bookmark’) to store a bookmark for the current website.  You
+ 
+**** ‘B’ (‘eww-list-bookmarks’) : 
+ can view stored bookmarks with ‘B’ (‘eww-list-bookmarks’).  This will
+ open the bookmark buffer ‘*eww bookmarks*’.
+
+**** PDFs are viewed : 
+		PDFs are viewed inline, by default, with ‘doc-view-mode’, but this
+ can be customized by using the mailcap (*note (emacs-mime)mailcap::)
+ mechanism, in particular ‘mailcap-mime-data’.
+**** ‘S’ (‘eww-list-buffers’) : 
+		To get summary of currently opened EWW buffers, press ‘S’
+ (‘eww-list-buffers’).  The ‘*eww buffers*’ buffer allows you to quickly
+ kill, flip through and switch to specific EWW buffer.  
+**** ‘s’ (‘eww-switch-to-buffer’). : 
+To switch EWW
+ buffers through a minibuffer prompt, press ‘s’ (‘eww-switch-to-buffer’).
+
+**** ‘&’ (‘eww-browse-with-external-browser’) : 
+		Although EWW and shr.el do their best to render webpages in GNU Emacs
+ some websites use features which can not be properly represented or are
+ not implemented (E.g., JavaScript).  If you have trouble viewing a
+ 
+ website with EWW then hit ‘&’ (‘eww-browse-with-external-browser’)
+ inside the EWW buffer to open the website in the external browser
+ specified by ‘shr-external-browser’.  Some content types, such as video
+ or audio content, do not make sense to display in GNU Emacs at all.  You
+ can tell EWW to open specific content automatically in an external
+ browser by customizing ‘eww-use-external-browser-for-content-type’.
+
 ** REPL 
 ** DeBug
 ** eShell
@@ -984,7 +1075,7 @@ From the doc:
      очень последовательнвый манул по всему оргу с кучей примеров
 *** мануал пдф
  [[https://orgmode.org/org.pdf][Link to 304p doc about org]]
-** Tree Notes 
+** Notes 
 *** Exempls
   - Note taken on [2018-10-29 Пн 20:19] \\
     ladfdfd
@@ -1765,6 +1856,10 @@ Many common Org mode key sequences are re-bound depending on the context.
 	C-c C-v h or C-c C-v C-h 	org-babel-describe-bindings
 	C-c C-v x or C-c C-v C-x 	org-babel-do-key-sequence-in-edit-buffer
 
+** Faces : 
+You may specify special faces for specific tags using the variable org-tag-faces, in
+much the same way as you can for TODO keywords (see Faces for TODO
+keywords). 
 * Help Docs Gnus
   The Emacs news and email reader.
 * Help Docs Mods 
