@@ -152,7 +152,16 @@
 (define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
-(define-key evil-normal-state-map (kbd "M-e M-l ") 'eval-last-sexp)
+(define-key evil-normal-state-map (kbd "M-e M-l") 'eval-last-sexp)
+(define-key evil-normal-state-map (kbd "M-e M-j") 
+		'(lambda() (interactive)
+					(move-beginning-of-line nil)
+					(search-forward (char-to-string ?\)) nil nil nil)
+					(unless (eq (char-after(point)) ?\))
+						(backward-char 1))
+					(if (eq (char-after(point)) ?\))
+						(eval-last-sexp nil))
+					))
 ;; -------------------------------------- }}}
 ;; ** find&replace  {{{
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)

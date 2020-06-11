@@ -38,7 +38,22 @@ description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
 ** progn : 
 (progn
 
-		(define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
+(define-key evil-normal-state-map (kbd "M-e M-j") 
+		'(lambda() (interactive)
+					(move-beginning-of-line nil)
+					(search-forward (char-to-string ?\)) nil nil nil)
+					(unless (eq (char-after(point)) ?\))
+						(backward-char 1))
+					(if (eq (char-after(point)) ?\))
+						(eval-last-sexp nil))
+					))
+
+(define-key evil-normal-state-map "zc" '(lambda() (interactive)
+					;; (outline-previous-visible-heading 1)
+					(move-beginning-of-line nil)
+					(org-up-element)
+					(hide-subtree)
+					))
 
 		) progn end
 * Pathes
@@ -1428,6 +1443,36 @@ https://orgmode.org/org.html#Advanced-features
   
 		|---------+---+--------|
 		|         |   |        |
+**** Time 
+***** outer
+
+| ! | Ending           | Weeks | Rent |  Total | |---+------------------+-------+------+--------|
+| # | [2016-04-18 Mon] |     4 |  180 | 720.00 |
+| # | [2016-05-16 Mon] |     4 |  180 | 720.00 |
+| # | [2016-06-20 Mon] |     5 |  180 | 900.00 |
+#+TBLFM: $5=$Weeks*$Rent; %.2f
+#+TBLFM: $3=($2 - @-1$2)/7::$5=$Weeks*$Rent; %.2f0/0/1
+#+TBLFM: $3=if(2 == @#, 4, ($2 - @-1$2)/7)::$5=$Weeks*$Rent; %.2f
+***** my
+
+|   |       |                        |                       |       |                                      |
+|---+-------+------------------------+-----------------------+-------+--------------------------------------|
+|   |  1000 | [2020-06-07 Sun 12:24] | [2020-06-07 Вс 10:00] |   0.1 | проснутся                            |
+|   |  1005 | [2020-06-07 Sun 10:19] | [2020-06-07 Вс 10:05] |  0.01 | подключить телефон на зарядку        |
+|   |  1000 | [2020-06-07 Sun 10:02] | [2020-06-07 Вс 10:01] | 0.001 | включить комп                        |
+|   |  1010 | [2020-06-07 Sun 10:10] | [2020-06-07 Вс 10:10] |       | сообшение белому - проверка телефона |
+|   |  1015 | [2020-06-07 Sun 10:15] | [2020-06-07 Вс 10:15] |       | принять душь                         |
+|   |  1115 | [2020-06-07 Sun 11:15] | [2020-06-07 Вс 11:15] |       | начать складыватсясложится           |
+|   |  1145 | [2020-06-07 Sun 11:45] | [2020-06-07 Вс 11:45] |       | выйти                                |
+|   |       | 0                      |                       |       | купить воды лоток\сельпо             |
+|   |  1245 | [2020-06-08 Mon 13:00] | [2020-06-08 Пн 13:00] |       | выйти из метро                       |
+|   | 13:45 | [2020-06-09 Tue 13:00] | [2020-06-09 Вт 13:00] |       |                                      |
+|   | 14:45 | 2                      | 1                     |     1 |                                      |
+|   | 14:45 | 0                      |                       |       |                                      |
+|---+-------+------------------------+-----------------------+-------+--------------------------------------|
+|   |       | 0                      |                       |       |                                      |
+#+TBLFM: $3=$+1 + $+2
+#+TBLFM: $3=@#
 *** keys 
 **** new
 c-c | - generet new table

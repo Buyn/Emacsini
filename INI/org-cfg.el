@@ -105,6 +105,7 @@
 ;; **** zc
 (define-key evil-normal-state-map "zc" '(lambda() (interactive)
 					;; (outline-previous-visible-heading 1)
+					(move-beginning-of-line nil)
 					(org-up-element)
 					(hide-subtree)
 					))
