@@ -153,6 +153,7 @@
 (define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
 (define-key evil-normal-state-map (kbd "M-e M-l") 'eval-last-sexp)
+;; *** search-forward & sexp M-e M-j : 
 (define-key evil-normal-state-map (kbd "M-e M-j") 
 		'(lambda() (interactive)
 					(move-beginning-of-line nil)

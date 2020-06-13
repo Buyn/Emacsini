@@ -23,6 +23,8 @@ _   _   _             _   _   _
 =================================
 ** Tmp 
  
+	 - Note taken on [2020-06-12 Пт 21:36] \\
+		 dfsdfsdf
 description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
      #+CAPTION: This is the caption for the next figure link (or table)
      #+NAME:   fig:SED-HR4049
