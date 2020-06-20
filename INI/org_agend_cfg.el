@@ -46,6 +46,29 @@
       '(("Q" . "Custom queries") ;; gives label to "Q" 
         ("Qa" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards "~/archive/*.org")))) 
+        ("Qn" "Todo next search" todo "NEXT"
+						(
+						;; (org-agenda-files (file-expand-wildcards "~/../Dropbox/orgs/GTD/*.org"))
+						(org-agenda-files '(		"~/../Dropbox/orgs/GTD/todo_today.org" 
+																		;; "~/../Dropbox/orgs/capture/emagus.org" 
+																		;; "~/../Dropbox/orgs/capture/Necronomicon.org" 
+																		;; "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																		) 
+								))) 
+        ("QN" todo "NEXT"
+						((org-agenda-files '(		"~/../Dropbox/orgs/GTD/todo_today.org" 
+																		"~/../Dropbox/orgs/capture/emagus.org" 
+																		"~/../Dropbox/orgs/capture/Necronomicon.org" 
+																		"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																		) 
+						))) 
+        ("QH" "My-agenda"
+              (	(agenda "")
+								(org-agenda-files '(
+																						"~/../Dropbox/orgs/capture/emagus.org" 
+																						"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																						) 
+								))) 
         ("Qw" "Website search" search ""
          ((org-agenda-files (file-expand-wildcards "~/website/*.org"))))
         ("Qb" "Projects and Archive" search ""
