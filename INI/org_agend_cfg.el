@@ -5,6 +5,10 @@
 ;; (find-file "~/INI/org-cfg.el")
 ;; --------------------------------------
 ;; --------------------- 
+;; * ageda setings 
+;; --------------------- 
+(setq org-agenda-sticky 1)
+;; --------------------- 
 ;; * open ageda on new frame 
 ;; --------------------- 
 ;;(setq org-agenda-files (quote ("~/ORG/start.org")))
@@ -68,6 +72,13 @@
 																						"~/../Dropbox/orgs/capture/emagus.org" 
 																						"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
 																						) 
+								))) 
+        ("Qh" agenda "My-agenda" (	
+								(org-agenda-files '(
+																		"~/../Dropbox/orgs/capture/emagus.org" 
+																		"~/../Dropbox/orgs/GTD/todo_today.org"
+																		"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																		) 
 								))) 
         ("Qw" "Website search" search ""
          ((org-agenda-files (file-expand-wildcards "~/website/*.org"))))

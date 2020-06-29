@@ -21,20 +21,35 @@ _   _   _             _   _   _
   |__|      ||_|_|_||      |__|
  /   |      ||_|_|_||      |   \
 =================================
-** Tmp 
- 
-	 - Note taken on [2020-06-12 Пт 21:36] \\
-		 dfsdfsdf
-description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
-     #+CAPTION: This is the caption for the next figure link (or table)
-     #+NAME:   fig:SED-HR4049
-     [[./img/a.jpg]]
+** Tmp  
+	(replace-regexp-in-string 
+		"\\" "/" "s:\df\ss\df.txt" t t)
+    (invalid-regexp "Trailing backslash")
 
-[2020-06-13 Сб]
-[2020-06-06 Сб]
-<2020-07-07 Вт>
-[2020-07-07 Вт]
+Подскажите пожалусто, как заменить одиночнуя обратную косую черту "\"
+в строке на другой символ?
+если
+(replace-regexp-in-string "\\" "_" "foo\bar" t t)
+приводит к ошибке
+    (invalid-regexp "Trailing backslash")
+а
+(replace-regexp-in-string "\\\\" "_" "foo\\bar" t t)
+>>"foo_bar"
+(replace-regexp-in-string (regexp-quote "\\") "_" "foo\\bar")
+>>"foo_bar"
+естественно работают для двойного слеша
 
+
+     #+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
+     Last block update at: on 06/26/2020 at 21:33
+     #+END:
+
+The dynamic block’s writer function:
+
+     (defun org-dblock-write:block-update-time (params)
+       (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
+         (insert "Last block update at: "
+                 (format-time-string fmt))))
 
 
 ** progn : 
@@ -123,7 +138,7 @@ description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
 (find-file "~/INI/hydra-cfg.el")
 (find-file "~/INI/www-cfg.el") not used
 *** literary 
-(find-file "~/INI/lit-cfg.el") not et
+(find-file "~/INI/lit-cfg.el") 
 	(find-file "~/INI/translate-cfg.el") not et
 	(find-file "~/INI/grammer-cfg.el") not et
 *** Programing
@@ -136,6 +151,8 @@ description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
 	(find-file "~/INI/python-cfg.el")
 	(find-file "~/INI/c-mode-cfg.el") not used
 	(find-file "~/INI/flycheck-cfg.el") 
+*** My Elisp
+	(find-file "~/ELs/BuYn/shell.el")
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -151,9 +168,14 @@ description part, for example ‘[[./img/a.jpg]]’.  If you wish to define
 (load "~/INI/dev-cfg.el")
 (load "~/INI/interface-mods.el")
 (load "~/INI/hydra-cfg.el")
+(load "~/ELs/BuYn/shell.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")
+** Agenda
+*** revert 
+(org-revert-all-org-buffers)
+*** open 
 
 ** Install
 tar not found when trying to install from melpa 
@@ -679,7 +701,21 @@ http://ergoemacs.org/emacs_manual/elisp/Shell-Arguments.html#Shell-Arguments
   ensure that your PATH environment variable is set appropriately
   before starting Emacs.  Trying to modify exec-path
   independently of PATH can lead to confusing results.
+*** exempl
+**** shell link
+[shell:D:\scripts\CMD\CygWin\vim.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
 
+[shell:D:\Development\lisp\HOME\emacs_Run.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+(shell  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt")
+[shell:D:\scripts\CMD\emagus\run_far.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\"]
+
+[shell:D:\Development\lisp\HOME\emacs_client.cmd  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+**** shell-command  : 
+(shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+
+(shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+
+(shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
 ** Options
 *** Visual
 *** Home 
@@ -1085,6 +1121,43 @@ From the doc:
 
 [fn:2] Second footnote.
 [fn:1] I not undestend ecthakli how this must work
+** Agenda
+*** exempl
+**** aaronbieber
+https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
+
+(defun air-org-skip-subtree-if-priority (priority)
+  "Skip an agenda subtree if it has a priority of PRIORITY.
+
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+        (pri-value (* 1000 (- org-lowest-priority priority)))
+        (pri-current (org-get-priority (thing-at-point 'line t))))
+    (if (= pri-value pri-current)
+        subtree-end
+      nil)))
+			
+(defun air-org-skip-subtree-if-habit ()
+  "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+    (if (string= (org-entry-get nil "STYLE") "habit")
+        subtree-end
+      nil)))
+
+
+(setq org-agenda-custom-commands
+      '(("d" "Daily agenda and all TODOs"
+         ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
+          (agenda "" ((org-agenda-ndays 1)))
+          (alltodo ""
+                   ((org-agenda-skip-function '(or (air-org-skip-subtree-if-habit)
+                                                   (air-org-skip-subtree-if-priority ?A)
+                                                   (org-agenda-skip-if nil '(scheduled deadline))))
+                    (org-agenda-overriding-header "ALL normal priority tasks:"))))
+         ((org-agenda-compact-blocks t)))))
+
 ** Help keys
 *** Visibility cycling
 Tab – show current
@@ -1456,7 +1529,6 @@ https://orgmode.org/org.html#Advanced-features
 #+TBLFM: $3=($2 - @-1$2)/7::$5=$Weeks*$Rent; %.2f0/0/1
 #+TBLFM: $3=if(2 == @#, 4, ($2 - @-1$2)/7)::$5=$Weeks*$Rent; %.2f
 ***** my
-
 |   |       |                        |                       |       |                                      |
 |---+-------+------------------------+-----------------------+-------+--------------------------------------|
 |   |  1000 | [2020-06-07 Sun 12:24] | [2020-06-07 Вс 10:00] |   0.1 | проснутся                            |
@@ -1475,637 +1547,633 @@ https://orgmode.org/org.html#Advanced-features
 |   |       | 0                      |                       |       |                                      |
 #+TBLFM: $3=$+1 + $+2
 #+TBLFM: $3=@#
-***** расписан
-#+CONSTANTS: mult=6.944e-4 
-|   | описание              | минут | часов | время начала           | время завершения       |   |
-|---+-----------------------+-------+-------+------------------------+------------------------+---|
-| 2 | проснутся             |     5 |     0 | [2020-06-18 Thu 08:50] | [2020-06-18 Thu 08:55] | 9 |
-| 3 | провверить расписание |    15 |     0 | [2020-06-18 Thu 08:55] | [2020-06-18 Thu 09:10] | 9 |
-| 4 | душь зубы             |    15 |     0 | [2020-06-18 Thu 09:10] | [2020-06-18 Thu 09:25] | 9 |
-| 5 | подготовка            |    10 |     0 | [2020-06-18 Thu 09:25] | [2020-06-18 Thu 09:35] | 9 |
-| 6 | жгем костёр           |    60 |     0 | [2020-06-18 Thu 09:35] | [2020-06-18 Thu 10:35] | 9 |
-| 7 | готовим               |    60 |     0 | [2020-06-18 Thu 10:35] | [2020-06-18 Thu 11:35] | 9 |
-| 8 | едим                  |    10 |     0 | [2020-06-18 Thu 11:35] | [2020-06-18 Thu 11:45] | 9 |
-| 9 | соня выежает          |    15 |     0 | [2020-06-18 Thu 11:45] | [2020-06-18 Thu 12:00] | 9 |
-|---+-----------------------+-------+-------+------------------------+------------------------+---|
-#+TBLFM: $6=if(@# == @>$1, @>$6, @+1$5)::$5=$6-$3*$mult::$1=@#
-#+TBLFM: $4=0
-#+TBLFM: $5=0
-#+TBLFM: $6=0
-#+TBLFM: $1=@#
-#+TBLFM: $7=@>$1
+***** расписание
+	 #+CONSTANTS: mult=6.944e-4 
+	 |   | описание          | минут | часов | время начала           | время завершения       |   |
+	 |---+-------------------+-------+-------+------------------------+------------------------+---|
+	 | 2 | готовим           |    40 |     0 | [2020-06-23 Tue 11:40] | [2020-06-23 Tue 12:20] | 9 |
+	 | 3 | Кушаем с Соней    |    40 |       | [2020-06-23 Tue 12:20] | [2020-06-23 Tue 13:00] |   |
+	 | 4 | встреча с вадимом |     0 |     1 | [2020-06-23 Tue 13:00] | [2020-06-23 Tue 14:00] | 9 |
+	 | 5 | встреча с вадимом |     0 |     1 | [2020-06-23 Tue 14:00] | [2020-06-23 Tue 15:00] | 9 |
+	 | 6 | встреча с вадимом |     0 |     1 | [2020-06-23 Tue 15:00] | [2020-06-23 Tue 16:00] | 9 |
+	 |---+-------------------+-------+-------+------------------------+------------------------+---|
+	 #+TBLFM: $5=$6-($3+$4*60)*$mult::$6=if(@#==@>$1,@>$6,@+1$5)::$1=@#
+	 #+TBLFM: @>$6= <2020-05-23 Сб 16:00>
+	 #+TBLFM: @>$6=  
+	 #+TBLFM: $5=0
+	 #+TBLFM: $4=0
+	 #+TBLFM: $6=0
+	 #+TBLFM: $1=@#
 
-*** keys 
-**** new
-c-c | - generet new table
-‘C-c |     (org-table-create-or-convert-from-region)’
-**** learn about ~references~ is to type C-c ? : 
- Before being able to insert a formula in [Formula], you need to know how to refer to a row, a column or a single field.
-The easiest way to learn about references is to type C-c ? while you are in a field.
-For example, if you are in the [Formula] field, C-c ? will tell you: line @2, col $4, ref @2$4 or D2, meaning that you are on the second row (or line) of the fourth column, and the reference for this field is either @2$4 or D2. 
-**** turn on the reference visualization grid with C-c } : 
-At any moment, if you are lost in rows and columns, you can always turn on the reference visualization grid with C-c }: 
-**** Debugging formulas c-c c-{
-**** ‘C-c <SPC>     (org-table-blank-field)’
-     Blank the field at point.
-**** ‘M-a     (org-table-beginning-of-field)’
-     Move to beginning of the current table field, or on to the previous
-     field.
-**** ‘M-e     (org-table-end-of-field)’
-     Move to end of the current table field, or on to the next field.
-     Blank the field at point.
-**** move 
-‘M-<LEFT>     (org-table-move-column-left)’
-‘M-<RIGHT>     (org-table-move-column-right)’
-     Move the current column left/right.
-‘M-<UP>     (org-table-move-row-up)’
-‘M-<DOWN>     (org-table-move-row-down)’
-     Move the current row up/down.
-**** add \\ remove
-‘M-S-<LEFT>     (org-table-delete-column)’
-     Kill the current column.
-‘M-S-<RIGHT>     (org-table-insert-column)’
-     Insert a new column to the left of the cursor position.
-‘M-S-<UP>     (org-table-kill-row)’
-     Kill the current row or horizontal line.
-‘M-S-<DOWN>     (org-table-insert-row)’
-**** ‘C-c -     (org-table-insert-hline)’
-     Insert a horizontal line below current row.  With a prefix
-     argument, the line is created above the current line.
-**** ‘C-c <RET>     (org-table-hline-and-move)’
-     Insert a horizontal line below current row, and move the cursor
-     into the row below that line.
-**** ‘C-c ^     (org-table-sort-lines)’
-     Sort the table lines in the region.  The position of point
-     indicates the column to be used for sorting, and the range of lines
-     is the range between the nearest horizontal separator lines, or the
-     entire table.  If point is before the first column, you will be
-     prompted for the sorting column.  If there is an active region, the
-     mark specifies the first line and the sorting column, while point
-     should be in the last line to be included into the sorting.  The
-     command prompts for the sorting type (alphabetically, numerically,
-     or by time).  You can sort in normal or reverse order.  You can
-     also supply your own key extraction and comparison functions.  When
-     called with a prefix argument, alphabetic sorting will be
-     case-sensitive.
-**** ‘M-<RET>     (org-table-wrap-region)’
-     Split the current field at the cursor position and move the rest to
-     the line below.  If there is an active region, and both point and
-     mark are in the same column, the text in the column is wrapped to
-     minimum width for the given number of lines.  A numeric prefix
-     argument may be used to change the number of desired lines.  If
-     there is no region, but you specify a prefix argument, the current
-     field is made blank, and the content is appended to the field
-     above.
-**** ‘C-c +     (org-table-sum)’
-     Sum the numbers in the current column, or in the rectangle defined
-     by the active region.  The result is shown in the echo area and can
-     be inserted with ‘C-y’.
-**** ‘S-<RET>     ~протягивание~ (org-table-copy-down)’
-     When current field is empty, copy from first non-empty field above.
-     When not empty, copy current field down to next row and move cursor
-     along with it.  Depending on the option ‘org-table-copy-increment’,
-     integer field values will be incremented during copy.  Integers
-     that are too large will not be incremented.  Also, a ‘0’ prefix
-     argument temporarily disables the increment.  This key is also used
-     by shift-selection and related modes (*note Conflicts::).
-**** ‘C-c |     (org-table-create-or-convert-from-region)’
-     Tables can also be imported by pasting tabular text into the Org
-     buffer, selecting the pasted text with ‘C-x C-x’ and then using the
-     ‘C-c |’ command (see above under Creation and conversion).
-‘C-c |     (org-table-create-or-convert-from-region)’
-     Convert the active region to a table.  If every line contains at
-     least one TAB character, the function assumes that the material is
-     tab separated.  If every line contains a comma, comma-separated
-     values (CSV) are assumed.  If not, lines are split at whitespace
-     into fields.  You can use a prefix argument to force a specific
-     separator: ‘C-u’ forces CSV, ‘C-u C-u’ forces TAB, ‘C-u C-u C-u’
-**** C-c = for editing column formulas : 
- If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
-**** C-u C-c = for field formulas : 
- If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
-**** edit formulas interactively in a dedicated buffer C-c ' 
-But you can also edit formulas more interactively in a dedicated buffer by typing C-c '. This new buffer lists all the formulas for the table at point and provides facilities to edit the references.
+****** keys 
+******* new
+	 c-c | - generet new table
+	 ‘C-c |     (org-table-create-or-convert-from-region)’
+******* learn about ~references~ is to type C-c ? : 
+		Before being able to insert a formula in [Formula], you need to know how to refer to a row, a column or a single field.
+	 The easiest way to learn about references is to type C-c ? while you are in a field.
+	 For example, if you are in the [Formula] field, C-c ? will tell you: line @2, col $4, ref @2$4 or D2, meaning that you are on the second row (or line) of the fourth column, and the reference for this field is either @2$4 or D2. 
+******* turn on the reference visualization grid with C-c } : 
+	 At any moment, if you are lost in rows and columns, you can always turn on the reference visualization grid with C-c }: 
+******* Debugging formulas c-c c-{
+******* ‘C-c <SPC>     (org-table-blank-field)’
+				Blank the field at point.
+******* ‘M-a     (org-table-beginning-of-field)’
+				Move to beginning of the current table field, or on to the previous
+				field.
+******* ‘M-e     (org-table-end-of-field)’
+				Move to end of the current table field, or on to the next field.
+				Blank the field at point.
+******* move 
+	 ‘M-<LEFT>     (org-table-move-column-left)’
+	 ‘M-<RIGHT>     (org-table-move-column-right)’
+				Move the current column left/right.
+	 ‘M-<UP>     (org-table-move-row-up)’
+	 ‘M-<DOWN>     (org-table-move-row-down)’
+				Move the current row up/down.
+******* add \\ remove
+	 ‘M-S-<LEFT>     (org-table-delete-column)’
+				Kill the current column.
+	 ‘M-S-<RIGHT>     (org-table-insert-column)’
+				Insert a new column to the left of the cursor position.
+	 ‘M-S-<UP>     (org-table-kill-row)’
+				Kill the current row or horizontal line.
+	 ‘M-S-<DOWN>     (org-table-insert-row)’
+******* ‘C-c -     (org-table-insert-hline)’
+				Insert a horizontal line below current row.  With a prefix
+				argument, the line is created above the current line.
+******* ‘C-c <RET>     (org-table-hline-and-move)’
+				Insert a horizontal line below current row, and move the cursor
+				into the row below that line.
+******* ‘C-c ^     (org-table-sort-lines)’
+				Sort the table lines in the region.  The position of point
+				indicates the column to be used for sorting, and the range of lines
+				is the range between the nearest horizontal separator lines, or the
+				entire table.  If point is before the first column, you will be
+				prompted for the sorting column.  If there is an active region, the
+				mark specifies the first line and the sorting column, while point
+				should be in the last line to be included into the sorting.  The
+				command prompts for the sorting type (alphabetically, numerically,
+				or by time).  You can sort in normal or reverse order.  You can
+				also supply your own key extraction and comparison functions.  When
+				called with a prefix argument, alphabetic sorting will be
+				case-sensitive.
+******* ‘M-<RET>     (org-table-wrap-region)’
+				Split the current field at the cursor position and move the rest to
+				the line below.  If there is an active region, and both point and
+				mark are in the same column, the text in the column is wrapped to
+				minimum width for the given number of lines.  A numeric prefix
+				argument may be used to change the number of desired lines.  If
+				there is no region, but you specify a prefix argument, the current
+				field is made blank, and the content is appended to the field
+				above.
+******* ‘C-c +     (org-table-sum)’
+				Sum the numbers in the current column, or in the rectangle defined
+				by the active region.  The result is shown in the echo area and can
+				be inserted with ‘C-y’.
+******* ‘S-<RET>     ~протягивание~ (org-table-copy-down)’
+				When current field is empty, copy from first non-empty field above.
+				When not empty, copy current field down to next row and move cursor
+				along with it.  Depending on the option ‘org-table-copy-increment’,
+				integer field values will be incremented during copy.  Integers
+				that are too large will not be incremented.  Also, a ‘0’ prefix
+				argument temporarily disables the increment.  This key is also used
+				by shift-selection and related modes (*note Conflicts::).
+******* ‘C-c |     (org-table-create-or-convert-from-region)’
+				Tables can also be imported by pasting tabular text into the Org
+				buffer, selecting the pasted text with ‘C-x C-x’ and then using the
+				‘C-c |’ command (see above under Creation and conversion).
+	 ‘C-c |     (org-table-create-or-convert-from-region)’
+				Convert the active region to a table.  If every line contains at
+				least one TAB character, the function assumes that the material is
+				tab separated.  If every line contains a comma, comma-separated
+				values (CSV) are assumed.  If not, lines are split at whitespace
+				into fields.  You can use a prefix argument to force a specific
+				separator: ‘C-u’ forces CSV, ‘C-u C-u’ forces TAB, ‘C-u C-u C-u’
+******* C-c = for editing column formulas : 
+		If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
+******* C-u C-c = for field formulas : 
+		If you prefer, you can edit formulas in the minibuffer: use C-c = for editing column formulas or C-u C-c = for field formulas.
+******* edit formulas interactively in a dedicated buffer C-c ' 
+	 But you can also edit formulas more interactively in a dedicated buffer by typing C-c '. This new buffer lists all the formulas for the table at point and provides facilities to edit the references.
 
-When the cursor is above a reference, the corresponding field in the table get highlighted. Nice! But you can do more than that: you can actually select the reference by using the S-<left/right/up/down> keys. 
-**** ‘C-c `     (org-table-edit-field)’
-     Edit the current field in a separate window.  This is useful for
-     fields that are not fully visible (*note Column width and
-     alignment::).  When called with a ‘C-u’ prefix, just make the full
-     field visible, so that it can be edited in place.  When called with
-     two ‘C-u’ prefixes, make the editor window follow the cursor
-     through the table and always show the current field.  The follow
-     mode exits automatically when the cursor leaves the table, or when
-     you repeat this command with ‘C-u C-u C-c `’.
-**** ‘C-c '     (org-table-edit-formulas)’
-     Edit all formulas for the current table in a special buffer, where
-     the formulas will be displayed one per line.  If the current field
-     has an active formula, the cursor in the formula editor will mark
-     it.  While inside the special buffer, Org will automatically
-     highlight any field or range reference at the cursor position.  You
-     may edit, remove and add formulas, and use the following commands:
+	 When the cursor is above a reference, the corresponding field in the table get highlighted. Nice! But you can do more than that: you can actually select the reference by using the S-<left/right/up/down> keys. 
+******* ‘C-c `     (org-table-edit-field)’
+				Edit the current field in a separate window.  This is useful for
+				fields that are not fully visible (*note Column width and
+				alignment::).  When called with a ‘C-u’ prefix, just make the full
+				field visible, so that it can be edited in place.  When called with
+				two ‘C-u’ prefixes, make the editor window follow the cursor
+				through the table and always show the current field.  The follow
+				mode exits automatically when the cursor leaves the table, or when
+				you repeat this command with ‘C-u C-u C-c `’.
+******* ‘C-c '     (org-table-edit-formulas)’
+				Edit all formulas for the current table in a special buffer, where
+				the formulas will be displayed one per line.  If the current field
+				has an active formula, the cursor in the formula editor will mark
+				it.  While inside the special buffer, Org will automatically
+				highlight any field or range reference at the cursor position.  You
+				may edit, remove and add formulas, and use the following commands:
 
-     ‘C-c C-c  or  C-x C-s     (org-table-fedit-finish)’
-          Exit the formula editor and store the modified formulas.  With
-          ‘C-u’ prefix, also apply the new formulas to the entire table.
-     ‘C-c C-q     (org-table-fedit-abort)’
-          Exit the formula editor without installing changes.
-     ‘C-c C-r     (org-table-fedit-toggle-ref-type)’
-          Toggle all references in the formula editor between standard
-          (like ‘B3’) and internal (like ‘@3$2’).
-     ‘<TAB>     (org-table-fedit-lisp-indent)’
-          Pretty-print or indent Lisp formula at point.  When in a line
-          containing a Lisp formula, format the formula according to
-          Emacs Lisp rules.  Another <TAB> collapses the formula back
-          again.  In the open formula, <TAB> re-indents just like in
-          Emacs Lisp mode.
-     ‘M-<TAB>     (lisp-complete-symbol)’
-          Complete Lisp symbols, just like in Emacs Lisp mode.(1)
-     ‘S-<UP>/<DOWN>/<LEFT>/<RIGHT>’
-          Shift the reference at point.  For example, if the reference
-          is ‘B3’ and you press ‘S-<RIGHT>’, it will become ‘C3’.  This
-          also works for relative references and for hline references.
-     ‘M-S-<UP>     (org-table-fedit-line-up)’
-     ‘M-S-<DOWN>     (org-table-fedit-line-down)’
-          Move the test line for column formulas in the Org buffer up
-          and down.
-     ‘M-<UP>     (org-table-fedit-scroll-down)’
-     ‘M-<DOWN>     (org-table-fedit-scroll-up)’
-          Scroll the window displaying the table.
-     ‘C-c }’
-          Turn the coordinate grid in the table on and off.
+				‘C-c C-c  or  C-x C-s     (org-table-fedit-finish)’
+						 Exit the formula editor and store the modified formulas.  With
+						 ‘C-u’ prefix, also apply the new formulas to the entire table.
+				‘C-c C-q     (org-table-fedit-abort)’
+						 Exit the formula editor without installing changes.
+				‘C-c C-r     (org-table-fedit-toggle-ref-type)’
+						 Toggle all references in the formula editor between standard
+						 (like ‘B3’) and internal (like ‘@3$2’).
+				‘<TAB>     (org-table-fedit-lisp-indent)’
+						 Pretty-print or indent Lisp formula at point.  When in a line
+						 containing a Lisp formula, format the formula according to
+						 Emacs Lisp rules.  Another <TAB> collapses the formula back
+						 again.  In the open formula, <TAB> re-indents just like in
+						 Emacs Lisp mode.
+				‘M-<TAB>     (lisp-complete-symbol)’
+						 Complete Lisp symbols, just like in Emacs Lisp mode.(1)
+				‘S-<UP>/<DOWN>/<LEFT>/<RIGHT>’
+						 Shift the reference at point.  For example, if the reference
+						 is ‘B3’ and you press ‘S-<RIGHT>’, it will become ‘C3’.  This
+						 also works for relative references and for hline references.
+				‘M-S-<UP>     (org-table-fedit-line-up)’
+				‘M-S-<DOWN>     (org-table-fedit-line-down)’
+						 Move the test line for column formulas in the Org buffer up
+						 and down.
+				‘M-<UP>     (org-table-fedit-scroll-down)’
+				‘M-<DOWN>     (org-table-fedit-scroll-up)’
+						 Scroll the window displaying the table.
+				‘C-c }’
+						 Turn the coordinate grid in the table on and off.
 
 
-*** Outer exempl
-**** GANTT
-https://www.youtube.com/watch?time_continue=791&v=5ViUBaarsbw&feature=emb_title
-*** explains 
-**** :=vmean($2..$3) 
-in this field. This formula means: calculate the mean for fields from the second ($2) to the third ($3) field in this row. If you prefer to use the other notation, type
-**** :=vmean(B&..C&)
- where the & character stands for "in this row", which is implicit in the previous notation. 
-**** prefixed by = instead of :=  
-Note that the only difference with what you've inserted previously is that the formula is prefixed by = instead of :=. When you're done, do a C-c C-c in the field: you should be prompted whether you want to replace the formula with a column formula, which is precisely what we want.
+****** Outer exempl
+******* GANTT
+	 https://www.youtube.com/watch?time_continue=791&v=5ViUBaarsbw&feature=emb_title
+****** explains 
+******* :=vmean($2..$3) 
+	 in this field. This formula means: calculate the mean for fields from the second ($2) to the third ($3) field in this row. If you prefer to use the other notation, type
+******* :=vmean(B&..C&)
+		where the & character stands for "in this row", which is implicit in the previous notation. 
+******* prefixed by = instead of :=  
+	 Note that the only difference with what you've inserted previously is that the formula is prefixed by = instead of :=. When you're done, do a C-c C-c in the field: you should be prompted whether you want to replace the formula with a column formula, which is precisely what we want.
 
-Once you agree with this, the value in the field should be the same than before (namely 11) and you can now update all the fields in this column by reapplying all formulas with C-u C-c * (or C-c C-c if you're on the #+TBLFM line.) 
-For now we have been defining formulas by inserting them directly in the table cells: typing = in a field starts the definition for a column formula and typing := starts a definition for a field formula. 
-*** visual
-**** width of this column to this value : 
-contain just the string ‘<N>’ where ‘N’ is an integer specifying the
-width of the column in characters.  The next re-align will then set the
-width of this column to this value.
+	 Once you agree with this, the value in the field should be the same than before (namely 11) and you can now update all the fields in this column by reapplying all formulas with C-u C-c * (or C-c C-c if you're on the #+TBLFM line.) 
+	 For now we have been defining formulas by inserting them directly in the table cells: typing = in a field starts the definition for a column formula and typing := starts a definition for a field formula. 
+****** visual
+******* width of this column to this value : 
+	 contain just the string ‘<N>’ where ‘N’ is an integer specifying the
+	 width of the column in characters.  The next re-align will then set the
+	 width of this column to this value.
 
-|---+------------------------------|         |---+--------|
-|   |                              |         |   | <6>    |
-| 1 | one                          |         | 1 | one    |
-| 2 | two                          |  ----\  | 2 | two    |
-| 3 | This is a long chunk of text |  ----/  | 3 | This=> |
-| 4 | four                         |         | 4 | four   |
-|---+------------------------------|         |---+--------|
+	 |---+------------------------------|         |---+--------|
+	 |   |                              |         |   | <6>    |
+	 | 1 | one                          |         | 1 | one    |
+	 | 2 | two                          |  ----\  | 2 | two    |
+	 | 3 | This is a long chunk of text |  ----/  | 3 | This=> |
+	 | 4 | four                         |         | 4 | four   |
+	 |---+------------------------------|         |---+--------|
 
-Fields that are wider become clipped and end in the string ‘=>’.  Note
-that the full text is still in the buffer but is hidden.  To see the
-full text, hold the mouse over the field—a tool-tip window will show the
-full content.  To edit such a field, use the command ‘C-c `’ (that is
-‘C-c’ followed by the grave accent).  This will open a new window with
-the full field.  Edit it and finish with ‘C-c C-c’.
-**** format 
-***** 3.5.2 Formula syntax for Calc
- -----------------------------
+	 Fields that are wider become clipped and end in the string ‘=>’.  Note
+	 that the full text is still in the buffer but is hidden.  To see the
+	 full text, hold the mouse over the field—a tool-tip window will show the
+	 full content.  To edit such a field, use the command ‘C-c `’ (that is
+	 ‘C-c’ followed by the grave accent).  This will open a new window with
+	 the full field.  Edit it and finish with ‘C-c C-c’.
+******* format 
+******** 3.5.2 Formula syntax for Calc
+		-----------------------------
 
- A formula can be any algebraic expression understood by the Emacs ‘Calc’
- package.  Note that ‘calc’ has the non-standard convention that ‘/’ has
- lower precedence than ‘*’, so that ‘a/b*c’ is interpreted as ‘a/(b*c)’.
- Before evaluation by ‘calc-eval’ (*note calc-eval: (calc)Calling Calc
- from Your Programs.), variable substitution takes place according to the
- rules described above.  The range vectors can be directly fed into the
- Calc vector functions like ‘vmean’ and ‘vsum’.
+		A formula can be any algebraic expression understood by the Emacs ‘Calc’
+		package.  Note that ‘calc’ has the non-standard convention that ‘/’ has
+		lower precedence than ‘*’, so that ‘a/b*c’ is interpreted as ‘a/(b*c)’.
+		Before evaluation by ‘calc-eval’ (*note calc-eval: (calc)Calling Calc
+		from Your Programs.), variable substitution takes place according to the
+		rules described above.  The range vectors can be directly fed into the
+		Calc vector functions like ‘vmean’ and ‘vsum’.
 
-		A formula can contain an optional mode string after a semicolon.
- This string consists of flags to influence Calc and other modes during
- execution.  By default, Org uses the standard Calc modes (precision 12,
- angular units degrees, fraction and symbolic modes off).  The display
- format, however, has been changed to ‘(float 8)’ to keep tables compact.
- The default settings can be configured using the option
- ‘org-calc-default-modes’.
-***** List of modes:
+			 A formula can contain an optional mode string after a semicolon.
+		This string consists of flags to influence Calc and other modes during
+		execution.  By default, Org uses the standard Calc modes (precision 12,
+		angular units degrees, fraction and symbolic modes off).  The display
+		format, however, has been changed to ‘(float 8)’ to keep tables compact.
+		The default settings can be configured using the option
+		‘org-calc-default-modes’.
+******** List of modes:
 
- ‘p20’
-			Set the internal Calc calculation precision to 20 digits.
- ‘n3’, ‘s3’, ‘e2’, ‘f4’
-			Normal, scientific, engineering or fixed format of the result of
-			Calc passed back to Org.  Calc formatting is unlimited in precision
-			as long as the Calc calculation precision is greater.
- ‘D’, ‘R’
-			Degree and radian angle modes of Calc.
- ‘F’, ‘S’
-			Fraction and symbolic modes of Calc.
- ‘T’, ‘t’, ‘U’
-			Duration computations in Calc or Lisp, *note Durations and time
-			values::.
- ‘E’
-			If and how to consider empty fields.  Without ‘E’ empty fields in
-			range references are suppressed so that the Calc vector or Lisp
-			list contains only the non-empty fields.  With ‘E’ the empty fields
-			are kept.  For empty fields in ranges or empty field references the
-			value ‘nan’ (not a number) is used in Calc formulas and the empty
-			string is used for Lisp formulas.  Add ‘N’ to use 0 instead for
-			both formula types.  For the value of a field the mode ‘N’ has
-			higher precedence than ‘E’.
- ‘N’
-			Interpret all fields as numbers, use 0 for non-numbers.  See the
-			next section to see how this is essential for computations with
-			Lisp formulas.  In Calc formulas it is used only occasionally
-			because there number strings are already interpreted as numbers
-			without ‘N’.
- ‘L’
-			Literal, for Lisp formulas only.  See the next section.
+		‘p20’
+				 Set the internal Calc calculation precision to 20 digits.
+		‘n3’, ‘s3’, ‘e2’, ‘f4’
+				 Normal, scientific, engineering or fixed format of the result of
+				 Calc passed back to Org.  Calc formatting is unlimited in precision
+				 as long as the Calc calculation precision is greater.
+		‘D’, ‘R’
+				 Degree and radian angle modes of Calc.
+		‘F’, ‘S’
+				 Fraction and symbolic modes of Calc.
+		‘T’, ‘t’, ‘U’
+				 Duration computations in Calc or Lisp, *note Durations and time
+				 values::.
+		‘E’
+				 If and how to consider empty fields.  Without ‘E’ empty fields in
+				 range references are suppressed so that the Calc vector or Lisp
+				 list contains only the non-empty fields.  With ‘E’ the empty fields
+				 are kept.  For empty fields in ranges or empty field references the
+				 value ‘nan’ (not a number) is used in Calc formulas and the empty
+				 string is used for Lisp formulas.  Add ‘N’ to use 0 instead for
+				 both formula types.  For the value of a field the mode ‘N’ has
+				 higher precedence than ‘E’.
+		‘N’
+				 Interpret all fields as numbers, use 0 for non-numbers.  See the
+				 next section to see how this is essential for computations with
+				 Lisp formulas.  In Calc formulas it is used only occasionally
+				 because there number strings are already interpreted as numbers
+				 without ‘N’.
+		‘L’
+				 Literal, for Lisp formulas only.  See the next section.
 
- Unless you use large integer numbers or high-precision-calculation and
- -display for floating point numbers you may alternatively provide a
- ‘printf’ format specifier to reformat the Calc result after it has been
- passed back to Org instead of letting Calc already do the formatting(1).
-*****  A few examples:
+		Unless you use large integer numbers or high-precision-calculation and
+		-display for floating point numbers you may alternatively provide a
+		‘printf’ format specifier to reformat the Calc result after it has been
+		passed back to Org instead of letting Calc already do the formatting(1).
+********  A few examples:
 
-			$1+$2                Sum of first and second field
-			$1+$2;%.2f           Same, format result to two decimals
-			exp($2)+exp($1)      Math functions can be used
-			$0;%.1f              Reformat current cell to 1 decimal
-			($3-32)*5/9          Degrees F -> C conversion
-			$c/$1/$cm            Hz -> cm conversion, using ‘constants.el’
-			tan($1);Dp3s1        Compute in degrees, precision 3, display SCI 1
-			sin($1);Dp3%.1e      Same, but use printf specifier for display
-			taylor($3,x=7,2)     Taylor series of $3, at x=7, second degree
+				 $1+$2                Sum of first and second field
+				 $1+$2;%.2f           Same, format result to two decimals
+				 exp($2)+exp($1)      Math functions can be used
+				 $0;%.1f              Reformat current cell to 1 decimal
+				 ($3-32)*5/9          Degrees F -> C conversion
+				 $c/$1/$cm            Hz -> cm conversion, using ‘constants.el’
+				 tan($1);Dp3s1        Compute in degrees, precision 3, display SCI 1
+				 sin($1);Dp3%.1e      Same, but use printf specifier for display
+				 taylor($3,x=7,2)     Taylor series of $3, at x=7, second degree
 
-		Calc also contains a complete set of logical operations, (*note
- Logical Operations: (calc)Logical Operations.).  For example
+			 Calc also contains a complete set of logical operations, (*note
+		Logical Operations: (calc)Logical Operations.).  For example
 
- ‘if($1 < 20, teen, string(""))’
-			"teen" if age $1 is less than 20, else the Org table result field
-			is set to empty with the empty string.
- ‘if("$1" == "nan" || "$2" == "nan", string(""), $1 + $2); E f-1’
-			Sum of the first two columns.  When at least one of the input
-			fields is empty the Org table result field is set to empty.  ‘E’ is
-			required to not convert empty fields to 0.  ‘f-1’ is an optional
-			Calc format string similar to ‘%.1f’ but leaves empty results
-			empty.
- ‘if(typeof(vmean($1..$7)) == 12, string(""), vmean($1..$7); E’
-			Mean value of a range unless there is any empty field.  Every field
-			in the range that is empty is replaced by ‘nan’ which lets ‘vmean’
-			result in ‘nan’.  Then ‘typeof == 12’ detects the ‘nan’ from
-			‘vmean’ and the Org table result field is set to empty.  Use this
-			when the sample set is expected to never have missing values.
- ‘if("$1..$7" == "[]", string(""), vmean($1..$7))’
-			Mean value of a range with empty fields skipped.  Every field in
-			the range that is empty is skipped.  When all fields in the range
-			are empty the mean value is not defined and the Org table result
-			field is set to empty.  Use this when the sample set can have a
-			variable size.
- ‘vmean($1..$7); EN’
-			To complete the example before: Mean value of a range with empty
-			fields counting as samples with value 0.  Use this only when
-			incomplete sample sets should be padded with 0 to the full size.
+		‘if($1 < 20, teen, string(""))’
+				 "teen" if age $1 is less than 20, else the Org table result field
+				 is set to empty with the empty string.
+		‘if("$1" == "nan" || "$2" == "nan", string(""), $1 + $2); E f-1’
+				 Sum of the first two columns.  When at least one of the input
+				 fields is empty the Org table result field is set to empty.  ‘E’ is
+				 required to not convert empty fields to 0.  ‘f-1’ is an optional
+				 Calc format string similar to ‘%.1f’ but leaves empty results
+				 empty.
+		‘if(typeof(vmean($1..$7)) == 12, string(""), vmean($1..$7); E’
+				 Mean value of a range unless there is any empty field.  Every field
+				 in the range that is empty is replaced by ‘nan’ which lets ‘vmean’
+				 result in ‘nan’.  Then ‘typeof == 12’ detects the ‘nan’ from
+				 ‘vmean’ and the Org table result field is set to empty.  Use this
+				 when the sample set is expected to never have missing values.
+		‘if("$1..$7" == "[]", string(""), vmean($1..$7))’
+				 Mean value of a range with empty fields skipped.  Every field in
+				 the range that is empty is skipped.  When all fields in the range
+				 are empty the mean value is not defined and the Org table result
+				 field is set to empty.  Use this when the sample set can have a
+				 variable size.
+		‘vmean($1..$7); EN’
+				 To complete the example before: Mean value of a range with empty
+				 fields counting as samples with value 0.  Use this only when
+				 incomplete sample sets should be padded with 0 to the full size.
 
-		You can add your own Calc functions defined in Emacs Lisp with
- ‘defmath’ and use them in formula syntax for Calc.
-***** 		---------- Footnotes ----------
+			 You can add your own Calc functions defined in Emacs Lisp with
+		‘defmath’ and use them in formula syntax for Calc.
+******** 		---------- Footnotes ----------
 
-		(1) The ‘printf’ reformatting is limited in precision because the
- value passed to it is converted into an ‘integer’ or ‘double’.  The
- ‘integer’ is limited in size by truncating the signed value to 32 bits.
- The ‘double’ is limited in precision to 64 bits overall which leaves
- approximately 16 significant decimal digits.
-
-
-*** Formulas
-**** sum
-***** name
-Assign a field-name using the ^ mark:
-|---+---|
-|   | 1 |
-|   | 2 |
-|   | 3 |
-|---+---|
-|   | 6 |
-| ^ | x |
-|---+---|
-#+TBLFM: $x=vsum(@1..@-1)
-***** bitwins lines 
-Yet another possibility makes use of horizontal lines (@I, @II, etc.) which are useful anyways to structure your table:
-
-| What  |    $$ |
-|-------+-------|
-| Ice   |  3.00 |
-| Soda  |  6.49 |
-| Gin   |  4.99 |
-|-------+-------|
-| Total | 14.48 |
-#+TBLFM: @>$2=vsum(@I..@II)
-***** bitwins Rows 
-The example below gives the sum of the last column both at the first and the last rows.
-
-|      |    T |   8 |
-| Col1 | Col2 | Sum |
-|------+------+-----|
-|    1 |    3 |   4 |
-|    2 |    8 |  10 |
-|    3 |   -9 |  -6 |
-|------+------+-----|
-|      |      |   8 |
-#+TBLFM: $3=$1+$2::@1$3=vsum(@I..@II)::@6$3=vsum(@I..@II)
-#+TBLFM: @1$2=T::
-
-vsum sums a vector of numbers; @I and @II refer to the first and second hlines.
-***** for sum colum 
-You can try this:
-$<col_num>=<func>(@2..@-1))
-@2 is static. It refers to the 2nd row onwards. @-1 refers to the second to last row.
-I think this was the easiest and non-intrusive way. It preserves your column names and does not clutter up the visual space. It does not require you to address the last row. It is addressed by default.
-Rows can be added/removed. No other markers.
-eg.
-#+TBLFM: $3=vmean(@2..@-1)::$4=vsum(@2..@-1))
-Sample table
-   | Time                   | Input             | Test      | InQty |
-   | <2018-03-13 Tue 06:15> | Water             |           |   200 |
-   | <2018-03-13 Tue 07:03> |                   |           |       |
-   |                        |                   |           |       |
-   | <2018-03-13 Tue 07:31> | Water             |           |   180 |
-   | <2018-03-13 Tue 09:00> | Chai              |           |   240 |
-   | <2018-03-13 Tue 11:30> | Chai              |           |   240 |
-   | <2018-03-13 Tue 16:01> | Water             |           |    60 |
-   |                        |                   |           |       |
-   |------------------------+-------------------+-----------+-------|
-   |                        |                   |           |   920 |
-   #+TBLFM: $4=vsum(@2..@-1)
-**** aggregate & name: 
-You may use the orgtbl-aggregate package available on http://melpa.org
-The sum of Col1 and Col2 is given in the aggregated table below.
-#+name: cc
-| Col1 | Col2 | Sum8 |
-|------+------+------|
-|    1 |    3 |    4 |
-|    2 |    8 |   10 |
-|    3 |   -9 |   -6 |
-#+TBLFM: $3=$1+$2
-
-#+BEGIN: aggregate :table "cc" :cols "vsum(Col1+Col2)"
-| vsum(Col1+Col2) |
-|-----------------|
-|               8 |
-#+END:
-
-Documentation here: https://github.com/tbanel/orgaggregate
-**** indexing colum #+tblfm: $1=@#-1
-Place #+tblfm: $1=@#-1 under the table. Now when you move your mouse to the formula and C-c C-c on it, it will recalculate the contents of the first column s.a. to create a sequence of increasing integers. – wvxvw Aug 12 '15 at 8:51
-I was looking for exactly the same thing (@#). Sometimes searching is faster than asking... ;-D – user543 Aug 13 '15 at 3:53
-It's possible, but time-consuming, to figure this out from the manual by piecing together info from two sections (sometimes asking is faster than searching, reading, and thinking :) Go to the info-mode manual in emacs (C-h I), Section 3.5.1 of the manual, in an unnumbered sub-section called "Field coordinates in formulas," explains @#-1. Then section 3.5.6, "Column Fomulas," explains the $1=. – Reb.Cabin Jul 14 '19 at 17:50
-Note that with @wvxvw's answer you can have 0-based indexing with $1=@#-2.
-**** Field coordinates in formulas
-.............................
-
-One of the very first actions during evaluation of Calc formulas and
-Lisp formulas is to substitute ‘@#’ and ‘$#’ in the formula with the row
-or column number of the field where the current result will go to.  The
-traditional Lisp formula equivalents are ‘org-table-current-dline’ and
-‘org-table-current-column’.  Examples:
-
-‘if(@# % 2, $#, string(""))’
-     Insert column number on odd rows, set field to empty on even rows.
-‘$2 = '(identity remote(FOO, @@#$1))’
-     Copy text or values of each row of column 1 of the table named
-     ‘FOO’ into column 2 of the current table.
-‘@3 = 2 * remote(FOO, @1$$#)’
-     Insert the doubled value of each column of row 1 of the table named
-     ‘FOO’ into row 3 of the current table.
-
-For the second/third example, the table named ‘FOO’ must have at least
-as many rows/columns as the current table.  Note that this is
-inefficient(3) for large number of rows/columns.
-**** Named references : 
-‘$name’ is interpreted as the name of a column, parameter or constant.
-Constants are defined globally through the option
-‘org-table-formula-constants’, and locally (for the file) through a line
-like
-
-     #+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
-
-Also properties (*note Properties and columns::) can be used as
-constants in table formulas: for a property ‘:Xyz:’ use the name
-‘$PROP_Xyz’, and the property will be searched in the current outline
-entry and in the hierarchy above it.  If you have the ‘constants.el’
-package, it will also be used to resolve constants, including natural
-constants like ‘$h’ for Planck’s constant, and units like ‘$km’ for
-kilometers(4).  Column names and parameters can be specified in special
-table lines.  These are described below, see *note Advanced features::.
-All names must start with a letter, and further consist of letters and
-numbers.
-
-**** Remote references : 
-You may also reference constants, fields and ranges from a different
-table, either in the current file or even in a different file.  The
-syntax is
-     remote(NAME-OR-ID,REF)
-where NAME can be the name of a table in the current file as set by a
-‘#+NAME: Name’ line before the table.  It can also be the ID of an
-entry, even in a different file, and the reference then refers to the
-first table in that entry.  REF is an absolute field or range reference
-as described above for example ‘@3$3’ or ‘$somename’, valid in the
-referenced table.
-   Indirection of NAME-OR-ID: When NAME-OR-ID has the format
-‘@ROW$COLUMN’ it will be substituted with the name or ID found in this
-field of the current table.  For example ‘remote($1, @>$2)’ =>
-‘remote(year_2013, @>$1)’.  The format ‘B3’ is not supported because it
-can not be distinguished from a plain table name or ID.
-
-**** 3.5.7 Lookup functions
-----------------------
-
-Org has three predefined Emacs Lisp functions for lookups in tables.
-‘(org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)’
-     Searches for the first element ‘S’ in list ‘S-LIST’ for which
-          (PREDICATE VAL S)
-     is ‘t’; returns the value from the corresponding position in list
-     ‘R-LIST’.  The default ‘PREDICATE’ is ‘equal’.  Note that the
-     parameters ‘VAL’ and ‘S’ are passed to ‘PREDICATE’ in the same
-     order as the corresponding parameters are in the call to
-     ‘org-lookup-first’, where ‘VAL’ precedes ‘S-LIST’.  If ‘R-LIST’ is
-     ‘nil’, the matching element ‘S’ of ‘S-LIST’ is returned.
-‘(org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)’
-     Similar to ‘org-lookup-first’ above, but searches for the last
-     element for which ‘PREDICATE’ is ‘t’.
-‘(org-lookup-all VAL S-LIST R-LIST &optional PREDICATE)’
-     Similar to ‘org-lookup-first’, but searches for all elements for
-     which ‘PREDICATE’ is ‘t’, and returns all corresponding values.
-     This function can not be used by itself in a formula, because it
-     returns a list of values.  However, powerful lookups can be built
-     when this function is combined with other Emacs Lisp functions.
-
-   If the ranges used in these functions contain empty fields, the ‘E’
-mode for the formula should usually be specified: otherwise empty fields
-will not be included in ‘S-LIST’ and/or ‘R-LIST’ which can, for example,
-result in an incorrect mapping from an element of ‘S-LIST’ to the
-corresponding element of ‘R-LIST’.
-
-   These three functions can be used to implement associative arrays,
-count matching cells, rank results, group data etc.  For practical
-examples see this tutorial on Worg
-(https://orgmode.org/worg/org-tutorials/org-lookups.html).
+			 (1) The ‘printf’ reformatting is limited in precision because the
+		value passed to it is converted into an ‘integer’ or ‘double’.  The
+		‘integer’ is limited in size by truncating the signed value to 32 bits.
+		The ‘double’ is limited in precision to 64 bits overall which leaves
+		approximately 16 significant decimal digits.
 
 
-**** 3.5.10 Advanced features
-***** calculation mark in first column : 
- If you want the recalculation of fields to happen automatically, or if
- you want to be able to assign names(1) to fields and columns, you need
- to reserve the first column of the table for special marking characters.
+****** Formulas
+******* sum
+******** name
+	 Assign a field-name using the ^ mark:
+	 |---+---|
+	 |   | 1 |
+	 |   | 2 |
+	 |   | 3 |
+	 |---+---|
+	 |   | 6 |
+	 | ^ | x |
+	 |---+---|
+	 #+TBLFM: $x=vsum(@1..@-1)
+******** bitwins lines 
+	 Yet another possibility makes use of horizontal lines (@I, @II, etc.) which are useful anyways to structure your table:
 
- ‘C-#     (org-table-rotate-recalc-marks)’
-			Rotate the calculation mark in first column through the states ‘ ’,
-			‘#’, ‘*’, ‘!’, ‘$’.  When there is an active region, change all
-			marks in the region.
+	 | What  |    $$ |
+	 |-------+-------|
+	 | Ice   |  3.00 |
+	 | Soda  |  6.49 |
+	 | Gin   |  4.99 |
+	 |-------+-------|
+	 | Total | 14.48 |
+	 #+TBLFM: @>$2=vsum(@I..@II)
+******** bitwins Rows 
+	 The example below gives the sum of the last column both at the first and the last rows.
+
+	 |      |    T |   8 |
+	 | Col1 | Col2 | Sum |
+	 |------+------+-----|
+	 |    1 |    3 |   4 |
+	 |    2 |    8 |  10 |
+	 |    3 |   -9 |  -6 |
+	 |------+------+-----|
+	 |      |      |   8 |
+	 #+TBLFM: $3=$1+$2::@1$3=vsum(@I..@II)::@6$3=vsum(@I..@II)
+	 #+TBLFM: @1$2=T::
+
+	 vsum sums a vector of numbers; @I and @II refer to the first and second hlines.
+******** for sum colum 
+	 You can try this:
+	 $<col_num>=<func>(@2..@-1))
+	 @2 is static. It refers to the 2nd row onwards. @-1 refers to the second to last row.
+	 I think this was the easiest and non-intrusive way. It preserves your column names and does not clutter up the visual space. It does not require you to address the last row. It is addressed by default.
+	 Rows can be added/removed. No other markers.
+	 eg.
+	 #+TBLFM: $3=vmean(@2..@-1)::$4=vsum(@2..@-1))
+	 Sample table
+			| Time                   | Input             | Test      | InQty |
+			| <2018-03-13 Tue 06:15> | Water             |           |   200 |
+			| <2018-03-13 Tue 07:03> |                   |           |       |
+			|                        |                   |           |       |
+			| <2018-03-13 Tue 07:31> | Water             |           |   180 |
+			| <2018-03-13 Tue 09:00> | Chai              |           |   240 |
+			| <2018-03-13 Tue 11:30> | Chai              |           |   240 |
+			| <2018-03-13 Tue 16:01> | Water             |           |    60 |
+			|                        |                   |           |       |
+			|------------------------+-------------------+-----------+-------|
+			|                        |                   |           |   920 |
+			#+TBLFM: $4=vsum(@2..@-1)
+******* aggregate & name: 
+	 You may use the orgtbl-aggregate package available on http://melpa.org
+	 The sum of Col1 and Col2 is given in the aggregated table below.
+	 #+name: cc
+	 | Col1 | Col2 | Sum8 |
+	 |------+------+------|
+	 |    1 |    3 |    4 |
+	 |    2 |    8 |   10 |
+	 |    3 |   -9 |   -6 |
+	 #+TBLFM: $3=$1+$2
+
+	 #+BEGIN: aggregate :table "cc" :cols "vsum(Col1+Col2)"
+
+	 #+END:
+
+	 Documentation here: https://github.com/tbanel/orgaggregate
+******* indexing colum #+tblfm: $1=@#-1
+	 Place #+tblfm: $1=@#-1 under the table. Now when you move your mouse to the formula and C-c C-c on it, it will recalculate the contents of the first column s.a. to create a sequence of increasing integers. – wvxvw Aug 12 '15 at 8:51
+	 I was looking for exactly the same thing (@#). Sometimes searching is faster than asking... ;-D – user543 Aug 13 '15 at 3:53
+	 It's possible, but time-consuming, to figure this out from the manual by piecing together info from two sections (sometimes asking is faster than searching, reading, and thinking :) Go to the info-mode manual in emacs (C-h I), Section 3.5.1 of the manual, in an unnumbered sub-section called "Field coordinates in formulas," explains @#-1. Then section 3.5.6, "Column Fomulas," explains the $1=. – Reb.Cabin Jul 14 '19 at 17:50
+	 Note that with @wvxvw's answer you can have 0-based indexing with $1=@#-2.
+******* Field coordinates in formulas
+	 .............................
+
+	 One of the very first actions during evaluation of Calc formulas and
+	 Lisp formulas is to substitute ‘@#’ and ‘$#’ in the formula with the row
+	 or column number of the field where the current result will go to.  The
+	 traditional Lisp formula equivalents are ‘org-table-current-dline’ and
+	 ‘org-table-current-column’.  Examples:
+
+	 ‘if(@# % 2, $#, string(""))’
+				Insert column number on odd rows, set field to empty on even rows.
+	 ‘$2 = '(identity remote(FOO, @@#$1))’
+				Copy text or values of each row of column 1 of the table named
+				‘FOO’ into column 2 of the current table.
+	 ‘@3 = 2 * remote(FOO, @1$$#)’
+				Insert the doubled value of each column of row 1 of the table named
+				‘FOO’ into row 3 of the current table.
+
+	 For the second/third example, the table named ‘FOO’ must have at least
+	 as many rows/columns as the current table.  Note that this is
+	 inefficient(3) for large number of rows/columns.
+******* Named references : 
+	 ‘$name’ is interpreted as the name of a column, parameter or constant.
+	 Constants are defined globally through the option
+	 ‘org-table-formula-constants’, and locally (for the file) through a line
+	 like
+
+				#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
+
+	 Also properties (*note Properties and columns::) can be used as
+	 constants in table formulas: for a property ‘:Xyz:’ use the name
+	 ‘$PROP_Xyz’, and the property will be searched in the current outline
+	 entry and in the hierarchy above it.  If you have the ‘constants.el’
+	 package, it will also be used to resolve constants, including natural
+	 constants like ‘$h’ for Planck’s constant, and units like ‘$km’ for
+	 kilometers(4).  Column names and parameters can be specified in special
+	 table lines.  These are described below, see *note Advanced features::.
+	 All names must start with a letter, and further consist of letters and
+	 numbers.
+
+******* Remote references : 
+	 You may also reference constants, fields and ranges from a different
+	 table, either in the current file or even in a different file.  The
+	 syntax is
+				remote(NAME-OR-ID,REF)
+	 where NAME can be the name of a table in the current file as set by a
+	 ‘#+NAME: Name’ line before the table.  It can also be the ID of an
+	 entry, even in a different file, and the reference then refers to the
+	 first table in that entry.  REF is an absolute field or range reference
+	 as described above for example ‘@3$3’ or ‘$somename’, valid in the
+	 referenced table.
+			Indirection of NAME-OR-ID: When NAME-OR-ID has the format
+	 ‘@ROW$COLUMN’ it will be substituted with the name or ID found in this
+	 field of the current table.  For example ‘remote($1, @>$2)’ =>
+	 ‘remote(year_2013, @>$1)’.  The format ‘B3’ is not supported because it
+	 can not be distinguished from a plain table name or ID.
+
+******* 3.5.7 Lookup functions
+	 ----------------------
+
+	 Org has three predefined Emacs Lisp functions for lookups in tables.
+	 ‘(org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)’
+				Searches for the first element ‘S’ in list ‘S-LIST’ for which
+						 (PREDICATE VAL S)
+				is ‘t’; returns the value from the corresponding position in list
+				‘R-LIST’.  The default ‘PREDICATE’ is ‘equal’.  Note that the
+				parameters ‘VAL’ and ‘S’ are passed to ‘PREDICATE’ in the same
+				order as the corresponding parameters are in the call to
+				‘org-lookup-first’, where ‘VAL’ precedes ‘S-LIST’.  If ‘R-LIST’ is
+				‘nil’, the matching element ‘S’ of ‘S-LIST’ is returned.
+	 ‘(org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)’
+				Similar to ‘org-lookup-first’ above, but searches for the last
+				element for which ‘PREDICATE’ is ‘t’.
+	 ‘(org-lookup-all VAL S-LIST R-LIST &optional PREDICATE)’
+				Similar to ‘org-lookup-first’, but searches for all elements for
+				which ‘PREDICATE’ is ‘t’, and returns all corresponding values.
+				This function can not be used by itself in a formula, because it
+				returns a list of values.  However, powerful lookups can be built
+				when this function is combined with other Emacs Lisp functions.
+
+			If the ranges used in these functions contain empty fields, the ‘E’
+	 mode for the formula should usually be specified: otherwise empty fields
+	 will not be included in ‘S-LIST’ and/or ‘R-LIST’ which can, for example,
+	 result in an incorrect mapping from an element of ‘S-LIST’ to the
+	 corresponding element of ‘R-LIST’.
+
+			These three functions can be used to implement associative arrays,
+	 count matching cells, rank results, group data etc.  For practical
+	 examples see this tutorial on Worg
+	 (https://orgmode.org/worg/org-tutorials/org-lookups.html).
+
+
+******* 3.5.10 Advanced features
+******** calculation mark in first column : 
+		If you want the recalculation of fields to happen automatically, or if
+		you want to be able to assign names(1) to fields and columns, you need
+		to reserve the first column of the table for special marking characters.
+
+		‘C-#     (org-table-rotate-recalc-marks)’
+				 Rotate the calculation mark in first column through the states ‘ ’,
+				 ‘#’, ‘*’, ‘!’, ‘$’.  When there is an active region, change all
+				 marks in the region.
 
 		 
-***** example of a table : 
-		Here is an example of a table that collects exam results of students
- and makes use of these features:
+******** example of a table : 
+			 Here is an example of a table that collects exam results of students
+		and makes use of these features:
 
-			|---+---------+--------+--------+--------+-------+------|
-			|   | Student | Prob 1 | Prob 2 | Prob 3 | Total | Note |
-			|---+---------+--------+--------+--------+-------+------|
-			| ! |         |     P1 |     P2 |     P3 |   Tot |      |
-			| # | Maximum |     10 |     15 |     25 |    50 | 10.0 |
-			| ^ |         |     m1 |     m2 |     m3 |    mt |      |
-			|---+---------+--------+--------+--------+-------+------|
-			| # | Peter   |     10 |      8 |     23 |    41 |  8.2 |
-			| # | Sam     |      2 |      4 |      3 |     9 |  1.8 |
-			|---+---------+--------+--------+--------+-------+------|
-			|   | Average |        |        |        |  25.0 |      |
-			| ^ |         |        |        |        |    at |      |
-			| $ | max=50  |        |        |        |       |      |
-			|---+---------+--------+--------+--------+-------+------|
-			|   | 50      |        |        |        |       |      |
-			#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@-II..@-I);%.1f
-			#+TBLFM: @10$2=$max
-****** Important : 
- Important: please note that for these special tables, recalculating the
- table with ‘C-u C-c *’ will only affect rows that are marked ‘#’ or ‘*’,
- and fields that have a formula assigned to the field itself.  The column
- formulas are not applied in rows with empty first field.
-***** The marking characters have the following meaning:
-******  ‘!’
-			 The fields in this line define names for the columns, so that you
-			 may refer to a column as ‘$Tot’ instead of ‘$6’.
-****** 	‘^’
-			 This row defines names for the fields _above_ the row.  With such a
-			 definition, any formula in the table may use ‘$m1’ to refer to the
-			 value ‘10’.  Also, if you assign a formula to a names field, it
-			 will be stored as ‘$name=...’.
-****** 	‘_’
-			 Similar to ‘^’, but defines names for the fields in the row
-			 _below_.
-******  ‘$’
-			 Fields in this row can define _parameters_ for formulas.  For
-			 example, if a field in a ‘$’ row contains ‘max=50’, then formulas
-			 in this table can refer to the value 50 using ‘$max’.  Parameters
-			 work exactly like constants, only that they can be defined on a
-			 per-table basis.
+				 |---+---------+--------+--------+--------+-------+------|
+				 |   | Student | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+				 |---+---------+--------+--------+--------+-------+------|
+				 | ! |         |     P1 |     P2 |     P3 |   Tot |      |
+				 | # | Maximum |     10 |     15 |     25 |    50 | 10.0 |
+				 | ^ |         |     m1 |     m2 |     m3 |    mt |      |
+				 |---+---------+--------+--------+--------+-------+------|
+				 | # | Peter   |     10 |      8 |     23 |    41 |  8.2 |
+				 | # | Sam     |      2 |      4 |      3 |     9 |  1.8 |
+				 |---+---------+--------+--------+--------+-------+------|
+				 |   | Average |        |        |        |  25.0 |      |
+				 | ^ |         |        |        |        |    at |      |
+				 | $ | max=50  |        |        |        |       |      |
+				 |---+---------+--------+--------+--------+-------+------|
+				 |   | 50      |        |        |        |       |      |
+				 #+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@-II..@-I);%.1f
+				 #+TBLFM: @10$2=$max
+********* Important : 
+		Important: please note that for these special tables, recalculating the
+		table with ‘C-u C-c *’ will only affect rows that are marked ‘#’ or ‘*’,
+		and fields that have a formula assigned to the field itself.  The column
+		formulas are not applied in rows with empty first field.
+******** The marking characters have the following meaning:
+*********  ‘!’
+					The fields in this line define names for the columns, so that you
+					may refer to a column as ‘$Tot’ instead of ‘$6’.
+********* 	‘^’
+					This row defines names for the fields _above_ the row.  With such a
+					definition, any formula in the table may use ‘$m1’ to refer to the
+					value ‘10’.  Also, if you assign a formula to a names field, it
+					will be stored as ‘$name=...’.
+********* 	‘_’
+					Similar to ‘^’, but defines names for the fields in the row
+					_below_.
+*********  ‘$’
+					Fields in this row can define _parameters_ for formulas.  For
+					example, if a field in a ‘$’ row contains ‘max=50’, then formulas
+					in this table can refer to the value 50 using ‘$max’.  Parameters
+					work exactly like constants, only that they can be defined on a
+					per-table basis.
  
-****** ‘#’
-			 Fields in this row are automatically recalculated when pressing
-			 <TAB> or <RET> or ‘S-<TAB>’ in this row.  Also, this row is
-			 selected for a global recalculation with ‘C-u C-c *’.  Unmarked
-			 lines will be left alone by this command.
+********* ‘#’
+					Fields in this row are automatically recalculated when pressing
+					<TAB> or <RET> or ‘S-<TAB>’ in this row.  Also, this row is
+					selected for a global recalculation with ‘C-u C-c *’.  Unmarked
+					lines will be left alone by this command.
 
-****** 	‘*’
-			 Selects this line for global recalculation with ‘C-u C-c *’, but
-			 not for automatic recalculation.  Use this when automatic
-			 recalculation slows down editing too much.
+********* 	‘*’
+					Selects this line for global recalculation with ‘C-u C-c *’, but
+					not for automatic recalculation.  Use this when automatic
+					recalculation slows down editing too much.
 
-****** 	‘ ’
-			 Unmarked lines are exempt from recalculation with ‘C-u C-c *’.  All
-			 lines that should be recalculated should be marked with ‘#’ or ‘*’.
+********* 	‘ ’
+					Unmarked lines are exempt from recalculation with ‘C-u C-c *’.  All
+					lines that should be recalculated should be marked with ‘#’ or ‘*’.
 
-****** 	‘/’
-			 Do not export this line.  Useful for lines that contain the
-			 narrowing ‘<N>’ markers or column group markers.
+********* 	‘/’
+					Do not export this line.  Useful for lines that contain the
+					narrowing ‘<N>’ markers or column group markers.
 
-***** series of degree ‘n’ at location ‘x’  : 
-		Finally, just to whet your appetite for what can be done with the
- fantastic ‘calc.el’ package, here is a table that computes the Taylor
- series of degree ‘n’ at location ‘x’ for a couple of functions.
+******** series of degree ‘n’ at location ‘x’  : 
+			 Finally, just to whet your appetite for what can be done with the
+		fantastic ‘calc.el’ package, here is a table that computes the Taylor
+		series of degree ‘n’ at location ‘x’ for a couple of functions.
 
-			|---+-------------+---+-----+--------------------------------------|
-			|   | Func        | n | x   | Result                               |
-			|---+-------------+---+-----+--------------------------------------|
-			| # | exp(x)      | 1 | x   | 1 + x                                |
-			| # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
-			| # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
-			| # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
-			| # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
-			| * | tan(x)      | 3 | x   | x pi / 180 + 5.72e-8 x^3 pi^3        |
-			|---+-------------+---+-----+--------------------------------------|
-			#+TBLFM: $5=taylor($2,$4,$3);n3
+				 |---+-------------+---+-----+--------------------------------------|
+				 |   | Func        | n | x   | Result                               |
+				 |---+-------------+---+-----+--------------------------------------|
+				 | # | exp(x)      | 1 | x   | 1 + x                                |
+				 | # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+				 | # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+				 | # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+				 | # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+				 | * | tan(x)      | 3 | x   | x pi / 180 + 5.72e-8 x^3 pi^3        |
+				 |---+-------------+---+-----+--------------------------------------|
+				 #+TBLFM: $5=taylor($2,$4,$3);n3
 
-***** ---------- Footnotes ----------
+******** ---------- Footnotes ----------
 
-		(1) Such names must start by an alphabetic character and use only
- alphanumeric/underscore characters.
+			 (1) Such names must start by an alphabetic character and use only
+		alphanumeric/underscore characters.
 
-**** ASCII bar plots
----------------
-While the cursor is on a column, typing ‘C-c " a’ or ‘M-x
-orgtbl-ascii-plot <RET>’ create a new column containing an ASCII-art
-bars plot.  The plot is implemented through a regular column formula.
-When the source column changes, the bar plot may be updated by
-refreshing the table, for example typing ‘C-u C-c *’.
+******* ASCII bar plots
+	 ---------------
+	 While the cursor is on a column, typing ‘C-c " a’ or ‘M-x
+	 orgtbl-ascii-plot <RET>’ create a new column containing an ASCII-art
+	 bars plot.  The plot is implemented through a regular column formula.
+	 When the source column changes, the bar plot may be updated by
+	 refreshing the table, for example typing ‘C-u C-c *’.
 
-     | Sede          | Max cites |              |
-     |---------------+-----------+--------------|
-     | Chile         |    257.72 | WWWWWWWWWWWW |
-     | Leeds         |    165.77 | WWWWWWWh     |
-     | Sao Paolo     |     71.00 | WWW;         |
-     | Stockholm     |    134.19 | WWWWWW:      |
-     | Morelia       |    257.56 | WWWWWWWWWWWH |
-     | Rochefourchat |      0.00 |              |
-     #+TBLFM: $3='(orgtbl-ascii-draw $2 0.0 257.72 12)
+				| Sede          | Max cites |              |
+				|---------------+-----------+--------------|
+				| Chile         |    257.72 | WWWWWWWWWWWW |
+				| Leeds         |    165.77 | WWWWWWWh     |
+				| Sao Paolo     |     71.00 | WWW;         |
+				| Stockholm     |    134.19 | WWWWWW:      |
+				| Morelia       |    257.56 | WWWWWWWWWWWH |
+				| Rochefourchat |      0.00 |              |
+				#+TBLFM: $3='(orgtbl-ascii-draw $2 0.0 257.72 12)
 
-   The formula is an elisp call:
-     (orgtbl-ascii-draw COLUMN MIN MAX WIDTH)
+			The formula is an elisp call:
+				(orgtbl-ascii-draw COLUMN MIN MAX WIDTH)
 
-‘COLUMN’
-     is a reference to the source column.
+	 ‘COLUMN’
+				is a reference to the source column.
 
-‘MIN MAX’
-     are the minimal and maximal values displayed.  Sources values
-     outside this range are displayed as ‘too small’ or ‘too large’.
+	 ‘MIN MAX’
+				are the minimal and maximal values displayed.  Sources values
+				outside this range are displayed as ‘too small’ or ‘too large’.
 
-‘WIDTH’
-     is the width in characters of the bar-plot.  It defaults to ‘12’.
+	 ‘WIDTH’
+				is the width in characters of the bar-plot.  It defaults to ‘12’.
 
 
-*** Lisp code
-**** explene constans & exempl
- But what if you want to use Emacs lisp code instead of Calc?
+****** Lisp code
+******* explene constans & exempl
+		But what if you want to use Emacs lisp code instead of Calc?
 
-Lets say for example that you want to associate each student with a decimal of the Pi number, depending on their mean across maths and physics.
+	 Lets say for example that you want to associate each student with a decimal of the Pi number, depending on their mean across maths and physics.
 
-For this you need to tell Org about the value you consider to be the value of the Pi number. You can do this by adding this line:
+	 For this you need to tell Org about the value you consider to be the value of the Pi number. You can do this by adding this line:
 
-#+CONSTANTS: pi=3.14159265358979323846
+	 #+CONSTANTS: pi=3.14159265358979323846
 
-(Don't forget to hit C-c C-c on the #+CONSTANTS line so that org-mode knows about it.)
+	 (Don't forget to hit C-c C-c on the #+CONSTANTS line so that org-mode knows about it.)
 
-Then you can define an Emacs lisp formula like this one:
+	 Then you can define an Emacs lisp formula like this one:
 
-$5='(substring (number-to-string $pi) (round $4) (1+ (round $4)));N
+	 $5='(substring (number-to-string $pi) (round $4) (1+ (round $4)));N
 
-Ahem. Let's parse this:
+	 Ahem. Let's parse this:
 
-    (substring S A B): get a substring of string S between A and B
-    (number-to-string $pi): convert the constant "Pi" into a string
-    (round $4): get the rounded value of the value in column $4
-    ;N: consider the values of fields to be numeric values, not strings.
+			 (substring S A B): get a substring of string S between A and B
+			 (number-to-string $pi): convert the constant "Pi" into a string
+			 (round $4): get the rounded value of the value in column $4
+			 ;N: consider the values of fields to be numeric values, not strings.
 
-If the mean of a student is 10, this formula returns the tenth decimal of Pi. 
+	 If the mean of a student is 10, this formula returns the tenth decimal of Pi. 
 ** Tags 
 Two: Which tags do you use most?
 You can always add tags freely and by hand, but if you configure the most important ones along with fast-access keys, life will be better. Configure the variable org-tags-alist or simply do this right in the file with1

@@ -50,4 +50,8 @@
 ;; 			'(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 ;; 	)
 
+
+;; ***** Commands
+;; (ispell)  to run check
+;; (ispell-change-dictionary) to RU
 ;; *  --------------------------------------

@@ -28,6 +28,7 @@
 (load "~/INI/folding-cfg.el")
 ;; --------------------------------------
 ;; * LITERARY-MODS CUSTOMIZATION
+;; (find-file "~/INI/lit-cfg.el") 
 (load "~/INI/lit-cfg.el")
 ;; --------------------------------------
 ;; * DEVELOPMENT-MODs CUSTOMIZATION
@@ -38,6 +39,10 @@
 ;; --------------------------------------
 ;; * ADVNSED SELECTIONS CUSTOMIZATION
 (load "~/INI/advnsed-selections-cfg.el")
+;; --------------------------------------
+;; * LOAD BUYN's ELISP DEFUNS
+;; (find-file "~/ELs/BuYn/shell.el")
+(load "~/ELs/BuYn/shell.el")
 ;; --------------------------------------
 ;; * NOT USED
 ;; ** TIME TRACKING-MODs CUSTOMIZATION
