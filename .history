@@ -3,3 +3,14 @@ exit
 "cmake"
 cmake
 exit
+$path
+%path
+rem
+rem %path
+rem %path%
+echo %path%
+cd ~
+cd %home%
+echo %echo%
+echo %home%
+exit

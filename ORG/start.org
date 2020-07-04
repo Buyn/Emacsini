@@ -22,55 +22,28 @@ _   _   _             _   _   _
  /   |      ||_|_|_||      |   \
 =================================
 ** Tmp  
-	(replace-regexp-in-string 
-		"\\" "/" "s:\df\ss\df.txt" t t)
-    (invalid-regexp "Trailing backslash")
 
-Подскажите пожалусто, как заменить одиночнуя обратную косую черту "\"
-в строке на другой символ?
-если
-(replace-regexp-in-string "\\" "_" "foo\bar" t t)
-приводит к ошибке
-    (invalid-regexp "Trailing backslash")
-а
-(replace-regexp-in-string "\\\\" "_" "foo\\bar" t t)
->>"foo_bar"
-(replace-regexp-in-string (regexp-quote "\\") "_" "foo\\bar")
->>"foo_bar"
-естественно работают для двойного слеша
+(setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
 
-
-     #+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
-     Last block update at: on 06/26/2020 at 21:33
-     #+END:
-
-The dynamic block’s writer function:
-
-     (defun org-dblock-write:block-update-time (params)
-       (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
-         (insert "Last block update at: "
-                 (format-time-string fmt))))
+(defun buyn-start-emagus (unix-path-to-file)
+  "	buyn start new emacs process
+		as parametr  
+		get file path in unix format
+		unix-path-to-file path to file in unix format
+		"
+  (shell-command
+		;; (message
+		(concat path-to-emagus-cmd
+						" "
+						unix-path-to-file)
+		)
+  )
 
 
 ** progn : 
 (progn
 
-(define-key evil-normal-state-map (kbd "M-e M-j") 
-		'(lambda() (interactive)
-					(move-beginning-of-line nil)
-					(search-forward (char-to-string ?\)) nil nil nil)
-					(unless (eq (char-after(point)) ?\))
-						(backward-char 1))
-					(if (eq (char-after(point)) ?\))
-						(eval-last-sexp nil))
-					))
-
-(define-key evil-normal-state-map "zc" '(lambda() (interactive)
-					;; (outline-previous-visible-heading 1)
-					(move-beginning-of-line nil)
-					(org-up-element)
-					(hide-subtree)
-					))
+(define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
 
 		) progn end
 * Pathes
@@ -716,6 +689,9 @@ http://ergoemacs.org/emacs_manual/elisp/Shell-Arguments.html#Shell-Arguments
 (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
 
 (shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
+**** start-process : 
+(start-process "12" nil "d:/Development/lisp/Emacs/bin/runemacs.exe")
+
 ** Options
 *** Visual
 *** Home 

@@ -114,6 +114,9 @@
 					(outline-up-heading 1)
 					(hide-subtree)
 					))
+;; *** ORG Table
+;; (global-set-key (kbd "C-c <C-return>") 'org-table-insert-row)
+(define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; ** ORG agenda customization
 (load "~/INI/org_agend_cfg.el")
 ;; ** ORG babel 
