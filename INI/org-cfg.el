@@ -116,10 +116,18 @@
 					))
 ;; *** ORG Table
 ;; (global-set-key (kbd "C-c <C-return>") 'org-table-insert-row)
-(define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
+;; move to 
+;; org-mode-map), which is an interactive autoloaded compiled Lisp
+;; (define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
+(define-key org-mode-map (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; ** ORG agenda customization
 (load "~/INI/org_agend_cfg.el")
 ;; ** ORG babel 
 (load "~/INI/babel-cfg.el")
 
+;; --------------------------------------
+
+;; ** ORG-BRAIN 
+;; (find-file-other-frame "~/INI/org-brain-cfg.el")
+;; (load "~/INI/org-brain-cfg.el")
 ;; --------------------------------------

@@ -22,6 +22,21 @@ _   _   _             _   _   _
  /   |      ||_|_|_||      |   \
 =================================
 ** Tmp  
+|        |        |   |   |   |
+|--------+--------+---+---+---|
+|        |        |   |   |   |
+|        |        |   |   |   |
+|        |        |   |   |   |
+|        |        |   |   |   |
+|--------+--------+---+---+---|
+|        |        |   |   |   |
+| sdfsdf | sdfsfd |   |   |   |
+|--------+--------+---+---+---|
+| sdf    |        |   |   |   |
+|        | sdfsdf |   |   |   |
+|        |        |   |   |   |
+|--------+--------+---+---+---|
+#+TBLFM: @II-1$2:=191
 
 (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
 
@@ -97,6 +112,7 @@ _   _   _             _   _   _
 	(find-file "~/INI/org_agend_cfg.el")
 	(find-file "~/INI/babel-cfg.el")
 	(find-file "~/ELs/Org/Babel/ob-eshell.el")
+	(find-file-other-frame "~/INI/org-brain-cfg.el") commented
 *** Folding
 (find-file "~/INI/folding-cfg.el")
 	(find-file "~/INI/origami_cfg.el") not using
@@ -142,6 +158,8 @@ _   _   _             _   _   _
 (load "~/INI/interface-mods.el")
 (load "~/INI/hydra-cfg.el")
 (load "~/ELs/BuYn/shell.el")
+** load init files
+(load "~/INI/org-brain-cfg.el")
 ** открыть
 (find-file-other-frame "d:/My_Docs/Ofice/PaperFlow/TODO/todo.org")
 (org-agenda nil "a")
@@ -924,6 +942,32 @@ Original value was
 *** HideShow
 Invoke HideShow mode with M-x hs-minor-mode.
 
+** Thems 
+*** face 
+**** note like 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(bold ((t (:weight ultra-bold))))
+ '(italic ((t (:slant italic))))
+ '(org-agenda-structure ((t (:inherit default :foreground "#bbc2cf" :underline nil :slant normal :weight bold :height 2.0 :width normal :foundry "outline" :family "PT Sans"))))
+ '(org-default ((t (:inherit variable-pitch))))
+ '(org-document-title ((t (:inherit org-level-1 :foreground "dark gray" :weight bold :height 1.2 :family "IM Fell English SC"))))
+ '(org-footnote ((t (:foreground "gray40" :underline t :height 0.5))))
+ '(org-indent ((t (:inherit org-hide fixed-pitch))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#a89984" :weight bold :height 1.6 :family "IM Fell English SC"))))
+ '(org-level-2 ((t (:inherit nil :foreground "#bdae93" :weight bold :height 1.4 :family "IM Fell English SC"))))
+ '(org-level-3 ((t (:foreground "#d5c4a1" :height 1.2 :family "IM Fell English SC"))))
+ '(org-level-4 ((t (:inherit nil :foreground "#ebdbb2" :weight normal :height 1.1 :family "IM Fell English SC"))))
+ '(org-level-5 ((t (:inherit nil :foreground "#ebdbb2" :weight normal :height 1.0 :family "IM Fell English SC"))))
+ '(org-level-6 ((t (:inherit nil))))
+ '(org-level-7 ((t nil)))
+ '(org-link ((t (:inherit nil :foreground "cornflower blue" :underline t :height 1.0))))
+ '(org-table ((t (:foreground "tomato"))))
+ '(org-variable-pitch-face ((t (:height 1.0 :family "IM Fell English"))))
+'(variable-pitch ((t (:height 1.0 :family "IM Fell English")))))
 * Help Docs eLisp
 ** show maseges
 *** message
@@ -1061,6 +1105,7 @@ From the doc:
     - Sean Austin :: He plays Sam, Frodo's friend.  I still remember
       him very well from his role as Mikey Walsh in The Goonies.
 ** Help
+	[[info:org#Tables][info:org]] 
 *** info\manual
     Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
     удобная систе показиваюшая мануалки по всем установленым модам
@@ -1404,6 +1449,7 @@ old
 	 
 	 
 ** Tabels
+	[[info:org#Tables][info:org#Tables]] 
 *** links 
 https://orgmode.org/org.html#Advanced-features
 *** exempl
@@ -2224,6 +2270,7 @@ Here’s an agenda mockup to illustrate the point, augmented with a “default�
   ABC:        Scheduled:  Subtask
 
 ** Links 
+[[info:org#Hyperlinks][info:org#Hyperlinks]]
 *** общее
 (define-key global-map "\C-cl" 'org-store-link)
 Для того что бы создать ссылку достаточно использовать такой шаблон — [[%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0][описание]].
@@ -2564,7 +2611,8 @@ keywords).
 * Help Docs Gnus
   The Emacs news and email reader.
 * Help Docs Mods 
-** use-package
+** DONE use-package
+	 CLOSED: [2020-07-17 Пт 03:59]
 *** Getting started
 ;; This is only needed once, near the top of the file
 (eval-when-compile
@@ -2859,7 +2907,8 @@ To just load ensure multiple packages are install
  (unless (package-installed-p package)
    (package-install package))
    (require package))))
-** hidra mod 
+** DONE hidra mod 
+	 CLOSED: [2020-07-17 Пт 03:59]
     https://github.com/abo-abo/hydra
 This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
 ** DONE WindMove & FrameMove 
@@ -2870,6 +2919,204 @@ https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-
 (global-set-key (kbd "M-j") 'windmove-down)
 (global-set-key (kbd "M-k") 'windmove-up)
 (global-set-key (kbd "M-l") 'windmove-right)
+** Org-brain
+*** help
+https://github.com/Kungsgeten/org-brain
+**** help on keys
+***** SVG Imageorg-brain-visualize
+The primary usage of org-brain is through M-x org-brain-visualize (which you might
+want to bind to a key). From there you can browse entries, add/remove
+relationships, open entries for editing etc. The following keybindings are available in
+org-brain-visualize:
+***** Key  Command  Description : 
+ Key  Command  Description  
+ m  org-brain-visualize-mind-map  Toggle between normal and  
+		 mind-map visualization.  
+ j or TAB  forward-button  Goto next link  
+ k or S-TAB  backward-button  Goto previous link  
+ b  org-brain-visualize-back  Like the back button in a web  
+		 browser.  
+ h or *  org-brain-add-child-headline *  Add a new child headline to  
+		 entry  
+ c  org-brain-add-child *  Add an existing entry, or a new  
+		 file, as a child  
+ C  org-brain-remove-child *  Remove one the entry’s child  
+		 relations  
+ e  org-brain-annotate-edge  Annotate the connection  
+		 between the visualized entry  
+		 and the entry link at point.  
+ p  org-brain-add-parent *  Add an existing entry, or a new  
+		 file, as a parent  
+ P  org-brain-remove-parent *  Remove one of the entry’s  
+		 parent relations  
+ f  org-brain-add-friendship *  Add an existing entry, or a new  
+		 file, as a friend  
+ F  org-brain-remove-friendship *  Remove one of the entry’s  
+		 friend relations  
+ n  org-brain-pin *  Toggle if the entry is pinned  
+		 or not  
+ N  org-brain-add-nickname  Add a nickname for the entry  
+		 (you can have several names  
+		 for the same entry)  
+ s  org-brain-select-dwim  Select an entry for batch  
+		 processing.  
+ S  org-brain-select-map  Prefix key to do batch  
+		 processing with selected  
+		 entries.  
+ t  org-brain-set-title  Change the title of the entry.  
+ T  org-brain-set-tags  Change the tags of the entry.  
+ d  org-brain-delete-entry  Choose an entry to delete.  
+ l  org-brain-visualize-add-resource  Add a new resource link in  
+		 entry  
+ r  org-brain-open-resource  Choose and open a resource  
+		 from the entry.  
+ C-y  org-brain-visualize-paste-resource  Add a new resource link from  
+		 clipboard  
+ a  org-brain-visualize-attach  Run org-attach on entry  
+		 (headline entries only)  
+ A  org-brain-archive  Archive the entry (headline  
+		 entries only)  
+ o  org-brain-goto-current  Open current entry for editing  
+ O  org-brain-goto  Choose and edit one of your  
+		 org-brain entries  
+ v  org-brain-visualize  Choose and visualize a  
+		 different entry  
+ V  org-brain-visualize-follow  Similar to  
+		 org-agenda-follow-mode; view  
+		 visualized entry in another  
+		 window.  
+ w  org-brain-visualize-random  Visualize one of your entries  
+		 at random.  
+ W  org-brain-visualize-wander  Visualize at random, in a set  
+		 interval. W again to cancel.  
+ C-c C-x C-v  org-toggle-inline-images  Display org-mode images in  
+		 the entry text.  
+ M  Move prefix  Move (refile) the current entry.  
+ M r  org-brain-refile  Move current entry to another  
+		 entry (change local parent).  
+ M p  org-brain-change-local-parent  Choose among the entry’s  
+		 parents and make another of  
+		 them the local parent.  
+
+The commands above marked with * can be run with the universal argument C-u in
+order to operate on the entry link at point instead of the visualized entry.
+
+You may use org-store-link inside of org-brain-visualize in order to store a link to the
+currently visualized org-brain entry.
+***** universal argument C- : 
+If the universal argument C-u is used when running org-brain-visualize-random or
+org-brain-visualize-wander, the randomized targets are restricted to descendants
+(children, grandchildren, grand-grandchildren etc) of the currently visualized entry.
+Use for instance C-u W to wander among the descendants.
+
+The universal argument C-u can also be used with org-brain-open-resource. This
+lets you choose not only resource from the visualized entry, but also from
+descendants (children, grand-children, etc) of that entry.
+
+If the universal argument C-u is used when calling org-brain-annotate-edge then the
+annotation will be “one-way”. The default behaviour is otherwise to annotate the
+connection in both directions.
+
+***** toggle by pressing : 
+When using the mind map visualization (toggle by pressing m), you can use the
+following keybindings in order to show or hide successive levels of hierarchy relative
+to the current entry.
+
+ Key  Command  Description  
+ +  org-brain-show-descendant-level  Show one more level of entries to the  
+		 right (children of children, etc.)  
+ -  org-brain-hide-descendant-level  Hide rightmost level of descendant  
+		 entries  
+ z  org-brain-show-ancestor-level  Show one more level of entries to the  
+		 left (parents of parents, etc.)  
+ Z  org-brain-hide-ancestor-level  Hide leftmost level of ancestor entries  
+
+***** batch processing : 
+If you want to select several entries and then remove/add them as
+children/parents/friends you can use the s key (org-brain-select-dwim) to select an
+entry. If the point is over a button link to an entry, that entry will be selected, otherwise
+it will select the currently visualized entry. If the entry is already selected, it will be
+unselected instead.
+
+Once you have selected all the entries you wish to use, you can use the S prefix key
+to do batch processing on the selected entries. The keybindings in this prefix keymap
+is identical to those in org-brain-visualize. You could for instance use S c to add all
+selected entries as children to the visualized entry, or S P to remove the parent
+relationship of the selected entries. When you’re done and wish to clear the selection
+use org-brain-clear-selected, which is bound to S s.
+**** Customizing the look of entry titles
+When visualizing you might want to see additional information about the entries. This
+can be done by customizing the following variables:
+
+ org-brain-vis-title-prepend-functions
+ org-brain-vis-title-append-functions
+ org-brain-vis-current-title-prepend-functions
+ org-brain-vis-current-title-append-functions
+
+Each of these variables should be a list of functions, which all takes an entry as the
+single parameter and returns a string. This string is the prepended or appended to
+the entry’s title, according to the name of the function. The variables with the name
+current in them only applies the functions on the currently visualized entry (the focused
+one).
+
+Suitable functions to add to these lists might be:
+
+ org-brain-entry-icon (included in org-brain-vis-title-prepend-functions by default)
+ org-brain-entry-todo-state
+ org-brain-entry-tags-string
+**** Editing from org-mode
+You can edit org-brain entries directly from org-mode. You can use the default
+org-mode outline structure to define parent/children relationships, but keep in mind
+that only entries with an ID property will be considered as entries to org-brain; use
+M-x org-brain-get-id to create an ID property to the current org-mode headline.
+Another alternative is to use M-x org-brain-refile which will create the ids for you. You
+can also create IDs for all headlines in the buffer with M-x
+org-brain-ensure-ids-in-buffer, and you might find it useful to add this to
+before-save-hook.
+
+Most of the commands available in org-brain-visualize can also be used in org-mode
+directly, in which case they will operate on the “entry at point”. In other words you can
+use M-x org-brain-add-child directly from org-mode in order to add a child to the
+org-brain entry at point. You may also want to use the commands
+org-brain-goto-<relationsship> to navigate between entries.
+
+Most of the commands available in org-brain-visualize-mode is also bound to the
+prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for
+instance C-c b, and you could then type C-c b p to add a parent to the current entry.
+Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
+
+You may want to create a link to an org-brain entry in an org-mode file (not
+necessarily an org-brain file itself). org-brain provides several link types for this
+purpose. You can use org-insert-link (bound to C-c C-l in org-mode by default) to
+insert one of these links. They all have in common that they, when clicked, will open
+the org-brain entry for editing. When inserting a link like this, org-brain will run
+completion upon all your entries.
+
+brain:
+ The default kind of link. Just let’s you visit another org-brain entry when clicked.
+ If the variable org-brain-backlink is t a brain-link will also be created as a
+ resource in the link target, linking back to where the link was created. If
+ org-brain-backlink is set to a string, that string will be added as a prefix to the
+ title of the backlink. Example: You set org-brain-backlink to =”<– “= and create
+ a brain: link in Rabbits linking to Carrots. Now a resource with the description
+ <-- Rabbits will be created in Carrots. 
+brain-child:
+ When inserted using org-insert-link this will make the linked entry a child to the
+ current org-brain entry, upon completion. Keep in mind that this doesn’t work if
+ you type the link manually; only by completion through org-insert-link. 
+brain-parent:
+ Like brain-child: but makes the linked entry a parent of the current entry. 
+brain-friend:
+ Like brain-child: but adds the linked entry as a friend. 
+brainswitch
+ If you have multiple brains you may want a link which switches to a specific brain
+ and one of its entries. The brainswitch link allows for this. 
+
+The names of the relationship inserting links (brain-child, brain-parent and
+brain-friend) can be customized with the variables org-brain-child-link-name,
+org-brain-parent-link-name, and org-brain-friend-link-name. This customization
+should be done before loading org-brain. If you’re using use-package, put the
+customization in the :init block.
 ** DONE Evil
 *** insert mod
 **** tab

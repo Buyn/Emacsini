@@ -74,8 +74,8 @@
     "
     ^Main^             ^99^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit            _i_ in       _h_elp 
-    ^^                  _j_ jump    
+    _q_uit            _i_n       _h_elp 
+    ^^                  _j_ump    _l_it-menu
     _p_rev-menu         _n_ext-menu    
     "
 ;; ***** keys
@@ -87,6 +87,7 @@
     ;; ("r" org-clock-report)
 	("n" spc-main-menu00/body)
 	("p" spc-main-menu98/body)
+	("l" lit-menu/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -391,7 +392,7 @@ _?_ help            _c_urrent file
 (defhydra lit-menu (:color pink)
 ;; ***** hint
     "
-                ^OrphoGrammus  Menus^          
+                ^OrphoGrammus  Menus^ z M-=         
     ────────────^───────────────────^───────────────────
      _[_ prev err    _]_ next err    _=_ word
      _p_rev cor err  _n_ext cor err  
