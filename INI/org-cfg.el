@@ -129,5 +129,5 @@
 
 ;; ** ORG-BRAIN 
 ;; (find-file-other-frame "~/INI/org-brain-cfg.el")
-;; (load "~/INI/org-brain-cfg.el")
+(load "~/INI/org-brain-cfg.el")
 ;; --------------------------------------

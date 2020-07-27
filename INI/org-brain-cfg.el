@@ -21,8 +21,8 @@
 ;; For Evil users
 ;; 3 If you’re an evil user, you’ll want to add (evil-set-initial-state
 ;;  'org-brain-visualize-mode 'emacs) to your org-brain configuration.
-  ;; (with-eval-after-load 'evil
-  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
 ;; *** :config : 
   :config
 ;; **** bind-key : 
@@ -39,7 +39,7 @@
 ;;  to before-save-hook, so that it runs when saving.
   (setq org-id-track-globally t)
   (setq org-id-locations-file "~/../Dropbox/orgs/org-Brain/.org-id-locations")
-  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+  ;; (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
 ;; **** org-capture-templates : 
 ;; 6 You might want to add information at the end of an entry, without visiting the file. A
 ;;  way to do this is to use a capture template, such as the one presented above.

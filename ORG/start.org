@@ -1,4 +1,4 @@
-* Welcom! Don`t panic!
+* Wellcome! Don`t panic!
 ** Set 
 #-*- mode: org -*-
 #+STARTUP: overview 
@@ -98,50 +98,51 @@ _   _   _             _   _   _
 ** init files
 *** root
 (find-file "~/.emacs")
-	(find-file "~/INI/init.el")
+	(find-file-other-frame "~/INI/init.el")
 *** vanila
-(find-file "~/INI/inpak.el")
-(find-file "~/INI/vanila_cfg.el")
+(find-file-other-frame "~/INI/inpak.el")
+(find-file-other-frame "~/INI/vanila_cfg.el")
 *** Evil
-(find-file "~/INI/evil-mod-cfg.el")
-	(find-file "~/ELs/Evil/evil-respect-input.el")
-	(find-file "~/ELs/Evil/onecharadd.el") not used
-	(find-file "~/ELs/Evil/copylines.el") пока нет
+	(find-file-other-frame "~/INI/evil-mod-cfg.el")
+	(find-file-other-frame "~/ELs/Evil/evil-respect-input.el")
+	(find-file-other-frame "~/ELs/Evil/onecharadd.el") not used
+	(find-file-other-frame "~/ELs/Evil/copylines.el") пока нет
 *** Orgs
-(find-file "~/INI/org-cfg.el")
-	(find-file "~/INI/org_agend_cfg.el")
-	(find-file "~/INI/babel-cfg.el")
-	(find-file "~/ELs/Org/Babel/ob-eshell.el")
-	(find-file-other-frame "~/INI/org-brain-cfg.el") commented
+(find-file-other-frame "~/INI/org-cfg.el")
+	(find-file-other-frame "~/INI/org_agend_cfg.el")
+	(find-file-other-frame "~/INI/babel-cfg.el")
+	(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
+	(find-file-other-frame "~/INI/org-brain-cfg.el") 
+	(find-file-other-frame "~/INI/org-brain-cfg.el") 
 *** Folding
-(find-file "~/INI/folding-cfg.el")
-	(find-file "~/INI/origami_cfg.el") not using
+(find-file-other-frame "~/INI/folding-cfg.el")
+	(find-file-other-frame "~/INI/origami_cfg.el") not using
 	но содержит в себе огромное количество класных решенией
 	которые нужно перенести в outshine-mod
-		(find-file "~/ELs/Evil/origami_triplebrase.el")
-	(find-file "~/INI/outshine_cfg.el")
+		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
+	(find-file-other-frame "~/INI/outshine_cfg.el")
 *** Other 
-(find-file "~/INI/frame-control.el")
-(find-file "~/INI/advnsed-selections-cfg.el")
-(find-file "~/INI/interface-mods.el")
-(find-file "~/INI/hydra-cfg.el")
-(find-file "~/INI/www-cfg.el") not used
+(find-file-other-frame "~/INI/frame-control.el")
+(find-file-other-frame "~/INI/advnsed-selections-cfg.el")
+(find-file-other-frame "~/INI/interface-mods.el")
+(find-file-other-frame "~/INI/hydra-cfg.el")
+(find-file-other-frame "~/INI/www-cfg.el") not used
 *** literary 
-(find-file "~/INI/lit-cfg.el") 
-	(find-file "~/INI/translate-cfg.el") not et
-	(find-file "~/INI/grammer-cfg.el") not et
+(find-file-other-frame "~/INI/lit-cfg.el") 
+	(find-file-other-frame "~/INI/translate-cfg.el") not et
+	(find-file-other-frame "~/INI/grammer-cfg.el") not et
 *** Programing
-(find-file "~/INI/dev-cfg.el")
-	(find-file "~/INI/autocomplete-cfg.el")
-	(find-file "~/INI/snippets-cfg.el")
-	(find-file "~/INI/delimiters-cfg.el")
-	(find-file "~/INI/js-cfg.el") not used
-	(find-file "~/INI/lua-cfg.el")
-	(find-file "~/INI/python-cfg.el")
-	(find-file "~/INI/c-mode-cfg.el") not used
-	(find-file "~/INI/flycheck-cfg.el") 
+(find-file-other-frame "~/INI/dev-cfg.el")
+	(find-file-other-frame "~/INI/autocomplete-cfg.el")
+	(find-file-other-frame "~/INI/snippets-cfg.el")
+	(find-file-other-frame "~/INI/delimiters-cfg.el")
+	(find-file-other-frame "~/INI/js-cfg.el") not used
+	(find-file-other-frame "~/INI/lua-cfg.el")
+	(find-file-other-frame "~/INI/python-cfg.el")
+	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
+	(find-file-other-frame "~/INI/flycheck-cfg.el") 
 *** My Elisp
-	(find-file "~/ELs/BuYn/shell.el")
+	(find-file-other-frame "~/ELs/BuYn/shell.el")
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -2737,7 +2738,6 @@ This does exactly the same thing as the following:
 (use-package ace-jump-mode
   :bind ("C-." . ace-jump-mode))
 *** Magic handlers
-
 Similar to :mode and :interpreter, you can also use :magic and :magic-fallback to cause certain function to be run if the beginning of a file matches a given regular expression. The difference between the two is that :magic-fallback has a lower priority than :mode. For example:
 
 (use-package pdf-tools
@@ -2748,7 +2748,6 @@ Similar to :mode and :interpreter, you can also use :magic and :magic-fallback t
 This registers an autoloaded command for pdf-view-mode, defers loading of pdf-tools, and runs pdf-view-mode if the beginning of a buffer matches the string "%PDF".
 
 *** Hooks
-
 The :hook keyword allows adding functions onto hooks, here only the basename of the hook is required. Thus, all of the following are equivalent:
 
 (use-package ace-jump-mode
@@ -2879,34 +2878,92 @@ If I don't use Emacs graphically, I can test the absolute minimum times. This is
 
 time emacs -l init.elc -batch --eval '(message "Hello, world!")'
 On the Mac I see an average of 0.36s for the same configuration, and on Linux 0.26s.
-*** DONE use-package
+*** DONE use-package exempl
 	CLOSED: [2019-09-13 Пт 05:52]
-
-
 The easiest way is to install use-package.
-
 (package-initialize)
 (require 'package)
 (add-to-list 'package-archives
     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
 (dolist (package '(use-package))
    (unless (package-installed-p package)
        (package-install package)))
-
 Then
-
  (use-package paredit
    :ensure t)
-
 The :ensure t is what ensures that the package is installed.
-
 To just load ensure multiple packages are install
-
 (dolist (package '(package-a package-b package-c))
  (unless (package-installed-p package)
    (package-install package))
    (require package))))
+*** :quelpa
+https://github.com/quelpa/quelpa-use-package
+**** instal
+(use-package quelpa-use-package :ensure t)
+**** use exempl github
+:quelpa (outshine :fetcher github :repo "alphapapa/outshine")
+**** quelpa-use-package
+https://github.com/quelpa/quelpa-use-package
+If you are using use-package (which can help to simplify your .emacs) you can use the quelpa handler provided by quelpa-use-package.
+**** Installation
+Requirements: Emacs 25.1
+Assuming you have bootstrapped quelpa, install quelpa-use-package (which installs use-package as a dependency) and require the library:
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+**** Usage
+After that it is possible to call use-package with the :quelpa keyword:
+;; installs abc-mode with quelpa
+(use-package abc-mode :quelpa)
+
+;; does the same (`t' is optional)
+(use-package abc-mode :quelpa t)
+
+;; again... (if the package would have another name)
+(use-package abc-mode :quelpa abc-mode)
+
+;; passes upgrade parameter to quelpa
+(use-package abc-mode :quelpa (:upgrade t))
+
+;; uses the given recipe
+(use-package abc-mode
+  :quelpa (abc-mode :fetcher github :repo "mkjunker/abc-mode"))
+
+;; recipe with plist arguments
+(use-package abc-mode
+  :quelpa ((abc-mode :fetcher github :repo "mkjunker/abc-mode") :upgrade t))
+***** Using quelpa with :ensure
+To make :ensure t use quelpa instead of package.el set the use-package-ensure-function in your init file:
+(setq use-package-ensure-function 'quelpa)
+After that:
+(use-package abc-mode :ensure t)
+will install abc-mode with quelpa.
+And if you enable use-package-always-ensure:
+(setq use-package-always-ensure t)
+then
+(use-package abc-mode)
+will install abc-mode with quelpa.
+***** Conditional execution
+Note that the :quelpa keyword is inserted after :if, :when, :unless and :requires so that you can make the installation of a package depend on some requirement, for example:
+(use-package magit-filenotify
+  :when (fboundp 'file-notify-add-watch)
+  :quelpa (magit-filenotify :fetcher github :repo "magit/magit-filenotify")
+In this case magit-filenotify is only installed if the function file-notify-add-watch is bound.
+Likewise you can use :requires to make the installation depend on a feature being available:
+(use-package magit-filenotify
+  :requires filenotify
+  :quelpa (magit-filenotify :fetcher github :repo "magit/magit-filenotify"))
+***** Overriding use-package-always-ensure
+To install some packages with quelpa but use use-package-always-ensure to install all others from an ELPA repo :ensure needs to be disabled if the :quelpa keyword is found.
+quelpa-use-package provides an advice for this purpose which can be activated thus:
+(quelpa-use-package-activate-advice)
+To disable it again you can use:
+(quelpa-use-package-deactivate-advice)
+
+
 ** DONE hidra mod 
 	 CLOSED: [2020-07-17 Пт 03:59]
     https://github.com/abo-abo/hydra
@@ -2919,7 +2976,8 @@ https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-
 (global-set-key (kbd "M-j") 'windmove-down)
 (global-set-key (kbd "M-k") 'windmove-up)
 (global-set-key (kbd "M-l") 'windmove-right)
-** Org-brain
+** DONE Org-brain
+	 CLOSED: [2020-07-22 Ср 05:45]
 *** help
 https://github.com/Kungsgeten/org-brain
 **** help on keys
@@ -3003,7 +3061,7 @@ order to operate on the entry link at point instead of the visualized entry.
 
 You may use org-store-link inside of org-brain-visualize in order to store a link to the
 currently visualized org-brain entry.
-***** universal argument C- : 
+***** universal argument C-u : 
 If the universal argument C-u is used when running org-brain-visualize-random or
 org-brain-visualize-wander, the randomized targets are restricted to descendants
 (children, grandchildren, grand-grandchildren etc) of the currently visualized entry.
@@ -3017,7 +3075,7 @@ If the universal argument C-u is used when calling org-brain-annotate-edge then 
 annotation will be “one-way”. The default behaviour is otherwise to annotate the
 connection in both directions.
 
-***** toggle by pressing : 
+***** toggle by Zooming : 
 When using the mind map visualization (toggle by pressing m), you can use the
 following keybindings in order to show or hide successive levels of hierarchy relative
 to the current entry.
@@ -3044,6 +3102,52 @@ is identical to those in org-brain-visualize. You could for instance use S c to 
 selected entries as children to the visualized entry, or S P to remove the parent
 relationship of the selected entries. When you’re done and wish to clear the selection
 use org-brain-clear-selected, which is bound to S s.
+**** ID
+***** M-x org-brain-update-id-locations
+org-brain use org-id in order to speed things up. Because of this, the variable org-id-track-globally should be t (which it already is by default). You may want to modify org-id-locations-file too. If you add entries to org-brain directly from org-mode you must assign headliens an ID. A comfortable way to do this is with the command org-brain-ensure-ids-in-buffer. Even more comfortable is to add that to before-save-hook, so that it runs when saving.
+****** exempl
+ (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+***** M-x org-brain-headline-to-file. : 
+If you have a headline entry, which you want to convert to a file entry, use M-x org-brain-headline-to-file. Unfortunately there is currently no function to convert a file entry into a headline entry.
+***** M-x org-brain-get-id
+You can edit org-brain entries directly from org-mode. You can use the default org-mode outline structure to define parent/children relationships, but keep in mind that only entries with an ID property will be considered as entries to org-brain; use M-x org-brain-get-id to create an ID property to the current org-mode headline. Another alternative is to use M-x org-brain-refile which will create the ids for you. You can also create IDs for all headlines in the buffer with M-x org-brain-ensure-ids-in-buffer, and you might find it useful to add this to before-save-hook.
+**** From ORG-MODE 
+***** org-brain-prefix-map
+Most of the commands available in org-brain-visualize-mode is also bound to the prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for instance C-c b, and you could then type C-c b p to add a parent to the current entry. Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
+***** 
+**** Renaming files in org-brain
+Headline entries use org-id to identify themselves, so the headlines can be manually renamed without worries. File entries, on the other hand, uses the filename as the identifier. This will cause problems if you try to manually rename files inside of org-brain.
+
+In order to rename a file, use M-x org-brain-rename-file.
+**** Special tags
+You might have a headline which you do not really want as an entry in org-brain. The most basic way to exclude such a headline is simply to not add an ID property to it. However, org-brain also provide two tags, which you can use to tag the headline:
+***** :nobrain:
+This tag excludes the headline, and its subheadings, from your org-brain entries. You can change the tag name by modifying org-brain-exclude-tree-tag.
+***** :childless:
+This tag does not exclude the headline, but it excludes the subheadings. You can change the tag name by modifying org-brain-exclude-children-tag. Works on file entries.
+The following tags modifies the kind of information that is shown when an entry is visualized:
+
+***** :notext:
+Do not show the entry’s text in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-text-tag.
+***** :resourceless:
+Do not show the entry’s resources in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-resources-tag.
+***** :showchildren:
+By default local child entries aren’t shown as text. By setting this tag the entry get the entire subtree as text. You can change the tag name by modifying org-brain-show-children-tag. Works on file entries.
+***** :nosiblings:
+You may have an entry with lots of children, and when you visualize one of these children you might not want to see the siblings from this parent. A good example would be if you have an index entry or similar. By tagging the parent with nosiblings the parent’s children will not show siblings from that parent. You can change the tag name by modifying org-brain-exclude-siblings-tag.
+***** :nolocalparent:
+This is similar to :nosiblings: but the tagged parent will not be shown at all when one of its local children are visualized.
+The following tags modify the way how information is shown when an entry is visualized.
+***** :ownline:
+Make each child of the tagged entry appear on its own line when the tagged entry is visualized. This only affects the tagged entry. It works akin to temporarily setting org-brain-child-fill-column-sexp to 0.
+***** :nosort:
+Display each child of the tagged node in the order the children are listed in the file, rather than in the sorted order determined by org-brain-visualize-sort-function. This affects the order of the node’s children in both the child list (when the tagged node is being visited) and in the sibling list (when one of the tagged node’s children is being visited).
+**** Having multiple brains
+You can have multiple brains simply by having more than one brain folder. In this way, each folder becomes a separate brain. You can switch between these using M-x org-brain-switch-brain. You can also use brainswitch: links in org-mode to switch brains.
+
+If you run org-brain-visualize from inside an org-file in the root of an org-brain directory, org-brain will automatically switch to this brain.
 **** Customizing the look of entry titles
 When visualizing you might want to see additional information about the entries. This
 can be done by customizing the following variables:
@@ -3121,4 +3225,13 @@ customization in the :init block.
 *** insert mod
 **** tab
 If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
+** DONE org-eww
+	 CLOSED: [2020-07-22 Ср 05:47]
+When this module is active `org-store-link' (often on key C-c l) in
+a eww buffer stores a link to the current url of the eww buffer.
+
+In an eww buffer function `org-eww-copy-for-org-mode' kills either
+a region or the whole buffer if no region is set and transforms the
+text on the fly so that it can be pasted into an org-mode buffer
+with hot links.
 

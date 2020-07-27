@@ -19,10 +19,10 @@
 ;; ***** hint
     "
     ^Main^             00             ^Menus^          
-    ^─────^───────────────────────────^─────^─────────
-    _q_ quit          _d_ev menu      _o_rg-mode                                      
-    _w_ww             _SPC_ insert    _y_nke-menu 
-    _p_rev-menu       _e_macs-menu    _n_ext-menu    
+    ^─────^───────────────────────────^─────^────────────
+    _q_ quit      _d_ev menu    _o_rg-mode   _b_Org-Brain                       
+    _w_ww         _SPC_ next    _y_nke-menu 
+    _p_rev-menu   _e_macs-menu               _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
@@ -30,10 +30,11 @@
     ("d" hydra-dev-menu/body)
     ("w" www-menu/body)
     ("e" hydra-emacs-menu/body)
-    ("SPC" khaoos-insert-one-char :color pink)
-	("y" hydra-yank-menu/body)
-	("n" spc-main-menu01/body)
-	("p" spc-main-menu99/body)
+    ("SPC" spc-main-menu01/body )
+		("y" hydra-yank-menu/body)
+		("n" spc-main-menu01/body)
+		("b" hydra-brain-org-menu/body)
+		("p" spc-main-menu99/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -47,21 +48,21 @@
     ^Main^       01        ^Menus^          
     ^────^─────────────────^─────^─────────
     _q_ quit              _o_ outline 
-    _c_calculus           _d_ ediff
+    _c_ calculus          _d_ ediff
     _t_ transpose
-    _f_ occur-dwim        _SPC_ insert    
+    _f_ occur-dwim        _SPC_ next    
     _p_rev-menu           _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
-    ("SPC" khaoos-insert-one-char :color pink)
+    ("SPC" spc-main-menu99)
     ("c" calc :color pink)
-	("o" hydra-outline/body) 
-	("d" hydra-ediff/body) 
-	("t" hydra-transpose/body) 
-	("f" hydra-occur-dwim/body)
-	("p" spc-main-menu00/body)
-	("n" spc-main-menu99/body)
+		("o" hydra-outline/body) 
+		("d" hydra-ediff/body) 
+		("t" hydra-transpose/body) 
+		("f" hydra-occur-dwim/body)
+		("p" spc-main-menu00/body)
+		("n" spc-main-menu99/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -539,7 +540,38 @@ _?_ help            _c_urrent file
 			(setq x-select-enable-clipboard nil)
 			)
 		"reg2clipbord")
+  ("w" (progn  
+			;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
+			;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
+			(org-eww-copy-for-org-mode)
+			)
+		"web-page2Org")
   ("q" nil "quit")
+	;; --------------------------------------
+  )
+;; --------------------------------------
+
+
+;; *** hydra-brain-org-menu
+(defhydra hydra-brain-org-menu (:color blue)
+  ;; (global-map "C-c")
+  "Org-Brain menu"
+  ("i" (org-brain-get-id)
+		"addID2header")
+  ("I" (org-brain-headline-to-file)
+		"addID2All")
+  ("v" (org-brain-visualize "index")
+		"2index")
+  ("V" (org-brain-entry-at-pt)
+		"2index")
+  ;; ("w" (progn  
+	;; 		;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
+	;; 		;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
+	;; 		(org-eww-copy-for-org-mode)
+	;; 		)
+		;; "web-page2Org")
+  ("q" nil "quit")
+	;; --------------------------------------
   )
 ;; --------------------------------------
 
@@ -567,3 +599,4 @@ _?_ help            _c_urrent file
 	("q" nil "quit")
 	)
 ;; --------------------------------------
+;; *  --------------------------------------
