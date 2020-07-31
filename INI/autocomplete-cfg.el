@@ -16,6 +16,8 @@
   ;; :defer 2
 	:config
 	(add-hook 'prog-mode-hook 'company-mode)
+	;; (setq completion-styles "basic substring emacs22")
+	(setq completion-styles '(partial-completion substring emacs22))
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 	;; :bind ("C-c c" hydra-clock/body)
 ;; *** old setings
