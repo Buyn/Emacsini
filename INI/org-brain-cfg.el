@@ -21,8 +21,8 @@
 ;; For Evil users
 ;; 3 If you’re an evil user, you’ll want to add (evil-set-initial-state
 ;;  'org-brain-visualize-mode 'emacs) to your org-brain configuration.
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  ;; (with-eval-after-load 'evil
+  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
 ;; *** :config : 
   :config
 ;; **** bind-key : 

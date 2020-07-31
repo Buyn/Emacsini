@@ -395,11 +395,11 @@ _?_ help            _c_urrent file
     "
                 ^OrphoGrammus  Menus^ z M-=         
     ────────────^───────────────────^───────────────────
-     _[_ prev err    _]_ next err    _=_ word
+     _[_ prev err    _]_ next err    _w_ word
      _p_rev cor err  _n_ext cor err  
      _f_lyspell      _c_omment chek  _q_uit
      _a_ll buffer    _r_egion cheak
-     _r_u-RU    _d_ictonar chenge    _e_n-US
+     _R_u-RU    _D_ictonar chenge    _E_n-US
     "
 ;; ***** keys
     ("[" evil-prev-flyspell-error :color pink)
@@ -409,11 +409,11 @@ _?_ help            _c_urrent file
     ("f" flyspell-mode :color pink)
     ("c" flyspell-prog-mode)
     ("a" flyspell-buffer)
-    ("r" ispell-change-dictionary "ru_RU")
-    ("d" ispell-change-dictionary)
-    ("e" ispell-change-dictionary "en_US")
+    ("R" ispell-change-dictionary "ru_RU")
+    ("D" ispell-change-dictionary)
+    ("E" ispell-change-dictionary "en_US")
     ("r" ispell-region)
-    ("=" ispell-word :color pink)
+    ("w" ispell-word :color pink)
 	("q" nil) 
 ;; ***** END of def
 	)
@@ -563,7 +563,13 @@ _?_ help            _c_urrent file
   ("v" (org-brain-visualize "index")
 		"2index")
   ("V" (org-brain-entry-at-pt)
-		"2index")
+		"visualize-org")
+  ("R" (org-brain-rename-file)
+		"rename-file")
+  ("U" (org-brain-update-id-location)
+		"updateID")
+  ("F" (org-brain-headline-to-file)
+		"Hline2file")
   ;; ("w" (progn  
 	;; 		;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
 	;; 		;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
