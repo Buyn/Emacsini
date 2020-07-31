@@ -592,6 +592,7 @@ _?_ help            _c_urrent file
 	("e" elpy-hydra/body "elpy")
 	("p" elpy-enable "pyton")
 	("d" rainbow-delimiters-mode "delimiters")
+	("l" display-line-numbers-mode "line-numbers")
 	("y" hydra-yasnippet/body "yasnippet" :color blue)
 	("q" nil "quit")
 	)

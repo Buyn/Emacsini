@@ -59,4 +59,12 @@
 									)
 								))
 ;; --------------------------------------
+;; ** PROG-MODE-HOOK CUSTOMIZATION
+	(add-hook 'prog-mode-hook 
+;; *** line-numbers-mode
+		#'display-line-numbers-mode
+		;; #'outshine-mode on in outshine cfg
+;; *** end prog-mode-hook
+		)
+;; --------------------------------------
 ;; *  --------------------------------------

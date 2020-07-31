@@ -42,7 +42,7 @@
 ;; The canonical way to set this is adding display-line-numbers-mode to a mode hook,
 ;; (add-hook 'foo-mode-hook #'display-line-numbers-mode)
 ;; or enabling global-display-line-numbers-mode if you want them everywhere,
-(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode 0)
 ;; and to set display-line-numbers-type to the desired style:
 (setq display-line-numbers-type 'relative)
 ;;Relative line numbers enabled
