@@ -138,6 +138,17 @@
 ;; --------------------------------------
 ; }}}
 ;; --------------------------------------
+;; * FRAMES-FUN CUSTOMIZATION  
+(defun buyn-get-frame-by-name (fname)
+  "If there is a frame named FNAME, return it, else nil."
+  (require 'dash)                       ; For `-some'
+  (-some (lambda (frame)
+           (when (equal fname (frame-parameter frame 'name))
+             frame))
+         (frame-list)))
+;; --------------------------------------
+; }}}
+;; --------------------------------------
 ;; * NOT USED;  {{{
 ;; (global-set-key (kbd "<kp-subtract>") 'xah-close-current-buffer)
 ;; (global-set-key (kbd "<kp-divide>") 'xah-previous-user-buffer)

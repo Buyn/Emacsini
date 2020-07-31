@@ -22,7 +22,7 @@
     ^─────^───────────────────────────^─────^────────────
     _q_ quit      _d_ev menu    _o_rg-mode   _b_Org-Brain                       
     _w_ww         _SPC_ next    _y_nke-menu 
-    _p_rev-menu   _e_macs-menu               _n_ext-menu    
+    _p_rev-menu   _e_macs-menu  ya_s_nippet  _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
@@ -33,6 +33,7 @@
     ("SPC" spc-main-menu01/body )
 		("y" hydra-yank-menu/body)
 		("n" spc-main-menu01/body)
+		("s" hydra-yasnippet/body )
 		("b" hydra-brain-org-menu/body)
 		("p" spc-main-menu99/body)
 ;; ***** END of def
