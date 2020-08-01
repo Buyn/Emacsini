@@ -134,6 +134,7 @@
 					(evil-buffer-new 0 "*new*")))
 ;; --------------------------------------
 ;; * FULLSCREEN-MOD CUSTOMIZATION;  {{{
+;; (find-file-other-frame "~/INI/fullscreen-cfg.el")
 (load "~/INI/fullscreen-cfg.el")
 ;; --------------------------------------
 ; }}}
@@ -158,3 +159,5 @@
 ;; (global-set-key (kbd "<C-kp-multiply>") 'xah-next-emacs-buffer)
 ;; --------------------------------------
 ;; --------------------------------------
+
+;; *  --------------------------------------

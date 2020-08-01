@@ -19,18 +19,25 @@
 (add-to-list 'default-frame-alist '(width . 75))
 ;; ------------------------------------------------------
 ;; ** load-theme : 
+;; ------------------------------------------------------
 (load-theme 'material t) ;; load material theme
 ;;(global-linum-mode t) ;; enable line numbers globally
 ;;(set-frame-font "Trebuchet MS")
 ;;(set-frame-font "Ubuntu Mono")
 ;;(set-default-font "Ubuntu Mono")
+;; ------------------------------------------------------
 ;; ** font : 
+;; ------------------------------------------------------
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono"))
+;; ------------------------------------------------------
 ;; ** tab-width : 
+;; ------------------------------------------------------
 (setq-default tab-width 2)
 (setq tab-width 2)
+;; ------------------------------------------------------
 ;; ** line-numbers-mode : 
+;; ------------------------------------------------------
 ;;Unfortunately, Emacs's help message is pretty bad in this case. The menu button is bound to an anonymous function, and the help system is basically displaying the byte-compiled version of that function. I got the Emacs source, searched for the unique looking string "Relative line numbers enabled", and found the function in lisp/menu-bar.el:
 ;;
 ;;  (lambda ()
@@ -46,7 +53,9 @@
 ;; and to set display-line-numbers-type to the desired style:
 (setq display-line-numbers-type 'relative)
 ;;Relative line numbers enabled
+;; ------------------------------------------------------
 ;; ** Warp line : 
+;; ------------------------------------------------------
 ;; Warp line on visula line end
 (global-visual-line-mode t)
 
@@ -59,7 +68,11 @@
 (setq line-move-visual t)
 (setq word-wrap t)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+;; ------------------------------------------------------
 ;; ** paren : 
+;; ------------------------------------------------------
+;; *** paren-mode : 
+;; ------------------------------------------------------
 (show-paren-mode 1)
 ;; for working with pair-able characters
 ;; lightweight package electric, which provided by Emacs out of the box.
@@ -74,6 +87,7 @@
 ;;        ))
 ;; ------------------------------------------------------
 ;; *** Wrapping selecting text in enclosing characters
+;; ------------------------------------------------------
 ;; For parens you can do M-(. For brackets/braces/quotes you could do:
 (global-set-key (kbd "M-[") 'insert-pair)
 (global-set-key (kbd "M-{") 'insert-pair)
@@ -86,10 +100,12 @@
 (global-set-key (kbd "M->") 'delete-pair)
 ;; ------------------------------------------------------
 ;; ** change input method
+;; ------------------------------------------------------
 (set-input-method "russian-computer")
 (global-set-key (kbd "C-^") 'toggle-input-method)
 ;; ------------------------------------------------------
 ;; ** Backups
+;; ------------------------------------------------------
 ;; By default, Emacs saves backup files – those ending in ~ – in the current directory, thereby cluttering it up.
 ;; Let's place them in ~/.emacs.d/backups, in case we need to look for a backup; moreover, let's keep old versions since there's disk space to go around
 ;;–what am I going to do with 500gigs when nearly all my ‘software’ is textfiles interpreted within Emacs 
@@ -101,9 +117,44 @@
 (setq version-control t)
 ;; Even version controlled files get to be backed up.
 ;; (setq vc-make-backup-files t)
-
-
+;; ------------------------------------------------------
+;; ** Menu bar & key
+;; ------------------------------------------------------
+;; *** coments : 
+;; (menu-bar-mode -1)
+;; (menu-bar-mode 1)
+;; (menu-bar-open)
+;; ------------------------------------------------------
+;; *** defun buyn-menu-bar-open : 
+(defun buyn-menu-bar-open ()
+  "Show Menu bar on all frames
+		and open menu 
+		set f10 to (buyn-menu-bar-close)"
+  (interactive)
+	(menu-bar-mode 1)
+	(menu-bar-open)
+	(global-set-key (kbd "<f10>") 'buyn-menu-bar-close)
+  )
+;; ------------------------------------------------------
+;; ------------------------------------------------------
+;; *** defun buyn-menu-bar-close : 
+(defun buyn-menu-bar-close()
+  "Hide Menu bar on all frames
+		and set f10 to (buyn-menu-bar-open)"
+  (interactive)
+	(menu-bar-mode -1)
+	;; (menu-bar-open)
+	(global-set-key (kbd "<f10>") 'buyn-menu-bar-open)
+  )
+;; ------------------------------------------------------
+;; *** set-key f10 : 
+;; ------------------------------------------------------
+	(global-set-key (kbd "<f10>") 'buyn-menu-bar-open)
 ;; ------------------------------------------------------
 ;; * “Interactively Do Things” (a.k.a. ido)
+;; ------------------------------------------------------
 (require 'ido)
 (ido-mode t)
+;; ------------------------------------------------------
+
+;; * --------------------------------------
