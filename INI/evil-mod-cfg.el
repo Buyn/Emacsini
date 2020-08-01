@@ -121,6 +121,7 @@
 (put 'save-column 'lisp-indent-function 0)
 ;; **** move-line-up : 
 (defun move-line-up ()
+	"BuYn function to move line up"
   (interactive)
   (save-column
     (transpose-lines 1)
@@ -128,6 +129,7 @@
 
 ;; **** move-line-down : 
 (defun move-line-down ()
+	"BuYn function to move line down"
   (interactive)
   (save-column
     (forward-line 1)
@@ -136,6 +138,35 @@
 ;; **** define-key : 
 (define-key evil-normal-state-map (kbd "M-m M-k") 'move-line-up)
 (define-key evil-normal-state-map (kbd "M-m M-j") 'move-line-down)
+;; *** copy-lines : 
+;; **** buyn-copy-line : 
+(defun buyn-copy-line () (interactive)
+			(setq region-text (buffer-substring (region-beginning) (region-end)))
+			(save-excursion
+				;; (insert " ")
+				(insert region-text)
+				;; (insert " :")
+				))
+;; **** buyn-copy-line-commented : 
+(defun buyn-copy-line-commented () 
+			 (interactive)
+			 (let ((visual-start (region-beginning))
+						 (visual-end (region-end))
+						 (region-text (buffer-substring (region-beginning) (region-end))))
+						(insert region-text)
+						(comment-region visual-start visual-end)
+						)
+			 ;; (evil-next-line 2) do nothing
+			 )
+;; **** define-key : 
+(define-key evil-visual-state-map (kbd "M-m M-p") 'buyn-copy-line)
+(define-key evil-visual-state-map (kbd "M-m M-c") 'buyn-copy-line-commented)
+(define-key evil-normal-state-local-map (kbd "M-m M-p") '(lambda() (interactive)
+								(evil-visual-line)
+								(buyn-copy-line)))
+(define-key evil-normal-state-local-map (kbd "M-m M-c") '(lambda() (interactive)
+								(evil-visual-line)
+								(buyn-copy-line-commented)))
 ;; *** move-char : 
 ;; **** M-m M-l : 
 (define-key evil-normal-state-map (kbd "M-m M-l") '(lambda() (interactive)
@@ -215,6 +246,7 @@
 ;; -------------------------------------- 
 ;; ** TAB on c-i
 (define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
+;; -------------------------------------- 
 ;; -------------------------------------- 
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  
 ;; ** load el

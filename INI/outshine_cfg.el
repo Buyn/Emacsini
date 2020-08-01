@@ -18,6 +18,7 @@
 	(define-key evil-normal-state-map "zf" 'outshine-insert-heading)
 ;; **** zF
 	(define-key evil-normal-state-map "zF" '(lambda() (interactive)
+			;; (evil-previous-line)
 			(outshine-insert-comment-subtree )
 			(insert (read-string "comment : "))
 			))
@@ -25,7 +26,9 @@
 ;; **** visual add zf
 	(define-key evil-visual-state-map "zf" '(lambda() (interactive)
 			(setq region-text (buffer-substring (region-beginning) (region-end)))
+			(evil-normal-state)
 			(evil-open-above 1)
+			(evil-previous-line)
 			(outshine-insert-heading)
 			(backward-char)
 			(save-excursion
