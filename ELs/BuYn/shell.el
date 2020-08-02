@@ -21,7 +21,9 @@
   (shell-command
 		(concat path-to-emagus-cmd
 						" "
-						unix-path-to-file)
+						unix-path-to-file
+						" &"
+						)
 		)
   )
 

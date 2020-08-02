@@ -11,7 +11,7 @@
 ;; Disables the startup message (this is the screen with all the tutorial information)
 (setq inhibit-startup-message t) ;; hide the startup message
 (tool-bar-mode -1)
-;; (menu-bar-mode -1)
+(menu-bar-mode -1)
 ;; ------------------------------------------------------
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
 ;; ------------------------------------------------------
