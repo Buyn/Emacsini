@@ -50,7 +50,7 @@
     ^────^─────────────────^─────^─────────
     _q_ quit              _o_ outline 
     _c_ calculus          _d_ ediff
-    _t_ transpose
+    _t_ transpose         _l_it-menu
     _f_ occur-dwim        _SPC_ next    
     _p_rev-menu           _n_ext-menu    
     "
@@ -64,6 +64,7 @@
 		("f" hydra-occur-dwim/body)
 		("p" spc-main-menu00/body)
 		("n" spc-main-menu99/body)
+	  ("l" lit-menu/body)
 ;; ***** END of def
 	)
 ;; --------------------------------------
@@ -77,8 +78,8 @@
     ^Main^             ^99^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
     _q_uit            _i_n       _h_elp 
-    ^^                  _j_ump    _l_it-menu
-    _p_rev-menu         _n_ext-menu    
+    ^^                _j_ump     _l_it-menu
+    _p_rev-menu       _n_ext-menu    
     "
 ;; ***** keys
     ("q" nil)
