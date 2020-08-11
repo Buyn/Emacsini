@@ -36,6 +36,7 @@
 ;; --------------------------------------
 ;; ** DEVELOPMENT-KEY CUSTOMIZATION
 ;; *** save & recompile
+;; **** global-set-key <f8> :
 (global-set-key(kbd "<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
@@ -45,6 +46,7 @@
 									)
 								(delete-other-windows)
 								))
+;; **** global-set-key "M-<f8>" :
 (global-set-key(kbd "M-<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
@@ -53,6 +55,26 @@
 										(concat
 											"defult(" (buffer-name) "):")
 										(buffer-file-name)
+										nil
+										(buffer-name)
+										)
+									)
+								))
+;; --------------------------------------
+;; **** global-set-key "M-<f8>" :
+(define-key evil-visual-state-map (kbd "M-<f8>") '(lambda() (interactive)
+								(setq region-text (buffer-substring (region-beginning) (region-end)))
+								(save-buffer)
+								(evil-normal-state)
+								(compile
+								 (read-string
+										(concat
+											"defult(" (buffer-name) "):")
+										(concat
+												(buffer-file-name)
+												" -p "
+												region-text
+												)
 										nil
 										(buffer-name)
 										)

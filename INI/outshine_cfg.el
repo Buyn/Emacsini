@@ -27,7 +27,7 @@
 	(define-key evil-visual-state-map "zf" '(lambda() (interactive)
 			(setq region-text (buffer-substring (region-beginning) (region-end)))
 			(evil-normal-state)
-			(evil-open-above 1)
+			;; (evil-open-above 1)
 			(evil-previous-line)
 			(outshine-insert-heading)
 			(backward-char)
