@@ -56,10 +56,44 @@ _   _   _             _   _   _
 
 
 ** progn : 
+#+begin_src emacs-lisp :tangle yes
+(define-key evil-visual-state-map (kbd "M-<f8>") '(lambda() (interactive)
+								(setq region-text (buffer-substring (region-beginning) (region-end)))
+								(save-buffer)
+								(evil-normal-state)
+								(compile
+								 (read-string
+										(concat
+											"defult(" (buffer-name) "):")
+										(concat
+												(buffer-file-name)
+												" -p "
+												region-text
+												)
+										nil
+										(buffer-name)
+										)
+									)
+								))
+;; --------------------------------------
+	(define-key evil-visual-state-map "zf" '(lambda() (interactive)
+			(setq region-text (buffer-substring (region-beginning) (region-end)))
+			(evil-normal-state)
+			;; (evil-open-above 1)
+			(evil-previous-line)
+			(outshine-insert-heading)
+			(backward-char)
+			(save-excursion
+				(insert " ")
+				(insert region-text)
+				(insert " :")
+			)))
+#+end_src
+
+#+RESULTS:
+| lambda | nil | (interactive) | (setq region-text (buffer-substring (region-beginning) (region-end))) | (evil-normal-state) | (evil-previous-line) | (outshine-insert-heading) | (backward-char) | (save-excursion (insert  ) (insert region-text) (insert  :)) |
+
 (progn
-
-(define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
-
 		) progn end
 * Pathes
 ** org files
@@ -71,7 +105,6 @@ _   _   _             _   _   _
 [[file:today.org][Today org file]]
 [[file:~/ORG/gtd/inbox.org][Inbox GTD File]]
 [[file:~/ORG/gtd/tickler.org][Tikler Todo File]]
-
 *** main todos
 (find-file "D:/Development/lisp/Dropbox/orgs/weekly.org")
 (find-file "~/../Dropbox/orgs/todo_main.org")
