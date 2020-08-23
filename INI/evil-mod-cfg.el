@@ -199,6 +199,7 @@
 					))
 ;; -------------------------------------- }}}
 ;; ** find&replace  {{{
+;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
 		(evil-normal-state)
@@ -209,7 +210,14 @@
 						nil
 						(current-kill 0 "DO-NOT-MOVE"))
 			))))
-;; -------------------------------------- }}}
+;; *** evil-visual * : 
+(define-key evil-visual-state-map (kbd "*") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(evil-normal-state)
+		(evil-search region-text t nil)
+		(push region-text regexp-search-ring)
+		)))
+;; *** -------------------------------------- }}}
 ;; ** Wrape by one char  {{{
 (define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
 		(let (

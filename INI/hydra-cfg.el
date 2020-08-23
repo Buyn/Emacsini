@@ -591,7 +591,7 @@ _?_ help            _c_urrent file
 	("c" company-mode "company")
 	("o" outshine-mode "outshine")
 	("e" elpy-hydra/body "elpy")
-	("p" elpy-enable "pyton")
+	("p" python-mode "pyton")
 	("d" rainbow-delimiters-mode "delimiters")
 	("l" display-line-numbers-mode "line-numbers")
 	("y" hydra-yasnippet/body "yasnippet" :color blue)
