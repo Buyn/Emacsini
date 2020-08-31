@@ -373,7 +373,8 @@ _?_ help            _c_urrent file
 ;; **** Keys
   ("d" yas-load-directory)
   ("e" yas-activate-extra-mode)
-  ("i" yas-insert-snippet)
+  ("i" yas-insert-snippet :color blue)
+  ("w" yas-wrap-around-region :color blue)
   ("f" yas-visit-snippet-file :color blue)
   ("n" yas-new-snippet)
   ("t" yas-tryout-snippet)

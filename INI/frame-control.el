@@ -99,6 +99,10 @@
 			(let (buffer-name-to-close (buffer-name))
 			(evil-quit)
 			(switch-to-buffer-other-frame buffer-name-to-close))))
+(global-set-key (kbd " M-g M-t M-j") '(lambda() (interactive)
+			(let (buffer-name-to-close (buffer-name))
+			(evil-quit)
+			(switch-to-buffer-other-frame buffer-name-to-close))))
 ;; --------------------------------------
 ;; ** Help in New Frame   ***  {{{
 ;; (define-key evil-normal-state-map (kbd " M-g M-t M-j") 'other-frame)
@@ -112,6 +116,9 @@
 ;; --------------------------------------
 ;; ** FRAMS CLOSE  {{{
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+(global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)

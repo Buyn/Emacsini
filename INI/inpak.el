@@ -1,8 +1,13 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
+;; * used in
+;; (find-file "~/INI/init.el")
 ;; --------------------------------------
-;; INSTALL PACKAGES
+;; --------------------------------------
+;; * INSTALL PACKAGES
+;; --------------------------------------
+;; ** add package-archives
 ;; --------------------------------------
 (require 'package)
 ;; add from melpa site;  {{{
@@ -31,7 +36,7 @@ There are two things you can do about this warning:
 (add-to-list 'package-archives 
 		 '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;; --------------------------------------
-;; Automatically Installing Packages
+;; ** Automatically Installing Packages
 ;; --------------------------------------
 ;; D:\Development\lisp\doc\Cfg\use-pac.txt
 ;; --------------------------------------
@@ -64,6 +69,10 @@ There are two things you can do about this warning:
 ;;   ;; Following line is not needed if use-package.el is in ~/.emacs.d
 ;;   (add-to-list 'load-path "<path where use-package is installed>")
 ;;   (require 'use-package))
-
-(require 'use-package)
+;; --------------------------------------
+;; ** quelpa-use-package :
+;; --------------------------------------
+(require 'use-package) 
 (use-package quelpa-use-package :ensure t)
+;; --------------------------------------
+;; * --------------------------------------
