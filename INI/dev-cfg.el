@@ -34,19 +34,30 @@
 (load "~/INI/flycheck-cfg.el")
 ;; (find-file "~/INI/flycheck-cfg.el") 
 ;; --------------------------------------
+;; ** DEVELOPMENT SETINGS CUSTOMIZATION
+(setq compilation-scroll-output nil)
+;; (defun my-compilation-finish-function (buffer desc)
+;;   (message "Buffer %s: %s" buffer desc)
+;; 	(evil-goto-first-line)
+;; 	)
+;; (add-to-list 'compilation-finish-functions 'my-compilation-finish-function)
 ;; ** DEVELOPMENT-KEY CUSTOMIZATION
 ;; *** save & recompile
 ;; **** global-set-key <f8> :
+;;  --------------------------------------
 (global-set-key(kbd "<f8>") '(lambda() (interactive)
-								(save-buffer)
-								(evil-normal-state)
-								(with-current-buffer "*compilation*"
-									(recompile)
-									(setq compilation-scroll-output 'first-error)
-									)
-								(delete-other-windows)
-								))
+				(save-buffer)
+				(evil-normal-state)
+				(let ((curent-buffer (buffer-name)))
+					(select-frame-by-name "*compilation*")
+					(recompile)
+					(select-frame-by-name curent-buffer))))				
+
+;; (setq compilation-scroll-output nil)
+;; (add-to-list 'compilation-finish-functions 'my-compilation-finish-function)
+;;  --------------------------------------
 ;; **** global-set-key "M-<f8>" :
+;;  --------------------------------------
 (global-set-key(kbd "M-<f8>") '(lambda() (interactive)
 								(save-buffer)
 								(evil-normal-state)
@@ -62,6 +73,7 @@
 								))
 ;; --------------------------------------
 ;; **** global-set-key "M-<f8>" :
+;;  --------------------------------------
 (define-key evil-visual-state-map (kbd "M-<f8>") '(lambda() (interactive)
 								(setq region-text (buffer-substring (region-beginning) (region-end)))
 								(save-buffer)
@@ -81,6 +93,7 @@
 									)
 								))
 ;; --------------------------------------
+;; *** --------------------------------------
 ;; ** PROG-MODE-HOOK CUSTOMIZATION
 	(add-hook 'prog-mode-hook 
 ;; *** line-numbers-mode

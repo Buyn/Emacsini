@@ -57,18 +57,29 @@ _   _   _             _   _   _
 
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-;; *** evil-visual * : 
-(define-key evil-visual-state-map (kbd "*") '(lambda() (interactive)
-	(let ((region-text (buffer-substring (region-beginning) (region-end))))
-		(evil-normal-state)
-		(evil-search region-text t nil)
-		(push region-text regexp-search-ring)
-		)))
+					;; (setq compilation-scroll-output 'first-error)
+				(setq compilation-scroll-output nil)
+				(defun my-compilation-finish-function (buffer desc)
+						(message "Buffer %s: %s" buffer desc)
+						(evil-goto-first-line)
+						)
+
+			;; add-to-list
+					;; (add-hook 'compilation-finish-functions 'my-compilation-finish-function)
+					(add-to-list 'compilation-finish-functions 'my-compilation-finish-function)
+		-			(global-set-key(kbd "<f8>") '(lambda() (interactive)
+													(save-buffer)
+													(evil-normal-state)
+													(let (curent-buffer (buffer-name))
+														(if (select-frame-by-name "*compilation*")
+															(recompile))
+															;; (setq compilation-scroll-output nil)
+															;; (evil-goto-first-line)
+														(select-frame-by-name curent-buffer)
+;; (delete-other-windows)
+	)
+													))
 #+end_src
-
-#+RESULTS:
-| lambda | nil | (interactive) | (setq region-text (buffer-substring (region-beginning) (region-end))) | (evil-normal-state) | (evil-previous-line) | (outshine-insert-heading) | (backward-char) | (save-excursion (insert  ) (insert region-text) (insert  :)) |
-
 (progn
 		) progn end
 * Pathes
