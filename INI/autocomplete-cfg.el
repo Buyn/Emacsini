@@ -20,12 +20,7 @@
 	(setq completion-styles '(partial-completion substring emacs22))
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 	;; :bind ("C-c c" hydra-clock/body)
-;; *** old setings
-;; (require 'evil)
-;; (add-hook 'after-init-hook 'global-company-mode)
-;; (global-set-key (kbd "C-SPC") nil)
-;; (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 ;; ***  END use-package 
   )
-(require 'company)
+;; (require 'company)
 ;; * --------------------------------------

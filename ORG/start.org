@@ -126,6 +126,9 @@ _   _   _             _   _   _
 	(find-file-other-frame "~/INI/js-cfg.el") not used
 	(find-file-other-frame "~/INI/lua-cfg.el")
 	(find-file-other-frame "~/INI/python-cfg.el")
+	(find-file-other-frame "~/INI/dev/csharp-cfg.el")
+	(find-file-other-frame "~/INI/dev/clojure-cfg.el")
+	(find-file-other-frame "~/INI/dev/unity-cfg.el")
 	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
 	(find-file-other-frame "~/INI/flycheck-cfg.el") 
 *** My Elisp
@@ -237,13 +240,26 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
     #    eval: (visual-line-mode t)
 ** Install package
 *** lisp auto code
+		#+begin_src emacs-lisp :tangle yes
  (unless (package-installed-p 'yasnippet-snippets)
    (package-install 'yasnippet-snippets))
  (require 'yasnippet-snippets)
+		#+end_src
 *** устанавливать в ручную : 
 ;; только если устанавливать в ручную
 ;; (add-to-list 'load-path
 ;;               "~/.emacs.d/plugins/yasnippet")
+** load require: 
+	#+begin_src emacs-lisp :tangle yes
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends '(company-irony-c-headers company-irony)))
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key "\t" 'company-complete-common)
+	#+end_src
 ** Keyborde help 
 *** evaluate
 ****    27.9 Evaluating Emacs Lisp Expressions
@@ -630,114 +646,164 @@ You can disable highlighting of any of the supported delimiter types through the
 ** info\help
    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
    удобная систе показиваюшая мануалки по всем установленым модам
-** Subprocesses
-*** 36.1 Functions that Create Subprocesses
-http://ergoemacs.org/emacs_manual/elisp/Shell-Arguments.html#Shell-Arguments
-**** three primitives : 
- There are three primitives that create a new subprocess in which to run
- a program.  One of them, ~make-process~, creates an asynchronous
- process and returns a process object (see Asynchronous Processes).
- The other two, =call-process= and =call-process-region=,
- create a synchronous process and do not return a process object
- (see Synchronous Processes).  There are various higher-level
- functions that make use of these primitives to run particular types of
- process.
+** run 
+*** run multiple Emacs servers : 
+   You can run multiple Emacs servers on the same machine by giving each
+one a unique “server name”, using the variable ‘server-name’.  For
+example, ‘M-x set-variable <RET> server-name <RET> "foo" <RET>’ sets the
+server name to ‘foo’.  The ‘emacsclient’ program can specify a server by
+name, using the ‘-s’ or the ‘-f’ option (*note emacsclient Options::),
+depending on whether or not the server uses a TCP socket (*note TCP
+Emacs server::).
 
- Synchronous and asynchronous processes are explained in the following
- sections.  Since the three functions are all called in a similar
- fashion, their common arguments are described here.
+   If you want to run multiple Emacs daemons (*note Initial Options::),
+you can give each daemon its own server name like this:
 
- In all cases, the functions specify the program to be run.  An error
- is signaled if the file is not found or cannot be executed.  If the
- file name is relative, the variable exec-path contains a list
- of directories to search.  Emacs initializes exec-path when it
- starts up, based on the value of the environment variable PATH.
- The standard file name constructs, ‘~’, ‘.’, and ‘..’,
- are interpreted as usual in exec-path, but environment variable
- substitutions (‘$HOME’, etc.) are not recognized; use
- substitute-in-file-name to perform them (see File Name Expansion).  nil in this list refers to
- default-directory.
+       emacs --daemon=foo
 
- Executing a program can also try adding suffixes to the specified
- name:
-**** User Option: exec-suffixes
-  This variable is a list of suffixes (strings) to try adding to the
-  specified program file name.  The list should include "" if you
-  want the name to be tried exactly as specified.  The default value is
-  system-dependent.
+*** Subprocesses
+**** 36.1 Functions that Create Subprocesses
+ http://ergoemacs.org/emacs_manual/elisp/Shell-Arguments.html#Shell-Arguments
+***** three primitives : 
+	There are three primitives that create a new subprocess in which to run
+	a program.  One of them, ~make-process~, creates an asynchronous
+	process and returns a process object (see Asynchronous Processes).
+	The other two, =call-process= and =call-process-region=,
+	create a synchronous process and do not return a process object
+	(see Synchronous Processes).  There are various higher-level
+	functions that make use of these primitives to run particular types of
+	process.
 
-  Please note: The argument program contains only the
-  name of the program file; it may not contain any command-line
-  arguments.  You must use a separate argument, args, to provide
-  those, as described below.
+	Synchronous and asynchronous processes are explained in the following
+	sections.  Since the three functions are all called in a similar
+	fashion, their common arguments are described here.
 
-  Each of the subprocess-creating functions has a buffer-or-name
-  argument that specifies where the output from the program will go.  It
-  should be a buffer or a buffer name; if it is a buffer name, that will
-  create the buffer if it does not already exist.  It can also be
-  nil, which says to discard the output, unless a custom filter
-  function handles it.  (See Filter Functions, and Read and Print.)  Normally, you should avoid having multiple processes send
-  output to the same buffer because their output would be intermixed
-  randomly.  For synchronous processes, you can send the output to a
-  file instead of a buffer (and the corresponding argument is therefore
-  more appropriately called destination).  By default, both
-  standard output and standard error streams go to the same destination,
-  but all the 3 primitives allow optionally to direct the standard error
-  stream to a different destination.
+	In all cases, the functions specify the program to be run.  An error
+	is signaled if the file is not found or cannot be executed.  If the
+	file name is relative, the variable exec-path contains a list
+	of directories to search.  Emacs initializes exec-path when it
+	starts up, based on the value of the environment variable PATH.
+	The standard file name constructs, ‘~’, ‘.’, and ‘..’,
+	are interpreted as usual in exec-path, but environment variable
+	substitutions (‘$HOME’, etc.) are not recognized; use
+	substitute-in-file-name to perform them (see File Name Expansion).  nil in this list refers to
+	default-directory.
 
-  All three of the subprocess-creating functions allow to specify
-  command-line arguments for the process to run. For call-process
-  and call-process-region, these come in the form of a
-  &rest argument, args.  For make-process, both the
-  program to run and its command-line arguments are specified as a list
-  of strings.  The command-line arguments must all be strings, and they
-  are supplied to the program as separate argument strings.  Wildcard
-  characters and other shell constructs have no special meanings in
-  these strings, since the strings are passed directly to the specified
-  program.
+	Executing a program can also try adding suffixes to the specified
+	name:
+***** User Option: exec-suffixes
+   This variable is a list of suffixes (strings) to try adding to the
+   specified program file name.  The list should include "" if you
+   want the name to be tried exactly as specified.  The default value is
+   system-dependent.
 
-  The subprocess inherits its environment from Emacs, but you can
-  specify overrides for it with process-environment.  See System Environment.  The subprocess gets its current directory from the
-  value of default-directory.
-**** Variable: exec-directory
-  The value of this variable is a string, the name of a directory that
-  contains programs that come with GNU Emacs and are intended for Emacs
-  to invoke.  The program movemail is an example of such a program;
-  Rmail uses it to fetch new mail from an inbox.
-**** User Option: exec-path
-  The value of this variable is a list of directories to search for
-  programs to run in subprocesses.  Each element is either the name of a
-  directory (i.e., a string), or nil, which stands for the default
-  directory (which is the value of default-directory).
-  See executable-find, for the details of this search.
+   Please note: The argument program contains only the
+   name of the program file; it may not contain any command-line
+   arguments.  You must use a separate argument, args, to provide
+   those, as described below.
+
+   Each of the subprocess-creating functions has a buffer-or-name
+   argument that specifies where the output from the program will go.  It
+   should be a buffer or a buffer name; if it is a buffer name, that will
+   create the buffer if it does not already exist.  It can also be
+   nil, which says to discard the output, unless a custom filter
+   function handles it.  (See Filter Functions, and Read and Print.)  Normally, you should avoid having multiple processes send
+   output to the same buffer because their output would be intermixed
+   randomly.  For synchronous processes, you can send the output to a
+   file instead of a buffer (and the corresponding argument is therefore
+   more appropriately called destination).  By default, both
+   standard output and standard error streams go to the same destination,
+   but all the 3 primitives allow optionally to direct the standard error
+   stream to a different destination.
+
+   All three of the subprocess-creating functions allow to specify
+   command-line arguments for the process to run. For call-process
+   and call-process-region, these come in the form of a
+   &rest argument, args.  For make-process, both the
+   program to run and its command-line arguments are specified as a list
+   of strings.  The command-line arguments must all be strings, and they
+   are supplied to the program as separate argument strings.  Wildcard
+   characters and other shell constructs have no special meanings in
+   these strings, since the strings are passed directly to the specified
+   program.
+
+   The subprocess inherits its environment from Emacs, but you can
+   specify overrides for it with process-environment.  See System Environment.  The subprocess gets its current directory from the
+   value of default-directory.
+***** Variable: exec-directory
+   The value of this variable is a string, the name of a directory that
+   contains programs that come with GNU Emacs and are intended for Emacs
+   to invoke.  The program movemail is an example of such a program;
+   Rmail uses it to fetch new mail from an inbox.
+***** User Option: exec-path
+   The value of this variable is a list of directories to search for
+   programs to run in subprocesses.  Each element is either the name of a
+   directory (i.e., a string), or nil, which stands for the default
+   directory (which is the value of default-directory).
+   See executable-find, for the details of this search.
 
 
-  The value of exec-path is used by call-process and
-  start-process when the program argument is not an absolute
-  file name.
+   The value of exec-path is used by call-process and
+   start-process when the program argument is not an absolute
+   file name.
 
-  Generally, you should not modify exec-path directly.  Instead,
-  ensure that your PATH environment variable is set appropriately
-  before starting Emacs.  Trying to modify exec-path
-  independently of PATH can lead to confusing results.
-*** exempl
-**** shell link
-[shell:D:\scripts\CMD\CygWin\vim.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+   Generally, you should not modify exec-path directly.  Instead,
+   ensure that your PATH environment variable is set appropriately
+   before starting Emacs.  Trying to modify exec-path
+   independently of PATH can lead to confusing results.
+**** exempl
+***** shell link
+ [shell:D:\scripts\CMD\CygWin\vim.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
 
-[shell:D:\Development\lisp\HOME\emacs_Run.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
-(shell  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt")
-[shell:D:\scripts\CMD\emagus\run_far.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\"]
+ [shell:D:\Development\lisp\HOME\emacs_Run.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+ (shell  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt")
+ [shell:D:\scripts\CMD\emagus\run_far.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\"]
 
-[shell:D:\Development\lisp\HOME\emacs_client.cmd  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
-**** shell-command  : 
-(shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+ [shell:D:\Development\lisp\HOME\emacs_client.cmd  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+***** shell-command  : 
+ (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
 
-(shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+ (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
 
-(shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
-**** start-process : 
-(start-process "12" nil "d:/Development/lisp/Emacs/bin/runemacs.exe")
+ (shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
+***** start-process : 
+ (start-process "12" nil "d:/Development/lisp/Emacs/bin/runemacs.exe")
 
+*** 44 Saving Emacs Sessions
+[[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
+**** simpl
+***** append keys : 
+‘C-u <F3>’
+‘C-u C-x (’
+     Re-execute last keyboard macro, then append keys to its definition.
+‘C-u C-u <F3>’
+‘C-u C-u C-x (’
+     Append keys to the last keyboard macro without re-executing it.
+***** last keyboard macro on each line : 
+‘C-x C-k r’
+     Run the last keyboard macro on each line that begins in the region
+     (‘apply-macro-to-region-lines’).
+***** 17.6 Editing a Keyboard Macro
+****** Edit the last : 
+‘C-x C-k C-e’
+     Edit the last defined keyboard macro (‘kmacro-edit-macro’).
+****** Edit previously NAME : 
+‘C-x C-k e NAME <RET>’
+     Edit a previously defined keyboard macro NAME (‘edit-kbd-macro’).
+****** Edit 300 keystrokes as macro : 
+‘C-x C-k l’
+     Edit the last 300 keystrokes as a keyboard macro
+     (‘kmacro-edit-lossage’).
+***** 17.4 Executing Macros with Variations
+In a keyboard macro, you can create an effect similar to that of
+‘query-replace’, in that the macro asks you each time around whether to
+make a change.
+
+‘C-x q’
+     When this point is reached during macro execution, ask for
+     confirmation (‘kbd-macro-query’).
+
+** keyboard macro
 ** Options
 *** Visual
 *** Home 
@@ -876,8 +942,6 @@ To switch EWW
  can tell EWW to open specific content automatically in an external
  browser by customizing ‘eww-use-external-browser-for-content-type’.
 
-** REPL 
-** DeBug
 ** eShell
 *** doc
 **** commands
@@ -1112,6 +1176,171 @@ From the doc:
     Non-nil means load prefers the newest version of a file.
     This applies when a filename suffix is not explicitly specified and load is trying various possible suffixes (see load-suffixes and load-file-rep-suffixes). Normally, it stops at the first file that exists unless you explicitly specify one or the other. If this option is non-nil, it checks all suffixes and uses whichever file is newest.
     Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
+** Cheat sheet 
+*** from 
+
+https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
+
+ 43
+ 3.0
+ "foo!"
+*** ;; FUNCTIONS
+ (+ 1 2 3 4 5)
+*** ;; LISt Processing Language
+		#+begin_src emacs-lisp :tangle yes
+	(1 2 3)
+
+	`(1 2 3)
+
+	(list 1 2 3 4 5)
+
+	;; "car" -- returns the first element of the list
+
+	(car
+	 (list 1 2 3))
+
+	;; "cdr" -- returns the entire list except the first element
+
+	(cdr
+	 `(1 2 3 4 5))
+
+	;; "cons" -- construct a list
+
+	(cons 1 `(2 3))
+
+	;; "append" -- takes two lists and joins them together
+
+	(append `(1 2) `(3 4))
+		#+end_src
+*** ;; VARIABLES
+		#+begin_src emacs-lisp :tangle yes
+	(setq my-list `(mac linux))
+
+	;; TODO: READ ABOUT MACROS IN ELISP
+	;; local variables
+	(let ((a 1)
+				(b 3))
+		(- a b))
+
+		#+end_src
+*** ;; FUNCTIONS
+		#+begin_src emacs-lisp :tangle yes
+	(defun main ()
+		"A docstring that tells a little bit about my function"
+		"Hello!")
+
+	(main)
+
+	(defun square (x)
+		(* x x))
+
+	(square 2)
+
+		#+end_src
+*** ;; CONDITIONALS
+		#+begin_src emacs-lisp :tangle yes
+	;; every value is truthy except nil and the empty list ()
+
+	;; and
+
+	(and t nil)
+
+	(and 1 13)
+
+	;; or
+
+	(or t nil)
+
+	(or nil `())
+
+	;; not
+
+	(not nil)
+
+	;; don't try to be very clever and try to write code
+	;; based on those return values that these functions give
+	;; unless you wanna dab on the haters
+
+	;; when -- only take an action if a predicate is true
+
+	(when (= (+ 2 2) 4)
+		"passed check")
+
+	;; if, else -- good ol' if else
+
+	(defun even-or-odd (n)
+		(if (= (% n 2) 0)
+				"even"
+			"odd"))
+
+	(even-or-odd 2)
+	(even-or-odd 54)
+	(even-or-odd 32343)
+
+	;; cond - much like a switch, i think
+	;; takes in a "collection" of lists. Remember that.
+	;; like "let"
+
+	(defun pick-sword (n)
+		(cond
+		 ((= n 0) "Wood")
+		 ((= n 1) "Plastic")
+		 ((= n 2) "Gold")))
+
+	(pick-sword 2)
+
+
+		#+end_src
+*** ;; anonymous functions -- lambdas!
+		#+begin_src emacs-lisp :tangle yes
+	;; lambdas are function literals
+
+	(lambda (x) (+ x 5))
+
+	;; call it 
+
+	((lambda (x) (+ x 5)) 9)
+
+	;; funcall -- calls a function
+
+	(funcall (lambda (x) (* x x)) 4)
+
+	(funcall '+ 1 2)
+
+	;; store the lambda in a variable
+
+	(fset `square (lambda (x) (* x x)))
+
+	(square 3)
+
+		#+end_src
+*** ;; HIGHER ORDER FUNCTIONS
+		#+begin_src emacs-lisp :tangle yes
+	(defun transform-until-zero (fn n)
+		"transforms n with the function given unless the number is 0"
+		(if (= n 0)
+				0
+			(funcall fn n)))
+
+	(transform-until-zero (lambda (n) (* n 2)) 0)
+
+	(transform-until-zero (lambda (n) (* n 2)) 3)
+
+	;; a very important higher order function is mapcar
+	;; takes in a list and a function and applies the function
+	;; to every element in the list. NOW we're talking
+
+		#+end_src
+*** ;; much like map in JS
+	#+begin_src emacs-lisp :tangle yes
+	(mapcar (lambda(n) (+ n 1)) '(1 2 3))
+
+	;; non destructive!
+
+	(setq my-list '(1 2 3))
+	(mapcar (lambda (n) (+ n 1)) my-list)
+
+	#+end_src
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
@@ -2932,10 +3161,30 @@ https://github.com/quelpa/quelpa-use-package
 **** instal
 (use-package quelpa-use-package :ensure t)
 **** use exempl github
-:quelpa (outshine :fetcher github :repo "alphapapa/outshine")
-**** quelpa-use-package
-https://github.com/quelpa/quelpa-use-package
-If you are using use-package (which can help to simplify your .emacs) you can use the quelpa handler provided by quelpa-use-package.
+		 #+begin_src emacs-lisp :tangle yes
+(unless (package-installed-p 'miracle)
+	(use-package miracle 
+	;; :ensure t 
+		:quelpa (miracle :fetcher github :repo "Saikyun/miracle")))
+		 #+end_src
+		Следим что название пакаджа совподает с название гепозитория
+		и если используем репо то нет домена гит в конце
+		помним что репозитории бываю и другие например просто гит
+		есть возможность задать плный урл
+		также следим что нет инсура иначе он будет устанавливать с задынх
+репо игноря гелп - нужны спец команды чтоб исур использовал гелп(на сайте есть) 
+		 #+begin_src emacs-lisp :tangle yes
+(quelpa
+'(miracle
+	:fetcher github
+	:url "https://github.com/saikyun/miracle.git"))
+		 #+end_src
+		 это пример для гилпа но допускаю что этот параметр в озможежен и
+для юза
+(use-package abc-mode :quelpa)
+вообше для установки достаточно этого
+он сам обо всё догадается и найдт
+все пораметры для уточнения и указани конкретики
 **** Installation
 Requirements: Emacs 25.1
 Assuming you have bootstrapped quelpa, install quelpa-use-package (which installs use-package as a dependency) and require the library:
@@ -2944,8 +3193,10 @@ Assuming you have bootstrapped quelpa, install quelpa-use-package (which install
    :fetcher git
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
-**** Usage
+**** Usage use package
 After that it is possible to call use-package with the :quelpa keyword:
+#+begin_src emacs-lisp :tangle yes
+
 ;; installs abc-mode with quelpa
 (use-package abc-mode :quelpa)
 
@@ -2965,6 +3216,7 @@ After that it is possible to call use-package with the :quelpa keyword:
 ;; recipe with plist arguments
 (use-package abc-mode
   :quelpa ((abc-mode :fetcher github :repo "mkjunker/abc-mode") :upgrade t))
+#+end_src
 ***** Using quelpa with :ensure
 To make :ensure t use quelpa instead of package.el set the use-package-ensure-function in your init file:
 (setq use-package-ensure-function 'quelpa)
@@ -2992,7 +3244,8 @@ quelpa-use-package provides an advice for this purpose which can be activated th
 (quelpa-use-package-activate-advice)
 To disable it again you can use:
 (quelpa-use-package-deactivate-advice)
-
+**** use quelpa : 
+(quelpa '(hydra :repo "abo-abo/hydra" :fetcher github))
 
 ** hidra mod 
     https://github.com/abo-abo/hydra
@@ -3446,6 +3699,7 @@ Suitable functions to add to these lists might be:
 *** insert mod
 **** tab
 If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
+
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
 a eww buffer stores a link to the current url of the eww buffer.

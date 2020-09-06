@@ -27,6 +27,18 @@
 ;; (find-file "~/INI/lua-cfg.el")
 (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
+;; ** C#-MOD CUSTOMIZATION
+;; (find-file-other-frame "~/INI/dev/csharp-cfg.el")
+;; (load "~/INI/dev/csharp-cfg.el")
+;; --------------------------------------
+;; ** CLOJURE-MODE CUSTOMIZATION
+;; (find-file-other-frame "~/INI/dev/clojure-cfg.el")
+(load "~/INI/dev/clojure-cfg.el")
+;; --------------------------------------
+;; ** UNITY CUSTOMIZATION
+;; (find-file-other-frame "~/INI/dev/unity-cfg.el")
+(load "~/INI/dev/unity-cfg.el")
+;; --------------------------------------
 ;; ** JS-MOD CUSTOMIZATION
 ;; (load "~/INI/js-cfg.el")
 ;; --------------------------------------

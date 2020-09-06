@@ -452,9 +452,9 @@ _?_ help            _c_urrent file
 ;; ***** hint
     "
                 ^Emacs-mode  Menus^          
-    ────────────^───────────────^───────────────────
+    ────────────^─────────────────^───────────────────
      To _w_in Format    To _u_nix Format
-     _q_uit
+     _q_uit						  _R_evert buffer
     "
 ;; ***** keys
 ;; ****** w : 
@@ -473,6 +473,8 @@ _?_ help            _c_urrent file
 								nil
 								(current-kill 0 "DO-NOT-MOVE"))
 								)
+;; ****** R : 
+	("R" revert-buffer) 
 ;; ****** q : 
 	("q" nil) 
 ;; ***** END of def
