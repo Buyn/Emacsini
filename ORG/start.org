@@ -103,17 +103,18 @@ _   _   _             _   _   _
 	(find-file-other-frame "~/INI/org-brain-cfg.el") 
 *** Folding
 (find-file-other-frame "~/INI/folding-cfg.el")
+	(find-file-other-frame "~/INI/outshine_cfg.el")
 	(find-file-other-frame "~/INI/origami_cfg.el") not using
 	но содержит в себе огромное количество класных решенией
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
-	(find-file-other-frame "~/INI/outshine_cfg.el")
 *** Other 
 (find-file-other-frame "~/INI/frame-control.el")
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")
 (find-file-other-frame "~/INI/interface-mods.el")
-(find-file-other-frame "~/INI/hydra-cfg.el")
 (find-file-other-frame "~/INI/www-cfg.el") not used
+*** Hydra menu
+ (find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el") 
 	(find-file-other-frame "~/INI/translate-cfg.el") not et
@@ -249,6 +250,13 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
 ;; только если устанавливать в ручную
 ;; (add-to-list 'load-path
 ;;               "~/.emacs.d/plugins/yasnippet")
+*** autoload : 
+(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
+*** eval-after-load : 
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
 ** load require: 
 	#+begin_src emacs-lisp :tangle yes
 (eval-after-load 'company
@@ -644,8 +652,15 @@ You can disable highlighting of any of the supported delimiter types through the
 	;; `(outline-6 ((t (:height 1.75 :weight bold))))
 	;; `(outline-7 ((t (:height 1.65 :weight bold))))
 ** info\help
+*** info manual : 
    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
    удобная систе показиваюшая мануалки по всем установленым модам
+*** customize-group
+		Получить инфу по всем переменным
+		режима поскольку зачастую режима нет в мануале
+зато кажется это генерится автоматически
+и там вполне полный хелп по каждой переменной
+M-x customize-group RET company. 
 ** run 
 *** run multiple Emacs servers : 
    You can run multiple Emacs servers on the same machine by giving each
@@ -3738,4 +3753,11 @@ Similarly to iswitchb. Iswitchb is great, because I don’t have to type the beg
 The search feature was actually inspired by the way I use iswitchb. You can start completion with an empty prefix, type C-s, search for “when”, and press C-o to limit the search. – nschum
 
 I’ve written another command named ‘company-filter-candidates’ that will probably be (edit: is) in version 0.2. It works like automatically pressing C-o after every search char. The search still has to be started manually (i.e. one key stroke).
+
+*** customize  company : 
+		Получить инфу по всем переменным
+M-x 
+customize-group 
+RET 
+company. 
 

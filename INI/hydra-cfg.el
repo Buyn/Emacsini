@@ -592,6 +592,7 @@ _?_ help            _c_urrent file
   ;; (global-map "C-c")
   "dev menu"
 	("c" company-mode "company")
+	("f" program-mode-hook-customize "fuze")
 	("o" outshine-mode "outshine")
 	("e" elpy-hydra/body "elpy")
 	("p" python-mode "pyton")

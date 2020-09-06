@@ -107,11 +107,11 @@
 ;; --------------------------------------
 ;; *** --------------------------------------
 ;; ** PROG-MODE-HOOK CUSTOMIZATION
-	(add-hook 'prog-mode-hook 
+	(add-hook 'prog-mode-hook (lambda ()
 ;; *** line-numbers-mode
-		'display-line-numbers-mode
+		(setq display-line-numbers-mode 1)
 		;; #'outshine-mode on in outshine cfg
 ;; *** end prog-mode-hook
-		)
+		))
 ;; --------------------------------------
 ;; *  --------------------------------------
