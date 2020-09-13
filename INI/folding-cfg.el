@@ -1,11 +1,15 @@
 ;; --------------------------------------
 ;; init.el --- Emacs configuration
 ;; --------------------------------------
-;; ORIGAMI-MOD CUSTOMIZATION
+;; * used in
+;; (find-file "~/INI/init.el")
+;; --------------------------------------
+;; * ORIGAMI-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; (load "~/INI/origami_cfg.el")
 ;; --------------------------------------
-;; OUTSHINE-MOD CUSTOMIZATION
+;; * OUTSHINE-MOD CUSTOMIZATION
 ;; --------------------------------------
 (load "~/INI/outshine_cfg.el")
 ;; --------------------------------------
+;; * --------------------------------------

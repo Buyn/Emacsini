@@ -56,14 +56,14 @@
     "
 ;; ***** keys
     ("q" nil)
-    ("SPC" spc-main-menu99)
+    ("SPC" spc-main-menu98/body)
     ("c" calc :color pink)
 		("o" hydra-outline/body) 
 		("d" hydra-ediff/body) 
 		("t" hydra-transpose/body) 
 		("f" hydra-occur-dwim/body)
 		("p" spc-main-menu00/body)
-		("n" spc-main-menu99/body)
+		("n" spc-main-menu98/body)
 	  ("l" lit-menu/body)
 ;; ***** END of def
 	)
@@ -105,11 +105,12 @@
     ^─────^────────────^──^─────────────^───────^─────────
     _q_ quit         _R_evert-buffer
                     
-    _p_rev-menu                        _n_ext-menu    
+    _p_rev-menu                     _SPC_ _n_ext-menu    
     "
 ;; ***** keys
-    ("q" nil)
+  ("q" nil)
 	("R" revert-buffer)
+  ("SPC" spc-main-menu99/body)
 	("n" spc-main-menu99/body)
 	("p" spc-main-menu01/body)
 ;; ***** END of def

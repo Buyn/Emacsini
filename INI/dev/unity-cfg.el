@@ -8,7 +8,6 @@
 ;; * UNITY CUSTOMIZATION
 ;; --------------------------------------
 ;; ** install miracle: Arcadia 
-;; *** install
 ;; :quelpa (outshine :fetcher github :repo "alphapapa/outshine")
 ;; git clone https://github.com/Saikyun/miracle.git
 (unless (package-installed-p 'miracle)
@@ -21,15 +20,15 @@
 	;; 	:url "https://github.com/saikyun/miracle.git"))
 ;; (quelpa '(miracle :repo "saikyun/miracle" :fetcher github))
 ;; (require 'use-package)
-;; *** use-package miracle : 
+;; ** use-package miracle : 
 (use-package miracle 
 	;; :ensure t
-;; *** END )
+;; ** END )
 	)
-;; *** Docs 
-;; **** links:
+;; ** Docs 
+;; *** links:
 ;; https://github.com/Saikyun/miracle
-;; **** keys:
+;; *** keys:
 ;; Keys 	Description
 ;; C-c C-c 	Evaluate expression at point.
 ;; C-c C-r 	Evaluate region.
@@ -46,5 +45,5 @@
 ;; C-c C-c 	Interrupt running job.
 ;; M-. 	Jump to definition of var at point.
 ;; C-c C-f 	Replaces the last result with a pretty printed version of it. f is for formatting.
-;; *** --------------------------------------
+;; ** --------------------------------------
 ;; * --------------------------------------

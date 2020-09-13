@@ -3,8 +3,9 @@
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
-** 
-_   _   _             _   _   _
+** Like a craftsman entering his workshop : 
+Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
+https://www.braveclojure.com/basic-emacs/
 | |_| |_| |           | |_| |_| |
  \ _____ /      o_     \ _____ /
   |     |       |_|     |     |
@@ -111,8 +112,13 @@ _   _   _             _   _   _
 *** Other 
 (find-file-other-frame "~/INI/frame-control.el")
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")
-(find-file-other-frame "~/INI/interface-mods.el")
 (find-file-other-frame "~/INI/www-cfg.el") not used
+*** interface
+(find-file-other-frame "~/INI/interface-mods.el")
+	(find-file-other-frame "~/INI/interface/powerline-cfg.el") notuse
+		(find-file-other-frame "~/INI/interface/jonathanchu-emacs-powerline-cfg.el") notuse
+			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
+		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** Hydra menu
  (find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
@@ -196,6 +202,12 @@ tar not found when trying to install from melpa
 You probably have an outdated package database
 (package-refresh-contents)
 (package-install "company-irony")
+remove pacage
+нужно водом команды в m-x m-y
+поскольку Поскольку название пакета отличается от его названия
+наличием циферхеша 
+m-x
+package-delete
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -3175,6 +3187,8 @@ To just load ensure multiple packages are install
 https://github.com/quelpa/quelpa-use-package
 **** instal
 (use-package quelpa-use-package :ensure t)
+**** cfg exempl link 
+	(find-file-other-frame "~/INI/dev/unity-cfg.el")
 **** use exempl github
 		 #+begin_src emacs-lisp :tangle yes
 (unless (package-installed-p 'miracle)
