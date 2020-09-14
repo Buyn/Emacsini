@@ -17,29 +17,36 @@
 							:repo "jonathanchu/emacs-powerline"
 							:fetcher github)))
 ;; ** use-package powerline : 
+;; *** --------------------------------------
 (use-package powerline 
 	;; :ensure t
-;; *** outshine config
+;; *** :init
+	;; :init 
+	;; 	(set-face-attribute 'mode-line nil
+	;; 											:foreground "Black"
+	;; 											:background "DarkOrange"
+	;; 											:box nil)
+	;; 	(setq powerline-arrow-shape 'curve);; 
+;; *** :config : 
   :config
-		;; (load "~/INI/interface/mode-line.el")
 		;; (load "~/ELs/powerline/sm-package-powerline.el")
 		;; (powerline-default-theme)
-		;; (custom-set-faces
-		;; '(mode-line ((t (
-		;; 									;; :foreground "#030303"
-		;; 									;; :background "#bdbdbd"
-		;; 									:foreground "Black"
-		;; 									:background "DarkOrange"
-		;; 									:box nil))))
-		;; '(mode-line-inactive ((t (
-		;; 									:foreground "#f9f9f9"
-		;; 									:background "#666666"
-		;; 									:box nil)))))
+		(setq powerline-arrow-shape 'curve);; 
 		(set-face-attribute 'mode-line nil
 												:foreground "Black"
 												:background "DarkOrange"
 												:box nil)
-		(setq powerline-arrow-shape 'curve);; 
+		(custom-set-faces
+		'(mode-line ((t (
+											;; :foreground "#030303"
+											;; :background "#bdbdbd"
+											:foreground "Black"
+											:background "DarkOrange"
+											:box nil)))))
+		;; '(mode-line-inactive ((t (
+		;; 									:foreground "#f9f9f9"
+		;; 									:background "#666666"
+		;; 									:box nil)))))
 ;; *** END )
 	)
 ;; --------------------------------------;; 

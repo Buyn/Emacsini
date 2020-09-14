@@ -58,28 +58,16 @@ https://www.braveclojure.com/basic-emacs/
 
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-					;; (setq compilation-scroll-output 'first-error)
-				(setq compilation-scroll-output nil)
-				(defun my-compilation-finish-function (buffer desc)
-						(message "Buffer %s: %s" buffer desc)
-						(evil-goto-first-line)
-						)
-
-			;; add-to-list
-					;; (add-hook 'compilation-finish-functions 'my-compilation-finish-function)
-					(add-to-list 'compilation-finish-functions 'my-compilation-finish-function)
-		-			(global-set-key(kbd "<f8>") '(lambda() (interactive)
-													(save-buffer)
-													(evil-normal-state)
-													(let (curent-buffer (buffer-name))
-														(if (select-frame-by-name "*compilation*")
-															(recompile))
-															;; (setq compilation-scroll-output nil)
-															;; (evil-goto-first-line)
-														(select-frame-by-name curent-buffer)
-;; (delete-other-windows)
+;; ** spaceline powerline : 
+(use-package spaceline 
+	:ensure t
+;; *** spaceline config
+  :config
+		(spaceline-spacemacs-theme)
+		;; (spaceline-emacs-theme)
+;; *** END )
 	)
-													))
+;; --------------------------------------
 #+end_src
 (progn
 		) progn end
@@ -115,8 +103,8 @@ https://www.braveclojure.com/basic-emacs/
 (find-file-other-frame "~/INI/www-cfg.el") not used
 *** interface
 (find-file-other-frame "~/INI/interface-mods.el")
-	(find-file-other-frame "~/INI/interface/powerline-cfg.el") notuse
-		(find-file-other-frame "~/INI/interface/jonathanchu-emacs-powerline-cfg.el") notuse
+	(find-file-other-frame "~/INI/interface/powerline-cfg.el") 
+		(find-file-other-frame "~/INI/interface/jonathanchu-emacs-powerline-cfg.el") 
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** Hydra menu

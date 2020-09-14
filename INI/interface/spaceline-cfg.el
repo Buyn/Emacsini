@@ -11,7 +11,7 @@
 	:ensure t
 ;; *** spaceline config
   :config
-		(spaceline-spacemacs-theme)
+		;; (spaceline-spacemacs-theme)
 		;; (spaceline-emacs-theme)
 ;; *** END )
 	)
