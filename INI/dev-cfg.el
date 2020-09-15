@@ -107,10 +107,15 @@
 ;; --------------------------------------
 ;; *** --------------------------------------
 ;; ** PROG-MODE-HOOK CUSTOMIZATION
-	(add-hook 'prog-mode-hook (lambda ()
+	(add-hook 'prog-mode-hook '(lambda ()
 ;; *** line-numbers-mode
-		(setq display-line-numbers-mode 1)
+		;; (setq display-line-numbers-mode t)
+		(display-line-numbers-mode t)
+;; *** outshine-mode : 
 		;; #'outshine-mode on in outshine cfg
+		;; (find-file-other-frame "~/INI/outshine_cfg.el")
+		;; (outshine-mode t)
+		;; (outline-minor-mode t)
 ;; *** end prog-mode-hook
 		))
 ;; --------------------------------------

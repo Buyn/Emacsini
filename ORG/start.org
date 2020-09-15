@@ -77,6 +77,8 @@ https://www.braveclojure.com/basic-emacs/
 (find-file "~/.emacs")
 	(find-file-other-frame "~/INI/init.el")
 *** vanila
+(hl-line-mode t)
+(hl-line-mode t)
 (find-file-other-frame "~/INI/inpak.el")
 (find-file-other-frame "~/INI/vanila_cfg.el")
 *** Evil
