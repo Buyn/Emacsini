@@ -77,8 +77,6 @@ https://www.braveclojure.com/basic-emacs/
 (find-file "~/.emacs")
 	(find-file-other-frame "~/INI/init.el")
 *** vanila
-(hl-line-mode t)
-(hl-line-mode t)
 (find-file-other-frame "~/INI/inpak.el")
 (find-file-other-frame "~/INI/vanila_cfg.el")
 *** Evil
@@ -821,6 +819,49 @@ make a change.
      confirmation (‘kbd-macro-query’).
 
 ** keyboard macro
+*** help
+**** info links
+	[[info:emacs#Keyboard Macros][info:emacs#Keyboard Macros]]
+**** keys : 
+***** base
+	‘C-u <F3>’
+	‘C-u C-x (’
+			 Re-execute last keyboard macro, then append keys to its definition.
+	‘C-u C-u <F3>’
+	‘C-u C-u C-x (’
+			 Append keys to the last keyboard macro without re-executing it.
+	‘C-x C-k r’
+			 Run the last keyboard macro on each line that begins in the region
+			 (‘apply-macro-to-region-lines’).
+***** edit 
+‘C-x C-k C-e’
+     Edit the last defined keyboard macro (‘kmacro-edit-macro’).
+‘C-x C-k e NAME <RET>’
+     Edit a previously defined keyboard macro NAME (‘edit-kbd-macro’).
+‘C-x C-k l’
+     Edit the last 300 keystrokes as a keyboard macro
+     (‘kmacro-edit-lossage’).
+***** name save session Bind 
+‘C-x C-k n’
+     Give a command name (for the duration of the Emacs session) to the
+     most recently defined keyboard macro (‘kmacro-name-last-macro’).
+‘C-x C-k b’
+     Bind the most recently defined keyboard macro to a key sequence
+     (for the duration of the session) (‘kmacro-bind-to-key’).
+‘M-x insert-kbd-macro’
+     Insert in the buffer a keyboard macro’s definition, as Lisp code.
+***** ring 
+‘C-x C-k C-k’
+    Execute the keyboard macro at the head of the ring
+    (‘kmacro-end-or-call-macro-repeat’).
+‘C-x C-k C-n’
+    Rotate the keyboard macro ring to the next macro (defined earlier)
+    (‘kmacro-cycle-ring-next’).
+‘C-x C-k C-p’
+    Rotate the keyboard macro ring to the previous macro (defined
+    later) (‘kmacro-cycle-ring-previous’).
+C-x C-k C-d
+		delete it from the macro ring.
 ** Options
 *** Visual
 *** Home 
