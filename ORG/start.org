@@ -58,16 +58,7 @@ https://www.braveclojure.com/basic-emacs/
 
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-;; ** spaceline powerline : 
-(use-package spaceline 
-	:ensure t
-;; *** spaceline config
-  :config
-		(spaceline-spacemacs-theme)
-		;; (spaceline-emacs-theme)
-;; *** END )
-	)
-;; --------------------------------------
+(scroll-bar-mode -1)
 #+end_src
 (progn
 		) progn end
@@ -97,8 +88,11 @@ https://www.braveclojure.com/basic-emacs/
 	но содержит в себе огромное количество класных решенией
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
-*** Other 
+*** frame : 
 (find-file-other-frame "~/INI/frame-control.el")
+	(find-file-other-frame "~/INI/fullscreen-cfg.el")
+		minimap-mode loading
+*** Other 
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")
 (find-file-other-frame "~/INI/www-cfg.el") not used
 *** interface

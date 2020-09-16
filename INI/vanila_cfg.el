@@ -51,7 +51,7 @@
 ;; or enabling global-display-line-numbers-mode if you want them everywhere,
 (global-display-line-numbers-mode 0)
 ;; and to set display-line-numbers-type to the desired style:
-(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 'relative)
 ;;Relative line numbers enabled
 ;; ------------------------------------------------------
 ;; ** Warp line : 
@@ -121,6 +121,7 @@
 ;; ** Visual
 ;; ------------------------------------------------------
 (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
+(scroll-bar-mode -1)
 ;; ------------------------------------------------------
 ;; ** Frame
 ;; ------------------------------------------------------
