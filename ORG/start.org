@@ -58,6 +58,8 @@ https://www.braveclojure.com/basic-emacs/
 
 ** progn : 
 #+begin_src emacs-lisp :results output silent
+	(setq minimap-width-fraction 0.1)
+	(setq minimap-minimum-width 0.03)
 (scroll-bar-mode -1)
 #+end_src
 (progn
@@ -91,6 +93,7 @@ https://www.braveclojure.com/basic-emacs/
 *** frame : 
 (find-file-other-frame "~/INI/frame-control.el")
 	(find-file-other-frame "~/INI/fullscreen-cfg.el")
+		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
 *** Other 
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")

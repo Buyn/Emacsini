@@ -4,28 +4,18 @@
 ;; * used in
 ;; (find-file "~/INI/frame-control.el")
 ;; --------------------------------------
-;; * MINIMAP-MODE CUSTOMIZATION
+;; * MINIMAP-MODE CUSTOMIZATION 
 ;; --------------------------------------
-;; ** use-package evil
-;; (use-package minimap
-;; 							:ensure t
-;; ** :config : 
-	;; :config
-	;; (minimap-mode)
-	;; (setq minimap-recreate-windo nil)
-	;; (setq minimap-major-modes nil)
-	;; (setq minimap-major-modes '(prog-mode))
-;; ** END of use-package minimap-mode
-  ;; )
-;; ** Docs
-;; After installation, simply use M-x minimap-mode to toggle activation of the minimap.
-;; Use 'M-x customize-group RET minimap RET' to adapt minimap to your needs.
+;; (find-file-other-frame "~/INI/frames/minimap-cfg.el")
+(load "~/INI/frames/minimap-cfg.el")
 ;; --------------------------------------
-;; ** --------------------------------------
 ;; * FULLSCREEN-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; (setq-local fullscreen-mode-activ nil)
-(setq fullscreen-mode-activ nil)
+(make-variable-buffer-local
+ (defvar fullscreen-mode-activ nil
+   "indictate is fullscreen mode is activ or nil"))
+;; (setq fullscreen-mode-activ nil)
 ;; ** toggle-full-screen :
 (defun toggle-full-screen ()
   "Toggles full-screen mode for Emacs window on Win32."
@@ -58,10 +48,11 @@
   "Toggles full-screen mode and bars."
   (interactive)
   ;; (toggle-bars)
-	;; (setq-local fullscreen-mode-activ (not fullscreen-mode-activ))
+	(setq-local fullscreen-mode-activ (not fullscreen-mode-activ))
   (toggle-full-screen)
   (toggle-fonte-lage-size)
-	;; (toggle-fullscreen-minimap)
+	(toggle-fullscreen-minimap)
+	;; (evil-window-set-width 0)
 	)
 ;; ** defun toggle-fullscreen-minimap : 
 ;; --------------------------------------
@@ -73,7 +64,8 @@
 	;; (minimap-mode)
 	;; (minimap-create)
 	(if fullscreen-mode-activ
-		(minimap-create-window)
+		;; (minimap-create-window)
+		(minimap-mode)
 		(minimap-kill))
 	;; (minimap-recenter)
 	;; (minimap-mode)
