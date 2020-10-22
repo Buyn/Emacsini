@@ -17,7 +17,8 @@
 	(setq minimap-width-fraction 0.1)
 	(setq minimap-minimum-width 0.03)
 	;; (setq minimap-major-modes '(prog-mode, org-mode, help-mode))
-	(setq minimap-major-modes '(prog-mode))
+	;; (setq minimap-major-modes '(prog-mode))
+	(setq minimap-major-modes '(prog-mode org-mode Info-mode))
 ;; ** END of use-package minimap-mode
   )
 ;; ** Docs

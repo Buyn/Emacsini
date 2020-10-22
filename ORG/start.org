@@ -54,13 +54,20 @@ https://www.braveclojure.com/basic-emacs/
 						unix-path-to-file)
 		)
   )
+** Templats 
+*** Туду
+**** сделать
+**** в процесе
+**** завершно
+*** Kanban
+**** todo
+**** in progress 
+**** done
 
 
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-	(setq minimap-width-fraction 0.1)
-	(setq minimap-minimum-width 0.03)
-(scroll-bar-mode -1)
+	(setq minimap-major-modes '(prog-mode org-mode Info-mode))
 #+end_src
 (progn
 		) progn end
@@ -2511,6 +2518,353 @@ https://orgmode.org/org.html#Advanced-features
 *** Formuls 
 **** sqrt : 
  #+TBLFM: @2$2 = 100 - @-1 :: $5 = 1 ::@3$2 = @-1 * @-2::@4$2 = sqrt(@-1)
+*** Keys 
+**** Re-aligning and
+----------------------------
+‘C-c C-c’ (‘org-table-align’)
+     Re-align the table without moving point.
+
+‘<TAB>’ (‘org-table-next-field’)
+     Re-align the table, move to the next field.  Creates a new row if
+     necessary.
+
+‘C-c <SPC>’ (‘org-table-blank-field’)
+     Blank the field at point.
+
+‘S-<TAB>’ (‘org-table-previous-field’)
+     Re-align, move to previous field.
+
+‘<RET>’ (‘org-table-next-row’)
+     Re-align the table and move down to next row.  Creates a new row if
+     necessary.  At the beginning or end of a line, ‘<RET>’ still
+     inserts a new line, so it can be used to split a table.
+
+**** field motion
+----------------------------
+‘M-a’ (‘org-table-beginning-of-field’)
+     Move to beginning of the current table field, or on to the previous
+     field.
+
+‘M-e’ (‘org-table-end-of-field’)
+     Move to end of the current table field, or on to the next field.
+
+**** Column and row editing
+----------------------
+‘M-<LEFT>’ (‘org-table-move-column-left’)
+     Move the current column left.
+
+‘M-<RIGHT>’ (‘org-table-move-column-right’)
+     Move the current column right.
+
+‘M-S-<LEFT>’ (‘org-table-delete-column’)
+     Kill the current column.
+
+‘M-S-<RIGHT>’ (‘org-table-insert-column’)
+     Insert a new column at point position.  Move the recent column and
+     all cells to the right of this column to the right.
+
+‘M-<UP>’ (‘org-table-move-row-up’)
+     Move the current row up.
+
+‘M-<DOWN>’ (‘org-table-move-row-down’)
+     Move the current row down.
+
+‘M-S-<UP>’ (‘org-table-kill-row’)
+     Kill the current row or horizontal line.
+
+‘S-<UP>’ (‘org-table-move-cell-up’)
+     Move cell up by swapping with adjacent cell.
+
+‘S-<DOWN>’ (‘org-table-move-cell-down’)
+     Move cell down by swapping with adjacent cell.
+
+‘S-<LEFT>’ (‘org-table-move-cell-left’)
+     Move cell left by swapping with adjacent cell.
+
+‘S-<RIGHT>’ (‘org-table-move-cell-right’)
+     Move cell right by swapping with adjacent cell.
+
+‘M-S-<DOWN>’ (‘org-table-insert-row’)
+     Insert a new row above the current row.  With a prefix argument,
+     the line is created below the current one.
+
+‘C-c -’ (‘org-table-insert-hline’)
+     Insert a horizontal line below current row.  With a prefix
+     argument, the line is created above the current line.
+
+‘C-c <RET>’ (‘org-table-hline-and-move’)
+     Insert a horizontal line below current row, and move point into the
+     row below that line.
+
+‘C-c ^’ (‘org-table-sort-lines’)
+     Sort the table lines in the region.  The position of point
+     indicates the column to be used for sorting, and the range of lines
+     is the range between the nearest horizontal separator lines, or the
+     entire table.  If point is before the first column, you are
+     prompted for the sorting column.  If there is an active region, the
+     mark specifies the first line and the sorting column, while point
+     should be in the last line to be included into the sorting.  The
+     command prompts for the sorting type, alphabetically, numerically,
+     or by time.  You can sort in normal or reverse order.  You can also
+     supply your own key extraction and comparison functions.  When
+     called with a prefix argument, alphabetic sorting is
+     case-sensitive.
+
+**** Regions
+-------
+‘C-c C-x M-w’ (‘org-table-copy-region’)
+     Copy a rectangular region from a table to a special clipboard.
+     Point and mark determine edge fields of the rectangle.  If there is
+     no active region, copy just the current field.  The process ignores
+     horizontal separator lines.
+
+‘C-c C-x C-w’ (‘org-table-cut-region’)
+     Copy a rectangular region from a table to a special clipboard, and
+     blank all fields in the rectangle.  So this is the “cut” operation.
+
+‘C-c C-x C-y’ (‘org-table-paste-rectangle’)
+     Paste a rectangular region into a table.  The upper left corner
+     ends up in the current field.  All involved fields are overwritten.
+     If the rectangle does not fit into the present table, the table is
+     enlarged as needed.  The process ignores horizontal separator
+     lines.
+
+‘M-<RET>’ (‘org-table-wrap-region’)
+     Split the current field at point position and move the rest to the
+     line below.  If there is an active region, and both point and mark
+     are in the same column, the text in the column is wrapped to
+     minimum width for the given number of lines.  A numeric prefix
+     argument may be used to change the number of desired lines.  If
+     there is no region, but you specify a prefix argument, the current
+     field is made blank, and the content is appended to the field
+     above.
+
+**** Calculations
+------------
+
+‘C-c +’ (‘org-table-sum’)
+     Sum the numbers in the current column, or in the rectangle defined
+     by the active region.  The result is shown in the echo area and can
+     be inserted with ‘C-y’.
+
+‘S-<RET>’ (‘org-table-copy-down’)
+     When current field is empty, copy from first non-empty field above.
+     When not empty, copy current field down to next row and move point
+     along with it.
+
+     Depending on the variable ‘org-table-copy-increment’, integer and
+     time stamp field values, and fields prefixed or suffixed with a
+     whole number, can be incremented during copy.  Also, a ‘0’ prefix
+     argument temporarily disables the increment.
+
+     This key is also used by shift-selection and related modes (see
+     *note Conflicts::).
+
+**** Miscellaneous
+-------------
+
+‘C-c `’ (‘org-table-edit-field’)
+     Edit the current field in a separate window.  This is useful for
+     fields that are not fully visible (see *note Column Width and
+     Alignment::).  When called with a ‘C-u’ prefix, just make the full
+     field visible, so that it can be edited in place.  When called with
+     two ‘C-u’ prefixes, make the editor window follow point through the
+     table and always show the current field.  The follow mode exits
+     automatically when point leaves the table, or when you repeat this
+     command with ‘C-u C-u C-c `’.
+
+‘M-x org-table-import’
+     Import a file as a table.  The table should be TAB or whitespace
+     separated.  Use, for example, to import a spreadsheet table or data
+     from a database, because these programs generally can write
+     TAB-separated text files.  This command works by inserting the file
+     into the buffer and then converting the region to a table.  Any
+     prefix argument is passed on to the converter, which uses it to
+     determine the separator.
+
+‘C-c |’ (‘org-table-create-or-convert-from-region’)
+     Tables can also be imported by pasting tabular text into the Org
+     buffer, selecting the pasted text with ‘C-x C-x’ and then using the
+     ‘C-c |’ command (see *note Creation and conversion::).
+
+‘M-x org-table-export’
+     Export the table, by default as a TAB-separated file.  Use for data
+     exchange with, for example, spreadsheet or database programs.  The
+     format used to export the file can be configured in the variable
+     ‘org-table-export-default-format’.  You may also use properties
+     ‘TABLE_EXPORT_FILE’ and ‘TABLE_EXPORT_FORMAT’ to specify the file
+     name and the format for table export in a subtree.  Org supports
+     quite general formats for exported tables.  The exporter format is
+     the same as the format used by Orgtbl radio tables, see *note
+     Translator functions::, for a detailed description.
+
+**** Shrink or expand current column : 
+‘C-c <TAB>’ (‘org-table-toggle-column-width’)
+     Shrink or expand current column.
+
+     If a width cookie specifies a width W for the column, shrinking it
+     displays the first W visible characters only.  Otherwise, the
+     column is shrunk to a single character.
+
+     When called before the first column or after the last one, ask for
+     a list of column ranges to operate on.
+
+‘C-u C-c <TAB>’ (‘org-table-shrink’)
+     Shrink all columns with a column width.  Expand the others.
+
+‘C-u C-u C-c <TAB>’ (‘org-table-expand’)
+     Expand all columns.
+
+**** what the coordinates : 
+what the coordinates of a field are, press ‘C-c ?’ in that field, or
+**** display of a grid : 
+press ‘C-c }’ to toggle the display of a grid.
+
+**** Install a new formula for the current column : 
+‘C-c =’ (‘org-table-eval-formula’)
+     Install a new formula for the current column and replace current
+     field with the result of the formula.  The command prompts for a
+     formula, with default taken from the ‘TBLFM’ keyword, applies it to
+     the current field and stores it.  With a numeric prefix argument,
+     e.g., ‘C-5 C-c =’, the command applies it to that many consecutive
+     fields in the current column.
+
+   To assign a formula to a column, type it directly into any field in
+the column, preceded by an equal sign, like ‘=$1+$2’.  When you press
+‘<TAB>’ or ‘<RET>’ or ‘C-c C-c’ with point still in the field, the
+formula is stored as the formula for the current column, evaluated and
+the current field replaced with the result.  If the field contains only
+‘=’, the previously stored formula for this column is used.  For each
+column, Org only remembers the most recently used formula.  In the
+‘TBLFM’ keyword, column formulas look like ‘$4=$1+$2’.  The left-hand
+side of a column formula can not be the name of column, it must be the
+numeric column reference or ‘$>’.
+
+**** Install a new formula for the current field. : 
+To assign a formula to a particular field, type it directly into the
+field, preceded by ‘:=’, for example ‘vsum(@II..III)’.  When you press
+‘<TAB>’ or ‘<RET>’ or ‘C-c C-c’ with point still in the field, the
+formula is stored as the formula for this field, evaluated, and the
+current field is replaced with the result.
+
+‘C-u C-c =’ (‘org-table-eval-formula’)
+     Install a new formula for the current field.  The command prompts
+     for a formula with default taken from the ‘TBLFM’ keyword, applies
+     it to the current field, and stores it.
+
+   The left-hand side of a formula can also be a special expression in
+order to assign the formula to a number of different fields.  There is
+no keyboard shortcut to enter such range formulas.  To add them, use the
+formula editor (see *note Editing and debugging formulas::) or edit the
+‘TBLFM’ keyword directly.
+
+‘$2=’
+     Column formula, valid for the entire column.  This is so common
+     that Org treats these formulas in a special way, see *note Column
+     formulas::.
+
+‘@3=’
+     Row formula, applies to all fields in the specified row.  ‘@>=’
+     means the last row.
+
+‘@1$2..@4$3=’
+     Range formula, applies to all fields in the given rectangular
+     range.  This can also be used to assign a formula to some but not
+     all fields in a row.
+
+‘$NAME=’
+     Named field, see *note Advanced features::.
+
+**** 3.5.8 Editing and debugging formulas
+------------------------------------
+You can edit individual formulas in the minibuffer or directly in the
+field.  Org can also prepare a special buffer with all active formulas
+of a table.  When offering a formula for editing, Org converts
+references to the standard format (like ‘B3’ or ‘D&’) if possible.  If
+you prefer to only work with the internal format (like ‘@3$2’ or ‘$4’),
+configure the variable ‘org-table-use-standard-references’.
+
+‘C-c =’ or ‘C-u C-c =’ (‘org-table-eval-formula’)
+     Edit the formula associated with the current column/field in the
+     minibuffer.  See *note Column formulas::, and *note Field and range
+     formulas::.
+
+‘C-u C-u C-c =’ (‘org-table-eval-formula’)
+     Re-insert the active formula (either a field formula, or a column
+     formula) into the current field, so that you can edit it directly
+     in the field.  The advantage over editing in the minibuffer is that
+     you can use the command ‘C-c ?’.
+
+‘C-c ?’ (‘org-table-field-info’)
+     While editing a formula in a table field, highlight the field(s)
+     referenced by the reference at point position in the formula.
+
+‘C-c }’ (‘org-table-toggle-coordinate-overlays’)
+     Toggle the display of row and column numbers for a table, using
+     overlays.  These are updated each time the table is aligned; you
+     can force it with ‘C-c C-c’.
+
+‘C-c {’ (‘org-table-toggle-formula-debugger’)
+     Toggle the formula debugger on and off.  See below.
+
+‘C-c '’ (‘org-table-edit-formulas’)
+     Edit all formulas for the current table in a special buffer, where
+     the formulas are displayed one per line.  If the current field has
+     an active formula, point in the formula editor marks it.  While
+     inside the special buffer, Org automatically highlights any field
+     or range reference at point position.  You may edit, remove and add
+     formulas, and use the following commands:
+
+     ‘C-c C-c’ or ‘C-x C-s’ (‘org-table-fedit-finish’)
+          Exit the formula editor and store the modified formulas.  With
+          ‘C-u’ prefix, also apply the new formulas to the entire table.
+
+     ‘C-c C-q’ (‘org-table-fedit-abort’)
+          Exit the formula editor without installing changes.
+
+     ‘C-c C-r’ (‘org-table-fedit-toggle-ref-type’)
+          Toggle all references in the formula editor between standard
+          (like ‘B3’) and internal (like ‘@3$2’).
+
+     ‘<TAB>’ (‘org-table-fedit-lisp-indent’)
+          Pretty-print or indent Lisp formula at point.  When in a line
+          containing a Lisp formula, format the formula according to
+          Emacs Lisp rules.  Another ‘<TAB>’ collapses the formula back
+          again.  In the open formula, ‘<TAB>’ re-indents just like in
+          Emacs Lisp mode.
+
+     ‘M-<TAB>’ (‘lisp-complete-symbol’)
+          Complete Lisp symbols, just like in Emacs Lisp mode.
+
+     ‘S-<UP>’, ‘S-<DOWN>’, ‘S-<LEFT>’, ‘S-<RIGHT>’
+          Shift the reference at point.  For example, if the reference
+          is ‘B3’ and you press ‘S-<RIGHT>’, it becomes ‘C3’.  This also
+          works for relative references and for hline references.
+
+     ‘M-S-<UP>’ (‘org-table-fedit-line-up’)
+          Move the test line for column formulas up in the Org buffer.
+
+     ‘M-S-<DOWN>’ (‘org-table-fedit-line-down’)
+          Move the test line for column formulas down in the Org buffer.
+
+     ‘M-<UP>’ (‘org-table-fedit-scroll-up’)
+          Scroll up the window displaying the table.
+
+     ‘M-<DOWN>’ (‘org-table-fedit-scroll-down’)
+          Scroll down the window displaying the table.
+
+     ‘C-c }’
+          Turn the coordinate grid in the table on and off.
+
+   Making a table field blank does not remove the formula associated
+with the field, because that is stored in a different line—the ‘TBLFM’
+keyword line.  During the next recalculation, the field will be filled
+again.  To remove a formula from a field, you have to give an empty
+reply when prompted for the formula, or to edit the ‘TBLFM’ keyword.
+
+   You may edit the ‘TBLFM’ keyword directly and re-apply the changed
+equations with ‘C-c C-c’ in that line or with the normal recalculation
+commands in the table.
 
 ** Tags 
 Two: Which tags do you use most?
