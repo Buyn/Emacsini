@@ -63,14 +63,53 @@ https://www.braveclojure.com/basic-emacs/
 **** todo
 **** in progress 
 **** done
-
-
+*** Ezenhaur 
+**** Срочное и важное
+**** Срочное но не важное
+**** Важное но не срочное 
+**** Не Срочное и не важное
+*** SWOT 
+**** Strengths
+**** Weaknesses
+**** Opportunities
+**** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
 	(setq minimap-major-modes '(prog-mode org-mode Info-mode))
 #+end_src
 (progn
 		) progn end
+** Rogue 
+*** templ
+|---+---+---+---+---|
+|   |   |   |   |   |
+|   | # | # | # |   |
+|   | # | # | # |   |
+|   | # |   |   |   |
+|   | # |   | # | # |
+|   |   |   | # | # |
+|   |   | @ |   |   |
+|---+---+---+---+---|
+** Calc 
+*** random
+		Выдаёт между 0-1
+(random 2)
+		Выдаёт между 0-99
+(random 100)
+		Выдаёт между 1-100
+(+ (random 100) 1)
+		Выдаёт между 10-100 (проверил)
+(+ (random 91) 10)
+*** time 
+(setq-local pom 25)
+(setq-local h 60)
+(defun min-to-houre (min-in)
+		(let ((hour (/ min-in 60)))
+		 (message "%s:%s" hour (- min-in (* hour 60)))))
+(/ h pom)
+(* 4 pom)
+(min-to-houre 100)
+
 * Pathes
 ** init files
 *** root
@@ -168,6 +207,7 @@ https://www.braveclojure.com/basic-emacs/
 *Help Docs Emacs 
 * Команды
 ** reload init files
+(load "~/INI/hydra-cfg.el")
 (load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
 (load "~/INI/vanila_cfg.el")
@@ -177,7 +217,6 @@ https://www.braveclojure.com/basic-emacs/
 (load "~/INI/lit-cfg.el")
 (load "~/INI/dev-cfg.el")
 (load "~/INI/interface-mods.el")
-(load "~/INI/hydra-cfg.el")
 (load "~/ELs/BuYn/shell.el")
 ** load init files
 (load "~/INI/org-brain-cfg.el")
@@ -261,6 +300,9 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
   '(progn
      (define-key company-mode-map (kbd "C-:") 'helm-company)
      (define-key company-active-map (kbd "C-:") 'helm-company)))
+*** describe-package
+describe-package
+
 ** load require: 
 	#+begin_src emacs-lisp :tangle yes
 (eval-after-load 'company
@@ -866,6 +908,99 @@ make a change.
     later) (‘kmacro-cycle-ring-previous’).
 C-x C-k C-d
 		delete it from the macro ring.
+** Registers
+*** keybord help
+**** 13.2 Saving Text in Registers
+‘C-x r r R’
+     Copy the region-rectangle into register R
+     (‘copy-rectangle-to-register’).  With numeric argument, delete it
+     as well.
+‘C-x r s R’
+     Copy region into register R (‘copy-to-register’).
+‘C-x r i R’
+     Insert text from register R (‘insert-register’).
+‘M-x append-to-register <RET> R’
+     Append region to text in register R.
+
+     When register R contains text, you can use ‘C-x r +’
+     (‘increment-register’) to append to that register.  Note that
+     command ‘C-x r +’ behaves differently if R contains a number.
+     *Note Number Registers::.
+
+‘M-x prepend-to-register <RET> R’
+     Prepend region to text in register R.
+**** position : 
+ ‘C-x r <SPC> R’
+			Record the position of point and the current buffer in register R
+			(‘point-to-register’).
+ ‘C-x r j R’
+			Jump to the position and buffer saved in register R
+			(‘jump-to-register’).
+     (set-register R '(file . NAME))
+For example,
+     (set-register ?z '(file . "/gd/gnu/emacs/19.0/src/ChangeLog"))
+puts the file name shown in register ‘z’.
+**** 13.8 Bookmarks
+‘C-x r m <RET>’
+     Set the bookmark for the visited file, at point.
+‘C-x r m BOOKMARK <RET>’
+     Set the bookmark named BOOKMARK at point (‘bookmark-set’).
+‘C-x r M BOOKMARK <RET>’
+     Like ‘C-x r m’, but don’t overwrite an existing bookmark.
+‘C-x r b BOOKMARK <RET>’
+     Jump to the bookmark named BOOKMARK (‘bookmark-jump’).
+‘C-x r l’
+     List all bookmarks (‘list-bookmarks’).
+‘M-x bookmark-save’
+     Save all the current bookmark values in the default bookmark file.
+‘M-x bookmark-load <RET> FILENAME <RET>’
+     Load a file named FILENAME that contains a list of bookmark values.
+     You can use this command, as well as ‘bookmark-write’, to work with
+     other files of bookmark values in addition to your default bookmark
+     file.
+
+‘M-x bookmark-write <RET> FILENAME <RET>’
+     Save all the current bookmark values in the file FILENAME.
+
+‘M-x bookmark-delete <RET> BOOKMARK <RET>’
+     Delete the bookmark named BOOKMARK.
+
+‘M-x bookmark-insert-location <RET> BOOKMARK <RET>’
+     Insert in the buffer the name of the file that bookmark BOOKMARK
+     points to.
+
+‘M-x bookmark-insert <RET> BOOKMARK <RET>’
+     Insert in the buffer the _contents_ of the file that bookmark
+     BOOKMARK points to.
+
+==============
+**** 13.4 Saving Window Configurations in Registers
+‘C-x r w R’
+     Save the state of the selected frame’s windows in register R
+     (‘window-configuration-to-register’).
+‘C-x r f R’
+     Save the state of all frames, including all their windows, in
+     register R (‘frameset-to-register’).
+
+   Use ‘C-x r j R’ to restore a window or frame configuration.  This is
+  If you wish to delete these frames
+instead, use ‘C-u C-x r j R’.
+
+==============================================
+**** 13.7 Keyboard Macro Registers
+If you need to execute a keyboard macro (*note Keyboard Macros::)
+frequently, it is more convenient to put it in a register or save it
+(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
+stores the last keyboard macro in register R.
+=============================
+**** 13.5 Keeping Numbers in Registers
+‘C-u NUMBER C-x r n R’
+     Store NUMBER into register R (‘number-to-register’).
+‘C-u NUMBER C-x r + R’
+     If R contains a number, increment the number in that register by
+     NUMBER.  Note that command ‘C-x r +’ (‘increment-register’) behaves
+     differently if R contains text.  *Note Text Registers::.
+=================================
 ** Options
 *** Visual
 *** Home 
@@ -1123,91 +1258,2599 @@ Invoke HideShow mode with M-x hs-minor-mode.
  '(org-variable-pitch-face ((t (:height 1.0 :family "IM Fell English"))))
 '(variable-pitch ((t (:height 1.0 :family "IM Fell English")))))
 * Help Docs eLisp
+** Data types
+*** varible
+**** show type
+ (type-of chartoadd)
+**** chek type
+ (typep *x* 'integer)
+**** chege type 
+***** From number to string:
+ (number-to-string 5)
+ "5"
+ you may transform a string to any numerical notation:
+ (number-to-string 341 :base 10)
+ "341"
+***** From string to number:
+ (parse-integer "5")
+ 5
+ with some trash
+ (parse-integer " 5 something not a number" :junk-allowed t)
+ 5
+ Or use this:
+ (read-from-string "23 absd")
+ 23
+***** FORMAT 
+ (format nil "~A" 1)
+**** Seeing the Current Value of a Variable
+	 c-h v
+ describe-variable
+
+ (progn
+ (evil-open-below 3)
+ (insert (getenv "PATH"))
+ )
+
+ (describe-variable exec-path)
+ (symbol-value exec-path)
+**** 12.7 Accessing Variable Values determined at run time
+ https://www.gnu.org/software/emacs/manual/html_node/elisp/Accessing-Variables.html
+ The usual way to reference a variable is to write the symbol which
+ names it.  See Symbol Forms.
+
+		Occasionally, you may want to reference a variable which is only
+ determined at run time.  In that case, you cannot specify the variable
+ name in the text of the program.  You can use the symbol-value
+ function to extract the value.
+
+
+ — Function: symbol-value symbol
+ This function returns the value stored in symbol's value cell. 
+ This is where the variable's current (dynamic) value is stored.  If
+ the variable has no local binding, this is simply its global value. 
+ If the variable is void, a void-variable error is signaled.
+
+         If the variable is lexically bound, the value reported by
+ symbol-value is not necessarily the same as the variable's
+ lexical value, which is determined by the lexical environment rather
+ than the symbol's value cell.  See Variable Scoping.
+
+								(setq abracadabra 5)
+								=> 5
+           (setq foo 9)
+								=> 9
+          
+           ;; Here the symbol abracadabra
+           ;;   is the symbol whose value is examined.
+           (let ((abracadabra 'foo))
+             (symbol-value 'abracadabra))
+								=>foo
+          
+           ;; Here, the value of abracadabra,
+           ;;   which is foo,
+           ;;   is the symbol whose value is examined.
+           (let ((abracadabra 'foo))
+             (symbol-value abracadabra))
+               => 9
+          
+           (symbol-value 'abracadabra)
+               => 5
+**** 12.5 Defining Global Variables
+ ==============================
+ A “variable definition” is a construct that announces your intention to
+ use a symbol as a global variable.  It uses the special forms ‘defvar’
+ or ‘defconst’, which are documented below.
+		A variable definition serves three purposes.  First, it informs
+ people who read the code that the symbol is _intended_ to be used a
+ certain way (as a variable).  Second, it informs the Lisp system of
+ this, optionally supplying an initial value and a documentation string.
+ Third, it provides information to programming tools such as ‘etags’,
+ allowing them to find where the variable was defined.
+
+		The difference between ‘defconst’ and ‘defvar’ is mainly a matter of
+ intent, serving to inform human readers of whether the value should ever
+ change.  Emacs Lisp does not actually prevent you from changing the
+ value of a variable defined with ‘defconst’.  One notable difference
+ between the two forms is that ‘defconst’ unconditionally initializes the
+ variable, whereas ‘defvar’ initializes it only if it is originally void.
+
+		To define a customizable variable, you should use ‘defcustom’ (which
+ calls ‘defvar’ as a subroutine).  *Note Variable Definitions::.
+
+	-- Special Form: defvar symbol [value [doc-string]]
+			This special form defines SYMBOL as a variable.  Note that SYMBOL
+			is not evaluated; the symbol to be defined should appear explicitly
+			in the ‘defvar’ form.  The variable is marked as “special”, meaning
+			that it should always be dynamically bound (*note Variable
+			Scoping::).
+
+			If VALUE is specified, and SYMBOL is void (i.e., it has no
+			dynamically bound value; *note Void Variables::), then VALUE is
+			evaluated and SYMBOL is set to the result.  But if SYMBOL is not
+			void, VALUE is not evaluated, and SYMBOL’s value is left unchanged.
+			If VALUE is omitted, the value of SYMBOL is not changed in any
+			case.
+
+			Note that specifying a value, even ‘nil’, marks the variable as
+			special permanently.  Whereas if VALUE is omitted then the variable
+			is only marked special locally (i.e. within the current lexical
+			scope, or file if at the top-level).  This can be useful for
+			suppressing byte compilation warnings, see *note Compiler Errors::.
+
+			If SYMBOL has a buffer-local binding in the current buffer,
+			‘defvar’ acts on the default value, which is buffer-independent,
+			rather than the buffer-local binding.  It sets the default value if
+			the default value is void.  *Note Buffer-Local Variables::.
+
+			If SYMBOL is already lexically bound (e.g., if the ‘defvar’ form
+			occurs in a ‘let’ form with lexical binding enabled), then ‘defvar’
+			sets the dynamic value.  The lexical binding remains in effect
+			until its binding construct exits.  *Note Variable Scoping::.
+
+			When you evaluate a top-level ‘defvar’ form with ‘C-M-x’ in Emacs
+			Lisp mode (‘eval-defun’), a special feature of ‘eval-defun’
+			arranges to set the variable unconditionally, without testing
+			whether its value is void.
+
+			If the DOC-STRING argument is supplied, it specifies the
+			documentation string for the variable (stored in the symbol’s
+			‘variable-documentation’ property).  *Note Documentation::.
+
+			Here are some examples.  This form defines ‘foo’ but does not
+			initialize it:
+
+           (defvar foo)
+								= foo
+
+			This example initializes the value of ‘bar’ to ‘23’, and gives it a
+			documentation string:
+
+           (defvar bar 23
+             "The normal weight of a bar.")
+								= bar
+
+			The ‘defvar’ form returns SYMBOL, but it is normally used at top
+			level in a file where its value does not matter.
+
+			For a more elaborate example of using ‘defvar’ without a value, see
+			*note Local defvar example::.
+
+	-- Special Form: defconst symbol value [doc-string]
+			This special form defines SYMBOL as a value and initializes it.  It
+			informs a person reading your code that SYMBOL has a standard
+			global value, established here, that should not be changed by the
+			user or by other programs.  Note that SYMBOL is not evaluated; the
+			symbol to be defined must appear explicitly in the ‘defconst’.
+
+			The ‘defconst’ form, like ‘defvar’, marks the variable as
+			“special”, meaning that it should always be dynamically bound
+			(*note Variable Scoping::).  In addition, it marks the variable as
+			risky (*note File Local Variables::).
+
+			‘defconst’ always evaluates VALUE, and sets the value of SYMBOL to
+			the result.  If SYMBOL does have a buffer-local binding in the
+			current buffer, ‘defconst’ sets the default value, not the
+			buffer-local value.  (But you should not be making buffer-local
+			bindings for a symbol that is defined with ‘defconst’.)
+
+			An example of the use of ‘defconst’ is Emacs’s definition of
+			‘float-pi’—the mathematical constant pi, which ought not to be
+			changed by anyone (attempts by the Indiana State Legislature
+			notwithstanding).  As the second form illustrates, however,
+			‘defconst’ is only advisory.
+
+           (defconst float-pi 3.141592653589793 "The value of Pi.")
+								= float-pi
+           (setq float-pi 3)
+								= float-pi
+           float-pi
+								= 3
+
+		*Warning:* If you use a ‘defconst’ or ‘defvar’ special form while the
+ variable has a local binding (made with ‘let’, or a function argument),
+ it sets the local binding rather than the global binding.  This is not
+ what you usually want.  To prevent this, use these special forms at top
+ level in a file, where normally no local binding is in effect, and make
+ sure to load the file before making a local binding for the variable.
+**** 12.11.2 Creating and Deleting Buffer-Local Bindings
+ Macro: defvar-local
+ setq-local
+ ---------------------------------------------------
+	-- Command: make-local-variable variable
+			This function creates a buffer-local binding in the current buffer
+			for VARIABLE (a symbol).  Other buffers are not affected.  The
+			value returned is VARIABLE.
+
+			The buffer-local value of VARIABLE starts out as the same value
+			VARIABLE previously had.  If VARIABLE was void, it remains void.
+
+           ;; In buffer ‘b1’:
+           (setq foo 5)                ; Affects all buffers.
+								= 5
+           (make-local-variable 'foo)  ; Now it is local in ‘b1’.
+								= foo
+           foo                         ; That did not change
+								= 5                   ;   the value.
+           (setq foo 6)                ; Change the value
+								= 6                   ;   in ‘b1’.
+           foo
+								= 6
+
+           ;; In buffer ‘b2’, the value hasn’t changed.
+           (with-current-buffer "b2"
+             foo)
+								= 5
+
+			Making a variable buffer-local within a ‘let’-binding for that
+			variable does not work reliably, unless the buffer in which you do
+			this is not current either on entry to or exit from the ‘let’.
+			This is because ‘let’ does not distinguish between different kinds
+			of bindings; it knows only which variable the binding was made for.
+
+			It is an error to make a constant or a read-only variable
+			buffer-local.  *Note Constant Variables::.
+
+			If the variable is terminal-local (*note Multiple Terminals::),
+			this function signals an error.  Such variables cannot have
+			buffer-local bindings as well.
+
+			*Warning:* do not use ‘make-local-variable’ for a hook variable.
+			The hook variables are automatically made buffer-local as needed if
+			you use the LOCAL argument to ‘add-hook’ or ‘remove-hook’.
+
+	-- Macro: setq-local variable value
+			This macro creates a buffer-local binding in the current buffer for
+			VARIABLE, and gives it the buffer-local value VALUE.  It is
+			equivalent to calling ‘make-local-variable’ followed by ‘setq’.
+			VARIABLE should be an unquoted symbol.
+
+	-- Command: make-variable-buffer-local variable
+			This function marks VARIABLE (a symbol) automatically buffer-local,
+			so that any subsequent attempt to set it will make it local to the
+			current buffer at the time.  Unlike ‘make-local-variable’, with
+			which it is often confused, this cannot be undone, and affects the
+			behavior of the variable in all buffers.
+
+			A peculiar wrinkle of this feature is that binding the variable
+			(with ‘let’ or other binding constructs) does not create a
+			buffer-local binding for it.  Only setting the variable (with ‘set’
+			or ‘setq’), while the variable does not have a ‘let’-style binding
+			that was made in the current buffer, does so.
+
+			If VARIABLE does not have a default value, then calling this
+			command will give it a default value of ‘nil’.  If VARIABLE already
+			has a default value, that value remains unchanged.  Subsequently
+			calling ‘makunbound’ on VARIABLE will result in a void buffer-local
+			value and leave the default value unaffected.
+
+			The value returned is VARIABLE.
+
+			It is an error to make a constant or a read-only variable
+			buffer-local.  *Note Constant Variables::.
+
+			*Warning:* Don’t assume that you should use
+			‘make-variable-buffer-local’ for user-option variables, simply
+			because users _might_ want to customize them differently in
+			different buffers.  Users can make any variable local, when they
+			wish to.  It is better to leave the choice to them.
+
+			The time to use ‘make-variable-buffer-local’ is when it is crucial
+			that no two buffers ever share the same binding.  For example, when
+			a variable is used for internal purposes in a Lisp program which
+			depends on having separate values in separate buffers, then using
+			‘make-variable-buffer-local’ can be the best solution.
+
+	-- Macro: defvar-local variable value &optional docstring
+			This macro defines VARIABLE as a variable with initial value VALUE
+			and DOCSTRING, and marks it as automatically buffer-local.  It is
+			equivalent to calling ‘defvar’ followed by
+			‘make-variable-buffer-local’.  VARIABLE should be an unquoted
+			symbol.
+
+	-- Function: local-variable-p variable &optional buffer
+			This returns ‘t’ if VARIABLE is buffer-local in buffer BUFFER
+			(which defaults to the current buffer); otherwise, ‘nil’.
+
+	-- Function: local-variable-if-set-p variable &optional buffer
+			This returns ‘t’ if VARIABLE either has a buffer-local value in
+			buffer BUFFER, or is automatically buffer-local.  Otherwise, it
+			returns ‘nil’.  If omitted or ‘nil’, BUFFER defaults to the current
+			buffer.
+
+	-- Function: buffer-local-value variable buffer
+			This function returns the buffer-local binding of VARIABLE (a
+			symbol) in buffer BUFFER.  If VARIABLE does not have a buffer-local
+			binding in buffer BUFFER, it returns the default value (*note
+			Default Value::) of VARIABLE instead.
+
+	-- Function: buffer-local-variables &optional buffer
+			This function returns a list describing the buffer-local variables
+			in buffer BUFFER.  (If BUFFER is omitted, the current buffer is
+			used.)  Normally, each list element has the form ‘(SYM . VAL)’,
+			where SYM is a buffer-local variable (a symbol) and VAL is its
+			buffer-local value.  But when a variable’s buffer-local binding in
+			BUFFER is void, its list element is just SYM.
+
+           (make-local-variable 'foobar)
+           (makunbound 'foobar)
+           (make-local-variable 'bind-me)
+           (setq bind-me 69)
+           (setq lcl (buffer-local-variables))
+               ;; First, built-in variables local in all buffers:
+           = ((mark-active . nil)
+               (buffer-undo-list . nil)
+               (mode-name . "Fundamental")
+               ...
+               ;; Next, non-built-in buffer-local variables.
+               ;; This one is buffer-local and void:
+               foobar
+               ;; This one is buffer-local and nonvoid:
+               (bind-me . 69))
+
+			Note that storing new values into the CDRs of cons cells in this
+			list does _not_ change the buffer-local values of the variables.
+
+	-- Command: kill-local-variable variable
+			This function deletes the buffer-local binding (if any) for
+			VARIABLE (a symbol) in the current buffer.  As a result, the
+			default binding of VARIABLE becomes visible in this buffer.  This
+			typically results in a change in the value of VARIABLE, since the
+			default value is usually different from the buffer-local value just
+			eliminated.
+
+			If you kill the buffer-local binding of a variable that
+			automatically becomes buffer-local when set, this makes the default
+			value visible in the current buffer.  However, if you set the
+			variable again, that will once again create a buffer-local binding
+			for it.
+
+			‘kill-local-variable’ returns VARIABLE.
+
+			This function is a command because it is sometimes useful to kill
+			one buffer-local variable interactively, just as it is useful to
+			create buffer-local variables interactively.
+
+	-- Function: kill-all-local-variables
+			This function eliminates all the buffer-local variable bindings of
+			the current buffer except for variables marked as permanent and
+			local hook functions that have a non-‘nil’ ‘permanent-local-hook’
+			property (*note Setting Hooks::).  As a result, the buffer will see
+			the default values of most variables.
+
+			This function also resets certain other information pertaining to
+			the buffer: it sets the local keymap to ‘nil’, the syntax table to
+			the value of ‘(standard-syntax-table)’, the case table to
+			‘(standard-case-table)’, and the abbrev table to the value of
+			‘fundamental-mode-abbrev-table’.
+
+			The very first thing this function does is run the normal hook
+			‘change-major-mode-hook’ (see below).
+
+			Every major mode command begins by calling this function, which has
+			the effect of switching to Fundamental mode and erasing most of the
+			effects of the previous major mode.  To ensure that this does its
+			job, the variables that major modes set should not be marked
+			permanent.
+
+			‘kill-all-local-variables’ returns ‘nil’.
+
+	-- Variable: change-major-mode-hook
+			The function ‘kill-all-local-variables’ runs this normal hook
+			before it does anything else.  This gives major modes a way to
+			arrange for something special to be done if the user switches to a
+			different major mode.  It is also useful for buffer-specific minor
+			modes that should be forgotten if the user changes the major mode.
+
+			For best results, make this variable buffer-local, so that it will
+			disappear after doing its job and will not interfere with the
+			subsequent major mode.  *Note Hooks::.
+
+		A buffer-local variable is “permanent” if the variable name (a
+ symbol) has a ‘permanent-local’ property that is non-‘nil’.  Such
+ variables are unaffected by ‘kill-all-local-variables’, and their local
+ bindings are therefore not cleared by changing major modes.  Permanent
+ locals are appropriate for data pertaining to where the file came from
+ or how to save it, rather than with how to edit the contents.
+*** String 
+**** Conversion
+***** 4.6 Conversion of Characters and Strings
+****** section describes : 
+	 This section describes functions for converting between characters, strings and
+	 integers. format (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Formatting-Strings.html#Formatting-Strings][Formatting Strings]]) and prin1-to-string (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Output-Functions.html#Output-Functions][Output Functions]])
+	 can also convert Lisp objects into strings. read-from-string (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Input-Functions.html#Input-Functions][Input Functions]]) can
+	 convert a string representation of a Lisp object into an object. The functions
+	 string-to-multibyte and string-to-unibyte convert the text representation of a string (see
+	 [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Converting-Representations.html#Converting-Representations][Converting Representations]]). 
+
+	 See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation.html#Documentation][Documentation]], for functions that produce textual descriptions of text characters
+	 and general input events (single-key-description and text-char-description). These are
+	 used primarily for making help messages. 
+****** Function: number-to-string number
+		This function returns a string consisting of the printed base-ten representation of
+		number. The returned value starts with a minus sign if the argument is negative. 
+
+	 (number-to-string 256)
+				=> "256"
+	 (number-to-string -23)
+				=> "-23"
+	 (number-to-string -23.5)
+				=> "-23.5"
+
+		int-to-string is a semi-obsolete alias for this function. 
+
+		See also the function format in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Formatting-Strings.html#Formatting-Strings][Formatting Strings]]. 
+****** Function: string-to-number string &optional base
+		This function returns the numeric value of the characters in string. If base is
+		non-nil, it must be an integer between 2 and 16 (inclusive), and integers are
+		converted in that base. If base is nil, then base ten is used. Floating-point
+		conversion only works in base ten; we have not implemented other radices for
+		floating-point numbers, because that would be much more work and does not
+		seem useful. If string looks like an integer but its value is too large to fit into a Lisp
+		integer, string-to-number returns a floating-point result. 
+
+		The parsing skips spaces and tabs at the beginning of string, then reads as much
+		of string as it can interpret as a number in the given base. (On some systems it
+		ignores other whitespace at the beginning, not just spaces and tabs.) If string
+		cannot be interpreted as a number, this function returns 0. 
+
+	 (string-to-number "256")
+				=> 256
+	 (string-to-number "25 is a perfect square.")
+				=> 25
+	 (string-to-number "X256")
+				=> 0
+	 (string-to-number "-4.5")
+				=> -4.5
+	 (string-to-number "1e5")
+				=> 100000.0
+		string-to-int is an obsolete alias for this function. 
+****** Function: char-to-string character
+		This function returns a new string containing one character, character. This
+		function is semi-obsolete because the function string is more general. See
+		[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Strings.html#Creating-Strings][Creating Strings]]. 
+****** Function: string-to-char string
+		This function returns the first character in string. This mostly identical to (aref string
+		0), except that it returns 0 if the string is empty. (The value is also 0 when the first
+		character of string is the null character, ASCII code 0.) This function may be
+		eliminated in the future if it does not seem useful enough to retain. 
+****** some other functions that can convert : 
+	 Here are some other functions that can convert to or from a string: 
+******* concat
+		 This function converts a vector or a list into a string. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Strings.html#Creating-Strings][Creating Strings]]. 
+******* vconcat
+		 This function converts a string into a vector. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Vector-Functions.html#Vector-Functions][Vector Functions]]. 
+******* append
+		 This function converts a string into a list. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Building-Lists.html#Building-Lists][Building Lists]]. 
+******* byte-to-string
+		 This function converts a byte of character data into a unibyte string. See
+		 [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Converting-Representations.html#Converting-Representations][Converting Representations]]. 
+**** 34.6.2 Simple Match Data Access
+*****  section explains : 
+ This section explains how to use the match data to find out what was matched by the
+ last search or match operation, if it succeeded. 
+
+ You can ask about the entire matching text, or about a particular parenthetical
+ subexpression of a regular expression. The count argument in the functions below
+ specifies which. If count is zero, you are asking about the entire match. If count is
+ positive, it specifies which subexpression you want. 
+
+ Recall that the subexpressions of a regular expression are those expressions grouped
+ with escaped parentheses, ‘\(…\)’. The countth subexpression is found by counting
+ occurrences of ‘\(’ from the beginning of the whole regular expression. The first
+ subexpression is numbered 1, the second 2, and so on. Only regular expressions can
+ have subexpressions—after a simple string search, the only information available is
+ about the entire match. 
+
+ Every successful search sets the match data. Therefore, you should query the match
+ data immediately after searching, before calling any other function that might perform
+ another search. Alternatively, you may save and restore the match data (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Saving-Match-Data.html#Saving-Match-Data][Saving]]
+ [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Saving-Match-Data.html#Saving-Match-Data][Match Data]]) around the call to functions that could perform another search. Or use the
+ functions that explicitly do not modify the match data; e.g., string-match-p. 
+
+ A search which fails may or may not alter the match data. In the current
+ implementation, it does not, but we may change it in the future. Don’t try to rely on the
+ value of the match data after a failing search. 
+*****  Function: match-string count &optional in-string
+	This function returns, as a string, the text matched in the last search or match
+	operation. It returns the entire text if count is zero, or just the portion corresponding
+	to the countth parenthetical subexpression, if count is positive. 
+
+	If the last such operation was done against a string with string-match, then you
+	should pass the same string as the argument in-string. After a buffer search or
+	match, you should omit in-string or pass nil for it; but you should make sure that
+	the current buffer when you call match-string is the one in which you did the
+	searching or matching. Failure to follow this advice will lead to incorrect results. 
+
+	The value is nil if count is out of range, or for a subexpression inside a ‘\|’
+	alternative that wasn’t used or a repetition that repeated zero times. 
+*****  Function: match-string-no-properties count &optional in-string
+
+	This function is like match-string except that the result has no text properties. 
+*****  Function: match-beginning count
+
+	If the last regular expression search found a match, this function returns the
+	position of the start of the matching text or of a subexpression of it. 
+
+	If count is zero, then the value is the position of the start of the entire match.
+	Otherwise, count specifies a subexpression in the regular expression, and the
+	value of the function is the starting position of the match for that subexpression. 
+
+	The value is nil for a subexpression inside a ‘\|’ alternative that wasn’t used or a
+	repetition that repeated zero times. 
+*****  Function: match-end count
+	This function is like match-beginning except that it returns the position of the end
+	of the match, rather than the position of the beginning. 
+***** example of using the match data : 
+ Here is an example of using the match data, with a comment showing the positions
+ within the text: 
+
+ (string-match "\\(qu\\)\\(ick\\)"
+               "The quick fox jumped quickly.")
+               ;0123456789
+			=> 4
+
+
+ (match-string 0 "The quick fox jumped quickly.")
+			=> "quick"
+ (match-string 1 "The quick fox jumped quickly.")
+			=> "qu"
+ (match-string 2 "The quick fox jumped quickly.")
+			=> "ick"
+
+
+ (match-beginning 1)       ; The beginning of the match
+			=> 4                 ;   with ‘qu’ is at index 4.
+
+
+ (match-beginning 2)       ; The beginning of the match
+			=> 6                 ;   with ‘ick’ is at index 6.
+
+
+ (match-end 1)             ; The end of the match
+			=> 6                 ;   with ‘qu’ is at index 6.
+
+ (match-end 2)             ; The end of the match
+			=> 9                 ;   with ‘ick’ is at index 9.
+*****  Here is another example : 
+ Here is another example. Point is initially located at the beginning of the line.
+ Searching moves point to between the space and the word ‘in’. The beginning of the
+ entire match is at the 9th character of the buffer (‘T’), and the beginning of the match
+ for the first subexpression is at the 13th character (‘c’). 
+
+ (list
+   (re-search-forward "The \\(cat \\)")
+   (match-beginning 0)
+   (match-beginning 1))
+     => (17 9 13)
+
+
+ ---------- Buffer: foo ----------
+ I read "The cat ∗in the hat comes back" twice.
+         ^   ^
+         9  13
+ ---------- Buffer: foo ----------
+
+ (In this case, the index returned is a buffer position; the first character of the buffer
+ counts as 1.) 
+
+*** lists
+**** plist 
+***** get
+ (plist-get '(x 1 y 2) 'y) ; 2
+ (plist-get '(x 1 y 2) 'b) ; nil
+***** set 
+ ;; create a property list xx
+ (setq xx '(a 1 b 2))
+
+ ;; set value to a existing key
+ (setq xx (plist-put xx 'b 9))
+
+ (plist-get xx 'b) ; 3
+ xx
+ ;; (a 1 b 3)
+***** cheak 
+ (setq xx '(a 1 b 2))
+
+ ;; check if a key exist
+ (plist-member xx 'b)
+ ;; (b 2)
+***** keywords : 
+ (setq tem '(:x 10 :y 20))
+ (plist-get tem :y)
+**** 5.3 Accessing Elements of Lists
+***** Function: car cons-cell
+	This function returns the value referred to by the first slot of the
+	cons cell cons-cell.  In other words, it returns the CAR of
+	cons-cell.
+
+	As a special case, if cons-cell is nil, this function
+	returns nil.  Therefore, any list is a valid argument.  An
+	error is signaled if the argument is not a cons cell or nil.
+
+
+	(car '(a b c))
+			 => a
+	(car '())
+			 => nil
+*****  Function: cdr cons-cell
+	This function returns the value referred to by the second slot of the
+	cons cell cons-cell.  In other words, it returns the CDR of
+	cons-cell.
+
+	As a special case, if cons-cell is nil, this function
+	returns nil; therefore, any list is a valid argument.  An error
+	is signaled if the argument is not a cons cell or nil.
+
+
+	(cdr '(a b c))
+			 => (b c)
+	(cdr '())
+			 => nil
+*****  Function: car-safe object
+	This function lets you take the CAR of a cons cell while avoiding
+	errors for other data types.  It returns the CAR of object if
+	object is a cons cell, nil otherwise.  This is in contrast
+	to car, which signals an error if object is not a list.
+
+
+	(car-safe object)
+	≡
+	(let ((x object))
+		(if (consp x)
+				(car x)
+			nil))
+*****  Function: cdr-safe object
+	This function lets you take the CDR of a cons cell while
+	avoiding errors for other data types.  It returns the CDR of
+	object if object is a cons cell, nil otherwise.
+	This is in contrast to cdr, which signals an error if
+	object is not a list.
+
+
+	(cdr-safe object)
+	≡
+	(let ((x object))
+		(if (consp x)
+				(cdr x)
+			nil))
+
+
+
+
+	Macro: pop listname
+	This macro provides a convenient way to examine the CAR of a
+	list, and take it off the list, all at once.  It operates on the list
+	stored in listname.  It removes the first element from the list,
+	saves the CDR into listname, then returns the removed
+	element.
+
+	In the simplest case, listname is an unquoted symbol naming a
+	list; in that case, this macro is equivalent to (prog1 (car listname) (setq listname (cdr listname))).
+
+
+	x
+			 => (a b c)
+	(pop x)
+			 => a
+	x
+			 => (b c)
+
+
+	More generally, listname can be a generalized variable.  In that
+	case, this macro saves into listname using setf.
+	See Generalized Variables.
+
+	For the push macro, which adds an element to a list,
+	See List Variables.
+*****  Function: nth n list
+	This function returns the nth element of list.  Elements
+	are numbered starting with zero, so the CAR of list is
+	element number zero.  If the length of list is n or less,
+	the value is nil.
+
+
+
+	(nth 2 '(1 2 3 4))
+			 => 3
+	(nth 10 '(1 2 3 4))
+			 => nil
+
+	(nth n x) ≡ (car (nthcdr n x))
+
+
+	The function elt is similar, but applies to any kind of sequence.
+	For historical reasons, it takes its arguments in the opposite order.
+	See Sequence Functions.
+*****  Function: nthcdr n list
+	This function returns the nth CDR of list.  In other
+	words, it skips past the first n links of list and returns
+	what follows.
+
+	If n is zero, nthcdr returns all of
+	list.  If the length of list is n or less,
+	nthcdr returns nil.
+
+
+	(nthcdr 1 '(1 2 3 4))
+			 => (2 3 4)
+	(nthcdr 10 '(1 2 3 4))
+			 => nil
+	(nthcdr 0 '(1 2 3 4))
+			 => (1 2 3 4)
+*****  Function: last list &optional n
+	This function returns the last link of list.  The car of
+	this link is the list’s last element.  If list is null,
+	nil is returned.  If n is non-nil, the
+	nth-to-last link is returned instead, or the whole of list
+	if n is bigger than list’s length.
+*****  Function: safe-length list
+	This function returns the length of list, with no risk of either
+	an error or an infinite loop.  It generally returns the number of
+	distinct cons cells in the list.  However, for circular lists,
+	the value is just an upper bound; it is often too large.
+
+	If list is not nil or a cons cell, safe-length
+	returns 0.
+
+
+	The most common way to compute the length of a list, when you are not
+	worried that it may be circular, is with length.  See Sequence Functions.
+*****  Function: caar cons-cell
+	This is the same as (car (car cons-cell)).
+*****  Function: cadr cons-cell
+	This is the same as (car (cdr cons-cell))
+	or (nth 1 cons-cell).
+*****  Function: cdar cons-cell
+	This is the same as (cdr (car cons-cell)).
+*****  Function: cddr cons-cell
+	This is the same as (cdr (cdr cons-cell))
+	or (nthcdr 2 cons-cell).
+	In addition to the above, 24 additional compositions of car and
+	cdr are defined as cxxxr and cxxxxr,
+	where each x is either a or d.  cadr,
+	caddr, and cadddr pick out the second, third or fourth
+	elements of a list, respectively.  cl-lib provides the same
+	under the names cl-second, cl-third, and
+	cl-fourth.  See List Functions in Common Lisp
+	Extensions.
+*****  Function: butlast x &optional n
+	This function returns the list x with the last element,
+	or the last n elements, removed.  If n is greater
+	than zero it makes a copy of the list so as not to damage the
+	original list.  In general, (append (butlast x n)
+	(last x n)) will return a list equal to x.
+*****  Function: nbutlast x &optional n
+	This is a version of butlast that works by destructively
+	modifying the cdr of the appropriate element, rather than
+	making a copy of the list.
+
+*** Lisp Symbol
+**** Xah Lee. : 
+***** The Concept of Symbols in Lisp : 
+	 Lisp has symbols concept. Lisp's concept of “symbols” is somewhat like identifiers in other languages, except that:
+
+			 lisp symbol can be held unevaluated, simply as itself, a inert name. In this sense, it's like a string.
+			 lisp symbol stores more than one value.
+	 The Concept of Symbols in Lisp
+
+	 LISP differs from most programing languages such as C, Java, Ruby, Python, in that it deals with symbols, as opposed to just identifiers and values.
+
+	 For example, in most languages, once you defined x=3, you cannot manipulate the variable “x” because it gets evaluated to 3 right away. If you want, you have to build a string "x" and manipulate this string, then use eval(lots string join here) to achieve the effect. (for example, you have a variable x, and it has integer 3 as value. you want to rename the variable so the new name is var_name + var_value.)
+
+	 In lisp, after (setq x 3) then x would evaluate to 3, but (quote x) evaluates to the symbol x itself.
+
+	 In practice, having a language dealing with “symbols” directly means that transformation of expressions in source code is possible at run-time. (In lisp, this is the lisp macro feature, which is a limited form of term rewriting languages such as Wolfram Language.) (info "(elisp) Macros")
+	 Symbol's Cells
+***** Each lisp symbol has the following “cells” to store things:
+
+			 “print name” cell - a string, the same as the symbol. Automatically set, cannot be changed.
+			 “value” cell - stores the symbol's value. When value cell is not void, the symbol is considered as a variable.
+			 “function” cell - stores function definition object, lisp macros, or other objects that can act as function.
+			 “property list” cell - hold a list of name/value pairs. Used for storing meta info about the symbol, such as function state, font face spec (for syntax coloring), deprecation flag, etc.
+
+	 A symbol's value cell or function cell may be empty. If so, it's said to be “void”. When you try to get a cell's value that's void, it's a lisp error. (a empty cell is not the same as having value of nil.)
+
+	 Normally, you don't need to worry about any of these tech details. The only thing that's useful for most elisp code is property list.
+
+	 [see Elisp: Property List]
+
+	 [see Elisp: Symbol Property List]
+
+	 Understanding Lisp Symbol is important when you do advanced lisp programing. For example: macros, create and call functions at run-time, nested functions, manipulate evaluation, implementing a language, or any sort of meta-programing. If you don't have a need, you should not exploit these facilities in your program. Keep your code simple.
+
+	 (info "(elisp) Symbols")
+***** Quoting Symbol
+
+	 A symbol, typically gets evaluated to its value. But you can stop this, by quote. e.g. (quote x). You can think of quote as “hold evaluation”.
+
+	 quote has a shortcut syntax.
+
+	 (quote x) is syntactically equivalent to 'x
+
+	 (info "(elisp) Quoting")
+****** 	When to Quote Symbol?
+
+		Some functions, automatically quote the argument for you, as a convenience.
+
+		For example, setq always automatically quotes its first argument. Because you basically always want the argument passed as a symbol. So, you write (setq x 3) instead of (set 'x 3).
+
+		The function set is almost the same as setq, except that set does not automatically quote the first argument. So, you write (set 'x 3). (info "(elisp) Setting Variables")
+
+		Some functions, require you to quote the argument yourself. Because sometimes you want a symbol's value passed, and sometimes the symbol itself.
+
+		For example, mapcar's arguments are not automatically quoted. You may or may not want to quote them, depending on your use.
+
+		Here's two examples of using mapcar, where in one example we want to quote the argument, and in the other example we do not want to quote the argument.
+
+		;; suppose we have many functions
+		(setq f '1+)
+		(setq f 'cos)
+		(setq f 'sqrt)
+		;; we use f as a wrapper because we are not sure which function we want until run time
+
+		;; here's our data
+		(setq mylist '(1 2 3))
+
+		;; normally, when using mapcar, we want first arg quoted
+		(mapcar '1+ mylist) ; (2 3 4)
+
+		;; here, we don't want first arg quoted
+		(mapcar f mylist) ; (1.0 1.4142135623730951 1.7320508075688772)
+***** Check If a Value is Symbol
+
+		;; check if a variable eval to a lisp symbol
+
+		;; make symbol x1's value cell to be 123
+		(setq x1 123 )
+
+		(symbolp x1) ; nil
+		;; nil, because x1 is evaluated, and that value is 123, not a symbol
+
+		(symbolp 'x1) ; t
+***** Get Value of Symbol's Cells
+		Here's how to get various cell's values.
+
+		Here's a example of getting cell values, with symbol “sin” (sin is a builtin math function).
+
+		;; get symbol's name cell value
+		(symbol-name 'sin) ; "sin"
+
+		;; get symbol's value cell value
+		(symbol-value 'sin) ; void-variable error
+		;; because the value cell of the symbol sin is void
+		;; or, we just say that sin isn't a variable
+
+		;; get symbol's function cell value
+		(symbol-function 'sin) ;#<subr sin>
+		;; the value is a primitive function (written in C), and has print form of #<subr sin>
+
+		;; get symbol's property list cell value
+		(symbol-plist 'sin) ; (side-effect-free t)
+
+		Here's another example with a user defined symbol.
+
+		;; get symbol cell values
+
+		;; this makes symbol x1's value cell to contain the number 3
+		(setq x1 3) ; 3
+
+		;; get symbol's name cell value
+		(symbol-name 'x1) ; "x1"
+
+		;; get symbol's value cell value
+		(symbol-value 'x1) ; 3
+
+		;; get symbol's function cell value
+		(symbol-function 'x1) ; nil
+		;; in emacs 24.3.1, this is a void-function error
+		;; in emacs 25.1, this returns nil
+		;; elisp manual 24 and 25.1  say it should be error
+
+		;; get symbol's property list cell value
+		(symbol-plist 'x1) ;nil
+***** Set Symbol's Name Cell
+		Symbol's name cell is automatically set, as a string of the symbol name. Symbol name cell cannot be changed.
+		Set Symbol's Value Cell
+
+		The normal way to set a symbol's value cell is using setq.
+
+		;; set a symbol's value cell
+		(setq y "yes yes")
+
+		;; get it
+		(symbol-value 'y) ; "yes yes"
+
+		(info "(elisp) Setting Variables")
+
+		You can also check if a symbol's value cell is not empty, by boundp. (we think of it as checking if a variable is defined.)
+
+		(boundp 'h) ; nil
+
+		(setq h 4)
+
+		(boundp 'h) ; t
+***** Set Symbol's Function Cell
+		The normal way to set a symbol's function cell is using defun or defmacro.
+
+		;; a function that returns 4
+		(defun z () 4)
+		;; Note: return value of defun is not defined
+
+		;; get a symbol's function cell value
+		(symbol-function 'z) ; (lambda nil 4)
+
+		(info "(elisp) Defining Functions")
+
+		(info "(elisp) Function Cells")
+
+		You can check if a symbol's function cell is not empty, by fboundp.
+
+		(fboundp 'f) ; nil
+
+		;; define a function that return 3
+		(defun f () 3)
+
+		;; now the fuction cell is filled
+		(fboundp 'f) ; t
+
+		Because a symbol can both hold a value and a function, a symbol can be both a variable and function. For example, the symbol buffer-file-name is both a variable and function. (you can try describe-function and describe-variable on it.)
+***** Convert Symbol to String
+		;; convert a symbol to string
+		(symbol-name 'defun)
+***** Convert String to Symbol
+		;; convert a string to symbol
+
+		;; if the symbol does not already exist in obarray, create it, put it in obarray
+		(intern "x")
+
+		;; if the symbol does not already exist in obarray, return nil
+		(intern-soft "x")
+
+**** fset : 
+ (fset 'baz 'bar)
+       bar
+
+ (symbol-function 'baz)
+       bar
+
+***** Function: fset symbol definition
+
+			This function stores definition in the function cell of symbol. The result is definition. Normally definition should be a function or the name of a function, but this is not checked. The argument symbol is an ordinary evaluated argument.
+
+			The primary use of this function is as a subroutine by constructs that define or alter functions, like defun or advice-add (see Advising Functions). You can also use it to give a symbol a function definition that is not a function, e.g., a keyboard macro (see Keyboard Macros):
+
+			;; Define a named keyboard macro.
+			(fset 'kill-two-lines "\^u2\^k")
+					 => "\^u2\^k"
+
+			It you wish to use fset to make an alternate name for a function, consider using defalias instead. See Definition of defalias. 
+**** 12.11 Advising Emacs Lisp Functions
+ [[http://ergoemacs.org/emacs/elisp.html][Xah Emacs Lisp Tutorial]]
+ Next: [[http://ergoemacs.org/emacs_manual/elisp/Obsolete-Functions.html#Obsolete-Functions][Obsolete Functions]], Previous: [[http://ergoemacs.org/emacs_manual/elisp/Closures.html#Closures][Closures]], Up: [[http://ergoemacs.org/emacs_manual/elisp/Functions.html#Functions][Functions]]   [[[http://ergoemacs.org/emacs_manual/elisp/index.html#SEC_Contents][Contents]]][[[http://ergoemacs.org/emacs_manual/elisp/index_index.html#Index][Index]]]
+ When you need to modify a function defined in another library, or when you need to
+ modify a hook like foo-function, a process filter, or basically any variable or object field
+ which holds a function value, you can use the appropriate setter function, such as fset
+ or defun for named functions, setq for hook variables, or set-process-filter for process
+ filters, but those are often too blunt, completely throwing away the previous value. 
+
+ The advice feature lets you add to the existing definition of a function, by advising the
+ function. This is a cleaner method than redefining the whole function. 
+
+ Emacs’s advice system provides two sets of primitives for that: the core set, for
+ function values held in variables and object fields (with the corresponding primitives
+ being add-function and remove-function) and another set layered on top of it for named
+ functions (with the main primitives being advice-add and advice-remove). 
+
+ For example, in order to trace the calls to the process filter of a process proc, you
+ could use: 
+
+ (defun my-tracing-function (proc string)
+   (message "Proc %S received %S" proc string))
+
+ (add-function :before (process-filter proc) #'my-tracing-function)
+
+ This will cause the process’s output to be passed to my-tracing-function before being
+ passed to the original process filter. my-tracing-function receives the same arguments
+ as the original function. When you’re done with it, you can revert to the untraced
+ behavior with: 
+
+ (remove-function (process-filter proc) #'my-tracing-function)
+
+ Similarly, if you want to trace the execution of the function named display-buffer, you
+ could use: 
+
+ (defun his-tracing-function (orig-fun &rest args)
+   (message "display-buffer called with args %S" args)
+   (let ((res (apply orig-fun args)))
+     (message "display-buffer returned %S" res)
+     res))
+
+ (advice-add 'display-buffer :around #'his-tracing-function)
+
+ Here, his-tracing-function is called instead of the original function and receives the
+ original function (additionally to that function’s arguments) as argument, so it can call it
+ if and when it needs to. When you’re tired of seeing this output, you can revert to the
+ untraced behavior with: 
+
+ (advice-remove 'display-buffer #'his-tracing-function)
+
+ The arguments :before and :around used in the above examples specify how the two
+ functions are composed, since there are many different ways to do it. The added
+ function is also called a piece of advice. 
+
+	• [[http://ergoemacs.org/emacs_manual/elisp/Core-Advising-Primitives.html#Core-Advising-Primitives][Core Advising Primitives]]:      Primitives to manipulate advice.   
+	• [[http://ergoemacs.org/emacs_manual/elisp/Advising-Named-Functions.html#Advising-Named-Functions][Advising Named Functions]]:      Advising named functions.   
+	• [[http://ergoemacs.org/emacs_manual/elisp/Advice-combinators.html#Advice-combinators][Advice combinators]]:      Ways to compose advice.   
+	• [[http://ergoemacs.org/emacs_manual/elisp/Porting-old-advice.html#Porting-old-advice][Porting old advice]]:      Adapting code using the old  
+			defadvice.   
+
+ Next: [[http://ergoemacs.org/emacs_manual/elisp/Obsolete-Functions.html#Obsolete-Functions][Obsolete Functions]], Previous: [[http://ergoemacs.org/emacs_manual/elisp/Closures.html#Closures][Closures]], Up: [[http://ergoemacs.org/emacs_manual/elisp/Functions.html#Functions][Functions]]   [[[http://ergoemacs.org/emacs_manual/elisp/index.html#SEC_Contents][Contents]]][[[http://ergoemacs.org/emacs_manual/elisp/index_index.html#Index][Index]]]
+
+**** Elisp: Symbol Property List
+ Each lisp symbol is associated with a “property list”.
+
+ This property list is stored in the symbol's property list cell. [see Elisp: Lisp Symbol]
+
+ Emacs lisp property list is used extensively in emacs. It is also very useful if you want to write a function with state. You can store the state info with the symbol itself, instead of using a global variable.
+ Set Whole Plist
+
+ (setplist SYMBOL NEWPLIST) - Set SYMBOL's property list to NEWPLIST, and return NEWPLIST.
+
+ ;; set the value of symbol ff's property list
+ (setplist 'ff '(a 1 b 2))
+
+ Get Whole Plist
+
+ (symbol-plist SYMBOL) - Return SYMBOL's property list.
+
+ ;; get the value of symbol ff's property list
+ (symbol-plist 'ff )
+
+ Add/Set a Key's Value
+
+ (put SYMBOL PROPNAME VALUE) - Store SYMBOL's PROPNAME property with value VALUE.
+
+ ;; set the value of key xx, of symbol ff's property list
+ (put 'ff 'xx 5)
+
+ Get a Key's Value
+
+ (get SYMBOL PROPNAME) - Return the value of SYMBOL's PROPNAME property.
+
+ ;; get the value of key xx, of symbol ff's property list
+ (get 'ff 'xx)
+
+**** 11.4 When a Variable is Void
+***** is void if : 
+	We say that a variable is void if its symbol has an unassigned value
+	cell (see Symbol Components).
+
+	Under Emacs Lisp’s default dynamic scoping rule (see Variable Scoping), the value cell stores the variable’s current (local or
+	global) value.  Note that an unassigned value cell is not the
+	same as having nil in the value cell.  The symbol nil is
+	a Lisp object and can be the value of a variable, just as any other
+	object can be; but it is still a value.  If a variable is void, trying
+	to evaluate the variable signals a void-variable error, instead
+	of returning a value.
+
+	Under the optional lexical scoping rule, the value cell only holds
+	the variable’s global value—the value outside of any lexical binding
+	construct.  When a variable is lexically bound, the local value is
+	determined by the lexical environment; hence, variables can have local
+	values even if their symbols’ value cells are unassigned.
+*****  Function: makunbound symbol
+	This function empties out the value cell of symbol, making the
+	variable void.  It returns symbol.
+
+	If symbol has a dynamic local binding, makunbound voids
+	the current binding, and this voidness lasts only as long as the local
+	binding is in effect.  Afterwards, the previously shadowed local or
+	global binding is reexposed; then the variable will no longer be void,
+	unless the reexposed binding is void too.
+
+	Here are some examples (assuming dynamic binding is in effect):
+
+
+	(setq x 1)               ; Put a value in the global binding.
+			 => 1
+	(let ((x 2))             ; Locally bind it.
+		(makunbound 'x)        ; Void the local binding.
+		x)
+	error Symbol's value as variable is void: x
+	x                        ; The global binding is unchanged.
+			 => 1
+
+	(let ((x 2))             ; Locally bind it.
+		(let ((x 3))           ; And again.
+			(makunbound 'x)      ; Void the innermost-local binding.
+			x))                  ; And refer: it’s void.
+	error Symbol's value as variable is void: x
+
+	(let ((x 2))
+		(let ((x 3))
+			(makunbound 'x))     ; Void inner binding, then remove it.
+		x)                     ; Now outer let binding is visible.
+			 => 2
+*****  Function: boundp variable
+	This function returns t if variable (a symbol) is not
+	void, and nil if it is void.
+
+	Here are some examples (assuming dynamic binding is in effect):
+
+
+	(boundp 'abracadabra)          ; Starts out void.
+			 => nil
+	(let ((abracadabra 5))         ; Locally bind it.
+		(boundp 'abracadabra))
+			 => t
+	(boundp 'abracadabra)          ; Still globally void.
+			 => nil
+	(setq abracadabra 5)           ; Make it globally nonvoid.
+			 => 5
+	(boundp 'abracadabra)
+			 => t
+**** 11.7 Accessing Variable Values
+ The usual way to reference a variable is to write the symbol which
+ names it.  See Symbol Forms.
+
+ Occasionally, you may want to reference a variable which is only
+ determined at run time.  In that case, you cannot specify the variable
+ name in the text of the program.  You can use the symbol-value
+ function to extract the value.
+
+
+ Function: symbol-value symbol
+ This function returns the value stored in symbol’s value cell.
+ This is where the variable’s current (dynamic) value is stored.  If
+ the variable has no local binding, this is simply its global value.
+ If the variable is void, a void-variable error is signaled.
+
+ If the variable is lexically bound, the value reported by
+ symbol-value is not necessarily the same as the variable’s
+ lexical value, which is determined by the lexical environment rather
+ than the symbol’s value cell.  See Variable Scoping.
+
+
+ (setq abracadabra 5)
+			=> 5
+ (setq foo 9)
+			=> 9
+
+ ;; Here the symbol abracadabra
+ ;;   is the symbol whose value is examined.
+ (let ((abracadabra 'foo))
+   (symbol-value 'abracadabra))
+			=> foo
+
+ ;; Here, the value of abracadabra,
+ ;;   which is foo,
+ ;;   is the symbol whose value is examined.
+ (let ((abracadabra 'foo))
+   (symbol-value abracadabra))
+			=> 9
+
+ (symbol-value 'abracadabra)
+			=> 5
+*** Vectors
+**** Xah Emacs
+***** Elisp: Vector
+ Emacs lisp vector datatype is
+	 a ordered sequence of values, with fixed number of elements.
+
+
+	Vector is a ordered sequence of values.
+	Each element can be any type.
+	Element's value can be changed.
+	Number of elements cannot change. (i.e. Vector's length is fixed.)
+	Read/Write to any position has constant access time.
+***** Create Vector
+	(make-vector 5 0)Create a vector of length 5, value 0 for all elements.
+
+	;; create a vector of length 5, value 0 for all elements
+	(make-vector 5 0) ;; [0 0 0 0 0]
+
+
+	(vector a b …)Create a vector with elements, the elements are evaluated.
+
+
+	;; create a vector and set to var v
+	(setq v (vector 3 4 5))
+
+	(setq x 7)
+
+	;; each element will be evaluated
+	(setq v (vector 3 x 5))
+
+	v ; [3 7 5]
+
+
+	[a b …]Create a vector, do not evaluate elements.
+
+
+	(setq n 7)
+
+	;; create a vector of elements 3 n 5. each element is NOT evaluated
+	(setq v [3 n 5])
+
+	v ; [3 n 5]
+	;; the n remains a symbol, not 7
+***** Fill Vector
+	(fillarray array val)Make all elements of array to have value val
+	.
+
+
+	(setq aa [3 4 5])
+	(fillarray aa nil) ;; [nil nil nil]
+
+	Length
+
+	(length (vector 7 4 5)) ; 3
+*****  Get Element
+	(aref array n)Return the element of array at index n.
+	(elt sequence n)Return element of sequence at index n.
+
+
+	When emacs doc mentions “ARRAY”, you can think of it as “vector or string”.
+
+	When emacs doc mentions “SEQUENCE”, you can think of it as “list or array”.
+
+	;; get a element from vector
+	(aref ["a" "b" "c"] 0) ; => "a"
+
+	;; get a element from vector
+	(elt ["a" "b" "c"] 0) ; => "a"
+
+
+
+	What's the difference between aref and elt?
+
+	elt is more general. It works on vector and list.
+	But if you know it's vector, you should use aref, because it's precise and faster.
+	[see Elisp: Sequence Type]
+*****  Change Element
+	(aset ARRAY IDX NEWELT)Store into the element of ARRAY at index IDX the value NEWELT. Return NEWELT.
+
+
+	(setq v [3 4 5])
+	(aset v 0 "b")
+	v  ; => ["b" 4 5]
+
+*****  Nested Vector
+	Vector can be nested in any way, because the elements can be any type.
+
+	;; nested vector
+	[[1 2] [3 4]] ; 2 by 2 matrix
+
+	;; random nested vector
+	[8 [3 [2 9] c] 7 [4 "b"]]
+*****  Join Vectors, Convert List to Vector
+	(vconcat sequence1 sequence2 …)Join any sequence types and return a vector. (List and vector are both sequence types.)
+
+
+	;; join any sequence types
+	(vconcat [3 4] ["a" "b"]) ; => [3 4 "a" "b"]
+
+	(vconcat [3 4] '("a" "b")) ; => [3 4 "a" "b"]
+
+	(vconcat [3 4] "ab") ; => [3 4 97 98]
+	;; string elements are converted to char.
+	;; 97 is the codepoint for the char a
+*****  Convert Vector to List
+	(append sequence1 sequence2 …)Join any sequence types and return a list. (List and vector are both sequence types.)
+	Warning: if you want it to return a propert list, the last element must be a list, or nil.
+
+	;; convert vector to list
+	(append [1 2 3] nil)
+	; => (1 2 3)
+
+	(append [1 2 3] [4 5] )
+	;; (1 2 3 . [4 5])
+	;; this is improper list
+
+	(append [1 2 3] [4 5] nil)
+	;; (1 2 3 4 5)
+	;; proper list
+
+	(append [1 2 3] [4 5] '(6))
+	;; (1 2 3 4 5 6)
+	;; proper list
+**** Functions That Operate on Vectors
+ Here are some functions that relate to vectors:
+***** Function: vectorp object
+			This function returns t if object is a vector.
+
+			(vectorp [a])
+					 => t
+			(vectorp "asdf")
+					 => nil
+
+	Function: vector &rest objects
+			This function creates and returns a vector whose elements are the arguments, objects.
+
+			(vector 'foo 23 [bar baz] "rats")
+					 => [foo 23 [bar baz] "rats"]
+			(vector)
+					 => []
+***** Function: make-vector length object
+			This function returns a new vector consisting of length elements, each initialized to object.
+
+			(setq sleepy (make-vector 9 'Z))
+					 => [Z Z Z Z Z Z Z Z Z]
+***** Function: vconcat &rest sequences
+			This function returns a new vector containing all the elements of the sequences. The arguments sequences may be lists, vectors, or strings. If no sequences are given, an empty vector is returned.
+****** constructed vector : 
+			 The value is a newly constructed vector that is not eq to any existing vector.
+
+			 (setq a (vconcat '(A B C) '(D E F)))
+						=> [A B C D E F]
+			 (eq a (vconcat a))
+						=> nil
+			 (vconcat)
+						=> []
+			 (vconcat [A B C] "aa" '(foo (6 7)))
+						=> [A B C 97 97 foo (6 7)]
+****** integers as arguments : 
+			 The vconcat function also allows integers as arguments. It converts them to strings of digits, making up the decimal print representation of the integer, and then uses the strings instead of the original integers. Don't use this feature; we plan to eliminate it. If you already use this feature, change your programs now! The proper way to convert an integer to a decimal number in this way is with format (see section Formatting Strings) or number-to-string (see section Conversion of Characters and Strings).
+****** other concatenation : 
+			 For other concatenation functions, see mapconcat in section Mapping Functions, concat in section Creating Strings, and append in section Building Cons Cells and Lists. 
+****** convert a vector into : 
+	 The append function provides a way to convert a vector into a list with the same elements (see section Building Cons Cells and Lists):
+	 (setq avector [1 two (quote (three)) "four" [five]])
+				=> [1 two (quote (three)) "four" [five]]
+	 (append avector nil)
+				=> (1 two (quote (three)) "four" [five])
+**** VectorUsage
+***** https://www.emacswiki.org/emacs/VectorUsage
+ Usually you should not be trying to modify vectors themselves, only the elements stored
+ in the vector, because vectors are designed for random access. They are fast. They
+ are not designed to be searched or sorted. They are also immutable, so you cannot
+ change them (only the elements). If you want change them (change their size), you
+ must create a copy instead.
+***** Sorting/Randomizing/Shuffling
+     (defun shuffle-vector (vector)
+       "Randomly permute the elements of VECTOR (all permutations equally likely)."
+       (let ((i 0)
+    	 j
+    	 temp
+    	 (len (length vector)))
+         (while (< i len)
+           (setq j (+ i (random (- len i))))
+           (setq temp (aref vector i))
+           (aset vector i (aref vector j))
+           (aset vector j temp)
+           (setq i (1+ i))))
+       vector)
+
+ Example output:
+
+     [1 5 3 2 4]
+     [3 2 5 1 4]
+     [3 4 1 5 2]
+***** Searching Vectors for Values
+ You can search lists using member or memq, and you can search alists using assoc
+ and assq.
+ Here is how to search a vector for a value:
+
+     (position 'c [a b c])
+     => 2
+ The position is a function from the CL package.
+
+ Here is how to search a vector v for a value b using the loop macro. This may be more
+ useful if you need to do things with the elements as you search.
+
+     (let ((v [4 5 6 7 8])
+           (b 7))
+       (loop for i from 0 for a across v if (equal a b) return i))
+			=> 3
+
+ The distinction may also be important if you’re trying to avoid loading the CL package
+ (it is always loaded in XEmacs): Functions require loading the CL package, macros
+ only require loading the CL package at compile-time:
+     (eval-when-compile (require 'cl))
+*****  Library Ring+
+
+ [[https://www.emacswiki.org/emacs/DrewAdams][DrewAdams]] has written library [[https://www.emacswiki.org/emacs/ring+.el][Lisp:ring+.el]], which extends standard library ring.el to
+ provides feature for using vectors as cyclic structures (“rings”). See [[https://www.emacswiki.org/emacs/RingPlus][RingPlus]].
+
+ This library includes function ‘ring-convert-sequence-to-ring’, which converts any
+ sequence to a ring, which is a vector. A sequence is any of these:
+
+ ,* list
+ ,* array, which is any of these:
+
+	* string
+	* vector
+	* char-table (like a vector, but indexed by character codes)
+	* bool-vector (like a vector, but with only ‘t’ and ‘nil’ entries)
+*****  A Gotcha!
+ Don’t try to treat an [[https://www.emacswiki.org/emacs/obarray][obarray]] as a normal vector! The [[http://www.emacswiki.org/cgi-bin/info-ref?find=Creating%20Symbols][Elisp manual]] tells you this clearly,
+ but I nevertheless tried to do this (programming idiom pointed out in the discussion of
+ vectors in the same manual):
+
+   (setq my-list (append minibuffer-completion-table nil)) ; Convert vector to list.
+
+ Wrong! And it took me while to figure the problem out…
+
+ When dealing with obarrays, use ‘mapatoms’ – always. – [[https://www.emacswiki.org/emacs/DrewAdams][DrewAdams]]
+*****  See Also
+ ,* [[https://www.emacswiki.org/emacs/LevenshteinDistance][LevenshteinDistance]] - Uses vectors for determining the edit distance between two
+	strings.
+ For more info on sequences, see the Elisp manual, Info node Sequences Arrays
+ Vectors.
+
+*** Sequences 
+**** 6.1 Sequences
+	Next: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Arrays.html#Arrays][Arrays]], Up: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sequences-Arrays-Vectors.html#Sequences-Arrays-Vectors][Sequences Arrays Vectors]]   [[[https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#SEC_Contents][Contents]]][[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Index.html#Index][Index]]]
+	This section describes functions that accept any kind of sequence. 
+***** Function: sequencep object
+
+		This function returns t if object is a list, vector, string, bool-vector, or char-table, nil
+		otherwise. See also seqp below. 
+***** Function: length sequence
+
+		This function returns the number of elements in sequence. The function signals the
+		wrong-type-argument error if the argument is not a sequence or is a dotted list; it
+		signals the circular-list error if the argument is a circular list. For a char-table, the
+		value returned is always one more than the maximum Emacs character code. 
+
+		See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/List-Elements.html#Definition-of-safe_002dlength][Definition of safe-length]], for the related function safe-length. 
+
+	 (length '(1 2 3))
+			 => 3
+	 (length ())
+			 => 0
+	 (length "foobar")
+			 => 6
+	 (length [1 2 3])
+			 => 3
+	 (length (make-bool-vector 5 nil))
+			 => 5
+
+	 See also string-bytes, in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text-Representations.html#Text-Representations][Text Representations]]. 
+
+	 If you need to compute the width of a string on display, you should use string-width
+	 (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Size-of-Displayed-Text.html#Size-of-Displayed-Text][Size of Displayed Text]]), not length, since length only counts the number of
+	 characters, but does not account for the display width of each character. 
+***** Function: elt sequence index
+
+		This function returns the element of sequence indexed by index. Legitimate values
+		of index are integers ranging from 0 up to one less than the length of sequence. If
+		sequence is a list, out-of-range values behave as for nth. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/List-Elements.html#Definition-of-nth][Definition of nth]].
+		Otherwise, out-of-range values trigger an args-out-of-range error. 
+
+	 (elt [1 2 3 4] 2)
+				=> 3
+	 (elt '(1 2 3 4) 2)
+				=> 3
+	 ;; We use string to show clearly which character elt returns.
+	 (string (elt "1234" 2))
+				=> "3"
+	 (elt [1 2 3 4] 4)
+				error-> Args out of range: [1 2 3 4], 4
+	 (elt [1 2 3 4] -1)
+				error-> Args out of range: [1 2 3 4], -1
+
+		This function generalizes aref (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Array-Functions.html#Array-Functions][Array Functions]]) and nth (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/List-Elements.html#Definition-of-nth][Definition of]]
+		[[https://www.gnu.org/software/emacs/manual/html_node/elisp/List-Elements.html#Definition-of-nth][nth]]). 
+***** Function: copy-sequence seqr
+
+		This function returns a copy of seqr, which should be either a sequence or a
+		record. The copy is the same type of object as the original, and it has the same
+		elements in the same order. However, if seqr is empty, like a string or a vector of
+		zero length, the value returned by this function might not be a copy, but an empty
+		object of the same type and identical to seqr. 
+
+		Storing a new element into the copy does not affect the original seqr, and vice
+		versa. However, the elements of the copy are not copies; they are identical (eq) to
+		the elements of the original. Therefore, changes made within these elements, as
+		found via the copy, are also visible in the original. 
+
+		If the argument is a string with text properties, the property list in the copy is itself
+		a copy, not shared with the original’s property list. However, the actual values of
+		the properties are shared. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text-Properties.html#Text-Properties][Text Properties]]. 
+
+		This function does not work for dotted lists. Trying to copy a circular list may cause
+		an infinite loop. 
+
+		See also append in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Building-Lists.html#Building-Lists][Building Lists]], concat in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Strings.html#Creating-Strings][Creating Strings]], and vconcat in
+		[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Vector-Functions.html#Vector-Functions][Vector Functions]], for other ways to copy sequences. 
+
+	 (setq bar (list 1 2))
+				=> (1 2)
+	 (setq x (vector 'foo bar))
+				=> [foo (1 2)]
+	 (setq y (copy-sequence x))
+				=> [foo (1 2)]
+
+
+	 (eq x y)
+				=> nil
+	 (equal x y)
+				=> t
+	 (eq (elt x 1) (elt y 1))
+				=> t
+
+
+	 ;; Replacing an element of one sequence.
+	 (aset x 0 'quux)
+	 x => [quux (1 2)]
+	 y => [foo (1 2)]
+
+
+	 ;; Modifying the inside of a shared element.
+	 (setcar (aref x 1) 69)
+	 x => [quux (69 2)]
+	 y => [foo (69 2)]
+***** Function: reverse sequence
+
+		This function creates a new sequence whose elements are the elements of
+		sequence, but in reverse order. The original argument sequence is not altered.
+		Note that char-tables cannot be reversed. 
+
+	 (setq x '(1 2 3 4))
+				=> (1 2 3 4)
+	 (reverse x)
+				=> (4 3 2 1)
+	 x
+				=> (1 2 3 4)
+	 (setq x [1 2 3 4])
+				=> [1 2 3 4]
+	 (reverse x)
+				=> [4 3 2 1]
+	 x
+				=> [1 2 3 4]
+	 (setq x "xyzzy")
+				=> "xyzzy"
+	 (reverse x)
+				=> "yzzyx"
+	 x
+				=> "xyzzy"
+***** Function: nreverse sequence
+
+		This function reverses the order of the elements of sequence. Unlike reverse the
+		original sequence may be modified. 
+
+		For example: 
+
+	 (setq x (list 'a 'b 'c))
+				=> (a b c)
+	 x
+				=> (a b c)
+	 (nreverse x)
+				=> (c b a)
+	 ;; The cons cell that was first is now last.
+	 x
+				=> (a)
+
+		To avoid confusion, we usually store the result of nreverse back in the same
+		variable which held the original list: 
+
+	 (setq x (nreverse x))
+
+		Here is the nreverse of our favorite example, (a b c), presented graphically: 
+
+	 Original list head:                       Reversed list:
+		-------------        -------------        ------------
+	 | car  | cdr  |      | car  | cdr  |      | car | cdr  |
+	 |   a  |  nil |<--   |   b  |   o  |<--   |   c |   o  |
+	 |      |      |   |  |      |   |  |   |  |     |   |  |
+		-------------    |   --------- | -    |   -------- | -
+										 |             |      |            |
+											-------------        ------------
+
+		For the vector, it is even simpler because you don’t need setq: 
+
+	 (setq x (copy-sequence [1 2 3 4]))
+				=> [1 2 3 4]
+	 (nreverse x)
+				=> [4 3 2 1]
+	 x
+				=> [4 3 2 1]
+
+		Note that unlike reverse, this function doesn’t work with strings. Although you can
+		alter string data by using aset, it is strongly encouraged to treat strings as
+		immutable even when they are mutable. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Mutability.html#Mutability][Mutability]]. 
+***** Function: sort sequence predicate
+
+		This function sorts sequence stably. Note that this function doesn’t work for all
+		sequences; it may be used only for lists and vectors. If sequence is a list, it is
+		modified destructively. This functions returns the sorted sequence and compares
+		elements using predicate. A stable sort is one in which elements with equal sort
+		keys maintain their relative order before and after the sort. Stability is important
+		when successive sorts are used to order elements according to different criteria. 
+
+		The argument predicate must be a function that accepts two arguments. It is
+		called with two elements of sequence. To get an increasing order sort, the
+		predicate should return non-nil if the first element is “less” than the second, or nil if
+		not. 
+
+		The comparison function predicate must give reliable results for any given pair of
+		arguments, at least within a single call to sort. It must be antisymmetric; that is, if
+		a is less than b, b must not be less than a. It must be transitive—that is, if a is less
+		than b, and b is less than c, then a must be less than c. If you use a comparison
+		function which does not meet these requirements, the result of sort is
+		unpredictable. 
+
+		The destructive aspect of sort for lists is that it rearranges the cons cells forming
+		sequence by changing CDRs. A nondestructive sort function would create new
+		cons cells to store the elements in their sorted order. If you wish to make a sorted
+		copy without destroying the original, copy it first with copy-sequence and then
+		sort. 
+
+		Sorting does not change the CARs of the cons cells in sequence; the cons cell
+		that originally contained the element a in sequence still has a in its CAR after
+		sorting, but it now appears in a different position in the list due to the change of
+		CDRs. For example: 
+
+	 (setq nums (list 1 3 2 6 5 4 0))
+				=> (1 3 2 6 5 4 0)
+	 (sort nums #'<)
+				=> (0 1 2 3 4 5 6)
+	 nums
+				=> (1 2 3 4 5 6)
+
+		Warning: Note that the list in nums no longer contains 0; this is the same cons
+		cell that it was before, but it is no longer the first one in the list. Don’t assume a
+		variable that formerly held the argument now holds the entire sorted list! Instead,
+		save the result of sort and use that. Most often we store the result back into the
+		variable that held the original list: 
+
+	 (setq nums (sort nums #'<))
+
+		For the better understanding of what stable sort is, consider the following vector
+		example. After sorting, all items whose car is 8 are grouped at the beginning of
+		vector, but their relative order is preserved. All items whose car is 9 are grouped
+		at the end of vector, but their relative order is also preserved: 
+
+	 (setq
+		 vector
+		 (vector '(8 . "xxx") '(9 . "aaa") '(8 . "bbb") '(9 . "zzz")
+						 '(9 . "ppp") '(8 . "ttt") '(8 . "eee") '(9 . "fff")))
+				=> [(8 . "xxx") (9 . "aaa") (8 . "bbb") (9 . "zzz")
+						(9 . "ppp") (8 . "ttt") (8 . "eee") (9 . "fff")]
+	 (sort vector (lambda (x y) (< (car x) (car y))))
+				=> [(8 . "xxx") (8 . "bbb") (8 . "ttt") (8 . "eee")
+						(9 . "aaa") (9 . "zzz") (9 . "ppp") (9 . "fff")]
+
+		See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sorting.html#Sorting][Sorting]], for more functions that perform sorting. See documentation in
+		[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Accessing-Documentation.html#Accessing-Documentation][Accessing Documentation]], for a useful example of sort. 
+
+	 The seq.el library provides the following additional sequence manipulation macros and
+	 functions, prefixed with seq-. To use them, you must first load the seq library. 
+
+	 All functions defined in this library are free of side-effects; i.e., they do not modify any
+	 sequence (list, vector, or string) that you pass as an argument. Unless otherwise
+	 stated, the result is a sequence of the same type as the input. For those functions that
+	 take a predicate, this should be a function of one argument. 
+
+	 The seq.el library can be extended to work with additional types of sequential
+	 data-structures. For that purpose, all functions are defined using cl-defgeneric. See
+	 [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Generic-Functions.html#Generic-Functions][Generic Functions]], for more details about using cl-defgeneric for adding extensions. 
+***** Function: seq-elt sequence index
+
+		This function returns the element of sequence at the specified index, which is an
+		integer whose valid value range is zero to one less than the length of sequence.
+		For out-of-range values on built-in sequence types, seq-elt behaves like elt. For
+		the details, see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sequence-Functions.html#Definition-of-elt][Definition of elt]]. 
+
+	 (seq-elt [1 2 3 4] 2)
+	 => 3
+
+		seq-elt returns places settable using setf (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Generalized-Variables.html#Setting-Generalized-Variables][Setting Generalized Variables]]). 
+
+	 (setq vec [1 2 3 4])
+	 (setf (seq-elt vec 2) 5)
+	 vec
+	 => [1 2 5 4]
+***** Function: seq-length sequence
+		This function returns the number of elements in sequence. For built-in sequence
+		types, seq-length behaves like length. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sequence-Functions.html#Definition-of-length][Definition of length]]. 
+***** Function: seqp object
+
+		This function returns non-nil if object is a sequence (a list or array), or any
+		additional type of sequence defined via seq.el generic functions. This is an
+		extensible variant of sequencep. 
+
+	 (seqp [1 2])
+	 => t
+	 (seqp 2)
+	 => nil
+***** Function: seq-drop sequence n
+
+		This function returns all but the first n (an integer) elements of sequence. If n is
+		negative or zero, the result is sequence. 
+
+	 (seq-drop [1 2 3 4 5 6] 3)
+	 => [4 5 6]
+	 (seq-drop "hello world" -4)
+	 => "hello world"
+***** Function: seq-take sequence n
+
+		This function returns the first n (an integer) elements of sequence. If n is negative
+		or zero, the result is nil. 
+
+	 (seq-take '(1 2 3 4) 3)
+	 => (1 2 3)
+	 (seq-take [1 2 3 4] 0)
+	 => []
+***** Function: seq-take-while predicate sequence
+
+		This function returns the members of sequence in order, stopping before the first
+		one for which predicate returns nil. 
+
+	 (seq-take-while (lambda (elt) (> elt 0)) '(1 2 3 -1 -2))
+	 => (1 2 3)
+	 (seq-take-while (lambda (elt) (> elt 0)) [-1 4 6])
+	 => []
+***** Function: seq-drop-while predicate sequence
+
+		This function returns the members of sequence in order, starting from the first one
+		for which predicate returns nil. 
+
+	 (seq-drop-while (lambda (elt) (> elt 0)) '(1 2 3 -1 -2))
+	 => (-1 -2)
+	 (seq-drop-while (lambda (elt) (< elt 0)) [1 4 6])
+	 => [1 4 6]
+***** Function: seq-do function sequence
+
+		This function applies function to each element of sequence in turn (presumably for
+		side effects), and returns sequence. 
+***** Function: seq-map function sequence
+		This function returns the result of applying function to each element of sequence.
+		The returned value is a list. 
+
+	 (seq-map #'1+ '(2 4 6))
+	 => (3 5 7)
+	 (seq-map #'symbol-name [foo bar])
+	 => ("foo" "bar")
+***** Function: seq-map-indexed function sequence
+
+		This function returns the result of applying function to each element of sequence
+		and its index within seq. The returned value is a list. 
+
+	 (seq-map-indexed (lambda (elt idx)
+											(list idx elt))
+										'(a b c))
+	 => ((0 a) (b 1) (c 2))
+***** Function: seq-mapn function &rest sequences
+
+		This function returns the result of applying function to each element of sequences.
+		The arity (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/What-Is-a-Function.html#What-Is-a-Function][subr-arity]]) of function must match the number of sequences.
+		Mapping stops at the end of the shortest sequence, and the returned value is a
+		list. 
+
+	 (seq-mapn #'+ '(2 4 6) '(20 40 60))
+	 => (22 44 66)
+	 (seq-mapn #'concat '("moskito" "bite") ["bee" "sting"])
+	 => ("moskitobee" "bitesting")
+***** Function: seq-filter predicate sequence
+
+		This function returns a list of all the elements in sequence for which predicate
+		returns non-nil. 
+
+	 (seq-filter (lambda (elt) (> elt 0)) [1 -1 3 -3 5])
+	 => (1 3 5)
+	 (seq-filter (lambda (elt) (> elt 0)) '(-1 -3 -5))
+	 => nil
+***** Function: seq-remove predicate sequence
+
+		This function returns a list of all the elements in sequence for which predicate
+		returns nil. 
+
+	 (seq-remove (lambda (elt) (> elt 0)) [1 -1 3 -3 5])
+	 => (-1 -3)
+	 (seq-remove (lambda (elt) (< elt 0)) '(-1 -3 -5))
+	 => nil
+***** Function: seq-reduce function sequence initial-value
+
+		This function returns the result of calling function with initial-value and the first
+		element of sequence, then calling function with that result and the second element
+		of sequence, then with that result and the third element of sequence, etc. function
+		should be a function of two arguments. If sequence is empty, this returns
+		initial-value without calling function. 
+
+	 (seq-reduce #'+ [1 2 3 4] 0)
+	 => 10
+	 (seq-reduce #'+ '(1 2 3 4) 5)
+	 => 15
+	 (seq-reduce #'+ '() 3)
+	 => 3
+***** Function: seq-some predicate sequence
+
+		This function returns the first non-nil value returned by applying predicate to each
+		element of sequence in turn. 
+
+	 (seq-some #'numberp ["abc" 1 nil])
+	 => t
+	 (seq-some #'numberp ["abc" "def"])
+	 => nil
+	 (seq-some #'null ["abc" 1 nil])
+	 => t
+	 (seq-some #'1+ [2 4 6])
+	 => 3
+***** Function: seq-find predicate sequence &optional default
+
+		This function returns the first element in sequence for which predicate returns
+		non-nil. If no element matches predicate, the function returns default. 
+
+		Note that this function has an ambiguity if the found element is identical to default,
+		as in that case it cannot be known whether an element was found or not. 
+
+	 (seq-find #'numberp ["abc" 1 nil])
+	 => 1
+	 (seq-find #'numberp ["abc" "def"])
+	 => nil
+***** Function: seq-every-p predicate sequence
+
+		This function returns non-nil if applying predicate to every element of sequence
+		returns non-nil. 
+
+	 (seq-every-p #'numberp [2 4 6])
+	 => t
+	 (seq-every-p #'numberp [2 4 "6"])
+	 => nil
+***** Function: seq-empty-p sequence
+
+		This function returns non-nil if sequence is empty. 
+
+	 (seq-empty-p "not empty")
+	 => nil
+	 (seq-empty-p "")
+	 => t
+***** Function: seq-count predicate sequence
+
+		This function returns the number of elements in sequence for which predicate
+		returns non-nil. 
+
+	 (seq-count (lambda (elt) (> elt 0)) [-1 2 0 3 -2])
+	 => 2
+***** Function: seq-sort function sequence
+
+		This function returns a copy of sequence that is sorted according to function, a
+		function of two arguments that returns non-nil if the first argument should sort
+		before the second. 
+***** Function: seq-sort-by function predicate sequence
+
+		This function is similar to seq-sort, but the elements of sequence are transformed
+		by applying function on them before being sorted. function is a function of one
+		argument. 
+
+	 (seq-sort-by #'seq-length #'> ["a" "ab" "abc"])
+	 => ["abc" "ab" "a"]
+***** Function: seq-contains-p sequence elt &optional function
+
+		This function returns non-nil if at least one element in sequence is equal to elt. If
+		the optional argument function is non-nil, it is a function of two arguments to use
+		instead of the default equal. 
+
+	 (seq-contains '(symbol1 symbol2) 'symbol1)
+	 => symbol1
+	 (seq-contains '(symbol1 symbol2) 'symbol3)
+	 => nil
+***** Function: seq-set-equal-p sequence1 sequence2 &optional testfn
+
+		This function checks whether sequence1 and sequence2 contain the same
+		elements, regardless of the order. If the optional argument testfn is non-nil, it is a
+		function of two arguments to use instead of the default equal. 
+
+	 (seq-set-equal-p '(a b c) '(c b a))
+	 => t
+	 (seq-set-equal-p '(a b c) '(c b))
+	 => nil
+	 (seq-set-equal-p '("a" "b" "c") '("c" "b" "a"))
+	 => t
+	 (seq-set-equal-p '("a" "b" "c") '("c" "b" "a") #'eq)
+	 => nil
+***** Function: seq-position sequence elt &optional function
+
+		This function returns the index of the first element in sequence that is equal to elt.
+		If the optional argument function is non-nil, it is a function of two arguments to use
+		instead of the default equal. 
+
+	 (seq-position '(a b c) 'b)
+	 => 1
+	 (seq-position '(a b c) 'd)
+	 => nil
+***** Function: seq-uniq sequence &optional function
+
+		This function returns a list of the elements of sequence with duplicates removed.
+		If the optional argument function is non-nil, it is a function of two arguments to use
+		instead of the default equal. 
+
+	 (seq-uniq '(1 2 2 1 3))
+	 => (1 2 3)
+	 (seq-uniq '(1 2 2.0 1.0) #'=)
+	 => (1 2)
+***** Function: seq-subseq sequence start &optional end
+
+		This function returns a subset of sequence from start to end, both integers (end
+		defaults to the last element). If start or end is negative, it counts from the end of
+		sequence. 
+
+	 (seq-subseq '(1 2 3 4 5) 1)
+	 => (2 3 4 5)
+	 (seq-subseq '[1 2 3 4 5] 1 3)
+	 => [2 3]
+	 (seq-subseq '[1 2 3 4 5] -3 -1)
+	 => [3 4]
+***** Function: seq-concatenate type &rest sequences
+
+		This function returns a sequence of type type made of the concatenation of
+		sequences. type may be: vector, list or string. 
+
+	 (seq-concatenate 'list '(1 2) '(3 4) [5 6])
+	 => (1 2 3 4 5 6)
+	 (seq-concatenate 'string "Hello " "world")
+	 => "Hello world"
+***** Function: seq-mapcat function sequence &optional type
+
+		This function returns the result of applying seq-concatenate to the result of
+		applying function to each element of sequence. The result is a sequence of type
+		type, or a list if type is nil. 
+
+	 (seq-mapcat #'seq-reverse '((3 2 1) (6 5 4)))
+	 => (1 2 3 4 5 6)
+***** Function: seq-partition sequence n
+
+		This function returns a list of the elements of sequence grouped into
+		sub-sequences of length n. The last sequence may contain less elements than n.
+		n must be an integer. If n is a negative integer or 0, the return value is nil. 
+
+	 (seq-partition '(0 1 2 3 4 5 6 7) 3)
+	 => ((0 1 2) (3 4 5) (6 7))
+***** Function: seq-intersection sequence1 sequence2 &optional function
+
+		This function returns a list of the elements that appear both in sequence1 and
+		sequence2. If the optional argument function is non-nil, it is a function of two
+		arguments to use to compare elements instead of the default equal. 
+
+	 (seq-intersection [2 3 4 5] [1 3 5 6 7])
+	 => (3 5)
+***** Function: seq-difference sequence1 sequence2 &optional function
+
+		This function returns a list of the elements that appear in sequence1 but not in
+		sequence2. If the optional argument function is non-nil, it is a function of two
+		arguments to use to compare elements instead of the default equal. 
+
+	 (seq-difference '(2 3 4 5) [1 3 5 6 7])
+	 => (2 4)
+***** Function: seq-group-by function sequence
+
+		This function separates the elements of sequence into an alist whose keys are the
+		result of applying function to each element of sequence. Keys are compared
+		using equal. 
+
+	 (seq-group-by #'integerp '(1 2.1 3 2 3.2))
+	 => ((t 1 3 2) (nil 2.1 3.2))
+	 (seq-group-by #'car '((a 1) (b 2) (a 3) (c 4)))
+	 => ((b (b 2)) (a (a 1) (a 3)) (c (c 4)))
+***** Function: seq-into sequence type
+
+		This function converts the sequence sequence into a sequence of type type. type
+		can be one of the following symbols: vector, string or list. 
+
+	 (seq-into [1 2 3] 'list)
+	 => (1 2 3)
+	 (seq-into nil 'vector)
+	 => []
+	 (seq-into "hello" 'vector)
+	 => [104 101 108 108 111]
+***** Function: seq-min sequence
+
+		This function returns the smallest element of sequence. The elements of sequence
+		must be numbers or markers (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Markers.html#Markers][Markers]]). 
+
+	 (seq-min [3 1 2])
+	 => 1
+	 (seq-min "Hello")
+	 => 72
+***** Function: seq-max sequence
+
+		This function returns the largest element of sequence. The elements of sequence
+		must be numbers or markers. 
+
+	 (seq-max [1 3 2])
+	 => 3
+	 (seq-max "Hello")
+	 => 111
+
+	 Macro: seq-doseq (var sequence) body…
+
+		This macro is like dolist (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Iteration.html#Iteration][dolist]]), except that sequence can be a list, vector or
+		string. This is primarily useful for side-effects. 
+
+	 Macro: seq-let var-sequence val-sequence body…
+
+		This macro binds the variables defined in var-sequence to the values that are the
+		corresponding elements of val-sequence. This is known as destructuring
+		binding. The elements of var-sequence can themselves include sequences,
+		allowing for nested destructuring. 
+
+		The var-sequence sequence can also include the &rest marker followed by a
+		variable name to be bound to the rest of val-sequence. 
+
+	 (seq-let [first second] [1 2 3 4]
+		 (list first second))
+	 => (1 2)
+	 (seq-let (_ a _ b) '(1 2 3 4)
+		 (list a b))
+	 => (2 4)
+	 (seq-let [a [b [c]]] [1 [2 [3]]]
+		 (list a b c))
+	 => (1 2 3)
+	 (seq-let [a b &rest others] [1 2 3 4]
+		 others)
+	 => [3 4]
+
+		The pcase patterns provide an alternative facility for destructuring binding, see
+		[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Destructuring-with-pcase-Patterns.html#Destructuring-with-pcase-Patterns][Destructuring with pcase Patterns]]. 
+***** Function: seq-random-elt sequence
+
+		This function returns an element of sequence taken at random. 
+
+	 (seq-random-elt [1 2 3 4])
+	 => 3
+	 (seq-random-elt [1 2 3 4])
+	 => 2
+	 (seq-random-elt [1 2 3 4])
+	 => 4
+	 (seq-random-elt [1 2 3 4])
+	 => 2
+	 (seq-random-elt [1 2 3 4])
+	 => 1
+
+		If sequence is empty, this function signals an error. 
+
+	 Next: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Arrays.html#Arrays][Arrays]], Up: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sequences-Arrays-Vectors.html#Sequences-Arrays-Vectors][Sequences Arrays Vectors]]   [[[https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#SEC_Contents][Contents]]][[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Index.html#Index][Index]]]
+*** map over 
+**** [[https://emacs.stackexchange.com/questions/2961/how-can-i-map-over-a-vector-and-get-a-vector][How can I map over a vector and get a vector?]]
+***** The only thing I've found that works is
+(eval `(vector ,@(mapcar #'1+ [1 2 3 4])))
+=> [2 3 4 5]
+but that seems far too complicated to be the 'right' way.
+***** Use [[https://www.gnu.org/software/emacs/manual/html_node/cl/Mapping-over-Sequences.html][cl-map]], instead:
+(cl-map 'vector #'1+ [1 2 3 4])
+
+A little extra background: cl-map is the [[http://clhs.lisp.se/Body/f_map.htm][Common Lisp map function]] that generalizes to
+sequence types:
+
+(cl-map 'vector #'1+ '[1 2 3 4]) ;; ==> [2 3 4 5]
+(cl-map 'list   #'1+ '(1 2 3 4)) ;; ==> (2 3 4 5)
+(cl-map 'string #'upcase "abc")  ;; ==> "ABC"
+
+It can also convert between sequence types (eg, here, the input is a list and the output
+is a vector):
+
+(cl-map 'vector #'1+ '(1 2 3 4)) ;; ==> [2 3 4 5]
+***** :) Don't the cl libraries give compiler : 
+ 18 seconds the 'winner' :) Don't the cl libraries give compiler warnings, though?
+ (Mostly because the FSF is obnoxious?) – [[https://emacs.stackexchange.com/users/2264/sean-allred][Sean Allred]] Nov 1 '14 at 14:51 
+
+ FWIW, I think the byte compilation problems were related to the old cl library rather
+ than the rejiggered cl-lib library. I don't for example, get any warnings when I (defun
+ fnx () (cl-map 'vector #'1+ '[1 2 3 4])) and then (byte-compile 'fnx). –  Nov 1 '14
+ 
+,* 2 
+ Even if you use the compatibility cl-lib, I think you'll get warnings on older emacs
+ (24.2). I wouldn't worry about it though, you have to pick your battles. – [[https://emacs.stackexchange.com/users/50/malabarba][Malabarba]]
+,* Note that this dynamically creates a list, then converts that to a vector and discards
+ the temporary list. – [[https://emacs.stackexchange.com/users/2429/cl%c3%a9ment][Clément]] Apr 13 at 22:05 
+
+***** without the cl : 
+Since I was beat by 18 seconds, here's a simpler and safer way to do it without the cl
+library. It also doesn't evaluate the elements. 
+
+(apply #'vector (mapcar #'1+ [1 2 3 4])) ;; => [2 3 4 5]
+
+ ,* That's also quite nice! Re: your earlier comment about older Emacs: it seems
+	especially helpful if you have to anticipate legacy users. It seems most helpful if you
+	only have to use it in a couple of spots, at which point you can trade off the slight
+	inconvenience against avoiding the cl-lib dependency. – [[https://emacs.stackexchange.com/users/253/dan][Dan♦]] Nov 1 '14 at 15:27 
+ ,* 1 
+	Very nifty!! I didn't think about using apply. – [[https://emacs.stackexchange.com/users/2264/sean-allred][Sean Allred]] Nov 1 '14 at 22:51 
+ ,* I think (apply #'vector ...) might be ever so slightly faster, but for completeness, it can
+	also be replaced with (vconcat ...). – [[https://emacs.stackexchange.com/users/15748/basil][Basil]] Nov 12 '18 at 20:03 
+
+***** not so elegant inplace-variant : 
+ The not so elegant inplace-variant for the case that the original vector is no longer
+ needed afterwards and memory allocation is time-critical (e.g. the vector is big).
+
+ (setq x [1 2 3 4])
+
+ (cl-loop for var across-ref x do
+					(setf var (1+ var)))
+
+ The result is stored in x. If you need the form to return x in the end you can add finally
+ return x as follows:
+
+ (cl-loop for var across-ref x do
+					(setf var (1+ var))
+					finally return x)
+
+***** For completeness, using seq:
+	(require 'seq)
+	(seq-into (seq-map #'1+ [1 2 3 4]) 'vector)
+
+	,* There is a deleted answer from [[https://emacs.stackexchange.com/users/19761/f%c3%b3lkvangr][Fólkvangr]] 2018-11-12 with the exact same seq-into
+	 line. The user has deleted his answer for the following reason: " My solution is less
+	 relevant because the seq library uses the underlying Common Lisp extensions. –
+	 Fólkvangr May 16 at 8:53" – [[https://emacs.stackexchange.com/users/2370/tobias][Tobias]] Jun 19 '19 at 7:28 
+	,* @Tobias I guess I'd disagree with that logic. Everything is going to end up using
+	 vconcat or vector anyway, but the different interface paradigms are useful to have on
+	 record. – [[https://emacs.stackexchange.com/users/2264/sean-allred][Sean Allred]] Jun 19 '19 at 10:31 
+	,* No problem. I just saw the deleted answer of Fólkvangr (almost) matching yours and
+	 wanted to notify you. For whatever reason seeing deleted answers requires 10000
+	 rep:-(. – [[https://emacs.stackexchange.com/users/2370/tobias][Tobias]] Jun 19 '19 at 11:02 
+	,* @Tobias yeah, I never really understood why those privileges were site-specific :-) –
+
+***** You can use loop
+
+	(let ((v (vector 1 2 3 4)))
+		(dotimes (i (length v))
+			(aset v i (1+ (aref v i))))
+		v)
+	;; => [2 3 4 5]
+
+	Sometimes you don't want to modify the original vector, you can make a copy
+
+	(let* ((v0 (vector 1 2 3 4))
+				 (v (copy-sequence v0)))
+		(dotimes (i (length v))
+			(aset v i (1+ (aref v i))))
+		(list v0 v))
+	;; => ([1 2 3 4] [2 3 4 5])
+
+	or create a new vector from scratch
+
+	(let* ((v0 (vector 1 2 3 4))
+				 (v (make-vector (length v0) nil)))
+		(dotimes (i (length v))
+			(aset v i (1+ (aref v0 i))))
+		(list v0 v))
+	;; => ([1 2 3 4] [2 3 4 5])
+	[[https://emacs.stackexchange.com/a/45946][share]]
+** Comparison : 
+*** 4.5 Comparison of Characters and Strings
+**** Function: char-equal character1 character2
+
+		 This function returns t if the arguments represent the same character, nil otherwise. This function ignores differences in case if case-fold-search is non-nil.
+
+		 (char-equal ?x ?x)
+					=> t
+		 (let ((case-fold-search nil))
+			 (char-equal ?x ?X))
+					=> nil
+**** Function: string= string1 string2
+
+		 This function returns t if the characters of the two strings match exactly. Symbols are also allowed as arguments, in which case the symbol names are used. Case is always significant, regardless of case-fold-search.
+
+		 This function is equivalent to equal for comparing two strings (see Equality Predicates). In particular, the text properties of the two strings are ignored; use equal-including-properties if you need to distinguish between strings that differ only in their text properties. However, unlike equal, if either argument is not a string or symbol, string= signals an error.
+
+		 (string= "abc" "abc")
+					=> t
+		 (string= "abc" "ABC")
+					=> nil
+		 (string= "ab" "ABC")
+					=> nil
+
+		 For technical reasons, a unibyte and a multibyte string are equal if and only if they contain the same sequence of character codes and all these codes are either in the range 0 through 127 (ASCII) or 160 through 255 (eight-bit-graphic). However, when a unibyte string is converted to a multibyte string, all characters with codes in the range 160 through 255 are converted to characters with higher codes, whereas ASCII characters remain unchanged. Thus, a unibyte string and its conversion to multibyte are only equal if the string is all ASCII. Character codes 160 through 255 are not entirely proper in multibyte text, even though they can occur. As a consequence, the situation where a unibyte and a multibyte string are equal without both being all ASCII is a technical oddity that very few Emacs Lisp programmers ever get confronted with. See Text Representations. 
+**** Function: string-equal string1 string2
+		 string-equal is another name for string=. 
+
+ Function: string-collate-equalp string1 string2 &optional locale ignore-case
+
+		 This function returns t if string1 and string2 are equal with respect to collation rules. A collation rule is not only determined by the lexicographic order of the characters contained in string1 and string2, but also further rules about relations between these characters. Usually, it is defined by the locale environment Emacs is running with.
+
+		 For example, characters with different coding points but the same meaning might be considered as equal, like different grave accent Unicode characters:
+
+		 (string-collate-equalp (string ?\uFF40) (string ?\u1FEF))
+					=> t
+
+		 The optional argument locale, a string, overrides the setting of your current locale identifier for collation. The value is system dependent; a locale "en_US.UTF-8" is applicable on POSIX systems, while it would be, e.g., "enu_USA.1252" on MS-Windows systems.
+
+		 If ignore-case is non-nil, characters are converted to lower-case before comparing them.
+
+		 To emulate Unicode-compliant collation on MS-Windows systems, bind w32-collate-ignore-punctuation to a non-nil value, since the codeset part of the locale cannot be "UTF-8" on MS-Windows.
+
+		 If your system does not support a locale environment, this function behaves like string-equal.
+
+		 Do not use this function to compare file names for equality, as filesystems generally don’t honor linguistic equivalence of strings that collation implements. 
+**** Function: string< string1 string2
+		 This function compares two strings a character at a time. It scans both the strings at the same time to find the first pair of corresponding characters that do not match. If the lesser character of these two is the character from string1, then string1 is less, and this function returns t. If the lesser character is the one from string2, then string1 is greater, and this function returns nil. If the two strings match entirely, the value is nil.
+
+		 Pairs of characters are compared according to their character codes. Keep in mind that lower case letters have higher numeric values in the ASCII character set than their upper case counterparts; digits and many punctuation characters have a lower numeric value than upper case letters. An ASCII character is less than any non-ASCII character; a unibyte non-ASCII character is always less than any multibyte non-ASCII character (see Text Representations).
+
+		 (string< "abc" "abd")
+					=> t
+		 (string< "abd" "abc")
+					=> nil
+		 (string< "123" "abc")
+					=> t
+
+		 When the strings have different lengths, and they match up to the length of string1, then the result is t. If they match up to the length of string2, the result is nil. A string of no characters is less than any other string.
+
+		 (string< "" "abc")
+					=> t
+		 (string< "ab" "abc")
+					=> t
+		 (string< "abc" "")
+					=> nil
+		 (string< "abc" "ab")
+					=> nil
+		 (string< "" "")
+					=> nil
+
+		 Symbols are also allowed as arguments, in which case their print names are compared. 
+**** Function: string-lessp string1 string2
+
+		 string-lessp is another name for string<. 
+**** Function: string-greaterp string1 string2
+
+		 This function returns the result of comparing string1 and string2 in the opposite order, i.e., it is equivalent to calling (string-lessp string2 string1). 
+**** Function: string-collate-lessp string1 string2 &optional locale ignore-case
+
+		 This function returns t if string1 is less than string2 in collation order. A collation order is not only determined by the lexicographic order of the characters contained in string1 and string2, but also further rules about relations between these characters. Usually, it is defined by the locale environment Emacs is running with.
+
+		 For example, punctuation and whitespace characters might be ignored for sorting (see Sequence Functions):
+
+		 (sort (list "11" "12" "1 1" "1 2" "1.1" "1.2") 'string-collate-lessp)
+					=> ("11" "1 1" "1.1" "12" "1 2" "1.2")
+
+		 This behavior is system-dependent; e.g., punctuation and whitespace are never ignored on Cygwin, regardless of locale.
+
+		 The optional argument locale, a string, overrides the setting of your current locale identifier for collation. The value is system dependent; a locale "en_US.UTF-8" is applicable on POSIX systems, while it would be, e.g., "enu_USA.1252" on MS-Windows systems. The locale value of "POSIX" or "C" lets string-collate-lessp behave like string-lessp:
+
+		 (sort (list "11" "12" "1 1" "1 2" "1.1" "1.2")
+					 (lambda (s1 s2) (string-collate-lessp s1 s2 "POSIX")))
+					=> ("1 1" "1 2" "1.1" "1.2" "11" "12")
+
+		 If ignore-case is non-nil, characters are converted to lower-case before comparing them.
+
+		 To emulate Unicode-compliant collation on MS-Windows systems, bind w32-collate-ignore-punctuation to a non-nil value, since the codeset part of the locale cannot be "UTF-8" on MS-Windows.
+
+		 If your system does not support a locale environment, this function behaves like string-lessp. 
+**** Function: string-version-lessp string1 string2
+
+		 This function compares strings lexicographically, except it treats sequences of numerical characters as if they comprised a base-ten number, and then compares the numbers. So ‘foo2.png’ is “smaller” than ‘foo12.png’ according to this predicate, even if ‘12’ is lexicographically “smaller” than ‘2’. 
+**** Function: string-prefix-p string1 string2 &optional ignore-case
+
+		 This function returns non-nil if string1 is a prefix of string2; i.e., if string2 starts with string1. If the optional argument ignore-case is non-nil, the comparison ignores case differences. 
+**** Function: string-suffix-p suffix string &optional ignore-case
+
+		 This function returns non-nil if suffix is a suffix of string; i.e., if string ends with suffix. If the optional argument ignore-case is non-nil, the comparison ignores case differences. 
+**** Function: compare-strings string1 start1 end1 string2 start2 end2 &optional ignore-case
+
+		 This function compares a specified part of string1 with a specified part of string2. The specified part of string1 runs from index start1 (inclusive) up to index end1 (exclusive); nil for start1 means the start of the string, while nil for end1 means the length of the string. Likewise, the specified part of string2 runs from index start2 up to index end2.
+
+		 The strings are compared by the numeric values of their characters. For instance, str1 is considered less than str2 if its first differing character has a smaller numeric value. If ignore-case is non-nil, characters are converted to upper-case before comparing them. Unibyte strings are converted to multibyte for comparison (see Text Representations), so that a unibyte string and its conversion to multibyte are always regarded as equal.
+
+		 If the specified portions of the two strings match, the value is t. Otherwise, the value is an integer which indicates how many leading characters agree, and which string is less. Its absolute value is one plus the number of characters that agree at the beginning of the two strings. The sign is negative if string1 (or its specified portion) is less. 
+**** Function: string-distance string1 string2 &optional bytecompare
+
+		 This function returns the Levenshtein distance between the source string string1 and the target string string2. The Levenshtein distance is the number of single-character changes—deletions, insertions, or replacements—required to transform the source string into the target string; it is one possible definition of the edit distance between strings.
+
+		 Letter-case of the strings is significant for the computed distance, but their text properties are ignored. If the optional argument bytecompare is non-nil, the function calculates the distance in terms of bytes instead of characters. The byte-wise comparison uses the internal Emacs representation of characters, so it will produce inaccurate results for multibyte strings that include raw bytes (see Text Representations); make the strings unibyte by encoding them (see Explicit Encoding) if you need accurate results with raw bytes. 
+**** Function: assoc-string key alist &optional case-fold
+		 This function works like assoc, except that key must be a string or symbol, and comparison is done using compare-strings. Symbols are converted to strings before testing. If case-fold is non-nil, key and the elements of alist are converted to upper-case before comparison. Unlike assoc, this function can also match elements of the alist that are strings or symbols rather than conses. In particular, alist can be a list of strings or symbols rather than an actual alist. See Association Lists. 
+
+ See also the function compare-buffer-substrings in Comparing Text, for a way to compare text in buffers. The function string-match, which matches a regular expression against a string, can be used for a kind of string comparison; see Regexp Search. 
+*** check whether minor modes is enabled : 
+Most minor modes are defined using the define-minor-mode macro. For buffer-local modes, that macro creates a buffer-local variable of the same name as the mode itself1. The variable is non-nil when the mode is enabled for the current buffer.
+Therefore to check whether flymake-mode is enabled, you can test the variable flymake-mode (noting that this variable might not be defined at all if the mode has not been enabled):
+
+(and (boundp 'flymake-mode) flymake-mode)
+
+Which, as Thom point out in the comments, can be expressed using the convenient macro:
+
+(bound-and-true-p flymake-mode)
+
+Which we can use as the condition for an if or when or unless expression:
+
+(if (bound-and-true-p flymake-mode)
+    (message "flymake-mode is on")
+  (message "flymake-mode is off"))
+
+** Text 
+*** By Xah Lee : 
+**** Elisp: Text Properties
+ Elisp: Text Properties
+ By Xah Lee. Date: 2017-06-17. Last updated: 2020-09-04.
+
+ Text in a buffer can have “text properties”.
+
+ Text properties is used to color text, or add keybinding to that text (for example, pressing Enter on a link in HTML opens the link instead of insert newline.), and other purposes.
+
+ Here's a command that makes a region red, by adding a text property of 'font-lock-face to it.
+
+ (defun x-make-word-red (begin end)
+	 "make current region colored red, using text properties"
+	 (interactive (list (region-beginning) (region-end)))
+	 (put-text-property begin end 'font-lock-face '(:foreground "red")))
+
+ Select a region, then
+ Alt+x
+ x-make-word-red
+
+ Here's example of adding a keymap to text, so that when Enter is pressed, it tries to open the file, taking current line as file name/path.
+
+ (setq x-keymap (make-sparse-keymap))
+ (define-key x-keymap (kbd "RET") (lambda () (find-file (thing-at-point 'filename) )))
+
+ (defun x-add-prop (begin end)
+	 "add text properties to a region."
+	 (interactive "r")
+		 (put-text-property begin end 'font-lock-face '(:foreground "blue"))
+		 (put-text-property begin end 'keymap x-keymap))
+
+
+ try it:
+
+
+ Open a new file, insert some text that contains file path.
+ Go to a line that's a file path, select it, then Alt+x x-add-prop. The region will be colored blue, and pressing Enter key on it will call x-open-me
+
+
+ What's Text Property
+
+ Text Property is a property list attached to text.
+
+ A property list is a list but interpreted as key and value pairs. Like this:
+
+ '(key1 val1 key2 val2 …)
+
+ [see Elisp: Property List]
+
+ When a property list is attached to text, some keys have special meaning that are predefined by emacs.
+
+ Here are some of the most useful property keys for writing a major/minor mode:
+
+
+ 'font-lock-face -> for syntax coloring. Value is a face. [see Elisp: How to Define Face]
+ 'face -> for syntax coloring. Value is a face. It overrides the 'font-lock-face property. This property is automatically updated/managed by font-lock-mode. [see Elisp: Font Lock Mode Basics]
+ 'syntax-table -> add syntax table to text. Value is a syntax table. This is useful for example, in a major mode for programing language, you want to make regex delimiter character such as SOLIDUS / to have string syntax, so regex string are colored as string. [see Elisp: Syntax Table]
+ 'keymap -> Add keybinding to text. Value is a keymap. When cursor is on the text, the keymap has priority in determining keystroke action. [see Elisp: How to Create Keymap for Major Mode]
+
+
+ For a complete list, see
+ (info "(elisp) Special Properties")
+
+ Functions for Working with Text Property
+
+ There are many functions to get values of text properties, add/change/delete them, or find out where a property begins, etc.
+ See
+
+
+ (info "(elisp) Text Properties")
+*** [[https://stackoverflow.com/questions/2419225/printing-colored-characters-in-lisp-emacs][Printing Colored Characters in Lisp / Emacs]]
+**** use a graphical toolkit : 
+ what Lisp? Emacs Lisp? The 'HyperSpec' is not for Emacs Lisp, but Common
+ Lisp. Printing colored text from Emacs Lisp should be covered in the Emacs
+ manual. Common Lisp has no built-in facilities for colored text, because the user
+ interface is outside the scope of the Common Lisp standard. Typically one would
+ use a graphical toolkit (like CAPI, CLIM, ...) or something like a 'curses' interface. If
+ you are using Emacs Lisp, then you can use Emacs built-in functionality. I guess you
+ could also look at some of the games that are coming with Emacs for inspiration. –
+ [[https://stackoverflow.com/users/69545/rainer-joswig][Rainer Joswig]] Mar 10 '10 at 17:57 SVG Image 
+**** ,* It is possible that [[http://en.wikipedia.org/wiki/ANSI_escape_code][en.wikipedia.org/wiki/ANSI_escape_code]] is the simple solution
+ you are looking for, depending on what you mean by "Lisp" as Rainer commented. –
+ [[https://stackoverflow.com/users/139746/pascal-cuoq][Pascal Cuoq]] Mar 10 '10 at 18:04 SVG Image 
+****  ,* I'm using SBCL which is one of the many flavors of CL, although it's running on
+ SLIME in emacs. This should be covered by the emacs manual though, right?
+ Thanks for the input, my world of lisp broadens daily. – [[https://stackoverflow.com/users/290763/limpoch][Limpoch]] Mar 10 '10 at 18:29
+,* You have two very different choices: you can write the game in SBCL, in which case
+ you'll need a Common Lisp user interface library, or you can write it in Emacs Lisp
+ and use Emacs' built-in functionality. SLIME is what you use to edit Common Lisp
+ code in emacs - like a text editor but with many more features. Your Lisp code is
+ not running in Emacs. If you want code to run in Emacs (and use Emacs' built-in
+ color text ability), it'll have to be Emacs Lisp. You'll need to decide which way you
+ want to do things before you can solve this problem. – [[https://stackoverflow.com/users/446918/noah-lavine][Noah Lavine]] Mar 10 '10 at
+ 22:17 
+,* did you find the solution you were looking for? – [[https://stackoverflow.com/users/3758484/johnbakers][johnbakers]] Nov 30 '13 at 15:08 
+**** propertize : 
+The appearance of text in Emacs is controlled by faces. Face can be changed through
+either overlay or text properties. Here is an example using the latter:
+
+
+;; Emacs-Lisp
+(insert (propertize "foo" 'font-lock-face '(:foreground "red")))
+
+However, if the game is implemented in SBCL, you'll need a way to communicate with
+Emacs from your SBCL program. As it seems that you're using Slime, using Swank,
+which is a part of Slime, might be the most convenient:
+
+
+;; Common-Lisp
+(swank::eval-in-emacs
+ '(with-current-buffer (slime-repl-buffer)
+    (insert (propertize "foo" 'font-lock-face '(:foreground "red")))))
+[[https://stackoverflow.com/a/2421008][share]] | Submit | 
+answered Mar 10 '10 at 22:10 
+[[https://stackoverflow.com/users/16240/huaiyuan][*]][[https://stackoverflow.com/users/16240/huaiyuan][huaiyuan]]huaiyuan 
+24.7k55 gold badges5252 silver badges6161 bronze badges 
+
+**** self plug : 
+Shameless self plug: you might want to try [[http://www.martin-loetzsch.de/gtfl/][this]], which is a graphical terminal for
+Common Lisp running in a web browser. It uses html for printing stuff, so you could do
+something like:
+
+(gtfl-out (:p :style "color:red;" "some characters"))
+****  wrote an Elisp defun : 
+I just wrote an Elisp defun to test the colors. It could be useful for example when setting
+up the general colors of the Linux VTs. Note that the color list ("black", "red", etc.) is
+only how it is conventionally and usually defined - if you set them up as other colors,
+perhaps red won't be red anymore. Still, it can be useful to test.
+
+;;;; insert colored and/or bright text
+(defun insert-colored-text (str clr bright)
+  "Inserts str at point, in color clr, bright or not."
+  (interactive (list (read-string " String: ")
+										 (read-string " Color: ")
+										 (y-or-n-p    " Bright? ") ))
+  (insert (propertize str 'font-lock-face
+          `(:weight ,(if bright 'bold 'normal) :foreground ,clr) )))
+(defalias 'ict 'insert-colored-text)
+
+(defun test-all-faces ()
+  "Prints a test string in al colors, both normal and bright."
+  (interactive)
+  (let ((str "This is what it looks like"))
+    (dolist (bold '(nil t) nil)
+      (dolist (color
+							 '("black" "red" "green" "yellow" "blue"
+								 "magenta" "cyan" "white") nil)
+        (insert-colored-text
+				 (format "%s in %s (that is %sbold)\n" str color
+								 (if bold "" "not ")) color bold) ))))
+(defalias 'taf 'test-all-faces)
+
+[[http://user.it.uu.se/~embe8573/cols.png][example output http://user.it.uu.se/~embe8573/cols.png]]
+
+
+**** [[https://stackoverflow.com/questions/19208933/change-the-color-of-the-text-in-the-common-lisp-repl\]][Change the color of the text in the Common Lisp REPL]] : 
+I am looking for the same answer and been here, and after a while found the answer
+from another link[[[https://stackoverflow.com/questions/19208933/change-the-color-of-the-text-in-the-common-lisp-repl\]][Change the color of the text in the Common Lisp REPL]].
+
+I think maybe you need it,the answer is:
+
+ Blockquote
+**** ANSI escape code : 
+You can use ANSI escape code to print colorful texts:
+
+(format t "~c[31mabc~c[0m~%" #\ESC #\ESC) ; this prints a red "abc" for most
+modern terminals I'm not sure whether this works in slime, although.
+
+shareimprove this answer answered Oct 6 '13 at 16:06
+
+SaltyEgg 626412
+
+
+**** #\ESC is not in the standard : 
+,* Thank You This post lead me to a deeper understanding of how the format function
+ works! Do you know where the #\ESC function is documented? – [[https://stackoverflow.com/users/2962623/rmoro][rmoro]] Oct 9 '16
+ at 6:14 
+,* #\ESC is not in the standard, a more portable expression might be (format t "~c
+ [31mRed~:*~c[32mGreen~:*~c[34mBlue~:*~c[mPlain~%" (code-char 27)) – [[https://stackoverflow.com/users/3008405/devon][devon]]
+ Jul 12 at 15:20 
+*** face : 
+(insert (propertize "bar" 'face '(:foreground "red")))
+**** :background "gray30" : 
+ (insert (propertize "bar" 'face '(:background "gray30")))
+**** :foreground "#33AAFF" : 
+ (insert (propertize "bar" 'face '(:foreground "#33AAFF")))
+**** background : 
+ (insert (propertize "bar" 'face '(:foreground "orange" :background "purple")))
 ** show maseges
 *** message
 (message "Load of init.el is ended")
 показывает сообшение прям из проверки
 (if nil "yes" "no")
 *** format
-   (format "sdfsdf")
-** varible
-*** show type
-(type-of chartoadd)
-*** chek type
-(typep *x* 'integer)
-*** chege type 
-**** From number to string:
-(number-to-string 5)
-"5"
-you may transform a string to any numerical notation:
-(number-to-string 341 :base 10)
-"341"
-**** From string to number:
-(parse-integer "5")
-5
-with some trash
-(parse-integer " 5 something not a number" :junk-allowed t)
-5
-Or use this:
-(read-from-string "23 absd")
-23
-**** FORMAT 
-(format nil "~A" 1)
-*** Seeing the Current Value of a Variable
-	c-h v
-describe-variable
+	 (format "sdfsdf")
+*** (defun min-to-houre (min)
+(defun min-to-houre (min)
+		(setq min (+ min 10))
+		 (message "value is %s" min))
+** Input 
+*** read : 
+	 (read)
 
-(progn
-(evil-open-below 3)
-(insert (getenv "PATH"))
-)
+** return 
+*** How do you return from a function at an arbitrary point?
+**** How do you return early from a function before it's ended? For example:
 
-(describe-variable exec-path)
-(symbol-value exec-path)
-*** 12.7 Accessing Variable Values determined at run time
-https://www.gnu.org/software/emacs/manual/html_node/elisp/Accessing-Variables.html
-The usual way to reference a variable is to write the symbol which
-names it.  See Symbol Forms.
+ (defun my-func () 
+	"for example."
+	(unless something (return nil))
+	; continue as usual...
+	(+ 42 1))
+ elisp
+ functions
+ share  improve this question   follow  
+ edited Feb 1 '15 at 1:03
+ asked Jan 31 '15 at 2:53
 
-   Occasionally, you may want to reference a variable which is only
-determined at run time.  In that case, you cannot specify the variable
-name in the text of the program.  You can use the symbol-value
-function to extract the value.
+ ocodo
+ 81266 silver badges1717 bronze badges
+ add a comment
+ 2 Answers
+ 
+ 19
+****  We have a number of options available.
+***** Throw
+	 You can catch / throw to exit the function.
 
+	 example:
 
-— Function: symbol-value symbol
-This function returns the value stored in symbol's value cell. 
-This is where the variable's current (dynamic) value is stored.  If
-the variable has no local binding, this is simply its global value. 
-If the variable is void, a void-variable error is signaled.
+	 (defun my-func ()
+		 "thrown error"
+		 (catch 'my-catch
+			 (when t
+				 (throw 'my-catch "always going to throw"))
+			 (+ 42 1)))
+***** Block
+		You can also use block and return-from (although you will need to require cl-macs)
 
-        If the variable is lexically bound, the value reported by
-symbol-value is not necessarily the same as the variable's
-lexical value, which is determined by the lexical environment rather
-than the symbol's value cell.  See Variable Scoping.
+		example:
 
-               (setq abracadabra 5)
-               => 5
-          (setq foo 9)
-               => 9
-          
-          ;; Here the symbol abracadabra
-          ;;   is the symbol whose value is examined.
-          (let ((abracadabra 'foo))
-            (symbol-value 'abracadabra))
-               =>foo
-          
-          ;; Here, the value of abracadabra,
-          ;;   which is foo,
-          ;;   is the symbol whose value is examined.
-          (let ((abracadabra 'foo))
-            (symbol-value abracadabra))
-              => 9
-          
-          (symbol-value 'abracadabra)
-              => 5
-** Cool guid
-https://github.com/chrisdone/elisp-guide
+		(require 'cl-macs)
+
+		(defun my-func ()
+			"block / return-from"
+			(block my-func
+				(when t
+					(return-from my-func))
+				(+ 42 1)))
+***** cl-defun
+		We also have cl-defun which has an implicit block with the same name as the function, so we can do the block style with less.
+
+		example:
+
+		(require 'cl-macs)
+
+		(cl-defun my-func ()
+			"cl-defun implicit block"
+			(when t
+				(return-from my-func)) ; my-func is an implicit block.
+			(+ 42 1)))
+***** defun*
+		cl-defun is also available as an alias defun* which is defined in cl.el so:
+
+		(require 'cl)
+
+		(defun* my-func ()
+			"defun* implicit block"
+			(when t
+				(return-from my-func)) ; my-func is an implicit block.
+			(+ 42 1)))
+		share  improve this answer   follow  
+		edited Jan 31 '15 at 3:23
+		answered Jan 31 '15 at 3:07
+***** 	ocodo
+		81266 silver badges1717 bronze badges
+		4
+		Note that if you don't have a preference for the CL syntax, catch/throw is more idiomatic in elisp, as other approaches are ultimately implemented in terms of catch/throw. The elisp manual says: "Most other versions of Lisp, including Common Lisp, have several ways of transferring control nonsequentially: return, return-from, and go, for example. Emacs Lisp has only throw." – phils Jan 31 '15 at 5:28
+***** 		In addition to what @EmacsFodder covered, just raise an error.
+
+		This will not help if the code is called within (dynamically, not lexically) the extent of error-handling constructs such as ignore-errors or condition-case, but otherwise it is a fine way to exit a function. It is in fact what is done most of the time.
+
+		(defun my-func () 
+		 "..."
+		 (unless something (error "Whoops!"))
+		 ; continue as usual...
+		 (+ 42 1))
+		If you want to handle the error yourself then you can put the calling code (e.g. the call to something that ulimately calls my-func) inside a condition-case. Again, this is what is done most of the time, at least as often as using catch + throw. It all depends on what behavior you want.
+
+		share  improve this answer   follow  
+		edited May 9 '15 at 20:26
+		answered Jan 31 '15 at 18:48
+**** 	Drew
+		59.3k55 gold badges8080 silver badges152152 bronze badges
+		Thanks for the answer Drew, I agree this is quite a common method. However, just doing an early return in a lot of other languages, doesn't incur the complexity of having to then deal with an error. When researching the question/answer set. I was specifically looking for alternatives to the "erroring out" style which always feels kludgy to me. I didn't specify this explicitly in the question text mind you. – ocodo Feb 1 '15 at 1:00 
+***** 	1
+		 It all depends on what you want to do. If you want to end immediately, with no further processing/handling, then raising an error is a good way to go for a nonlocal exit, in Emacs. If you want to do something during a nonlocal exit, i.e., handle it in some way, then catch, unwind-protect, condition-case and the like are useful. There is a whole section of the Elisp manual devoted to nonlocal exits. (And there is nothing particularly kludgy about any of them, IMO.) – Drew Feb 1 '15 at 2:54 
+		 "Feels" is entirely subjective of course. Thanks for the nonlocal manual ref. – ocodo Feb 1 '15 at 2:56
+		 add a comment
+		 Your Answer
 ** compile
 Emacs 24.3 or below
 
@@ -1238,171 +3881,208 @@ From the doc:
     Non-nil means load prefers the newest version of a file.
     This applies when a filename suffix is not explicitly specified and load is trying various possible suffixes (see load-suffixes and load-file-rep-suffixes). Normally, it stops at the first file that exists unless you explicitly specify one or the other. If this option is non-nil, it checks all suffixes and uses whichever file is newest.
     Note that if you customize this, obviously it will not affect files that are loaded before your customizations are read!
-** Cheat sheet 
-*** from 
+** interactive
+*** (interactive (list (region-beginning) (region-end))) : 
+ Text in a buffer can have “text properties”.
 
-https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
+ Text properties is used to color text, or add keybinding to that text (for example, pressing Enter on a link in HTML opens the link instead of insert newline.), and other purposes.
 
- 43
- 3.0
- "foo!"
-*** ;; FUNCTIONS
- (+ 1 2 3 4 5)
-*** ;; LISt Processing Language
-		#+begin_src emacs-lisp :tangle yes
-	(1 2 3)
+ Here's a command that makes a region red, by adding a text property of 'font-lock-face to it.
 
-	`(1 2 3)
+ (defun x-make-word-red (begin end)
+   "make current region colored red, using text properties"
+   (interactive (list (region-beginning) (region-end)))
+   (put-text-property begin end 'font-lock-face '(:foreground "red")))
 
-	(list 1 2 3 4 5)
+ Select a region, then Alt+x x-make-word-red
 
-	;; "car" -- returns the first element of the list
+*** (interactive "r") : 
+ Here's example of adding a keymap to text, so that when Enter is pressed, it tries to open the file, taking current line as file name/path.
 
-	(car
-	 (list 1 2 3))
+ (setq x-keymap (make-sparse-keymap))
+ (define-key x-keymap (kbd "RET") (lambda () (find-file (thing-at-point 'filename) )))
 
-	;; "cdr" -- returns the entire list except the first element
+ (defun x-add-prop (begin end)
+   "add text properties to a region."
+   (interactive "r")
+     (put-text-property begin end 'font-lock-face '(:foreground "blue"))
+     (put-text-property begin end 'keymap x-keymap))
 
-	(cdr
-	 `(1 2 3 4 5))
+ try it:
 
-	;; "cons" -- construct a list
+     Open a new file, insert some text that contains file path.
+     Go to a line that's a file path, select it, then Alt+x x-add-prop. The region will be colored blue, and pressing Enter key on it will call x-open-me
+** Docs
+*** Pdfs
+**** Land of lisp
+https://drive.google.com/file/d/10mKcsFB0pDeLRM15T6QlmG4Rn979rBDl/view?usp=sharing
+*** Cheat sheet 
+**** from 
 
-	(cons 1 `(2 3))
+ https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
 
-	;; "append" -- takes two lists and joins them together
+	43
+	3.0
+	"foo!"
+**** ;; FUNCTIONS
+	(+ 1 2 3 4 5)
+**** ;; LISt Processing Language
+		 #+begin_src emacs-lisp :tangle yes
+	 (1 2 3)
 
-	(append `(1 2) `(3 4))
-		#+end_src
-*** ;; VARIABLES
-		#+begin_src emacs-lisp :tangle yes
-	(setq my-list `(mac linux))
+	 `(1 2 3)
 
-	;; TODO: READ ABOUT MACROS IN ELISP
-	;; local variables
-	(let ((a 1)
-				(b 3))
-		(- a b))
+	 (list 1 2 3 4 5)
 
-		#+end_src
-*** ;; FUNCTIONS
-		#+begin_src emacs-lisp :tangle yes
-	(defun main ()
-		"A docstring that tells a little bit about my function"
-		"Hello!")
+	 ;; "car" -- returns the first element of the list
 
-	(main)
+	 (car
+		(list 1 2 3))
 
-	(defun square (x)
-		(* x x))
+	 ;; "cdr" -- returns the entire list except the first element
 
-	(square 2)
+	 (cdr
+		`(1 2 3 4 5))
 
-		#+end_src
-*** ;; CONDITIONALS
-		#+begin_src emacs-lisp :tangle yes
-	;; every value is truthy except nil and the empty list ()
+	 ;; "cons" -- construct a list
 
-	;; and
+	 (cons 1 `(2 3))
 
-	(and t nil)
+	 ;; "append" -- takes two lists and joins them together
 
-	(and 1 13)
+	 (append `(1 2) `(3 4))
+		 #+end_src
+**** ;; VARIABLES
+		 #+begin_src emacs-lisp :tangle yes
+	 (setq my-list `(mac linux))
 
-	;; or
+	 ;; TODO: READ ABOUT MACROS IN ELISP
+	 ;; local variables
+	 (let ((a 1)
+				 (b 3))
+		 (- a b))
 
-	(or t nil)
+		 #+end_src
+**** ;; FUNCTIONS
+		 #+begin_src emacs-lisp :tangle yes
+	 (defun main ()
+		 "A docstring that tells a little bit about my function"
+		 "Hello!")
 
-	(or nil `())
+	 (main)
 
-	;; not
+	 (defun square (x)
+		 (* x x))
 
-	(not nil)
+	 (square 2)
 
-	;; don't try to be very clever and try to write code
-	;; based on those return values that these functions give
-	;; unless you wanna dab on the haters
+		 #+end_src
+**** ;; CONDITIONALS
+		 #+begin_src emacs-lisp :tangle yes
+	 ;; every value is truthy except nil and the empty list ()
 
-	;; when -- only take an action if a predicate is true
+	 ;; and
 
-	(when (= (+ 2 2) 4)
-		"passed check")
+	 (and t nil)
 
-	;; if, else -- good ol' if else
+	 (and 1 13)
 
-	(defun even-or-odd (n)
-		(if (= (% n 2) 0)
-				"even"
-			"odd"))
+	 ;; or
 
-	(even-or-odd 2)
-	(even-or-odd 54)
-	(even-or-odd 32343)
+	 (or t nil)
 
-	;; cond - much like a switch, i think
-	;; takes in a "collection" of lists. Remember that.
-	;; like "let"
+	 (or nil `())
 
-	(defun pick-sword (n)
-		(cond
-		 ((= n 0) "Wood")
-		 ((= n 1) "Plastic")
-		 ((= n 2) "Gold")))
+	 ;; not
 
-	(pick-sword 2)
+	 (not nil)
+
+	 ;; don't try to be very clever and try to write code
+	 ;; based on those return values that these functions give
+	 ;; unless you wanna dab on the haters
+
+	 ;; when -- only take an action if a predicate is true
+
+	 (when (= (+ 2 2) 4)
+		 "passed check")
+
+	 ;; if, else -- good ol' if else
+
+	 (defun even-or-odd (n)
+		 (if (= (% n 2) 0)
+				 "even"
+			 "odd"))
+
+	 (even-or-odd 2)
+	 (even-or-odd 54)
+	 (even-or-odd 32343)
+
+	 ;; cond - much like a switch, i think
+	 ;; takes in a "collection" of lists. Remember that.
+	 ;; like "let"
+
+	 (defun pick-sword (n)
+		 (cond
+			((= n 0) "Wood")
+			((= n 1) "Plastic")
+			((= n 2) "Gold")))
+
+	 (pick-sword 2)
 
 
-		#+end_src
-*** ;; anonymous functions -- lambdas!
-		#+begin_src emacs-lisp :tangle yes
-	;; lambdas are function literals
+		 #+end_src
+**** ;; anonymous functions -- lambdas!
+		 #+begin_src emacs-lisp :tangle yes
+	 ;; lambdas are function literals
 
-	(lambda (x) (+ x 5))
+	 (lambda (x) (+ x 5))
 
-	;; call it 
+	 ;; call it 
 
-	((lambda (x) (+ x 5)) 9)
+	 ((lambda (x) (+ x 5)) 9)
 
-	;; funcall -- calls a function
+	 ;; funcall -- calls a function
 
-	(funcall (lambda (x) (* x x)) 4)
+	 (funcall (lambda (x) (* x x)) 4)
 
-	(funcall '+ 1 2)
+	 (funcall '+ 1 2)
 
-	;; store the lambda in a variable
+	 ;; store the lambda in a variable
 
-	(fset `square (lambda (x) (* x x)))
+	 (fset `square (lambda (x) (* x x)))
 
-	(square 3)
+	 (square 3)
 
-		#+end_src
-*** ;; HIGHER ORDER FUNCTIONS
-		#+begin_src emacs-lisp :tangle yes
-	(defun transform-until-zero (fn n)
-		"transforms n with the function given unless the number is 0"
-		(if (= n 0)
-				0
-			(funcall fn n)))
+		 #+end_src
+**** ;; HIGHER ORDER FUNCTIONS
+		 #+begin_src emacs-lisp :tangle yes
+	 (defun transform-until-zero (fn n)
+		 "transforms n with the function given unless the number is 0"
+		 (if (= n 0)
+				 0
+			 (funcall fn n)))
 
-	(transform-until-zero (lambda (n) (* n 2)) 0)
+	 (transform-until-zero (lambda (n) (* n 2)) 0)
 
-	(transform-until-zero (lambda (n) (* n 2)) 3)
+	 (transform-until-zero (lambda (n) (* n 2)) 3)
 
-	;; a very important higher order function is mapcar
-	;; takes in a list and a function and applies the function
-	;; to every element in the list. NOW we're talking
+	 ;; a very important higher order function is mapcar
+	 ;; takes in a list and a function and applies the function
+	 ;; to every element in the list. NOW we're talking
 
-		#+end_src
-*** ;; much like map in JS
-	#+begin_src emacs-lisp :tangle yes
-	(mapcar (lambda(n) (+ n 1)) '(1 2 3))
+		 #+end_src
+**** ;; much like map in JS
+	 #+begin_src emacs-lisp :tangle yes
+	 (mapcar (lambda(n) (+ n 1)) '(1 2 3))
 
-	;; non destructive!
+	 ;; non destructive!
 
-	(setq my-list '(1 2 3))
-	(mapcar (lambda (n) (+ n 1)) my-list)
+	 (setq my-list '(1 2 3))
+	 (mapcar (lambda (n) (+ n 1)) my-list)
 
-	#+end_src
+	 #+end_src
+*** Cool guid
+ https://github.com/chrisdone/elisp-guide
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
@@ -2518,6 +5198,13 @@ https://orgmode.org/org.html#Advanced-features
 *** Formuls 
 **** sqrt : 
  #+TBLFM: @2$2 = 100 - @-1 :: $5 = 1 ::@3$2 = @-1 * @-2::@4$2 = sqrt(@-1)
+**** sum 
+#+TBLFM: 
+@>$5=vsum(@I..@12)::
+@>$3=vsum(@I..@II)::$3=@1$3*$-1::
+$5=@1$3*($2^2)::@2$4= @2$3::$4=$3+@-1$4::@>$4=0:: 
+@2$6=@2$5::$6=$5+@-1$6::@>$6=0
+
 *** Keys 
 **** Re-aligning and
 ----------------------------

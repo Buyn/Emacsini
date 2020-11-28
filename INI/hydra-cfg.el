@@ -21,7 +21,7 @@
     ^Main^             00             ^Menus^          
     ^─────^───────────────────────────^─────^────────────
     _q_ quit      _d_ev menu    _o_rg-mode   _b_Org-Brain                       
-    _w_ww         _SPC_ next    _y_nke-menu 
+    _w_ww         _SPC_ next    _y_nke-menu  _r_eader
     _p_rev-menu   _e_macs-menu  ya_s_nippet  _n_ext-menu    
     "
 ;; ***** keys
@@ -34,6 +34,7 @@
 		("y" hydra-yank-menu/body)
 		("n" spc-main-menu01/body)
 		("s" hydra-yasnippet/body )
+		("r" hydra-reader-menu/body )
 		("b" hydra-brain-org-menu/body)
 		("p" spc-main-menu99/body)
 ;; ***** END of def
@@ -612,5 +613,32 @@ _?_ help            _c_urrent file
 	("f" describe-face "describe-face")
 	("q" nil "quit")
 	)
+;; --------------------------------------
+;; *** hydra-reader-menu
+(defhydra hydra-reader-menu (:color blue)
+  ;; "Reader menu spd: % 'pixel-wait"
+  "Reader menu "
+  ;; "Reader menu spd: %(* 10 (- 1 pixel-wait))"
+	("r" (if (bound-and-true-p pixel-scroll-mode)
+					(progn
+						(pixel-scroll-mode -1)
+						(setq scroll-preserve-screen-position nil)
+						(define-key evil-normal-state-map (kbd "SPC") 
+									'khaoos-insert-one-char)
+						(message "Reader is off"))
+					(progn
+						(pixel-scroll-mode 1)
+						(setq scroll-preserve-screen-position 1)
+						(setq pixel-wait 0.1)
+						(define-key evil-normal-state-map (kbd "SPC") 
+							(lambda() (interactive)
+								(pixel-scroll-pixel-up 900)))
+						(message "Reader is on")))
+			  "toggle reader")
+	("f" (setq pixel-wait (- pixel-wait 0.1))
+					(format "faster spd:%s" (- 1 pixel-wait)) :color pink)
+	("s" (setq pixel-wait (+ pixel-wait 0.1))
+					"slower":color pink)
+	("q" nil "quit"))
 ;; --------------------------------------
 ;; *  --------------------------------------
