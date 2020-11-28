@@ -30,6 +30,8 @@
 ;;  accessable if you edit entries from org-mode. See Editing from org-mode under
 ;;  Usage below.
   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
+	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
+
 ;; **** org-id : 
 ;; 4 org-brain use org-id in order to speed things up. Because of this, the variable
 ;;  org-id-track-globally should be t (which it already is by default). You may want to

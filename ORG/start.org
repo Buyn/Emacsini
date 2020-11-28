@@ -75,6 +75,10 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
+	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
+#+end_src
+
+#+begin_src emacs-lisp :results output silent
 	(setq minimap-major-modes '(prog-mode org-mode Info-mode))
 #+end_src
 (progn
