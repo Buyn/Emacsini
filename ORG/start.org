@@ -82,6 +82,12 @@ https://www.braveclojure.com/basic-emacs/
 	(define-key evil-normal-state-map (kbd "M-e M-f M-d") 'elpy-goto-definition)
 	(define-key evil-normal-state-map (kbd "M-e M-f M-D") 'elpy-goto-definition-other-window)
 #+end_src
+#+begin_src emacs-lisp :tangle yes
+(setq minimap-major-modes '())
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
+#+end_src
 ** Calc 
 *** random
 		Выдаёт между 0-1
