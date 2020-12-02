@@ -316,7 +316,7 @@ _?_ help            _c_urrent file
 ;; --------------------------------------
 
 ;; *** elpy-hydra
-(defhydra elpy-hydra (:color red)
+(defhydra elpy-hydra (:color blue)
 ;; **** doc
 ;; Two hydras for Elpy to ease the running of tests:
 ;;     elpy-hydra shows a menu to run the current unit test we are in with two test runners, Django and Pytest. The current virtualenv is shown in the header and we can change it (w, "workon").
@@ -590,13 +590,13 @@ _?_ help            _c_urrent file
 
 
 ;; *** hydra-dev-menu
-(defhydra hydra-dev-menu (:color pink)
+(defhydra hydra-dev-menu (:color red)
   ;; (global-map "C-c")
   "dev menu"
 	("c" company-mode "company")
 	("f" program-mode-hook-customize "fuze")
 	("o" outshine-mode "outshine")
-	("e" elpy-hydra/body "elpy")
+	("e" elpy-hydra/body "elpy" :color blue)
 	("p" python-mode "pyton")
 	("d" rainbow-delimiters-mode "delimiters")
 	("l" display-line-numbers-mode "line-numbers")
@@ -615,6 +615,7 @@ _?_ help            _c_urrent file
 	)
 ;; --------------------------------------
 ;; *** hydra-reader-menu
+(setq pixel-wait 0)
 (defhydra hydra-reader-menu (:color blue)
   ;; "Reader menu spd: % 'pixel-wait"
   "Reader menu "
@@ -632,6 +633,7 @@ _?_ help            _c_urrent file
 						(setq pixel-wait 0.1)
 						(define-key evil-normal-state-map (kbd "SPC") 
 							(lambda() (interactive)
+								(evil-window-middle)
 								(pixel-scroll-pixel-up 900)))
 						(message "Reader is on")))
 			  "toggle reader")

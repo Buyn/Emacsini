@@ -6,7 +6,7 @@
 ;; --------------------------------------
 ;; * MINIMAP-MODE CUSTOMIZATION 
 ;; --------------------------------------
-;; ** use-package evil
+;; ** use-package minimap
 (use-package minimap
 							:ensure t
 ;; ** :config : 
@@ -18,7 +18,8 @@
 	(setq minimap-minimum-width 0.03)
 	;; (setq minimap-major-modes '(prog-mode, org-mode, help-mode))
 	;; (setq minimap-major-modes '(prog-mode))
-	(setq minimap-major-modes '(prog-mode org-mode Info-mode))
+	;; (setq minimap-major-modes '(prog-mode org-mode Info-mode))
+	(setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
 ;; ** END of use-package minimap-mode
   )
 ;; ** Docs

@@ -28,8 +28,12 @@
 	;; findout what it do
 ;; *** define-key : 
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
-	(define-key evil-normal-state-map (kbd "M-e M-f M-p") 'elpy-goto-definition)
-	(define-key evil-normal-state-map (kbd "M-e M-f M-P") 'elpy-goto-definition-other-window)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-p") 'xref-find-definitions)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-P") 'xref-find-definitions-other-frame)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-o") 'elpy-occur-definitions)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-a") 'elpy-goto-assignment)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-d") 'elpy-goto-definition)
+	(define-key evil-normal-state-map (kbd "M-e M-f M-D") 'elpy-goto-definition-other-window)
 	(define-key evil-insert-state-map (kbd "<f8>") '(lambda() (interactive)
 
 				(org-save-all-org-buffers)
