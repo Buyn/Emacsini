@@ -26,6 +26,8 @@
 	;; (setq python-shell-interpreter "python"
 	;; python-shell-interpreter-args "-i")
 	;; findout what it do
+	(add-to-list 'auto-mode-alist '("\\.kv$" . python-mode))
+	;; (add-to-list 'interpreter-mode-alist '("kv" . python-mode))
 ;; *** define-key : 
 	(define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 	(define-key evil-normal-state-map (kbd "M-e M-f M-p") 'xref-find-definitions)
