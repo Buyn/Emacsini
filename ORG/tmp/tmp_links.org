@@ -1,0 +1,3 @@
+* Tasks
+** link to 
+[[file:d:/Development/lisp/HOME/INI/org_agend_cfg.el::;; * Agend ADD new case]]

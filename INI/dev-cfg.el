@@ -58,7 +58,9 @@
 ;; **** global-set-key <f8> :
 ;;  --------------------------------------
 (global-set-key(kbd "<f8>") '(lambda() (interactive)
-				(save-buffer)
+				;; (save-buffer)
+				(save-some-buffers 'no-confirm)
+				(org-save-all-org-buffers)
 				(evil-normal-state)
 				(let ((curent-buffer (buffer-name)))
 					(select-frame-by-name "*compilation*")

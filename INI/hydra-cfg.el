@@ -634,7 +634,7 @@ _?_ help            _c_urrent file
 						(define-key evil-normal-state-map (kbd "SPC") 
 							(lambda() (interactive)
 								(evil-window-middle)
-								(pixel-scroll-pixel-up 900)))
+								(pixel-scroll-pixel-up 666)))
 						(message "Reader is on")))
 			  "toggle reader")
 	("f" (setq pixel-wait (- pixel-wait 0.1))

@@ -43,6 +43,12 @@
 	("i" "Todo [inbox]" entry
 	    (file+headline "~/org/gtd/inbox.org" "Tasks")
 	    "* TODO %i%?")
+	("l" "links to transfer" entry
+	    (file+headline "~/org/tmp/tmp_links.org" "Tasks")
+	    "* TODO %i%?")
+	("s" "Sandbox" entry
+	    (file+headline "~/org/tmp/sandbox.org" )
+	    "* TODO %i%?")
 	("T" "Tickler" entry
 	    (file+headline "~/org/gtd/tickler.org" "Tickler")
 	    "* %i%? \n %U")
