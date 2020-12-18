@@ -75,6 +75,16 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
+(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(evil-normal-state)
+		(query-replace
+			(read-string (concat "replace("  (current-kill 0 "DO-NOT-MOVE") "):")
+						nil
+						nil
+						(current-kill 0 "DO-NOT-MOVE"))
+			region-text
+			))))
 (setq org-capture-templates '(
 	("t" "Todo" entry
 	    (file+headline "~/org/gtd/gtd.org" "Tasks")
@@ -260,16 +270,44 @@ open macros file
 *** open 
 
 ** Install
-tar not found when trying to install from melpa 
-You probably have an outdated package database
-(package-refresh-contents)
-(package-install "company-irony")
-remove pacage
-нужно водом команды в m-x m-y
-поскольку Поскольку название пакета отличается от его названия
-наличием циферхеша 
-m-x
-package-delete
+*** Docs
+ tar not found when trying to install from melpa 
+ You probably have an outdated package database
+ (package-refresh-contents)
+ (package-install "company-irony")
+ remove pacage
+ нужно водом команды в m-x m-y
+ поскольку Поскольку название пакета отличается от его названия
+ наличием циферхеша 
+ m-x
+ package-delete
+*** experement pack 
+**** ahk
+***** xahk-mode : 
+xahk-mode is an available package.
+***** ahk-mode : 
+ahk-mode is an available package.
+(use-package ahk-mode
+							:ensure t)
+
+any ahk script, then type “M-x ahk-mode”, you'll see the
+source code syntax colored.
+
+To have Emacs automatically load the file when it restarts, and
+automatically use the mode when opening files ending in “.ahk”, do this:
+
+This package is located within Melpa.  To install, add
+("melpa" . "http://melpa.org/packages/") to package-archives and
+execute "M-x package-install RET ahk-mode RET".
+
+FEATURES
+
+When opening a script file you will get:
+- syntax highlighting
+- Commenting - provide functions for block and standard commenting
+- Imenu - jump to a function / label within a buffer
+- Execute scripts
+- Auto complete - adds options for `company-mode' and `auto-complete-mode'
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -331,7 +369,7 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
   '(progn
      (define-key company-mode-map (kbd "C-:") 'helm-company)
      (define-key company-active-map (kbd "C-:") 'helm-company)))
-*** describe-package
+*** describe-package (найти пакаджи на сервере и описанить)
 describe-package
 
 ** load require: 
