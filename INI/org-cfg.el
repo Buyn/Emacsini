@@ -17,6 +17,7 @@
 ;; --------------------------------------
 (require 'org)
 (global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
+(global-set-key [(meta f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/tmp/tmp_links.org")))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -95,6 +96,11 @@
 (define-key evil-normal-state-map "zk" 'org-backward-element)
 (define-key evil-normal-state-map "zh" 'org-up-element)
 (define-key evil-normal-state-map "zl" 'org-down-element)
+;; it i think in visual not working delate it after resets
+(define-key evil-visual-state-map "zj" 'org-forward-element)
+(define-key evil-visual-state-map "zk" 'org-backward-element)
+(define-key evil-visual-state-map "zh" 'org-up-element)
+(define-key evil-visual-state-map "zl" 'org-down-element)
 ;; **** foldings manipulate
 (define-key evil-normal-state-map "zJ" 'org-metadown)
 (define-key evil-normal-state-map "zK" 'org-metaup)

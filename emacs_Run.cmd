@@ -1,3 +1,5 @@
+rem d:
+rem cd D:\Development\lisp\Emacs\bin\
 set HOME=.\
 D:\Development\lisp\Emacs\bin\runemacs.exe %*
 rem D:\Development\lisp\Emacs\bin\emacsclientw.exe -n -c -a ""

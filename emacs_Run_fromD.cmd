@@ -1,3 +1,5 @@
+d:
+rem cd D:\Development\lisp\Emacs\bin\
 cd "D:\Development\lisp\HOME\"
 set HOME=.\
 D:\Development\lisp\Emacs\bin\runemacs.exe %*

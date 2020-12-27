@@ -56,13 +56,13 @@
 )
 (setq url-cookie-secure-storage
  '((".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "17-Dec-2020" "Mon, 18 Jan 2021 00:00:00 GMT" "/" ".wikipedia.org" t])
+	[url-cookie "WMF-Last-Access-Global" "21-Dec-2020" "Fri, 22 Jan 2021 00:00:00 GMT" "/" ".wikipedia.org" t])
  (".wikibooks.org"
 	[url-cookie "WMF-Last-Access-Global" "24-Nov-2020" "Sat, 26 Dec 2020 12:00:00 GMT" "/" ".wikibooks.org" t])
  ("en.wikibooks.org"
 	[url-cookie "WMF-Last-Access" "24-Nov-2020" "Sat, 26 Dec 2020 12:00:00 GMT" "/" "en.wikibooks.org" t])
  ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "17-Dec-2020" "Mon, 18 Jan 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
+	[url-cookie "WMF-Last-Access" "21-Dec-2020" "Fri, 22 Jan 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
  (".github.com"
 	[url-cookie "logged_in" "no" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t]
 	[url-cookie "_octo" "GH1.1.1253637579.1582393222" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t])
