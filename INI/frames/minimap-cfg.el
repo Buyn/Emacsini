@@ -12,16 +12,25 @@
 ;; ** :config : 
 	:config
 	;; (minimap-mode)
+;; *** setq : 
 	;; (setq minimap-recreate-windo nil)
 	;; (setq minimap-major-modes nil)
 	(setq minimap-width-fraction 0.1)
 	(setq minimap-minimum-width 0.03)
 	(setq minimap-highlight-line nil)
 	(setq minimap-update-delay 0.3)
+	(setq minimap-automatically-delete-window nil)
+	(setq minimap-recreate-window nil)
 	;; (setq minimap-major-modes '(prog-mode, org-mode, help-mode))
 	;; (setq minimap-major-modes '(prog-mode))
 	;; (setq minimap-major-modes '(prog-mode org-mode Info-mode))
 	(setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
+;; *** custom-set-faces : 
+	(custom-set-faces
+	 '(minimap-active-region-background ((
+								((background dark))
+								(:background "#454590" :extend t))
+					(t (:background "#A84708FE0FFF" :extend t)))))
 ;; ** END of use-package minimap-mode
   )
 ;; ** Docs

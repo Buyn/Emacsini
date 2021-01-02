@@ -75,6 +75,12 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
 (define-key evil-normal-state-map (kbd "M-c M-t") '(lambda () (interactive)
 				  (setq x-select-enable-clipboard
 								(not x-select-enable-clipboard))
