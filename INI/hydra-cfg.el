@@ -544,13 +544,16 @@ _?_ help            _c_urrent file
   ("y" (progn  
 			(setq x-select-enable-clipboard t)
 			(kill-new (current-kill 0 "DO-NOT-MOVE"))
+			;; (message last-clip)
 			(setq x-select-enable-clipboard nil)
 			)
 		"reg2clipbord")
   ("w" (progn  
+			(setq x-select-enable-clipboard t)
 			;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
 			;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
 			(org-eww-copy-for-org-mode)
+			(setq x-select-enable-clipboard nil)
 			)
 		"web-page2Org")
   ("q" nil "quit")

@@ -77,7 +77,7 @@
 					(evil-delete-whole-line nil  nil)
 					(setq x-select-enable-clipboard nil)
 					))
-;; *** M-c M-p : 
+;; *** M-c M-p: 
 (define-key evil-normal-state-map (kbd "M-c M-p") '(lambda() (interactive)
 								(setq x-select-enable-clipboard 1)
 								(yank)
@@ -98,9 +98,12 @@
 				(yank)
 				(setq x-select-enable-clipboard nil)))
 ;; *** M-c M-t : 
-(define-key evil-normal-state-map (kbd "M-c M-t") '(lambda() (interactive)
+(define-key evil-normal-state-map (kbd "M-c M-t") '(lambda () (interactive)
 				  (setq x-select-enable-clipboard
-						(not x-select-enable-clipboard))))
+								(not x-select-enable-clipboard))
+					(if x-select-enable-clipboard
+						(message "x-select-enable-clipboard is on")
+						(message "x-select-enable-clipboard = off"))))
 ;; -------------------------------------- }}}
 ;; *** M-p : 
 (define-key evil-insert-state-map (kbd "M-p ") '(lambda() (interactive)
