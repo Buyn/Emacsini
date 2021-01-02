@@ -31,4 +31,9 @@
 ;; (find-file-other-frame "~/INI/interface/powerline-cfg.el")
 (load "~/INI/interface/powerline-cfg.el")
 ;; --------------------------------------
+;; * REVERSE-IM CUSTOMIZATION: 
+;; --------------------------------------
+;; (find-file-other-frame "~/INI/interface/input-methods-cfg.el")
+(load "~/INI/interface/input-methods-cfg.el")
+;; --------------------------------------
 ;; * --------------------------------------

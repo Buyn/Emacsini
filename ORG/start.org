@@ -169,6 +169,7 @@ open macros file
 (find-file-other-frame "~/INI/interface-mods.el")
 	(find-file-other-frame "~/INI/interface/powerline-cfg.el") 
 		(find-file-other-frame "~/INI/interface/jonathanchu-emacs-powerline-cfg.el") 
+		(find-file-other-frame "~/INI/interface/input-methods-cfg.el")
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** Hydra menu
