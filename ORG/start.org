@@ -80,7 +80,9 @@ https://www.braveclojure.com/basic-emacs/
   :custom
   (reverse-im-input-methods '("russian-computer"))
   :config
-  (reverse-im-mode t))
+  (reverse-im-mode t)
+	(define-key evil-visual-state-map (kbd "M-U") 'reverse-im-translate-region)
+	(define-key evil-insert-state-map (kbd "M-U") 'reverse-im-translate-word))
 (define-key evil-normal-state-map (kbd "M-c M-t") '(lambda () (interactive)
 				  (setq x-select-enable-clipboard
 								(not x-select-enable-clipboard))
