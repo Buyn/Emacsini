@@ -23,6 +23,10 @@ https://www.braveclojure.com/basic-emacs/
  /   |      ||_|_|_||      |   \
 =================================
 ** Tmp  
+(elscreen-get-number-of-screens)
+
+(evil-window-set-width 177)
+(elscreen-get-screen-nickname 1)
 |        |        |   |   |   |
 |--------+--------+---+---+---|
 |        |        |   |   |   |
@@ -166,7 +170,7 @@ open macros file
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
 *** frame : 
-(find-file-other-frame "~/INI/frame-control.el")
+	(find-file-other-frame "~/INI/frame-control.el") EVILTABS WINDMOVE
 	(find-file-other-frame "~/INI/fullscreen-cfg.el")
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
@@ -196,9 +200,10 @@ open macros file
 	(find-file-other-frame "~/INI/python-cfg.el")
 	(find-file-other-frame "~/INI/dev/csharp-cfg.el")
 	(find-file-other-frame "~/INI/dev/clojure-cfg.el")
+	(find-file-other-frame "~/INI/dev/autohotkey-cfg.el")
 	(find-file-other-frame "~/INI/dev/unity-cfg.el")
 	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
-	(find-file-other-frame "~/INI/flycheck-cfg.el") 
+	(find-file-other-frame "~/INI/flycheck-cfg.el")
 *** My Elisp
 	(find-file-other-frame "~/ELs/BuYn/shell.el")
 ** org files
@@ -357,6 +362,13 @@ When opening a script file you will get:
 - Imenu - jump to a function / label within a buffer
 - Execute scripts
 - Auto complete - adds options for `company-mode' and `auto-complete-mode'
+
+D:\scripts\ahk 
+
+D:/scripts/ahk/Magic_Carpet.ahk 
+
+(find-file-other-frame "D:/scripts/ahk/Magic_Carpet.ahk")
+D:/scripts/ahk/Magic_Carpet.ahk 
 ***** xahk-mode : 
 xahk-mode is an available package.
 **** reverse-im
@@ -4187,6 +4199,40 @@ Which we can use as the condition for an if or when or unless expression:
 (if (bound-and-true-p flymake-mode)
     (message "flymake-mode is on")
   (message "flymake-mode is off"))
+*** Control structurs 
+**** cond : 
+***** Help
+cond is a special form in ‘C source code’.
+(cond CLAUSES...)
+
+Try each clause until one succeeds.
+Each clause looks like (CONDITION BODY...).  CONDITION is evaluated
+and, if the value is non-nil, this clause succeeds:
+then the expressions in BODY are evaluated and the last one’s
+value is the value of the cond-form.
+If a clause has one element, as in (CONDITION), then the cond-form
+returns CONDITION’s value, if that is non-nil.
+If no clause succeeds, cond returns nil.
+***** exempls
+****** elscreen : 
+ (defun elscreen-goto (screen)
+	 "Switch to screen SCREEN."
+	 (interactive "NGoto screen number: ")
+	 (cond
+		((eq (elscreen-get-current-screen) screen))
+		((elscreen-screen-live-p screen)
+		 (elscreen-set-window-configuration
+			(elscreen-get-current-screen)
+			(elscreen-current-window-configuration))
+		 (elscreen-set-current-screen screen)
+		 (elscreen-goto-internal screen)
+		 (elscreen-notify-screen-modification 'force)
+		 (run-hooks 'elscreen-goto-hook)
+		 screen)
+		(t
+		 (elscreen-message (format "No screen %d" screen))
+		 nil)))
+ https://www.youtube.com/watch?v=m661lmrAYKY
 
 ** Text 
 *** By Xah Lee : 
@@ -8144,6 +8190,9 @@ Suitable functions to add to these lists might be:
 *** insert mod
 **** tab
 If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
+*** ex mode : 
+**** evil-ex-define-cmd : 
+	 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
 
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in

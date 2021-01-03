@@ -30,7 +30,7 @@
 ;; --------------------------------------
 ;; --------------------------------------
 ;; * EVIL TABS  {{{
-;; ** use-package evil
+;; ** use-package evil-tabs
 (use-package evil-tabs :ensure t
 ;; ** :config : 
 	:config
@@ -38,6 +38,7 @@
 	(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
 	(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
 	(elscreen-toggle-display-tab)
+	;; (setq elscreen-display-tab nil)
   ;; :bind ("C-c c" hydra-clock/body)
 ;; ** END of use-package evil-tabs
   )
@@ -149,7 +150,7 @@
 ;; * FRAMES-FUN CUSTOMIZATION  
 (defun buyn-get-frame-by-name (fname)
   "If there is a frame named FNAME, return it, else nil."
-  (require 'dash)                       ; For `-some'
+  (require 'dash) ; For `-some'
   (-some (lambda (frame)
            (when (equal fname (frame-parameter frame 'name))
              frame))
