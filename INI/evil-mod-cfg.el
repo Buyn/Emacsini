@@ -284,3 +284,9 @@
 ;; (define-key evil-normal-state-map (kbd "RET") 'addone-char-after-normal-evil)
 (define-key evil-normal-state-map (kbd "RET") 'khaoos-append-one-char)
 ;; --------------------------------------  
+
+;; * EVIL TABS  
+;; ** load el
+;; (find-file "~/INI/Evil/evil-tabs-cfg.el")
+(load "~/INI/Evil/evil-tabs-cfg.el")
+;; *  --------------------------------------

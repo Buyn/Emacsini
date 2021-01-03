@@ -153,6 +153,7 @@ open macros file
 (find-file-other-frame "~/INI/vanila_cfg.el")
 *** Evil
 	(find-file-other-frame "~/INI/evil-mod-cfg.el")
+	(find-file-other-frame "~/INI/Evil/evil-tabs-cfg.el")
 	(find-file-other-frame "~/ELs/Evil/evil-respect-input.el")
 	(find-file-other-frame "~/ELs/Evil/onecharadd.el") not used
 	(find-file-other-frame "~/ELs/Evil/copylines.el") пока нет
@@ -170,7 +171,7 @@ open macros file
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
 *** frame : 
-	(find-file-other-frame "~/INI/frame-control.el") EVILTABS WINDMOVE
+	(find-file-other-frame "~/INI/frame-control.el") WINDMOVE
 	(find-file-other-frame "~/INI/fullscreen-cfg.el")
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
