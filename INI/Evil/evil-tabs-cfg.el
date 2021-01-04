@@ -5,7 +5,7 @@
 ;; (find-file "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
 ;; --------------------------------------
-;; * EVIL TABS  {{{
+;; * EVIL TABS  
 ;; ** use-package evil-tabs
 (use-package evil-tabs :ensure t
 ;; ** :config : 
@@ -38,4 +38,37 @@
 
 ;; --------------------------------------
 ;; --------------------------------------
+;; * TAB Functions
+;; ** make new indirect tab :
+(defun make-new-indirect-tab (name)
+  "Make new tab and indirect bufer with name"
+  (interactive)
+	(setq minimap-major-modes '())
+	(clone-indirect-buffer name nil)
+	(elscreen-create)
+	;; (switch-to-buffer "evil-tabs-cfg.el<2>"))
+	(switch-to-buffer name))
+
+;; --------------------------------------
+;; ** gen-name-for-curennt-indirect-buffer : 
+(defun gen-name-for-curennt-indirect-buffer (ender)
+  "genarate name for indirect buffer
+		on curennt buffer name"
+  ;; (interactive "P")
+	(concat (buffer-name) ender)
+  ) 
+;; (gen-name-for-curennt-indirect-buffer "<2>")
+;; ** next-or-make-new-tab 
+(defun next-or-make-new-tab ()
+  "Swircg on next tab or
+		make new tab and open in it indirect buffer"
+  (interactive)
+		(let ((num-of-scr (elscreen-get-number-of-screens))) (cond
+			((= num-of-scr 1)
+				(make-new-indirect-tab
+				(gen-name-for-curennt-indirect-buffer "<2>")))
+			((= num-of-scr 2)
+						(elscreen-next))
+			((= num-of-scr 3)
+						(elscreen-next)))))
 ;; *  --------------------------------------

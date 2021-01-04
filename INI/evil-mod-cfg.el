@@ -287,6 +287,6 @@
 
 ;; * EVIL TABS  
 ;; ** load el
-;; (find-file "~/INI/Evil/evil-tabs-cfg.el")
+;; (find-file-other-frame "~/INI/Evil/evil-tabs-cfg.el")
 (load "~/INI/Evil/evil-tabs-cfg.el")
 ;; *  --------------------------------------
