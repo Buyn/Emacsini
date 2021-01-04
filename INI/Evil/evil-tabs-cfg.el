@@ -6,16 +6,23 @@
 ;; --------------------------------------
 ;; --------------------------------------
 ;; * EVIL TABS  
-;; ** use-package evil-tabs
+;; ** install evil-tabs
 (use-package evil-tabs :ensure t
 ;; ** :config : 
 	:config
 	(global-evil-tabs-mode t)
-	(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
-	(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
 	(elscreen-toggle-display-tab)
 	;; (setq elscreen-display-tab nil)
+;; ** evil-ex-define-cmd : 
+	(evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
+	(evil-ex-define-cmd "tabcl[ose]" 'elscreen-kill)
+;; ** define-key evil-normal-state-map : 
   ;; :bind ("C-c c" hydra-clock/body)
+	(evil-define-key 'normal evil-tabs-mode-map
+		"gt" 'elscreen-next
+		"gT" 'elscreen-previous
+		"gt" 'next-or-make-new-tab
+		"T" 'evil-tabs-current-buffer-to-tab)
 ;; ** END of use-package evil-tabs
   )
 ;; ** Docs

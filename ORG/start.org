@@ -25,6 +25,7 @@ https://www.braveclojure.com/basic-emacs/
 ** Tmp  
 (elscreen-get-number-of-screens)
 
+(elscreen-get-number-of-screens)
 (evil-window-set-width 177)
 (elscreen-get-screen-nickname 1)
 |        |        |   |   |   |
