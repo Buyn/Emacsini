@@ -12,8 +12,9 @@
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
 ;; * WWW CUSTOMIZATION
+;; (find-file-other-frame "~/INI/www-cfg.el") 
 ;; (load "~/INI/www-cfg.el")
-;; (find-file "~/INI/www-cfg.el") not used
+(eval-after-load "~/INI/www-cfg.el")
 ;; --------------------------------------
 ;; * INTERFACE-MODS CUSTOMIZATION
 (load "~/INI/interface-mods.el")

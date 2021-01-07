@@ -80,22 +80,6 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-(use-package reverse-im
-  :ensure t
-  :custom
-  (reverse-im-input-methods '("russian-computer"))
-  :config
-  (reverse-im-mode t)
-	(define-key evil-visual-state-map (kbd "M-U") 'reverse-im-translate-region)
-	(define-key evil-insert-state-map (kbd "M-U") 'reverse-im-translate-word))
-(define-key evil-normal-state-map (kbd "M-c M-t") '(lambda () (interactive)
-				  (setq x-select-enable-clipboard
-								(not x-select-enable-clipboard))
-					(if x-select-enable-clipboard
-						(message "x-select-enable-clipboard is on")
-						(message "x-select-enable-clipboard = off"))))
-
-(global-set-key [(meta f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/tmp/tmp_links.org")))
 
 #+end_src
 
@@ -163,7 +147,7 @@ open macros file
 	(find-file-other-frame "~/INI/org_agend_cfg.el")
 	(find-file-other-frame "~/INI/babel-cfg.el")
 	(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
-	(find-file-other-frame "~/INI/org-brain-cfg.el") 
+	(find-file-other-frame "~/INI/org-brain-cfg.el")
 *** Folding
 (find-file-other-frame "~/INI/folding-cfg.el")
 	(find-file-other-frame "~/INI/outshine_cfg.el")
@@ -178,7 +162,7 @@ open macros file
 		minimap-mode loading
 *** Other 
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")
-(find-file-other-frame "~/INI/www-cfg.el") not used
+(find-file-other-frame "~/INI/www-cfg.el") 
 *** interface
 (find-file-other-frame "~/INI/interface-mods.el")
 	(find-file-other-frame "~/INI/interface/powerline-cfg.el") 
