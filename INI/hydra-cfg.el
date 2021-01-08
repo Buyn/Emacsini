@@ -492,13 +492,13 @@ _?_ help            _c_urrent file
     "
                 ^WWW  Menus^          
     ────────────^──────────^───────────────────
-     _d_el buffer   _L_ist    _B_ookmarks     _v_isual
-     _s_earch       _S_witch  _p_ast&go          
-     _z_oom         _q_uit    _Y_ank page url
+     _d_el buffer   _L_ist    _B_ookmarks    _v_isual
+     _S_earchOtherF _s_earch  s_W_itch       _p_ast&go          
+     _z_oom         _q_uit    _Y_ankPageUrl
     "
 ;; ***** keys
     ("L" (eww-list-buffers))
-    ("S" (eww-switch-to-buffer))
+    ("W" (eww-switch-to-buffer))
     ("B" (eww-list-bookmarks))
     ("v" global-visual-line-mode)
     ("d" (kill-buffer (current-buffer)) :color red)
@@ -513,13 +513,29 @@ _?_ help            _c_urrent file
 		   )
 	 )
 ;; ****** "s" : 
-    ("s"  (progn (if (use-region-p)
-					(eww (buffer-substring
-							(region-beginning)
-							(region-end)))
-					(eww (buffer-substring
-							(line-beginning-position)
-							(line-beginning-position 2))))))
+    ("s"  (
+			let (buffer-name-to-close (buffer-name))
+					(if (use-region-p)
+						(eww (buffer-substring
+								(region-beginning)
+								(region-end)))
+						(eww (buffer-substring
+								(line-beginning-position)
+								(line-beginning-position 2))))
+					(switch-to-buffer buffer-name-to-close)))
+;; ****** "S" : 
+    ("S"  (
+			let (buffer-name-to-close (buffer-name))
+					(evil-window-split)
+					(if (use-region-p)
+						(eww (buffer-substring
+								(region-beginning)
+								(region-end)))
+						(eww (buffer-substring
+								(line-beginning-position)
+								(line-beginning-position 2))))
+					(evil-quit)
+					(switch-to-buffer-other-frame buffer-name-to-close)))
 ;; ****** "Y" : 
     ("Y" (progn  
 			(setq x-select-enable-clipboard t)

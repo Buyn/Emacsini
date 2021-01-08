@@ -13,8 +13,8 @@
 ;; --------------------------------------
 ;; * WWW CUSTOMIZATION
 ;; (find-file-other-frame "~/INI/www-cfg.el") 
-;; (load "~/INI/www-cfg.el")
-(eval-after-load "~/INI/www-cfg.el")
+(load "~/INI/www-cfg.el")
+;; (eval-after-load "~/INI/www-cfg.el")
 ;; --------------------------------------
 ;; * INTERFACE-MODS CUSTOMIZATION
 (load "~/INI/interface-mods.el")

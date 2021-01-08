@@ -80,7 +80,15 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-
+(defun open-link-in-new-frame ()
+  "open-link-in-new-frame"
+  (interactive)
+			(let (buffer-name-to-close (buffer-name))
+				(evil-window-split)
+				(eww-follow-link)
+				(evil-quit)
+				(switch-to-buffer-other-frame buffer-name-to-close)))
+(define-key eww-link-keymap (kbd "C-RET") 'open-link-in-new-frame)
 #+end_src
 
 #+begin_src emacs-lisp :results output silent
@@ -156,7 +164,8 @@ open macros file
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
 *** frame : 
-	(find-file-other-frame "~/INI/frame-control.el") WINDMOVE
+	(find-file-other-frame "~/INI/frame-control.el")
+															WINDMOVE
 	(find-file-other-frame "~/INI/fullscreen-cfg.el")
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
