@@ -86,6 +86,7 @@ https://www.braveclojure.com/basic-emacs/
 #+begin_src emacs-lisp :results output silent
 (setq minimap-major-modes '())
 #+end_src
+
 #+begin_src emacs-lisp :results output silent
 (setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
 #+end_src
