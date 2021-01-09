@@ -494,13 +494,14 @@ _?_ help            _c_urrent file
     ────────────^──────────^───────────────────
      _d_el buffer   _L_ist    _B_ookmarks    _v_isual
      _S_earchOtherF _s_earch  s_W_itch       _p_ast&go          
-     _z_oom         _q_uit    _Y_ankPageUrl
+     _z_oom         _q_uit    _Y_ankPageUrl  _f_rameOpenLink
     "
 ;; ***** keys
     ("L" (eww-list-buffers))
     ("W" (eww-switch-to-buffer))
     ("B" (eww-list-bookmarks))
     ("v" global-visual-line-mode)
+    ("f" open-link-in-new-frame)
     ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
 	("q" nil) 

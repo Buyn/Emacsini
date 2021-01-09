@@ -14,15 +14,15 @@
   (interactive)
 			(let (buffer-name-to-close (buffer-name))
 				(evil-window-split)
-				(eww-follow-link)
+				;; (global-visual-line-mode)
+				(eww (shr-url-at-point nil))
 				(evil-quit)
 				(switch-to-buffer-other-frame buffer-name-to-close)))
 ;; --------------------------------------
 ;; ** define-key : 
 ;; --------------------------------------
-;; (define-key eww-link-keymap (kbd "C-<return>") 'open-link-in-new-frame)
-;; (define-key eww- (kbd "C-RET") 'open-link-in-new-frame)
-;; <C-return> 
+;; (define-key eww-mode-map (kbd "C-<return>") 'open-link-in-new-frame)
+(define-key eww-mode-map (kbd "C-RET") 'open-link-in-new-frame)
 ;; --------------------------------------
 
 ;; ** buyn-eww-hook : 

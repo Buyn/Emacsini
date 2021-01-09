@@ -5,7 +5,7 @@
 ;; (find-file "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
 ;; --------------------------------------
-;; * EVIL TABS  
+;; * EVIL TABS CONFIGURATION 
 ;; ** install evil-tabs
 (use-package evil-tabs :ensure t
 ;; ** :config : 
@@ -45,7 +45,7 @@
 
 ;; --------------------------------------
 ;; --------------------------------------
-;; * TAB Functions
+;; * TAB FUNCTIONS
 ;; ** make new indirect tab :
 (defun make-new-indirect-tab (name)
   "Make new tab and indirect bufer with name"
@@ -64,6 +64,8 @@
   ;; (interactive "P")
 	(concat (buffer-name) ender)
   ) 
+
+;; --------------------------------------
 ;; (gen-name-for-curennt-indirect-buffer "<2>")
 ;; ** next-or-make-new-tab 
 (defun next-or-make-new-tab ()
@@ -77,5 +79,39 @@
 			((= num-of-scr 2)
 						(elscreen-next))
 			((= num-of-scr 3)
-						(elscreen-next)))))
+						(switch-between-too-first-tabs)))))
+
+;; --------------------------------------
+;; ** switch-between-too-first-tabs 
+(defun switch-between-too-first-tabs ()
+  "switch-between-too-first-tabs"
+	(let ((scr-num (elscreen-get-current-screen)))
+		(cond
+			((= scr-num 0) (elscreen-goto 1))
+			((= scr-num 1) (elscreen-goto 0))
+			((> scr-num 1) (elscreen-goto 1)))))
+
+;; --------------------------------------
+;; ** make-new-tab-for-fullscreen-windows 
+(defun make-new-tab-for-fullscreen-windows ()
+  "make-new-tab-for-fullscreen-windows"
+  (interactive)
+	(when (= (elscreen-get-number-of-screens) 1)
+			(make-new-indirect-tab))
+	(let ((orbuf-name (buffer-name)))
+			(elscreen-create)
+			(switch-to-buffer orbuf-name)
+			(evil-window-vsplit)
+			(evil-window-set-width 60)
+			(let ((name (concat orbuf-name "<fs0>")))
+				(clone-indirect-buffer name nil)
+				(switch-to-buffer name))
+			(evil-window-split)
+			(let ((name (concat orbuf-name "<fs1>")))
+				(clone-indirect-buffer name nil)
+				(switch-to-buffer name))
+			(evil-window-split)
+			(let ((name (concat orbuf-name "<fs2>")))
+				(clone-indirect-buffer name nil)
+				(switch-to-buffer name))))
 ;; *  --------------------------------------

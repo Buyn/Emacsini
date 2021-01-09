@@ -91,7 +91,6 @@
 		(setq x-select-enable-clipboard nil)
 		))
 ;; *** M-c M-o : 
-;; *** M-c M-o : 
 (define-key evil-normal-state-map (kbd "M-c M-o") '(lambda() (interactive)
 				(setq x-select-enable-clipboard 1)
 				(evil-insert-newline-below)
