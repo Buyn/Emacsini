@@ -80,7 +80,9 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-	(load "~/INI/www-cfg.el") 
+(org-agenda-files '(	
+	"~/../Dropbox/orgs/GTD/todo_today.org"
+	"~/../Dropbox/orgs/GTD/todo_nottoday.org"))
 #+end_src
 
 #+begin_src emacs-lisp :results output silent

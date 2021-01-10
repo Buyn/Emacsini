@@ -21,11 +21,11 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-(setq org-log-done t)
 ;; (global-set-key (kbd "C-c l") 'org-store-link)
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
 ;; --------------------------------------
+
 ;; ** ---------------     ORG TODOs
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
@@ -34,6 +34,7 @@
 ;; (setq org-agenda-custom-commands
 ;;       '(("n" occur-tree "NEXT")))
 ;; --------------------------------------
+
 ;; ** ---------------     ORG Capures
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
@@ -80,6 +81,7 @@
 ;; User Option: org-confirm-elisp-link-function
 ;;     Function that prompts the user before executing an Emacs Lisp link. 
 (setq org-confirm-elisp-link-function nil)
+(setq org-log-done t)
 ;; ** ORG binding : 
 ;; *** ORG heders : 
 (define-key evil-normal-state-map
@@ -133,12 +135,11 @@
 ;; (define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
 (define-key org-mode-map (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; ** ORG agenda customization
+;; (find-file-other-frame "~/INI/org_agend_cfg.el")
 (load "~/INI/org_agend_cfg.el")
 ;; ** ORG babel 
+;; (find-file-other-frame "~/INI/babel-cfg.el")
 (load "~/INI/babel-cfg.el")
-
-;; --------------------------------------
-
 ;; ** ORG-BRAIN 
 ;; (find-file-other-frame "~/INI/org-brain-cfg.el")
 (load "~/INI/org-brain-cfg.el")

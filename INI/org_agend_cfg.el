@@ -8,6 +8,9 @@
 ;; * ageda setings 
 ;; --------------------- 
 (setq org-agenda-sticky 1)
+(setq (org-agenda-files '(	
+	"~/../Dropbox/orgs/GTD/todo_today.org"
+	"~/../Dropbox/orgs/GTD/todo_nottoday.org")))
 ;; --------------------- 
 ;; * open ageda on new frame 
 ;; --------------------- 
@@ -26,8 +29,8 @@
 
 (define-key evil-normal-state-map (kbd "M-g M-t M-a") '(lambda () (interactive) 
 		(simple-run-command-in-new-frame 'org-agenda))) 
-
 ;; --------------------- 
+
 ;; * Agend ADD new case
 ;; --------------------- 
 ;; ** comment : 
@@ -61,9 +64,9 @@
 								))) 
         ("QN" todo "NEXT"
 						((org-agenda-files '(		"~/../Dropbox/orgs/GTD/todo_today.org" 
-																		"~/../Dropbox/orgs/capture/emagus.org" 
-																		"~/../Dropbox/orgs/capture/Necronomicon.org" 
-																		"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																		;; "~/../Dropbox/orgs/capture/emagus.org" 
+																		;; "~/../Dropbox/orgs/capture/Necronomicon.org" 
+																		;; "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
 																		) 
 						))) 
         ("QH" "My-agenda"
@@ -71,6 +74,7 @@
 								(org-agenda-files '(
 																						"~/../Dropbox/orgs/capture/emagus.org" 
 																						"~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+																						"~/../Dropbox/orgs/capture/Necronomicon.org" 
 																						) 
 								))) 
         ("Qh" agenda "My-agenda" (	
