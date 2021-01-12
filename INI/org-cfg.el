@@ -136,7 +136,10 @@
 (define-key org-mode-map (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; ** ORG agenda customization
 ;; (find-file-other-frame "~/INI/org_agend_cfg.el")
-(load "~/INI/org_agend_cfg.el")
+
+(use-package org-agenda
+  :config
+	(load "~/INI/org_agend_cfg.el"))
 ;; ** ORG babel 
 ;; (find-file-other-frame "~/INI/babel-cfg.el")
 (load "~/INI/babel-cfg.el")

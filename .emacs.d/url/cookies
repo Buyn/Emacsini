@@ -4,6 +4,17 @@
 (setq url-cookie-storage
  '(("emackandboliohk.com"
 	[url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil])
+ (".readthedocs.io"
+	[url-cookie "__cfduid" "d1e52dceb8d1b6c2f72a91f2ba4d937d01610407214" "Wed, 10-Feb-21 23:20:14 GMT" "/" ".readthedocs.io" nil])
+ ("myraspberry.ru"
+	[url-cookie "siteStatistics" "7fd02860b1d73d55d79959da44ff36cd"
+							#("Вт янв 19 03:14:11 2038 GMT" 0 27
+								(charset windows-1251))
+							"/" "myraspberry.ru" nil]
+	[url-cookie "PHPSESSID" "d133d316ba0312c6b43b0402ec138c91"
+							#("Вс янв 17 23:34:05 2021 GMT" 0 27
+								(charset windows-1251))
+							"/" "myraspberry.ru" nil])
  ("www.wikiwand.com"
 	[url-cookie "wikiwand.firstLandingPage" "article_page"
 							#("Чт авг 20 01:11:17 2020 GMT" 0 27
@@ -48,6 +59,10 @@
 	[url-cookie "_shopify_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil])
  (".realpython.com"
 	[url-cookie "__cfduid" "da1c9e9b8919ca54bbcd1e8f32923e02d1610012448" "Sat, 06-Feb-21 09:40:48 GMT" "/" ".realpython.com" nil])
+ ("nyxt.atlas.engineer"
+	[url-cookie "lack.session" "76d6d00bef3a8c29eaeeb983cf233ade0e718350" "Tue, 09 Jan 2142 00:44:36 GMT" "/" "nyxt.atlas.engineer" nil])
+ (".medium.com"
+	[url-cookie "__cfduid" "d7bcba9a41011312216cc8c21c2bd53f21610418363" "Thu, 11-Feb-21 02:26:03 GMT" "/" ".medium.com" nil])
  ("sourceforge.net"
 	[url-cookie "VISITOR" "55c94821-583d-4d12-b2d2-059e94185876"
 							#("Сб мар 02 09:48:53 2030 GMT" 0 27
@@ -57,6 +72,8 @@
 (setq url-cookie-secure-storage
  '((".wikipedia.org"
 	[url-cookie "WMF-Last-Access-Global" "07-Jan-2021" "Mon, 08 Feb 2021 00:00:00 GMT" "/" ".wikipedia.org" t])
+ (".youtube.com"
+	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t])
  ("en.wikipedia.org"
 	[url-cookie "WMF-Last-Access" "07-Jan-2021" "Mon, 08 Feb 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
  (".github.com"
@@ -85,6 +102,10 @@
 							"/" "reddit.com" t])
  ("ru.wikipedia.org"
 	[url-cookie "WMF-Last-Access" "07-Jan-2021" "Mon, 08 Feb 2021 00:00:00 GMT" "/" "ru.wikipedia.org" t])
+ ("medium.com"
+	[url-cookie "uid" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
+	[url-cookie "sid" "1:esnthg0ktKQxQFddPKvm027zbIA2/tUwooH2/JDTvpLGO9KhHs00REB+ULcO+ALP" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
+	[url-cookie "optimizelyEndUserId" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t])
  ("emackandboliohk.com"
 	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
 )

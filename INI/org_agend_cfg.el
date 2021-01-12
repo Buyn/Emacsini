@@ -8,9 +8,23 @@
 ;; * ageda setings 
 ;; --------------------- 
 (setq org-agenda-sticky 1)
-(setq (org-agenda-files '(	
+(setq org-agenda-files '(	
 	"~/../Dropbox/orgs/GTD/todo_today.org"
-	"~/../Dropbox/orgs/GTD/todo_nottoday.org")))
+	"~/../Dropbox/orgs/GTD/todo_nottoday.org"))
+;; --------------------- 
+;; * 
+;; --------------------- 
+;; (define-key org-agenda-mode-map (kbd "H")
+;; 	'(lambda () (interactive) 
+;; 		(setq current-prefix-arg '(4)) ; C-u
+;; 		(call-interactively 'org-agenda-do-date-earlier)))
+
+(define-key org-agenda-mode-map (kbd "L")
+	'(lambda () (interactive) 
+		 (org-agenda-date-later-minutes 6)))
+(define-key org-agenda-mode-map (kbd "H")
+	'(lambda () (interactive) 
+		 (org-agenda-date-earlier-minutes 6)))
 ;; --------------------- 
 ;; * open ageda on new frame 
 ;; --------------------- 

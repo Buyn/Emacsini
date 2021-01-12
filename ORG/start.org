@@ -68,6 +68,10 @@ https://www.braveclojure.com/basic-emacs/
 **** todo
 **** in progress 
 **** done
+*** Pomodoro
+**** Pomodoro 
+**** arhiv 
+**** todo
 *** Ezenhaur 
 **** Срочное и важное
 **** Срочное но не важное
