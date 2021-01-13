@@ -3,6 +3,7 @@
 ;; --------------------------------------
 ;; * used in
 ;; (find-file "~/INI/org-cfg.el")
+;; (find-file-other-frame "~/INI/org-cfg.el")
 ;; --------------------------------------
 ;; --------------------- 
 ;; * ageda setings 

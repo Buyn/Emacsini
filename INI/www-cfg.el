@@ -3,6 +3,7 @@
 ;; --------------------------------------
 ;; * used in
 ;; (find-file "~/INI/init.el")
+;; (find-file-other-frame "~/INI/init.el")
 ;; --------------------------------------
 ;; --------------------------------------
 ;; * EWW-MODE CUSTOMIZATION 
@@ -70,10 +71,10 @@
 ;; --------------------------------------
 ;; todo не загружен eww
 ;; todo add riader key
-;; (define-key eww-mode-map (kbd "C-<return>") 'open-link-in-new-frame)
+(define-key eww-mode-map (kbd "C-<return>") 'open-link-in-new-frame)
 ;; (define-key eww-mode-map (kbd "C-RET") 'open-link-in-new-frame)
-;; (define-key eww-mode-map (kbd "o o") 'eww)
-;; (define-key eww-mode-map (kbd "O O") 'eww-browse-with-external-browser)
+(define-key eww-mode-map (kbd "o o") 'eww)
+(define-key eww-mode-map (kbd "O O") 'eww-browse-with-external-browser)
 ;; --------------------------------------
 
 ;; ** hooks : 
