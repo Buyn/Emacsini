@@ -433,15 +433,26 @@ _?_ help            _c_urrent file
     "
                 ^Org-mode  Menus^          
     ────────────^───────────────^───────────────────
-     _d_one TODO    A_r_hiv TODO  _t_odo set
-     a_g_enda   _q_uit
+     _d_one TODO A_r_hiv TODO    a_g_enda
+     _t_odo set  _i_schedule+1h  _q_uit   
     "
 ;; ***** keys
+;; ****** one-line keys
     ("d" org-todo "DONE")
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
-	("q" nil) 
+		("q" nil) 
+;; ****** i : 
+    ("i" (org--deadline-or-schedule nil 'scheduled 
+						(concat
+							(number-to-string (+ 1 (nth 2 (decode-time))))
+							":"
+							(let ((i (nth 1 (decode-time))))
+								(if (> i  9)
+										(number-to-string i)
+										(concat "0" (number-to-string i))))))
+					:color blue)
 ;; ***** END of def
 	)
 ;; --------------------------------------
