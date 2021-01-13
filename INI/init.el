@@ -12,6 +12,8 @@
 (load "~/INI/evil-mod-cfg.el")
 ;; --------------------------------------
 ;; * WWW CUSTOMIZATION
+;; (with-eval-after-load 'evil
+;;   (define-key evil-motion-state-map (kbd "g l") 'evil-end-of-line))
 ;; (eval-after-load "~/INI/www-cfg.el")
 ;; (find-file-other-frame "~/INI/www-cfg.el") 
 (use-package eww

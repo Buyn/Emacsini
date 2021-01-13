@@ -455,12 +455,12 @@ _?_ help            _c_urrent file
 		("q" nil) 
 ;; ****** i : 
     ("i" (org--deadline-or-schedule nil 'scheduled 
-							 (curent-time-format-hh-mm 1 0)
-					:color blue))
+							 (curent-time-format-hh-mm 1 0))
+					:color blue)
 ;; ****** n : 
     ("n" (org--deadline-or-schedule nil 'scheduled 
-							 (curent-time-format-hh-mm 13 0)
-					:color blue))
+							 (curent-time-format-hh-mm 13 0))
+					:color blue)
 ;; ***** END of def
 	)
 ;; --------------------------------------

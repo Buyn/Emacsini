@@ -22,28 +22,30 @@
 ;; 		(call-interactively 'org-agenda-do-date-earlier)))
 ;; ** g : 
 ;; --------------------- 
-;; (define-key org-agenda-mode-map (kbd "g g")
-;; 	'(lambda () (interactive) 
-;; 		 (org-agenda-redo)))
+(unbind-key (kbd "g") org-agenda-mode-map)
+(define-key org-agenda-mode-map (kbd "g g")
+	'(lambda () (interactive) 
+		 (org-agenda-redo)))
 ;; --------------------- 
 
 ;; ** z : 
 ;; --------------------- 
-;; (define-key org-agenda-mode-map (kbd "z n")
-;; 	'(lambda () (interactive) 
-;; 		 (org-agenda-add-note)))
+(unbind-key (kbd "z") org-agenda-mode-map)
+(define-key org-agenda-mode-map (kbd "z n")
+	'(lambda () (interactive) 
+		 (org-agenda-add-note)))
 
-;; (define-key org-agenda-mode-map (kbd "z z")
-;; 	'(lambda () (interactive) 
-;; 		 (evil-scroll-line-to-center (line-number-at-pos))))
+(define-key org-agenda-mode-map (kbd "z z")
+	'(lambda () (interactive) 
+		 (evil-scroll-line-to-center (line-number-at-pos))))
 
-;; (define-key org-agenda-mode-map (kbd "z t")
-;; 	'(lambda () (interactive) 
-;; 		(evil-scroll-line-to-top  (line-number-at-pos))))
+(define-key org-agenda-mode-map (kbd "z t")
+	'(lambda () (interactive) 
+		(evil-scroll-line-to-top  (line-number-at-pos))))
 
-;; (define-key org-agenda-mode-map (kbd "z b")
-;; 	'(lambda () (interactive) 
-;; 		(evil-scroll-line-to-bottom  (line-number-at-pos))))
+(define-key org-agenda-mode-map (kbd "z b")
+	'(lambda () (interactive) 
+		(evil-scroll-line-to-bottom  (line-number-at-pos))))
 
 ;; ** P&N : 
 ;; --------------------- 
