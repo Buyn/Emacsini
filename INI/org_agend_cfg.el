@@ -13,19 +13,58 @@
 	"~/../Dropbox/orgs/GTD/todo_today.org"
 	"~/../Dropbox/orgs/GTD/todo_nottoday.org"))
 ;; --------------------- 
-;; * 
+;; * define-key org-agenda-mode-map
 ;; --------------------- 
+;; ** comments 
 ;; (define-key org-agenda-mode-map (kbd "H")
 ;; 	'(lambda () (interactive) 
 ;; 		(setq current-prefix-arg '(4)) ; C-u
 ;; 		(call-interactively 'org-agenda-do-date-earlier)))
+;; ** g : 
+;; --------------------- 
+;; (define-key org-agenda-mode-map (kbd "g g")
+;; 	'(lambda () (interactive) 
+;; 		 (org-agenda-redo)))
+;; --------------------- 
 
+;; ** z : 
+;; --------------------- 
+;; (define-key org-agenda-mode-map (kbd "z n")
+;; 	'(lambda () (interactive) 
+;; 		 (org-agenda-add-note)))
+
+;; (define-key org-agenda-mode-map (kbd "z z")
+;; 	'(lambda () (interactive) 
+;; 		 (evil-scroll-line-to-center (line-number-at-pos))))
+
+;; (define-key org-agenda-mode-map (kbd "z t")
+;; 	'(lambda () (interactive) 
+;; 		(evil-scroll-line-to-top  (line-number-at-pos))))
+
+;; (define-key org-agenda-mode-map (kbd "z b")
+;; 	'(lambda () (interactive) 
+;; 		(evil-scroll-line-to-bottom  (line-number-at-pos))))
+
+;; ** P&N : 
+;; --------------------- 
+(define-key org-agenda-mode-map (kbd "P")
+	'(lambda () (interactive) 
+		 (evil-scroll-page-up 1)))
+(define-key org-agenda-mode-map (kbd "N")
+	'(lambda () (interactive) 
+		 (evil-scroll-page-down 1)))
+;; --------------------- 
+
+;; ** L&H : 
+;; --------------------- 
 (define-key org-agenda-mode-map (kbd "L")
 	'(lambda () (interactive) 
 		 (org-agenda-date-later-minutes 6)))
 (define-key org-agenda-mode-map (kbd "H")
 	'(lambda () (interactive) 
 		 (org-agenda-date-earlier-minutes 6)))
+;; --------------------- 
+
 ;; --------------------- 
 ;; * open ageda on new frame 
 ;; --------------------- 
