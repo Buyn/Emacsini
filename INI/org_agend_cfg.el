@@ -23,9 +23,20 @@
 ;; ** g : 
 ;; --------------------- 
 (unbind-key (kbd "g") org-agenda-mode-map)
+;; --------------------- 
+
 (define-key org-agenda-mode-map (kbd "g g")
 	'(lambda () (interactive) 
 		 (org-agenda-redo)))
+
+(define-key org-agenda-mode-map (kbd "g j")
+	'(lambda () (interactive) 
+		 (org-agenda-goto-date)))
+	
+(define-key org-agenda-mode-map (kbd "g k")
+	'(lambda () (interactive) 
+		 (org-agenda-capture)))
+
 ;; --------------------- 
 
 ;; ** z : 
@@ -46,6 +57,26 @@
 (define-key org-agenda-mode-map (kbd "z b")
 	'(lambda () (interactive) 
 		(evil-scroll-line-to-bottom  (line-number-at-pos))))
+
+;; ** evil j&k
+;; --------------------- 
+(define-key org-agenda-mode-map (kbd "j")
+	'(lambda () (interactive) 
+		 (org-agenda-next-line)))
+(define-key org-agenda-mode-map (kbd "k")
+	'(lambda () (interactive) 
+		 (org-agenda-previous-line)))
+;; --------------------- 
+
+;; ** evil c-f&c-b: 
+(define-key org-agenda-mode-map (kbd "C-f")
+	'(lambda () (interactive) 
+		 ((evil-scroll-page-down 1))))
+(define-key org-agenda-mode-map (kbd "C-b")
+	'(lambda () (interactive) 
+		 (evil-scroll-page-up 1)))
+;; --------------------- 
+;; --------------------- 
 
 ;; ** P&N : 
 ;; --------------------- 

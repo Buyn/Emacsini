@@ -133,6 +133,12 @@ https://www.braveclojure.com/basic-emacs/
 
 ;; --------------------- 
 (load "~/INI/hydra-cfg.el")
+
+(use-package eww
+  :config
+;; (find-file-other-frame "~/INI/org_agend_cfg.el")
+	(load "~/INI/www-cfg.el"))
+
 #+end_src
 
 #+begin_src emacs-lisp :results output silent
