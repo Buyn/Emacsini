@@ -131,6 +131,26 @@ https://www.braveclojure.com/basic-emacs/
 		 (org-agenda-date-earlier-minutes 6)))
 ;; --------------------- 
 
+;; ** evil j&k
+;; --------------------- 
+(define-key org-agenda-mode-map (kbd "j")
+	'(lambda () (interactive) 
+		 (org-agenda-next-line)))
+(define-key org-agenda-mode-map (kbd "k")
+	'(lambda () (interactive) 
+		 (org-agenda-previous-line)))
+;; --------------------- 
+
+;; ** evil c-f&c-b: 
+(define-key org-agenda-mode-map (kbd "C-f")
+	'(lambda () (interactive) 
+		 (evil-scroll-page-down 1)))
+(define-key org-agenda-mode-map (kbd "C-b")
+	'(lambda () (interactive) 
+		 (evil-scroll-page-up 1)))
+;; --------------------- 
+;; --------------------- 
+
 ;; --------------------- 
 (load "~/INI/hydra-cfg.el")
 

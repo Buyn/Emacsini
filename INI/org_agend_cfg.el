@@ -71,7 +71,7 @@
 ;; ** evil c-f&c-b: 
 (define-key org-agenda-mode-map (kbd "C-f")
 	'(lambda () (interactive) 
-		 ((evil-scroll-page-down 1))))
+		 (evil-scroll-page-down 1)))
 (define-key org-agenda-mode-map (kbd "C-b")
 	'(lambda () (interactive) 
 		 (evil-scroll-page-up 1)))
@@ -88,11 +88,14 @@
 		 (evil-scroll-page-down 1)))
 ;; --------------------- 
 
-;; ** L&H : 
+;; ** L&H "C-S-l": 
 ;; --------------------- 
 (define-key org-agenda-mode-map (kbd "L")
 	'(lambda () (interactive) 
 		 (org-agenda-date-later-minutes 6)))
+(define-key org-agenda-mode-map (kbd "C-S-l")
+	'(lambda () (interactive) 
+		 (org-agenda-date-later-hours 13)))
 (define-key org-agenda-mode-map (kbd "H")
 	'(lambda () (interactive) 
 		 (org-agenda-date-earlier-minutes 6)))
