@@ -37,6 +37,14 @@
 	'(lambda () (interactive) 
 		 (org-agenda-capture)))
 
+(define-key org-agenda-mode-map (kbd "g h")
+	'(lambda () (interactive) 
+		 (org-agenda-holidays)))
+
+(define-key org-agenda-mode-map (kbd "g l")
+	'(lambda () (interactive) 
+		 (org-agenda-log-mode)))
+	
 ;; --------------------- 
 
 ;; ** z : 
@@ -88,17 +96,35 @@
 		 (evil-scroll-page-down 1)))
 ;; --------------------- 
 
-;; ** L&H "C-S-l": 
+;; ** L&H
 ;; --------------------- 
 (define-key org-agenda-mode-map (kbd "L")
 	'(lambda () (interactive) 
 		 (org-agenda-date-later-minutes 6)))
-(define-key org-agenda-mode-map (kbd "C-S-l")
-	'(lambda () (interactive) 
-		 (org-agenda-date-later-hours 13)))
 (define-key org-agenda-mode-map (kbd "H")
 	'(lambda () (interactive) 
 		 (org-agenda-date-earlier-minutes 6)))
+;; --------------------- 
+
+;; ** "C-S-h"&"C-S-l": 
+;; --------------------- 
+(define-key org-agenda-mode-map (kbd "C-S-l")
+	'(lambda () (interactive) 
+		 (org-agenda-date-later-hours 13)))
+(define-key org-agenda-mode-map (kbd "C-S-h")
+	'(lambda () (interactive) 
+			(curent-time-format-hh-mm 0 0)))
+;; --------------------- 
+
+;; --------------------- 
+;; ** l&h  
+;; --------------------- 
+(define-key org-agenda-mode-map (kbd "l")
+	'(lambda () (interactive) 
+		 (org-agenda-date-later-minutes 1)))
+(define-key org-agenda-mode-map (kbd "h")
+	'(lambda () (interactive) 
+		 (org-agenda-date-earlier-minutes 1)))
 ;; --------------------- 
 
 ;; --------------------- 

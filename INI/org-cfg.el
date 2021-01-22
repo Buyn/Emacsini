@@ -30,7 +30,13 @@
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
         ;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-        (sequence "NEXT(x)" "WAITING(w)" "VERIFY(v)" "|" "CANCELED(c)" "DELEGATED(g)")))
+        (sequence "NEXT(x)" 
+									"WAITING(w)" 
+									"VERIFY(v)" 
+									"CR(r)"
+									"|" 
+									"CANCELED(c)" 
+									"DELEGATED(g)")))
 ;; (setq org-agenda-custom-commands
 ;;       '(("n" occur-tree "NEXT")))
 ;; --------------------------------------
