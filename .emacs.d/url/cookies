@@ -81,7 +81,7 @@
 	[url-cookie "sid" "1:esnthg0ktKQxQFddPKvm027zbIA2/tUwooH2/JDTvpLGO9KhHs00REB+ULcO+ALP" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
 	[url-cookie "uid" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t])
  ("ru.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "07-Jan-2021" "Mon, 08 Feb 2021 00:00:00 GMT" "/" "ru.wikipedia.org" t])
+	[url-cookie "WMF-Last-Access" "24-Jan-2021" "Thu, 25 Feb 2021 00:00:00 GMT" "/" "ru.wikipedia.org" t])
  ("reddit.com"
 	[url-cookie "edgebucket" "8xsDqKHwFcE8N79HIm"
 							#("Пт ноя 25 00:26:33 2022 GMT" 0 27
@@ -107,12 +107,11 @@
 	[url-cookie "_octo" "GH1.1.1253637579.1582393222" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t]
 	[url-cookie "logged_in" "no" "Mon, 22 Feb 2021 17:40:22 -0000" "/" ".github.com" t])
  ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "18-Jan-2021" "Fri, 19 Feb 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
+	[url-cookie "WMF-Last-Access" "23-Jan-2021" "Wed, 24 Feb 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
  (".youtube.com"
-	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t]
-	[url-cookie "GPS" "1" "Thu, 21-Jan-2021 22:14:10 GMT" "/" ".youtube.com" t])
+	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t])
  (".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "18-Jan-2021" "Fri, 19 Feb 2021 00:00:00 GMT" "/" ".wikipedia.org" t]))
+	[url-cookie "WMF-Last-Access-Global" "24-Jan-2021" "Thu, 25 Feb 2021 00:00:00 GMT" "/" ".wikipedia.org" t]))
 )
 
 ;; Local Variables:

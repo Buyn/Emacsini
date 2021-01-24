@@ -441,10 +441,11 @@ _?_ help            _c_urrent file
 (defhydra org-menu (:color pink)
 ;; ***** hint
     "
-                ^Org-mode  Menus^          
-    ────────────^───────────────^───────────────────
-     _d_one TODO A_r_hiv TODO    a_g_enda
-     _t_odo set  _i_+1h _n_+13h  _q_uit   
+						^Org-mode  Menus^          
+────────────^───────────────^───────────────────
+	_d_one TODO A_r_hiv TODO    a_g_enda 
+	_t_odo set  _h_+1h _n_+13h  _q_uit   
+ _s_how image
     "
 ;; ***** keys
 ;; ****** one-line keys
@@ -452,9 +453,10 @@ _?_ help            _c_urrent file
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
+    ("s" org-toggle-inline-images :color blue)
 		("q" nil) 
-;; ****** i : 
-    ("i" (org--deadline-or-schedule nil 'scheduled 
+;; ****** h : 
+    ("h" (org--deadline-or-schedule nil 'scheduled 
 							 (curent-time-format-hh-mm 1 0))
 					:color blue)
 ;; ****** n : 

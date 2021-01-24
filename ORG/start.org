@@ -23,26 +23,43 @@ https://www.braveclojure.com/basic-emacs/
  /   |      ||_|_|_||      |   \
 =================================
 ** Tmp  
-(elscreen-get-number-of-screens)
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:SED-HR4049
+[[./274px.png]]
 
-(elscreen-get-number-of-screens)
-(evil-window-set-width 177)
-(elscreen-get-screen-nickname 1)
-|        |        |   |   |   |
-|--------+--------+---+---+---|
-|        |        |   |   |   |
-|        |        |   |   |   |
-|        |        |   |   |   |
-|        |        |   |   |   |
-|--------+--------+---+---+---|
-|        |        |   |   |   |
-| sdfsdf | sdfsfd |   |   |   |
-|--------+--------+---+---+---|
-| sdf    |        |   |   |   |
-|        | sdfsdf |   |   |   |
-|        |        |   |   |   |
-|--------+--------+---+---+---|
-#+TBLFM: @II-1$2:=191
+[[d:/274px.png]]
+[~/../../../274px.png]]
+[[~/../../../274px.png]]
+
+#+BEGIN_SRC ditaa :file hello-world.png
+/--------------+    /--------------+
+| cRED         |    |              |
+| Hello World! *--->* {s}          |
+|              |    |  Datebase    |
++--------------/    +--------------/
+										
+										
+
+
+#+END_SRC
+
+#+RESULTS:
+[[file:hello-world.png]]
+
+#+BEGIN_SRC ditaa :file 1.png :cmdline -r -s 0.8 
+${0}
+#+END_SRC 
+
+#+RESULTS:
+[[file:1.png]]
+
+[[./images/hello-world.png]]
+
+[[https://i.stack.imgur.com/o2Ko6.png]]
+
+[[i.stack.imgur.com/o2Ko6.png
+]]
+https://i.stack.imgur.com/o2Ko6.png 
 
 (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
 
@@ -4989,6 +5006,23 @@ https://drive.google.com/file/d/10mKcsFB0pDeLRM15T6QlmG4Rn979rBDl/view?usp=shari
     - Elijah Wood :: He plays Frodo
     - Sean Austin :: He plays Sam, Frodo's friend.  I still remember
       him very well from his role as Mikey Walsh in The Goonies.
+*** Drowers 
+#+BEGIN_VERSE
+ Great clouds overhead
+ Tiny black birds rise and fall
+ Snow covers Emacs
+
+    ---AlexSchroeder
+#+END_VERSE
+#+BEGIN_QUOTE
+Everything should be made as simple as possible,
+but not any simpler ---Albert Einstein
+#+END_QUOTE
+#+BEGIN_CENTER
+Everything should be made as simple as possible, \\
+but not any simpler
+#+END_CENTER
+
 ** Help
 	[[info:org#Tables][info:org]] 
 *** info\manual
@@ -8402,6 +8436,70 @@ If you are using Evil anyways, you can use C-t and C-d to increase/decrease inde
 *** ex mode : 
 **** evil-ex-define-cmd : 
 	 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
+
+** ivy 
+*** keys
+**** Minibuffer bindings:
+ key             binding
+ ---             -------
+ C-c							Prefix Command
+ C-g							minibuffer-keyboard-quit
+ TAB							ivy-partial-or-done
+ C-j							ivy-alt-done
+ RET							ivy-done
+ C-o							hydra-ivy/body
+ C-r							ivy-reverse-i-search
+ C-s							ivy-next-line-or-history
+ C-v							ivy-scroll-up-command
+ ESC							Prefix Command
+ SPC							self-insert-command
+ $								ivy-magic-read-file-env
+ S-SPC						ivy-restrict-to-matches
+ C-'							ivy-avy
+ <down-mouse-1>	ignore
+ <mouse-1>				ivy-mouse-done
+ <mouse-3>				ivy-mouse-dispatching-done
+ <next>					ivy-scroll-up-command
+ <prior>					ivy-scroll-down-command
+ <remap>					Prefix Command
+ <right>					ivy-forward-char
+
+**** sort : 
+ C-c C-a					ivy-toggle-ignore
+ C-c C-o					ivy-occur
+ C-c C-s					ivy-rotate-sort
+****  <remap> <backward-delete-char-untabify>
+																 ivy-backward-delete-char
+ <remap> <backward-kill-word>		ivy-backward-kill-word
+ <remap> <beginning-of-buffer>		ivy-beginning-of-buffer
+ <remap> <delete-backward-char>	ivy-backward-delete-char
+ <remap> <delete-char>						ivy-delete-char
+ <remap> <describe-mode>					ivy-help
+ <remap> <end-of-buffer>					ivy-end-of-buffer
+ <remap> <forward-char>					ivy-forward-char
+ <remap> <kill-line>							ivy-kill-line
+ <remap> <kill-ring-save>				ivy-kill-ring-save
+ <remap> <kill-whole-line>				ivy-kill-whole-line
+ <remap> <kill-word>							ivy-kill-word
+ <remap> <next-line>							ivy-next-line
+ <remap> <previous-line>					ivy-previous-line
+ <remap> <scroll-down-command>		ivy-scroll-down-command
+ <remap> <scroll-up-command>			ivy-scroll-up-command
+**** ivy-read : 
+ C-M-a						ivy-read-action
+ C-M-j						ivy-immediate-done
+ M-RET						ivy-call
+ C-M-n						ivy-next-line-and-call
+ C-M-o						ivy-dispatching-call
+ C-M-p						ivy-previous-line-and-call
+ C-M-y						ivy-insert-current-full
+ M-i							ivy-insert-current
+ M-j							ivy-yank-word
+ M-n							ivy-next-history-element
+ M-o							ivy-dispatching-done
+ M-p							ivy-previous-history-element
+ M-r							ivy-toggle-regexp-quote
+ M-v							ivy-scroll-down-command
 
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
