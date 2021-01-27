@@ -7,6 +7,24 @@
 							#("Сб мар 02 09:48:53 2030 GMT" 0 27
 								(charset windows-1251))
 							"/" "sourceforge.net" nil])
+ (".pikabu.ru"
+	[url-cookie "grex2" "%7B%22low_interval_new_20200831%22%3A%22exp48%22%7D"
+							#("Вс апр 25 05:08:23 2021 GMT" 0 27
+								(charset windows-1251))
+							"/" ".pikabu.ru" nil]
+	[url-cookie "pcid" "tYAlQIY1Yv2"
+							#("Чт янв 23 05:08:23 2031 GMT" 0 27
+								(charset windows-1251))
+							"/" ".pikabu.ru" nil])
+ ("pikabu.ru"
+	[url-cookie "la" "1611551304_3197_3197___"
+							#("Чт янв 23 05:08:23 2031 GMT" 0 27
+								(charset windows-1251))
+							"/" "pikabu.ru" nil]
+	[url-cookie "PHPSESS" "aqc25e6uflai8i1aeb6om0ighc"
+							#("Чт янв 28 05:08:23 2021 GMT" 0 27
+								(charset windows-1251))
+							"/" "pikabu.ru" nil])
  (".vsetop.org"
 	[url-cookie "__cfduid" "d125c627b64891e8ee8ccc781c5f69c6a1610955481" "Wed, 17-Feb-21 07:38:01 GMT" "/" ".vsetop.org" nil])
  (".medium.com"
@@ -70,6 +88,11 @@
 	[url-cookie "__cfduid" "d1e52dceb8d1b6c2f72a91f2ba4d937d01610407214" "Wed, 10-Feb-21 23:20:14 GMT" "/" ".readthedocs.io" nil])
  (".google.com"
 	[url-cookie "NID" "207=lT8jTbe4wObdwY4-lhfia1guKANy_n-BmKaWBu8QQ05Qz__Dak1nMNHuSJy7Xyj1aqOl-biXfvBVqtKJ1wzW6VxxYQ2fEPYIBl6cBD42Yrb2SofsvPMeod1ohbpp0yqVPbNr4JMbNW37RAO1cpz6oZpVVmK3ORTUQefJdsDomfM" "Thu, 15-Jul-2021 19:58:35 GMT" "/" ".google.com" nil])
+ ("plantuml.com"
+	[url-cookie "active_template::173770" "pub_site.1611623640" "Thu, 28 Jan 2021 01:14:00 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezepvv" "160" "Wed, 27 Jan 2021 01:14:00 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezovuuidtime_173770" "1611623640" "Thu, 28 Jan 2021 01:14:00 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezCMPCCS" "true" "Wed, 26 Jan 2022 01:14:00 GMT" "/" "plantuml.com" nil])
  ("emackandboliohk.com"
 	[url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]))
 )

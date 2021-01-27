@@ -152,3 +152,8 @@
 ;; (find-file-other-frame "~/INI/org-brain-cfg.el")
 (load "~/INI/org-brain-cfg.el")
 ;; --------------------------------------
+
+;; * GRAPH ORG TOOLS
+;; (find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
+(load "~/INI/ORG/graph-tools-cfg.el")
+;; --------------------------------------

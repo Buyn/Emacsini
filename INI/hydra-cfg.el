@@ -453,7 +453,7 @@ _?_ help            _c_urrent file
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
-    ("s" org-toggle-inline-images :color blue)
+    ("s" org-toggle-inline-images )
 		("q" nil) 
 ;; ****** h : 
     ("h" (org--deadline-or-schedule nil 'scheduled 

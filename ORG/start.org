@@ -23,43 +23,7 @@ https://www.braveclojure.com/basic-emacs/
  /   |      ||_|_|_||      |   \
 =================================
 ** Tmp  
-#+CAPTION: This is the caption for the next figure link (or table)
-#+NAME:   fig:SED-HR4049
-[[./274px.png]]
-
-[[d:/274px.png]]
 [~/../../../274px.png]]
-[[~/../../../274px.png]]
-
-#+BEGIN_SRC ditaa :file hello-world.png
-/--------------+    /--------------+
-| cRED         |    |              |
-| Hello World! *--->* {s}          |
-|              |    |  Datebase    |
-+--------------/    +--------------/
-										
-										
-
-
-#+END_SRC
-
-#+RESULTS:
-[[file:hello-world.png]]
-
-#+BEGIN_SRC ditaa :file 1.png :cmdline -r -s 0.8 
-${0}
-#+END_SRC 
-
-#+RESULTS:
-[[file:1.png]]
-
-[[./images/hello-world.png]]
-
-[[https://i.stack.imgur.com/o2Ko6.png]]
-
-[[i.stack.imgur.com/o2Ko6.png
-]]
-https://i.stack.imgur.com/o2Ko6.png 
 
 (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
 
@@ -313,6 +277,7 @@ open macros file
 	(find-file-other-frame "~/INI/babel-cfg.el")
 	(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
+	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
 *** Folding
 (find-file-other-frame "~/INI/folding-cfg.el")
 	(find-file-other-frame "~/INI/outshine_cfg.el")
@@ -8501,6 +8466,1551 @@ If you are using Evil anyways, you can use C-t and C-d to increase/decrease inde
  M-r							ivy-toggle-regexp-quote
  M-v							ivy-scroll-down-command
 
+** Graph  
+*** PLANTUML
+**** man
+***** class
+******  Class Diagram  * [[https://plantuml.com/class-diagram#e5cec68ef9127fc4][Declaring element]]  
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=0bb074dd4a565b5d1779ebfaf53e719d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#9dd2a6eca0c2a0e7][Relations between classes]]  
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=0bb074dd4a565b5d1779ebfaf53e719d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#4a705b44651caa59][Label on relations]]  
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=0bb074dd4a565b5d1779ebfaf53e719d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#090967fbee930909][Adding methods]]  
+		* [[https://plantuml.com/class-diagram#3644720244dd6c6a][Defining visibility]]  
+****** 	Declaring element  * [[https://plantuml.com/class-diagram#9fd9d25be2fbb118][Abstract and Static]]  
+	*  * [[https://plantuml.com/class-diagram#08ca680401eefe3a][Advanced class body]]  
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=e5cec68ef9127fc4cb03b75d35fb2cd5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#59c91a18bcc97bb0][Notes and stereotypes]]  
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=e5cec68ef9127fc4cb03b75d35fb2cd5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#23ca7846dedbb80a][More on notes]]  
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=e5cec68ef9127fc4cb03b75d35fb2cd5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#e9d98ede969e1bba][Note on field (field, attribut, member) or]]  
+     [[https://plantuml.com/class-diagram#e9d98ede969e1bba][method]]  
+	Submit   * [[https://plantuml.com/class-diagram#1d010d898a1fead2][Note on links]]  
+	@startuml  * [[https://plantuml.com/class-diagram#a339d3559f33ad64][Abstract class and interface]]  
+	abstract        abstract  * [[https://plantuml.com/class-diagram#03256bc1982e60f4][Using non-letters]]  
+	abstract class  "abstract class"  * [[https://plantuml.com/class-diagram#6a8ec84e53ede3ae][Hide attributes, methods...]]  
+	annotation      annotation  * [[https://plantuml.com/class-diagram#20ec7d48c223b142][Hide classes]]  
+	circle          circle  * [[https://plantuml.com/class-diagram#b09695ba6d76313d][Use generics]]  
+	()              circle_short_form  * [[https://plantuml.com/class-diagram#4b62dd14f1d33739][Specific Spot]]  
+	class           class  * [[https://plantuml.com/class-diagram#27fe4eb3edbaff8f][Packages]]  
+	diamond         diamond  * [[https://plantuml.com/class-diagram#a05971470d7fd711][Packages style]]  
+	<>              diamond_short_form  * [[https://plantuml.com/class-diagram#13d28e8dfc702e34][Namespaces]]  
+	entity          entity  * [[https://plantuml.com/class-diagram#e73aec79687e3638][Automatic namespace creation]]  
+	enum            enum  * [[https://plantuml.com/class-diagram#8b64d7547fa4f699][Lollipop interface]]  
+	interface       interface  * [[https://plantuml.com/class-diagram#9a49d5ae2dd333a4][Changing arrows direction]]  
+	@enduml  * [[https://plantuml.com/class-diagram#fbbc0504d940020e][Association classes]]  
+	*  * [[https://plantuml.com/class-diagram#ca121e2ba9f02322][Association on same classe]]  
+		* [[https://plantuml.com/class-diagram#7aa53dbdfc2137bf][Skinparam]]  
+****** 	Relations between classes  * [[https://plantuml.com/class-diagram#89a4c54a52d87715][Skinned Stereotypes]]  
+	*  * [[https://plantuml.com/class-diagram#cfe920390b501516][Color gradient]]  
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=9dd2a6eca0c2a0e79ad6bfc27a583fb7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#c08f8d9927fcb626][Help on layout]]  
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=9dd2a6eca0c2a0e79ad6bfc27a583fb7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#fc6a662f75b53104][Splitting large files]]  
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=9dd2a6eca0c2a0e79ad6bfc27a583fb7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#6e0d446ea2c5bf82][Extends and implements]]  
+		* [[https://plantuml.com/class-diagram#74f446c1d06a4f04][Inline style of relations (Linking or]]  
+	Relations between classes are defined using the following symbols :    [[https://plantuml.com/class-diagram#74f446c1d06a4f04][arrow)]]  
+		* [[https://plantuml.com/class-diagram#372843e1093965d6][Change relation, linking or arrow color]]  
+   Type   Symbol   Drawing      [[https://plantuml.com/class-diagram#372843e1093965d6][and style]]  
+   Extension   <|--  *    * [[https://plantuml.com/class-diagram#4829cb0f596c9350][Arrows from/to class members]]  
+   Composition  *--  *      
+   Aggregation   o--  *      
+     
+	It is possible to replace -- by .. to have a dotted line.     
+     
+	Knowing those rules, it is possible to draw the following drawings:     
+     
+	Submit     
+	@startuml    
+	Class01 <|-- Class02    
+	Class03 *-- Class04    
+	Class05 o-- Class06    
+	Class07 .. Class08    
+	Class09 -- Class10    
+	@enduml    
+	*    
+     
+	Submit     
+	@startuml    
+	Class11 <|.. Class12    
+	Class13 --> Class14    
+	Class15 ..> Class16    
+	Class17 ..|> Class18    
+	Class19 <--* Class20    
+	@enduml    
+	*    
+     
+	Submit     
+	@startuml    
+	Class21 #-- Class22    
+	Class23 x-- Class24    
+	Class25 }-- Class26    
+	Class27 +-- Class28    
+	Class29 ^-- Class30    
+	@enduml    
+	*    
+****** 	Label on relations    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It is possible to add a label on the relation, using :, followed by the text    
+	of the label.     
+     
+	For cardinality, you can use double-quotes "" on each side of the    
+	relation.     
+     
+	Submit     
+	@startuml    
+     
+	Class01 "1" *-- "many" Class02 : contains    
+     
+	Class03 o-- Class04 : aggregation    
+     
+	Class05 --> "1" Class06    
+     
+	@enduml    
+	*    
+     
+	You can add an extra arrow pointing at one object showing which    
+	object acts on the other object, using < or > at the begin or at the end    
+	of the label.     
+     
+	Submit     
+	@startuml    
+	class Car    
+     
+	Driver - Car : drives >    
+	Car *- Wheel : have 4 >    
+	Car -- Person : < owns    
+     
+	@enduml    
+	*    
+****** 	Adding methods    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=090967fbee9309097ce3bd7a98cd4aed&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=090967fbee9309097ce3bd7a98cd4aed&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=090967fbee9309097ce3bd7a98cd4aed&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	To declare fields and methods, you can use the symbol : followed by    
+	the field's or method's name.     
+     
+	The system checks for parenthesis to choose between methods and    
+	fields.     
+     
+	Submit     
+	@startuml    
+	Object <|-- ArrayList    
+     
+	Object : equals()    
+	ArrayList : Object[] elementData    
+	ArrayList : size()    
+     
+	@enduml    
+	*    
+     
+	It is also possible to group between brackets {} all fields and methods.     
+     
+	Note that the syntax is highly flexible about type/name order.     
+     
+	Submit     
+	@startuml    
+	class Dummy {    
+		String data    
+		void methods()    
+	}    
+     
+	class Flight {    
+     flightNumber : Integer    
+     departureTime : Date    
+	}    
+	@enduml    
+	*    
+     
+	You can use {field} and {method} modifiers to override default    
+	behaviour of the parser about fields and methods.     
+     
+	Submit     
+	@startuml    
+	class Dummy {    
+		{field} A field (despite parentheses)    
+		{method} Some method    
+	}    
+     
+	@enduml    
+	*    
+****** 	Defining visibility    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=3644720244dd6c6a9b9b9306d9577aeb&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=3644720244dd6c6a9b9b9306d9577aeb&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=3644720244dd6c6a9b9b9306d9577aeb&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	When you define methods or fields, you can use characters to define    
+	the visibility of the corresponding item:     
+     
+   Character  Icon for field  Icon for  Visibility       
+       method         
+   -  *  *  private       
+   #  *  *  protected       
+   ~  *  *  package      
+         private       
+   +  *  *  public       
+     
+	Submit     
+	@startuml    
+     
+	class Dummy {    
+   -field1    
+   #field2    
+   ~method1()    
+   +method2()    
+	}    
+     
+	@enduml    
+	*    
+     
+	You can turn off this feature using the skinparam classAttributeIconSize    
+	0 command :     
+     
+	Submit     
+	@startuml    
+	skinparam classAttributeIconSize 0    
+	class Dummy {    
+   -field1    
+   #field2    
+   ~method1()    
+   +method2()    
+	}    
+     
+	@enduml    
+	*    
+****** 	Abstract and Static    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=9fd9d25be2fbb118f4b55084f233c07d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=9fd9d25be2fbb118f4b55084f233c07d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=9fd9d25be2fbb118f4b55084f233c07d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can define static or abstract methods or fields using the {static} or    
+	{abstract} modifier.     
+     
+	These modifiers can be used at the start or at the end of the line. You    
+	can also use {classifier} instead of {static}.     
+     
+	Submit     
+	@startuml    
+	class Dummy {    
+		{static} String id    
+		{abstract} void methods()    
+	}    
+	@enduml    
+	*    
+****** 	Advanced class body    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=08ca680401eefe3a2fa918168d574a11&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=08ca680401eefe3a2fa918168d574a11&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=08ca680401eefe3a2fa918168d574a11&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	By default, methods and fields are automatically regrouped by    
+	PlantUML. You can use separators to define your own way of ordering    
+	fields and methods. The following separators are possible : --..==__.     
+     
+	You can also use titles within the separators:     
+     
+	Submit     
+	@startuml    
+	class Foo1 {    
+		You can use    
+		several lines    
+		..    
+		as you want    
+		and group    
+		==    
+		things together.    
+		__    
+		You can have as many groups    
+		as you want    
+		--    
+		End of class    
+	}    
+     
+	class User {    
+		.. Simple Getter ..    
+		+ getName()    
+		+ getAddress()    
+		.. Some setter ..    
+		+ setName()    
+		__ private data __    
+		int age    
+		-- encrypted --    
+		String password    
+	}    
+     
+	@enduml    
+	*    
+****** 	Notes and stereotypes    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=59c91a18bcc97bb0659545a3c33b21de&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=59c91a18bcc97bb0659545a3c33b21de&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=59c91a18bcc97bb0659545a3c33b21de&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Stereotypes are defined with the class keyword, << and >>.     
+     
+	You can also define notes using note left of , note right of , note top of ,    
+	note bottom of keywords.     
+     
+	You can also define a note on the last defined class using note left, note    
+	right, note top, note bottom.     
+     
+	A note can be also define alone with the note keywords, then linked to    
+	other objects using the .. symbol.     
+     
+	Submit     
+	@startuml    
+	class Object << general >>    
+	Object <|--- ArrayList    
+     
+	note top of Object : In java, every class\nextends this one.    
+     
+	note "This is a floating note" as N1    
+	note "This note is connected\nto several objects." as N2    
+	Object .. N2    
+	N2 .. ArrayList    
+     
+	class Foo    
+	note left: On last defined class    
+     
+	@enduml    
+	*    
+****** 	More on notes    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=23ca7846dedbb80ac370cfe62995f7b5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=23ca7846dedbb80ac370cfe62995f7b5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=23ca7846dedbb80ac370cfe62995f7b5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It is also possible to use few HTML tags (See [[https://plantuml.com/creole][Creole expression]]) like :    
+     
+	* <b>    
+	* <u>    
+	* <i>    
+	* <s>, <del>, <strike>    
+	* <font color="#AAAAAA"> or <font color="colorName">    
+	* <color:#AAAAAA> or <color:colorName>    
+	* <size:nn> to change font size    
+	* <img src="file"> or <img:file>: the file must be accessible by the    
+   filesystem    
+****** 	You can also have a note on several lines.     
+     
+	You can also define a note on the last defined class using note left, note    
+	right, note top, note bottom.     
+     
+	Submit     
+	@startuml    
+     
+	class Foo    
+	note left: On last defined class    
+     
+	note top of Object    
+		In java, <size:18>every</size> <u>class</u>    
+		<b>extends</b>    
+		<i>this</i> one.    
+	end note    
+     
+	note as N1    
+		This note is <u>also</u>    
+		<b><color:royalBlue>on several</color>    
+		<s>words</s> lines    
+		And this is hosted by <img:sourceforge.jpg>    
+	end note    
+     
+	@enduml    
+	*    
+****** 	Note on field (field, attribut, member) or method    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=e9d98ede969e1bba1f5b8c6885fc6683&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=e9d98ede969e1bba1f5b8c6885fc6683&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=e9d98ede969e1bba1f5b8c6885fc6683&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It is possible to add a note on field (field, attribut, member) or on    
+	method.     
+****** 	Note on field or method    
+     
+	Submit     
+	@startuml    
+	class A {    
+	{static} int counter    
+	+void {abstract} start(int timeout)    
+	}    
+	note right of A::counter    
+		This member is annotated    
+	end note    
+	note right of A::start    
+		This method is now explained in a UML note    
+	end note    
+	@enduml    
+	*    
+     
+	Note on method with the same name    
+     
+	Submit     
+	@startuml    
+	class A {    
+	{static} int counter    
+	+void {abstract} start(int timeoutms)    
+	+void {abstract} start(Duration timeout)    
+	}    
+	note left of A::counter    
+		This member is annotated    
+	end note    
+	note right of A::"start(int timeoutms)"    
+		This method with int    
+	end note    
+	note right of A::"start(Duration timeout)"    
+		This method with Duration    
+	end note    
+	@enduml    
+	*    
+     
+	[Ref. [[https://forum.plantuml.net/3474][QA-3474]] and [[https://forum.plantuml.net/5835][QA-5835]]]    
+****** 	Note on links    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=1d010d898a1fead2d4c6d46c0288fe5e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=1d010d898a1fead2d4c6d46c0288fe5e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=1d010d898a1fead2d4c6d46c0288fe5e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It is possible to add a note on a link, just after the link definition, using    
+	note on link.     
+     
+	You can also use note left on link, note right on link, note top on link,    
+	note bottom on link if you want to change the relative position of the    
+	note with the label.     
+     
+	Submit     
+	@startuml    
+     
+	class Dummy    
+	Dummy --> Foo : A link    
+	note on link #red: note that is red    
+     
+	Dummy --> Foo2 : Another link    
+	note right on link #blue    
+	this is my note on right link    
+	and in blue    
+	end note    
+     
+	@enduml    
+	*    
+****** 	Abstract class and interface    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=a339d3559f33ad64bec7e8282522fffa&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=a339d3559f33ad64bec7e8282522fffa&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=a339d3559f33ad64bec7e8282522fffa&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can declare a class as abstract using abstract or abstract class    
+	keywords.     
+     
+	The class will be printed in italic.     
+     
+	You can use the interface, annotation and enum keywords too.     
+     
+	Submit     
+	@startuml    
+     
+	abstract class AbstractList    
+	abstract AbstractCollection    
+	interface List    
+	interface Collection    
+     
+	List <|-- AbstractList    
+	Collection <|-- AbstractCollection    
+     
+	Collection <|- List    
+	AbstractCollection <|- AbstractList    
+	AbstractList <|-- ArrayList    
+     
+	class ArrayList {    
+		Object[] elementData    
+		size()    
+	}    
+     
+	enum TimeUnit {    
+		DAYS    
+		HOURS    
+		MINUTES    
+	}    
+****** 	annotation SuppressWarnings    
+	@enduml    
+	*    
+     
+	Using non-letters    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=03256bc1982e60f464d168c5d711e289&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=03256bc1982e60f464d168c5d711e289&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=03256bc1982e60f464d168c5d711e289&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	If you want to use [[https://plantuml.com/unicode][non-letters]] in the class (or enum...) display, you can    
+	either :     
+     
+	* Use the as keyword in the class definition    
+	* Put quotes "" around the class name    
+     
+	Submit     
+	@startuml    
+	class "This is my class" as class1    
+	class class2 as "It works this way too"    
+     
+	class2 *-- "foo/dummy" : use    
+	@enduml    
+	*    
+****** 	Hide attributes, methods...    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=6a8ec84e53ede3aef8fe23ab45f4af02&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=6a8ec84e53ede3aef8fe23ab45f4af02&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=6a8ec84e53ede3aef8fe23ab45f4af02&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can parameterize the display of classes using the hide/show    
+	command.     
+     
+	The basic command is: hide empty members. This command will hide    
+	attributes or methods if they are empty.     
+     
+	Instead of empty members, you can use:     
+     
+	* empty fields or empty attributes for empty fields,    
+	* empty methods for empty methods,    
+	* fields or attributes which will hide fields, even if they are described,    
+	* methods which will hide methods, even if they are described,    
+	* members which will hide fields and methods, even if they are    
+   described,    
+	* circle for the circled character in front of class name,    
+	* stereotype for the stereotype.    
+     
+	You can also provide, just after the hide or show keyword:     
+     
+	* class for all classes,    
+	* interface for all interfaces,    
+	* enum for all enums,    
+	* <<foo1>> for classes which are stereotyped with foo1,    
+	* an existing class name.    
+     
+	You can use several show/hide commands to define rules and    
+	exceptions.     
+     
+	Submit     
+	@startuml    
+     
+	class Dummy1 {    
+		+myMethods()    
+	}    
+     
+	class Dummy2 {    
+		+hiddenMethod()    
+	}    
+     
+	class Dummy3 <<Serializable>> {    
+	String name    
+	}    
+     
+	hide members    
+	hide <<Serializable>> circle    
+	show Dummy1 methods    
+	show <<Serializable>> fields    
+     
+	@enduml    
+	*    
+****** 	Hide classes    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=20ec7d48c223b142e068a59ca0c056d5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=20ec7d48c223b142e068a59ca0c056d5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=20ec7d48c223b142e068a59ca0c056d5&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can also use the show/hide commands to hide classes.     
+     
+	This may be useful if you define a large [[https://plantuml.com/preprocessing][!included file]], and if you want to    
+	hide come classes after [[https://plantuml.com/preprocessing][file inclusion]].     
+     
+	Submit     
+	@startuml    
+     
+	class Foo1    
+	class Foo2    
+     
+	Foo2 *-- Foo1    
+     
+	hide Foo2    
+     
+	@enduml    
+	*    
+****** 	Use generics    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=b09695ba6d76313daa0b4ba36c182cf7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=b09695ba6d76313daa0b4ba36c182cf7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=b09695ba6d76313daa0b4ba36c182cf7&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can also use bracket < and > to define generics usage in a class.     
+     
+	Submit     
+	@startuml    
+     
+	class Foo<? extends Element> {    
+		int size()    
+	}    
+	Foo *- Element    
+     
+	@enduml    
+	*    
+     
+	It is possible to disable this drawing using skinparam genericDisplay    
+	old command.     
+****** 	Specific Spot    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=4b62dd14f1d33739da97fc2dba1f4c1e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=4b62dd14f1d33739da97fc2dba1f4c1e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=4b62dd14f1d33739da97fc2dba1f4c1e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Usually, a spotted character (C, I, E or A) is used for classes,    
+	interface, enum and abstract classes.     
+     
+	But you can define your own spot for a class when you define the    
+	stereotype, adding a single character and a color, like in this example:     
+     
+	Submit     
+	@startuml    
+     
+	class System << (S,#FF7700) Singleton >>    
+	class Date << (D,orchid) >>    
+	@enduml    
+	*    
+****** 	Packages    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can define a package using the package keyword, and optionally    
+	declare a background color for your package (Using a html color code    
+	or name).     
+     
+	Note that package definitions can be nested.     
+     
+	Submit     
+	@startuml    
+     
+	package "Classic Collections" #DDDDDD {    
+		Object <|-- ArrayList    
+	}    
+     
+	package net.sourceforge.plantuml {    
+		Object <|-- Demo1    
+		Demo1 *- Demo2    
+	}    
+     
+	@enduml    
+	*    
+****** 	Packages style    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=a05971470d7fd711d8aa14a16f3d88c4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=a05971470d7fd711d8aa14a16f3d88c4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=a05971470d7fd711d8aa14a16f3d88c4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	There are different styles available for packages.     
+     
+	You can specify them either by setting a default style with the command    
+	: skinparam packageStyle, or by using a stereotype on the package:     
+     
+	Submit     
+	@startuml    
+	scale 750 width    
+	package foo1 <<Node>> {    
+		class Class1    
+	}    
+     
+	package foo2 <<Rectangle>> {    
+		class Class2    
+	}    
+     
+	package foo3 <<Folder>> {    
+		class Class3    
+	}    
+     
+	package foo4 <<Frame>> {    
+		class Class4    
+	}    
+     
+	package foo5 <<Cloud>> {    
+		class Class5    
+	}    
+     
+	package foo6 <<Database>> {    
+		class Class6    
+	}    
+     
+	@enduml    
+	*    
+     
+	You can also define links between packages, like in the following    
+	example:     
+     
+	Submit     
+	@startuml    
+     
+	skinparam packageStyle rectangle    
+     
+	package foo1.foo2 {    
+	}    
+     
+	package foo1.foo2.foo3 {    
+		class Object    
+	}    
+     
+	foo1.foo2 +-- foo1.foo2.foo3    
+     
+	@enduml    
+	*    
+****** 	Namespaces    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=13d28e8dfc702e3456e0767dff9a128a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=13d28e8dfc702e3456e0767dff9a128a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=13d28e8dfc702e3456e0767dff9a128a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	In packages, the name of a class is the unique identifier of this class. It    
+	means that you cannot have two classes with the very same name in    
+	different packages.     
+     
+	In that case, you should use [[http://en.wikipedia.org/wiki/Namespace_%28computer_science%29][namespaces]] instead of packages.     
+     
+	You can refer to classes from other namespaces by fully qualify them.    
+	Classes from the default namespace are qualified with a starting dot.     
+     
+	Note that you don't have to explicitly create namespace : a fully    
+	qualified class is automatically put in the right namespace.     
+     
+	Submit     
+	@startuml    
+     
+	class BaseClass    
+     
+	namespace net.dummy #DDDDDD {    
+			.BaseClass <|-- Person    
+			Meeting o-- Person    
+     
+			.BaseClass <|- Meeting    
+	}    
+     
+	namespace net.foo {    
+		net.dummy.Person  <|- Person    
+		.BaseClass <|-- Person    
+     
+		net.dummy.Meeting o-- Person    
+	}    
+     
+	BaseClass <|-- net.unused.Person    
+     
+	@enduml    
+	*    
+****** 	Automatic namespace creation    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=e73aec79687e363816b3b5745eea56c1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=e73aec79687e363816b3b5745eea56c1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=e73aec79687e363816b3b5745eea56c1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can define another separator (other than the dot) using the    
+	command : set namespaceSeparator ???.     
+     
+	Submit     
+	@startuml    
+     
+	set namespaceSeparator ::    
+	class X1::X2::foo {    
+		some info    
+	}    
+     
+	@enduml    
+	*    
+     
+	You can disable automatic package creation using the command set    
+	namespaceSeparator none.     
+     
+	Submit     
+	@startuml    
+     
+	set namespaceSeparator none    
+	class X1.X2.foo {    
+		some info    
+	}    
+     
+	@enduml    
+	*    
+****** 	Lollipop interface    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=8b64d7547fa4f699553de52bc5b2cfde&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=8b64d7547fa4f699553de52bc5b2cfde&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=8b64d7547fa4f699553de52bc5b2cfde&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can also define lollipops interface on classes, using the following    
+	syntax:     
+     
+	* bar ()- foo    
+	* bar ()-- foo    
+	* foo -() bar    
+     
+	Submit     
+	@startuml    
+	class foo    
+	bar ()- foo    
+	@enduml    
+	*    
+****** 	Changing arrows direction    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=9a49d5ae2dd333a4383349c978d76966&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=9a49d5ae2dd333a4383349c978d76966&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=9a49d5ae2dd333a4383349c978d76966&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	By default, links between classes have two dashes -- and are vertically    
+	orien(or    
+	dot) like this:     
+     
+	Submit     
+	@startuml    
+	Room o- Student    
+	Room *-- Chair    
+	@enduml    
+	*    
+     
+	You can also change directions by reversing the link:     
+     
+	Submit     
+	@startuml    
+	Student -o Room    
+	Chair --* Room    
+	@enduml    
+	*    
+     
+	It is also possible to change arrow direction by adding left, right, up or    
+	down keywords inside the arrow:     
+     
+	Submit     
+	@startuml    
+	foo -left-> dummyLeft    
+	foo -right-> dummyRight    
+	foo -up-> dummyUp    
+	foo -down-> dummyDown    
+	@enduml    
+	*    
+     
+	You can shorten the arrow by using only the first character of the    
+	direction (for example, -d- instead of -down-) or the two first characters    
+	(-do-).     
+     
+	Please note that you should not abuse this functionality : Graphviz    
+	gives usually good results without tweaking.     
+     
+	And with the [[https://plantuml.com/use-case-diagram#d551e48d272b2b07][left to right direction]] parameter:     
+     
+	Submit     
+	@startuml    
+	left to right direction    
+	foo -left-> dummyLeft    
+	foo -right-> dummyRight    
+	foo -up-> dummyUp    
+	foo -down-> dummyDown    
+	@enduml    
+	*    
+****** 	Association classes    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=fbbc0504d940020ef0cff1c2cf295041&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=fbbc0504d940020ef0cff1c2cf295041&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=fbbc0504d940020ef0cff1c2cf295041&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can define association class after that a relation has been defined    
+	between two classes, like in this example:     
+     
+	Submit     
+	@startuml    
+	class Student {    
+		Name    
+	}    
+	Student "0..*" - "1..*" Course    
+	(Student, Course) .. Enrollment    
+     
+	class Enrollment {    
+		drop()    
+		cancel()    
+	}    
+	@enduml    
+	*    
+     
+	You can define it in another direction:     
+     
+	Submit     
+	@startuml    
+	class Student {    
+		Name    
+	}    
+	Student "0..*" -- "1..*" Course    
+	(Student, Course) . Enrollment    
+     
+	class Enrollment {    
+		drop()    
+		cancel()    
+	}    
+	@enduml    
+	*    
+****** 	Association on same classe    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=ca121e2ba9f023220c07b2ecb6974a90&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=ca121e2ba9f023220c07b2ecb6974a90&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=ca121e2ba9f023220c07b2ecb6974a90&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Submit     
+	@startuml    
+	class Station {    
+			+name: string    
+	}    
+     
+	class StationCrossing {    
+			+cost: TimeInterval    
+	}    
+     
+	<> diamond    
+     
+	StationCrossing . diamond    
+	diamond - "from 0..*" Station    
+	diamond - "to 0..* " Station    
+	@enduml    
+	*    
+     
+	[Ref. [[http://wiki.plantuml.net/site/incubation#associations][Incubation: Associations]]]    
+****** 	Skinparam    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=7aa53dbdfc2137bf0189ecb9ea1dc7d8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=7aa53dbdfc2137bf0189ecb9ea1dc7d8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=7aa53dbdfc2137bf0189ecb9ea1dc7d8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can use the [[https://plantuml.com/skinparam][skinparam]] command to change colors and fonts for    
+	the drawing.     
+     
+	You can use this command :     
+     
+	* In the diagram definition, like any other commands,    
+	* In an [[https://plantuml.com/preprocessing][included file]],    
+	* In a configuration file, provided in the [[https://plantuml.com/command-line][command line]] or the [[https://plantuml.com/ant-task][ANT task]].    
+     
+	Submit     
+	@startuml    
+     
+	skinparam class {    
+	BackgroundColor PaleGreen    
+	ArrowColor SeaGreen    
+	BorderColor SpringGreen    
+	}    
+	skinparam stereotypeCBackgroundColor YellowGreen    
+     
+	Class01 "1" *-- "many" Class02 : contains    
+     
+	Class03 o-- Class04 : aggregation    
+     
+	@enduml    
+	*    
+****** 	Skinned Stereotypes    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=89a4c54a52d87715bf13ba50af377720&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=89a4c54a52d87715bf13ba50af377720&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=89a4c54a52d87715bf13ba50af377720&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can define specific color and fonts for stereotyped classes.     
+     
+	Submit     
+	@startuml    
+     
+	skinparam class {    
+	BackgroundColor PaleGreen    
+	ArrowColor SeaGreen    
+	BorderColor SpringGreen    
+	BackgroundColor<<Foo>> Wheat    
+	BorderColor<<Foo>> Tomato    
+	}    
+	skinparam stereotypeCBackgroundColor YellowGreen    
+	skinparam stereotypeCBackgroundColor<< Foo >> DimGray    
+     
+	Class01 <<Foo>>    
+	Class03 <<Foo>>    
+	Class01 "1" *-- "many" Class02 : contains    
+     
+	Class03 o-- Class04 : aggregation    
+     
+	@enduml    
+	*    
+****** 	Color gradient    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=cfe920390b50151693307bdf09d95c7f&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=cfe920390b50151693307bdf09d95c7f&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=cfe920390b50151693307bdf09d95c7f&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It's possible to declare individual color for classes or note using the #    
+	notation.     
+     
+	You can use either [[https://plantuml.com/color][standard color name]] or RGB code.     
+     
+	You can also use color gradient in background, with the following    
+	syntax: two colors names separated either by:     
+     
+	* |,    
+	* /,    
+	* \,    
+	* or -    
+     
+	depending the direction of the gradient.     
+     
+	For example, you could have:     
+     
+	Submit     
+	@startuml    
+     
+	skinparam backgroundcolor AntiqueWhite/Gold    
+	skinparam classBackgroundColor Wheat|CornflowerBlue    
+     
+	class Foo #red-green    
+	note left of Foo #blue\9932CC    
+		this is my    
+		note on this class    
+	end note    
+     
+	package example #GreenYellow/LightGoldenRodYellow {    
+		class Dummy    
+	}    
+     
+	@enduml    
+	*    
+****** 	Help on layout    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=c08f8d9927fcb626db83893dde0269a9&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=c08f8d9927fcb626db83893dde0269a9&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=c08f8d9927fcb626db83893dde0269a9&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Sometimes, the default layout is not perfect...     
+     
+	You can use together keyword to group some classes together : the    
+	layout engine will try to group them (as if they were in the same    
+	package).     
+     
+	You can also use hidden links to force the layout.     
+     
+	Submit     
+	@startuml    
+     
+	class Bar1    
+	class Bar2    
+	together {    
+		class Together1    
+		class Together2    
+		class Together3    
+	}    
+	Together1 - Together2    
+	Together2 - Together3    
+	Together2 -[hidden]--> Bar1    
+	Bar1 -[hidden]> Bar2    
+     
+     
+	@enduml    
+	*    
+****** 	Splitting large files    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=fc6a662f75b53104862a06bf33c4fa05&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=fc6a662f75b53104862a06bf33c4fa05&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=fc6a662f75b53104862a06bf33c4fa05&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Sometimes, you will get some very large image files.     
+     
+	You can use the page (hpages)x(vpages) command to split the    
+	generated image into several files :     
+     
+	hpages is a number that indicated the number of horizontal pages, and    
+	vpages is a number that indicated the number of vertical pages.     
+     
+	You can also use some specific skinparam settings to put borders on    
+	splitted pages (see example).     
+     
+	Submit     
+	@startuml    
+	' Split into 4 pages    
+	page 2x2    
+	skinparam pageMargin 10    
+	skinparam pageExternalColor gray    
+	skinparam pageBorderColor black    
+     
+	class BaseClass    
+     
+	namespace net.dummy #DDDDDD {    
+			.BaseClass <|-- Person    
+			Meeting o-- Person    
+     
+			.BaseClass <|- Meeting    
+     
+	}    
+     
+	namespace net.foo {    
+		net.dummy.Person  <|- Person    
+		.BaseClass <|-- Person    
+     
+		net.dummy.Meeting o-- Person    
+	}    
+     
+	BaseClass <|-- net.unused.Person    
+	@enduml    
+	*    
+****** 	Extends and implements    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=6e0d446ea2c5bf82fcb8e5903bb3df98&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=6e0d446ea2c5bf82fcb8e5903bb3df98&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=6e0d446ea2c5bf82fcb8e5903bb3df98&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It is also possible to use extends and implements keywords.     
+     
+	Submit     
+	@startuml    
+	class ArrayList implements List    
+	class ArrayList extends AbstractList    
+	@enduml    
+	*    
+     
+	Inline style of relations (Linking or arrow)    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=74f446c1d06a4f0425e5dfc5f2a31425&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=74f446c1d06a4f0425e5dfc5f2a31425&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=74f446c1d06a4f0425e5dfc5f2a31425&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	It's also possible to have explicitly bold, dashed, dotted, hidden or plain    
+	relation, links or arrows:    
+     
+	* without label    
+     
+	Submit     
+	@startuml    
+	class foo    
+	foo --> bar    
+	foo -[bold]-> bar1    
+	foo -[dashed]-> bar2    
+	foo -[dotted]-> bar3    
+	foo -[hidden]-> bar4    
+	foo -[plain]-> bar5    
+	@enduml    
+	*    
+     
+	* with label    
+     
+	Submit     
+	@startuml    
+	class foo    
+	foo --> bar          : ∅    
+	foo -[bold]-> bar1   : bold    
+	foo -[dashed]-> bar2 : dashed    
+	foo -[dotted]-> bar3 : dotted    
+	foo -[hidden]-> bar4 : hidden    
+	foo -[plain]-> bar5  : plain    
+	@enduml    
+	*    
+     
+	[Adapted from [[https://forum.plantuml.net/4181/how-change-width-line-in-a-relationship-between-two-classes?show=4232#a4232][QA-4181]]]    
+     
+	Change relation, linking or arrow color and style    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=372843e1093965d603c6aa5ed7c7647b&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=372843e1093965d603c6aa5ed7c7647b&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=372843e1093965d603c6aa5ed7c7647b&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	You can change the [[https://plantuml.com/color][color]] of individual relation or arrows using the    
+	following notation: [#color] or #color;line.    
+	[bold|dashed|dotted];text:color:     
+     
+	* old method    
+     
+	Submit     
+	@startuml    
+	class foo    
+	foo --> bar    
+	foo -[#red]-> bar1    
+	foo -[#green]-> bar2    
+	foo -[#blue]-> bar3    
+	'foo -[#blue;#yellow;#green]-> bar4    
+	@enduml    
+	*    
+     
+	* new method    
+     
+	Submit     
+	@startuml    
+	class foo    
+	foo --> bar : normal    
+	foo --> bar1 #line:red;line.bold;text:red  : red bold    
+	foo --> bar2 #green;line.dashed;text:green : green dashed     
+	foo --> bar3 #blue;line.dotted;text:blue   : blue dotted    
+	@enduml    
+	*    
+     
+	[See similar feature on [[https://plantuml.com/deployment-diagram#0b2e57c3d4eafdda][deployment]]]    
+****** 	Arrows from/to class members    
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=4829cb0f596c935081b3c3f776b9af0e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=4829cb0f596c935081b3c3f776b9af0e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=4829cb0f596c935081b3c3f776b9af0e&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
+     
+	Submit     
+	@startuml    
+	class Foo {    
+	+ field1    
+	+ field2    
+	}    
+     
+	class Bar {    
+	+ field3    
+	+ field4    
+	}    
+     
+	Foo::field1 --> Bar::field3 : foo    
+	Foo::field2 --> Bar::field4 : bar    
+	@enduml    
+	*    
+     
+	[Ref. [[https://forum.plantuml.net/3636][QA-3636]]]    
+     
+	Submit     
+	@startuml    
+	left to right direction    
+     
+	class User {    
+		id : INTEGER    
+		..    
+		other_id : INTEGER    
+	}    
+     
+	class Email {    
+		id : INTEGER    
+		..    
+		user_id : INTEGER    
+		address : INTEGER    
+	}    
+     
+	User::id *-- Email::user_id    
+	@enduml    
+	*    
+     
+	[Ref. [[https://forum.plantuml.net/5261][QA-5261]]]    
+***** Object Diagram  * [[https://plantuml.com/object-diagram#29df1b044e936302][Definition of objects]]  
+ [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=fb01426efa51410ac5531ec0842d4db1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]  * [[https://plantuml.com/object-diagram#e79e7df1fbafe644][Relations between objects]]  
+ [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=fb01426efa51410ac5531ec0842d4db1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]  * [[https://plantuml.com/object-diagram#5f6416a7e094d77e][Associations objects]]  
+ [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=fb01426efa51410ac5531ec0842d4db1&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]  * [[https://plantuml.com/object-diagram#60a833de4109a30e][Adding fields]]  
+   * [[https://plantuml.com/object-diagram#7e9e334df13386bb][Common features with class diagrams]]  
+******  Definition of objects  * [[https://plantuml.com/object-diagram#6c738a9019f7ac08][Map table or associative array]]  
+	*    
+	[[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=29df1b044e936302611ca3538ecdb583&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=29df1b044e936302611ca3538ecdb583&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	[[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=29df1b044e936302611ca3538ecdb583&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	You define instance of objects using the object    
+	keywords.     
+     
+	Submit     
+	@startuml    
+	object firstObject    
+	object "My Second Object" as o2    
+	@enduml    
+	*    
+****** 	Relations between objects    
+	 *    
+	 [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=e79e7df1fbafe6440a5beafe333dd97c&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=e79e7df1fbafe6440a5beafe333dd97c&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=e79e7df1fbafe6440a5beafe333dd97c&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	 Relations between objects are defined using the    
+	 following symbols :     
+     
+		Type   Symbol   Image       
+		Extension   <|--  *      
+		Composition  *--  *      
+		Aggregation   o--  *      
+     
+	 It is possible to replace -- by .. to have a dotted    
+	 line.     
+     
+	 Knowing those rules, it is possible to draw the    
+	 following drawings.     
+     
+	 It is possible a add a label on the relation, using :    
+	 followed by the text of the label.     
+     
+	 For cardinality, you can use double-quotes "" on    
+	 each side of the relation.     
+     
+	 Submit     
+	 @startuml    
+	 object Object01    
+	 object Object02    
+	 object Object03    
+	 object Object04    
+	 object Object05    
+	 object Object06    
+	 object Object07    
+	 object Object08    
+     
+	 Object01 <|-- Object02    
+	 Object03 *-- Object04    
+	 Object05 o-- "4" Object06    
+	 Object07 .. Object08 : some labels    
+	 @enduml    
+	 *    
+****** 	 Associations objects    
+	 *    
+	 [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=5f6416a7e094d77e27bbd1489978f032&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=5f6416a7e094d77e27bbd1489978f032&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=5f6416a7e094d77e27bbd1489978f032&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	 Submit     
+	 @startuml    
+	 object o1    
+	 object o2    
+	 diamond dia    
+	 object o3    
+     
+	 o1  --> dia    
+	 o2  --> dia    
+	 dia --> o3    
+	 @enduml    
+	 *    
+****** 	 Adding fields    
+	 *    
+	 [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=60a833de4109a30edc95bbc697741f60&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=60a833de4109a30edc95bbc697741f60&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=60a833de4109a30edc95bbc697741f60&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	 To declare fields, you can use the symbol : followed    
+	 by the field's name.     
+     
+	 Submit     
+	 @startuml    
+     
+	 object user    
+     
+	 user : name = "Dummy"    
+	 user : id = 123    
+     
+	 @enduml    
+	 *    
+     
+	 It is also possible to group all fields between    
+	 brackets {}.     
+     
+	 Submit     
+	 @startuml    
+     
+	 object user {    
+		 name = "Dummy"    
+		 id = 123    
+	 }    
+     
+	 @enduml    
+	 *    
+****** 	 Common features with class diagrams    
+	 *    
+	 [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=7e9e334df13386bbf82a97708cad40f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=7e9e334df13386bbf82a97708cad40f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=7e9e334df13386bbf82a97708cad40f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	 * [[https://plantuml.com/class-diagram#Hide][Hide attributes, methods...]]    
+	 * [[https://plantuml.com/class-diagram#Notes][Defines notes]]    
+	 * [[https://plantuml.com/class-diagram#Using][Use packages]]    
+	 * [[https://plantuml.com/class-diagram#Skinparam][Skin the output]]    
+****** 	 Map table or associative array    
+	 *    
+	 [[http://alphadoc.plantuml.com/action/dokuwiki/en/object-diagram?do=edit&title=6c738a9019f7ac08639e17899239078a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/asciidoc/en/object-diagram?do=edit&title=6c738a9019f7ac08639e17899239078a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+	 [[http://alphadoc.plantuml.com/action/markdown/en/object-diagram?do=edit&title=6c738a9019f7ac08639e17899239078a&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fobject-diagram][*]]    
+     
+	 You can define a map table or [[https://en.wikipedia.org/wiki/Associative_array][associative array]],    
+	 with map keyword and => separator.     
+     
+	 Submit     
+	 @startuml    
+	 map CapitalCity {    
+		UK => London    
+		USA => Washington    
+		Germany => Berlin    
+	 }    
+	 @enduml    
+	 *    
+     
+	 Submit     
+	 @startuml    
+	 map "Map **Contry => CapitalCity**" as CC {    
+		UK => London    
+		USA => Washington    
+		Germany => Berlin    
+	 }    
+	 @enduml    
+	 *    
+     
+	 Submit     
+	 @startuml    
+	 map "map: Map<Integer, String>" as users {    
+		1 => Alice    
+		2 => Bob    
+		3 => Charlie    
+	 }    
+	 @enduml    
+	 *    
+     
+	 And add link with object.     
+     
+	 Submit     
+	 @startuml    
+	 object London    
+     
+	 map CapitalCity {    
+		UK *-> London    
+		USA => Washington    
+		Germany => Berlin    
+	 }    
+	 @enduml    
+	 *    
+     
+	 Submit     
+	 @startuml    
+	 object London    
+	 object Washington    
+	 object Berlin    
+	 object NewYork    
+     
+	 map CapitalCity {    
+		UK *-> London    
+		USA *--> Washington    
+		Germany *---> Berlin    
+	 }    
+     
+	 NewYork --> CapitalCity::USA    
+	 @enduml    
+	 *    
+     
+	 [Ref. [[https://github.com/plantuml/plantuml/issues/307][#307]]]    
+
+**** exempls
+***** seqvese
+	#+begin_src plantuml :file e:\Temp\my-diagram.png
+	title Authentication Sequence
+
+	note right of Bob: Bob idle
+	note right of Alice: Alice thinks
+	Alice->Bob: Authentication Request
+	note right of Bob: Bob thinks about it
+	Bob->Alice: Authentication Response
+	#+end_src
+	#+results:
+	[[file:e:\Temp\my-diagram.png]]
+
+	#+begin_src plantuml :file my-diagram.png
+	title Authentication Sequence
+
+	note right of Bob: Bob idle
+	note right of Alice: Alice thinks
+	Alice->Bob: Authentication Request
+	note right of Bob: Bob thinks about it
+	Bob->Alice: Authentication Response
+	#+end_src
+
+	#+begin_src plantuml :file my-diagram.png
+	participant Bob
+	actor Alice
+
+	Bob -> Alice : hello
+	Alice -> Bob : Is it ok?
+	#+end_src
+	#+results:
+	[[file:my-diagram.png]]
+***** class 
+	#+begin_src plantuml :file e:\Temp\my-diagram.png
+	title Authentication Sequence
+	Object <|-- ArrayList    
+	Object : equals()    
+	ArrayList : Object[] elementData    
+	ArrayList : size()    
+	#+end_src
+	#+results:
+	[[file:e:\Temp\my-diagram.png]]
+     
+*** DITAA
+**** exempls
+***** hello-world : 
+[[~/../../../274px.png]]
+#+BEGIN_SRC ditaa :file hello-world.png
+/--------------+    /--------------+
+| cRED         |    |              |
+| Hello World! *--->* {s} cYEL     |
+|              |    |  Datebase    |
++--------------/    +--------------/
+
+#+END_SRC
+
+#+RESULTS:
+[[file:hello-world.png]]
+
+#+BEGIN_SRC ditaa :file hello-world.png
+/--------------+    /--------------+
+| cRED         |    |              |
+| Hello World! *--->* {s} cYEL     |
+|              |    |  Datebase    |
+|              |    |              |
+|    +--+      |    |              |
+|    |  |      |    |              |
+|    +--+      |    |              |
++--------------/    +--------------/
+										
+										
+
+
+#+END_SRC
+
+#+results:
+[[file:hello-world.png]]
+
+#+BEGIN_SRC ditaa :file hello-world.png
+/--------------+    /--------------+
+| cRED         |    |              |
+| Hello World! *--->* {s} cYEL     |
+|              |    |  Datebase    |
+|              |    |              |
+|    +--+ +----+    |              |
+|    |  | |cYEL|    |              |
++-+  +--+ |    |    |              |
+  +-------+----+    +--------------/
+					 					
+										
+
+
+#+END_SRC
+#+results:
+[[file:hello-world.png]]
+
+#+BEGIN_SRC ditaa :file hello-world.png :cmdline -r -s 0.8 
+${0}
+#+END_SRC 
+#+results:
+[[file:hello-world.png]]
+*** ARTIST
+**** exempls
+#+begin_src artist
+					 +-----+   -%%++		         ------+-+--+- ..	 .-	.-
+	<-cursor |r..ht|.----.mm.         --/  ++m+mm+-+-m.+-+--++%%%*+----+
+			. .  |  m- .m.m*###mm.- .  --/----++m-+*+*+#m+mm%-mm-#++#**.-. |
+		 .   --m---------m+*##m*m-++--(   ..+.-m+-##%%%###*%m###%###+-..-|
+		....+  .#-*###%%##%#*#+%+..-  |..m+#***###*%#m%+*###*%%#m%m##m-m |
+		..-m#++..m**-m-%--########-+%m**%#######*#-#m+m.###**  |  %#%%-. --
+		. -.%*mm-- .|  .|..-*+ -m##.- *%###########%%##m%|% |. *  %|*%#+.+
+			 ++m-+ +....  . %..-+m.%m%.+#######    ######|% .    #  %|#mm%+mm
+			 ...... .+-  ....   +#####+#m###        #*###m++.m-.-m#%##mm+#%m .
+				...++..+---- -..m-m    -##*##         #####%-+...| %m-.%-+++*|..
+					 .*m##.++. *+##%    #*#####        ######*m-....--+-*+...- |
+				 .++++mmm+*+++-m* %*m#*####%################m%.. . %|%m--+-%-+
+					 .-.+++-.mm.+-m.+++#m-##*################%.*-- m .   .	 ..
+							--m	----*%*-.#.*%##*#%-#########%|#|*||   | .m.. .+
+							.-% ##%%r- -..-mm*###*##+m#####m###+...*# .####%m
+							..m-.+.-.. . ...+-##m%#%#m#*%#%. .	.	...	 ...+.-. .
+							 .. ... .  .  .. -+ -. --+. ... -		 . .	-	+...
+								 - +.						 .----	 + ..	.				-..	..
+							 .
+#+end_src
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
 a eww buffer stores a link to the current url of the eww buffer.
