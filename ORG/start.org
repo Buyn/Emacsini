@@ -8468,8 +8468,312 @@ If you are using Evil anyways, you can use C-t and C-d to increase/decrease inde
 
 ** Graph  
 *** PLANTUML
+**** Guide : 
+***** Welcome to The Hitchhiker’s Guide to PlantUML! — The Hitchhiker's Guide to PlantUML documentation
+ https://crashedmind.github.io/PlantUMLHitchhikersGuide/
+****** 1.4. Images
+1.4.1. Add Images To A Diagram¶
+This uses the image tag which is part of PlantUML creole Legacy HTML support per
+PlantUML specification:
+
+Some HTML tags are also working:
+
+    <b> for bold text
+    <u> or <u:#AAAAAA> or <u:[[color|colorName]]> for underline
+    <i> for italic
+    <s> or <s:#AAAAAA> or <s:[[color|colorName]]> for strike text
+    <w> or <w:#AAAAAA> or <w:[[color|colorName]]> for wave underline text
+    <color:#AAAAAA> or <color:[[color|colorName]]>
+    <back:#AAAAAA> or <back:[[color|colorName]]> for background color
+    <size:nn> to change font size
+    <img:file> : the file must be accessible by the filesystem
+    <img:http://plantuml.com/logo3.png> : the URL must be available from the Internet
+
+'diagram from https://plantuml.com/creole
+@startuml
+:* You can change <color:red>text color</color>
+ * You can change <back:cadetblue>background color</back>
+ * You can change <size:18>size</size>
+ * You use <u>legacy</u> <b>HTML <i>tag</i></b>
+ * You use <u:red>color</u> <s:green>in HTML</s> <w:#0000FF>tag</w>
+----
+ * image x0.5 : <img:http://plantuml.com/logo3.png{scale=0.5}>
+----
+ * image x1.5 : <img:http://plantuml.com/logo3.png{scale=1.5}>
+;
+@enduml
+
+ 
+
+  1  'diagram from https://plantuml.com/creole  
+  2  @startuml  
+  3  :* You can change <color:red>text color</color>  
+  4  * You can change <back:cadetblue>background color</back>  
+  5  * You can change <size:18>size</size>  
+  6  * You use <u>legacy</u> <b>HTML <i>tag</i></b>  
+  7  * You use <u:red>color</u> <s:green>in HTML</s> <w:#0000FF>tag</w>  
+  8  ----  
+  9  * image x0.5 : <img:http://plantuml.com/logo3.png{scale=0.5}>  
+ 10  ----  
+ 11  * image x1.5 : <img:http://plantuml.com/logo3.png{scale=1.5}>  
+ 12  ;  
+ 13  @enduml  
+ 14    
+
+Tip
+
+You can scale an image. In the diagram above, we made the image 0.5, and 1.5 times
+bigger using the `scale` keyword.
+
+
 **** man
+***** PlantUML in a nutshell[[http://alphadoc.plantuml.com/action/dokuwiki/en/index?do=edit&title=97a7ead45486a5b61b181da8db9944e8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Findex][
+*]][[http://alphadoc.plantuml.com/action/asciidoc/en/index?do=edit&title=97a7ead45486a5b61b181da8db9944e8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Findex][*]][[http://alphadoc.plantuml.com/action/markdown/en/index?do=edit&title=97a7ead45486a5b61b181da8db9944e8&orig=https%3A%2F%2Fplantuml.com%2Fen%2Findex][*]]
+PlantUML is a component that allows to quickly write : 
+,* [[https://plantuml.com/sequence-diagram][Sequence diagram]]
+,* [[https://plantuml.com/use-case-diagram][Usecase diagram]]
+,* [[https://plantuml.com/class-diagram][Class diagram]]
+,* [[https://plantuml.com/object-diagram][Object diagram]]
+,* [[https://plantuml.com/activity-diagram-beta][Activity diagram]] (here is [[https://plantuml.com/activity-diagram-legacy][the legacy syntax)]]
+,* [[https://plantuml.com/component-diagram][Component diagram]]
+,* [[https://plantuml.com/deployment-diagram][Deployment diagram]]
+,* [[https://plantuml.com/state-diagram][State diagram]]
+,* [[https://plantuml.com/timing-diagram][Timing diagram]]
+
+The following non-UML diagrams are also supported: 
+
+,* [[https://plantuml.com/json][JSON data]]
+,* [[https://plantuml.com/yaml][YAML data]]
+,* [[https://plantuml.com/nwdiag][Network diagram (nwdiag)]]
+,* [[https://plantuml.com/salt][Wireframe graphical interface (salt)]]
+,* [[https://plantuml.com/archimate-diagram][Archimate diagram]]
+,* [[https://plantuml.com/activity-diagram-beta#sdl][Specification and Description Language (SDL)]]
+,* [[https://plantuml.com/ditaa][Ditaa diagram]]
+,* [[https://plantuml.com/gantt-diagram][Gantt diagram]]
+,* [[https://plantuml.com/mindmap-diagram][MindMap diagram]]
+,* [[https://plantuml.com/wbs-diagram][Work Breakdown Structure diagram (WBS)]]
+,* [[https://plantuml.com/ascii-math][Mathematic with AsciiMath or JLaTeXMath notation]]
+,* [[https://plantuml.com/ie-diagram][Entity Relationship diagram (IE/ER)]]
+
+Diagrams are defined using a simple and intuitive language. ([[https://plantuml.com/guide][see PlantUML]]
+[[https://plantuml.com/guide][Language Reference Guide]]). 
+
+New users can read the [[https://plantuml.com/starting][quick start page]]. There is also a [[https://plantuml.com/faq][F.A.Q. page]]. PlantUML can
+be used within [[https://plantuml.com/running][many other tools]]. 
+
+Images can be generated in PNG, [[https://plantuml.com/svg][in SVG]] or [[https://plantuml.com/latex][in LaTeX]] format. It is also possible to
+generate [[https://plantuml.com/ascii-art][ASCII art diagrams]] (only for sequence diagrams). 
+
+ Example:  describes the following diagram :  
+ (You can edit the text if you want,    
+ the diagram will be dynamically updated!)    
+                                           [[http://www.plantuml.com/plantuml][*]]  
+This example is working thanks to the [[http://www.plantuml.com/plantuml][online demo server]]. 
+***** Language specification
+ [[https://plantuml.com/activity-diagram-legacy][activity]]  Description of PlantUML language for UML activity diagram.  
+ [[https://plantuml.com/activity-diagram-beta][activity beta]]  Proposal of new syntax of PlantUML language for UML activity  
+   diagram.  
+ [[https://plantuml.com/archimate-diagram][archimate]]  Archimate Support  
+ [[https://plantuml.com/ascii-math][AsciiMath]]  Support for mathematical expressions  
+ [[https://plantuml.com/class-diagram][classes]]  Description of PlantUML language for UML class diagram  
+ [[https://plantuml.com/color][color]]  Display all color names  
+ [[https://plantuml.com/commons][commons]]  Some common commands available on all diagrams.  
+ [[https://plantuml.com/component-diagram][component]]  Description of PlantUML language for UML component  
+   diagram  
+ [[https://plantuml.com/creole][creole]]  Use of Creole  
+ [[https://plantuml.com/deployment-diagram][deployment]]  Description of PlantUML language for UML deployment  
+   diagram  
+ [[https://plantuml.com/gantt-diagram][gantt]]  Beta support for Gantt diagram  
+ [[https://plantuml.com/incubation][incubation]]  Incubation of new features  
+ [[https://plantuml.com/link][link]]  Using hyperlinks and URL  
+ [[https://plantuml.com/mindmap-diagram][mindmap]]  Description of PlantUML language for MindMap diagram  
+ [[https://plantuml.com/nwdiag][nwdiag]]  Quickly draw network diagrams  
+ [[https://plantuml.com/object-diagram][objects]]  Description of PlantUML language for UML object diagram  
+ [[https://plantuml.com/openiconic][openiconic]]  OpenIconic integration  
+ [[https://plantuml.com/preprocessing][preprocessing]]  Information about Preprocessing  
+ [[https://plantuml.com/salt][salt]]  Design graphical interface with a simple text description  
+ [[https://plantuml.com/sequence-diagram][sequence]]  Description of PlantUML language for UML sequence diagram  
+ [[https://plantuml.com/skinparam][skinparam]]  Use of skinparam command  
+ [[https://plantuml.com/sprite][sprite]]  Defining and using sprites  
+ [[https://plantuml.com/state-diagram][state]]  Description of PlantUML language for UML state diagram  
+ [[https://plantuml.com/timing-diagram][timing-diagram]]  Description of PlantUML language for UML timing diagram  
+   (beta)  
+ [[https://plantuml.com/use-case-diagram][usecase]]  Description of PlantUML language for UML usecase diagram  
+ [[https://plantuml.com/wbs-diagram][wbs]]  Description of PlantUML language for Work Breakdown  
+   Structure  
+
+--------------------------------------------------------------------------
+***** Advanced usage
+ [[https://plantuml.com/ascii-art][ascii_art]]  Use of ASCII art with PlantUML  
+ [[https://plantuml.com/command-line][command_line]]  Usage as command line  
+ [[https://plantuml.com/ditaa][ditaa]]  Integration with DIagrams Through Ascii Art  
+ [[https://plantuml.com/dot][dot]]  Use Graphviz/Dot language from PlantUML  
+ [[https://plantuml.com/eps][eps]]  Information about Encapsulated PostScript  
+ [[https://plantuml.com/gui][gui]]  Use of PlantUML as standalone tool  
+ [[https://plantuml.com/handwritten][handwritten]]  Generate handwritten diagrams  
+ [[https://plantuml.com/link][link]]  Using hyperlinks  
+ [[https://plantuml.com/oregon-trail][oregon-trail]]  Remember The Oregon Trail  
+ [[https://plantuml.com/pdf][pdf]]  PDF Support from PlantUML  
+ [[https://plantuml.com/sources][sources]]  Where to put PlantUML diagram text description  
+ [[https://plantuml.com/statistics-report][statistics]]  Generate statistics about your PlantUML usage  
+ [[https://plantuml.com/steve][steve]]  A special command dedicated to Steve Jobs and Steve  
+   Wozniak  
+ [[https://plantuml.com/smetana02][smetana02]]  Porting Graphviz To Java  
+ [[https://plantuml.com/sudoku][sudoku]]  Have a break and generate Sudoku  
+ [[https://plantuml.com/svg][svg]]  SVG support from PlantUML  
+ [[https://plantuml.com/picoweb][picoweb]]  Use of PlantUML as PicoWeb HTTP server  
+ [[https://plantuml.com/server][server]]  Use of PlantUML as HTTP server  
+ [[https://plantuml.com/unicode][unicode]]  Use of unicode from PlantUML  
+ [[https://plantuml.com/vizjs][vizjs]]  Running Graphviz in Javascript  
+ [[https://plantuml.com/xearth][xearth]]  XEarth integration  
+ [[https://plantuml.com/xmi][xmi]]  Beta support for XMI  
+Ezoic
+report this ad
+--------------------------------------------------------------------------
+
+***** Defining and using sprites 
+****** A Sprite is a small graphic element that can be used in diagrams.
+ In PlantUML, sprites are monochrome and can have either 4, 8 or 16 gray level.
+
+ To define a sprite, you have to use a hexadecimal digit between 0 and F per pixel.
+
+****** sprite : 
+ Then you can use the sprite using <$XXX> where XXX is the name of the sprite.
+
+ @startuml
+ sprite $foo1 {
+   FFFFFFFFFFFFFFF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   FFFFFFFFFFFFFFF
+ }
+ Alice -> Bob : Testing <$foo1>
+ @enduml
+
+****** You can scale the sprite.
+ @startuml
+ sprite $foo1 {
+   FFFFFFFFFFFFFFF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   FFFFFFFFFFFFFFF
+ }
+ Alice -> Bob : Testing <$foo1{scale=3}>
+ @enduml
+
+****** Changing colors
+ Although sprites are monochrome, it's possible to change their color.
+
+ @startuml
+ sprite $foo1 {
+   FFFFFFFFFFFFFFF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   F0123456789ABCF
+   FFFFFFFFFFFFFFF
+ }
+ Alice -> Bob : Testing <$foo1,scale=3.4,color=orange>
+ @enduml
+****** Encoding Sprite 
+ To encode sprite, you can use the command line like:
+
+ java -jar plantuml.jar -encodesprite 16z foo.png
+
+ where foo.png is the image file you want to use (it will be converted to gray automatically).
+
+ After -encodesprite, you have to specify a format: 4, 8, 16, 4z, 8z or 16z.
+
+ The number indicates the gray level and the optional z is used to enable compression in sprite definition.
+****** Importing Sprite 
+ You can also launch the GUI to generate a sprite from an existing image.
+
+ Click in the menubar then on File/Open Sprite Window.
+
+ After copying an image into you clipboard, several possible definitions of the corresponding sprite will be displayed : you will just have to pickup the one you want.
+****** Examples 
+ @startuml
+ sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa1XC716sz0Pq4MVPEWfBHIuxP3L6kbTcizR8tAhzaqFvXwvFfPEqm0
+ start
+ :click on <$printer> to print the page;
+ @enduml
+
+ @startuml
+	sprite $bug [15x15/16z] PKzR2i0m2BFMi15p__FEjQEqB1z27aeqCqixa8S4OT7C53cKpsHpaYPDJY_12MHM-BLRyywPhrrlw3qumqNThmXgd1TOterAZmOW8sgiJafogofWRwtV3nCF
+	sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa1XC716sz0Pq4MVPEWfBHIuxP3L6kbTcizR8tAhzaqFvXwvFfPEqm0
+	sprite $disk {
+		444445566677881
+		436000000009991
+		43600000000ACA1
+		53700000001A7A1
+		53700000012B8A1
+		53800000123B8A1
+		63800001233C9A1
+		634999AABBC99B1
+		744566778899AB1
+		7456AAAAA99AAB1
+		8566AFC228AABB1
+		8567AC8118BBBB1
+		867BD4433BBBBB1
+		39AAAAABBBBBBC1
+ }
+****** 	title Use of sprites (<$printer>, <$bug>...)
+	class Example {
+	Can have some bug : <$bug>
+	Click on <$disk> to save
+	}
+
+	note left : The printer <$printer> is available
+
+ @enduml
+******  StdLib 
+ The PlantUML StdLib includes a number of ready icons in various IT areas such as architecture, cloud services, logos etc. It including AWS, Azure, Kubernetes, C4, product Logos and many others. To explore these libraries:
+
+     Browse the Github folders of PlantUML StdLib
+     Browse the source repos of StdLib collections that interest you. Eg if you are interested in logos you can find that it came from gilbarbara-plantuml-sprites, and quickly find its 
+
+ sprites-list. (The next section shows how to list selected sprites but unfortunately that's in grayscale whereas this custom listing is in color.)
+
+     Study the in-depth Hitchhiker’s Guide to PlantUML, eg sections Standard Library Sprites and PlantUML Stdlib Overview
+******  Listing Sprites 
+ You can use the listsprites command to show available sprites:
+
+     Used on its own, it just shows ArchiMate sprites
+     If you include some sprite libraries in your diagram, the command shows all these sprites, as explained in View all the icons with listsprites.
+
+ (Example from Hitchhikers Guide to PlantUML)
+
+ @startuml
+
+ !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+ !include osaPuml/Common.puml
+ !include osaPuml/User/all.puml
+
+ listsprites
+ @enduml
+
+ Most collections have files called all that allow you to see a whole sub-collection at once. Else you need to find the sprites that interest you and include them one by one. Unfortunately, the version of a collection included in StdLib often does not have such all files, so as you see above we include the collection from github, not from StdLib.
+
+ All sprites are in grayscale, but most collections define specific macros that include appropriate (vendor-specific) colors. 
+
 ***** class
+https://plantuml.com/class-diagram
 ******  Class Diagram  * [[https://plantuml.com/class-diagram#e5cec68ef9127fc4][Declaring element]]  
 	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=0bb074dd4a565b5d1779ebfaf53e719d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#9dd2a6eca0c2a0e7][Relations between classes]]  
 	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=0bb074dd4a565b5d1779ebfaf53e719d&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]  * [[https://plantuml.com/class-diagram#4a705b44651caa59][Label on relations]]  
@@ -9885,6 +10189,3230 @@ If you are using Evil anyways, you can use C-t and C-d to increase/decrease inde
 	 *    
      
 	 [Ref. [[https://github.com/plantuml/plantuml/issues/307][#307]]]    
+***** Use Case Diagram 
+https://plantuml.com/use-case-diagram
+Let's have a few examples:
+****** Usecases nclosed using between parentheses (because two parentheses looks like an oval).
+
+ You can also use the usecase keyword to define a usecase. And you can define an alias, using the as keyword. This alias will be used later, when defining relations.
+
+ @startuml
+
+ (First usecase)
+ (Another usecase) as (UC2)
+ usecase UC3
+ usecase (Last\nusecase) as UC4
+
+ @enduml
+******  Actors 
+ The name defining an actor is enclosed between colons.
+
+ You can also use the actor keyword to define an actor. An alias can be assigned using the as keyword and can be used later instead of the actor's name, e. g. when defining relations.
+
+ You can see from the following examples, that the actor definitions are optional.
+
+ @startuml
+
+ :First Actor:
+ :Another\nactor: as Man2
+ actor Woman3
+ actor :Last actor: as Person1
+
+ @enduml
+******  Change Actor style 
+ You can change the actor style from stick man (by default) to:
+
+     an awesome man with the skinparam actorStyle awesome command;
+     a hollow man with the skinparam actorStyle hollow command.
+
+ Stick man (by default)
+
+ @startuml
+ :User: --> (Use)
+ "Main Admin" as Admin
+ "Use the application" as (Use)
+ Admin --> (Admin the application)
+ @enduml
+
+ Awesome man
+
+ @startuml
+ skinparam actorStyle awesome
+ :User: --> (Use)
+ "Main Admin" as Admin
+ "Use the application" as (Use)
+ Admin --> (Admin the application)
+ @enduml
+
+ [Ref. QA-10493]
+
+ Hollow man
+
+ @startuml
+ skinparam actorStyle Hollow 
+ :User: --> (Use)
+ "Main Admin" as Admin
+ "Use the application" as (Use)
+ Admin --> (Admin the application)
+ @enduml
+
+ [Ref. PR#396]
+******  Usecases description 
+
+ If you want to have a description spanning several lines, you can use quotes.
+
+ You can also use the following separators:
+
+     -- (dashes)
+     .. (periods)
+     == (equals)
+     __ (underscores)
+
+ By using them pairwise and enclosing text between them, you can created separators with titles.
+
+ @startuml
+
+ usecase UC1 as "You can use
+ several lines to define your usecase.
+ You can also use separators.
+ --
+ Several separators are possible.
+ ==
+ And you can add titles:
+ ..Conclusion..
+ This allows large description."
+
+ @enduml
+******  Use package 
+ You can use packages to group actors or use cases.
+
+ @startuml
+ left to right direction
+ actor Guest as g
+ package Professional {
+   actor Chef as c
+   actor "Food Critic" as fc
+ }
+ package Restaurant {
+   usecase "Eat Food" as UC1
+   usecase "Pay for Food" as UC2
+   usecase "Drink" as UC3
+   usecase "Review" as UC4
+ }
+ fc --> UC4
+ g --> UC1
+ g --> UC2
+ g --> UC3
+ @enduml
+
+ You can use rectangle to change the display of the package.
+
+ @startuml
+ left to right direction
+ actor "Food Critic" as fc
+ rectangle Restaurant {
+   usecase "Eat Food" as UC1
+   usecase "Pay for Food" as UC2
+   usecase "Drink" as UC3
+ }
+ fc --> UC1
+ fc --> UC2
+ fc --> UC3
+ @enduml
+******  Basic example 
+ To link actors and use cases, the arrow --> is used.
+
+ The more dashes - in the arrow, the longer the arrow. You can add a label on the arrow, by adding a : character in the arrow definition.
+
+ In this example, you see that User has not been defined before, and is used as an actor.
+
+ @startuml
+
+ User -> (Start)
+ User --> (Use the application) : A small label
+
+ :Main Admin: ---> (Use the application) : This is\nyet another\nlabel
+
+ @enduml
+******  Extension 
+ If one actor/use case extends another one, you can use the symbol <|--.
+
+ @startuml
+ :Main Admin: as Admin
+ (Use the application) as (Use)
+
+ User <|-- Admin
+ (Start) <|-- (Use)
+
+ @enduml
+******  Using notes 
+ You can use the note left of , note right of , note top of , note bottom of keywords to define notes related to a single object.
+
+ A note can be also define alone with the note keywords, then linked to other objects using the .. symbol.
+
+ @startuml
+ :Main Admin: as Admin
+ (Use the application) as (Use)
+
+ User -> (Start)
+ User --> (Use)
+
+ Admin ---> (Use)
+
+ note right of Admin : This is an example.
+
+ note right of (Use)
+   A note can also
+   be on several lines
+ end note
+
+ note "This note is connected\nto several objects." as N2
+ (Start) .. N2
+ N2 .. (Use)
+ @enduml
+******  Stereotypes 
+ You can add stereotypes while defining actors and use cases using << and >>.
+
+ @startuml
+ User << Human >>
+ :Main Database: as MySql << Application >>
+ (Start) << One Shot >>
+ (Use the application) as (Use) << Main >>
+
+ User -> (Start)
+ User --> (Use)
+
+ MySql --> (Use)
+
+ @enduml
+******  Changing arrows direction 
+ By default, links between classes have two dashes -- and are vertically oriented. It is possible to use horizontal link by putting a single dash (or dot) like this:
+
+ @startuml
+ :user: --> (Use case 1)
+ :user: -> (Use case 2)
+ @enduml
+
+ You can also change directions by reversing the link:
+
+ @startuml
+ (Use case 1) <.. :user:
+ (Use case 2) <- :user:
+ @enduml
+
+ It is also possible to change arrow direction by adding left, right, up or down keywords inside the arrow:
+
+ @startuml
+ :user: -left-> (dummyLeft)
+ :user: -right-> (dummyRight)
+ :user: -up-> (dummyUp)
+ :user: -down-> (dummyDown)
+ @enduml
+
+ You can shorten the arrow by using only the first character of the direction (for example, -d- instead of -down-) or the two first characters (-do-).
+
+ Please note that you should not abuse this functionality : Graphviz gives usually good results without tweaking.
+
+ And with the left to right direction parameter:
+
+ @startuml
+ left to right direction
+ :user: -left-> (dummyLeft)
+ :user: -right-> (dummyRight)
+ :user: -up-> (dummyUp)
+ :user: -down-> (dummyDown)
+ @enduml
+******  Splitting diagrams 
+ The newpage keywords to split your diagram into several pages or images.
+
+ @startuml
+ :actor1: --> (Usecase1)
+ newpage
+ :actor2: --> (Usecase2)
+ @enduml
+******  Left to right direction 
+ The general default behavior when building diagram is top to bottom.
+
+ @startuml
+ 'default
+ top to bottom direction
+ user1 --> (Usecase 1)
+ user2 --> (Usecase 2)
+
+ @enduml
+
+ You may change to left to right using the left to right direction command. The result is often better with this direction.
+
+ @startuml
+
+ left to right direction
+ user1 --> (Usecase 1)
+ user2 --> (Usecase 2)
+
+ @enduml
+******  Skinparam 
+ You can use the skinparam command to change colors and fonts for the drawing.
+
+ You can use this command :
+
+     In the diagram definition, like any other commands,
+     In an included file,
+     In a configuration file, provided in the command line or the ANT task.
+
+ You can define specific color and fonts for stereotyped actors and usecases.
+
+ @startuml
+ skinparam handwritten true
+
+ skinparam usecase {
+ BackgroundColor DarkSeaGreen
+ BorderColor DarkSlateGray
+
+ BackgroundColor<< Main >> YellowGreen
+ BorderColor<< Main >> YellowGreen
+
+ ArrowColor Olive
+ ActorBorderColor black
+ ActorFontName Courier
+
+ ActorBackgroundColor<< Human >> Gold
+ }
+
+ User << Human >>
+ :Main Database: as MySql << Application >>
+ (Start) << One Shot >>
+ (Use the application) as (Use) << Main >>
+
+ User -> (Start)
+ User --> (Use)
+
+ MySql --> (Use)
+
+ @enduml
+******  Complete example 
+ @startuml
+ left to right direction
+ skinparam packageStyle rectangle
+ actor customer
+ actor clerk
+ rectangle checkout {
+   customer -- (checkout)
+   (checkout) .> (payment) : include
+   (help) .> (checkout) : extends
+   (checkout) -- clerk
+ }
+ @enduml
+***** Deployment Diagram 
+https://plantuml.com/deployment-diagram
+****** Declaring element 
+ @startuml
+ actor actor
+ actor/ "actor/"
+ agent agent
+ artifact artifact
+ boundary boundary
+ card card
+ circle circle
+ cloud cloud
+ collections collections
+ component component
+ control control
+ database database
+ entity entity
+ file file
+ folder folder
+ frame frame
+ hexagon hexagon
+ interface interface
+ label label
+ node node
+ package package
+ queue queue
+ rectangle rectangle
+ stack stack
+ storage storage
+ usecase usecase
+ usecase/ "usecase/"
+ @enduml
+
+ You can optionaly put text using bracket [] for a long description.
+
+ @startuml
+ folder folder [
+ This is a <b>folder
+ ----
+ You can use separator
+ ====
+ of different kind
+ ....
+ and style
+ ]
+
+ node node [
+ This is a <b>node
+ ----
+ You can use separator
+ ====
+ of different kind
+ ....
+ and style
+ ]
+
+ database database [
+ This is a <b>database
+ ----
+ You can use separator
+ ====
+ of different kind
+ ....
+ and style
+ ]
+
+ usecase usecase [
+ This is a <b>usecase
+ ----
+ You can use separator
+ ====
+ of different kind
+ ....
+ and style
+ ]
+
+ card card [
+ This is a <b>card
+ ----
+ You can use separator
+ ====
+ of different kind
+ ....
+ and style
+ <i><color:blue>(add from V1.2020.7)</color></i>
+ ]
+ @enduml
+****** Declaring element (using short form) 
+ We can declare element using some short forms.
+
+ Long form Keyword 	Short form Keyword 	Long form example 	Short form example 	Ref.
+ actor	:a:	actor actor1	:actor2:	Actors
+ component	[c]	component component1	[component2]	Components
+ interface	()i	interface interface1	() "interface2"	Interfaces
+ usecase	(u)	usecase usecase1	(usecase2)	Usecases
+
+ Actor
+
+ @startuml
+
+ actor actor1
+ :actor2:
+
+ @enduml
+
+ NB: There is an old syntax for actor with guillemet which is now deprecated and will be removed some days. Please do not use in your diagram.
+
+ Component
+
+ @startuml
+
+ component component1
+ [component2]
+
+ @enduml
+
+ Interface
+
+ @startuml
+
+ interface interface1
+ () "interface2"
+
+ label "//interface example//"
+ @enduml
+
+ Usecase
+
+ @startuml
+
+ usecase usecase1
+ (usecase2)
+
+ @enduml
+****** Linking or arrow 
+ You can create simple links between elements with or without labels:
+
+ @startuml
+
+ node node1
+ node node2
+ node node3
+ node node4
+ node node5
+ node1 -- node2 : label1
+ node1 .. node3 : label2
+ node1 ~~ node4 : label3
+ node1 == node5
+
+ @enduml
+
+ It's also possible to have explicitly bold, dashed, dotted, hidden or plain links or arrows.
+
+ @startuml
+ node foo
+ foo --> bar          : ∅
+ foo -[bold]-> bar1   : bold
+ foo -[dashed]-> bar2 : dashed
+ foo -[dotted]-> bar3 : dotted
+ foo -[hidden]-> bar4 : hidden
+ foo -[plain]-> bar5  : plain
+ @enduml
+
+ It is possible to use several types of links:
+
+ @startuml
+
+ artifact artifact1
+ artifact artifact2
+ artifact artifact3
+ artifact artifact4
+ artifact artifact5
+ artifact artifact6
+ artifact artifact7
+ artifact artifact8
+ artifact artifact9
+ artifact artifact10
+ artifact1 --> artifact2
+ artifact1 --* artifact3
+ artifact1 --o artifact4
+ artifact1 --+ artifact5
+ artifact1 --# artifact6
+ artifact1 -->> artifact7
+ artifact1 --0 artifact8
+ artifact1 --^ artifact9
+ artifact1 --(0 artifact10
+
+ @enduml
+
+ You can also have the following types:
+
+ @startuml
+
+ cloud cloud1
+ cloud cloud2
+ cloud cloud3
+ cloud cloud4
+ cloud cloud5
+ cloud1 -0- cloud2
+ cloud1 -0)- cloud3
+ cloud1 -(0- cloud4
+ cloud1 -(0)- cloud5
+
+ @enduml
+
+ or another example:
+
+ @startuml
+ actor foo1
+ actor foo2
+ foo1 <-0-> foo2
+ foo1 <-(0)-> foo2
+ 
+ (ac1) -le(0)-> left1
+ ac1 -ri(0)-> right1
+ ac1 .up(0).> up1
+ ac1 ~up(0)~> up2
+ ac1 -do(0)-> down1
+ ac1 -do(0)-> down2
+ 
+ actor1 -0)- actor2
+ 
+ component comp1
+ component comp2
+ comp1 *-0)-+ comp2
+ [comp3] <-->> [comp4]
+ @enduml
+
+ [Ref. QA-1736]
+****** Change arrow color and style 
+ You can change the color of individual arrows using the following notation: [#color].
+
+ @startuml
+ node foo
+ foo --> bar
+ foo -[#red]-> bar1
+ foo -[#green]-> bar2
+ foo -[#blue]-> bar3
+ foo -[#blue;#yellow;#green]-> bar4
+ @enduml
+
+ Then you can change color and style of individual arrows using the following notation:
+
+		 old method [#color;style]
+
+ @startuml
+ node foo
+ foo --> bar
+ foo -[#red;bold]-> bar1                  : <color:red>[#red;bold]
+ foo -[#green;dashed]-> bar2              : <color:green>[#green;dashed]
+ foo -[#blue;dotted]-> bar3               : <color:blue>[#blue;dotted]
+ foo -[#blue;#yellow;#green;plain]-> bar4 : [#blue;#yellow;#green;plain]
+ @enduml
+
+		 new method #color;line.[bold|dashed|dotted];text:color
+
+ @startuml
+ node foo
+ foo --> bar : normal
+ foo --> bar1 #line:red;line.bold;text:red  : red bold
+ foo --> bar2 #green;line.dashed;text:green : green dashed 
+ foo --> bar3 #blue;line.dotted;text:blue   : blue dotted
+ @enduml
+
+ [See similar feature on class diagram]
+****** Nestable elements 
+ Here are the nestable elements:
+
+ @startuml
+ artifact artifact {
+ }
+ card card {
+ }
+ cloud cloud {
+ }
+ component component {
+ }
+ database database {
+ }
+ file file {
+ }
+ folder folder {
+ }
+ frame frame {
+ }
+ hexagon hexagon {
+ }
+ node node {
+ }
+ package package {
+ }
+ queue queue {
+ }
+ rectangle rectangle {
+ }
+ stack stack {
+ }
+ storage storage {
+ }
+ @enduml
+****** Packages and nested elements 
+ Example with one level
+
+ @startuml
+ artifact    artifactVeryLOOOOOOOOOOOOOOOOOOOg    as "artifact" {
+ file f1
+ }
+ card        cardVeryLOOOOOOOOOOOOOOOOOOOg        as "card" {
+ file f2
+ }
+ cloud       cloudVeryLOOOOOOOOOOOOOOOOOOOg       as "cloud" {
+ file f3
+ }
+ component   componentVeryLOOOOOOOOOOOOOOOOOOOg   as "component" {
+ file f4
+ }
+ database    databaseVeryLOOOOOOOOOOOOOOOOOOOg    as "database" {
+ file f5
+ }
+ file        fileVeryLOOOOOOOOOOOOOOOOOOOg        as "file" {
+ file f6
+ }
+ folder      folderVeryLOOOOOOOOOOOOOOOOOOOg      as "folder" {
+ file f7
+ }
+ frame       frameVeryLOOOOOOOOOOOOOOOOOOOg       as "frame" {
+ file f8
+ }
+ hexagon     hexagonVeryLOOOOOOOOOOOOOOOOOOOg     as "hexagon" {
+ file f9
+ }
+ node        nodeVeryLOOOOOOOOOOOOOOOOOOOg        as "node" {
+ file f10
+ }
+ package     packageVeryLOOOOOOOOOOOOOOOOOOOg     as "package" {
+ file f11
+ }
+ queue       queueVeryLOOOOOOOOOOOOOOOOOOOg       as "queue" {
+ file f12
+ }
+ rectangle   rectangleVeryLOOOOOOOOOOOOOOOOOOOg   as "rectangle" {
+ file f13
+ }
+ stack       stackVeryLOOOOOOOOOOOOOOOOOOOg       as "stack" {
+ file f14
+ }
+ storage     storageVeryLOOOOOOOOOOOOOOOOOOOg     as "storage" {
+ file f15
+ }
+ @enduml
+
+ Other example
+
+ @startuml
+ artifact Foo1 {
+	 folder Foo2
+ }
+
+ folder Foo3 {
+	 artifact Foo4
+ }
+
+ frame Foo5 {
+	 database Foo6
+ }
+
+ cloud vpc {
+	 node ec2 {
+		 stack stack
+	 }
+ }
+
+ @enduml
+
+ @startuml
+ node Foo1 {
+	cloud Foo2
+ }
+
+ cloud Foo3 {
+	 frame Foo4
+ }
+
+ database Foo5  {
+	 storage Foo6
+ }
+
+ storage Foo7 {
+	 storage Foo8
+ }
+ @enduml
+
+ Full nesting
+
+ Here is all the nested elements:
+
+		 by alphabetical order:
+
+ @startuml
+ artifact artifact {
+ card card {
+ cloud cloud {
+ component component {
+ database database {
+ file file {
+ folder folder {
+ frame frame {
+ hexagon hexagon {
+ node node {
+ package package {
+ queue queue {
+ rectangle rectangle {
+ stack stack {
+ storage storage {
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ @enduml
+
+		 or reverse alphabetical order
+
+ @startuml
+ storage storage {
+ stack stack {
+ rectangle rectangle {
+ queue queue {
+ package package {
+ node node {
+ hexagon hexagon {
+ frame frame {
+ folder folder {
+ file file {
+ database database {
+ component component {
+ cloud cloud {
+ card card {
+ artifact artifact {
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ @enduml
+******  Alias 
+ Simple alias with as
+
+ @startuml
+ node Node1 as n1
+ node "Node 2" as n2
+ file f1 as "File 1"
+ cloud c1 as "this
+ is
+ a
+ cloud"
+ cloud c2 [this
+ is
+ another
+ cloud]
+
+ n1 -> n2
+ n1 --> f1
+ f1 -> c1
+ c1 -> c2
+ @enduml
+
+ Examples of long alias
+
+ @startuml
+ actor        "actor"       as actorVeryLOOOOOOOOOOOOOOOOOOOg
+ agent        "agent"       as agentVeryLOOOOOOOOOOOOOOOOOOOg
+ artifact     "artifact"    as artifactVeryLOOOOOOOOOOOOOOOOOOOg
+ boundary     "boundary"    as boundaryVeryLOOOOOOOOOOOOOOOOOOOg
+ card         "card"        as cardVeryLOOOOOOOOOOOOOOOOOOOg
+ cloud        "cloud"       as cloudVeryLOOOOOOOOOOOOOOOOOOOg
+ collections  "collections" as collectionsVeryLOOOOOOOOOOOOOOOOOOOg
+ component    "component"   as componentVeryLOOOOOOOOOOOOOOOOOOOg
+ control      "control"     as controlVeryLOOOOOOOOOOOOOOOOOOOg
+ database     "database"    as databaseVeryLOOOOOOOOOOOOOOOOOOOg
+ entity       "entity"      as entityVeryLOOOOOOOOOOOOOOOOOOOg
+ file         "file"        as fileVeryLOOOOOOOOOOOOOOOOOOOg
+ folder       "folder"      as folderVeryLOOOOOOOOOOOOOOOOOOOg
+ frame        "frame"       as frameVeryLOOOOOOOOOOOOOOOOOOOg
+ hexagon      "hexagon"     as hexagonVeryLOOOOOOOOOOOOOOOOOOOg
+ interface    "interface"   as interfaceVeryLOOOOOOOOOOOOOOOOOOOg
+ label        "label"       as labelVeryLOOOOOOOOOOOOOOOOOOOg
+ node         "node"        as nodeVeryLOOOOOOOOOOOOOOOOOOOg
+ package      "package"     as packageVeryLOOOOOOOOOOOOOOOOOOOg
+ queue        "queue"       as queueVeryLOOOOOOOOOOOOOOOOOOOg
+ stack        "stack"       as stackVeryLOOOOOOOOOOOOOOOOOOOg
+ rectangle    "rectangle"   as rectangleVeryLOOOOOOOOOOOOOOOOOOOg
+ storage      "storage"     as storageVeryLOOOOOOOOOOOOOOOOOOOg
+ usecase      "usecase"     as usecaseVeryLOOOOOOOOOOOOOOOOOOOg
+ @enduml
+
+ @startuml
+ actor       actorVeryLOOOOOOOOOOOOOOOOOOOg       as "actor"
+ agent       agentVeryLOOOOOOOOOOOOOOOOOOOg       as "agent"
+ artifact    artifactVeryLOOOOOOOOOOOOOOOOOOOg    as "artifact"
+ boundary    boundaryVeryLOOOOOOOOOOOOOOOOOOOg    as "boundary"
+ card        cardVeryLOOOOOOOOOOOOOOOOOOOg        as "card"
+ cloud       cloudVeryLOOOOOOOOOOOOOOOOOOOg       as "cloud"
+ collections collectionsVeryLOOOOOOOOOOOOOOOOOOOg as "collections"
+ component   componentVeryLOOOOOOOOOOOOOOOOOOOg   as "component"
+ control     controlVeryLOOOOOOOOOOOOOOOOOOOg     as "control"
+ database    databaseVeryLOOOOOOOOOOOOOOOOOOOg    as "database"
+ entity      entityVeryLOOOOOOOOOOOOOOOOOOOg      as "entity"
+ file        fileVeryLOOOOOOOOOOOOOOOOOOOg        as "file"
+ folder      folderVeryLOOOOOOOOOOOOOOOOOOOg      as "folder"
+ frame       frameVeryLOOOOOOOOOOOOOOOOOOOg       as "frame"
+ hexagon     hexagonVeryLOOOOOOOOOOOOOOOOOOOg     as "hexagon"
+ interface   interfaceVeryLOOOOOOOOOOOOOOOOOOOg   as "interface"
+ label       labelVeryLOOOOOOOOOOOOOOOOOOOg       as "label"
+ node        nodeVeryLOOOOOOOOOOOOOOOOOOOg        as "node"
+ package     packageVeryLOOOOOOOOOOOOOOOOOOOg     as "package"
+ queue       queueVeryLOOOOOOOOOOOOOOOOOOOg       as "queue"
+ stack       stackVeryLOOOOOOOOOOOOOOOOOOOg       as "stack"
+ rectangle   rectangleVeryLOOOOOOOOOOOOOOOOOOOg   as "rectangle"
+ storage     storageVeryLOOOOOOOOOOOOOOOOOOOg     as "storage"
+ usecase     usecaseVeryLOOOOOOOOOOOOOOOOOOOg     as "usecase"
+ @enduml
+
+ [Ref. QA-12082]
+******  Type of arrow head or '0' arrow 
+ Type of arrow head
+
+ @startuml
+ left to right direction
+
+ f13 --0   b13 : ""--0""
+ f12 --@   b12 : ""--@""
+ f11 --:|> b11 : ""--:|>""
+ f10 --||> b10 : ""--||>""
+ f9  --|>  b9  : ""--|>""
+ f8  --^   b8  : ""--^ ""
+ f7  --\\  b7  : ""--\\\\""
+ f6  --#   b6  : ""--# ""
+ f5  --+   b5  : ""--+ ""
+ f4  --o   b4  : ""--o ""
+ f3  --*   b3  : ""--* ""
+ f2  -->>  b2  : ""-->>""
+ f1  -->   b1  : ""--> ""
+ f0  --    b0  : ""--  ""
+ @enduml
+
+ Type of '0' arrow or circle arrow
+
+ @startuml
+ left to right direction
+
+ f10 0--0 b10 : "" 0--0 ""
+ f9 )--(  b9  : "" )--(""
+ f8 0)--(0 b8 : "" 0)--(0""
+ f7 0)--  b7  : "" 0)-- ""
+ f6 -0)-  b6  : "" -0)-\n ""
+ f5 -(0)- b5  : "" -(0)-\n""
+ f4 -(0-  b4  : "" -(0-\n ""
+ f3 --(0  b3  : "" --(0 ""
+ f2 --(   b2  : "" --(  ""
+ f1 --0   b1  : "" --0  ""
+ @enduml
+******  Round corner 
+ @startuml
+ skinparam rectangle {
+		 roundCorner<<Concept>> 25
+ }
+
+ rectangle "Concept Model" <<Concept>> {
+ rectangle "Example 1" <<Concept>> as ex1
+ rectangle "Another rectangle"
+ }
+ @enduml
+******  Specific SkinParameter 
+
+ roundCorner
+
+ @startuml
+ skinparam roundCorner 15
+ actor actor
+ agent agent
+ artifact artifact
+ boundary boundary
+ card card
+ circle circle
+ cloud cloud
+ collections collections
+ component component
+ control control
+ database database
+ entity entity
+ file file
+ folder folder
+ frame frame
+ hexagon hexagon
+ interface interface
+ label label
+ node node
+ package package
+ queue queue
+ rectangle rectangle
+ stack stack
+ storage storage
+ usecase usecase
+ @enduml
+***** Timing Diagram
+https://plantuml.com/timing-diagram
+This is still under construction. You can propose new features if you need some.
+****** Declaring participant 
+
+You declare participant using the following keywords, depending on how you want them to be drawn.
+
+    concise: A simplified signal designed to show the movement of data (great for messages).
+    robust: A complex line signal designed to show the transition from one state to another (can have many states).
+    clock: A 'clocked' signal that repeatedly transitions from high to low
+    binary: A specific signal restricted to only 2 states (binary).
+
+You define state change using the @ notation, and the is verb.
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+@enduml
+****** Binary and Clock 
+It's also possible to have binary and clock signal, using the following keywords:
+
+    binary
+    clock
+
+@startuml
+clock clk with period 1
+binary "Enable" as EN
+
+@0
+EN is low
+
+@5
+EN is high
+
+@10
+EN is low
+@enduml
+****** Adding message 
+You can add message using the following syntax.
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+@enduml
+****** Relative time 
+It is possible to use relative time with @.
+
+@startuml
+robust "DNS Resolver" as DNS
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+DNS is Idle
+
+@+100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@+200
+WB is Waiting
+WB -> DNS@+50 : Resolve URL
+
+@+100
+DNS is Processing
+
+@+300
+DNS is Idle
+@enduml
+****** Anchor Points 
+Instead of using absolute or relative time on an absolute time you can define a time as an anchor point by using the as keyword and starting the name with a :.
+
+@XX as :<anchor point name>
+
+@startuml
+clock clk with period 1
+binary "enable" as EN
+concise "dataBus" as db
+
+@0 as :start
+@5 as :en_high 
+@10 as :en_low
+
+
+@:start
+EN is low
+db is "0x0000"
+
+@:en_high
+EN is high
+
+@:en_low
+EN is low
+
+@:en_high-2
+db is "0xf23a"
+
+@:en_high+6
+db is "0x0000"
+@enduml
+****** Participant oriented 
+Rather than declare the diagram in chronological order, you can define it by participant.
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@WB
+0 is idle
++200 is Proc.
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+****** Setting scale pecific scale.
+@startuml
+concise "Web User" as WU
+scale 100 as 50 pixels
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+****** Initial state n inital state.
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+****** Intricated state 
+A signal could be in some undefined state.
+
+@startuml
+robust "Signal1" as S1
+robust "Signal2" as S2
+S1 has 0,1,2,hello
+S2 has 0,1,2
+@0
+S1 is 0
+S2 is 0
+@100
+S1 is {0,1} #SlateGrey
+S2 is {0,1}
+@200
+S1 is 1
+S2 is 0
+@300
+S1 is hello
+S2 is {0,2}
+@enduml
+****** Hidden state 
+It is also possible to hide some state.
+
+@startuml
+concise "Web User" as WU
+
+@0
+WU is {-}
+
+@100
+WU is A1
+
+@200
+WU is {-}
+
+@300
+WU is {hidden}
+
+@400
+WU is A3
+
+@500
+WU is {-}
+@enduml
+****** Hide time axis 
+It is possible to hide time axis.
+
+@startuml
+hide time-axis
+concise "Web User" as WU
+
+WU is Absent
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+****** Using Time and Date 
+It is possible to use time or date.
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@2019/07/02
+WU is Idle
+WB is Idle
+
+@2019/07/04
+WU is Waiting : some note
+WB is Processing : some other note
+
+@2019/07/05
+WB is Waiting
+@enduml
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@1:15:00
+WU is Idle
+WB is Idle
+
+@1:16:30
+WU is Waiting : some note
+WB is Processing : some other note
+
+@1:17:30
+WB is Waiting
+@enduml
+****** Adding constraint isplay time constraints on the diagrams.
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+WB@0 <-> @50 : {50 ms lag}
+
+@WU
+0 is Waiting
++500 is ok
+@200 <-> @+150 : {150 ms}
+@enduml
+****** Highlighted period 
+You can higlight a part of diagram.
+
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU -> WB : URL
+WU is Waiting #LightCyan;line:Aqua
+
+@200
+WB is Proc.
+
+@300
+WU -> WB@350 : URL2
+WB is Waiting
+
+@+200
+WU is ok
+
+@+200
+WB is Idle
+
+highlight 200 to 450 #Gold;line:DimGrey : This is my caption
+@enduml
+****** Adding texts 
+You can optionally add a title, a header, a footer, a legend and a caption:
+
+@startuml
+Title This is my title
+header: some header
+footer: some footer
+legend
+Some legend
+end legend
+caption some caption
+
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+@enduml
+****** Complete example 
+Thanks to Adam Rosien for this example.
+
+@startuml
+concise "Client" as Client
+concise "Server" as Server
+concise "Response freshness" as Cache
+
+Server is idle
+Client is idle
+
+@Client
+0 is send
+Client -> Server@+25 : GET
++25 is await
++75 is recv
++25 is idle
++25 is send
+Client -> Server@+25 : GET\nIf-Modified-Since: 150
++25 is await
++50 is recv
++25 is idle
+@100 <-> @275 : no need to re-request from server
+
+@Server
+25 is recv
++25 is work
++25 is send
+Server -> Client@+25 : 200 OK\nExpires: 275
++25 is idle
++75 is recv
++25 is send
+Server -> Client@+25 : 304 Not Modified
++25 is idle
+
+@Cache
+75 is fresh
++200 is stale
+@enduml
+****** Digital Example 
+@startuml
+scale 5 as 150 pixels
+
+clock clk with period 1
+binary "enable" as en
+binary "R/W" as rw
+binary "data Valid" as dv
+concise "dataBus" as db
+concise "address bus" as addr
+
+@6 as :write_beg
+@10 as :write_end
+
+@15 as :read_beg
+@19 as :read_end
+
+
+@0
+en is low
+db is "0x0"
+addr is "0x03f"
+rw is low
+dv is 0
+
+@:write_beg-3
+ en is high
+@:write_beg-2
+ db is "0xDEADBEEF"
+@:write_beg-1
+dv is 1
+@:write_beg
+rw is high
+
+
+@:write_end
+rw is low
+dv is low
+@:write_end+1
+rw is low
+db is "0x0"
+addr is "0x23"
+
+@12
+dv is high
+@13 
+db is "0xFFFF"
+
+@20
+en is low
+dv is low
+@21 
+db is "0x0"
+
+highlight :write_beg to :write_end #Gold:Write
+highlight :read_beg to :read_end #lightBlue:Read
+
+db@:write_beg-1 <-> @:write_end : setup time
+db@:write_beg-1 -> addr@:write_end+1 : hold
+@enduml
+****** Adding color 
+You can add color.
+
+@startuml
+concise "LR" as LR
+concise "ST" as ST
+
+LR is AtPlace #palegreen
+ST is AtLoad #gray
+
+@LR
+0 is Lowering
+100 is Lowered #pink
+350 is Releasing
+ 
+@ST
+200 is Moving
+@enduml
+***** Network diagram (nwdiag) 
+****** https://plantuml.com/nwdiag
+nwdiag has been created by Takeshi Komiya and allows to quickly draw network diagrams. So we thank him for his creation!
+
+Since the syntax is clear and simple, this has been integrated within PlantUML. We reuse here the examples that Takeshi has documented.
+
+Simple
+******  diagram 
+@startuml
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      web01 [address = "210.x.x.1"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
+}
+@enduml
+****** Define multiple addresses 
+@startuml
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      // set multiple addresses (using comma)
+      web01 [address = "210.x.x.1, 210.x.x.20"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
+}
+@enduml
+****** Grouping nodes 
+Define group inside network definitions
+
+@startuml
+nwdiag {
+  network Sample_front {
+    address = "192.168.10.0/24";
+
+    // define group
+    group web {
+      web01 [address = ".1"];
+      web02 [address = ".2"];
+    }
+  }
+  network Sample_back {
+    address = "192.168.20.0/24";
+    web01 [address = ".1"];
+    web02 [address = ".2"];
+    db01 [address = ".101"];
+    db02 [address = ".102"];
+
+    // define network using defined nodes
+    group db {
+      db01;
+      db02;
+    }
+  }
+}
+@enduml
+
+Define group at outside network definitions
+
+@startuml
+nwdiag {
+  // define group at outside network definitions
+  group {
+    color = "#FFAAAA";
+
+    web01;
+    web02;
+    db01;
+  }
+
+  network dmz {
+    web01;
+    web02;
+  }
+  network internal {
+    web01;
+    web02;
+    db01;
+    db02;
+  }
+}
+@enduml
+
+Define several groups on same network
+
+@startuml
+nwdiag {
+  group {
+    color = "#FFaaaa";
+    web01;
+    db01;
+  }
+  group {
+    color = "#aaaaFF";
+    web02;
+    db02;
+  }
+  network dmz {
+      address = "210.x.x.x/24"
+
+      web01 [address = "210.x.x.1"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01 ;
+      db02 ;
+  }
+}
+@enduml
+
+[Ref. QA-12663]
+****** Extended Syntax (for network or group) 
+Network
+
+For network or network's component, you can add or change:
+
+    address (separated by comma ,);
+    color;
+    description;
+    shape.
+
+@startuml
+nwdiag {
+  network Sample_front {
+    address = "192.168.10.0/24"
+    color = "red"
+
+    // define group
+    group web {
+      web01 [address = ".1", shape = "node"]
+      web02 [address = ".2"]
+    }
+  }
+  network Sample_back {
+    address = "192.168.20.0/24"
+    color = "palegreen"
+    web01 [address = ".1"]
+    web02 [address = ".2"]
+    db01 [address = ".101", shape = database ]
+    db02 [address = ".102"]
+
+    // define network using defined nodes
+    group db {
+      db01;
+      db02;
+    }
+  }
+}
+@enduml
+
+Group
+
+For group, you can add or change:
+
+    color;
+    description.
+
+@startuml
+nwdiag {
+  group {
+    color = "#CCFFCC";
+    description = "Long group label";
+
+    web01;
+    web02;
+    db01;
+  }
+
+  network dmz {
+    web01;
+    web02;
+  }
+  network internal {
+    web01;
+    web02;
+    db01 [address = ".101", shape = database];
+  }
+}
+@enduml
+
+[Ref. QA-12056]
+****** Using Sprite on nwdiag 
+You can use all the Sprite of all Standard Library or other.
+
+@startuml
+!include <office/Servers/application_server>
+!include <office/Servers/database_server>
+
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      // set multiple addresses (using comma)
+      web01 [address = "210.x.x.1, 210.x.x.20",  description = "<$application_server>\n web01"]
+      web02 [address = "210.x.x.2",  description = "<$application_server>\n web02"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01 [address = "172.x.x.100",  description = "<$database_server>\n db01"];
+      db02 [address = "172.x.x.101",  description = "<$database_server>\n db02"];
+  }
+}
+@enduml
+
+[Ref. QA-11862]
+****** Using OpenIconic on nwdiag 
+You can also use the icons from OpenIconic on the description.
+
+@startuml
+
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      user [description = "<&person*5>\n user1"];
+      // set multiple addresses (using comma)
+      web01 [address = "210.x.x.1, 210.x.x.20",  description = "<&cog*4>\nweb01"]
+      web02 [address = "210.x.x.2",  description = "<&cog*4>\nweb02"];
+
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01 [address = "172.x.x.100",  description = "<&spreadsheet*4>\n db01"];
+      db02 [address = "172.x.x.101",  description = "<&spreadsheet*4>\n db02"];
+      ptr  [address = "172.x.x.110",  description = "<&print*4>\n ptr01"];
+  }
+}
+@enduml
+****** Same nodes on more than two networks 
+You can use same nodes on different networks (more than two networks); nwdiag use in this case 'jump line' over networks.
+
+@startuml
+nwdiag {
+  // define group at outside network definitions
+  group {
+    color = "#7777FF";
+
+    web01;
+    web02;
+    db01;
+  }
+
+  network dmz {
+    color = "pink"
+
+    web01;
+    web02;
+  }
+
+  network internal {
+    web01;
+    web02;
+    db01 [shape = database ];
+  }
+
+  network internal2 {
+    color = "LightBlue";
+
+    web01;
+    web02;
+    db01;
+  }
+
+}
+@enduml
+****** Peer networks 
+@startuml
+nwdiag {
+  inet [shape = cloud];
+  inet -- router;
+
+  network {
+    router;
+    web01;
+    web02;
+  }
+}
+@enduml
+****** Peer networks and group 
+Without group
+
+@startuml
+nwdiag {
+    internet [ shape = cloud];
+    internet -- router;
+
+    network proxy {
+        router;
+        app;
+    }
+    network default {
+    	app;
+        db;
+    }
+}
+@enduml
+
+Group on first
+
+@startuml
+nwdiag {
+    internet [ shape = cloud];
+    internet -- router;
+
+    group {
+      color = "pink";
+      app;
+      db;
+    }
+
+    network proxy {
+        router;
+        app;
+    }
+
+    network default {
+    	app;
+        db;
+    }
+}
+@enduml
+
+Group on second
+
+@startuml
+nwdiag {
+    internet [ shape = cloud];
+    internet -- router;
+
+    network proxy {
+        router;
+        app;
+    }
+
+    group {
+      color = "pink";
+      app;
+      db;
+    }
+
+    network default {
+    	app;
+        db;
+    }
+}
+@enduml
+
+FIXME
+Why the line on proxy for 'db'? ('db' must be only on 'default network') [See example without group]
+
+Group on third
+
+@startuml
+nwdiag {
+    internet [ shape = cloud];
+    internet -- router;
+
+    network proxy {
+        router;
+        app;
+    }
+    network default {
+    	app;
+        db;
+    }
+    group {
+      color = "pink";
+      app;
+      db;
+    }
+}
+@enduml
+
+FIXME
+[Ref. Issue#408 and QA-12655]Not totally fixed
+****** Add title, caption, header, footer or legend on network diagram 
+@startuml
+
+header some header
+
+footer some footer
+
+title My title
+
+nwdiag {
+  network inet {
+      web01 [shape = cloud]
+  }
+}
+
+legend
+The legend
+end legend
+
+caption This is caption
+@enduml
+
+[Ref. QA-11303 and Common commands]
+****** Change width of the networks 
+You can change the width of the networks, especially in order to have the same full width for only some or all networks.
+
+Here are some examples, with all the possibilities:
+
+    without
+
+@startuml
+nwdiag {
+  network NETWORK_BASE {
+   dev_A   [address = "dev_A" ]
+   dev_B [address = "dev_B" ]
+  }
+  network IntNET1 {
+   dev_B [address = "dev_B1" ]
+   dev_M [address = "dev_M1" ]
+  }
+  network IntNET2 {
+   dev_B [address = "dev_B2" ]
+   dev_M [address = "dev_M2" ]
+ }
+}
+@enduml
+
+    only the first
+
+@startuml
+nwdiag {
+  network NETWORK_BASE {
+   width = full
+   dev_A   [address = "dev_A" ]
+   dev_B [address = "dev_B" ]
+  }
+  network IntNET1 {
+   dev_B [address = "dev_B1" ]
+   dev_M [address = "dev_M1" ]
+  }
+  network IntNET2 {
+   dev_B [address = "dev_B2" ]
+   dev_M [address = "dev_M2" ]
+ }
+}
+@enduml
+
+    the first and the second
+
+@startuml
+nwdiag {
+  network NETWORK_BASE {
+   width = full
+   dev_A   [address = "dev_A" ]
+   dev_B [address = "dev_B" ]
+  }
+  network IntNET1 {
+   width = full
+   dev_B [address = "dev_B1" ]
+   dev_M [address = "dev_M1" ]
+  }
+  network IntNET2 {
+   dev_B [address = "dev_B2" ]
+   dev_M [address = "dev_M2" ]
+ }
+}
+@enduml
+
+    all the network (with same full width)
+
+@startuml
+nwdiag {
+  network NETWORK_BASE {
+   width = full
+   dev_A   [address = "dev_A" ]
+   dev_B [address = "dev_B" ]
+  }
+  network IntNET1 {
+   width = full
+   dev_B [address = "dev_B1" ]
+   dev_M [address = "dev_M1" ]
+  }
+  network IntNET2 {
+   width = full
+   dev_B [address = "dev_B2" ]
+   dev_M [address = "dev_M2" ]
+ }
+}
+@enduml
+***** Archimate Diagram 
+****** https://plantuml.com/archimate-diagram
+This is only a proposal and subject to change.
+
+You are very welcome to create a new discussion on this future syntax. Your feedbacks, ideas and suggestions help us to find the right solution.
+****** Archimate keyword 
+You can use the archimate keyword to define an element. Stereotype can optionally specify an additional icon. Some colors (Business, Application, Motivation, Strategy, Technology, Physical, Implementation) are also available.
+
+@startuml
+archimate #Technology "VPN Server" as vpnServerA <<technology-device>>
+
+rectangle GO #lightgreen
+rectangle STOP #red
+rectangle WAIT #orange
+@enduml
+****** Defining Junctions 
+Using the circle keyword and the preprocessor, you can also create junctions.
+
+@startuml
+!define Junction_Or circle #black
+!define Junction_And circle #whitesmoke
+
+Junction_And JunctionAnd
+Junction_Or JunctionOr
+
+archimate #Technology "VPN Server" as vpnServerA <<technology-device>>
+
+rectangle GO #lightgreen
+rectangle STOP #red
+rectangle WAIT #orange
+GO -up-> JunctionOr
+STOP -up-> JunctionOr
+STOP -down-> JunctionAnd
+WAIT -down-> JunctionAnd
+@enduml
+****** Example 1 
+
+@startuml
+skinparam rectangle<<behavior>> {
+	roundCorner 25
+}
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+rectangle "Handle claim"  as HC <<$bProcess>><<behavior>> #Business
+rectangle "Capture Information"  as CI <<$bProcess>><<behavior>> #Business
+rectangle "Notify\nAdditional Stakeholders" as NAS <<$bProcess>><<behavior>> #Business
+rectangle "Validate" as V <<$bProcess>><<behavior>> #Business
+rectangle "Investigate" as I <<$bProcess>><<behavior>> #Business
+rectangle "Pay" as P <<$bProcess>><<behavior>> #Business
+
+HC *-down- CI
+HC *-down- NAS
+HC *-down- V
+HC *-down- I
+HC *-down- P
+
+CI -right->> NAS
+NAS -right->> V
+V -right->> I
+I -right->> P
+
+rectangle "Scanning" as scanning <<$aService>><<behavior>> #Application
+rectangle "Customer admnistration" as customerAdministration <<$aService>><<behavior>> #Application
+rectangle "Claims admnistration" as claimsAdministration <<$aService>><<behavior>> #Application
+rectangle Printing <<$aService>><<behavior>> #Application
+rectangle Payment <<$aService>><<behavior>> #Application
+
+scanning -up-> CI
+customerAdministration  -up-> CI
+claimsAdministration -up-> NAS
+claimsAdministration -up-> V
+claimsAdministration -up-> I
+Payment -up-> P
+
+Printing -up-> V
+Printing -up-> P
+
+rectangle "Document\nManagement\nSystem" as DMS <<$aComponent>> #Application
+rectangle "General\nCRM\nSystem" as CRM <<$aComponent>>  #Application
+rectangle "Home & Away\nPolicy\nAdministration" as HAPA <<$aComponent>> #Application
+rectangle "Home & Away\nFinancial\nAdministration" as HFPA <<$aComponent>>  #Application
+
+DMS .up.|> scanning
+DMS .up.|> Printing
+CRM .up.|> customerAdministration
+HAPA .up.|> claimsAdministration
+HFPA .up.|> Payment
+
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See
+====
+<$bProcess> :business process
+====
+<$aService> : application service
+====
+<$aComponent> : application component
+endlegend
+@enduml
+****** Example 2 
+@startuml
+skinparam roundcorner 25
+rectangle "Capture Information"  as CI <<$archimate/business-process>> #Business
+@enduml
+****** List possible sprites 
+
+You can list all possible sprites for Archimate using the following diagram:
+
+@startuml
+listsprite
+@enduml
+****** ArchiMate Macros 
+Archimate Macros and Library
+
+A list of Archimate macros are defined Archimate-PlantUML here which simplifies the creation of ArchiMate diagrams, and Archimate is natively on the Standard Library of PlantUML.
+
+Archimate elements
+Using the macros, creation of ArchiMate elements are done using the following format: Category_ElementName(nameOfTheElement, "description")
+
+For example:
+
+    To define a Stakeholder element, which is part of Motivation category, the syntax will be Motivation_Stakeholder(StakeholderElement, "Stakeholder Description"):
+
+@startuml
+!include <archimate/Archimate>
+Motivation_Stakeholder(StakeholderElement, "Stakeholder Description")
+@enduml
+
+    To define a Business Service element, Business_Service(BService, "Business Service"):
+
+@startuml
+!include <archimate/Archimate>
+Business_Service(BService, "Business Service")
+@enduml
+
+Archimate relationships
+The ArchiMate relationships are defined with the following pattern: Rel_RelationType(fromElement, toElement, "description") and to define the direction/orientation of the two elements: Rel_RelationType_Direction(fromElement, toElement, "description")
+
+The RelationTypes supported are:
+
+    Access
+    Aggregation
+    Assignment
+    Association
+    Composition
+    Flow
+    Influence
+    Realization
+    Serving
+    Specialization
+    Triggering
+
+The Directions supported are:
+
+    Up
+    Down
+    Left
+    Right
+
+For example:
+
+    To denote a composition relationship between the Stakeholder and Business Service defined above, the syntax will be
+
+Rel_Composition(StakeholderElement, BService, "Description for the relationship")
+
+@startuml
+!include <archimate/Archimate>
+Motivation_Stakeholder(StakeholderElement, "Stakeholder Description")
+Business_Service(BService, "Business Service")
+Rel_Composition(StakeholderElement, BService, "Description for the relationship")
+@enduml
+
+    Unordered List ItemTo orient the two elements in top - down position, the syntax will be
+
+Rel_Composition_Down(StakeholderElement, BService, "Description for the relationship")
+
+@startuml
+!include <archimate/Archimate>
+Motivation_Stakeholder(StakeholderElement, "Stakeholder Description")
+Business_Service(BService, "Business Service")
+Rel_Composition_Down(StakeholderElement, BService, "Description for the relationship")
+@enduml
+
+Appendice: Examples of all Archimate RelationTypes
+
+@startuml
+left to right direction
+!include <archimate/Archimate>
+Rel_Triggering(i15, j15, Triggering)
+Rel_Specialization(i14, j14, Specialization)
+Rel_Serving(i13, j13, Serving)
+Rel_Realization(i12, j12, Realization)
+Rel_Influence(i11, j11, Influence)
+Rel_Flow(i10, j10, Flow)
+Rel_Composition(i9, j9, Composition)
+'Rel_Association_dir(i8, j8, Association_dir)
+Rel_Association(i7, j7, Association)
+Rel_Assignment(i6, j6, Assignment)
+Rel_Aggregation(i5, j5, Aggregation)
+Rel_Access_w(i4, j4, Access_w)
+Rel_Access_rw(i3, j3, Access_rw)
+Rel_Access_r(i2, j2, Access_r)
+Rel_Access(i1, j1, Access)
+@enduml
+***** Gantt Diagram 
+****** https://plantuml.com/gantt-diagram
+The Gantt is described in natural language, using very simple sentences (subject-verb-complement).
+****** Declaring tasks 
+
+Tasks defined using square bracket.
+
+Duration
+
+Their durations are defined using the last verb:
+
+@startgantt
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+-- All example --
+[Task 1 (1 day)] lasts 1 day
+[T2 (5 days)] lasts 5 days
+[T3 (1 week)] lasts 1 week
+[T4 (1 week and 4 days)] lasts 1 week and 4 days
+[T5 (2 weeks)] lasts 2 weeks
+@endgantt
+
+Start
+
+Their beginning are defined using the start verb:
+
+@startuml
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+
+Project starts 2020-07-01
+[Prototype design] starts 2020-07-01
+[Test prototype] starts 2020-07-16
+@enduml
+
+End
+
+Their ending are defined using the end verb:
+
+@startuml
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+
+Project starts 2020-07-01
+[Prototype design] ends 2020-07-15
+[Test prototype] ends 2020-07-25
+
+@enduml
+
+Start/End
+
+It is possible to define both absolutely, by specifying dates:
+
+@startuml
+
+Project starts 2020-07-01
+[Prototype design] starts 2020-07-01
+[Test prototype] starts 2020-07-16
+[Prototype design] ends 2020-07-15
+[Test prototype] ends 2020-07-25
+
+@enduml
+****** One-line declaration (with the and conjunction) 
+
+It is possible to combine declaration on one line with the and conjunction.
+
+@startuml
+Project starts 2020-07-01
+[Prototype design] starts 2020-07-01 and ends 2020-07-15
+[Test prototype] starts 2020-07-16 and lasts 10 days
+@enduml
+****** Adding constraints onstraints between tasks.
+
+@startgantt
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+[Test prototype] starts at [Prototype design]'s end
+@endgantt
+
+@startgantt
+[Prototype design] lasts 10 days
+[Code prototype] lasts 10 days
+[Write tests] lasts 5 days
+[Code prototype] starts at [Prototype design]'s end
+[Write tests] starts at [Code prototype]'s start
+@endgantt
+****** Short names efine short name for tasks with the as keyword.
+
+@startgantt
+[Prototype design] as [D] lasts 15 days
+[Test prototype] as [T] lasts 10 days
+[T] starts at [D]'s end
+@endgantt
+****** Customize colors ustomize colors with is colored in.
+
+@startgantt
+[Prototype design] lasts 13 days
+[Test prototype] lasts 4 days
+[Test prototype] starts at [Prototype design]'s end
+[Prototype design] is colored in Fuchsia/FireBrick
+[Test prototype] is colored in GreenYellow/Green
+@endgantt
+****** Completion status ompletion status of a task.
+
+@startgantt
+[foo] lasts 21 days
+[foo] is 40% completed
+[bar] lasts 30 days and is 10% complete
+@endgantt
+****** Milestone ilestones using the happen verb.
+
+Relative milestone (use of constraints)
+
+@startgantt
+[Test prototype] lasts 10 days
+[Prototype completed] happens at [Test prototype]'s end
+[Setup assembly line] lasts 12 days
+[Setup assembly line] starts at [Test prototype]'s end
+@endgantt
+
+Absolute milestone (use of fixed date)
+
+@startgantt
+Project starts 2020-07-01
+[Test prototype] lasts 10 days
+[Prototype completed] happens 2020-07-10
+[Setup assembly line] lasts 12 days
+[Setup assembly line] starts at [Test prototype]'s end
+@endgantt
+
+Milestone of maximum end of tasks
+
+@startgantt
+[Task1] lasts 4 days
+then [Task1.1] lasts 4 days
+[Task1.2] starts at [Task1]'s end and lasts 7 days
+
+[Task2] lasts 5 days
+then [Task2.1] lasts 4 days
+
+[MaxTaskEnd] happens at [Task1.1]'s end
+[MaxTaskEnd] happens at [Task1.2]'s end
+[MaxTaskEnd] happens at [Task2.1]'s end
+
+@endgantt
+
+[Ref. QA-10764]
+****** Hyperlinks yperlinks to tasks.
+
+@startgantt
+[task1] lasts 10 days
+[task1] links to [[http://plantuml.com]]
+@endgantt
+****** Calendar pecify a starting date for the whole project. By default, the first task starts at this date.
+
+@startgantt
+Project starts the 20th of september 2017
+[Prototype design] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+@endgantt
+****** Coloring days 
+
+It is possible to add colors to some days.
+
+@startgantt
+Project starts the 2020/09/01 
+
+2020/09/07 is colored in salmon
+2020/09/13 to 2020/09/16 are colored in lightblue
+
+[Prototype design] as [TASK1] lasts 22 days
+[TASK1] is colored in Lavender/LightBlue
+[Prototype completed] happens at [TASK1]'s end
+@endgantt
+****** Changing scale or very long project, with one of those parameters:
+
+    printscale
+    ganttscale
+    projectscale
+
+and one of the values:
+
+    daily (by default)
+    weekly
+    monthly
+
+(See QA-11272, QA-9041 and QA-10948)
+
+Daily (by default)
+
+@startuml
+saturday are closed
+sunday are closed
+
+Project starts the 1st of january 2021
+[Prototype design end] as [TASK1] lasts 19 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 14 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@enduml
+
+Weekly
+
+@startuml
+printscale weekly
+saturday are closed
+sunday are closed
+
+Project starts the 1st of january 2021
+[Prototype design end] as [TASK1] lasts 19 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 14 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@enduml
+
+@startgantt
+printscale weekly
+Project starts the 20th of september 2020
+[Prototype design] as [TASK1] lasts 130 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 20 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@endgantt
+
+Monthly
+
+@startgantt
+projectscale monthly
+Project starts the 20th of september 2020
+[Prototype design] as [TASK1] lasts 130 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 20 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@endgantt
+****** Close day o close some day.
+
+@startgantt
+project starts the 2018/04/09
+saturday are closed
+sunday are closed
+2018/05/01 is closed
+2018/04/17 to 2018/04/19 is closed
+[Prototype design] lasts 14 days
+[Test prototype] lasts 4 days
+[Test prototype] starts at [Prototype design]'s end
+[Prototype design] is colored in Fuchsia/FireBrick
+[Test prototype] is colored in GreenYellow/Green
+@endgantt
+
+Then it is possible to open some closed day.
+
+@startgantt
+2020-07-07 to 2020-07-17 is closed
+2020-07-13 is open
+
+Project starts the 2020-07-01
+[Prototype design] lasts 10 days
+Then [Test prototype] lasts 10 days
+@endgantt
+****** Simplified task succession eyword to denote consecutive tasks.
+
+@startgantt
+[Prototype design] lasts 14 days
+then [Test prototype] lasts 4 days
+then [Deploy prototype] lasts 6 days
+@endgantt
+
+You can also use arrow ->
+
+@startgantt
+[Prototype design] lasts 14 days
+[Build prototype] lasts 4 days
+[Prepare test] lasts 6 days
+[Prototype design] -> [Build prototype]
+[Prototype design] -> [Prepare test]
+@endgantt
+****** Separator 
+
+You can use -- to separate sets of tasks.
+
+@startgantt
+[Task1] lasts 10 days
+then [Task2] lasts 4 days
+-- Phase Two --
+then [Task3] lasts 5 days
+then [Task4] lasts 6 days
+@endgantt
+****** Working with resources esources using the on keyword and brackets for resource name.
+
+@startgantt
+[Task1] on {Alice} lasts 10 days
+[Task2] on {Bob:50%} lasts 2 days
+then [Task3] on {Alice:25%} lasts 1 days
+@endgantt
+
+Multiple resources can be assigned to a task:
+
+@startgantt
+[Task1] on {Alice} {Bob} lasts 20 days
+@endgantt
+
+Resources can be marked as off on specific days:
+
+@startgantt
+project starts on 2020-06-19
+[Task1] on {Alice} lasts 10 days
+{Alice} is off on 2020-06-24 to 2020-06-26
+@endgantt
+****** Complex example se the and conjunction.
+
+You can also add delays in constraints.
+
+@startgantt
+[Prototype design] lasts 13 days and is colored in Lavender/LightBlue
+[Test prototype] lasts 9 days and is colored in Coral/Green and starts 3 days after [Prototype design]'s end
+[Write tests] lasts 5 days and ends at [Prototype design]'s end
+[Hire tests writers] lasts 6 days and ends at [Write tests]'s start
+[Init and write tests report] is colored in Coral/Green
+[Init and write tests report] starts 1 day before [Test prototype]'s start and ends at [Test prototype]'s end
+@endgantt
+****** Comments 
+
+As is mentioned on Common Commands page:
+
+    Everything that starts with simple quote ' is a comment.
+
+    You can also put comments on several lines using /' to start and '/ to end. 
+
+(i.e.: the first character (except space character) of a comment line must be a simple quote ')
+
+@startgantt
+' This is a comment
+
+[T1] lasts 3 days
+
+/' this comment
+is on several lines '/
+
+[T2] starts at [T1]'s end and lasts 1 day
+@endgantt
+****** Using style 
+
+Without style (by default)
+
+@startuml
+[Task1] lasts 20 days
+note bottom
+  memo1 ...
+  memo2 ...
+  explanations1 ...
+  explanations2 ...
+end note
+[Task2] lasts 4 days
+[Task1] -> [Task2]
+-- Separator title --
+[M1] happens on 5 days after [Task1]'s end
+-- end --
+@enduml
+
+With style
+
+You can use style to change rendering of elements.
+
+@startuml
+<style>
+ganttDiagram {
+	task {
+		FontName Helvetica
+		FontColor red
+		FontSize 18
+		FontStyle bold
+		BackGroundColor GreenYellow
+		LineColor blue
+	}
+	milestone {
+		FontColor blue
+		FontSize 25
+		FontStyle italic
+		BackGroundColor yellow
+		LineColor red
+	}
+	note {
+		FontColor DarkGreen
+		FontSize 10
+		LineColor OrangeRed
+	}
+	arrow {
+		FontName Helvetica
+		FontColor red
+		FontSize 18
+		FontStyle bold
+		BackGroundColor GreenYellow
+		LineColor blue
+	}
+	separator {
+		LineColor red
+		BackGroundColor green
+		FontSize 16
+		FontStyle bold
+		FontColor purple
+	}
+}
+</style>
+[Task1] lasts 20 days
+note bottom
+  memo1 ...
+  memo2 ...
+  explanations1 ...
+  explanations2 ...
+end note
+[Task2] lasts 4 days
+[Task1] -> [Task2]
+-- Separator title --
+[M1] happens on 5 days after [Task1]'s end
+-- end --
+@enduml
+
+[Ref. QA-10835, QA-12045, QA-11877 and PR-438]
+
+TODO
+Awaiting style for Separator and all style for Arrow (thickness...)
+****** Add notes 
+
+@startgantt
+[task01] lasts 15 days
+note bottom
+  memo1 ...
+  memo2 ...
+  explanations1 ...
+  explanations2 ...
+end note
+
+[task01] -> [task02]
+
+@endgantt
+
+Example with overlap.
+
+@startgantt
+[task01] lasts 15 days
+note bottom
+  memo1 ...
+  memo2 ...
+  explanations1 ...
+  explanations2 ...
+end note
+
+[task01] -> [task02]
+[task03] lasts 5 days
+
+@endgantt
+
+@startgantt
+
+-- test01 --
+
+[task01] lasts 4 days
+note bottom
+'note left
+memo1 ...
+memo2 ...
+explanations1 ...
+explanations2 ...
+end note
+
+[task02] lasts 8 days
+[task01] -> [task02]
+note bottom
+'note left
+memo1 ...
+memo2 ...
+explanations1 ...
+explanations2 ...
+end note
+-- test02 --
+
+[task03] as [t3] lasts 7 days
+[t3] -> [t4]
+@endgantt
+
+DONE
+Thanks for correction (of #386 on v1.2020.18) when overlapping
+
+@startgantt
+
+Project starts 2020-09-01
+
+[taskA] starts 2020-09-01 and lasts 3 days
+[taskB] starts 2020-09-10 and lasts 3 days
+[taskB] displays on same row as [taskA]
+
+[task01] starts 2020-09-05 and lasts 4 days
+
+then [task02] lasts 8 days
+note bottom
+  note for task02
+  more notes
+end note
+
+then [task03] lasts 7 days
+note bottom
+  note for task03
+  more notes
+end note
+
+-- separator --
+
+[taskC] starts 2020-09-02 and lasts 5 days
+[taskD] starts 2020-09-09 and lasts 5 days
+[taskD] displays on same row as [taskC]
+
+[task 10] starts 2020-09-05 and lasts 5 days
+then [task 11] lasts 5 days
+note bottom
+  note for task11
+  more notes
+end note
+@endgantt
+****** Pause tasks 
+
+@startgantt
+Project starts the 5th of december 2018
+saturday are closed
+sunday are closed
+2018/12/29 is opened
+[Prototype design] lasts 17 days
+[Prototype design] pauses on 2018/12/13
+[Prototype design] pauses on 2018/12/14
+[Prototype design] pauses on monday
+[Test prototype] starts at [Prototype design]'s end and lasts 2 weeks
+@endgantt
+****** Change link colors 
+
+@startgantt
+[T1] lasts 4 days
+[T2] lasts 4 days and starts 3 days after [T1]'s end with blue dotted link
+[T3] lasts 4 days and starts 3 days after [T2]'s end with green bold link
+[T4] lasts 4 days and starts 3 days after [T3]'s end with green dashed link
+@endgantt
+
+@startuml
+Links are colored in blue
+[Prototype design] lasts 14 days
+[Build prototype] lasts 4 days
+[Prepare test] lasts 6 days
+[Prototype design] -[#FF00FF]-> [Build prototype]
+[Prototype design] -[dotted]-> [Prepare test]
+@enduml
+****** Tasks or Milestones on the same line 
+
+@startgantt
+[Prototype design] lasts 13 days
+[Test prototype] lasts 4 days and 1 week
+[Test prototype] starts 1 week and 2 days after [Prototype design]'s end
+[Test prototype] displays on same row as [Prototype design]
+[r1] happens on 5 days after [Prototype design]'s end
+[r2] happens on 5 days after [r1]'s end
+[r3] happens on 5 days after [r2]'s end
+[r2] displays on same row as [r1]
+[r3] displays on same row as [r1]
+@endgantt
+****** Highlight today 
+
+@startgantt
+Project starts the 20th of september 2018
+sunday are close
+2018/09/21 to 2018/09/23 are colored in salmon
+2018/09/21 to 2018/09/30 are named [Vacation in the Bahamas] 
+
+today is 30 days after start and is colored in #AAF
+[Foo] happens 40 days after start
+[Dummy] lasts 10 days and starts 10 days after start
+
+@endgantt
+****** Task between two milestones 
+
+@startgantt
+project starts on 2020-07-01
+[P_start] happens 2020-07-03
+[P_end]   happens 2020-07-13
+[Prototype design] occurs from [P_start] to [P_end]
+@endgantt
+****** Grammar and verbal form 
+
+Verbal form 	Example
+[T] starts 	
+[M] happens 	
+****** Add title, header, footer, caption or legend on gantt diagram 
+
+@startuml
+
+header some header
+
+footer some footer
+
+title My title
+
+[Prototype design] lasts 13 days
+
+legend
+The legend
+end legend
+
+caption This is caption
+
+@enduml
+
+(See also: Common commands)
+****** Removing Foot Boxes 
+
+You can use the hide footbox keywords to remove the foot boxes of the gantt diagram (as for sequence diagram).
+
+Examples on:
+
+    daily scale (without project start)
+
+@startgantt
+
+hide footbox
+title Foot Box removed
+
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+@endgantt
+
+    daily scale
+
+@startgantt
+
+Project starts the 20th of september 2017
+[Prototype design] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+
+hide footbox
+@endgantt
+
+    weekly scale
+
+@startgantt
+hide footbox
+
+printscale weekly
+saturday are closed
+sunday are closed
+
+Project starts the 1st of january 2021
+[Prototype design end] as [TASK1] lasts 19 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 14 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@endgantt
+
+    monthly scale
+
+@startgantt
+
+hide footbox
+
+projectscale monthly
+Project starts the 20th of september 2020
+[Prototype design] as [TASK1] lasts 130 days
+[TASK1] is colored in Lavender/LightBlue
+[Testing] lasts 20 days
+[TASK1]->[Testing]
+
+2021-01-18 to 2021-01-22 are named [End's committee]
+2021-01-18 to 2021-01-22 are colored in salmon 
+@endgantt
+***** Component Diagram 
+****** https://plantuml.com/component-diagram
+Let's have few examples.
+****** Components e bracketed.
+You can also use the component keyword to define a component. And you can define an alias, using the as keyword. This alias will be used later, when defining relations.
+
+@startuml
+
+[First component]
+[Another component] as Comp2
+component Comp3
+component [Last\ncomponent] as Comp4
+
+@enduml
+****** Interfaces 
+
+Interface can be defined using the () symbol (because this looks like a circle).
+
+You can also use the interface keyword to define an interface. And you can define an alias, using the as keyword. This alias will be used latter, when defining relations.
+
+We will see latter that interface definition is optional.
+
+@startuml
+
+() "First Interface"
+() "Another interface" as Interf2
+interface Interf3
+interface "Last\ninterface" as Interf4
+
+[component]
+footer //Adding "component" to force diagram to be a **component diagram**//
+@enduml
+****** Basic example 
+
+Links between elements are made using combinations of dotted line (..), straight line (--), and arrows (-->) symbols.
+
+@startuml
+
+DataAccess - [First Component]
+[First Component] ..> HTTP : use
+
+@enduml
+****** Using notes 
+
+You can use the note left of , note right of , note top of , note bottom of keywords to define notes related to a single object.
+
+A note can be also define alone with the note keywords, then linked to other objects using the .. symbol.
+
+@startuml
+
+interface "Data Access" as DA
+
+DA - [First Component]
+[First Component] ..> HTTP : use
+
+note left of HTTP : Web Service only
+
+note right of [First Component]
+  A note can also
+  be on several lines
+end note
+
+@enduml
+****** Grouping Components 
+
+You can use several keywords to group components and interfaces together:
+
+    package
+    node
+    folder
+    frame
+    cloud
+    database
+
+@startuml
+
+package "Some Group" {
+  HTTP - [First Component]
+  [Another Component]
+}
+
+node "Other Groups" {
+  FTP - [Second Component]
+  [First Component] --> FTP
+}
+
+cloud {
+  [Example 1]
+}
+
+
+database "MySql" {
+  folder "This is my folder" {
+    [Folder 3]
+  }
+  frame "Foo" {
+    [Frame 4]
+  }
+}
+
+
+[Another Component] --> [Example 1]
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+
+@enduml
+****** Changing arrows direction 
+
+By default, links between classes have two dashes -- and are vertically oriented. It is possible to use horizontal link by putting a single dash (or dot) like this:
+
+@startuml
+[Component] --> Interface1
+[Component] -> Interface2
+@enduml
+
+You can also change directions by reversing the link:
+
+@startuml
+Interface1 <-- [Component]
+Interface2 <- [Component]
+@enduml
+
+It is also possible to change arrow direction by adding left, right, up or down keywords inside the arrow:
+
+@startuml
+[Component] -left-> left
+[Component] -right-> right
+[Component] -up-> up
+[Component] -down-> down
+@enduml
+
+You can shorten the arrow by using only the first character of the direction (for example, -d- instead of -down-) or the two first characters (-do-).
+
+Please note that you should not abuse this functionality : Graphviz gives usually good results without tweaking.
+
+And with the left to right direction parameter:
+
+@startuml
+left to right direction
+[Component] -left-> left
+[Component] -right-> right
+[Component] -up-> up
+[Component] -down-> down
+@enduml
+****** Use UML2 notation 
+
+By default (from v1.2020.13-14), UML2 notation is used.
+
+@startuml
+
+interface "Data Access" as DA
+
+DA - [First Component]
+[First Component] ..> HTTP : use
+
+@enduml
+****** Use UML1 notation 
+
+The skinparam componentStyle uml1 command is used to switch to UML1 notation.
+
+@startuml
+skinparam componentStyle uml1
+
+interface "Data Access" as DA
+
+DA - [First Component]
+[First Component] ..> HTTP : use
+
+@enduml
+****** Use rectangle notation (remove UML notation) 
+
+The skinparam componentStyle rectangle command is used to switch to rectangle notation (without any UML notation).
+
+@startuml
+skinparam componentStyle rectangle
+
+interface "Data Access" as DA
+
+DA - [First Component]
+[First Component] ..> HTTP : use
+
+@enduml
+****** Long description escription on several lines using square brackets.
+
+@startuml
+component comp1 [
+This component
+has a long comment
+on several lines
+]
+@enduml
+****** Individual colors 
+
+You can specify a color after component definition.
+
+@startuml
+component  [Web Server] #Yellow
+@enduml
+****** Using Sprite in Stereotype tereotype components.
+
+@startuml
+sprite $businessProcess [16x16/16] {
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFF0FFFFF
+FFFFFFFFFF00FFFF
+FF00000000000FFF
+FF000000000000FF
+FF00000000000FFF
+FFFFFFFFFF00FFFF
+FFFFFFFFFF0FFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+}
+
+
+rectangle " End to End\nbusiness process" <<$businessProcess>> {
+ rectangle "inner process 1" <<$businessProcess>> as src
+ rectangle "inner process 2" <<$businessProcess>> as tgt
+ src -> tgt
+}
+@enduml
+****** Skinparam 
+
+You can use the skinparam command to change colors and fonts for the drawing.
+
+You can use this command :
+
+    In the diagram definition, like any other commands;
+    In an included file;
+    In a configuration file, provided in the command line or the Ant task.
+
+You can define specific color and fonts for stereotyped components and interfaces.
+
+@startuml
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Data Access" as DA
+
+DA - [First Component]
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+
+@enduml
+
+@startuml
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+    backgroundColor<<static lib>> DarkKhaki
+    backgroundColor<<shared lib>> Green
+}
+
+skinparam node {
+borderColor Green
+backgroundColor Yellow
+backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+
+@enduml
+****** Specific SkinParameter 
+componentStyle
+
+    By default (or with skinparam componentStyle uml2), you have an icon for component
+
+@startuml
+skinparam BackgroundColor transparent
+skinparam componentStyle uml2
+component A {
+   component "A.1" {
+}
+   component A.44 {
+      [A4.1]
+}
+   component "A.2"
+   [A.3]
+   component A.5 [
+A.5] 
+   component A.6 [
+]
+}
+[a]->[b]
+@enduml
+
+    If you want to suppress it, and to have only the rectangle, you can use skinparam componentStyle rectangle
+
+@startuml
+skinparam BackgroundColor transparent
+skinparam componentStyle rectangle
+component A {
+   component "A.1" {
+}
+   component A.44 {
+      [A4.1]
+}
+   component "A.2"
+   [A.3]
+   component A.5 [
+A.5] 
+   component A.6 [
+]
+}
+[a]->[b]
+@enduml
+***** ditaa fom plantuml 
+****** Generalisation 
+PlantUML now can generate diagrams other than UML. In such cases the usual @startuml does not make sense anymore. So now we allow diagrams start with @startXYZ and finish with @endXYZ, where XYZ can change with the type of diagram and can be any characters (including spaces).
+
+    This means that plugin developers are encouraged to change their code to recognize @start instead of @startuml. 
+
+DITAA diagrams are usually formatted as @startditaa...@endditaa.
+****** Ditaa 
+
+Ditaa (DIagrams Through Ascii Art) is an Open Source project that allows to generate general diagrams from a text descriptions. The idea is close to PlantUML, and it may be useful for documentation to generate other diagrams than UML.
+
+So last version of PlantUML allows this :
+
+@startuml
+ditaa
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+    :                         ^
+    |       Lots of work      |
+    +-------------------------+
+@enduml
+
+You will find the complete documentation about ditaa on:
+
+    ditaa.sourceforge.net
+    github.com/stathissideris/ditaa
+
+If your plugin does not support @startditaa yet, a temporary feature has been set up : it is also possible to use Ditaa with @startuml by using ditaa keyword on the very first line of your description.
+
+ On PlantUML, only PNG generation is supported.
+****** Option supported by PlantUML 
+
+You can also use some option, after the @startditaa or ditaa keyword:
+
+    -E or --no-separation to remove separator
+    -S or --no-shadows to remove shadow
+    scale=<XYZ> to scale up or down the diagram
+
+Without option
+
+@startditaa
++---------+  /--------\   +-------+
+| cBLU    +--+cAAA    +---+Version|
+|         |  |  Data  |   |   V3  |
+|    +----+  |  Base  |   |cRED{d}|
+|    |cPNK|  |     {s}|   +-------+
+|    |    |  \---+----/
++----+----+    
+@endditaa
+
+Remove separator
+
+@startditaa -E
++---------+  /--------\   +-------+
+| cBLU    +--+cAAA    +---+Version|
+|         |  |  Data  |   |   V3  |
+|    +----+  |  Base  |   |cRED{d}|
+|    |cPNK|  |     {s}|   +-------+
+|    |    |  \---+----/
++----+----+    
+@endditaa
+
+Remove shadow or scale diagram
+
+@startuml
+ditaa(--no-shadows, scale=0.7)
++---------+  /--------\   +-------+
+| cBLU    +--+cAAA    +---+Version|
+|         |  |  Data  |   |   V3  |
+|    +----+  |  Base  |   |cRED{d}|
+|    |cPNK|  |     {s}|   +-------+
+|    |    |  \---+----/
++----+----+    
+@enduml
+****** Tags 
+
+Tag 	Description
+{c} 	Choice or Decision
+{d} 	Document - Symbol representing a document
+{io} 	Input/Output - Symbol representing input/output
+{mo} 	Manual operation
+{o} 	Ellipse
+{s} 	Storage - Symbol representing a form of storage, like a database or a hard disk.
+{tr} 	Trapezoid
+
+@startditaa
++------+------+------+------+------+------+------+
+| c {c}|d {d} |io{io}|mo{mo}|o{o}  |s{s}  |tr{tr}|
++------+------+------+------+------+------+------+
+@endditaa
+****** More documentation 
+
+You will find the complete documentation about ditaa on:
+
+    ditaa.sourceforge.net
+    github.com/stathissideris/ditaa
 
 **** exempls
 ***** seqvese
@@ -9930,32 +13458,349 @@ If you are using Evil anyways, you can use C-t and C-d to increase/decrease inde
 	#+results:
 	[[file:e:\Temp\my-diagram.png]]
      
+	#+begin_src plantuml :file my-diagram.png
+	scale 12
+	title Authentication Sequence
+	Object <|-- ArrayList    
+	Object : equals()    
+	ArrayList : Object[] elementData    
+	ArrayList : size()    
+	#+end_src
+	#+RESULTS:
+	[[file:my-diagram.png]]
+
 *** DITAA
+**** DIagrams Through Ascii Art 
+***** Command line
+ You need the latest Java runtimes (JRE) to use ditaa. The best anti-aliasing can be
+ achieved using Java 1.5 or higher.
+
+ To start from the command line, type (where XXX is the version number):
+
+ java -jar ditaaXXX.jar
+
+ You will be presented with the command-line options help:
+
+
+	-A,--no-antialias          Turns anti-aliasing off.
+	-d,--debug                 Renders the debug grid over the resulting
+														 image.
+	-E,--no-separation         Prevents the separation of common edges of
+														 shapes. You can see the difference below:
+
+	+---------+  *  *  
+	| cBLU    |      
+	|         |      
+	|    +----+      
+	|    |cPNK|      
+	|    |    |      
+	+----+----+      
+	Before processing  Common edge  No separation  
+		separation (default)  (with the -E option)  
+ ,* 
+ ,* 
+
+	-e,--encoding <ENCODING>   The encoding of the input file.
+	-h,--html                  In this case the input is an HTML file. The
+														 contents of the <pre class="textdiagram"> tags
+														 are rendered as diagrams and saved in the
+														 images directory and a new HTML file is
+														 produced with the appropriate <img> tags.
+														 See the [[http://ditaa.sourceforge.net/#html_mode][HTML section]].
+		 --help                  Prints usage help.
+	-o,--overwrite             If the filename of the destination image
+														 already exists, an alternative name is chosen.
+														 If the overwrite option is selected, the image
+														 file is instead overwriten.
+	-r,--round-corners         Causes all corners to be rendered as round
+														 corners.
+	-s,--scale <SCALE>         A natural number that determines the size of
+														 the rendered image. The units are fractions of
+														 the default size (2.5 renders 1.5 times bigger
+														 than the default).
+	-S,--no-shadows            Turns off the drop-shadow effect.
+	-t,--tabs <TABS>           Tabs are normally interpreted as 8 spaces but
+														 it is possible to change that using this
+														 option. It is not advisable to use tabs in
+														 your diagrams.
+	-v,--verbose               Makes ditaa more verbose.
+***** Syntax
+****** Round corners
+	If you use / and \ to connect corners, they are rendered as round corners:
+
+	 /--+  round corner demo  
+	 |  |    
+	 +--/    
+	 Before processing  Rendered  
+	round corner demo 
+****** Color
+	Color codes can be used to add color to the diagrams. The syntax of color codes is
+	cXXX
+	where XXX is a hex number. The first digit of the number represents the red
+	compoment of the color, the second digit represents green and the third blue (good
+	ol' RGB). See below for an example of use of color codes:
+
+	 /----\ /----\  color demo  
+	 |c33F| |cC02|    
+	 |    | |    |    
+	 \----/ \----/    
+     
+	 /----\ /----\    
+	 |c1FF| |c1AB|    
+	 |    | |    |    
+	 \----/ \----/    
+	 Before processing  Rendered  
+	color demo 
+
+	This can become a bit tedious after a while, so there are (only some for now) human
+	readable color codes provided:
+
+	 Color codes  color code  
+	 /-------------+-------------\    
+	 |cRED RED     |cBLU BLU     |    
+	 +-------------+-------------+    
+	 |cGRE GRE     |cPNK PNK     |    
+	 +-------------+-------------+    
+	 |cBLK BLK     |cYEL YEL     |    
+	 \-------------+-------------/    
+	 Before processing  Rendered  
+	color code 
+	As you can see above, if a colored shape contains any text, the color of the text is
+	adjusted according to the underlying color. If the undelying color is dark, the text color
+	is changed to white (from the default black).
+	Note that color codes only apply if they are within closed shapes, and they have no
+	effect anywhere outside.
+****** Tags
+	ditaa recognises some tags that change the way a rectangular shape is rendered. All
+	tags are between { and }. See the table below:
+	 Name  Original  Rendered  Comment  
+	 Document  +-----+  *  Symbol representing a document.  
+		 |{d}  |      
+		 |     |      
+		 |     |      
+		 +-----+      
+	 Storage  +-----+  *  Symbol representing a form of  
+		 |{s}  |    storage,  
+		 |     |    like a database or a hard disk.  
+		 |     |      
+		 +-----+      
+	 Input/Output  +-----+  *  Symbol representing input/output.  
+		 |{io} |      
+		 |     |      
+		 |     |      
+		 +-----+      
+
+Tag 	Description
+{c} 	Choice or Decision
+{d} 	Document - Symbol representing a document
+{io} 	Input/Output - Symbol representing input/output
+{mo} 	Manual operation
+{o} 	Ellipse
+{s} 	Storage - Symbol representing a form of storage, like a database or a hard disk.
+{tr} 	Trapezoid
+
+@startditaa
++------+------+------+------+------+------+------+
+| c {c}|d {d} |io{io}|mo{mo}|o{o}  |s{s}  |tr{tr}|
++------+------+------+------+------+------+------+
+@endditaa
+
+****** Dashed lines
+	Any lines that contain either at least one = (for horizontal lines) or at least one : (for
+	vertical lines) are rendered as dashed lines. Only one of those characters can make a
+	whole line dashed, so this feature "spreads". The rationale behind that is that you only
+	have to change one character to switch from normal to dashed (and vice versa), rather
+	than redrawing the whole line/shape. Special symbols (like document or storage
+	symbols) can also be dashed. See below:
+
+	 ----+  /----\  +----+  *  
+			 :  |    |  :    |    
+			 |  |    |  |{s} |    
+			 v  \-=--+  +----+    
+	 Before processing  Rendered  
+	,* 
+****** Point markers
+	If * is encountered on a line (but not at the end of the line), it is rendered as a special
+	marker, called the point marker (this feature is still experimental). See below:
+
+	 *----*  point marker demo  
+	 |    |      /--*    
+	 *    *      |    
+	 |    |  -*--+    
+	 *----*    
+	 Before processing  Rendered  
+	point marker demo 
+****** Text handling
+	(This section is still being written)
+	If the pattern ' o XXXXX' is encountered, where XXXXX is any text, the 'o' is
+	interpreted and rendered as a bullet point. Note that there must be a space before the
+	'o' as well as after it. See below:
+
+	 /-----------------\  bullet point demo  
+	 | Things to do    |    
+	 | cGRE            |    
+	 | o Cut the grass |    
+	 | o Buy jam       |    
+	 | o Fix car       |    
+	 | o Make website  |    
+	 \-----------------/    
+	 Before processing  Rendered  
+	bullet point demo 
+****** HTML mode
+	When ditaa is run using the --html option, the input is an HTML file. The contents of
+	the <pre class="textdiagram"> tags are rendered as diagrams and saved in the
+	images directory and a new HTML file is produced with the appropriate <img> tags.
+
+	If the id parameter is present in the <pre> tag, its value is used as the filename of the
+	rendered png. Otherwise a filename of the form ditaa_diagram_X.png is used, where
+	X is a number. Similarly, if there is no output filename specified, the converted html file
+	is named in the form of xxxx_processed.html, where xxxx is the filename of the
+	original file.
+
+	In this mode, files that exist are not generated again, they are just skipped. You can
+	force overwrite of the files using the --overwrite option.
+****** Remove shadow or scale diagram
+@startuml
+ditaa(--no-shadows, scale=0.7)
++---------+  /--------\   +-------+
+| cBLU    +--+cAAA    +---+Version|
+|         |  |  Data  |   |   V3  |
+|    +----+  |  Base  |   |cRED{d}|
+|    |cPNK|  |     {s}|   +-------+
+|    |    |  \---+----/
++----+----+    
+@enduml
+
+***** by Stathis Sideris
+ (((-[[http://ditaa.sourceforge.net/#intro][intro]]-))) (((-[[http://ditaa.sourceforge.net/#download][download]]-))) (((-[[http://ditaa.sourceforge.net/#usage][usage and syntax]]-))) (((-[[http://ditaa.sourceforge.net/#friends][friends]]-))) (((-[[http://ditaa.sourceforge.net/#contact][contact]]-)))
+
+ ditaa is a small command-line utility written in Java, that can convert diagrams drawn
+ using ascii art ('drawings' that contain characters that resemble lines like | / - ), into
+ proper bitmap graphics. This is best illustrated by the following example -- which also
+ illustrates the benefits of using ditaa in comparison to other methods :)
+
+			+--------+   +-------+    +-------+  
+			|        | --+ ditaa +--> |       |  
+			|  Text  |   +-------+    |diagram|  
+			|Document|   |!magic!|    |       |  
+			|     {d}|   |       |    |       |  
+			+---+----+   +-------+    +-------+  
+					:                         ^  
+					|       Lots of work      |  
+					+-------------------------+  
+	After conversion using ditaa, the above file becomes:  
+	round corner demo  
+ round
+		 corner demo 
+
+ ditaa interprets ascci art as a series of open and closed shapes, but it also uses
+ special markup syntax to increase the possibilities of shapes and symbols that can be
+ rendered.
+
+ ditaa is open source and free software (free as in free speech), since it is released
+ under the GPL license.
+
+ BUT WHY? Does this thing have any real use?
+
+ There are several reasons why I did this:
+
+ 1 Simply for hack value. I wanted to know if/how it could be done and how easily.
+ 2 Aesthetic reasons and legacy formats: there are several old FAQs with ascii
+	diagrams lying out there. At this time and age ascii diagrams make my eyes hurt
+	due to their ugliness. ditaa can be used to convert them to something nicer.
+	Although ditaa would not be able to convert all of them (due to differences in drawing
+	'style' in each case), it could prove useful in the effort of modernising some of those
+	documents without too much effort. I also know a lot of people that can make an
+	ascii diagram easily, but when it gets to using a diagram program, they don't do
+	very well. Maybe this utility could help them make good-looking diagrams
+	easily/quickly.
+ 3 Embedding diagrams to text-only formats: There is a number of formats that
+	are text-based (html, docbook, LaTeX, programming language comments), but
+	when rendered by other software (browsers, interpreters, the javadoc tool etc), they
+	can contain images as part of their content. If ditaa was intergrated with those tools
+	(and I'm planning to do the javadoc bit myself soon), then you would have
+	readable/editable diagrams within the text format itself, something that would make
+	things much easier. ditaa syntax can currently be embedded to [[http://ditaa.sourceforge.net/#html_mode][HTML]].
+ 4 Reusability of "code": Suppose you make a diagram in ascii art and you render
+	it with version 0.6b of ditaa. You keep the ascii diagram, and then version 0.8
+	comes out, which features some new cool effects. You re-render your old diagram
+	with the new version of ditaa, and it looks better, with zero effort! In that sense ditaa
+	is a diagram markup language, with very loose syntax.
+***** Download
+ (((-[[http://ditaa.sourceforge.net/#intro][intro]]-))) (((-[[http://ditaa.sourceforge.net/#download][download]]-))) (((-[[http://ditaa.sourceforge.net/#usage][usage and syntax]]-))) (((-[[http://ditaa.sourceforge.net/#friends][friends]]-))) (((-[[http://ditaa.sourceforge.net/#contact][contact]]-)))
+
+ The latest version of ditaa can be obtained from its [[http://sourceforge.net/projects/ditaa/][SourceForge project page]].
+
+ You can checkout the code using:
+
+		svn co https://ditaa.svn.sourceforge.net/svnroot/ditaa ditaa
+
+ You can also [[http://ditaa.svn.sourceforge.net/viewvc/ditaa/][browse the code online]].
+***** Friends and relatives
+ (((-[[http://ditaa.sourceforge.net/#intro][intro]]-))) (((-[[http://ditaa.sourceforge.net/#download][download]]-))) (((-[[http://ditaa.sourceforge.net/#usage][usage and syntax]]-))) (((-[[http://ditaa.sourceforge.net/#friends][friends]]-))) (((-[[http://ditaa.sourceforge.net/#contact][contact]]-)))
+
+ Here is a list of projects that are related to ditaa and add to its functionality: 
+
+ ,* Mikael Brännström's [[http://ditaa-addons.sourceforge.net/][ditaa-addons]] offers two very interesting pieces of functionality:
+	The Textdiagram Javadoc taglet allows you to embedd ascii diagrams to Java
+	comments and have them rendered as ditaa diagrams in the HTML output. The
+	Ditaa Eps program allows you to render to EPS instead of PNG.
+ ,* Mathieu Lecarme's [[http://github.com/athoune/Ditaa-web/][ditaa-web]] allows you to install ditaa on your web server and use
+	it as a webservice through a HTTP POST request.
+ ,* Bill Baker's [[http://ditaa.org/][ditaa.org]] allows you to run ditaa from the web.
+ ,* ditaa comes bundled within [[http://orgmode.org/][org-mode]], a major mode for emacs. [[http://doc.norang.ca/org-mode.html#sec-13.1][Here's]] an example
+	of how you can use it.
+ ,* There is a [[http://www.dokuwiki.org/plugin:ditaa][plugin]] for [[http://www.dokuwiki.org][DocuWiki]] that allows you to render ditaa diagrams in the wiki
+	pages. Written by Dennis Ploeger.
+
+ Here's a list of projects that are somehow related to ditaa, and could prove
+ useful/relevant while using it: 
+
+ ,* Nadim Khemir's [[http://search.cpan.org/dist/App-Asciio/][asciio]] could be used for producing the ascii diagrams more
+	easily. It would require some modifications to its default settings for the diagrams to
+	render properly (specifically the characters used for corners should all be set to +).
+	Here is a [[http://www.youtube.com/watch?v=IiOHYNHo_Nw][screencast]] of how asciio works.
+ ,* Markus Gebhard's [[http://www.jave.de/][JavE]] could be used for the same purpose, although I've never
+	tried it.
+ ,* If you make sure to keep the lines straight, [[http://www.cinsk.org/emacs/emacs-artist.html][artist-mode]] for emacs can be used to
+	produce ditaa-compatible diagrams.
+***** Contact
+ (((-[[http://ditaa.sourceforge.net/#intro][intro]]-))) (((-[[http://ditaa.sourceforge.net/#download][download]]-))) (((-[[http://ditaa.sourceforge.net/#usage][usage and syntax]]-))) (((-[[http://ditaa.sourceforge.net/#friends][friends]]-))) (((-[[http://ditaa.sourceforge.net/#contact][contact]]-)))
+
+ The author of ditaa is Stathis Sideris. Please feel free to contact me with any
+ questions, suggestions, bug fixes, hate mail etc. at:
+
+ stathissideris {at} users {dot} sourceforge {dot} net
+ Thanks to John Tsiombikas and Leonidas Tsampros for beta testing of ditaa. :)
+ Thanks to Steve Purcell for writing [[http://jargs.sourceforge.net/][JArgs]].
+ Thanks to Mr. Jericho for writing [[http://jerichohtml.sourceforge.net/][Jericho HTML Parser]].
+ You might also be interested in my [[http://www.stathis.co.uk][personal website]].
 **** exempls
 ***** hello-world : 
 [[~/../../../274px.png]]
 #+BEGIN_SRC ditaa :file hello-world.png
-/--------------+    /--------------+
-| cRED         |    |              |
-| Hello World! *--->* {s} cYEL     |
+/--------------+    +--------------+
+| cRED         |    |   Datebase   |
+| Hello World! *--->* {d} cYEL     |
 |              |    |  Datebase    |
-+--------------/    +--------------/
++--------------+    +--------------/
 
 #+END_SRC
 
 #+RESULTS:
 [[file:hello-world.png]]
 
+
 #+BEGIN_SRC ditaa :file hello-world.png
 /--------------+    /--------------+
 | cRED         |    |              |
-| Hello World! *--->* {s} cYEL     |
+| Hello World! *--->| {s} cYEL     |
 |              |    |  Datebase    |
 |              |    |              |
 |    +--+      |    |              |
 |    |  |      |    |              |
-|    +--+      |    |              |
-+--------------/    +--------------/
+|    +--+   ++-+    |              |
++-----------+       +--------------/
 										
 										
 
@@ -9992,24 +13837,32 @@ ${0}
 **** exempls
 #+begin_src artist
 					 +-----+   -%%++		         ------+-+--+- ..	 .-	.-
-	<-cursor |r..ht|.----.mm.         --/  ++m+mm+-+-m.+-+--++%%%*+----+
-			. .  |  m- .m.m*###mm.- .  --/----++m-+*+*+#m+mm%-mm-#++#**.-. |
-		 .   --m---------m+*##m*m-++--(   ..+.-m+-##%%%###*%m###%###+-..-|
-		....+  .#-*###%%##%#*#+%+..-  |..m+#***###*%#m%+*###*%%#m%m##m-m |
-		..-m#++..m**-m-%--########-+%m**%#######*#-#m+m.###**  |  %#%%-. --
-		. -.%*mm-- .|  .|..-*+ -m##.- *%###########%%##m%|% |. *  %|*%#+.+
-			 ++m-+ +....  . %..-+m.%m%.+#######    ######|% .    #  %|#mm%+mm
-			 ...... .+-  ....   +#####+#m###        #*###m++.m-.-m#%##mm+#%m .
-				...++..+---- -..m-m    -##*##         #####%-+...| %m-.%-+++*|..
-					 .*m##.++. *+##%    #*#####        ######*m-....--+-*+...- |
-				 .++++mmm+*+++-m* %*m#*####%################m%.. . %|%m--+-%-+
-					 .-.+++-.mm.+-m.+++#m-##*################%.*-- m .   .	 ..
-							--m	----*%*-.#.*%##*#%-#########%|#|*||   | .m.. .+
-							.-% ##%%r- -..-mm*###*##+m#####m###+...*# .####%m
-							..m-.+.-.. . ...+-##m%#%#m#*%#%. .	.	...	 ...+.-. .
-							 .. ... .  .  .. -+ -. --+. ... -		 . .	-	+...
-								 - +.						 .----	 + ..	.				-..	..
-							 .
+	<-cursor |r..ht|.----.mm.         --/  ++m/mm+-+-m.+-+--++%%%*+----+
+			. .  |----+-------------+  --/----++m/+*+*+#m+mm%-mm-#++#**.-. |
+		 .   --/----+/---\+*##m*m-+m++------+-/-+---------+%m###%###+-..-|
+		....+/ -----/-----\\*#+++mm+%++++-+--/--m-m-+m-+-+|#*%%#m%m##m-m |
+		..-m(+(..m**+m-%--|#)#\.###mm##+|###.###*####m%.#||**  |  %#%%-. --
+		. -.%\m----\+---+-|/*/ \+####m#%*##############%*|| |. *  %|*%#+.+
+			 ++m-\ +/.|.  ./+-.%m|-#%####################|%||    #  %|#mm%+mm
+			 .....--++\-----.%%++m%*##################**+*+++m-.-m#%##mm+#%m .
+				...++.|(+\-- ..++m-+m#################*#++*--+---+---+.%-+++*|..
+					 .*m|#+++--#%m-#%##m###############	 	 ###m-....--++*+...- |
+				 .++++\m/+*++++..+-m#+m*%%##################m%.. . %||m--+-%-+
+					 .-.+/+-.mm-+m#.- +m%#########m#*-m######%.*-- m . | .	 ..
+							--m	----*%*%-#.###############|##.#|*||   | .m.| .+
+							.-% ##%%r- -..-mm####*##+m####+----+-----------+m
+							..m-.+.-.. . ...m-##m%#%#m#*%#%. . -.	...  ...+.-. .
+							 .. ... .  .  .. -+ -. --+. ... -	++ . .  - +...
+								 - +.						 .----	 + ..	.	++		-..	..
+							 .																												 
+
+
+
+
+
+
+
+																																											 -
 #+end_src
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
