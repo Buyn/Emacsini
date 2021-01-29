@@ -114,7 +114,7 @@
 (define-key org-agenda-mode-map (kbd "C-S-h")
 	'(lambda () (interactive) 
 			;; (curent-time-format-hh-mm 0 0)))
-		 (org-agenda-date-later-hours 3)))
+		 (org-agenda-schedule nil (curent-time-format-hh-mm 1 0))))
 ;; --------------------- 
 
 ;; --------------------- 
