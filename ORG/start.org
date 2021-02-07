@@ -345,11 +345,13 @@ open macros file
 (find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
 *** captures
 (find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
-(find-file "~/../Desktop/orgs/capture/Pensieve.org")
 (find-file-other-frame "~/../Desktop/orgs/capture/astronomicon.org")
-(find-file "~/../Desktop/orgs/capture/astronomicon.org")
 (find-file-other-frame "~/../Desktop/orgs/capture/emagus.org")
+(find-file-other-frame "~/../Dropbox/orgs/capture/Ansible.org")
+(find-file "~/../Desktop/orgs/capture/astronomicon.org")
+(find-file "~/../Desktop/orgs/capture/Pensieve.org")
 (find-file "~/../Desktop/orgs/capture/emagus.org")
+
 *** gts 
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")

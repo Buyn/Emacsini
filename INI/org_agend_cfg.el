@@ -9,6 +9,9 @@
 ;; * ageda setings 
 ;; --------------------- 
 (setq org-agenda-sticky 1)
+;; default active on l \ g l
+;; (setq org-agenda-log-mode-items '(closed clock))
+(setq org-agenda-log-mode-items '(closed clock state))
 (setq org-agenda-files '(	
 	"~/../Dropbox/orgs/GTD/todo_today.org"
 	"~/../Dropbox/orgs/GTD/todo_nottoday.org"))
@@ -113,7 +116,6 @@
 		 (org-agenda-date-later-hours 13)))
 (define-key org-agenda-mode-map (kbd "C-S-h")
 	'(lambda () (interactive) 
-			;; (curent-time-format-hh-mm 0 0)))
 		 (org-agenda-schedule nil (curent-time-format-hh-mm 1 0))))
 ;; --------------------- 
 
