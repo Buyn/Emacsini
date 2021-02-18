@@ -25,7 +25,7 @@
 ;; --------------------------------------
 ;; ** LUA-MOD CUSTOMIZATION
 ;; (find-file "~/INI/lua-cfg.el")
-(load "~/INI/lua-cfg.el")
+;; (load "~/INI/lua-cfg.el")
 ;; --------------------------------------
 ;; ** C#-MOD CUSTOMIZATION
 ;; (find-file-other-frame "~/INI/dev/csharp-cfg.el")

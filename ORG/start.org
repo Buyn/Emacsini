@@ -237,6 +237,27 @@ open macros file
 (find-file-other-frame "~/keymac/mac-done-copy.el")
 #+end_src
 ‘insert-kbd-macro’
+*** CalcandSave 
+#+begin_src emacs-lisp :results output silent
+	(load-file "~/keymac/calc-and-save.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'calc-and-save
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 42 f2 105] 0 "%d")) arg)))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f5>") 'calc-and-save)
+#+end_src
+
+
+‘C-x C-k n’
+     Give a command name (for the duration of the Emacs session) to the
+     most recently defined keyboard macro (‘kmacro-name-last-macro’).
+open macros file
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/calc-and-save.el")
+#+end_src
+‘insert-kbd-macro’
 ** Calc 
 *** random
 		Выдаёт между 0-1
@@ -305,7 +326,7 @@ open macros file
  (find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el") 
-	(find-file-other-frame "~/INI/translate-cfg.el") not et
+	(find-file-other-frame "~/INI/translate-cfg.el") 
 	(find-file-other-frame "~/INI/grammer-cfg.el") not et
 *** Programing
 (find-file-other-frame "~/INI/dev-cfg.el")
@@ -13470,6 +13491,44 @@ You will find the complete documentation about ditaa on:
 	#+end_src
 	#+RESULTS:
 	[[file:my-diagram.png]]
+***** img:https:
+	#+begin_src plantuml :file e:\Temp\my-diagram.png
+	title Authentication Sequence
+object "inbound message" as m1
+object "XML Splitter" as s1
+
+m1 : <img:https://images.saymedia-content.com/.image/t_share/MTc0NDYwNzc3ODAxODUyMjY0/top-magic-the-gathering-cards-of-all-time.jpg> 
+s1 : <img:https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg>
+
+m1 -> s1
+	#+end_src
+	#+RESULTS:
+	[[file:e:\Temp\my-diagram.png]]
+
+	#+begin_src plantuml :file e:\Temp\my-diagram.png
+	title  <size:48>Authentication Sequence</size>
+object "inbound message" as m1
+object "XML Splitter" as s1
+
+m1 : <img:https://images.saymedia-content.com/.image/t_share/MTc0NDYwNzc3ODAxODUyMjY0/top-magic-the-gathering-cards-of-all-time.jpg>
+s1 : <img:https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg>
+
+m1 -> s1
+	#+end_src
+	#+RESULTS:
+	[[file:e:\Temp\my-diagram.png]]
+
+	#+begin_src plantuml :file e:\Temp\my-diagram.png
+title  <size:48>Authentication Sequence</size>
+object "inbound message" as m1
+
+m1 : <img:https://images.saymedia-content.com/.image/t_share/MTc0NDYwNzc3ODAxODUyMjY0/top-magic-the-gathering-cards-of-all-time.jpg>
+m1 : <size:48>10d2 +1</size> 
+m1 : <size:48>It is New Text</size> 
+
+	#+end_src
+	#+RESULTS:
+	[[file:e:\Temp\my-diagram.png]]
 
 *** DITAA
 **** DIagrams Through Ascii Art 
