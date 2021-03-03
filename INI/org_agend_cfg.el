@@ -36,6 +36,10 @@
 	'(lambda () (interactive) 
 		 (org-agenda-goto-date)))
 	
+(define-key org-agenda-mode-map (kbd "g m")
+	'(lambda () (interactive) 
+		 (evil-middle-of-visual-line)))
+
 (define-key org-agenda-mode-map (kbd "g k")
 	'(lambda () (interactive) 
 		 (org-agenda-capture)))
@@ -59,7 +63,8 @@
 
 (define-key org-agenda-mode-map (kbd "z z")
 	'(lambda () (interactive) 
-		 (evil-scroll-line-to-center (line-number-at-pos))))
+			(evil-middle-of-visual-line)
+			(evil-scroll-line-to-center (line-number-at-pos))))
 
 (define-key org-agenda-mode-map (kbd "z t")
 	'(lambda () (interactive) 

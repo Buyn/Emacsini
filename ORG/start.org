@@ -65,149 +65,7 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "DONE(d)")
-        ;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-        (sequence "NEXT(x)" 
-									"WAITING(w)" 
-									"VERIFY(v)" 
-									"|" 
-									"cR(r)"
-									"CANCELED(c)" 
-									"DELEGATED(g)")))
-
-;; ** l&h  
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "l")
-	'(lambda () (interactive) 
-		 (org-agenda-date-later-minutes 1)))
-
-(define-key org-agenda-mode-map (kbd "h")
-	'(lambda () (interactive) 
-		 (org-agenda-date-earlier-minutes 1)))
-;; --------------------- 
-
-;; --------------------- 
-;; ** g : 
-;; --------------------- 
-(unbind-key (kbd "g") org-agenda-mode-map)
-;; --------------------- 
-
-(define-key org-agenda-mode-map (kbd "g g")
-	'(lambda () (interactive) 
-		 (org-agenda-redo)))
-
-(define-key org-agenda-mode-map (kbd "g j")
-	'(lambda () (interactive) 
-		 (org-agenda-goto-date)))
-	
-(define-key org-agenda-mode-map (kbd "g k")
-	'(lambda () (interactive) 
-		 (org-agenda-capture)))
-
-(define-key org-agenda-mode-map (kbd "g h")
-	'(lambda () (interactive) 
-		 (org-agenda-holidays)))
-
-(define-key org-agenda-mode-map (kbd "g l")
-	'(lambda () (interactive) 
-		 (org-agenda-log-mode)))
-	
-;; --------------------- 
-
-
-;; ** z : 
-;; --------------------- 
-(unbind-key (kbd "z") org-agenda-mode-map)
-(define-key org-agenda-mode-map (kbd "z n")
-	'(lambda () (interactive) 
-		 (org-agenda-add-note)))
-
-(define-key org-agenda-mode-map (kbd "z z")
-	'(lambda () (interactive) 
-		 (evil-scroll-line-to-center (line-number-at-pos))))
-
-(define-key org-agenda-mode-map (kbd "z t")
-	'(lambda () (interactive) 
-		(evil-scroll-line-to-top  (line-number-at-pos))))
-
-(define-key org-agenda-mode-map (kbd "z b")
-	'(lambda () (interactive) 
-		(evil-scroll-line-to-bottom  (line-number-at-pos))))
-
-;; ** P&N : 
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "P")
-	'(lambda () (interactive) 
-		 (evil-scroll-page-up 1)))
-(define-key org-agenda-mode-map (kbd "N")
-	'(lambda () (interactive) 
-		 (evil-scroll-page-down 1)))
-;; --------------------- 
-
-;; ** L&H
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "L")
-	'(lambda () (interactive) 
-		 (org-agenda-date-later-minutes 6)))
-(define-key org-agenda-mode-map (kbd "H")
-	'(lambda () (interactive) 
-		 (org-agenda-date-earlier-minutes 6)))
-;; --------------------- 
-
-;; * "C-S-h"&"C-S-l": 
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "C-S-l")
-	'(lambda () (interactive) 
-		 (org-agenda-date-later-hours 13)))
-(define-key org-agenda-mode-map (kbd "C-S-h")
-	'(lambda () (interactive) 
-			(curent-time-format-hh-mm 0 0)))
-;; --------------------- 
-
-;; --------------------- 
-;; ** l&h  
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "l")
-	'(lambda () (interactive) 
-		 (org-agenda-date-later-minutes 1)))
-(define-key org-agenda-mode-map (kbd "h")
-	'(lambda () (interactive) 
-		 (org-agenda-date-earlier-minutes 1)))
-;; --------------------- 
-
-;; --------------------- 
-
-;; --------------------- 
-;; --------------------- 
-
-;; ** evil j&k
-;; --------------------- 
-(define-key org-agenda-mode-map (kbd "j")
-	'(lambda () (interactive) 
-		 (org-agenda-next-line)))
-(define-key org-agenda-mode-map (kbd "k")
-	'(lambda () (interactive) 
-		 (org-agenda-previous-line)))
-;; --------------------- 
-
-;; ** evil c-f&c-b: 
-(define-key org-agenda-mode-map (kbd "C-f")
-	'(lambda () (interactive) 
-		 (evil-scroll-page-down 1)))
-(define-key org-agenda-mode-map (kbd "C-b")
-	'(lambda () (interactive) 
-		 (evil-scroll-page-up 1)))
-;; --------------------- 
-;; --------------------- 
-
-;; --------------------- 
-(load "~/INI/hydra-cfg.el")
-
-(use-package eww
-  :config
-;; (find-file-other-frame "~/INI/org_agend_cfg.el")
-	(load "~/INI/www-cfg.el"))
+	(load "~/INI/org_agend_cfg.el")
 
 #+end_src
 
@@ -277,6 +135,18 @@ open macros file
 (/ h pom)
 (* 4 pom)
 (min-to-houre 100)
+** Cards todo 
+*** New Project
+**** new org
+(find-file-other-frame "~/../Dropbox/Office/Progects/Audit/MFA/MFA.org")
+**** new cmd
+(find-file-other-frame "~/../Dropbox/Office/Progects/Audit/MFA/MFA.cmd")
+**** icon for cmd 
+D:\Development\lisp\Emacs\bin\emacs.exe 
+**** Far 
+D:\shell\Far\Far.exe D:\Development\lisp\Dropbox\Office\Progects\Audit\MFA 
+D:\shell\Far\Far.exe D:\Development\version-control\GitHub\Vadim\Tochil_mpy   
+D:\shell\Far\Far.exe 
 
 * Pathes
 ** init files
@@ -320,6 +190,7 @@ open macros file
 	(find-file-other-frame "~/INI/interface/powerline-cfg.el") 
 		(find-file-other-frame "~/INI/interface/jonathanchu-emacs-powerline-cfg.el") 
 		(find-file-other-frame "~/INI/interface/input-methods-cfg.el")
+	(find-file-other-frame "~/INI/frames/minimap-cfg.el") move here
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** Hydra menu

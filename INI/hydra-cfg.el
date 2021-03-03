@@ -476,8 +476,8 @@ _?_ help            _c_urrent file
     "
                 ^Emacs-mode  Menus^          
     ────────────^─────────────────^───────────────────
-     To _w_in Format    To _u_nix Format
-     _q_uit						  _R_evert buffer
+     To _w_in Format    To _u_nix Format _s_av-tex2reg
+     _q_uit						  _R_evert buffer  _i_ns-reg2tex
     "
 ;; ***** keys
 ;; ****** w : 
@@ -500,6 +500,10 @@ _?_ help            _c_urrent file
 	("R" revert-buffer) 
 ;; ****** q : 
 	("q" nil) 
+;; ****** s : 
+	("s" copy-to-register :color blue) 
+;; ****** i : 
+	("i" insert-register :color blue) 
 ;; ***** END of def
 	)
 ;; --------------------------------------
