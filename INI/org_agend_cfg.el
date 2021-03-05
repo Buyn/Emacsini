@@ -15,6 +15,19 @@
 (setq org-agenda-files '(	
 	"~/../Dropbox/orgs/GTD/todo_today.org"
 	"~/../Dropbox/orgs/GTD/todo_nottoday.org"))
+
+;; (setq org-agenda-time-grid
+;; 		'((daily today require-timed)
+;; 		(200 400 600 800 1000 1200 1400 1600 1800 2000 2200 )
+;; 		"......" "----------------")
+;; 		)
+
+(setq org-agenda-time-grid
+		'((daily today require-timed)
+		(100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 )
+		"......" "----------------")
+		)
+
 ;; --------------------- 
 ;; * define-key org-agenda-mode-map
 ;; --------------------- 
