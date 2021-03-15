@@ -65,7 +65,8 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-	(load "~/INI/org_agend_cfg.el")
+(load "~/INI/hydra-cfg.el")
+(load "~/INI/org_agend_cfg.el")
 
 #+end_src
 
@@ -116,6 +117,20 @@ open macros file
 (find-file-other-frame "~/keymac/calc-and-save.el")
 #+end_src
 ‘insert-kbd-macro’
+*** outline_next : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/outline_next.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'outline_next
+   (kmacro-lambda-form [?I ?* ?* ?* ?* ?  escape ?k ?z ?a ?j ?j] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6>") 'outline_next)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/outline_next.el")
+#+end_src
 ** Calc 
 *** random
 		Выдаёт между 0-1

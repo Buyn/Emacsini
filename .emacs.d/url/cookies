@@ -4,8 +4,6 @@
 (setq url-cookie-storage
  '(("emackandboliohk.com"
 	[url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil])
- (".plantuml.com"
-	[url-cookie "__cfduid" "da03bb3f151cdb288c845216b988b7b971612458185" "Sat, 06-Mar-21 17:03:05 GMT" "/" ".plantuml.com" nil])
  ("plantuml.com"
 	[url-cookie "ezCMPCCS" "true" "Sun, 06 Feb 2022 22:16:48 GMT" "/" "plantuml.com" nil])
  (".google.com"
@@ -89,8 +87,6 @@
 	[url-cookie "phpbb3_8ocj9_u" "1" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
 	[url-cookie "phpbb3_8ocj9_k" "" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
 	[url-cookie "phpbb3_8ocj9_sid" "8288bb120e8001f29c556e723da5f76f" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil])
- ("www.spletnik.ru"
-	[url-cookie "engageya" "1" "Thu, 11-Mar-2021 15:54:07 GMT" "/" "www.spletnik.ru" nil])
  ("sourceforge.net"
 	[url-cookie "VISITOR" "55c94821-583d-4d12-b2d2-059e94185876"
 							#("Сб мар 02 09:48:53 2030 GMT" 0 27
@@ -98,16 +94,12 @@
 							"/" "sourceforge.net" nil]))
 )
 (setq url-cookie-secure-storage
- '((".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "03-Feb-2021" "Sun, 07 Mar 2021 12:00:00 GMT" "/" ".wikipedia.org" t])
- (".maker.pro"
+ '((".maker.pro"
 	[url-cookie "__cfduid" "d5f83e71c3d1fe2ba03332c539bbca3a21614406541" "Mon, 29-Mar-21 06:15:41 GMT" "/" ".maker.pro" t])
  (".aidungeon.io"
 	[url-cookie "__cfduid" "deec803370146fe3512c43a73d7254de41613651940" "Sat, 20-Mar-21 12:39:00 GMT" "/" ".aidungeon.io" t])
  (".youtube.com"
 	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t])
- ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "03-Feb-2021" "Sun, 07 Mar 2021 12:00:00 GMT" "/" "en.wikipedia.org" t])
  ("realpython.com"
 	[url-cookie "csrftoken" "DOjfeQYiRqe3S73Vl6XJ6r3OEY91q2GxPEu6X5Win7KPUegn1vNjxLAfcP0IMYQW"
 							#("Чт янв 06 09:42:25 2022 GMT" 0 27

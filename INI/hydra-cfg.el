@@ -414,9 +414,15 @@ _?_ help            _c_urrent file
     ("f" flyspell-mode :color pink)
     ("c" flyspell-prog-mode)
     ("a" flyspell-buffer)
-    ("R" ispell-change-dictionary "ru_RU")
+    ;; ("R" ispell-change-dictionary "ru_RU")
+    ("R" (progn
+						(ispell-change-dictionary "ru_RU")
+					  (flyspell-mode t)))
     ("D" ispell-change-dictionary)
-    ("E" ispell-change-dictionary "en_US")
+    ("E" (progn
+						(ispell-change-dictionary "en_US")
+					  (flyspell-mode t)))
+		;; ispell-change-dictionary "en_US")
     ("r" ispell-region)
     ("w" ispell-word :color pink)
 	("q" nil) 
