@@ -67,7 +67,8 @@ https://www.braveclojure.com/basic-emacs/
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
 (load "~/INI/org_agend_cfg.el")
-
+(load "~/INI/fullscreen-cfg.el")
+(load "~/INI/interface/input-methods-cfg.el")
 #+end_src
 
 #+begin_src emacs-lisp :results output silent
@@ -208,8 +209,9 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/frames/minimap-cfg.el") move here
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
-*** Hydra menu
- (find-file-other-frame "~/INI/hydra-cfg.el")
+		sdAdff
+*** HYDRA MENU
+ (FIND-FILE-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el") 
 	(find-file-other-frame "~/INI/translate-cfg.el") 
@@ -4460,6 +4462,11 @@ SaltyEgg 626412
 (message "Load of init.el is ended")
 показывает сообшение прям из проверки
 (if nil "yes" "no")
+(message "The name of this buffer is: %s." (buffer-name))
+добавиь  в сообшение переменую
+
+     (message "There are %d %s in the office!"
+              (- fill-column 14) "pink elephants")
 *** format
 	 (format "sdfsdf")
 *** (defun min-to-houre (min)

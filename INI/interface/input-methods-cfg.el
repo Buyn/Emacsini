@@ -18,6 +18,10 @@
 ;; ** define-key : 
 	(define-key evil-visual-state-map (kbd "M-U") 'reverse-im-translate-region)
 	(define-key evil-insert-state-map (kbd "M-U") 'reverse-im-translate-word)
+	(define-key evil-insert-state-map (kbd "C-U") 
+	'(lambda () (interactive) 
+			(reverse-im-translate-word)
+			(toggle-input-method))
 ;; ** use-package END)
 	)
 ;; ** --------------------------------------

@@ -12,10 +12,6 @@
 ;; * FULLSCREEN-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; (setq-local fullscreen-mode-activ nil)
-(make-variable-buffer-local
- (defvar fullscreen-mode-activ nil
-   "indictate is fullscreen mode is activ or nil"))
-;; (setq fullscreen-mode-activ nil)
 ;; ** toggle-full-screen :
 (defun toggle-full-screen ()
   "Toggles full-screen mode for Emacs window on Win32."
@@ -29,12 +25,12 @@
   (interactive)
   ;; use a property “state”. Value is t or nil
   (if (get 'toggle-font-lage-size 'state)
-    (progn
-	(text-scale-set 0)
-        (put 'toggle-font-lage-size 'state nil))
-    (progn
-	(text-scale-set +3)
-	(put 'toggle-font-lage-size 'state t))))
+			(progn
+				(text-scale-set 0)
+				(put 'toggle-font-lage-size 'state nil))
+			(progn
+				(text-scale-set +3)
+				(put 'toggle-font-lage-size 'state t))))
 ;; --------------------------------------
 ;; ** toggle-bars : 
 (defun toggle-bars ()
@@ -54,12 +50,22 @@
 	(toggle-fullscreen-minimap)
 	;; (evil-window-set-width 0)
 	)
-;; ** defun toggle-fullscreen-minimap : 
+;; ** toggle-full-screen-and-minimap : 
+(defun toggle-full-screen-and-minimap ()
+  "Toggles full-screen mode and minimap."
+  (interactive)
+  ;; (toggle-bars)
+	(setq-local fullscreen-mode-activ (not fullscreen-mode-activ))
+  (toggle-full-screen)
+  (toggle-fonte-lage-size)
+	(toggle-fullscreen-minimap)
+	;; (evil-window-set-width 0)
+	)
+;; ** toggle-fullscreen-minimap : 
 ;; --------------------------------------
 (defun toggle-fullscreen-minimap ()
   "Toggle minimap in fullscreen
-		fullscreen is chekt on fullscreen-mode-activ
-		"
+		fullscreen is chekt on fullscreen-mode-activ"
   (interactive)
 	;; (minimap-mode)
 	;; (minimap-create)
@@ -72,7 +78,23 @@
 	;; (minimap-update nil)
 	;; (minimap-update)
 	;; (minimap-active-current-buffer-p)
-  )
+		)
+;; ** toggle-fullscreen-agenda : 
+(defun toggle-fullscreen-agenda ()
+  "Full screen for agenda mode
+		if all work rewrite for all mods"
+  (interactive)
+	(unless (boundp fullscreen-mode-activ)
+		(defvar-local fullscreen-mode-activ nil
+			"indictate is fullscreen mode is activ or not
+				or if not init nil
+				set it aftar init to false"))
+  (toggle-frame-fullscreen)
+  (if fullscreen-mode-activ
+				(text-scale-set 0)
+				(text-scale-set +3))
+	(setq-local fullscreen-mode-activ (not fullscreen-mode-activ)))
+  
 ;; ** set-key : 
 ;; --------------------------------------
 ;; Use F11 to switch between windowed and full-screen modes

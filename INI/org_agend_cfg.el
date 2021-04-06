@@ -43,7 +43,8 @@
 
 (define-key org-agenda-mode-map (kbd "g g")
 	'(lambda () (interactive) 
-		 (org-agenda-redo)))
+		 (org-agenda-redo)
+		 (evil-middle-of-visual-line)))
 
 (define-key org-agenda-mode-map (kbd "g j")
 	'(lambda () (interactive) 
@@ -65,6 +66,9 @@
 	'(lambda () (interactive) 
 		 (org-agenda-log-mode)))
 	
+(define-key org-agenda-mode-map (kbd "g f")
+	'(lambda () (interactive) 
+		 (toggle-fullscreen-agenda)))
 ;; --------------------- 
 
 ;; ** z : 
@@ -131,7 +135,7 @@
 ;; --------------------- 
 (define-key org-agenda-mode-map (kbd "C-S-l")
 	'(lambda () (interactive) 
-		 (org-agenda-date-later-hours 13)))
+		 (org-agenda-date-later-hours 5)))
 (define-key org-agenda-mode-map (kbd "C-S-h")
 	'(lambda () (interactive) 
 		 (org-agenda-schedule nil (curent-time-format-hh-mm 1 0))))

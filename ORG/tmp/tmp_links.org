@@ -1,2 +1,17 @@
 * link to 
+* Calc 
+** sendbox
+#+begin_src emacs-lisp :tangle yes
+(setq low 2409.68)
+(setq hih 3109.68)
+#+end_src
 
+#+RESULTS:
+: 3109.68
+
+#+begin_src emacs-lisp :tangle yes
+(+ hih low)
+#+end_src
+
+#+RESULTS:
+: 5519.36
