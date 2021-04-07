@@ -135,7 +135,7 @@
 ;; --------------------- 
 (define-key org-agenda-mode-map (kbd "C-S-l")
 	'(lambda () (interactive) 
-		 (org-agenda-date-later-hours 5)))
+		 (org-agenda-date-later-hours 3)))
 (define-key org-agenda-mode-map (kbd "C-S-h")
 	'(lambda () (interactive) 
 		 (org-agenda-schedule nil (curent-time-format-hh-mm 1 0))))
