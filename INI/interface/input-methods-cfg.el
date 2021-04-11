@@ -20,7 +20,7 @@
 	(define-key evil-insert-state-map (kbd "M-U") 'reverse-im-translate-word)
 	(define-key evil-insert-state-map (kbd "C-U") 
 	'(lambda () (interactive) 
-			(reverse-im-translate-word)
+			(reverse-im-translate-word 1)
 			(toggle-input-method)))
 ;; ** use-package END)
 	)

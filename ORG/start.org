@@ -214,8 +214,9 @@ D:\shell\Far\Far.exe
  (FIND-FILE-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el") 
-	(find-file-other-frame "~/INI/translate-cfg.el") 
-	(find-file-other-frame "~/INI/grammer-cfg.el") not et
+	(find-file-other-frame "~/INI/translate-cfg.el")
+	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
+	(find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
 *** Programing
 (find-file-other-frame "~/INI/dev-cfg.el")
 	(find-file-other-frame "~/INI/autocomplete-cfg.el")
@@ -410,6 +411,29 @@ https://github.com/a13/reverse-im.el
   :config
   (reverse-im-mode t))
 #+end_src
+
+**** read-aloud
+https://github.com/gromnitsky/read-aloud.el
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+ (use-package read-aloud
+   :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+#+end_src
+#+RESULTS:
+: t
 
 ** setings
 *** systems paths

@@ -118,7 +118,7 @@
 							#("Пт ноя 25 00:26:33 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" "reddit.com" t]
-	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDY5ODg3OTMsInN1YiI6Ii1rS0l2MW5KUm4ybjlDQkpCV2hXSHp3TnRiSmMiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiXX0.vXgbQoTnSPmcyzZiPI92_SehMDjod19vCngFHoKdJP0" "Sat, 03 Dec 2022 08:48:33 GMT" "/" "reddit.com" t])
+	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTgxMTUyMjQsInN1YiI6Ii1SdHVBMFhKMzM3TmR6VDFaaVYtcEt0UktiSTAiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiXX0.9A_7vgMzVxdiCnVNWZFL7EVViVI_UpSUMi4u8UV4djQ" "Tue, 11 Apr 2023 03:29:04 GMT" "/" "reddit.com" t])
  (".reddit.com"
 	[url-cookie "csv" "1"
 							#("Пт ноя 25 00:26:34 2022 GMT" 0 27
