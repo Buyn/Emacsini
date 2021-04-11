@@ -12,6 +12,10 @@
 ;; * FULLSCREEN-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; (setq-local fullscreen-mode-activ nil)
+(defvar-local fullscreen-mode-activ nil
+	"indictate is fullscreen mode is activ or not
+		or if not init nil
+		set it aftar init to false")
 ;; ** toggle-full-screen :
 (defun toggle-full-screen ()
   "Toggles full-screen mode for Emacs window on Win32."
@@ -44,7 +48,7 @@
   "Toggles full-screen mode and bars."
   (interactive)
   ;; (toggle-bars)
-	(setq-local fullscreen-mode-activ (not fullscreen-mode-activ))
+	;; (setq-local fullscreen-mode-activ (not fullscreen-mode-activ))
   (toggle-full-screen)
   (toggle-fonte-lage-size)
 	(toggle-fullscreen-minimap)
@@ -100,7 +104,8 @@
 ;; Use F11 to switch between windowed and full-screen modes
 ;;(global-set-key (kbd "C-M-f") 'toggle-full-screen-and-bars)
 ;;(define-key evil-normal-state-map [(control shift f)] 'toggle-full-screen-and-bars)
-(global-set-key [(control shift f)]  'toggle-full-screen-and-bars)
+;; (global-set-key [(control shift f)]  'toggle-full-screen-and-bars)
+(global-set-key [(control shift f)]  'toggle-fullscreen-agenda)
 ;; --------------------------------------
 ;; ** --------------------------------------
 ;; * --------------------------------------

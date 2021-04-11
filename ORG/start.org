@@ -209,9 +209,8 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/frames/minimap-cfg.el") move here
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
-		sdAdff
 *** HYDRA MENU
- (FIND-FILE-other-frame "~/INI/hydra-cfg.el")
+ (find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el") 
 	(find-file-other-frame "~/INI/translate-cfg.el")

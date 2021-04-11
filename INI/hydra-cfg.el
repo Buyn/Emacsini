@@ -673,6 +673,7 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ;; "Reader menu spd: % 'pixel-wait"
   "Reader menu "
   ;; "Reader menu spd: %(* 10 (- 1 pixel-wait))"
+;; **** r : 
 	("r" (if (bound-and-true-p pixel-scroll-mode)
 					(progn
 						(pixel-scroll-mode -1)
@@ -690,10 +691,19 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 								(pixel-scroll-pixel-up 666)))
 						(message "Reader is on")))
 			  "toggle reader")
+;; **** f : 
 	("f" (setq pixel-wait (- pixel-wait 0.1))
 					(format "faster spd:%s" (- 1 pixel-wait)) :color pink)
+;; **** s : 
 	("s" (setq pixel-wait (+ pixel-wait 0.1))
 					"slower":color pink)
+;; **** t : 
+	("t" read-aloud-this "aloudThis")
+;; **** B : 
+	("B" read-aloud-buf "aloudBuffer")
+;; **** s : 
+	("s" read-aloud-stop. "StopAloud")
+;; **** q : 
 	("q" nil "quit"))
 ;; --------------------------------------
 ;; *  --------------------------------------
