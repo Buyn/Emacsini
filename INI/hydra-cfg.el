@@ -703,6 +703,8 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("B" read-aloud-buf "aloudBuffer")
 ;; **** s : 
 	("s" read-aloud-stop. "StopAloud")
+;; **** E : 
+	("E" read-aloud-change-engine "AloudEngine")
 ;; **** q : 
 	("q" nil "quit"))
 ;; --------------------------------------

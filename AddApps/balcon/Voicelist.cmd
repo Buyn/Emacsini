@@ -1,0 +1,1 @@
+balcon.exe -l > Voice.txt

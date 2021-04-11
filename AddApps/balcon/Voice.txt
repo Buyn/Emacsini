@@ -1,0 +1,14 @@
+
+SAPI 4:
+  Alyona :: Alyona (Russian) SAPI4 22kHz
+SAPI 5:
+  Acapela Alyona22k
+  Microsoft Anna
+  RHVoice Anna
+  RHVoice Bdl
+  RHVoice Clb
+  RHVoice Elena
+  RHVoice Irina
+  RHVoice Natalia
+  RHVoice Slt
+  ScanSoft Katerina_Full_22kHz
