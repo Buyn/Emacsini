@@ -9,52 +9,62 @@
 ;; * READ-ALOUD-MOD CUSTOMIZATION 
 ;; ** load
 ;; (find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
-(add-to-list 'load-path "~/ELs/text-to-speech/read-aloud")
 ;; (load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+(add-to-list 'load-path "~/ELs/text-to-speech/read-aloud")
+;; *** use-package read-aloud : 
 (use-package read-aloud :ensure t
+;; *** :config : 
   :config
-;; (setq read-aloud-engine "balcon.ru")
+;; **** plist read-aloud-engines : 
+;; ***** ru : 
+;; ******  elena : 
 (lax-plist-put read-aloud-engines "bal.ru.elena"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Elena" "-i" "-enc" "utf8")))
-
+;; ******  Alyona22k : 
 (lax-plist-put read-aloud-engines "bal.ru.Alyona22k"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Alyona22k" "-i" "-enc" "utf8")))
-
+;; ******  anna : 
 (lax-plist-put read-aloud-engines "bal.ru.anna"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "RHVoice Anna" "-i" "-enc" "utf8")))
-
+;; ******  Irina : 
 (lax-plist-put read-aloud-engines "bal.ru.Irina"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Irina" "-i" "-enc" "utf8")))
-
+;; ******  Katerina : 
 (lax-plist-put read-aloud-engines "bal.ru.Katerina"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Katerina" "-i" "-enc" "utf8")))
-
+;; ***** ua : 
+;; ******  Natalia : 
 (lax-plist-put read-aloud-engines "bal.ua.Natalia"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Natalia" "-i" "-enc" "utf8")))
-
+;; ***** en : 
+;; ******  Slt : 
 (lax-plist-put read-aloud-engines "bal.en.Slt"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Slt" "-i" "-enc" "utf8")))
-
+;; ******  Bdl : 
 (lax-plist-put read-aloud-engines "bal.en.Bdl"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Bdl" "-i" "-enc" "utf8")))
-
+;; ******  Clb : 
 (lax-plist-put read-aloud-engines "bal.en.Clb"
-	'(cmd "D:\\Reader\\balabolka\\balcon\\balcon.exe"
+	'(cmd "~/AddApps/balcon/balcon.exe"
 		args ( "-n" "Clb" "-i" "-enc" "utf8")))
-
+;; ******  jampal.en : 
 	(lax-plist-put read-aloud-engines "jampal.en"
 		'(cmd "cscript"
 					args ("D:\\Development\\lisp\\Home\\AddApps\\Jampal\\ptts.vbs" "-r" "1")))
-	;; (setq read-aloud-engine "jampal.en"))
-	(setq read-aloud-engine "bal.en.Slt"))
+;; **** setq read-aloud-engine : 
+;; (setq read-aloud-engine "jampal.en"))
+;; (setq read-aloud-engine "balcon.ru")
+	(setq read-aloud-engine "bal.en.Slt")
+;; *** ===========END========= ) : 
+	)
 ;; ** Docs
 ;; *** Usage 
 ;; M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
