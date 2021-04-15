@@ -1,3 +1,10 @@
+#+begin_src translate 
+Ты работтаешь проверка?
+#+end_src
+
+#+RESULTS:
+: Are you working verification?
+
 * link to 
 * Calc 
 ** sendbox

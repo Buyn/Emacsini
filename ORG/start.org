@@ -212,7 +212,7 @@ D:\shell\Far\Far.exe
 *** HYDRA MENU
  (find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
-(find-file-other-frame "~/INI/lit-cfg.el") 
+(find-file-other-frame "~/INI/lit-cfg.el")
 	(find-file-other-frame "~/INI/translate-cfg.el")
 	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
 	(find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
@@ -411,16 +411,15 @@ https://github.com/a13/reverse-im.el
   (reverse-im-mode t))
 #+end_src
 
-**** read-aloud
-https://github.com/gromnitsky/read-aloud.el
+**** skewer-mode
+***** use-package : 
 #+begin_src emacs-lisp :results output silent
 (package-refresh-contents)
-(use-package reverse-im
-  :ensure t
-  :custom
-  (reverse-im-input-methods '("russian-computer"))
+(use-package skewer-mode :ensure t
   :config
-  (reverse-im-mode t))
+	(add-hook 'js2-mode-hook 'skewer-mode)
+	(add-hook 'css-mode-hook 'skewer-css-mode)
+	(add-hook 'html-mode-hook 'skewer-html-mode))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -433,7 +432,603 @@ https://github.com/gromnitsky/read-aloud.el
 #+end_src
 #+RESULTS:
 : t
+***** Exempl 
+****** make server
+******* ferst
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
 
+	#+end_src
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/script.js")
+
+	#+end_src
+	#+RESULTS:
+	: #<buffer script.js>
+
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/hello.html")
+	#+end_src
+
+	#+RESULTS:
+	: #<buffer hello.html>
+	#+begin_src emacs-lisp :tangle yes
+	(require 'simple-httpd)
+	(setq httpd-root 
+		"~/../../version-control/GitHub/HTML/skewer"
+	;; "/home/user/Documents/javascript"
+		)
+	(httpd-start)
+	#+end_src
+	#+RESULTS:
+******* boids-js
+https://github.com/skeeto/boids-js
+Skewer -- Emacs browser interaction - YouTube
+https://www.youtube.com/watch?v=4tyTgyzUJqM
+	#+begin_src emacs-lisp :tangle yes
+	(setq httpd-port 4242)
+	(require 'simple-httpd)
+	(setq httpd-root 
+		"~/../../version-control/GitHub/HTML/skewer"
+		)
+	(httpd-start)
+	#+end_src
+
+	#+RESULTS:
+
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/example.html")
+	#+end_src
+	#+RESULTS:
+	: #<buffer example.html>
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids.js")
+	#+end_src
+	#+RESULTS:
+	: #<buffer boids.js>
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids_sanbox.js")
+	#+end_src
+
+	#+RESULTS:
+	: #<buffer boids_sanbox.js>
+
+ http://localhost:4242/example.html
+
+	#+begin_src emacs-lisp :tangle yes
+	(httpd-stop)
+	#+end_src
+
+	#+RESULTS:
+
+****** connect to server
+http://localhost:8080/hello.html
+http://localhost:4242/example.html
+
+	#+begin_src emacs-lisp :tangle yes
+(httpd-stop)
+	#+end_src
+****** start repl
+A REPL into the browser can be created with 
+M-x skewer-repl, or C-c C-z. This
+****** repl command 
+******* console.log : 
+ console.log
+ ('hey!')
+
+ console.log
+ ('hello world!')
+
+ console.log ('hello world!');
+******* alert : 
+alert('hey!');
+******* skewer.log : 
+skewer.log("hi from brobser!");
+****** live edit html 
+****** live edit js 
+JS2-mode
+
+ C-x C-e
+***** Docs
+****** Skewer: live web development with Emacs
+******* links
+ GitHub - skeeto/skewer-mode: Live web development in Emacs
+ https://github.com/skeeto/skewer-mode
+
+Provides live interaction with JavaScript, CSS, and HTML in a web browser.
+Expressions are sent on-the-fly from an editing buffer to be evaluated in the browser,
+just like Emacs does with an inferior Lisp process in Lisp modes.
+
+,* Watch the [[http://youtu.be/4tyTgyzUJqM][demo video on YouTube]] ([[http://nullprogram.s3.amazonaws.com/skewer/demo.webm][webm]])
+
+Skewer is available from [[https://melpa.org/][MELPA]], which will install the dependencies for you. This
+package and its dependencies are pure Elisp, meaning setup is a breeze, the whole
+thing is highly portable, and it works with many browsers.
+
+Dependencies:
+
+,* [[https://github.com/skeeto/emacs-http-server][simple-httpd]] (available on MELPA)
+,* [[https://github.com/mooz/js2-mode][js2-mode]] (available on ELPA)
+
+Skewer requires Emacs 24.3 or later.
+******* Usage
+******** Quick version
+
+If Skewer was installed from MELPA, skip to step 3.
+
+1 Put this repository directory in your load-path
+2 Load skewer-mode.el
+3 M-x run-skewer to attach a browser to Emacs
+4 From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the
+ browser to evaluate
+
+The function skewer-setup can be used to configure all of mode hooks (previously
+this was the default). This can also be done manually like so,
+
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+The keybindings for evaluating expressions in the browser are just like the Lisp
+modes. These are provided by the minor mode skewer-mode.
+
+,* C-x C-e: Evaluate the form before the point and display the result in the minibuffer.
+ If given a prefix argument, insert the result into the current buffer.
+,* C-M-x: Evaluate the top-level form around the point.
+,* C-c C-k: Load the current buffer.
+,* C-c C-z: Select the REPL buffer.
+
+The result of the expression is echoed in the minibuffer.
+
+Additionally, css-mode and html-mode get similar sets of bindings for modifying the
+CSS rules and HTML on the current page.
+******** CSS
+
+,* C-x C-e: Load the declaration at the point.
+,* C-M-x: Load the entire rule around the point.
+,* C-c C-k: Load the current buffer as a stylesheet.
+******** HTML
+,* C-M-x: Load the HTML tag immediately around the point.
+
+Note: run-skewer uses browse-url to launch the browser. This may require further
+setup depending on your operating system and personal preferences.
+
+Multiple browsers and browser tabs can be attached to Emacs at once. JavaScript
+forms are sent to all attached clients simultaneously, and each will echo back the
+result individually. Use list-skewer-clients to see a list of all currently attached
+clients.
+
+Sometimes Skewer's long polls from the browser will timeout after a number of hours
+of inactivity. If you find the browser disconnected from Emacs for any reason, use the
+browser's console to call skewer() to reconnect. This avoids a page reload, which
+would lose any fragile browser state you might care about.
+******* Manual version
+To skewer your own document rather than the provided blank one,
+
+1 Load the dependencies
+2 Load skewer-mode.el
+3 Start the HTTP server (httpd-start)
+4 Include "[[http://localhost:8080/skewer][http://localhost:8080/skewer]]" as a script (see example.html and check
+ your httpd-port)
+5 Visit the document from your browser
+
+Skewer fully supports CORS so the document need not be hosted by Emacs itself. A
+Greasemonkey userscript is provided, Skewer Everything, for injecting Skewer into
+any arbitrary page you're visiting without needing to modify the page on the host.
+More information below.
+
+Don't copy skewer.js anywhere or use it directly. Emacs hosts this script itself,
+manipulating it in memory before it reaches the browser. Always access it through the
+servlet on the Emacs webserver as /skewer.
+******* Browser Support
+Skewer is known to work properly with Firefox, Chrome, Safari, Opera, and IE8+.
+Except for CSS and HTML, Skewer will work in IE7 when document.querySelector
+and JSON are polyfilled. If you find any other JavaScript-supported browser that
+doesn't work with Skewer, please report it.
+******* REPL
+A REPL into the browser can be created with M-x skewer-repl, or C-c C-z. This
+should work like a console within the browser. Messages can be logged to this REPL
+with skewer.log() (like console.log()).
+
+Results of expressions evaluated in the REPL are printed more verbosely than in the
+minibuffer, when possible. This may help in debugging.
+******* Skewering with CORS
+Skewer supports [[http://en.wikipedia.org/wiki/Cross-origin_resource_sharing][Cross-origin Resource Sharing (CORS)]]. This means you can
+Skewer a document hosted from any server without needing any special changes on
+that server, except for including /skewer as a script in that document.
+
+If you don't control the server from which you want to skewer pages -- such that you
+can't add the Skewer's script -- the provided Greasemonkey userscript (.user.js)
+https://github.com/skeeto/skewer-mode/blob/master/skewer-everything.user.js
+can be used to inject it into any page you visit. Note that this userscript will assume
+you're running the Skewer server at [[http://localhost:8080/][http://localhost:8080/]] (simple-httpd's default
+port). If this isn't true, you need to edit the top of the userscript.
+
+The script isn't actually injected until you switch the toggle in the top-right corner, the
+red/green triangle.
+
+Alternatively, the following bookmarklet will load skewer on demand:
+
+javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://localhost:8080/skewer';d.body.appendChild(s);})()
+
+With a browser plugin like [[https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en][Custom Javascript for Websites]], you can use the
+bookmarklet to auto-skewer specific domains, saving you a mouse click on each
+reload.
+******* bower
+Also provided are some functions for loading libraries from the bower infrastructure
+on the fly. This is accessed with skewer-bower-load. For example, I often find it
+useful to load jQuery when skewering a page that doesn't have jQuery installed.
+
+Note: to use this bower does not need to be installed, only git. It's just the bower
+infrastructure being used. Unfortunately this infrastructure is a mess right now; many
+packages are in some sort of broken state -- missing dependencies, missing
+metadata, broken metadata, or an invalid repository URL. Some of this is due to
+under-specification of the metadata by the bower project.
+******* Motivation
+
+I wanted something like [[https://github.com/swank-js/swank-js][swank-js]] but without all the painful setup. Having already
+written an Emacs web server I was halfway there. It took relatively little code to
+accomplish.
+
+I also didn't want to rely a browser-specific feature, like MozRepl or WebKit's remote
+debugger ([[https://github.com/jscheid/kite][kite]]).
+
+The name refers to the idea that Emacs is skewering the browser from server-side.
+****** package - How to use skewer-mode? 
+******* currently struggling : 
+https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode
+I am currently struggling to use skewer-mode in Emacs.
+
+I downloaded and installed skewer-mode via MELPA, so all the dependencies
+should be inplace.
+
+For testing purposes I even downloaded the boidsjs [[https://github.com/skeeto/boids-js][demo]].
+
+I'll open up boids.js, then type M-xrun-skewer (opens up the browser with URL
+http://127.0.0.1:8080/skewer/demo) and then finally run M-xskewer-mode (->
+skewer-mode enabled).
+
+But in the browser nothing happens.
+
+What am I doing wrong?
+
+[[https://emacs.stackexchange.com/questions/tagged/package][package]] [[https://emacs.stackexchange.com/questions/tagged/skewer-mode][skewer-mode]] [[https://emacs.stackexchange.com/questions/tagged/javascript][javascript]] 
+[[https://emacs.stackexchange.com/q/2376][Share]] 
+[[https://emacs.stackexchange.com/posts/2376/edit][Improve this question]] 
+Submit 
+[[https://emacs.stackexchange.com/posts/2376/revisions][edited Oct 23 '14 at 19:30]] 
+[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]] 
+3,65611 gold badge2020 silver badges4040 bronze badges 
+asked Oct 20 '14 at 18:31 
+[[https://emacs.stackexchange.com/users/2158/jacksgt][*]][[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]]JacksGT 
+31322 silver badges77 bronze badges 
+4 
+
+,* As I understand it, skewer provides an interface for evaluation of javascript... Do
+ you actually evaluate the content of the boids.js buffer? – [[https://emacs.stackexchange.com/users/184/t-verron][T. Verron]] Oct 20 '14 at
+ 18:33 
+,* I'm loading the current buffer with <kbd>C-x C-k</kbd> ("boid.js loaded") and the
+ trying to evaluate with <kbd>C-x C-e</kbd>. But it gives me an error that it could
+ not parse the "$"-sign. That is because it did not load the jQuery from the
+ corresponding HTML file (example.html) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:44 
+,* 2 
+ You need to eval the html file in skewer-html-mode. – [[https://emacs.stackexchange.com/users/160/jordon-biondo][Jordon Biondo]] Oct 20 '14 at
+ 18:45 SVG Image 
+,* How? C-x C-k does not work in skewer-html-mode – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:50
+
+[[https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode#][Add a comment]]  | 
+
+3 Answers 
+
+******* start the http server : 
+TLDR; You have to start the http server ([[https://github.com/skeeto/emacs-web-server][simple-http]]) and load your HTML files
+through it.
+
+For example, let's say you have a HTML file named hello.html and a JS script file
+named script.js in /home/user/Documents/javascript folder.
+
+hello.html:
+
+<!doctype html>
+<html>
+<head>
+    <!-- Include skewer.js as a script -->
+    <script src="http://localhost:8080/skewer"></script>
+    <!-- Include my script.js file -->
+    <script src="script.js"></script>
+</head>
+<body>
+    <p>Hello world</p>
+</body>
+</html>
+
+script.js:
+
+alert('hey!');
+
+init.el (or .emacs):
+
+(require 'simple-httpd)
+;; set root folder for httpd server
+(setq httpd-root "/home/user/Documents/javascript")
+
+It's time to start the server: M-x httpd-start, and open the index.html file in the
+browser, by visiting http://localhost:8080/hello.html. You should get the alert in
+the browser and now call skewer-repl.
+
+You can further interact with the browser through the repl. So, everything you evaluate
+in the repl will be transmitted to the browser. For example if you type console.log
+('hey!') 
+in the repl, you will get this message in the browser's console. 
+
+If you want to interactively modify HTML (e.g. live update HTML tags from emacs),
+add to your init.el (or .emacs):
+
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+Now when you are in your .html file you can evaluate tags with C-M-x
+(skewer-html-eval-tag), and these will be immediately updated in your browser. 
+
+Keep in mind that conversely, this also applies to CSS and CSS files.
+
+[[https://emacs.stackexchange.com/a/2515][Share]] 
+[[https://emacs.stackexchange.com/posts/2515/edit][Improve this answer]] 
+Submit 
+[[https://emacs.stackexchange.com/posts/2515/revisions][edited Sep 22 '18 at 7:16]] 
+answered Oct 23 '14 at 18:31 
+[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]]caisah 
+3,65611 gold badge2020 silver badges4040 bronze badges 
+2 
+
+,* 1 
+ This is really great answer, thanks for posting it. Probably also worth nothing that if
+ you don't want to hardcode the httpd-root in your config, you can run M-x
+ eval-expression (setq httpd-root "/path/to/files") from within emacs at
+ any time. – [[https://emacs.stackexchange.com/users/2762/cody-reichert][Cody Reichert]] Dec 15 '14 at 15:42 SVG Image 
+,* useless '\' in example html <script
+ src="http://localhost:8080/skewer"></script>\ (can't edit - edits must be
+ >=6 characters) – [[https://emacs.stackexchange.com/users/18327/kai-dj][kai-dj]] Sep 18 '18 at 13:36 SVG Image 
+
+******* Instead of running the demo : 
+Instead of running the demo, just perform these minimal steps to ensure that
+everything is working correctly.
+
+1 Open a new buffer with the name myskewer.js
+2 Enable JS2-mode (a dependency of skewer)
+3 Enable skewer-mode
+4 M-xrun-skewer (a browser opens, go back to myskewer.js)
+5 Type alert("hello"); and hit C-xC-e at the end of that line
+6 Go back to the browser.
+
+You should see an alert box on the page.
+
+[[https://emacs.stackexchange.com/users/294/gambo][*]][[https://emacs.stackexchange.com/users/294/gambo][Gambo]]Gambo 
+,* Thank you for your answer! Unfortunately, I'm prompted the error "No collapsable
+ element found at point" – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:02 SVG Image 
+,* Sorry, My mistake. C-x C-e is the actual keys to push. will edit my answer –
+ [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:10 
+,* That worked! However: How do I tell Skewer to load the HTML, too? (As shown in
+ the demo) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:27 
+,* 1 
+ @JacksGT Place your downloaded files into ~/public_html then follow the
+ instructions for "Manual version" at [[https://github.com/skeeto/skewer-mode#manual-version][this]] link. Once that is done visit [[http://localhost:8080][localhost:8080]]
+ https://github.com/skeeto/skewer-mode#manual-version
+ in your browser. – [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:52 SVG Image 
+
+******* In case port 8080 is already in use : 
+In case port 8080 is already in use: 
+
+you can configure skewer/simple-httpd to use another port by customizing the
+httpd-port variable. (M-x customize-variable<ret>httpd-port)
+
+[[https://emacs.stackexchange.com/a/32372][Share]]
+
+**** multiple-cursors.el
+***** install
+
+
+***** Docs
+****** github.com : 
+******* Multiple cursors : 
+ https://github.com/magnars/multiple-cursors.el
+	Multiple cursors for Emacs. This is some pretty crazy functionality, so yes, there are
+	kinks. Don't be afraid though, I've been using it since 2011 with great success and
+	much merriment.
+******** Maintenance warning
+	 I use this package every day, and have been doing so for years. It just works. At
+	 least, it works for all my use cases. And if it breaks somehow, I fix it.
+
+	 However, it has become painfully clear to me that I don't have time to fix problems I
+	 don't have. It's been years since I could keep pace with the issues and pull requests.
+	 Whenever I try, I keep getting feedback that my fix isn't good enough by some
+	 standard I don't particularly care about.
+
+	 So, I have closed the issue tracker and the pull requests. I hope you can happily use
+	 this package, just like I do. If it doesn't work for you, then I'm sorry. Thankfully Emacs
+	 is infinitely malleable, you can probably fix it yourself.
+
+	 TLDR: I am still maintaining this package, but I am no longer crowdsourcing a list of
+	 issues.
+******* Installation
+	I highly recommend installing multiple-cursors through package.el.
+	It's available on [[http://melpa.org/][MELPA]] and [[http://stable.melpa.org][MELPA Stable]]:
+
+	M-x package-install multiple-cursors
+
+	The package depends on the cl-lib package, so if you do not use package.el or
+	have a recent Emacs, you would need to install that too: see [[http://elpa.gnu.org/packages/cl-lib.html][GNU ELPA]].
+******* Basic usage
+******** Start out : 
+	Start out with:
+	(require 'multiple-cursors)
+
+	Then you have to set up your keybindings - multiple-cursors doesn't presume to know
+	how you'd like them laid out. Here are some examples:
+
+	When you have an active region that spans multiple lines, the following will add a
+	cursor to each line:
+
+	(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+	When you want to add multiple cursors not based on continuous lines, but based on
+	keywords in the buffer, use:
+
+	(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+	(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+	(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+	First mark the word, then add more cursors.
+
+	To get out of multiple-cursors-mode, press <return> or C-g. The latter will first
+	disable multiple regions before disabling multiple cursors. If you want to insert a
+	newline in multiple-cursors-mode, use C-j.
+******** Important note
+	Multiple cursors does not do well when you invoke its commands with M-x. It needs to
+	be bound to keys to work properly. Pull request to fix this is welcome.
+******** Video
+	You can [[http://emacsrocks.com/e13.html][watch an intro to multiple-cursors at Emacs Rocks]].
+******* Command overview
+******** Mark one more occurrence
+ ,* mc/mark-next-like-this: Adds a cursor and region at the next part of the buffer
+	forwards that matches the current region.
+ ,* mc/mark-next-like-this-word: Adds a cursor and region at the next part of the
+	buffer forwards that matches the current region, if no region is selected it selects
+	the word at the point.
+ ,* mc/mark-next-like-this-symbol: Adds a cursor and region at the next part of the
+	buffer forwards that matches the current region, if no region is selected it selects
+	the symbol at the point.
+ ,* mc/mark-next-word-like-this: Like mc/mark-next-like-this but only for whole
+	words.
+ ,* mc/mark-next-symbol-like-this: Like mc/mark-next-like-this but only for
+	whole symbols.
+ ,* mc/mark-previous-like-this: Adds a cursor and region at the next part of the
+	buffer backwards that matches the current region.
+ ,* mc/mark-previous-like-this-word: Adds a cursor and region at the next part of
+	the buffer backwards that matches the current region, if no region is selected it
+	selects the word at the point.
+ ,* mc/mark-previous-like-this-symbol: Adds a cursor and region at the next part
+	of the buffer backwards that matches the current region, if no region is selected it
+	selects the symbol at the point.
+ ,* mc/mark-previous-word-like-this: Like mc/mark-previous-like-this but only
+	for whole words.
+ ,* mc/mark-previous-symbol-like-this: Like mc/mark-previous-like-this but
+	only for whole symbols.
+ ,* mc/mark-more-like-this-extended: Use arrow keys to quickly mark/skip
+	next/previous occurrences.
+ ,* mc/add-cursor-on-click: Bind to a mouse event to add cursors by clicking. See
+	tips-section.
+ ,* mc/mark-pop: Set a cursor at the current point and move to the next (different)
+	position on the mark stack. This allows for fine grained control over the placement
+	of cursors.
+******** Juggle around with the current cursors
+ ,* mc/unmark-next-like-this: Remove the cursor furthest down in the buffer.
+ ,* mc/unmark-previous-like-this: Remove the cursor furthest up in the buffer.
+ ,* mc/skip-to-next-like-this: Remove the cursor furthest down, marking the next
+	occurrence down.
+ ,* mc/skip-to-previous-like-this: Remove the cursor furthest up, marking the
+	next occurrence up.
+******** Mark many occurrences
+ ,* mc/edit-lines: Adds one cursor to each line in the current region.
+ ,* mc/edit-beginnings-of-lines: Adds a cursor at the start of each line in the
+	current region.
+ ,* mc/edit-ends-of-lines: Adds a cursor at the end of each line in the current
+	region.
+ ,* mc/mark-all-like-this: Marks all parts of the buffer that matches the current
+	region.
+ ,* mc/mark-all-words-like-this: Like mc/mark-all-like-this but only for whole
+	words.
+ ,* mc/mark-all-symbols-like-this: Like mc/mark-all-like-this but only for whole
+	symbols.
+ ,* mc/mark-all-in-region: Prompts for a string to match in the region, adding
+	cursors to all of them.
+ ,* mc/mark-all-like-this-in-defun: Marks all parts of the current defun that
+	matches the current region.
+ ,* mc/mark-all-words-like-this-in-defun: Like
+	mc/mark-all-like-this-in-defun but only for whole words.
+ ,* mc/mark-all-symbols-like-this-in-defun: Like
+	mc/mark-all-like-this-in-defun but only for whole symbols.
+ ,* mc/mark-all-dwim: Tries to be smart about marking everything you want. Can be
+	pressed multiple times.
+******** Special
+ ,* set-rectangular-region-anchor: Think of this one as set-mark except you're
+	marking a rectangular region.
+ ,* mc/mark-sgml-tag-pair: Mark the current opening and closing tag.
+ ,* mc/insert-numbers: Insert increasing numbers for each cursor, top to bottom.
+ ,* mc/insert-letters: Insert increasing letters for each cursor, top to bottom.
+ ,* mc/sort-regions: Sort the marked regions alphabetically.
+ ,* mc/reverse-regions: Reverse the order of the marked regions.
+******* Tips and tricks
+ ,* To get out of multiple-cursors-mode, press <return> or C-g. The latter will first
+	disable multiple regions before disabling multiple cursors. If you want to insert a
+	newline in multiple-cursors-mode, use C-j.
+
+ ,* (define-key mc/keymap (kbd "<return>") nil) will make <return> insert a
+	newline; multiple-cursors-mode can still be disabled with C-g.
+
+ ,* Sometimes you end up with cursors outside of your view. You can scroll the screen
+	to center on each cursor with C-v and M-v or you can press C-' to hide all lines
+	without a cursor, press C-' again to unhide.
+
+ ,* Try pressing mc/mark-next-like-this with no region selected. It will just add a
+	cursor on the next line.
+
+ ,* Try pressing mc/mark-next-like-this-word or mc/mark-next-like-this-symbol
+	with no region selected. It will mark the word or symbol and add a cursor at the
+	next occurrence
+
+ ,* Try pressing mc/mark-all-like-this-dwim on a tagname in html-mode.
+
+ ,* Notice that the number of cursors active can be seen in the modeline.
+
+ ,* If you get out of multiple-cursors-mode and yank - it will yank only from the kill-ring
+	of main cursor. To yank from the kill-rings of every cursor use yank-rectangle,
+	normally found at C-x r y.
+
+ ,* You can use mc/reverse-regions with nothing selected and just one cursor. It will
+	then flip the sexp at point and the one below it.
+
+ ,* When you use mc/edit-lines, you can give it a positive or negative prefix to
+	change how it behaves on too short lines.
+
+ ,* If you would like to keep the global bindings clean, and get custom keybindings
+	when the region is active, you can try [[https://github.com/fgallina/region-bindings-mode][region-bindings-mode]].
+
+ BTW, I highly recommend adding mc/mark-next-like-this to a key binding that's
+ right next to the key for er/expand-region.
+******* Binding mouse events
+ To override a mouse event, you will likely have to also unbind the down-mouse part of
+ the event. Like this:
+
+ (global-unset-key (kbd "M-<down-mouse-1>"))
+ (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+
+ Or you can do like me and find an unused, but less convenient, binding:
+
+ (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+******* Unknown commands
+ Multiple-cursors uses two lists of commands to know what to do: the run-once list and
+ the run-for-all list. It comes with a set of defaults, but it would be beyond silly to try and
+ include all the known Emacs commands.
+
+ So that's why multiple-cursors occasionally asks what to do about a command. It will
+ then remember your choice by saving it in ~/.emacs.d/.mc-lists.el. You can
+ change the location with:
+
+ (setq mc/list-file "/my/preferred/file")
+
+ NB! Make sure to do so before requiring multiple-cursors.
+
+ It is possible to set multiple-cursors to "run-for-all" for every command except for
+ those that are listed in mc/cmds-to-run-once. To enable this set
+ mc/always-run-for-all to non-nil. Add commands to be run once to
+ mc/cmds-to-run-once in ".mc-lists.el".
+******* Known limitations
+ ,* isearch-forward and isearch-backward aren't supported with multiple cursors. If you
+	want this functionality, you can use [[https://github.com/zk-phi/phi-search][phi-search]].
+ ,* Commands run with M-x won't be repeated for all cursors.
+ ,* All key bindings that refer to lambdas are always run for all cursors. If you need to
+	limit it, you will have to give it a name.
+ ,* Redo might screw with your cursors. Undo works very well.
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -13886,4 +14481,38 @@ M-x
 customize-group 
 RET 
 company. 
+** read-aloud
+*** Install
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+ (use-package read-aloud
+   :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+#+end_src
+#+RESULTS:
+: t
+*** Docs
+https://github.com/gromnitsky/read-aloud.el
+**** Usage 
+***** read-aloud-this : 
+M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
+***** read-aloud-buf : 
+M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
+***** read-aloud-stop : 
+top reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
+***** read-aloud-change-engine : 
+M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
+
 

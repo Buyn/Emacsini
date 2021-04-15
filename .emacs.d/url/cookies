@@ -94,6 +94,9 @@
 (setq url-cookie-secure-storage
  '(("emackandboliohk.com"
 	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
+ ("github.com"
+	[url-cookie "logged_in" "no" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t]
+	[url-cookie "_octo" "GH1.1.1496171597.1618234365" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t])
  (".gamepedia.com"
 	[url-cookie "wikia_beacon_id" "7v5PDDJtN2" "Sat, 14 Aug 2021 23:23:56 GMT" "/" ".gamepedia.com" t])
  ("one-tab.com"

@@ -7,11 +7,11 @@
 ;; --------------------------------------
 ;; *  --------------------------------------
 ;; * READ-ALOUD-MOD CUSTOMIZATION 
-;; ** load
+;; *** load
 ;; (find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
 ;; (load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
-(add-to-list 'load-path "~/ELs/text-to-speech/read-aloud")
 ;; *** use-package read-aloud : 
+(add-to-list 'load-path "~/ELs/text-to-speech/read-aloud")
 (use-package read-aloud :ensure t
 ;; *** :config : 
   :config
@@ -72,6 +72,10 @@
 (lax-plist-put read-aloud-engines "bal.en.Lucy"
 	'(cmd "~/AddApps/balcon/balcon.exe"
 			args ( "-n" "Lucy" "-i" "-enc" "utf8")))
+;; ****** Jane22k
+(lax-plist-put read-aloud-engines "bal.en.Jane"
+	'(cmd "~/AddApps/balcon/balcon.exe"
+			args ( "-n" "Jane" "-i" "-enc" "utf8")))
 ;; ****** jampal.en : 
 	(lax-plist-put read-aloud-engines "jampal.en"
 		'(cmd "cscript"

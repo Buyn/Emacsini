@@ -9,7 +9,7 @@
 ;; ** LOAD TRANSLATE-MOD CUSTOMIZATION 
 ;; (find-file "~/INI/translate-cfg.el")
 	;; (find-file-other-frame "~/INI/translate-cfg.el") 
-;; (load "~/INI/translate-cfg.el")
+(load "~/INI/translate-cfg.el")
 ;; --------------------------------------
 ;; ** LOAD GRAMMER-MOD CUSTOMIZATION 
 ;; (find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") 
