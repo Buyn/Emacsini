@@ -825,7 +825,51 @@ httpd-port variable. (M-x customize-variable<ret>httpd-port)
 
 **** multiple-cursors.el
 ***** install
+****** use-package : 
+ multiple-cursors
+ #+begin_src emacs-lisp :results output silent
+	 ;; (package-refresh-contents)
+	 (use-package multiple-cursors :ensure t
+		 :config
+		 (define-key evil-visual-state-map "zi" 'mc/edit-lines)
+		 (define-key evil-visual-state-map "zn" 'mc/mark-next-like-this)
+		 (define-key evil-visual-state-map "zp" 'mc/mark-previous-like-this)
+		 (define-key evil-visual-state-map "zo" 'mc/mark-all-like-this)
+		 (define-key evil-visual-state-map "zN" 'mc/skip-to-next-like-this)
+		 (define-key evil-visual-state-map "zP" 'mc/skip-to-previous-like-this)
+		 (define-key evil-visual-state-map "zI" 'mc/mark-all-in-region)
+		 (define-key evil-visual-state-map "zO" 'mc/mark-all-like-this-in-defun)
+		 (define-key evil-visual-state-map "zN" 'mc/insert-numbers)
+		 )
+ #+end_src
 
+ #+begin_src emacs-lisp :tangle yes
+	(use-package read-aloud
+		:ensure t)
+ #+end_src
+
+ #+begin_src emacs-lisp :tangle yes
+	 (load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+ #+end_src
+ #+RESULTS:
+ : t
+***** test 
+asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
 
 ***** Docs
 ****** github.com : 
@@ -1029,6 +1073,320 @@ httpd-port variable. (M-x customize-variable<ret>httpd-port)
  ,* All key bindings that refer to lambdas are always run for all cursors. If you need to
 	limit it, you will have to give it a name.
  ,* Redo might screw with your cursors. Undo works very well.
+
+**** evil-mc
+***** install
+****** refresh-contents : 
+ #+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+ #+end_src
+****** use-package : 
+evil-mc
+ #+begin_src emacs-lisp :results output silent
+		(use-package evil-mc :ensure t
+	 :config
+	 (global-evil-mc-mode  1) ;; enable
+	 (define-key evil-visual-state-map "zi" 'evil-mc-make-cursor-in-visual-selection-end)
+	 ;; (define-key evil-visual-state-map "zj" 'evil-mc-make-cursor-move-next-line)
+	 ;; (define-key evil-visual-state-map "zk" 'evil-mc-make-cursor-move-prev-line)
+	 ;; (define-key evil-visual-state-map "zn" 'evil-mc-skip-and-goto-next-match)
+	 ;; (define-key evil-visual-state-map "zp" 'evil-mc-skip-and-goto-prev-match)
+	 ;; (define-key evil-visual-state-map "zN" 'evil-mc-skip-and-goto-next-cursor)
+	 ;; (define-key evil-visual-state-map "zP" 'evil-mc-skip-and-goto-prev-cursor)
+	 (define-key evil-visual-state-map "zo" 'evil-mc-make-all-cursors)
+	 (define-key evil-visual-state-map "zI" 'evil-mc-make-cursor-in-visual-selection-beg)
+	 (define-key evil-visual-state-map "zq" 'evil-mc-undo-all-cursors)
+	 )
+ #+end_src
+****** other : 
+ #+begin_src emacs-lisp :tangle yes
+	(use-package read-aloud
+		:ensure t)
+ #+end_src
+
+ #+begin_src emacs-lisp :tangle yes
+	 (load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+ #+end_src
+ #+RESULTS:
+ : t
+***** test 
+asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
+
+***** Docs
+****** my
+******* from el 
+			(define-key map (kbd "m") 'evil-mc-make-all-cursors)
+			(define-key map (kbd "u") 'evil-mc-undo-last-added-cursor)
+			(define-key map (kbd "q") 'evil-mc-undo-all-cursors)
+			(define-key map (kbd "s") 'evil-mc-pause-cursors)
+			(define-key map (kbd "r") 'evil-mc-resume-cursors)
+			(define-key map (kbd "f") 'evil-mc-make-and-goto-first-cursor)
+			(define-key map (kbd "l") 'evil-mc-make-and-goto-last-cursor)
+			(define-key map (kbd "h") 'evil-mc-make-cursor-here)
+			(define-key map (kbd "j") 'evil-mc-make-cursor-move-next-line)
+			(define-key map (kbd "k") 'evil-mc-make-cursor-move-prev-line)
+			(define-key map (kbd "N") 'evil-mc-skip-and-goto-next-cursor)
+			(define-key map (kbd "P") 'evil-mc-skip-and-goto-prev-cursor)
+			(define-key map (kbd "n") 'evil-mc-skip-and-goto-next-match)
+			(define-key map (kbd "p") 'evil-mc-skip-and-goto-prev-match)
+			(define-key map (kbd "I") 'evil-mc-make-cursor-in-visual-selection-beg)
+			(define-key map (kbd "A") 'evil-mc-make-cursor-in-visual-selection-end)
+			map))
+
+	(defvar evil-mc-key-map
+		(let ((map (make-sparse-keymap)))
+			(evil-define-key* '(normal visual) map
+												(kbd "gr") evil-mc-cursors-map
+												(kbd "M-n") 'evil-mc-make-and-goto-next-cursor
+												(kbd "M-p") 'evil-mc-make-and-goto-prev-cursor
+												(kbd "C-n") 'evil-mc-make-and-goto-next-match
+												(kbd "C-t") 'evil-mc-skip-and-goto-next-match
+												(kbd "C-p") 'evil-mc-make-and-goto-prev-match)
+****** github.com : 
+******* evil-mc
+ ▓█████ ██▒   █▓ ██▓ ██▓        ███▄ ▄███▓ ▄████▄  
+ ▓█   ▀▓██░   █▒▓██▒▓██▒       ▓██▒▀█▀ ██▒▒██▀ ▀█  
+ ▒███   ▓██  █▒░▒██▒▒██░       ▓██    ▓██░▒▓█    ▄ 
+ ▒▓█  ▄  ▒██ █░░░██░▒██░       ▒██    ▒██ ▒▓▓▄ ▄██▒
+ ░▒████▒  ▒▀█░  ░██░░██████▒   ▒██▒   ░██▒▒ ▓███▀ ░
+ ░░ ▒░ ░  ░ ▐░  ░▓  ░ ▒░▓  ░   ░ ▒░   ░  ░░ ░▒ ▒  ░
+	░ ░  ░  ░ ░░   ▒ ░░ ░ ▒  ░   ░  ░      ░  ░  ▒   
+		░       ░░   ▒ ░  ░ ░      ░      ░   ░        
+		░  ░     ░   ░      ░  ░          ░   ░ ░      
+						░                             ░        
+
+ [[https://travis-ci.org/gabesoft/evil-mc][https://travis-ci.org/gabesoft/evil-mc.svg?branch=master]]
+ [[http://melpa.org/#/evil-mc][http://melpa.org/packages/evil-mc-badge.svg?style=flat-square]]
+ [[http://melpa.org/#/evil-mc][http://stable.melpa.org/packages/evil-mc-badge.svg?style=flat-square]]
+
+ [[https://github.com/gabesoft/evil-mc#multiple-cursors-implementation-for-evil-mode][SVG Image]]Multiple cursors implementation for evil-mode
+
+ [[https://github.com/gabesoft/evil-mc#synopsis][SVG Image]]Synopsis
+
+ evil-mc provides multiple cursors functionality for Emacs when used with evil-mode
+******* Usage
+ Start with:
+ (require 'evil-mc)
+******** Local Setup
+	To enable or disable evil-mc mode for a single buffer use:
+
+	(evil-mc-mode  1) ;; enable
+	(evil-mc-mode -1) ;; disable
+******** Global Setup
+	To enable or disable evil-mc mode for all buffers use:
+
+	(global-evil-mc-mode  1) ;; enable
+	(global-evil-mc-mode -1) ;; disable
+******* Basic Usage
+ The main commands used to create or delete cursors are:
+ (evil-mc-make-all-cursors)
+ ;; Create cursors for all strings that match the selected 
+ ;; region or the symbol under cursor.
+ (evil-mc-undo-all-cursors)
+ ;; Remove all cursors.
+ (evil-mc-make-and-goto-next-match)
+ ;; Make a cursor at point and go to the next match of the 
+ ;; selected region or the symbol under cursor.
+ (evil-mc-skip-and-goto-next-match)
+ ;; Go to the next match of the selected region or the symbol under 
+ ;; cursor without creating a cursor at point.
+ The above commands as well as others, detailed below, are setup with key bindings
+ when the evil-mc mode is enabled. The keys are defined in evil-mc-key-map. You
+ can take a look at that variable declaration in [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]] to see all key bindings. But, in
+ short, C-n / C-p are used for creating cursors, and M-n / M-p are used for cycling
+ through cursors. The commands that create cursors wrap around; but, the ones that
+ cycle them do not. To skip creating a cursor forward use C-t or grn and backward
+ grp. Finally use gru to “undo” the last added cursor, and grq to remove all cursors.
+ Optionally set up visual mode keybindings for I and A to create cursors at the
+ beginning or end of every visually selected line.
+ (evil-define-key 'visual evil-mc-key-map
+   "A" #'evil-mc-make-cursor-in-visual-selection-end
+   "I" #'evil-mc-make-cursor-in-visual-selection-beg)
+
+ For an example of setting up evil-mc see this [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc-setup.el][setup file]]
+******* Commands
+ Here’s a detailed list of all commands used to create, navigate through, or delete
+ cursors:
+ All the commands below assume that there is a real cursor and possibly some fake
+ cursors.
+
+ (evil-mc-make-all-cursors)
+ ;; Make a cursor for every match of the selected region or the symbol at point.
+
+ (evil-mc-undo-all-cursors)
+ ;; Remove all cursors.
+
+ (evil-mc-undo-last-added-cursor)
+ ;; Remove the last added cursor and move point to its position.
+
+ (evil-mc-make-and-goto-next-match)
+ ;; Make a cursor at point, and go to the next match of the 
+ ;; selected region or the symbol at point.
+
+ (evil-mc-make-and-goto-prev-match)
+ ;; Make a cursor at point, and go to the previous match of the 
+ ;; selected region or the symbol at point.
+
+ (evil-mc-skip-and-goto-next-match)
+ ;; Go to the next match of the selected region or symbol at point
+ ;; without making a cursor at point. This command can be used to
+ ;; remove unwanted cursors.
+
+ (evil-mc-skip-and-goto-prev-match)
+ ;; Go to the previous match of the selected region or symbol at point
+ ;; without making a cursor at point. This command can be used to
+ ;; remove unwanted cursors.
+
+ (evil-mc-make-and-goto-prev-cursor)
+ ;; Make a cursor at point and move point to the cursor
+ ;; closest to it when searching backwards.
+
+ (evil-mc-make-and-goto-next-cursor)
+ ;; Make a cursor at point and move point to the cursor
+ ;; closest to it when searching forwards.
+
+ (evil-mc-skip-and-goto-prev-cursor)
+ ;; Move point to the cursor closest to it when searching backwards
+ ;; without making a cursor at point. This command can be used to
+ ;; remove unwanted cursors.
+
+ (evil-mc-skip-and-goto-next-cursor)
+ ;; Move point to the cursor closest to it when searching forwards
+ ;; without making a cursor at point. This command can be used to
+ ;; remove unwanted cursors.
+
+ (evil-mc-make-and-goto-first-cursor)
+ ;; Make a cursor at point and move point to the cursor at the first position.
+
+ (evil-mc-make-and-goto-last-cursor)
+ ;; Make a cursor at point and move point to the cursor at the last position.
+
+ (evil-mc-make-cursor-here)
+ ;; Create a cursor at point. This command should be used with `evil-mc-pause-cursors'.
+
+ (evil-mc-pause-cursors)
+ ;; Pause all fake cursors. This can be used with `evil-mc-make-cursor-here'
+
+ (evil-mc-resume-cursors)
+ ;; Call to resume paused cursors.
+
+ (evil-mc-make-cursor-in-visual-selection-beg)
+ ;; Create cursors at the beginning of every visually selected line.
+
+ (evil-mc-make-cursor-in-visual-selection-end)
+ ;; Create cursors at the end of every visually selected line.
+******* Customization
+******** can be customized : 
+ evil-mc can be customized in several ways:
+
+ ,* Every known command is executed using a command handler defined in a variable
+	called evil-mc-known-commands in [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc-known-commands.el][evil-mc-known-commands.el]]. Those can be
+	overridden by defining the evil-mc-custom-known-commands variable. See the
+	documentation of that variable in [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]] for more info.
+ ,* Some minor modes are incompatible with evil-mc. Those modes are defined in
+	evil-mc-incompatible-minor-modes and can be overridden by defining that
+	variable.
+ ,* In addition there are two hooks that can be used to temporarily disable or enable
+	additional functionality while there are multiple cursors active 
+ evil-mc-before-cursors-created
+ ;; this hook runs just before the first cursor is created
+
+ evil-mc-after-cursors-created
+ ;; this hook runs just after the last cursor is deleted
+******** Mode line text and colors
+
+	There are 4 variables, that can change the mode lines text, and its color.
+******** Only one cursor
+
+	The emc text can be hidden, by setting this variable to nil. (default: t)
+
+	(setq evil-mc-one-cursor-show-mode-line-text t)
+******** Two or more cursors, resumed (unpaused)
+
+	The resumed mode line text, can have two different colors:
+
+	,* The cursors color, when this variable is t.
+	,* The default colors, when this variable is nil.
+
+	(default: t)
+
+	(setq evil-mc-mode-line-text-cursor-color t)
+******** Two or more cursors, paused
+	The (paused) text can be hidden, by setting this variable to nil. (default: t)
+
+	(setq evil-mc-mode-line-text-paused t)
+
+	The paused mode line text can have three different colors:
+
+	,* Inverse colors, when the inverse colors variable is t.
+	,* Cursors color, when the inverse colors variable is nil, and the cursor color variable
+	 is t.
+	,* Default colors, when both the inverse and cursor color variables are nil.
+
+	(default: t, for both the inverse and cursor variables)
+
+	(setq evil-mc-mode-line-text-inverse-colors t)
+	(setq evil-mc-mode-line-text-cursor-color t)
+******* Notes
+ ,* Most evil motions and operators are supported but not every single command will
+	work.
+ ,* If the cursors don’t seem to work during a command, either the command is not
+	known (see evil-mc-known-commands in [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc-known-commands.el][evil-mc-known-commands.el]]) or some
+	minor modes could be interfering with the evil-mc operations.
+ ,* Issues and pull requests are welcome.
+******** Debugging
+	,* When a command does not work, and you want to get more information, you can
+	 enable (or disable) debugging by running any of the commands below
+	 interactively. 
+	(evil-mc-executing-debug-on)
+	;; Turn debug on while executing a command.
+
+	(evil-mc-executing-debug-off)
+	;; Turn debug off while executing a command.
+
+	(evil-mc-recording-debug-on)
+	;; Turn debug on while recording a command.
+
+	(evil-mc-recording-debug-off)
+	;; Turn debug off while recording a command.
+
+	(evil-mc-all-debug-on)
+	;; Turn all debug on.
+
+	(evil-mc-all-debug-off)
+	;; Turn all debug off.
+******** Limitations
+	,* After an undo command the cursors will return to their original positions if [[http://www.emacswiki.org/emacs/UndoTree][undo-tree]]
+	 mode is enabled and evil-repeat has not been used.
+	,* Redo may cause the real cursor to get out of sync with the others. This can be
+	 worked around by setting a mark and returning to it after a redo.
+	,* Jumps work if [[https://github.com/bling/evil-jumper][evil-jumper]] mode is enabled
+	,* Search commands such as evil-search-forward, evil-search-backward, and
+	 evil-search-next are not supported
+******** Known issues
+	,* Only named commands can be executed by the fake cursors.
+	,* There could be a performance penalty when there are too many cursors (30+).
+	,* Paste will not work when [[https://github.com/syl20bnr/spacemacs][spacemacs]]’ paste micro state is enabled. This is due to
+	 the fact that evil-paste-pop and evil-paste-pop-next commands are not
+	 supported.
+	,* evil-repeat works only for some commands. In particular it doesn’t work for
+	 delete. It will also interfere with the cursor positions during an undo or redo
+	 operation.
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))

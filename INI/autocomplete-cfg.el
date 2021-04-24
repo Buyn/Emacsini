@@ -44,6 +44,7 @@
 ;; *** --------------------------------------
   ;; :defer 2
 ;; *** :init : 
+ :diminish 
  :init
   (setq company-require-match nil)            ; Don't require match, so you can still move your cursor as expected.
   (setq company-tooltip-align-annotations t)  ; Align annotation to the right side.

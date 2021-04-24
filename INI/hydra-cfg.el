@@ -434,6 +434,10 @@ _?_ help            _c_urrent file
 
 ;; *** Org menu
 ;; **** defun for Org menu
+;; ***** mac-done-copy : 
+(fset 'mac-done-copy
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("dzadd`dpza``" 0 "%d")) arg)))
+;; ***** curent-time-format-hh-mm : 
 (defun curent-time-format-hh-mm (p-h p-m)
   "curent-time-format-hh-mm"
 	(concat
@@ -449,18 +453,24 @@ _?_ help            _c_urrent file
     "
 						^Org-mode  Menus^          
 ────────────^───────────────^───────────────────
-	_d_one TODO A_r_hiv TODO    a_g_enda 
+	_d_oneMACRO  A_r_hiv TODO    a_g_enda 
 	_t_odo set  _h_+1h _n_+13h  _q_uit   
  _s_how image
     "
 ;; ***** keys
 ;; ****** one-line keys
-    ("d" org-todo "DONE")
     ("r" org-archive-subtree)
     ("t" org-todo "TODO")
     ("g" org-agenda :color blue)
     ("s" org-toggle-inline-images )
 		("q" nil) 
+;; ****** d : 
+    ("d" (progn
+					 ;; (nil/body) 
+					 (mac-done-copy)
+					 ;; (org-menu/body)
+					 ) 
+							:color blue)
 ;; ****** h : 
     ("h" (org--deadline-or-schedule nil 'scheduled 
 							 (curent-time-format-hh-mm 1 0))
