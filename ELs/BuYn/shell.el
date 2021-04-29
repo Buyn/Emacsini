@@ -8,9 +8,41 @@
 ;; --------------------------------------
 ;; ** varibls
 (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe") 
+(setq path-to-far "D:/shell/FAR/Far.exe")
 (setq path-to-emagus-client "d:/Development/lisp/Emacs/bin/emacsclientw.exe -n -c -a ''") 
 (setq path-to-emagus-client-buyn "d:/Development/lisp/Emacs/bin/emacsclientw.exe -n -c -a 'buyn'") 
 ;; ** functions
+;; *** buyn-cmd-start :
+(defun buyn-cmd-start (cmd-params)
+  "	buyn start new cmd process
+		as parametr  
+		get comand to execute
+		"
+  (shell-command
+		(concat "cmd"
+						" /c "
+						" start "
+						cmd-params
+						" &"
+						)
+		)
+  )
+
+;; *** buyn-far :
+(defun buyn-far (cmd-params)
+  "	buyn start new cmd process
+		as parametr  
+		get comand to execute
+		"
+  (buyn-cmd-start
+		(concat path-to-far
+						" "
+						cmd-params
+						;; " &"
+						)
+		)
+  )
+
 ;; *** buyn-start-emagus :
 (defun buyn-start-emagus (unix-path-to-file)
   "	buyn start new emacs process
