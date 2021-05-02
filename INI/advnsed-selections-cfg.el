@@ -55,9 +55,10 @@
 ;; ** use-package evil-mc 
 (use-package evil-mc :ensure t
 ;; ** evil-mc config
-	 :config
-	 (global-evil-mc-mode  1) ;; enable
-	 (define-key evil-visual-state-map "zi" 'evil-mc-make-cursor-in-visual-selection-end)
+	:disabled
+	:config
+	(global-evil-mc-mode  1) ;; enable
+	(define-key evil-visual-state-map "zi" 'evil-mc-make-cursor-in-visual-selection-end)
 	 ;; (define-key evil-visual-state-map "zj" 'evil-mc-make-cursor-move-next-line)
 	 ;; (define-key evil-visual-state-map "zk" 'evil-mc-make-cursor-move-prev-line)
 	 ;; (define-key evil-visual-state-map "zn" 'evil-mc-skip-and-goto-next-match)

@@ -9,7 +9,6 @@
 ;; * TRANSLATE-MOD CUSTOMIZATION 
 ;; *** ob-translate
 ;; **** use-package ob-translate 
-
 (use-package popup :ensure t)
 (use-package ob-translate :ensure t
 ;; (package-refresh-contents)
@@ -32,6 +31,8 @@
 ;; :dest	Destination language(s).
 ;; #+BEGIN_SRC translate :dest it,fr	‘en’ (for English).
 ;; :dest may be a single country-code, or a comma-separated list.
+;; перевод на украинский
+;; #+begin_src translate :dest uk
 ;; All defaults are customizable with M-x customize-group RET ob-translate.
 ;; :dest may be a single country-code, or a comma-separated list.
 

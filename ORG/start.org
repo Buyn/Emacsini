@@ -46,8 +46,8 @@ https://www.braveclojure.com/basic-emacs/
 **** в процесе
 **** завершно
 *** Kanban
-**** todo
 **** in progress 
+**** todo
 **** done
 *** Pomodoro
 **** Pomodoro 
@@ -270,6 +270,8 @@ D:\shell\Far\Far.exe
 *Help Docs Emacs 
 * Команды
 ** reload init files
+(load "~/INI/lua-cfg.el")
+(load "~/ELs/BuYn/shell.el")
 (load "~/INI/hydra-cfg.el")
 (load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
@@ -280,7 +282,6 @@ D:\shell\Far\Far.exe
 (load "~/INI/lit-cfg.el")
 (load "~/INI/dev-cfg.el")
 (load "~/INI/interface-mods.el")
-(load "~/ELs/BuYn/shell.el")
 ** load init files
 (load "~/INI/org-brain-cfg.el")
 ** открыть
@@ -822,6 +823,36 @@ you can configure skewer/simple-httpd to use another port by customizing the
 httpd-port variable. (M-x customize-variable<ret>httpd-port)
 
 [[https://emacs.stackexchange.com/a/32372][Share]]
+
+**** tts-editor : 
+***** load
+#+begin_src emacs-lisp results output silent
+	(load "~/ELs/tts/tts-editor/tts-editor.el")
+	(load "~/ELs/BuYn/tts.el")
+#+end_src
+#+begin_src emacs-lisp results output silent
+	(find-file-other-frame "~/ELs/BuYn/tts.el")
+#+end_src
+D:\Development\lisp\Home\ELs\tts\tts-editor\tts-editor.el 
+***** docs 
+****** git
+******* Installation
+				#+begin_src emacs-lisp results output silent
+ (use-package
+     :straight (tts-editor :type git
+                           :host github
+                           :repo "dangersalad/emacs-tts-editor")
+     :commands (tts-editor/listen-start
+								tts-editor/listen-stop))
+				#+end_src
+*******  Usage
+ Start the server with M-x tts-editor/listen-start. You will see messages and other information in the *tts-editor* buffer.
+
+ In the generated buffers, the C-x C-s keybinding will performe a “Save and Play” on all of the script/UI files and reload them all. To save your buffers to your file system, you can use the C-x C-w (write-file) binding.
+
+ You can use M-x tts-editor/reload to reload the files in the current save.
+
+ M-x tts-editor/listen-stop will close the server and remove all script buffers.
 
 **** multiple-cursors.el
 ***** install
