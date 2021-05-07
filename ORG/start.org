@@ -221,7 +221,7 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/autocomplete-cfg.el")
 	(find-file-other-frame "~/INI/snippets-cfg.el")
 	(find-file-other-frame "~/INI/delimiters-cfg.el")
-	(find-file-other-frame "~/INI/js-cfg.el") not used
+	(find-file-other-frame "~/INI/js-cfg.el") 
 	(find-file-other-frame "~/INI/lua-cfg.el")
 	(find-file-other-frame "~/INI/python-cfg.el")
 	(find-file-other-frame "~/INI/dev/csharp-cfg.el")
@@ -232,6 +232,11 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/flycheck-cfg.el")
 *** My Elisp
 	(find-file-other-frame "~/ELs/BuYn/shell.el")
+	----- not auto loadet -----
+	(find-file-other-frame "~/ELs/BuYn/ai-dungon.el")
+	(load "~/ELs/tts/tts-editor/tts-editor.el")
+	(load "~/ELs/BuYn/tts.el")
+	----- not auto loadet -----
 ** org files
 *** lincks
 [[file:~/../Dropbox/orgs/weekly.org][weekly file]]
@@ -423,33 +428,23 @@ https://github.com/a13/reverse-im.el
 	(add-hook 'html-mode-hook 'skewer-html-mode))
 #+end_src
 
-#+begin_src emacs-lisp :tangle yes
- (use-package read-aloud
-   :ensure t)
-#+end_src
 
-#+begin_src emacs-lisp :tangle yes
-	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
-#+end_src
-#+RESULTS:
-: t
 ***** Exempl 
 ****** make server
 ******* ferst
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
+#+end_src
 
-	#+end_src
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/script.js")
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/script.js")
+#+end_src
+#+RESULTS:
+: #<buffer script.js>
 
-	#+end_src
-	#+RESULTS:
-	: #<buffer script.js>
-
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/hello.html")
-	#+end_src
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/hello.html")
+#+end_src
 
 	#+RESULTS:
 	: #<buffer hello.html>

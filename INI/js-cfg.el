@@ -8,8 +8,8 @@
 ;; * Setting up js2-mode
 ;; ** use-package js2-mode
 (use-package js2-mode :ensure t
-  ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
+  ;; :disabled
+  ;; :config
 ;; *** END of use-package 
   )
 (require 'js2-mode)
@@ -19,27 +19,28 @@
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 ;; js2-refactor and xref-js2
 ;; ** use-package js2-refactor
-(use-package js2-refactor :ensure t
-  ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
+(use-package js2-refactor
+  :disabled
+	:ensure t
 ;; *** END of use-package hydra
   )
-(require 'js2-refactor)
 ;; ** use-package xref-js2
 (use-package xref-js2 :ensure t
+  :disabled
+  :config
   ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
+	(require 'js2-refactor)
+	(add-hook 'js2-mode-hook #'js2-refactor-mode)
+	(js2r-add-keybindings-with-prefix "C-c C-r")
+	(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+	;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+	;; unbind it.
+	(define-key js-mode-map (kbd "M-.") nil)
+	(add-hook 'js2-mode-hook (lambda ()
+		(add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 ;; *** END of use-package hydra
   )
-(require 'xref-js2)
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-r")
-(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-;; unbind it.
-(define-key js-mode-map (kbd "M-.") nil)
-(add-hook 'js2-mode-hook (lambda ()
-  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
 ;; --------------------------------------
 ;; * ---------      Tern & Company     ----
 ;; may need add this commands for node.js
@@ -55,19 +56,33 @@
 ;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 ;; ** company-tern
 (use-package company-tern :ensure t
+  :disabled
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
-;; ***  END of use-package hydra
+	:config
+	(add-to-list 'company-backends 'company-tern)
+	;; (add-hook 'js2-mode-hook (lambda ()
+	;;                            (tern-mode)
+	;;                            (company-mode)))
+	(add-hook 'js-mode-hook (lambda ()
+														(tern-mode)
+														(company-mode)))
+;; ***  END of use-package 
   )
-(require 'company-tern)
-(add-to-list 'company-backends 'company-tern)
-;; (add-hook 'js2-mode-hook (lambda ()
-;;                            (tern-mode)
-;;                            (company-mode)))
-(add-hook 'js-mode-hook (lambda ()
-                           (tern-mode)
-                           (company-mode)))
 ;; --------------------------------------
+;; * skewer-mode
+;; --------------------------------------
+;; ** use-package xref-js2
+(use-package skewer-mode :ensure t
+  ;; :disabled
+  :config
+	(add-hook 'js2-mode-hook 'skewer-mode)
+	(add-hook 'css-mode-hook 'skewer-css-mode)
+	(add-hook 'html-mode-hook 'skewer-html-mode)
+;; *** END of use-package hydra
+  )
+;; --------------------------------------
+
 ;; * JS-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; ** Docs

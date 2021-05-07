@@ -40,7 +40,8 @@
 (load "~/INI/dev/unity-cfg.el")
 ;; --------------------------------------
 ;; ** JS-MOD CUSTOMIZATION
-;; (load "~/INI/js-cfg.el")
+;; (find-file-other-frame "~/INI/js-cfg.el") 
+(load "~/INI/js-cfg.el")
 ;; --------------------------------------
 ;; ** FLYCHECK CUSTOMIZATION
 (load "~/INI/flycheck-cfg.el")
