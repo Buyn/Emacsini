@@ -24,8 +24,14 @@
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------
 ;; ** LUA-MOD CUSTOMIZATION
+;; --------------------------------------
 ;; (find-file "~/INI/lua-cfg.el")
-;; (load "~/INI/lua-cfg.el")
+(load "~/INI/lua-cfg.el")
+;; --------------------------------------
+;; ** AHK-MODE CUSTOMIZATION
+;; --------------------------------------
+;; (find-file-other-frame "~/INI/dev/autohotkey-cfg.el")
+(load "~/INI/dev/autohotkey-cfg.el")
 ;; --------------------------------------
 ;; ** C#-MOD CUSTOMIZATION
 ;; (find-file-other-frame "~/INI/dev/csharp-cfg.el")

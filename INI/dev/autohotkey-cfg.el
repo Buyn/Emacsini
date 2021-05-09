@@ -6,7 +6,6 @@
 ;; --------------------------------------
 ;; * AHK-MODE CUSTOMIZATION
 ;; --------------------------------------
-
 ;; ** install ahk-mode : 
 (use-package ahk-mode
 	:ensure t

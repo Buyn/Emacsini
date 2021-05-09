@@ -417,408 +417,6 @@ https://github.com/a13/reverse-im.el
   (reverse-im-mode t))
 #+end_src
 
-**** skewer-mode
-***** use-package : 
-#+begin_src emacs-lisp :results output silent
-(package-refresh-contents)
-(use-package skewer-mode :ensure t
-  :config
-	(add-hook 'js2-mode-hook 'skewer-mode)
-	(add-hook 'css-mode-hook 'skewer-css-mode)
-	(add-hook 'html-mode-hook 'skewer-html-mode))
-#+end_src
-
-
-***** Exempl 
-****** make server
-******* ferst
-#+begin_src emacs-lisp :tangle yes
-(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/script.js")
-#+end_src
-#+RESULTS:
-: #<buffer script.js>
-
-#+begin_src emacs-lisp :tangle yes
-(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/hello.html")
-#+end_src
-
-	#+RESULTS:
-	: #<buffer hello.html>
-	#+begin_src emacs-lisp :tangle yes
-	(require 'simple-httpd)
-	(setq httpd-root 
-		"~/../../version-control/GitHub/HTML/skewer"
-	;; "/home/user/Documents/javascript"
-		)
-	(httpd-start)
-	#+end_src
-	#+RESULTS:
-******* boids-js
-https://github.com/skeeto/boids-js
-Skewer -- Emacs browser interaction - YouTube
-https://www.youtube.com/watch?v=4tyTgyzUJqM
-	#+begin_src emacs-lisp :tangle yes
-	(setq httpd-port 4242)
-	(require 'simple-httpd)
-	(setq httpd-root 
-		"~/../../version-control/GitHub/HTML/skewer"
-		)
-	(httpd-start)
-	#+end_src
-
-	#+RESULTS:
-
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/example.html")
-	#+end_src
-	#+RESULTS:
-	: #<buffer example.html>
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids.js")
-	#+end_src
-	#+RESULTS:
-	: #<buffer boids.js>
-	#+begin_src emacs-lisp :tangle yes
-	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids_sanbox.js")
-	#+end_src
-
-	#+RESULTS:
-	: #<buffer boids_sanbox.js>
-
- http://localhost:4242/example.html
-
-	#+begin_src emacs-lisp :tangle yes
-	(httpd-stop)
-	#+end_src
-
-	#+RESULTS:
-
-****** connect to server
-http://localhost:8080/hello.html
-http://localhost:4242/example.html
-
-	#+begin_src emacs-lisp :tangle yes
-(httpd-stop)
-	#+end_src
-****** start repl
-A REPL into the browser can be created with 
-M-x skewer-repl, or C-c C-z. This
-****** repl command 
-******* console.log : 
- console.log
- ('hey!')
-
- console.log
- ('hello world!')
-
- console.log ('hello world!');
-******* alert : 
-alert('hey!');
-******* skewer.log : 
-skewer.log("hi from brobser!");
-****** live edit html 
-****** live edit js 
-JS2-mode
-
- C-x C-e
-***** Docs
-****** Skewer: live web development with Emacs
-******* links
- GitHub - skeeto/skewer-mode: Live web development in Emacs
- https://github.com/skeeto/skewer-mode
-
-Provides live interaction with JavaScript, CSS, and HTML in a web browser.
-Expressions are sent on-the-fly from an editing buffer to be evaluated in the browser,
-just like Emacs does with an inferior Lisp process in Lisp modes.
-
-,* Watch the [[http://youtu.be/4tyTgyzUJqM][demo video on YouTube]] ([[http://nullprogram.s3.amazonaws.com/skewer/demo.webm][webm]])
-
-Skewer is available from [[https://melpa.org/][MELPA]], which will install the dependencies for you. This
-package and its dependencies are pure Elisp, meaning setup is a breeze, the whole
-thing is highly portable, and it works with many browsers.
-
-Dependencies:
-
-,* [[https://github.com/skeeto/emacs-http-server][simple-httpd]] (available on MELPA)
-,* [[https://github.com/mooz/js2-mode][js2-mode]] (available on ELPA)
-
-Skewer requires Emacs 24.3 or later.
-******* Usage
-******** Quick version
-
-If Skewer was installed from MELPA, skip to step 3.
-
-1 Put this repository directory in your load-path
-2 Load skewer-mode.el
-3 M-x run-skewer to attach a browser to Emacs
-4 From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the
- browser to evaluate
-
-The function skewer-setup can be used to configure all of mode hooks (previously
-this was the default). This can also be done manually like so,
-
-(add-hook 'js2-mode-hook 'skewer-mode)
-(add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'html-mode-hook 'skewer-html-mode)
-
-The keybindings for evaluating expressions in the browser are just like the Lisp
-modes. These are provided by the minor mode skewer-mode.
-
-,* C-x C-e: Evaluate the form before the point and display the result in the minibuffer.
- If given a prefix argument, insert the result into the current buffer.
-,* C-M-x: Evaluate the top-level form around the point.
-,* C-c C-k: Load the current buffer.
-,* C-c C-z: Select the REPL buffer.
-
-The result of the expression is echoed in the minibuffer.
-
-Additionally, css-mode and html-mode get similar sets of bindings for modifying the
-CSS rules and HTML on the current page.
-******** CSS
-
-,* C-x C-e: Load the declaration at the point.
-,* C-M-x: Load the entire rule around the point.
-,* C-c C-k: Load the current buffer as a stylesheet.
-******** HTML
-,* C-M-x: Load the HTML tag immediately around the point.
-
-Note: run-skewer uses browse-url to launch the browser. This may require further
-setup depending on your operating system and personal preferences.
-
-Multiple browsers and browser tabs can be attached to Emacs at once. JavaScript
-forms are sent to all attached clients simultaneously, and each will echo back the
-result individually. Use list-skewer-clients to see a list of all currently attached
-clients.
-
-Sometimes Skewer's long polls from the browser will timeout after a number of hours
-of inactivity. If you find the browser disconnected from Emacs for any reason, use the
-browser's console to call skewer() to reconnect. This avoids a page reload, which
-would lose any fragile browser state you might care about.
-******* Manual version
-To skewer your own document rather than the provided blank one,
-
-1 Load the dependencies
-2 Load skewer-mode.el
-3 Start the HTTP server (httpd-start)
-4 Include "[[http://localhost:8080/skewer][http://localhost:8080/skewer]]" as a script (see example.html and check
- your httpd-port)
-5 Visit the document from your browser
-
-Skewer fully supports CORS so the document need not be hosted by Emacs itself. A
-Greasemonkey userscript is provided, Skewer Everything, for injecting Skewer into
-any arbitrary page you're visiting without needing to modify the page on the host.
-More information below.
-
-Don't copy skewer.js anywhere or use it directly. Emacs hosts this script itself,
-manipulating it in memory before it reaches the browser. Always access it through the
-servlet on the Emacs webserver as /skewer.
-******* Browser Support
-Skewer is known to work properly with Firefox, Chrome, Safari, Opera, and IE8+.
-Except for CSS and HTML, Skewer will work in IE7 when document.querySelector
-and JSON are polyfilled. If you find any other JavaScript-supported browser that
-doesn't work with Skewer, please report it.
-******* REPL
-A REPL into the browser can be created with M-x skewer-repl, or C-c C-z. This
-should work like a console within the browser. Messages can be logged to this REPL
-with skewer.log() (like console.log()).
-
-Results of expressions evaluated in the REPL are printed more verbosely than in the
-minibuffer, when possible. This may help in debugging.
-******* Skewering with CORS
-Skewer supports [[http://en.wikipedia.org/wiki/Cross-origin_resource_sharing][Cross-origin Resource Sharing (CORS)]]. This means you can
-Skewer a document hosted from any server without needing any special changes on
-that server, except for including /skewer as a script in that document.
-
-If you don't control the server from which you want to skewer pages -- such that you
-can't add the Skewer's script -- the provided Greasemonkey userscript (.user.js)
-https://github.com/skeeto/skewer-mode/blob/master/skewer-everything.user.js
-can be used to inject it into any page you visit. Note that this userscript will assume
-you're running the Skewer server at [[http://localhost:8080/][http://localhost:8080/]] (simple-httpd's default
-port). If this isn't true, you need to edit the top of the userscript.
-
-The script isn't actually injected until you switch the toggle in the top-right corner, the
-red/green triangle.
-
-Alternatively, the following bookmarklet will load skewer on demand:
-
-javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://localhost:8080/skewer';d.body.appendChild(s);})()
-
-With a browser plugin like [[https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en][Custom Javascript for Websites]], you can use the
-bookmarklet to auto-skewer specific domains, saving you a mouse click on each
-reload.
-******* bower
-Also provided are some functions for loading libraries from the bower infrastructure
-on the fly. This is accessed with skewer-bower-load. For example, I often find it
-useful to load jQuery when skewering a page that doesn't have jQuery installed.
-
-Note: to use this bower does not need to be installed, only git. It's just the bower
-infrastructure being used. Unfortunately this infrastructure is a mess right now; many
-packages are in some sort of broken state -- missing dependencies, missing
-metadata, broken metadata, or an invalid repository URL. Some of this is due to
-under-specification of the metadata by the bower project.
-******* Motivation
-
-I wanted something like [[https://github.com/swank-js/swank-js][swank-js]] but without all the painful setup. Having already
-written an Emacs web server I was halfway there. It took relatively little code to
-accomplish.
-
-I also didn't want to rely a browser-specific feature, like MozRepl or WebKit's remote
-debugger ([[https://github.com/jscheid/kite][kite]]).
-
-The name refers to the idea that Emacs is skewering the browser from server-side.
-****** package - How to use skewer-mode? 
-******* currently struggling : 
-https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode
-I am currently struggling to use skewer-mode in Emacs.
-
-I downloaded and installed skewer-mode via MELPA, so all the dependencies
-should be inplace.
-
-For testing purposes I even downloaded the boidsjs [[https://github.com/skeeto/boids-js][demo]].
-
-I'll open up boids.js, then type M-xrun-skewer (opens up the browser with URL
-http://127.0.0.1:8080/skewer/demo) and then finally run M-xskewer-mode (->
-skewer-mode enabled).
-
-But in the browser nothing happens.
-
-What am I doing wrong?
-
-[[https://emacs.stackexchange.com/questions/tagged/package][package]] [[https://emacs.stackexchange.com/questions/tagged/skewer-mode][skewer-mode]] [[https://emacs.stackexchange.com/questions/tagged/javascript][javascript]] 
-[[https://emacs.stackexchange.com/q/2376][Share]] 
-[[https://emacs.stackexchange.com/posts/2376/edit][Improve this question]] 
-Submit 
-[[https://emacs.stackexchange.com/posts/2376/revisions][edited Oct 23 '14 at 19:30]] 
-[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]] 
-3,65611 gold badge2020 silver badges4040 bronze badges 
-asked Oct 20 '14 at 18:31 
-[[https://emacs.stackexchange.com/users/2158/jacksgt][*]][[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]]JacksGT 
-31322 silver badges77 bronze badges 
-4 
-
-,* As I understand it, skewer provides an interface for evaluation of javascript... Do
- you actually evaluate the content of the boids.js buffer? – [[https://emacs.stackexchange.com/users/184/t-verron][T. Verron]] Oct 20 '14 at
- 18:33 
-,* I'm loading the current buffer with <kbd>C-x C-k</kbd> ("boid.js loaded") and the
- trying to evaluate with <kbd>C-x C-e</kbd>. But it gives me an error that it could
- not parse the "$"-sign. That is because it did not load the jQuery from the
- corresponding HTML file (example.html) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:44 
-,* 2 
- You need to eval the html file in skewer-html-mode. – [[https://emacs.stackexchange.com/users/160/jordon-biondo][Jordon Biondo]] Oct 20 '14 at
- 18:45 SVG Image 
-,* How? C-x C-k does not work in skewer-html-mode – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:50
-
-[[https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode#][Add a comment]]  | 
-
-3 Answers 
-
-******* start the http server : 
-TLDR; You have to start the http server ([[https://github.com/skeeto/emacs-web-server][simple-http]]) and load your HTML files
-through it.
-
-For example, let's say you have a HTML file named hello.html and a JS script file
-named script.js in /home/user/Documents/javascript folder.
-
-hello.html:
-
-<!doctype html>
-<html>
-<head>
-    <!-- Include skewer.js as a script -->
-    <script src="http://localhost:8080/skewer"></script>
-    <!-- Include my script.js file -->
-    <script src="script.js"></script>
-</head>
-<body>
-    <p>Hello world</p>
-</body>
-</html>
-
-script.js:
-
-alert('hey!');
-
-init.el (or .emacs):
-
-(require 'simple-httpd)
-;; set root folder for httpd server
-(setq httpd-root "/home/user/Documents/javascript")
-
-It's time to start the server: M-x httpd-start, and open the index.html file in the
-browser, by visiting http://localhost:8080/hello.html. You should get the alert in
-the browser and now call skewer-repl.
-
-You can further interact with the browser through the repl. So, everything you evaluate
-in the repl will be transmitted to the browser. For example if you type console.log
-('hey!') 
-in the repl, you will get this message in the browser's console. 
-
-If you want to interactively modify HTML (e.g. live update HTML tags from emacs),
-add to your init.el (or .emacs):
-
-(add-hook 'html-mode-hook 'skewer-html-mode)
-
-Now when you are in your .html file you can evaluate tags with C-M-x
-(skewer-html-eval-tag), and these will be immediately updated in your browser. 
-
-Keep in mind that conversely, this also applies to CSS and CSS files.
-
-[[https://emacs.stackexchange.com/a/2515][Share]] 
-[[https://emacs.stackexchange.com/posts/2515/edit][Improve this answer]] 
-Submit 
-[[https://emacs.stackexchange.com/posts/2515/revisions][edited Sep 22 '18 at 7:16]] 
-answered Oct 23 '14 at 18:31 
-[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]]caisah 
-3,65611 gold badge2020 silver badges4040 bronze badges 
-2 
-
-,* 1 
- This is really great answer, thanks for posting it. Probably also worth nothing that if
- you don't want to hardcode the httpd-root in your config, you can run M-x
- eval-expression (setq httpd-root "/path/to/files") from within emacs at
- any time. – [[https://emacs.stackexchange.com/users/2762/cody-reichert][Cody Reichert]] Dec 15 '14 at 15:42 SVG Image 
-,* useless '\' in example html <script
- src="http://localhost:8080/skewer"></script>\ (can't edit - edits must be
- >=6 characters) – [[https://emacs.stackexchange.com/users/18327/kai-dj][kai-dj]] Sep 18 '18 at 13:36 SVG Image 
-
-******* Instead of running the demo : 
-Instead of running the demo, just perform these minimal steps to ensure that
-everything is working correctly.
-
-1 Open a new buffer with the name myskewer.js
-2 Enable JS2-mode (a dependency of skewer)
-3 Enable skewer-mode
-4 M-xrun-skewer (a browser opens, go back to myskewer.js)
-5 Type alert("hello"); and hit C-xC-e at the end of that line
-6 Go back to the browser.
-
-You should see an alert box on the page.
-
-[[https://emacs.stackexchange.com/users/294/gambo][*]][[https://emacs.stackexchange.com/users/294/gambo][Gambo]]Gambo 
-,* Thank you for your answer! Unfortunately, I'm prompted the error "No collapsable
- element found at point" – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:02 SVG Image 
-,* Sorry, My mistake. C-x C-e is the actual keys to push. will edit my answer –
- [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:10 
-,* That worked! However: How do I tell Skewer to load the HTML, too? (As shown in
- the demo) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:27 
-,* 1 
- @JacksGT Place your downloaded files into ~/public_html then follow the
- instructions for "Manual version" at [[https://github.com/skeeto/skewer-mode#manual-version][this]] link. Once that is done visit [[http://localhost:8080][localhost:8080]]
- https://github.com/skeeto/skewer-mode#manual-version
- in your browser. – [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:52 SVG Image 
-
-******* In case port 8080 is already in use : 
-In case port 8080 is already in use: 
-
-you can configure skewer/simple-httpd to use another port by customizing the
-httpd-port variable. (M-x customize-variable<ret>httpd-port)
-
-[[https://emacs.stackexchange.com/a/32372][Share]]
-
 **** tts-editor : 
 ***** load
 #+begin_src emacs-lisp results output silent
@@ -8219,1171 +7817,407 @@ To disable it again you can use:
 **** use quelpa : 
 (quelpa '(hydra :repo "abo-abo/hydra" :fetcher github))
 
-** hidra mod 
-    https://github.com/abo-abo/hydra
-This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
-** yasnippet
-*** Path to my snipets 
-cd D:\Development\lisp\HOME\.emacs.d\snippets\python-mode 
-*** Path to lib snipets 
-cd D:\Development\lisp\HOME\.emacs.d\elpa\yasnippet-snippets-20200122.1140\snippets 
-*** doc 
-**** my
-		 снипеты из твоей папки переписывают орегиналые
-		 если уних совподают имен
-		 снипеты подгрухаются вместе емаком
-		 и невкурсе если они сменились
-		 по команда из меню all - a  
-yas-reload-all переподгружает их
-**** manual
-[[http://joaotavora.github.io/yasnippet/][Yet another snippet extension]]
-***** Expanding
-****** Inserting region or register contents into snippet
-It's often useful to inject already written text in the middle of a snippet. The variable
-[[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-wrap-around-region][yas-wrap-around-region]] when to t substitute the region contents into the $0
-placeholder of a snippet expanded by [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-insert-snippet][yas-insert-snippet]]. Setting it to a character
-value (e.g. ?0) will insert the contents of corresponding register. 
-
-Older (versions 0.9.1 and below) of Yasnippet, supported a setting of cua that is
-equivalent to ?0 but only worked with cua-mode turned on. This setting is still
-supported for backwards compatibility, but is now entirely equivalent to ?0. 
-***** Writing snippets 
-http://joaotavora.github.io/yasnippet/snippet-development.html
-****** Mirrors 
-We refer the tab stops with placeholders as a field. A field can have mirrors. All
-mirrors get updated whenever you update any field text. Here's an example: 
-
-\begin{${1:enumerate}}
-    $0
-\end{$1}
-
-When you type "document" at ${1:enumerate}, the word "document" will also be
-inserted at \end{$1}. The best explanation is to see the screencast([[http://www.youtube.com/watch?v=vOj7btx3ATg][YouTube]] or [[http://yasnippet.googlecode.com/files/yasnippet.avi][avi]]
-[[http://yasnippet.googlecode.com/files/yasnippet.avi][video]]). 
-
-The tab stops with the same number to the field act as its mirrors. If none of the tab
-stops has an initial value, the first one is selected as the field and others mirrors. 
-****** Mirrors with transformations 
-
-If the value of an ${n:-construct starts with and contains $(, then it is interpreted as a
-mirror for field n with a transformation. The mirror's text content is calculated according
-to this transformation, which is Emacs-lisp code that gets evaluated in an environment
-where the variable [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-text][yas-text]] is bound to the text content (string) contained in the field n.
-Here's an example for Objective-C: 
-
-- (${1:id})${2:foo}
-{
-    return $2;
-}
-
-- (void)set${2:$(capitalize yas-text)}:($1)aValue
-{
-    [$2 autorelease];
-    $2 = [aValue retain];
-}
-$0
-
-Look at ${2:$(capitalize yas-text)}, it is a mirror with transformation instead of a field.
-The actual field is at the first line: ${2:foo}. When you type text in ${2:foo}, the
-transformation will be evaluated and the result will be placed there as the transformed
-text. So in this example, if you type "baz" in the field, the transformed text will be
-"Baz". This example is also available in the screencast. 
-
-Another example is for rst-mode. In reStructuredText, the document title can be some
-text surrounded by "=" below and above. The "=" should be at least as long as the
-text. So 
-
-=====
-Title
-=====
-
-is a valid title but 
-
-===
-Title
-===
-
-is not. Here's an snippet for rst title: 
-
-${1:$(make-string (string-width yas-text) ?\=)}
-${1:Title}
-${1:$(make-string (string-width yas-text) ?\=)}
-
-$0
-
-Note that a mirror with a transform is not restricted to the text of the field it is mirroring.
-By making use of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-field-value][yas-field-value]], a mirror can look at any of the snippet's field (as
-mentioned above, all mirrors are updated when any field is updated). Here is an
-example which shows a "live" result of calling format: 
-
-(format "${1:formatted %s}" "${2:value}")
-=> "${1:$(ignore-errors (format (yas-field-value 1) (yas-field-value 2)))}"
-
-To keep the example simple, it uses ignore-errors to suppress errors due to
-incomplete format codes. 
-
-****** Fields with transformations
-
-From version 0.6 on, you can also have lisp transformation inside fields. These work
-mostly like mirror transformations. However, they are evaluated when you first enter the
-field, after each change you make to the field and also just before you exit the field. 
-
-The syntax is also a tiny bit different, so that the parser can distinguish between fields
-and mirrors. In the following example 
-
-
-#define "${1:mydefine$(upcase yas-text)}"
-
-mydefine gets automatically upcased to MYDEFINE once you enter the field. As you
-type text, it gets filtered through the transformation every time. 
-
-Note that to tell this kind of expression from a mirror with a transformation, YASnippet
-needs extra text between the : and the transformation's $. If you don't want this
-extra-text, you can use two $'s instead. 
-
-
-#define "${1:$$(upcase yas-text)}"
-
-Please note that as soon as a transformation takes place, it changes the value of the
-field and sets it its internal modification state to true. As a consequence, the
-auto-deletion behaviour of normal fields does not take place. This is by design. 
-
-****** Choosing fields value from a list and other tricks
-
-As mentioned, the field transformation is invoked just after you enter the field, and with
-some useful variables bound, notably [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-modified-p][yas-modified-p]] and [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-moving-away-p][yas-moving-away-p]].
-Because of this feature you can place a transformation in the primary field that lets you
-select default values for it. 
-
-The [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-choose-value][yas-choose-value]] does this work for you. For example: 
-
-<div align="${2:$$(yas-choose-value '("right" "center" "left"))}">
-  $0
-</div>
-
-See the definition of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-choose-value][yas-choose-value]] to see how it was written using the two
-variables. 
-
-Here's another use, for LaTeX-mode, which calls reftex-label just as you enter snippet
-field 2. This one makes use of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-modified-p][yas-modified-p]] directly. 
-
-\section{${1:"Titel der Tour"}}%
-\index{$1}%
-\label{{2:"waiting for reftex-label call..."$(unless yas-modified-p (reftex-label nil 'dont-
-insert))}}%
-
-The function [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-verify-value][yas-verify-value]] has another neat trick, and makes use of
-[[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-moving-away-p][yas-moving-away-p]]. Try it and see! Also, check out this [[http://groups.google.com/group/smart-snippet/browse_thread/thread/282a90a118e1b662][thread]] 
-
-****** Nested placeholder fields
-
-From version 0.6 on, you can also have nested placeholders of the type: 
-
-<div${1: id="${2:some_id}"}>$0</div>
-
-This allows you to choose if you want to give this div an id attribute. If you tab forward
-after expanding, it will let you change "some\id" to whatever you like. Alternatively, you
-can just press C-d (which executes [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-skip-and-clear-or-delete-char][yas-skip-and-clear-or-delete-char]]) and go straight
-to the exit marker. 
-
-By the way, C-d will only clear the field if you cursor is at the beginning of the field and
-it hasn't been changed yet. Otherwise, it performs the normal Emacs delete-char
-command. 
-
-****** Indentation markers
-
-If [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-indent-line][yas-indent-line]] is not set to 'auto, it's still possible to indent specific lines by adding
-an indentation marker, $>, somewhere on the line. 
-
-
-***** Organizing snippets 
-http://joaotavora.github.io/yasnippet/snippet-organization.html	
-***** Reference
-http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-wrap-around-region
-
-** WindMove & FrameMove 
-https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
-;; Remap windmove keys to home keys
-(global-set-key (kbd "M-h") 'windmove-left)
-(global-set-key (kbd "M-j") 'windmove-down)
-(global-set-key (kbd "M-k") 'windmove-up)
-(global-set-key (kbd "M-l") 'windmove-right)
-** Org-brain
-*** help
-https://github.com/Kungsgeten/org-brain
-**** help on keys
-***** SVG Imageorg-brain-visualize
-The primary usage of org-brain is through M-x org-brain-visualize (which you might
-want to bind to a key). From there you can browse entries, add/remove
-relationships, open entries for editing etc. The following keybindings are available in
-org-brain-visualize:
-***** Key  Command  Description : 
- Key  Command  Description  
- m  org-brain-visualize-mind-map  Toggle between normal and  
-		 mind-map visualization.  
- j or TAB  forward-button  Goto next link  
- k or S-TAB  backward-button  Goto previous link  
- b  org-brain-visualize-back  Like the back button in a web  
-		 browser.  
- h or *  org-brain-add-child-headline *  Add a new child headline to  
-		 entry  
- c  org-brain-add-child *  Add an existing entry, or a new  
-		 file, as a child  
- C  org-brain-remove-child *  Remove one the entry’s child  
-		 relations  
- e  org-brain-annotate-edge  Annotate the connection  
-		 between the visualized entry  
-		 and the entry link at point.  
- p  org-brain-add-parent *  Add an existing entry, or a new  
-		 file, as a parent  
- P  org-brain-remove-parent *  Remove one of the entry’s  
-		 parent relations  
- f  org-brain-add-friendship *  Add an existing entry, or a new  
-		 file, as a friend  
- F  org-brain-remove-friendship *  Remove one of the entry’s  
-		 friend relations  
- n  org-brain-pin *  Toggle if the entry is pinned  
-		 or not  
- N  org-brain-add-nickname  Add a nickname for the entry  
-		 (you can have several names  
-		 for the same entry)  
- s  org-brain-select-dwim  Select an entry for batch  
-		 processing.  
- S  org-brain-select-map  Prefix key to do batch  
-		 processing with selected  
-		 entries.  
- t  org-brain-set-title  Change the title of the entry.  
- T  org-brain-set-tags  Change the tags of the entry.  
- d  org-brain-delete-entry  Choose an entry to delete.  
- l  org-brain-visualize-add-resource  Add a new resource link in  
-		 entry  
- r  org-brain-open-resource  Choose and open a resource  
-		 from the entry.  
- C-y  org-brain-visualize-paste-resource  Add a new resource link from  
-		 clipboard  
- a  org-brain-visualize-attach  Run org-attach on entry  
-		 (headline entries only)  
- A  org-brain-archive  Archive the entry (headline  
-		 entries only)  
- o  org-brain-goto-current  Open current entry for editing  
- O  org-brain-goto  Choose and edit one of your  
-		 org-brain entries  
- v  org-brain-visualize  Choose and visualize a  
-		 different entry  
- V  org-brain-visualize-follow  Similar to  
-		 org-agenda-follow-mode; view  
-		 visualized entry in another  
-		 window.  
- w  org-brain-visualize-random  Visualize one of your entries  
-		 at random.  
- W  org-brain-visualize-wander  Visualize at random, in a set  
-		 interval. W again to cancel.  
- C-c C-x C-v  org-toggle-inline-images  Display org-mode images in  
-		 the entry text.  
- M  Move prefix  Move (refile) the current entry.  
- M r  org-brain-refile  Move current entry to another  
-		 entry (change local parent).  
- M p  org-brain-change-local-parent  Choose among the entry’s  
-		 parents and make another of  
-		 them the local parent.  
-
-The commands above marked with * can be run with the universal argument C-u in
-order to operate on the entry link at point instead of the visualized entry.
-
-You may use org-store-link inside of org-brain-visualize in order to store a link to the
-currently visualized org-brain entry.
-***** universal argument C-u : 
-If the universal argument C-u is used when running org-brain-visualize-random or
-org-brain-visualize-wander, the randomized targets are restricted to descendants
-(children, grandchildren, grand-grandchildren etc) of the currently visualized entry.
-Use for instance C-u W to wander among the descendants.
-
-The universal argument C-u can also be used with org-brain-open-resource. This
-lets you choose not only resource from the visualized entry, but also from
-descendants (children, grand-children, etc) of that entry.
-
-If the universal argument C-u is used when calling org-brain-annotate-edge then the
-annotation will be “one-way”. The default behaviour is otherwise to annotate the
-connection in both directions.
-
-***** toggle by Zooming : 
-When using the mind map visualization (toggle by pressing m), you can use the
-following keybindings in order to show or hide successive levels of hierarchy relative
-to the current entry.
-
- Key  Command  Description  
- +  org-brain-show-descendant-level  Show one more level of entries to the  
-		 right (children of children, etc.)  
- -  org-brain-hide-descendant-level  Hide rightmost level of descendant  
-		 entries  
- z  org-brain-show-ancestor-level  Show one more level of entries to the  
-		 left (parents of parents, etc.)  
- Z  org-brain-hide-ancestor-level  Hide leftmost level of ancestor entries  
-
-***** batch processing : 
-If you want to select several entries and then remove/add them as
-children/parents/friends you can use the s key (org-brain-select-dwim) to select an
-entry. If the point is over a button link to an entry, that entry will be selected, otherwise
-it will select the currently visualized entry. If the entry is already selected, it will be
-unselected instead.
-
-Once you have selected all the entries you wish to use, you can use the S prefix key
-to do batch processing on the selected entries. The keybindings in this prefix keymap
-is identical to those in org-brain-visualize. You could for instance use S c to add all
-selected entries as children to the visualized entry, or S P to remove the parent
-relationship of the selected entries. When you’re done and wish to clear the selection
-use org-brain-clear-selected, which is bound to S s.
-**** ID
-***** M-x org-brain-update-id-locations
-			Удобно в ручную можно удалить любые айди
-потом запустить эту команду и он удалит эти айди из списка
-поскольку сам фали содержит пути к файлам
-и как результат если в файле больше нет айди
-он удаляет его из файла-списка
-org-brain use org-id in order to speed things up. Because of this, the variable org-id-track-globally should be t (which it already is by default). You may want to modify org-id-locations-file too. If you add entries to org-brain directly from org-mode you must assign headliens an ID. A comfortable way to do this is with the command org-brain-ensure-ids-in-buffer. Even more comfortable is to add that to before-save-hook, so that it runs when saving.
-If you find that org-brain is missing entries, or list entries which doesn’t exist, try using M-x org-brain-update-id-locations, which syncs the org-brain entries with the org-id caching system.
-****** exempl
- (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-***** M-x org-brain-headline-to-file. : 
-If you have a headline entry, which you want to convert to a file entry, use M-x org-brain-headline-to-file. Unfortunately there is currently no function to convert a file entry into a headline entry.
-***** M-x org-brain-get-id
-You can edit org-brain entries directly from org-mode. You can use the default org-mode outline structure to define parent/children relationships, but keep in mind that only entries with an ID property will be considered as entries to org-brain; use M-x org-brain-get-id to create an ID property to the current org-mode headline. Another alternative is to use M-x org-brain-refile which will create the ids for you. You can also create IDs for all headlines in the buffer with M-x org-brain-ensure-ids-in-buffer, and you might find it useful to add this to before-save-hook.
-**** From ORG-MODE 
-***** org-brain-prefix-map
-Most of the commands available in org-brain-visualize-mode is also bound to the prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for instance C-c b, and you could then type C-c b p to add a parent to the current entry. Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
-***** org-brain-add-entry
-You could also use M-x org-brain-add-entry if you do not want to visualize the new entry. Also commands which add children, parents and friends, or links to entries, can create new entries in the same way. Se General information below.
-***** org-brain-add-child : 
-Most of the commands available in org-brain-visualize can also be used in org-mode directly, in which case they will operate on the “entry at point”. In other words you can use M-x org-brain-add-child directly from org-mode in order to add a child to the org-brain entry at point. 
-***** org-brain-goto-<relationsship> : 
-You may also want to use the commands org-brain-goto-<relationsship> to navigate between entries.
-***** headline convert to file: 
-If you have a headline entry, which you want to convert to a file entry, use M-x
-org-brain-headline-to-file. Unfortunately there is currently no function to convert a file
-entry into a headline entry.
-***** Editing from org-mode
- You can edit org-brain entries directly from org-mode. You can use the default
- org-mode outline structure to define parent/children relationships, but keep in mind
- that only entries with an ID property will be considered as entries to org-brain; use
- M-x org-brain-get-id to create an ID property to the current org-mode headline.
- Another alternative is to use M-x org-brain-refile which will create the ids for you. You
- can also create IDs for all headlines in the buffer with M-x
- org-brain-ensure-ids-in-buffer, and you might find it useful to add this to
- before-save-hook.
-
- Most of the commands available in org-brain-visualize can also be used in org-mode
- directly, in which case they will operate on the “entry at point”. In other words you can
- use M-x org-brain-add-child directly from org-mode in order to add a child to the
- org-brain entry at point. You may also want to use the commands
- org-brain-goto-<relationsship> to navigate between entries.
-
- Most of the commands available in org-brain-visualize-mode is also bound to the
- prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for
- instance C-c b, and you could then type C-c b p to add a parent to the current entry.
- Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
-
- You may want to create a link to an org-brain entry in an org-mode file (not
- necessarily an org-brain file itself). org-brain provides several link types for this
- purpose. You can use org-insert-link (bound to C-c C-l in org-mode by default) to
- insert one of these links. They all have in common that they, when clicked, will open
- the org-brain entry for editing. When inserting a link like this, org-brain will run
- completion upon all your entries.
-
-****** brain:
-	 The default kind of link. Just let’s you visit another org-brain entry when clicked.
-	 If the variable org-brain-backlink is t a brain-link will also be created as a
-	 resource in the link target, linking back to where the link was created. If
-	 org-brain-backlink is set to a string, that string will be added as a prefix to the
-	 title of the backlink. Example: You set org-brain-backlink to =”<– “= and create
-	 a brain: link in Rabbits linking to Carrots. Now a resource with the description
-	 <-- Rabbits will be created in Carrots. 
-****** brain-child:
-	 When inserted using org-insert-link this will make the linked entry a child to the
-	 current org-brain entry, upon completion. Keep in mind that this doesn’t work if
-	 you type the link manually; only by completion through org-insert-link. 
-****** brain-parent:
-	 Like brain-child: but makes the linked entry a parent of the current entry. 
-******  brain-friend:
-	 Like brain-child: but adds the linked entry as a friend. 
-******  brainswitch
-	 If you have multiple brains you may want a link which switches to a specific brain
-	 and one of its entries. The brainswitch link allows for this. 
-****** inserting links : 
-	The names of the relationship inserting links (brain-child, brain-parent and
-	brain-friend) can be customized with the variables org-brain-child-link-name,
-	org-brain-parent-link-name, and org-brain-friend-link-name. This customization
-	should be done before loading org-brain. If you’re using use-package, put the
-	customization in the :init block.
-**** Renaming files in org-brain
-Headline entries use org-id to identify themselves, so the headlines can be manually renamed without worries. File entries, on the other hand, uses the filename as the identifier. This will cause problems if you try to manually rename files inside of org-brain.
-
-In order to rename a file, use M-x org-brain-rename-file.
-**** Special tags
-You might have a headline which you do not really want as an entry in org-brain. The most basic way to exclude such a headline is simply to not add an ID property to it. However, org-brain also provide two tags, which you can use to tag the headline:
-***** :nobrain:
-This tag excludes the headline, and its subheadings, from your org-brain entries. You can change the tag name by modifying org-brain-exclude-tree-tag.
-***** :childless:
-This tag does not exclude the headline, but it excludes the subheadings. You can change the tag name by modifying org-brain-exclude-children-tag. Works on file entries.
-The following tags modifies the kind of information that is shown when an entry is visualized:
-
-***** :notext:
-Do not show the entry’s text in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-text-tag.
-***** :resourceless:
-Do not show the entry’s resources in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-resources-tag.
-***** :showchildren:
-By default local child entries aren’t shown as text. By setting this tag the entry get the entire subtree as text. You can change the tag name by modifying org-brain-show-children-tag. Works on file entries.
-***** :nosiblings:
-You may have an entry with lots of children, and when you visualize one of these children you might not want to see the siblings from this parent. A good example would be if you have an index entry or similar. By tagging the parent with nosiblings the parent’s children will not show siblings from that parent. You can change the tag name by modifying org-brain-exclude-siblings-tag.
-***** :nolocalparent:
-This is similar to :nosiblings: but the tagged parent will not be shown at all when one of its local children are visualized.
-The following tags modify the way how information is shown when an entry is visualized.
-***** :ownline:
-Make each child of the tagged entry appear on its own line when the tagged entry is visualized. This only affects the tagged entry. It works akin to temporarily setting org-brain-child-fill-column-sexp to 0.
-***** :nosort:
-Display each child of the tagged node in the order the children are listed in the file, rather than in the sorted order determined by org-brain-visualize-sort-function. This affects the order of the node’s children in both the child list (when the tagged node is being visited) and in the sibling list (when one of the tagged node’s children is being visited).
-**** Having multiple brains
-You can have multiple brains simply by having more than one brain folder. In this way, each folder becomes a separate brain. You can switch between these using M-x org-brain-switch-brain. You can also use brainswitch: links in org-mode to switch brains.
-
-If you run org-brain-visualize from inside an org-file in the root of an org-brain directory, org-brain will automatically switch to this brain.
-**** Customizing the look of entry titles
-When visualizing you might want to see additional information about the entries. This
-can be done by customizing the following variables:
-
- org-brain-vis-title-prepend-functions
- org-brain-vis-title-append-functions
- org-brain-vis-current-title-prepend-functions
- org-brain-vis-current-title-append-functions
-
-Each of these variables should be a list of functions, which all takes an entry as the
-single parameter and returns a string. This string is the prepended or appended to
-the entry’s title, according to the name of the function. The variables with the name
-current in them only applies the functions on the currently visualized entry (the focused
-one).
-
-Suitable functions to add to these lists might be:
-
- org-brain-entry-icon (included in org-brain-vis-title-prepend-functions by default)
- org-brain-entry-todo-state
- org-brain-entry-tags-string
-** Elpy 
-*** keys short help
-**** my keys 
-	 (kbd "C-SPC") 'company-complete)
-	 (kbd "M-e M-f M-p") 'xref-find-definitions)
-	 (kbd "M-e M-f M-P") 'xref-find-definitions-other-frame)
-	 (kbd "M-e M-f M-o") 'elpy-occur-definitions)
-	 (kbd "M-e M-f M-a") 'elpy-goto-assignment)
-	 (kbd "M-e M-f M-d") 'elpy-goto-definition)
-	 (kbd "M-e M-f M-D") 'elpy-goto-definition-other-window)
-	 (kbd "<f8>") save & recompile
-**** Navigation
-	 M-. (elpy-goto-definition)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition][¶]]
-	 C-x 4 M-. (elpy-goto-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition-other-window][¶]]
-	 M-* (pop-tag-mark)[[https://elpy.readthedocs.io/en/latest/ide.html#command-pop-tag-mark][¶]]
-	 C-c C-o (elpy-occur-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-occur-definitions][¶]]
-	 M-x elpy-goto-assignment[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-assignment][¶]]
-	 M-. (xref-find-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definitions][¶]]
-	 C-x 4 . (xref-find-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-window][¶]]
-	 C-x 5 . (xref-find-definition-other-frame)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-frame][¶]]
-	 M-, (xref-pop-marker-stack)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-pop-marker-stack][¶]]
-	 M-? (xref-find-references)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-references][¶]]
-	 C-M-. (xref-find-apropos)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-apropos][¶]]
-**** elpy-doc : 
-	 C-c C-d (elpy-doc)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-doc][¶]]
-**** syntax check : 
-	 C-c C-n (elpy-flymake-next-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-next-error][¶]]
-	 C-c C-p (elpy-flymake-previous-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-previous-error][¶]]
-	 C-c C-v (elpy-check)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][¶]]
-	 python-check-command (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-python-check-command][¶]]
-**** Debugging[[https://elpy.readthedocs.io/en/latest/ide.html#debugging][¶]]
-	 C-c C-u d (elpy-pdb-debug-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][¶]]
-	 C-c C-u b (elpy-pdb-toggle-breakpoint-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][¶]]
-	 C-c C-u p (elpy-pdb-break-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-break-at-point][¶]]
-	 C-c C-u e (elpy-pdb-debug-last-exception)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-last-exception][¶]]
-**** Testing[[https://elpy.readthedocs.io/en/latest/ide.html#testing][¶]]
-	 C-c C-t (elpy-test)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-test][¶]]
-	 M-x elpy-set-test-runner[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-test-runner][¶]]
-**** Refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#refactoring][¶]]
-	 C-c C-e (elpy-multiedit-python-symbol-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-multiedit-python-symbol-at-point][¶]]
-	 C-c C-r f (elpy-format-code)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-format-code][¶]]
-	 elpy-formatter (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-formatter][¶]]
-	 Jedi refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#jedi-refactoring][¶]]
-	 C-c C-r r (elpy-refactor-rename)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-rename][¶]]
-	 C-c C-r v (elpy-refactor-extract-variable)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-variable][¶]]
-	 C-c C-r f (elpy-refactor-extract-function)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-function][¶]]
-	 C-c C-r i (elpy-refactor-inline)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-inline][¶]]
-*** IDE Features
-**** Projects[[https://elpy.readthedocs.io/en/latest/ide.html#projects][¶]]
-	Elpy supports the notion of projects, a related collection of files under a common
-	directory. This common directory is called the project root. A number of Elpy’s
-	commands work on all files inside the project root.
-
-	C-c C-f (elpy-find-file)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-find-file][¶]]
-
-	 Find a file in the current project. This uses a search-as-you-type interface for all
-	 files under the project root.
-
-	 A prefix argument enables “do what I mean” mode. On an import statement, it will
-	 try to open the module imported. Elsewhere in a file, it will look for an associated
-	 test or implementation file, and if found, open that. If this fails, either way, it will fall
-	 back to the normal find file in project behavior.
-
-	 If the current file is called foo.py, then this will search for a test_foo.py in the same
-	 directory, or in a test or tests subdirectory. If the current file is already called
-	 test_foo.py, it will try and find a foo.py nearby.
-
-	 This command uses [[https://github.com/bbatsov/projectile][projectile]] or [[https://github.com/technomancy/find-file-in-project][find-file-in-project]] under the hood, so you need
-	 one of them to be installed.
-
-	C-c C-s (elpy-rgrep-symbol)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-rgrep-symbol][¶]]
-
-	 Search the files in the current project for a string. By default, this uses the symbol
-	 at point. With a prefix argument, it will prompt for a regular expression to search.
-
-	 This is basically a grep -r through the project.
-
-	In addition to these two commands, [[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][elpy-check]] also supports optionally checking all
-	files in the current project.
-
-	Elpy’s idea of the project root and which files belong to a project and which don’t can
-	be influenced as well.
-
-	M-x elpy-set-project-root[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-project-root][¶]]
-
-	 Set the current project root directory. This directory should contain all files related
-	 to the current project.
-
-	elpy-project-ignored-directories (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-project-ignored-directories][¶]]
-
-	 When Elpy searches for files in the current project, it will ignore files in directories
-	 listed here.
-
-	elpy-project-root-finder-functions (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-project-root-finder-functions][¶]]
-
-	 To find the project root, Elpy can utilize a number of heuristics. With this option,
-	 you can configure which are used.
-
-	To configure Elpy specifically for a single project, you can use Emacs’ [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][Directory]]
-	[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][Variables]]. Elpy provides a simple interface to this.
-
-	M-x elpy-set-project-variable[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-project-variable][¶]]
-
-	 Set or change the value of a project-wide variable. With a prefix argument, the
-	 value for the variable is removed.
-
-	 This only takes effect in new buffers.
-**** Completion[[https://elpy.readthedocs.io/en/latest/ide.html#completion][¶]]
-	When you type Python code, Elpy will try and figure out possible completions and
-	provide them in a suggestion window. If Elpy doesn’t do so automatically, you can
-	force it to complete right where you are.
-
-	M-TAB (elpy-company-backend)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-company-backend][¶]]
-
-	 Provide completion suggestions for a completion at point.
-
-	You can use cursor keys or M-n and M-p to scroll through the options, RET to use the
-	selected completion, or TAB to complete the common part.
-
-	On any completion option, C-d or <f1> will display a temporary window with
-	documentation. C-w will display a temporary window showing the source code of the
-	completion to get some context.
-
-	Elpy uses [[https://company-mode.github.io/][Company Mode]] for the completion interface, so its documentation is a good
-	place for further information.
-
-	elpy-get-info-from-shell (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-get-info-from-shell][¶]]
-
-	 If t, use the shell to gather docstrings and completions. Normally elpy provides
-	 completion and documentation using static code analysis (from jedi). With this
-	 option, elpy will add the completion candidates and the docstrings from the
-	 associated python shell; This activates fallback completion candidates for cases
-	 when the static code analysis fails.
-**** Navigation[[https://elpy.readthedocs.io/en/latest/ide.html#navigation][¶]]
-	Elpy supports advanced navigation features.
-
-	M-. (elpy-goto-definition)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition][¶]]
-
-	 Go to the location where the identifier at point is defined. This is not always easy
-	 to make out, so the result can be wrong. Also, the backends can not always
-	 identify what kind of symbol is at point. Especially after a few indirections, they
-	 have basically no hope of guessing right, so they don’t.
-
-	C-x 4 M-. (elpy-goto-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition-other-window][¶]]
-
-	 Same as elpy-go-to-definition (with the same caveats) but goes to the definition
-	 of the symbol at point in other window, if defined.
-
-	M-* (pop-tag-mark)[[https://elpy.readthedocs.io/en/latest/ide.html#command-pop-tag-mark][¶]]
-
-	 Go back to the last place where M-. was used, effectively turning M-. and M-* into
-	 a forward and backward motion for definition lookups.
-
-	C-c C-o (elpy-occur-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-occur-definitions][¶]]
-
-	 Search the buffer for a list of definitions of classes and functions.
-
-	M-x elpy-goto-assignment[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-assignment][¶]]
-
-	 Go to the location where the identifier at point is assigned. It is not bound by
-	 default, so you will have to bind it manually. You can also use it as a replacement
-	 to elpy-goto-definition (see [[http://elpy.readthedocs.org/en/latest/customization_tips.html#jumping-to-assignment][Jumping to assignment]]).
-
-	If you use an Emacs version superior to 25, Elpy will define the necessary backends
-	for the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Xref.html][xref]] package.
-
-	M-. (xref-find-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definitions][¶]]
-
-	 Find the definition of the identifier at point.
-
-	C-x 4 . (xref-find-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-window][¶]]
-
-	 Like M-. but switch to the other window.
-
-	C-x 5 . (xref-find-definition-other-frame)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-frame][¶]]
-
-	 Like M-. but switch to the other frame.
-
-	M-, (xref-pop-marker-stack)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-pop-marker-stack][¶]]
-
-	 Go back to the last place where M-. was used, effectively turning M-. and M-, into
-	 a forward and backward motion for definition lookups.
-
-	M-? (xref-find-references)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-references][¶]]
-
-	 Find references for an identifier of the current buffer.
-
-	C-M-. (xref-find-apropos)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-apropos][¶]]
-
-	 Find all meaningful symbols that match a given pattern.
-**** Interactive Python[[https://elpy.readthedocs.io/en/latest/ide.html#interactive-python][¶]]
-	Emacs can run a Python interpreter in a special buffer, making it much easier to send
-	code snippets over. Elpy provides additional functionality to seamlessly work with
-	interactive Python in a style similar to [[http://ess.r-project.org][ESS]].
-***** Interpreter Setup[[https://elpy.readthedocs.io/en/latest/ide.html#interpreter-setup][¶]]
-
-	 Elpy uses the Python interpreter setup from the Emacs python package. This section
-	 briefly summarizes some common setups; add the one you need to your .emacs file.
-	 Note that the code below (and Elpy in general) require at least Emacs 24.4.
-
-	 Use the Python standard interpreter (default):
-
-	 (setq python-shell-interpreter "python"
-				 python-shell-interpreter-args "-i")
-
-	 Use Jupyter console (recommended for interactive Python):
-
-	 (setq python-shell-interpreter "jupyter"
-				 python-shell-interpreter-args "console --simple-prompt"
-				 python-shell-prompt-detect-failure-warning nil)
-	 (add-to-list 'python-shell-completion-native-disabled-interpreters
-								"jupyter")
-
-	 Use IPython:
-
-	 (setq python-shell-interpreter "ipython"
-				 python-shell-interpreter-args "-i --simple-prompt")
-
-	 Note that various issues with plotting have been reported when running IPython 5 in
-	 Emacs under Windows. We recommend using Jupyter console instead.
-
-	 If you have an older version of IPython and the above code does not work for you, you
-	 may also try:
-
-	 (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-	 (setq python-shell-interpreter "ipython"
-				 python-shell-interpreter-args "-i")
-
-	 As an IPython_ user, you might be interested in the `Emacs IPython
-	 Notebook`_ or an `Elpy layer`_ for Spacemacs_, too.
-
-	 Note for MacOS users: In some configurations, display artifacts (lines of ^G s) can
-	 appear in the shell. This can be fixed by prepending -c exec('__import__
-	 (\\'readline\\')') to python-shell-interpeter-args (e.g. (setq python-shell-interpreter-args
-	 "-c exec('__import__(\\'readline\\')') -i") for python)
-***** The Shell Buffer[[https://elpy.readthedocs.io/en/latest/ide.html#the-shell-buffer][¶]]
-
-	 C-c C-z (elpy-shell-switch-to-shell)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-switch-to-shell][¶]]
-
-		Switch to buffer with a Python interpreter running, starting one if necessary.
-
-		By default, Elpy tries to find the root directory of the current project (git, svn or hg
-		repository, python package or projectile project) and starts the python interpreter
-		here. This behaviour can be suppressed with the option
-		elpy-shell-starting-directory.
-
-	 elpy-shell-starting-directory (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-starting-directory][¶]]
-
-		Govern the directory in which Python shells will be started. Can be 'project-root
-		(default) to use the current project root, 'current-directory to use the buffer current
-		directory, or a string indicating a specific path.
-
-	 M-x elpy-shell-toggle-dedicated-shell[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-toggle-dedicated-shell][¶]]
-
-		By default, python buffers are all attached to a same python shell (that lies in the
-		*Python* buffer), meaning that all buffers and code fragments will be send to this
-		shell. elpy-shell-toggle-dedicated-shell attaches a dedicated python shell (not
-		shared with the other python buffers) to the current python buffer. To make this the
-		default behavior (like the deprecated option elpy-dedicated-shells did), use the
-		following snippet:
-
-	 (add-hook 'elpy-mode-hook (lambda () (elpy-shell-toggle-dedicated-shell 1)))
-
-	 M-x elpy-shell-set-local-shell[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-set-local-shell][¶]]
-
-		Attach the current python buffer to a specific python shell (whose name is asked
-		with completion). You can use this function to have one python shell per project,
-		with:
-
-	 (add-hook 'elpy-mode-hook (lambda () (elpy-shell-set-local-shell (elpy-project-root))))
-
-	 C-c C-k (elpy-shell-kill)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-kill][¶]]
-
-		Kill the associated python shell.
-
-	 C-c C-K (elpy-shell-kill-all)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-kill-all][¶]]
-
-		Kill all active python shells.
-***** Evaluating code fragments[[https://elpy.readthedocs.io/en/latest/ide.html#evaluating-code-fragments][¶]]
-	 Elpy provides commands to send the current Python statement (e), function definition
-	 (f), class definition (c), top-level statement (s), group of Python statements (g), cell (w),
-	 region (r), or buffer (b) to the Python shell for evaluation. These commands are bound
-	 to prefix C-c C-y, followed by the single character indicating what to send; e.g., C-c
-	 C-y e sends the Python statement at point.
-
-	 Each of the commands to send code fragments to the shell has four variants, one for
-	 each combination of: whether or not the point should move after sending (“step”), and
-	 whether or not the Python shell should be focused after sending (“go”). Step is
-	 activated by C-, go by S-. For example:
-
-	 C-c C-y e (elpy-shell-send-statement)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement][¶]]
-
-		Send the current statement to the Python shell and keep point position. Here
-		statement refers to the Python statement the point is on, including potentially
-		nested statements. If point is on an if/elif/else clause send the entire if statement
-		(with all its elif/else clauses). If point is on a decorated function, send the
-		decorator as well.
-
-	 C-c C-y C-e (elpy-shell-send-statement-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-step][¶]]
-
-		Send the current statement to the Python shell and move point to first subsequent
-		statement.
-
-		Also bound to C-RET.
-
-	 C-c C-y E (elpy-shell-send-statement-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-go][¶]]
-
-		Send the current statement to the Python shell, keeping point position, and switch
-		focus to the Python shell buffer.
-
-	 C-c C-y C-S-E (elpy-shell-send-statement-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-step-and-go][¶]]
-
-		Send the current statement to the Python shell, move point to first subsequent
-		statement, and switch focus to the Python shell buffer.
-
-	 Elpy provides support for sending multiple statements to the shell.
-
-	 C-c C-y O (elpy-shell-send-group-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-step][¶]]
-
-		Send the current or next group of top-level statements to the Python shell and
-		step. A sequence of top-level statements is a group if they are not separated by
-		empty lines. Empty lines within each top-level statement are ignored.
-
-		If the point is within a statement, send the group around this statement.
-		Otherwise, go to the top-level statement below point and send the group around
-		this statement.
-
-	 C-c C-y W (elpy-shell-send-codecell-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-step][¶]]
-
-		Send the current code cell to the Python shell and step. A code cell is a piece of
-		code surrounded by special separator lines; see below. For example, you can
-		insert two lines starting with ## to quickly send the code in-between.
-
-	 elpy-shell-codecell-beginning-regexp (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-codecell-beginning-regexp][¶]]
-
-		Regular expression for matching a line indicating the beginning of a code cell. By
-		default, ##.* is treated as a beginning of a code cell, as are the code cell
-		beginnings in Python files exported from IPython or Jupyter notebooks (e.g., #
-		<codecell> or # In[1]:).
-
-	 elpy-shell-cell-boundary-regexp (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-cell-boundary-regexp][¶]]
-
-		Regular expression for matching a line indicating the boundary of a cell
-		(beginning or ending). By default, ##.* is treated as a cell boundary, as are the
-		boundaries in Python files exported from IPython or Jupyter notebooks (e.g., #
-		<markdowncell>, # In[1]:, or # Out[1]:).
-
-		Note that [[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-codecell-beginning-regexp][elpy-shell-codecell-beginning-regexp]] must also match the cell
-		boundaries defined here.
-
-	 The functions for sending the entire buffer have special support for avoiding
-	 accidental code execution, e.g.:
-
-	 C-c C-y r (elpy-shell-send-region-or-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer][¶]]
-
-		Send the the active region (if any) or the entire buffer (otherwise) to the Python
-		shell and keep point position.
-
-		When sending the whole buffer, this command will also escape any uses of the if
-		__name__ == '__main__' idiom, to prevent accidental execution of a script. If you
-		want this to be evaluated, pass a prefix argument with C-u.
-
-		Also bound to C-c C-c.
-
-	 elpy-shell-add-to-shell-history (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-add-to-shell-history][¶]]
-
-		If t, Elpy will make the code sent available in the shell history. This allows to use
-		comint-previous-input (C-up) in the python shell to get back the pieces of code
-		sent by Elpy.
-
-	 The list of remaining commands to send code fragments is:
-
-	 C-c C-y s (elpy-shell-send-top-statement)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement][¶]]
-
-	 C-c C-y S (elpy-shell-send-top-statement-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-go][¶]]
-
-	 C-c C-y f (elpy-shell-send-defun)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun][¶]]
-
-	 C-c C-y F (elpy-shell-send-defun-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-go][¶]]
-
-	 C-c C-y c (elpy-shell-send-defclass)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass][¶]]
-
-	 C-c C-y C (elpy-shell-send-defclass-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-go][¶]]
-
-	 C-c C-y o (elpy-shell-send-group)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group][¶]]
-
-	 C-c C-y O (elpy-shell-send-group-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-go][¶]]
-
-	 C-c C-y w (elpy-shell-send-codecell)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell][¶]]
-
-	 C-c C-y W (elpy-shell-send-codecell-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-go][¶]]
-
-	 C-c C-y R (elpy-shell-send-region-or-buffer-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-go][¶]]
-
-	 C-c C-y b (elpy-shell-send-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer][¶]]
-
-	 C-c C-y B (elpy-shell-send-buffer-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-go][¶]]
-
-	 C-c C-y C-s (elpy-shell-send-top-statement-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-step][¶]]
-
-	 C-c C-y C-S-S (elpy-shell-send-top-statement-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-step-and-go][¶]]
-
-	 C-c C-y C-f (elpy-shell-send-defun-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-step][¶]]
-
-	 C-c C-y C-S-F (elpy-shell-send-defun-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-step-and-go][¶]]
-
-	 C-c C-y C-c (elpy-shell-send-defclass-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-step][¶]]
-
-	 C-c C-y C-S-C (elpy-shell-send-defclass-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-step-and-go][¶]]
-
-	 C-c C-y C-S-O (elpy-shell-send-group-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-step-and-go][¶]]
-
-	 C-c C-y C-W (elpy-shell-send-codecell-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-step-and-go][¶]]
-
-	 C-c C-y C-r (elpy-shell-send-region-or-buffer-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-step][¶]]
-
-	 C-c C-y C-S-R (elpy-shell-send-region-or-buffer-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-step-and-go][¶]]
-
-	 C-c C-y C-b (elpy-shell-send-buffer-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-step][¶]]
-
-	 C-c C-y C-S-B (elpy-shell-send-buffer-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-step-and-go][¶]]
-***** Shell feedback[[https://elpy.readthedocs.io/en/latest/ide.html#shell-feedback][¶]]
-	 When package [[https://www.emacswiki.org/emacs/EvalSexpFu][eval-sexp-fu]] is loaded and eval-sexp-fu-flash-mode is active, the
-	 statements sent to the shell are briefly flashed after running an evaluation command,
-	 thereby providing visual feedback.
-
-	 elpy-shell-echo-input (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input][¶]]
-
-		Whenever a code fragment is sent to the Python shell, Elpy prints it in the Python
-		shell buffer (i.e., it looks as if it was actually typed into the shell). This behavior can
-		be turned on and off via the custom variable elpy-shell-echo-input and further
-		customized via elpy-shell-echo-input-cont-prompt (whether to show continuation
-		prompts for multi-line inputs) and elpy-shell-echo-input-lines-head /
-		elpy-shell-echo-input-lines-tail (how much to cut when input is long).
-
-	 elpy-shell-echo-output (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-output][¶]]
-
-		Elpy shows the output produced by a code fragment sent to the shell in the echo
-		area when the shell buffer is currently invisible. This behavior can be controlled via
-		elpy-shell-echo-output (never, always, or only when shell invisible). Output echoing
-		is particularly useful if the custom variable [[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-display-buffer-after-send][elpy-shell-display-buffer-after-send]] is
-		set to nil (the default value). Then, no window is needed to display the shell
-		(thereby saving screen real estate), but the outputs can still be seen in the echo
-		area.
-
-	 elpy-shell-display-buffer-after-send (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-display-buffer-after-send][¶]]
-
-		Whether to display the Python shell after sending something to it (default nil).
-**** Syntax Checking[[https://elpy.readthedocs.io/en/latest/ide.html#syntax-checking][¶]]
-	 Whenever you save a file, Elpy will run a syntax check and highlight possible errors or
-	 warnings inline.
-
-	 C-c C-n (elpy-flymake-next-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-next-error][¶]]
-
-	 C-c C-p (elpy-flymake-previous-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-previous-error][¶]]
-
-		You can navigate between any error messages with these keys. The current error
-		will be shown in the minibuffer.
-
-	 Elpy uses the built-in [[https://www.gnu.org/software/emacs/manual/html_node/flymake/index.html#Top][Flymake]] library to find syntax errors on the fly, so see there for
-	 more configuration options.
-
-	 C-c C-v (elpy-check)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][¶]]
-
-		Alternatively, you can run a syntax check on the current file where the output is
-		displayed in a new buffer, giving you an overview and allowing you to jump to the
-		errors from there.
-
-		With a prefix argument, this will run the syntax check on all files in the current
-		project.
-
-	 python-check-command (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-python-check-command][¶]]
-
-		To change which command is used for syntax checks, you can customize this
-		option. By default, Elpy uses the flake8 program, which you have to install
-		separately. The [[https://elpy.readthedocs.io/en/latest/introduction.html#command-elpy-config][elpy-config]] command will prompt you to do this if Elpy can’t find
-		the program.
-
-		It is possible to create a single virtual env for the sole purpose of installing flake8
-		in there, and then simply link the command script to a directory inside your PATH,
-		meaning you do not need to install the program in every virtual env separately.
-**** Documentation[[https://elpy.readthedocs.io/en/latest/ide.html#documentation][¶]]
-	 Elpy provides a single interface to documentation.
-
-	 C-c C-d (elpy-doc)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-doc][¶]]
-
-		When point is on a symbol, Elpy will try and find the documentation for that object,
-		and display that. If it can’t find the documentation for whatever reason, it will try
-		and look up the symbol at point in pydoc. If it’s not there, either, it will prompt the
-		user for a string to look up in pydoc.
-
-		With a prefix argument, Elpy will skip all the guessing and just prompt the user for
-		a string to look up in pydoc.
-
-	 If the autodoc module is enabled (not by default) the documentation is automatically
-	 updated with the symbol at point or the currently selected company candidate.
-
-	 elpy-autodoc-delay (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-autodoc-delay][¶]]
-
-		The idle delay in seconds until documentation is updated automatically.
-**** Debugging[[https://elpy.readthedocs.io/en/latest/ide.html#debugging][¶]]
-	 Elpy provides an interface to [[https://docs.python.org/3/library/pdb.html][pdb]], the builtin Python debugger. Note that this interface
-	 is only available for Emacs 25 and above.
-
-	 C-c C-u d (elpy-pdb-debug-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][¶]]
-
-		Run pdb on the current buffer. If no breakpoints has been set using
-		[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][elpy-pdb-toggle-breakpoint-at-point]], the debugger will pause at the beginning of
-		the buffer. Else, the debugger will pause at the first breakpoint. Once pdb is
-		started, the [[https://docs.python.org/3/library/pdb.html#debugger-commands][pdb commands]] can be used to step through and look into the code
-		evaluation.
-
-		With a prefix argument C-u, ignore the breakpoints and always pause at the
-		beginning of the buffer.
-
-	 C-c C-u b (elpy-pdb-toggle-breakpoint-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][¶]]
-
-		Add (or remove) a breakpoint on the current line. Elpy adds a red circle to the
-		fringe to indicate the presence of a breakpoint. You can then use
-		[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][elpy-pdb-debug-buffer]] to start pdb and pause at each of the breakpoints.
-
-		With a prefix argument C-u, remove all the breakpoints.
-
-	 C-c C-u p (elpy-pdb-break-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-break-at-point][¶]]
-
-		Run pdb on the current buffer and pause at the cursor position.
-
-	 C-c C-u e (elpy-pdb-debug-last-exception)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-last-exception][¶]]
-
-		Run post-mortem pdb on the last exception.
-**** Testing[[https://elpy.readthedocs.io/en/latest/ide.html#testing][¶]]
-	 Testing is an important part of programming. Elpy provides a central interface to
-	 testing, which allows for a good workflow for tests.
-
-	 Elpy’s test interface is built around Emacs’ [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation.html][compilation framework]]. Elpy will run test
-	 commands as a compilation job, with all the advantages this brings.
-
-	 C-c C-t (elpy-test)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-test][¶]]
-
-		Start a test run. This uses the currently configured test runner to discover and run
-		tests. If point is inside a test case, the test runner will run exactly that test case.
-		Otherwise, or if a prefix argument is given, it will run all tests.
-
-	 M-x elpy-set-test-runner[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-test-runner][¶]]
-
-		This changes the current test runner. Elpy supports the standard unittest discovery
-		runner, the Django discovery runner, nose, green, py.test and Twisted trial. You
-		can also write your own, as described in [[https://elpy.readthedocs.io/en/latest/extending.html#writing-test-runners][Writing Test Runners]].
-
-		Note on Django runners: Elpy tries to find manage.py within your project structure.
-		If it’s unable to find it, it falls back to django-admin.py. You must set the
-		environment variable DJANGO_SETTINGS_MODULE accordingly.
-
-	 This enables a good workflow. You write a test and use C-c C-t to watch it fail. You
-	 then go to your implementation file, for example using C-u C-c C-f, and make the test
-	 pass. You can use a key bound to recompile (I use <f5> for this) to just re-run that one
-	 test. Once that passes, you can use C-c C-t again to run all tests to make sure they all
-	 pass as well. Repeat.
-
-	 For an even more automated way, you can use [[https://github.com/jorgenschaefer/emacs-tdd/][tdd.el]], which will run your last compile
-	 command whenever you save a file.
-**** Refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#refactoring][¶]]
-	 C-c C-e (elpy-multiedit-python-symbol-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-multiedit-python-symbol-at-point][¶]]
-
-		Edit all occurrences of the symbol at point at once. This will highlight all such
-		occurrences, and editing one of them will edit all. This is an easy way to rename
-		identifiers.
-
-		If the backend does not support finding occurrences (currently only Jedi does), or
-		if a prefix argument is given, this will edit syntactic occurrences instead of
-		semantic ones. This can match more occurrences than it should, so be careful.
-		You can narrow the current buffer to the current function using C-x n d to restrict
-		where this matches.
-
-		Finally, if there is a region active, Elpy will edit all occurrences of the text in the
-		region.
-
-	 C-c C-r f (elpy-format-code)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-format-code][¶]]
-
-		Format code using the available formatter.
-
-		If a region is selected, only that region is formatted. Otherwise current buffer is
-		formatted.
-
-	 elpy-formatter (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-formatter][¶]]
-
-		Allow to select the formatter you want to use amongst [[https://github.com/google/yapf][yapf]] , [[https://github.com/hhatto/autopep8][autopep8]] and [[https://github.com/ambv/black][black]].
-
-		[[https://github.com/google/yapf][yapf]] and [[https://github.com/hhatto/autopep8][autopep8]] can be configured with style files placed in the project root
-		directory (determined by elpy-project-root). [[https://github.com/ambv/black][black]] can be configured in the
-		pyproject.toml file of your project.
-
-	 Jedi refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#jedi-refactoring][¶]]
-
-		The following commands take advantage of Jedi refactoring possibilities. They
-		all present a diff of the modifications before applying them, this allows to check
-		the ongoing modifications and cancel some of them if needed.
-
-	 C-c C-r r (elpy-refactor-rename)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-rename][¶]]
-
-		Rename all occurences of the symbol at point (variable, function, class, …). If
-		needed, rename occurences in other files as well.
-
-	 C-c C-r v (elpy-refactor-extract-variable)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-variable][¶]]
-
-		Move the selection to a new variable.
-
-	 C-c C-r f (elpy-refactor-extract-function)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-function][¶]]
-
-		Move the selection to a new function.
-
-	 C-c C-r i (elpy-refactor-inline)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-inline][¶]]
-
-		Inline the variable at point. i.e. replace it with its defining expression.
-**** Profiling[[https://elpy.readthedocs.io/en/latest/ide.html#profiling][¶]]
-	 Elpy allows one to profile python scripts asynchronously using cProfile.
-	 M-x elpy-profile-buffer-or-region[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-profile-buffer-or-region][¶]]
-
-		Send the current buffer or region to the profiler and display the result with
-		elpy-profile-visualizer. The default visualizer is [[https://jiffyclub.github.io/snakeviz][snakeviz]], a browser-based
-		graphical profile viewer that can be installed with pip install snakeviz.
-		[[https://www.vrplumber.com/programming/runsnakerun][RunSnakeRun]] (Python-2 only GTK GUI) and [[https://github.com/pwaller/pyprof2calltree][pyprof2calltree]] (uses QCacheGrind
-		or KCacheGrind for display) are supported alternatives and can be similarly
-		installed with pip.
-**** Django[[https://elpy.readthedocs.io/en/latest/ide.html#django][¶]]
-
-	 Elpy has basic Django support such as parsing either manage.py or django-admin.py
-	 (If it does not find manage.py it falls back to django-admin.py) for command
-	 completion assistance. Can also start runserver automatically and you can give an ip
-	 address and port.
-
-	 C-c C-x c (elpy-django-command)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-django-command][¶]]
-
-		Choose what command you’d like to run via django-admin.py or manage.py.
-		Please note that for compatibility reasons, the shell command will use python
-		(instead of ipython by default).
-
-	 C-c C-x r (elpy-django-runserver)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-django-runserver][¶]]
-
-		Start the development server command, runserver. Default arguments are
-		127.0.0.1 for ip address and 8000 for port. These can be changed via
-		elpy-django-server-ipaddr and elpy-django-server-port.
-
-	 [[https://elpy.readthedocs.io/en/latest/concepts.html][Next]][[https://elpy.readthedocs.io/en/latest/editing.html][Previous]] 
-
-** Evil
-*** insert mod
-**** tab
-If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
-*** ex mode : 
-**** evil-ex-define-cmd : 
-	 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
-
-** ivy 
-*** keys
-**** Minibuffer bindings:
- key             binding
- ---             -------
- C-c							Prefix Command
- C-g							minibuffer-keyboard-quit
- TAB							ivy-partial-or-done
- C-j							ivy-alt-done
- RET							ivy-done
- C-o							hydra-ivy/body
- C-r							ivy-reverse-i-search
- C-s							ivy-next-line-or-history
- C-v							ivy-scroll-up-command
- ESC							Prefix Command
- SPC							self-insert-command
- $								ivy-magic-read-file-env
- S-SPC						ivy-restrict-to-matches
- C-'							ivy-avy
- <down-mouse-1>	ignore
- <mouse-1>				ivy-mouse-done
- <mouse-3>				ivy-mouse-dispatching-done
- <next>					ivy-scroll-up-command
- <prior>					ivy-scroll-down-command
- <remap>					Prefix Command
- <right>					ivy-forward-char
-
-**** sort : 
- C-c C-a					ivy-toggle-ignore
- C-c C-o					ivy-occur
- C-c C-s					ivy-rotate-sort
-****  <remap> <backward-delete-char-untabify>
-																 ivy-backward-delete-char
- <remap> <backward-kill-word>		ivy-backward-kill-word
- <remap> <beginning-of-buffer>		ivy-beginning-of-buffer
- <remap> <delete-backward-char>	ivy-backward-delete-char
- <remap> <delete-char>						ivy-delete-char
- <remap> <describe-mode>					ivy-help
- <remap> <end-of-buffer>					ivy-end-of-buffer
- <remap> <forward-char>					ivy-forward-char
- <remap> <kill-line>							ivy-kill-line
- <remap> <kill-ring-save>				ivy-kill-ring-save
- <remap> <kill-whole-line>				ivy-kill-whole-line
- <remap> <kill-word>							ivy-kill-word
- <remap> <next-line>							ivy-next-line
- <remap> <previous-line>					ivy-previous-line
- <remap> <scroll-down-command>		ivy-scroll-down-command
- <remap> <scroll-up-command>			ivy-scroll-up-command
-**** ivy-read : 
- C-M-a						ivy-read-action
- C-M-j						ivy-immediate-done
- M-RET						ivy-call
- C-M-n						ivy-next-line-and-call
- C-M-o						ivy-dispatching-call
- C-M-p						ivy-previous-line-and-call
- C-M-y						ivy-insert-current-full
- M-i							ivy-insert-current
- M-j							ivy-yank-word
- M-n							ivy-next-history-element
- M-o							ivy-dispatching-done
- M-p							ivy-previous-history-element
- M-r							ivy-toggle-regexp-quote
- M-v							ivy-scroll-down-command
-
+** skewer-mode
+*** use-package : 
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package skewer-mode :ensure t
+  :config
+	(add-hook 'js2-mode-hook 'skewer-mode)
+	(add-hook 'css-mode-hook 'skewer-css-mode)
+	(add-hook 'html-mode-hook 'skewer-html-mode))
+#+end_src
+
+
+*** Exempl 
+**** make server
+***** ferst
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/script.js")
+#+end_src
+#+RESULTS:
+: #<buffer script.js>
+
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/hello.html")
+#+end_src
+
+	#+RESULTS:
+	: #<buffer hello.html>
+	#+begin_src emacs-lisp :tangle yes
+	(require 'simple-httpd)
+	(setq httpd-root 
+		"~/../../version-control/GitHub/HTML/skewer"
+	;; "/home/user/Documents/javascript"
+		)
+	(httpd-start)
+	#+end_src
+	#+RESULTS:
+***** boids-js
+https://github.com/skeeto/boids-js
+Skewer -- Emacs browser interaction - YouTube
+https://www.youtube.com/watch?v=4tyTgyzUJqM
+	#+begin_src emacs-lisp :tangle yes
+	(setq httpd-port 4242)
+	(require 'simple-httpd)
+	(setq httpd-root 
+		"~/../../version-control/GitHub/HTML/skewer"
+		)
+	(httpd-start)
+	#+end_src
+
+	#+RESULTS:
+
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/example.html")
+	#+end_src
+	#+RESULTS:
+	: #<buffer example.html>
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids.js")
+	#+end_src
+	#+RESULTS:
+	: #<buffer boids.js>
+	#+begin_src emacs-lisp :tangle yes
+	(find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/boids_sanbox.js")
+	#+end_src
+
+	#+RESULTS:
+	: #<buffer boids_sanbox.js>
+
+ http://localhost:4242/example.html
+
+	#+begin_src emacs-lisp :tangle yes
+	(httpd-stop)
+	#+end_src
+
+	#+RESULTS:
+
+**** connect to server
+http://localhost:8080/hello.html
+http://localhost:4242/example.html
+
+	#+begin_src emacs-lisp :tangle yes
+(httpd-stop)
+	#+end_src
+**** start repl
+A REPL into the browser can be created with 
+M-x skewer-repl, or C-c C-z. This
+**** repl command 
+***** console.log : 
+console.log
+('hey!')
+
+console.log
+('hello world!')
+
+console.log ('hello world!');
+***** alert : 
+alert('hey!');
+***** skewer.log : 
+skewer.log("hi from brobser!");
+**** live edit html 
+**** live edit js 
+JS2-mode
+
+ C-x C-e
+*** Docs
+**** Skewer: live web development with Emacs
+***** links
+ GitHub - skeeto/skewer-mode: Live web development in Emacs
+ https://github.com/skeeto/skewer-mode
+
+Provides live interaction with JavaScript, CSS, and HTML in a web browser.
+Expressions are sent on-the-fly from an editing buffer to be evaluated in the browser,
+just like Emacs does with an inferior Lisp process in Lisp modes.
+
+,* Watch the [[http://youtu.be/4tyTgyzUJqM][demo video on YouTube]] ([[http://nullprogram.s3.amazonaws.com/skewer/demo.webm][webm]])
+
+Skewer is available from [[https://melpa.org/][MELPA]], which will install the dependencies for you. This
+package and its dependencies are pure Elisp, meaning setup is a breeze, the whole
+thing is highly portable, and it works with many browsers.
+
+Dependencies:
+
+,* [[https://github.com/skeeto/emacs-http-server][simple-httpd]] (available on MELPA)
+,* [[https://github.com/mooz/js2-mode][js2-mode]] (available on ELPA)
+
+Skewer requires Emacs 24.3 or later.
+***** Usage
+****** Quick version
+
+If Skewer was installed from MELPA, skip to step 3.
+
+1 Put this repository directory in your load-path
+2 Load skewer-mode.el
+3 M-x run-skewer to attach a browser to Emacs
+4 From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the
+ browser to evaluate
+
+The function skewer-setup can be used to configure all of mode hooks (previously
+this was the default). This can also be done manually like so,
+
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+The keybindings for evaluating expressions in the browser are just like the Lisp
+modes. These are provided by the minor mode skewer-mode.
+
+,* C-x C-e: Evaluate the form before the point and display the result in the minibuffer.
+ If given a prefix argument, insert the result into the current buffer.
+,* C-M-x: Evaluate the top-level form around the point.
+,* C-c C-k: Load the current buffer.
+,* C-c C-z: Select the REPL buffer.
+
+The result of the expression is echoed in the minibuffer.
+
+Additionally, css-mode and html-mode get similar sets of bindings for modifying the
+CSS rules and HTML on the current page.
+****** CSS
+
+,* C-x C-e: Load the declaration at the point.
+,* C-M-x: Load the entire rule around the point.
+,* C-c C-k: Load the current buffer as a stylesheet.
+****** HTML
+,* C-M-x: Load the HTML tag immediately around the point.
+
+Note: run-skewer uses browse-url to launch the browser. This may require further
+setup depending on your operating system and personal preferences.
+
+Multiple browsers and browser tabs can be attached to Emacs at once. JavaScript
+forms are sent to all attached clients simultaneously, and each will echo back the
+result individually. Use list-skewer-clients to see a list of all currently attached
+clients.
+
+Sometimes Skewer's long polls from the browser will timeout after a number of hours
+of inactivity. If you find the browser disconnected from Emacs for any reason, use the
+browser's console to call skewer() to reconnect. This avoids a page reload, which
+would lose any fragile browser state you might care about.
+***** Manual version
+To skewer your own document rather than the provided blank one,
+
+1 Load the dependencies
+2 Load skewer-mode.el
+3 Start the HTTP server (httpd-start)
+4 Include "[[http://localhost:8080/skewer][http://localhost:8080/skewer]]" as a script (see example.html and check
+ your httpd-port)
+5 Visit the document from your browser
+
+Skewer fully supports CORS so the document need not be hosted by Emacs itself. A
+Greasemonkey userscript is provided, Skewer Everything, for injecting Skewer into
+any arbitrary page you're visiting without needing to modify the page on the host.
+More information below.
+
+Don't copy skewer.js anywhere or use it directly. Emacs hosts this script itself,
+manipulating it in memory before it reaches the browser. Always access it through the
+servlet on the Emacs webserver as /skewer.
+***** Browser Support
+Skewer is known to work properly with Firefox, Chrome, Safari, Opera, and IE8+.
+Except for CSS and HTML, Skewer will work in IE7 when document.querySelector
+and JSON are polyfilled. If you find any other JavaScript-supported browser that
+doesn't work with Skewer, please report it.
+***** REPL
+A REPL into the browser can be created with M-x skewer-repl, or C-c C-z. This
+should work like a console within the browser. Messages can be logged to this REPL
+with skewer.log() (like console.log()).
+
+Results of expressions evaluated in the REPL are printed more verbosely than in the
+minibuffer, when possible. This may help in debugging.
+***** Skewering with CORS
+Skewer supports [[http://en.wikipedia.org/wiki/Cross-origin_resource_sharing][Cross-origin Resource Sharing (CORS)]]. This means you can
+Skewer a document hosted from any server without needing any special changes on
+that server, except for including /skewer as a script in that document.
+
+If you don't control the server from which you want to skewer pages -- such that you
+can't add the Skewer's script -- the provided Greasemonkey userscript (.user.js)
+https://github.com/skeeto/skewer-mode/blob/master/skewer-everything.user.js
+can be used to inject it into any page you visit. Note that this userscript will assume
+you're running the Skewer server at [[http://localhost:8080/][http://localhost:8080/]] (simple-httpd's default
+port). If this isn't true, you need to edit the top of the userscript.
+
+The script isn't actually injected until you switch the toggle in the top-right corner, the
+red/green triangle.
+
+Alternatively, the following bookmarklet will load skewer on demand:
+
+javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://localhost:8080/skewer';d.body.appendChild(s);})()
+
+With a browser plugin like [[https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en][Custom Javascript for Websites]], you can use the
+bookmarklet to auto-skewer specific domains, saving you a mouse click on each
+reload.
+***** bower
+Also provided are some functions for loading libraries from the bower infrastructure
+on the fly. This is accessed with skewer-bower-load. For example, I often find it
+useful to load jQuery when skewering a page that doesn't have jQuery installed.
+
+Note: to use this bower does not need to be installed, only git. It's just the bower
+infrastructure being used. Unfortunately this infrastructure is a mess right now; many
+packages are in some sort of broken state -- missing dependencies, missing
+metadata, broken metadata, or an invalid repository URL. Some of this is due to
+under-specification of the metadata by the bower project.
+***** Motivation
+
+I wanted something like [[https://github.com/swank-js/swank-js][swank-js]] but without all the painful setup. Having already
+written an Emacs web server I was halfway there. It took relatively little code to
+accomplish.
+
+I also didn't want to rely a browser-specific feature, like MozRepl or WebKit's remote
+debugger ([[https://github.com/jscheid/kite][kite]]).
+
+The name refers to the idea that Emacs is skewering the browser from server-side.
+**** package - How to use skewer-mode? 
+***** currently struggling : 
+https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode
+I am currently struggling to use skewer-mode in Emacs.
+
+I downloaded and installed skewer-mode via MELPA, so all the dependencies
+should be inplace.
+
+For testing purposes I even downloaded the boidsjs [[https://github.com/skeeto/boids-js][demo]].
+
+I'll open up boids.js, then type M-xrun-skewer (opens up the browser with URL
+http://127.0.0.1:8080/skewer/demo) and then finally run M-xskewer-mode (->
+skewer-mode enabled).
+
+But in the browser nothing happens.
+
+What am I doing wrong?
+
+[[https://emacs.stackexchange.com/questions/tagged/package][package]] [[https://emacs.stackexchange.com/questions/tagged/skewer-mode][skewer-mode]] [[https://emacs.stackexchange.com/questions/tagged/javascript][javascript]] 
+[[https://emacs.stackexchange.com/q/2376][Share]] 
+[[https://emacs.stackexchange.com/posts/2376/edit][Improve this question]] 
+Submit 
+[[https://emacs.stackexchange.com/posts/2376/revisions][edited Oct 23 '14 at 19:30]] 
+[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]] 
+3,65611 gold badge2020 silver badges4040 bronze badges 
+asked Oct 20 '14 at 18:31 
+[[https://emacs.stackexchange.com/users/2158/jacksgt][*]][[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]]JacksGT 
+31322 silver badges77 bronze badges 
+4 
+
+,* As I understand it, skewer provides an interface for evaluation of javascript... Do
+ you actually evaluate the content of the boids.js buffer? – [[https://emacs.stackexchange.com/users/184/t-verron][T. Verron]] Oct 20 '14 at
+ 18:33 
+,* I'm loading the current buffer with <kbd>C-x C-k</kbd> ("boid.js loaded") and the
+ trying to evaluate with <kbd>C-x C-e</kbd>. But it gives me an error that it could
+ not parse the "$"-sign. That is because it did not load the jQuery from the
+ corresponding HTML file (example.html) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:44 
+,* 2 
+ You need to eval the html file in skewer-html-mode. – [[https://emacs.stackexchange.com/users/160/jordon-biondo][Jordon Biondo]] Oct 20 '14 at
+ 18:45 SVG Image 
+,* How? C-x C-k does not work in skewer-html-mode – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 18:50
+
+[[https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode#][Add a comment]]  | 
+
+3 Answers 
+
+***** start the http server : 
+TLDR; You have to start the http server ([[https://github.com/skeeto/emacs-web-server][simple-http]]) and load your HTML files
+through it.
+
+For example, let's say you have a HTML file named hello.html and a JS script file
+named script.js in /home/user/Documents/javascript folder.
+
+hello.html:
+
+<!doctype html>
+<html>
+<head>
+    <!-- Include skewer.js as a script -->
+    <script src="http://localhost:8080/skewer"></script>
+    <!-- Include my script.js file -->
+    <script src="script.js"></script>
+</head>
+<body>
+    <p>Hello world</p>
+</body>
+</html>
+
+script.js:
+
+alert('hey!');
+
+init.el (or .emacs):
+
+(require 'simple-httpd)
+;; set root folder for httpd server
+(setq httpd-root "/home/user/Documents/javascript")
+
+It's time to start the server: M-x httpd-start, and open the index.html file in the
+browser, by visiting http://localhost:8080/hello.html. You should get the alert in
+the browser and now call skewer-repl.
+
+You can further interact with the browser through the repl. So, everything you evaluate
+in the repl will be transmitted to the browser. For example if you type console.log
+('hey!') 
+in the repl, you will get this message in the browser's console. 
+
+If you want to interactively modify HTML (e.g. live update HTML tags from emacs),
+add to your init.el (or .emacs):
+
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+Now when you are in your .html file you can evaluate tags with C-M-x
+(skewer-html-eval-tag), and these will be immediately updated in your browser. 
+
+Keep in mind that conversely, this also applies to CSS and CSS files.
+
+[[https://emacs.stackexchange.com/a/2515][Share]] 
+[[https://emacs.stackexchange.com/posts/2515/edit][Improve this answer]] 
+Submit 
+[[https://emacs.stackexchange.com/posts/2515/revisions][edited Sep 22 '18 at 7:16]] 
+answered Oct 23 '14 at 18:31 
+[[https://emacs.stackexchange.com/users/193/caisah][*]][[https://emacs.stackexchange.com/users/193/caisah][caisah]]caisah 
+3,65611 gold badge2020 silver badges4040 bronze badges 
+2 
+
+,* 1 
+ This is really great answer, thanks for posting it. Probably also worth nothing that if
+ you don't want to hardcode the httpd-root in your config, you can run M-x
+ eval-expression (setq httpd-root "/path/to/files") from within emacs at
+ any time. – [[https://emacs.stackexchange.com/users/2762/cody-reichert][Cody Reichert]] Dec 15 '14 at 15:42 SVG Image 
+,* useless '\' in example html <script
+ src="http://localhost:8080/skewer"></script>\ (can't edit - edits must be
+ >=6 characters) – [[https://emacs.stackexchange.com/users/18327/kai-dj][kai-dj]] Sep 18 '18 at 13:36 SVG Image 
+
+***** Instead of running the demo : 
+Instead of running the demo, just perform these minimal steps to ensure that
+everything is working correctly.
+
+1 Open a new buffer with the name myskewer.js
+2 Enable JS2-mode (a dependency of skewer)
+3 Enable skewer-mode
+4 M-xrun-skewer (a browser opens, go back to myskewer.js)
+5 Type alert("hello"); and hit C-xC-e at the end of that line
+6 Go back to the browser.
+
+You should see an alert box on the page.
+
+[[https://emacs.stackexchange.com/users/294/gambo][*]][[https://emacs.stackexchange.com/users/294/gambo][Gambo]]Gambo 
+,* Thank you for your answer! Unfortunately, I'm prompted the error "No collapsable
+ element found at point" – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:02 SVG Image 
+,* Sorry, My mistake. C-x C-e is the actual keys to push. will edit my answer –
+ [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:10 
+,* That worked! However: How do I tell Skewer to load the HTML, too? (As shown in
+ the demo) – [[https://emacs.stackexchange.com/users/2158/jacksgt][JacksGT]] Oct 20 '14 at 19:27 
+,* 1 
+ @JacksGT Place your downloaded files into ~/public_html then follow the
+ instructions for "Manual version" at [[https://github.com/skeeto/skewer-mode#manual-version][this]] link. Once that is done visit [[http://localhost:8080][localhost:8080]]
+ https://github.com/skeeto/skewer-mode#manual-version
+ in your browser. – [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:52 SVG Image 
+
+***** In case port 8080 is already in use : 
+In case port 8080 is already in use: 
+
+you can configure skewer/simple-httpd to use another port by customizing the
+httpd-port variable. (M-x customize-variable<ret>httpd-port)
+
+[[https://emacs.stackexchange.com/a/32372][Share]]
 ** Graph  
 *** PLANTUML
 **** Guide : 
@@ -14820,6 +13654,1197 @@ ${0}
 
 																																											 -
 #+end_src
+** yasnippet
+*** Path to my snipets 
+cd D:\Development\lisp\HOME\.emacs.d\snippets\python-mode 
+*** Path to lib snipets 
+cd D:\Development\lisp\HOME\.emacs.d\elpa\yasnippet-snippets-20200122.1140\snippets 
+*** doc 
+**** my
+		 снипеты из твоей папки переписывают орегиналые
+		 если уних совподают имен
+		 снипеты подгрухаются вместе емаком
+		 и невкурсе если они сменились
+		 по команда из меню all - a  
+yas-reload-all переподгружает их
+**** manual
+[[http://joaotavora.github.io/yasnippet/][Yet another snippet extension]]
+***** Expanding
+****** Inserting region or register contents into snippet
+It's often useful to inject already written text in the middle of a snippet. The variable
+[[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-wrap-around-region][yas-wrap-around-region]] when to t substitute the region contents into the $0
+placeholder of a snippet expanded by [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-insert-snippet][yas-insert-snippet]]. Setting it to a character
+value (e.g. ?0) will insert the contents of corresponding register. 
+
+Older (versions 0.9.1 and below) of Yasnippet, supported a setting of cua that is
+equivalent to ?0 but only worked with cua-mode turned on. This setting is still
+supported for backwards compatibility, but is now entirely equivalent to ?0. 
+***** Writing snippets 
+http://joaotavora.github.io/yasnippet/snippet-development.html
+****** Mirrors 
+We refer the tab stops with placeholders as a field. A field can have mirrors. All
+mirrors get updated whenever you update any field text. Here's an example: 
+
+\begin{${1:enumerate}}
+    $0
+\end{$1}
+
+When you type "document" at ${1:enumerate}, the word "document" will also be
+inserted at \end{$1}. The best explanation is to see the screencast([[http://www.youtube.com/watch?v=vOj7btx3ATg][YouTube]] or [[http://yasnippet.googlecode.com/files/yasnippet.avi][avi]]
+[[http://yasnippet.googlecode.com/files/yasnippet.avi][video]]). 
+
+The tab stops with the same number to the field act as its mirrors. If none of the tab
+stops has an initial value, the first one is selected as the field and others mirrors. 
+****** Mirrors with transformations 
+
+If the value of an ${n:-construct starts with and contains $(, then it is interpreted as a
+mirror for field n with a transformation. The mirror's text content is calculated according
+to this transformation, which is Emacs-lisp code that gets evaluated in an environment
+where the variable [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-text][yas-text]] is bound to the text content (string) contained in the field n.
+Here's an example for Objective-C: 
+
+- (${1:id})${2:foo}
+{
+    return $2;
+}
+
+- (void)set${2:$(capitalize yas-text)}:($1)aValue
+{
+    [$2 autorelease];
+    $2 = [aValue retain];
+}
+$0
+
+Look at ${2:$(capitalize yas-text)}, it is a mirror with transformation instead of a field.
+The actual field is at the first line: ${2:foo}. When you type text in ${2:foo}, the
+transformation will be evaluated and the result will be placed there as the transformed
+text. So in this example, if you type "baz" in the field, the transformed text will be
+"Baz". This example is also available in the screencast. 
+
+Another example is for rst-mode. In reStructuredText, the document title can be some
+text surrounded by "=" below and above. The "=" should be at least as long as the
+text. So 
+
+=====
+Title
+=====
+
+is a valid title but 
+
+===
+Title
+===
+
+is not. Here's an snippet for rst title: 
+
+${1:$(make-string (string-width yas-text) ?\=)}
+${1:Title}
+${1:$(make-string (string-width yas-text) ?\=)}
+
+$0
+
+Note that a mirror with a transform is not restricted to the text of the field it is mirroring.
+By making use of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-field-value][yas-field-value]], a mirror can look at any of the snippet's field (as
+mentioned above, all mirrors are updated when any field is updated). Here is an
+example which shows a "live" result of calling format: 
+
+(format "${1:formatted %s}" "${2:value}")
+=> "${1:$(ignore-errors (format (yas-field-value 1) (yas-field-value 2)))}"
+
+To keep the example simple, it uses ignore-errors to suppress errors due to
+incomplete format codes. 
+
+****** Fields with transformations
+
+From version 0.6 on, you can also have lisp transformation inside fields. These work
+mostly like mirror transformations. However, they are evaluated when you first enter the
+field, after each change you make to the field and also just before you exit the field. 
+
+The syntax is also a tiny bit different, so that the parser can distinguish between fields
+and mirrors. In the following example 
+
+
+#define "${1:mydefine$(upcase yas-text)}"
+
+mydefine gets automatically upcased to MYDEFINE once you enter the field. As you
+type text, it gets filtered through the transformation every time. 
+
+Note that to tell this kind of expression from a mirror with a transformation, YASnippet
+needs extra text between the : and the transformation's $. If you don't want this
+extra-text, you can use two $'s instead. 
+
+
+#define "${1:$$(upcase yas-text)}"
+
+Please note that as soon as a transformation takes place, it changes the value of the
+field and sets it its internal modification state to true. As a consequence, the
+auto-deletion behaviour of normal fields does not take place. This is by design. 
+
+****** Choosing fields value from a list and other tricks
+
+As mentioned, the field transformation is invoked just after you enter the field, and with
+some useful variables bound, notably [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-modified-p][yas-modified-p]] and [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-moving-away-p][yas-moving-away-p]].
+Because of this feature you can place a transformation in the primary field that lets you
+select default values for it. 
+
+The [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-choose-value][yas-choose-value]] does this work for you. For example: 
+
+<div align="${2:$$(yas-choose-value '("right" "center" "left"))}">
+  $0
+</div>
+
+See the definition of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-choose-value][yas-choose-value]] to see how it was written using the two
+variables. 
+
+Here's another use, for LaTeX-mode, which calls reftex-label just as you enter snippet
+field 2. This one makes use of [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-modified-p][yas-modified-p]] directly. 
+
+\section{${1:"Titel der Tour"}}%
+\index{$1}%
+\label{{2:"waiting for reftex-label call..."$(unless yas-modified-p (reftex-label nil 'dont-
+insert))}}%
+
+The function [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-verify-value][yas-verify-value]] has another neat trick, and makes use of
+[[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-moving-away-p][yas-moving-away-p]]. Try it and see! Also, check out this [[http://groups.google.com/group/smart-snippet/browse_thread/thread/282a90a118e1b662][thread]] 
+
+****** Nested placeholder fields
+
+From version 0.6 on, you can also have nested placeholders of the type: 
+
+<div${1: id="${2:some_id}"}>$0</div>
+
+This allows you to choose if you want to give this div an id attribute. If you tab forward
+after expanding, it will let you change "some\id" to whatever you like. Alternatively, you
+can just press C-d (which executes [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-skip-and-clear-or-delete-char][yas-skip-and-clear-or-delete-char]]) and go straight
+to the exit marker. 
+
+By the way, C-d will only clear the field if you cursor is at the beginning of the field and
+it hasn't been changed yet. Otherwise, it performs the normal Emacs delete-char
+command. 
+
+****** Indentation markers
+
+If [[http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-indent-line][yas-indent-line]] is not set to 'auto, it's still possible to indent specific lines by adding
+an indentation marker, $>, somewhere on the line. 
+
+
+***** Organizing snippets 
+http://joaotavora.github.io/yasnippet/snippet-organization.html	
+***** Reference
+http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-wrap-around-region
+** read-aloud
+*** Install
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+ (use-package read-aloud
+   :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+#+end_src
+#+RESULTS:
+: t
+*** Docs
+https://github.com/gromnitsky/read-aloud.el
+**** Usage 
+***** read-aloud-this : 
+M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
+***** read-aloud-buf : 
+M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
+***** read-aloud-stop : 
+top reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
+***** read-aloud-change-engine : 
+M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
+
+** hidra mod 
+    https://github.com/abo-abo/hydra
+This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
+** Org-brain
+*** help
+https://github.com/Kungsgeten/org-brain
+**** help on keys
+***** SVG Imageorg-brain-visualize
+The primary usage of org-brain is through M-x org-brain-visualize (which you might
+want to bind to a key). From there you can browse entries, add/remove
+relationships, open entries for editing etc. The following keybindings are available in
+org-brain-visualize:
+***** Key  Command  Description : 
+ Key  Command  Description  
+ m  org-brain-visualize-mind-map  Toggle between normal and  
+		 mind-map visualization.  
+ j or TAB  forward-button  Goto next link  
+ k or S-TAB  backward-button  Goto previous link  
+ b  org-brain-visualize-back  Like the back button in a web  
+		 browser.  
+ h or *  org-brain-add-child-headline *  Add a new child headline to  
+		 entry  
+ c  org-brain-add-child *  Add an existing entry, or a new  
+		 file, as a child  
+ C  org-brain-remove-child *  Remove one the entry’s child  
+		 relations  
+ e  org-brain-annotate-edge  Annotate the connection  
+		 between the visualized entry  
+		 and the entry link at point.  
+ p  org-brain-add-parent *  Add an existing entry, or a new  
+		 file, as a parent  
+ P  org-brain-remove-parent *  Remove one of the entry’s  
+		 parent relations  
+ f  org-brain-add-friendship *  Add an existing entry, or a new  
+		 file, as a friend  
+ F  org-brain-remove-friendship *  Remove one of the entry’s  
+		 friend relations  
+ n  org-brain-pin *  Toggle if the entry is pinned  
+		 or not  
+ N  org-brain-add-nickname  Add a nickname for the entry  
+		 (you can have several names  
+		 for the same entry)  
+ s  org-brain-select-dwim  Select an entry for batch  
+		 processing.  
+ S  org-brain-select-map  Prefix key to do batch  
+		 processing with selected  
+		 entries.  
+ t  org-brain-set-title  Change the title of the entry.  
+ T  org-brain-set-tags  Change the tags of the entry.  
+ d  org-brain-delete-entry  Choose an entry to delete.  
+ l  org-brain-visualize-add-resource  Add a new resource link in  
+		 entry  
+ r  org-brain-open-resource  Choose and open a resource  
+		 from the entry.  
+ C-y  org-brain-visualize-paste-resource  Add a new resource link from  
+		 clipboard  
+ a  org-brain-visualize-attach  Run org-attach on entry  
+		 (headline entries only)  
+ A  org-brain-archive  Archive the entry (headline  
+		 entries only)  
+ o  org-brain-goto-current  Open current entry for editing  
+ O  org-brain-goto  Choose and edit one of your  
+		 org-brain entries  
+ v  org-brain-visualize  Choose and visualize a  
+		 different entry  
+ V  org-brain-visualize-follow  Similar to  
+		 org-agenda-follow-mode; view  
+		 visualized entry in another  
+		 window.  
+ w  org-brain-visualize-random  Visualize one of your entries  
+		 at random.  
+ W  org-brain-visualize-wander  Visualize at random, in a set  
+		 interval. W again to cancel.  
+ C-c C-x C-v  org-toggle-inline-images  Display org-mode images in  
+		 the entry text.  
+ M  Move prefix  Move (refile) the current entry.  
+ M r  org-brain-refile  Move current entry to another  
+		 entry (change local parent).  
+ M p  org-brain-change-local-parent  Choose among the entry’s  
+		 parents and make another of  
+		 them the local parent.  
+
+The commands above marked with * can be run with the universal argument C-u in
+order to operate on the entry link at point instead of the visualized entry.
+
+You may use org-store-link inside of org-brain-visualize in order to store a link to the
+currently visualized org-brain entry.
+***** universal argument C-u : 
+If the universal argument C-u is used when running org-brain-visualize-random or
+org-brain-visualize-wander, the randomized targets are restricted to descendants
+(children, grandchildren, grand-grandchildren etc) of the currently visualized entry.
+Use for instance C-u W to wander among the descendants.
+
+The universal argument C-u can also be used with org-brain-open-resource. This
+lets you choose not only resource from the visualized entry, but also from
+descendants (children, grand-children, etc) of that entry.
+
+If the universal argument C-u is used when calling org-brain-annotate-edge then the
+annotation will be “one-way”. The default behaviour is otherwise to annotate the
+connection in both directions.
+
+***** toggle by Zooming : 
+When using the mind map visualization (toggle by pressing m), you can use the
+following keybindings in order to show or hide successive levels of hierarchy relative
+to the current entry.
+
+ Key  Command  Description  
+ +  org-brain-show-descendant-level  Show one more level of entries to the  
+		 right (children of children, etc.)  
+ -  org-brain-hide-descendant-level  Hide rightmost level of descendant  
+		 entries  
+ z  org-brain-show-ancestor-level  Show one more level of entries to the  
+		 left (parents of parents, etc.)  
+ Z  org-brain-hide-ancestor-level  Hide leftmost level of ancestor entries  
+
+***** batch processing : 
+If you want to select several entries and then remove/add them as
+children/parents/friends you can use the s key (org-brain-select-dwim) to select an
+entry. If the point is over a button link to an entry, that entry will be selected, otherwise
+it will select the currently visualized entry. If the entry is already selected, it will be
+unselected instead.
+
+Once you have selected all the entries you wish to use, you can use the S prefix key
+to do batch processing on the selected entries. The keybindings in this prefix keymap
+is identical to those in org-brain-visualize. You could for instance use S c to add all
+selected entries as children to the visualized entry, or S P to remove the parent
+relationship of the selected entries. When you’re done and wish to clear the selection
+use org-brain-clear-selected, which is bound to S s.
+**** ID
+***** M-x org-brain-update-id-locations
+			Удобно в ручную можно удалить любые айди
+потом запустить эту команду и он удалит эти айди из списка
+поскольку сам фали содержит пути к файлам
+и как результат если в файле больше нет айди
+он удаляет его из файла-списка
+org-brain use org-id in order to speed things up. Because of this, the variable org-id-track-globally should be t (which it already is by default). You may want to modify org-id-locations-file too. If you add entries to org-brain directly from org-mode you must assign headliens an ID. A comfortable way to do this is with the command org-brain-ensure-ids-in-buffer. Even more comfortable is to add that to before-save-hook, so that it runs when saving.
+If you find that org-brain is missing entries, or list entries which doesn’t exist, try using M-x org-brain-update-id-locations, which syncs the org-brain entries with the org-id caching system.
+****** exempl
+ (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+***** M-x org-brain-headline-to-file. : 
+If you have a headline entry, which you want to convert to a file entry, use M-x org-brain-headline-to-file. Unfortunately there is currently no function to convert a file entry into a headline entry.
+***** M-x org-brain-get-id
+You can edit org-brain entries directly from org-mode. You can use the default org-mode outline structure to define parent/children relationships, but keep in mind that only entries with an ID property will be considered as entries to org-brain; use M-x org-brain-get-id to create an ID property to the current org-mode headline. Another alternative is to use M-x org-brain-refile which will create the ids for you. You can also create IDs for all headlines in the buffer with M-x org-brain-ensure-ids-in-buffer, and you might find it useful to add this to before-save-hook.
+**** From ORG-MODE 
+***** org-brain-prefix-map
+Most of the commands available in org-brain-visualize-mode is also bound to the prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for instance C-c b, and you could then type C-c b p to add a parent to the current entry. Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
+***** org-brain-add-entry
+You could also use M-x org-brain-add-entry if you do not want to visualize the new entry. Also commands which add children, parents and friends, or links to entries, can create new entries in the same way. Se General information below.
+***** org-brain-add-child : 
+Most of the commands available in org-brain-visualize can also be used in org-mode directly, in which case they will operate on the “entry at point”. In other words you can use M-x org-brain-add-child directly from org-mode in order to add a child to the org-brain entry at point. 
+***** org-brain-goto-<relationsship> : 
+You may also want to use the commands org-brain-goto-<relationsship> to navigate between entries.
+***** headline convert to file: 
+If you have a headline entry, which you want to convert to a file entry, use M-x
+org-brain-headline-to-file. Unfortunately there is currently no function to convert a file
+entry into a headline entry.
+***** Editing from org-mode
+ You can edit org-brain entries directly from org-mode. You can use the default
+ org-mode outline structure to define parent/children relationships, but keep in mind
+ that only entries with an ID property will be considered as entries to org-brain; use
+ M-x org-brain-get-id to create an ID property to the current org-mode headline.
+ Another alternative is to use M-x org-brain-refile which will create the ids for you. You
+ can also create IDs for all headlines in the buffer with M-x
+ org-brain-ensure-ids-in-buffer, and you might find it useful to add this to
+ before-save-hook.
+
+ Most of the commands available in org-brain-visualize can also be used in org-mode
+ directly, in which case they will operate on the “entry at point”. In other words you can
+ use M-x org-brain-add-child directly from org-mode in order to add a child to the
+ org-brain entry at point. You may also want to use the commands
+ org-brain-goto-<relationsship> to navigate between entries.
+
+ Most of the commands available in org-brain-visualize-mode is also bound to the
+ prefix keymap org-brain-prefix-map. You can bind this to a key in org-mode, for
+ instance C-c b, and you could then type C-c b p to add a parent to the current entry.
+ Example config: (define-key org-mode-map (kbd "C-c b") 'org-brain-prefix-map).
+
+ You may want to create a link to an org-brain entry in an org-mode file (not
+ necessarily an org-brain file itself). org-brain provides several link types for this
+ purpose. You can use org-insert-link (bound to C-c C-l in org-mode by default) to
+ insert one of these links. They all have in common that they, when clicked, will open
+ the org-brain entry for editing. When inserting a link like this, org-brain will run
+ completion upon all your entries.
+
+****** brain:
+	 The default kind of link. Just let’s you visit another org-brain entry when clicked.
+	 If the variable org-brain-backlink is t a brain-link will also be created as a
+	 resource in the link target, linking back to where the link was created. If
+	 org-brain-backlink is set to a string, that string will be added as a prefix to the
+	 title of the backlink. Example: You set org-brain-backlink to =”<– “= and create
+	 a brain: link in Rabbits linking to Carrots. Now a resource with the description
+	 <-- Rabbits will be created in Carrots. 
+****** brain-child:
+	 When inserted using org-insert-link this will make the linked entry a child to the
+	 current org-brain entry, upon completion. Keep in mind that this doesn’t work if
+	 you type the link manually; only by completion through org-insert-link. 
+****** brain-parent:
+	 Like brain-child: but makes the linked entry a parent of the current entry. 
+******  brain-friend:
+	 Like brain-child: but adds the linked entry as a friend. 
+******  brainswitch
+	 If you have multiple brains you may want a link which switches to a specific brain
+	 and one of its entries. The brainswitch link allows for this. 
+****** inserting links : 
+	The names of the relationship inserting links (brain-child, brain-parent and
+	brain-friend) can be customized with the variables org-brain-child-link-name,
+	org-brain-parent-link-name, and org-brain-friend-link-name. This customization
+	should be done before loading org-brain. If you’re using use-package, put the
+	customization in the :init block.
+**** Renaming files in org-brain
+Headline entries use org-id to identify themselves, so the headlines can be manually renamed without worries. File entries, on the other hand, uses the filename as the identifier. This will cause problems if you try to manually rename files inside of org-brain.
+
+In order to rename a file, use M-x org-brain-rename-file.
+**** Special tags
+You might have a headline which you do not really want as an entry in org-brain. The most basic way to exclude such a headline is simply to not add an ID property to it. However, org-brain also provide two tags, which you can use to tag the headline:
+***** :nobrain:
+This tag excludes the headline, and its subheadings, from your org-brain entries. You can change the tag name by modifying org-brain-exclude-tree-tag.
+***** :childless:
+This tag does not exclude the headline, but it excludes the subheadings. You can change the tag name by modifying org-brain-exclude-children-tag. Works on file entries.
+The following tags modifies the kind of information that is shown when an entry is visualized:
+
+***** :notext:
+Do not show the entry’s text in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-text-tag.
+***** :resourceless:
+Do not show the entry’s resources in org-brain-visualize. You can change the tag name by modifying org-brain-exclude-resources-tag.
+***** :showchildren:
+By default local child entries aren’t shown as text. By setting this tag the entry get the entire subtree as text. You can change the tag name by modifying org-brain-show-children-tag. Works on file entries.
+***** :nosiblings:
+You may have an entry with lots of children, and when you visualize one of these children you might not want to see the siblings from this parent. A good example would be if you have an index entry or similar. By tagging the parent with nosiblings the parent’s children will not show siblings from that parent. You can change the tag name by modifying org-brain-exclude-siblings-tag.
+***** :nolocalparent:
+This is similar to :nosiblings: but the tagged parent will not be shown at all when one of its local children are visualized.
+The following tags modify the way how information is shown when an entry is visualized.
+***** :ownline:
+Make each child of the tagged entry appear on its own line when the tagged entry is visualized. This only affects the tagged entry. It works akin to temporarily setting org-brain-child-fill-column-sexp to 0.
+***** :nosort:
+Display each child of the tagged node in the order the children are listed in the file, rather than in the sorted order determined by org-brain-visualize-sort-function. This affects the order of the node’s children in both the child list (when the tagged node is being visited) and in the sibling list (when one of the tagged node’s children is being visited).
+**** Having multiple brains
+You can have multiple brains simply by having more than one brain folder. In this way, each folder becomes a separate brain. You can switch between these using M-x org-brain-switch-brain. You can also use brainswitch: links in org-mode to switch brains.
+
+If you run org-brain-visualize from inside an org-file in the root of an org-brain directory, org-brain will automatically switch to this brain.
+**** Customizing the look of entry titles
+When visualizing you might want to see additional information about the entries. This
+can be done by customizing the following variables:
+
+ org-brain-vis-title-prepend-functions
+ org-brain-vis-title-append-functions
+ org-brain-vis-current-title-prepend-functions
+ org-brain-vis-current-title-append-functions
+
+Each of these variables should be a list of functions, which all takes an entry as the
+single parameter and returns a string. This string is the prepended or appended to
+the entry’s title, according to the name of the function. The variables with the name
+current in them only applies the functions on the currently visualized entry (the focused
+one).
+
+Suitable functions to add to these lists might be:
+
+ org-brain-entry-icon (included in org-brain-vis-title-prepend-functions by default)
+ org-brain-entry-todo-state
+ org-brain-entry-tags-string
+** Elpy 
+*** keys short help
+**** my keys 
+	 (kbd "C-SPC") 'company-complete)
+	 (kbd "M-e M-f M-p") 'xref-find-definitions)
+	 (kbd "M-e M-f M-P") 'xref-find-definitions-other-frame)
+	 (kbd "M-e M-f M-o") 'elpy-occur-definitions)
+	 (kbd "M-e M-f M-a") 'elpy-goto-assignment)
+	 (kbd "M-e M-f M-d") 'elpy-goto-definition)
+	 (kbd "M-e M-f M-D") 'elpy-goto-definition-other-window)
+	 (kbd "<f8>") save & recompile
+**** Navigation
+	 M-. (elpy-goto-definition)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition][¶]]
+	 C-x 4 M-. (elpy-goto-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition-other-window][¶]]
+	 M-* (pop-tag-mark)[[https://elpy.readthedocs.io/en/latest/ide.html#command-pop-tag-mark][¶]]
+	 C-c C-o (elpy-occur-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-occur-definitions][¶]]
+	 M-x elpy-goto-assignment[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-assignment][¶]]
+	 M-. (xref-find-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definitions][¶]]
+	 C-x 4 . (xref-find-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-window][¶]]
+	 C-x 5 . (xref-find-definition-other-frame)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-frame][¶]]
+	 M-, (xref-pop-marker-stack)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-pop-marker-stack][¶]]
+	 M-? (xref-find-references)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-references][¶]]
+	 C-M-. (xref-find-apropos)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-apropos][¶]]
+**** elpy-doc : 
+	 C-c C-d (elpy-doc)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-doc][¶]]
+**** syntax check : 
+	 C-c C-n (elpy-flymake-next-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-next-error][¶]]
+	 C-c C-p (elpy-flymake-previous-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-previous-error][¶]]
+	 C-c C-v (elpy-check)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][¶]]
+	 python-check-command (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-python-check-command][¶]]
+**** Debugging[[https://elpy.readthedocs.io/en/latest/ide.html#debugging][¶]]
+	 C-c C-u d (elpy-pdb-debug-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][¶]]
+	 C-c C-u b (elpy-pdb-toggle-breakpoint-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][¶]]
+	 C-c C-u p (elpy-pdb-break-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-break-at-point][¶]]
+	 C-c C-u e (elpy-pdb-debug-last-exception)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-last-exception][¶]]
+**** Testing[[https://elpy.readthedocs.io/en/latest/ide.html#testing][¶]]
+	 C-c C-t (elpy-test)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-test][¶]]
+	 M-x elpy-set-test-runner[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-test-runner][¶]]
+**** Refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#refactoring][¶]]
+	 C-c C-e (elpy-multiedit-python-symbol-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-multiedit-python-symbol-at-point][¶]]
+	 C-c C-r f (elpy-format-code)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-format-code][¶]]
+	 elpy-formatter (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-formatter][¶]]
+	 Jedi refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#jedi-refactoring][¶]]
+	 C-c C-r r (elpy-refactor-rename)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-rename][¶]]
+	 C-c C-r v (elpy-refactor-extract-variable)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-variable][¶]]
+	 C-c C-r f (elpy-refactor-extract-function)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-function][¶]]
+	 C-c C-r i (elpy-refactor-inline)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-inline][¶]]
+*** IDE Features
+**** Projects[[https://elpy.readthedocs.io/en/latest/ide.html#projects][¶]]
+	Elpy supports the notion of projects, a related collection of files under a common
+	directory. This common directory is called the project root. A number of Elpy’s
+	commands work on all files inside the project root.
+
+	C-c C-f (elpy-find-file)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-find-file][¶]]
+
+	 Find a file in the current project. This uses a search-as-you-type interface for all
+	 files under the project root.
+
+	 A prefix argument enables “do what I mean” mode. On an import statement, it will
+	 try to open the module imported. Elsewhere in a file, it will look for an associated
+	 test or implementation file, and if found, open that. If this fails, either way, it will fall
+	 back to the normal find file in project behavior.
+
+	 If the current file is called foo.py, then this will search for a test_foo.py in the same
+	 directory, or in a test or tests subdirectory. If the current file is already called
+	 test_foo.py, it will try and find a foo.py nearby.
+
+	 This command uses [[https://github.com/bbatsov/projectile][projectile]] or [[https://github.com/technomancy/find-file-in-project][find-file-in-project]] under the hood, so you need
+	 one of them to be installed.
+
+	C-c C-s (elpy-rgrep-symbol)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-rgrep-symbol][¶]]
+
+	 Search the files in the current project for a string. By default, this uses the symbol
+	 at point. With a prefix argument, it will prompt for a regular expression to search.
+
+	 This is basically a grep -r through the project.
+
+	In addition to these two commands, [[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][elpy-check]] also supports optionally checking all
+	files in the current project.
+
+	Elpy’s idea of the project root and which files belong to a project and which don’t can
+	be influenced as well.
+
+	M-x elpy-set-project-root[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-project-root][¶]]
+
+	 Set the current project root directory. This directory should contain all files related
+	 to the current project.
+
+	elpy-project-ignored-directories (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-project-ignored-directories][¶]]
+
+	 When Elpy searches for files in the current project, it will ignore files in directories
+	 listed here.
+
+	elpy-project-root-finder-functions (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-project-root-finder-functions][¶]]
+
+	 To find the project root, Elpy can utilize a number of heuristics. With this option,
+	 you can configure which are used.
+
+	To configure Elpy specifically for a single project, you can use Emacs’ [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][Directory]]
+	[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][Variables]]. Elpy provides a simple interface to this.
+
+	M-x elpy-set-project-variable[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-project-variable][¶]]
+
+	 Set or change the value of a project-wide variable. With a prefix argument, the
+	 value for the variable is removed.
+
+	 This only takes effect in new buffers.
+**** Completion[[https://elpy.readthedocs.io/en/latest/ide.html#completion][¶]]
+	When you type Python code, Elpy will try and figure out possible completions and
+	provide them in a suggestion window. If Elpy doesn’t do so automatically, you can
+	force it to complete right where you are.
+
+	M-TAB (elpy-company-backend)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-company-backend][¶]]
+
+	 Provide completion suggestions for a completion at point.
+
+	You can use cursor keys or M-n and M-p to scroll through the options, RET to use the
+	selected completion, or TAB to complete the common part.
+
+	On any completion option, C-d or <f1> will display a temporary window with
+	documentation. C-w will display a temporary window showing the source code of the
+	completion to get some context.
+
+	Elpy uses [[https://company-mode.github.io/][Company Mode]] for the completion interface, so its documentation is a good
+	place for further information.
+
+	elpy-get-info-from-shell (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-get-info-from-shell][¶]]
+
+	 If t, use the shell to gather docstrings and completions. Normally elpy provides
+	 completion and documentation using static code analysis (from jedi). With this
+	 option, elpy will add the completion candidates and the docstrings from the
+	 associated python shell; This activates fallback completion candidates for cases
+	 when the static code analysis fails.
+**** Navigation[[https://elpy.readthedocs.io/en/latest/ide.html#navigation][¶]]
+	Elpy supports advanced navigation features.
+
+	M-. (elpy-goto-definition)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition][¶]]
+
+	 Go to the location where the identifier at point is defined. This is not always easy
+	 to make out, so the result can be wrong. Also, the backends can not always
+	 identify what kind of symbol is at point. Especially after a few indirections, they
+	 have basically no hope of guessing right, so they don’t.
+
+	C-x 4 M-. (elpy-goto-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-definition-other-window][¶]]
+
+	 Same as elpy-go-to-definition (with the same caveats) but goes to the definition
+	 of the symbol at point in other window, if defined.
+
+	M-* (pop-tag-mark)[[https://elpy.readthedocs.io/en/latest/ide.html#command-pop-tag-mark][¶]]
+
+	 Go back to the last place where M-. was used, effectively turning M-. and M-* into
+	 a forward and backward motion for definition lookups.
+
+	C-c C-o (elpy-occur-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-occur-definitions][¶]]
+
+	 Search the buffer for a list of definitions of classes and functions.
+
+	M-x elpy-goto-assignment[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-goto-assignment][¶]]
+
+	 Go to the location where the identifier at point is assigned. It is not bound by
+	 default, so you will have to bind it manually. You can also use it as a replacement
+	 to elpy-goto-definition (see [[http://elpy.readthedocs.org/en/latest/customization_tips.html#jumping-to-assignment][Jumping to assignment]]).
+
+	If you use an Emacs version superior to 25, Elpy will define the necessary backends
+	for the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Xref.html][xref]] package.
+
+	M-. (xref-find-definitions)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definitions][¶]]
+
+	 Find the definition of the identifier at point.
+
+	C-x 4 . (xref-find-definition-other-window)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-window][¶]]
+
+	 Like M-. but switch to the other window.
+
+	C-x 5 . (xref-find-definition-other-frame)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-definition-other-frame][¶]]
+
+	 Like M-. but switch to the other frame.
+
+	M-, (xref-pop-marker-stack)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-pop-marker-stack][¶]]
+
+	 Go back to the last place where M-. was used, effectively turning M-. and M-, into
+	 a forward and backward motion for definition lookups.
+
+	M-? (xref-find-references)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-references][¶]]
+
+	 Find references for an identifier of the current buffer.
+
+	C-M-. (xref-find-apropos)[[https://elpy.readthedocs.io/en/latest/ide.html#command-xref-find-apropos][¶]]
+
+	 Find all meaningful symbols that match a given pattern.
+**** Interactive Python[[https://elpy.readthedocs.io/en/latest/ide.html#interactive-python][¶]]
+	Emacs can run a Python interpreter in a special buffer, making it much easier to send
+	code snippets over. Elpy provides additional functionality to seamlessly work with
+	interactive Python in a style similar to [[http://ess.r-project.org][ESS]].
+***** Interpreter Setup[[https://elpy.readthedocs.io/en/latest/ide.html#interpreter-setup][¶]]
+
+	 Elpy uses the Python interpreter setup from the Emacs python package. This section
+	 briefly summarizes some common setups; add the one you need to your .emacs file.
+	 Note that the code below (and Elpy in general) require at least Emacs 24.4.
+
+	 Use the Python standard interpreter (default):
+
+	 (setq python-shell-interpreter "python"
+				 python-shell-interpreter-args "-i")
+
+	 Use Jupyter console (recommended for interactive Python):
+
+	 (setq python-shell-interpreter "jupyter"
+				 python-shell-interpreter-args "console --simple-prompt"
+				 python-shell-prompt-detect-failure-warning nil)
+	 (add-to-list 'python-shell-completion-native-disabled-interpreters
+								"jupyter")
+
+	 Use IPython:
+
+	 (setq python-shell-interpreter "ipython"
+				 python-shell-interpreter-args "-i --simple-prompt")
+
+	 Note that various issues with plotting have been reported when running IPython 5 in
+	 Emacs under Windows. We recommend using Jupyter console instead.
+
+	 If you have an older version of IPython and the above code does not work for you, you
+	 may also try:
+
+	 (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+	 (setq python-shell-interpreter "ipython"
+				 python-shell-interpreter-args "-i")
+
+	 As an IPython_ user, you might be interested in the `Emacs IPython
+	 Notebook`_ or an `Elpy layer`_ for Spacemacs_, too.
+
+	 Note for MacOS users: In some configurations, display artifacts (lines of ^G s) can
+	 appear in the shell. This can be fixed by prepending -c exec('__import__
+	 (\\'readline\\')') to python-shell-interpeter-args (e.g. (setq python-shell-interpreter-args
+	 "-c exec('__import__(\\'readline\\')') -i") for python)
+***** The Shell Buffer[[https://elpy.readthedocs.io/en/latest/ide.html#the-shell-buffer][¶]]
+
+	 C-c C-z (elpy-shell-switch-to-shell)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-switch-to-shell][¶]]
+
+		Switch to buffer with a Python interpreter running, starting one if necessary.
+
+		By default, Elpy tries to find the root directory of the current project (git, svn or hg
+		repository, python package or projectile project) and starts the python interpreter
+		here. This behaviour can be suppressed with the option
+		elpy-shell-starting-directory.
+
+	 elpy-shell-starting-directory (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-starting-directory][¶]]
+
+		Govern the directory in which Python shells will be started. Can be 'project-root
+		(default) to use the current project root, 'current-directory to use the buffer current
+		directory, or a string indicating a specific path.
+
+	 M-x elpy-shell-toggle-dedicated-shell[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-toggle-dedicated-shell][¶]]
+
+		By default, python buffers are all attached to a same python shell (that lies in the
+		*Python* buffer), meaning that all buffers and code fragments will be send to this
+		shell. elpy-shell-toggle-dedicated-shell attaches a dedicated python shell (not
+		shared with the other python buffers) to the current python buffer. To make this the
+		default behavior (like the deprecated option elpy-dedicated-shells did), use the
+		following snippet:
+
+	 (add-hook 'elpy-mode-hook (lambda () (elpy-shell-toggle-dedicated-shell 1)))
+
+	 M-x elpy-shell-set-local-shell[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-set-local-shell][¶]]
+
+		Attach the current python buffer to a specific python shell (whose name is asked
+		with completion). You can use this function to have one python shell per project,
+		with:
+
+	 (add-hook 'elpy-mode-hook (lambda () (elpy-shell-set-local-shell (elpy-project-root))))
+
+	 C-c C-k (elpy-shell-kill)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-kill][¶]]
+
+		Kill the associated python shell.
+
+	 C-c C-K (elpy-shell-kill-all)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-kill-all][¶]]
+
+		Kill all active python shells.
+***** Evaluating code fragments[[https://elpy.readthedocs.io/en/latest/ide.html#evaluating-code-fragments][¶]]
+	 Elpy provides commands to send the current Python statement (e), function definition
+	 (f), class definition (c), top-level statement (s), group of Python statements (g), cell (w),
+	 region (r), or buffer (b) to the Python shell for evaluation. These commands are bound
+	 to prefix C-c C-y, followed by the single character indicating what to send; e.g., C-c
+	 C-y e sends the Python statement at point.
+
+	 Each of the commands to send code fragments to the shell has four variants, one for
+	 each combination of: whether or not the point should move after sending (“step”), and
+	 whether or not the Python shell should be focused after sending (“go”). Step is
+	 activated by C-, go by S-. For example:
+
+	 C-c C-y e (elpy-shell-send-statement)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement][¶]]
+
+		Send the current statement to the Python shell and keep point position. Here
+		statement refers to the Python statement the point is on, including potentially
+		nested statements. If point is on an if/elif/else clause send the entire if statement
+		(with all its elif/else clauses). If point is on a decorated function, send the
+		decorator as well.
+
+	 C-c C-y C-e (elpy-shell-send-statement-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-step][¶]]
+
+		Send the current statement to the Python shell and move point to first subsequent
+		statement.
+
+		Also bound to C-RET.
+
+	 C-c C-y E (elpy-shell-send-statement-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-go][¶]]
+
+		Send the current statement to the Python shell, keeping point position, and switch
+		focus to the Python shell buffer.
+
+	 C-c C-y C-S-E (elpy-shell-send-statement-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-statement-and-step-and-go][¶]]
+
+		Send the current statement to the Python shell, move point to first subsequent
+		statement, and switch focus to the Python shell buffer.
+
+	 Elpy provides support for sending multiple statements to the shell.
+
+	 C-c C-y O (elpy-shell-send-group-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-step][¶]]
+
+		Send the current or next group of top-level statements to the Python shell and
+		step. A sequence of top-level statements is a group if they are not separated by
+		empty lines. Empty lines within each top-level statement are ignored.
+
+		If the point is within a statement, send the group around this statement.
+		Otherwise, go to the top-level statement below point and send the group around
+		this statement.
+
+	 C-c C-y W (elpy-shell-send-codecell-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-step][¶]]
+
+		Send the current code cell to the Python shell and step. A code cell is a piece of
+		code surrounded by special separator lines; see below. For example, you can
+		insert two lines starting with ## to quickly send the code in-between.
+
+	 elpy-shell-codecell-beginning-regexp (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-codecell-beginning-regexp][¶]]
+
+		Regular expression for matching a line indicating the beginning of a code cell. By
+		default, ##.* is treated as a beginning of a code cell, as are the code cell
+		beginnings in Python files exported from IPython or Jupyter notebooks (e.g., #
+		<codecell> or # In[1]:).
+
+	 elpy-shell-cell-boundary-regexp (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-cell-boundary-regexp][¶]]
+
+		Regular expression for matching a line indicating the boundary of a cell
+		(beginning or ending). By default, ##.* is treated as a cell boundary, as are the
+		boundaries in Python files exported from IPython or Jupyter notebooks (e.g., #
+		<markdowncell>, # In[1]:, or # Out[1]:).
+
+		Note that [[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-codecell-beginning-regexp][elpy-shell-codecell-beginning-regexp]] must also match the cell
+		boundaries defined here.
+
+	 The functions for sending the entire buffer have special support for avoiding
+	 accidental code execution, e.g.:
+
+	 C-c C-y r (elpy-shell-send-region-or-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer][¶]]
+
+		Send the the active region (if any) or the entire buffer (otherwise) to the Python
+		shell and keep point position.
+
+		When sending the whole buffer, this command will also escape any uses of the if
+		__name__ == '__main__' idiom, to prevent accidental execution of a script. If you
+		want this to be evaluated, pass a prefix argument with C-u.
+
+		Also bound to C-c C-c.
+
+	 elpy-shell-add-to-shell-history (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-add-to-shell-history][¶]]
+
+		If t, Elpy will make the code sent available in the shell history. This allows to use
+		comint-previous-input (C-up) in the python shell to get back the pieces of code
+		sent by Elpy.
+
+	 The list of remaining commands to send code fragments is:
+
+	 C-c C-y s (elpy-shell-send-top-statement)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement][¶]]
+
+	 C-c C-y S (elpy-shell-send-top-statement-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-go][¶]]
+
+	 C-c C-y f (elpy-shell-send-defun)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun][¶]]
+
+	 C-c C-y F (elpy-shell-send-defun-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-go][¶]]
+
+	 C-c C-y c (elpy-shell-send-defclass)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass][¶]]
+
+	 C-c C-y C (elpy-shell-send-defclass-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-go][¶]]
+
+	 C-c C-y o (elpy-shell-send-group)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group][¶]]
+
+	 C-c C-y O (elpy-shell-send-group-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-go][¶]]
+
+	 C-c C-y w (elpy-shell-send-codecell)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell][¶]]
+
+	 C-c C-y W (elpy-shell-send-codecell-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-go][¶]]
+
+	 C-c C-y R (elpy-shell-send-region-or-buffer-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-go][¶]]
+
+	 C-c C-y b (elpy-shell-send-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer][¶]]
+
+	 C-c C-y B (elpy-shell-send-buffer-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-go][¶]]
+
+	 C-c C-y C-s (elpy-shell-send-top-statement-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-step][¶]]
+
+	 C-c C-y C-S-S (elpy-shell-send-top-statement-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-top-statement-and-step-and-go][¶]]
+
+	 C-c C-y C-f (elpy-shell-send-defun-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-step][¶]]
+
+	 C-c C-y C-S-F (elpy-shell-send-defun-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defun-and-step-and-go][¶]]
+
+	 C-c C-y C-c (elpy-shell-send-defclass-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-step][¶]]
+
+	 C-c C-y C-S-C (elpy-shell-send-defclass-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-defclass-and-step-and-go][¶]]
+
+	 C-c C-y C-S-O (elpy-shell-send-group-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-group-and-step-and-go][¶]]
+
+	 C-c C-y C-W (elpy-shell-send-codecell-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-codecell-and-step-and-go][¶]]
+
+	 C-c C-y C-r (elpy-shell-send-region-or-buffer-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-step][¶]]
+
+	 C-c C-y C-S-R (elpy-shell-send-region-or-buffer-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer-and-step-and-go][¶]]
+
+	 C-c C-y C-b (elpy-shell-send-buffer-and-step)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-step][¶]]
+
+	 C-c C-y C-S-B (elpy-shell-send-buffer-and-step-and-go)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-buffer-and-step-and-go][¶]]
+***** Shell feedback[[https://elpy.readthedocs.io/en/latest/ide.html#shell-feedback][¶]]
+	 When package [[https://www.emacswiki.org/emacs/EvalSexpFu][eval-sexp-fu]] is loaded and eval-sexp-fu-flash-mode is active, the
+	 statements sent to the shell are briefly flashed after running an evaluation command,
+	 thereby providing visual feedback.
+
+	 elpy-shell-echo-input (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input][¶]]
+
+		Whenever a code fragment is sent to the Python shell, Elpy prints it in the Python
+		shell buffer (i.e., it looks as if it was actually typed into the shell). This behavior can
+		be turned on and off via the custom variable elpy-shell-echo-input and further
+		customized via elpy-shell-echo-input-cont-prompt (whether to show continuation
+		prompts for multi-line inputs) and elpy-shell-echo-input-lines-head /
+		elpy-shell-echo-input-lines-tail (how much to cut when input is long).
+
+	 elpy-shell-echo-output (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-output][¶]]
+
+		Elpy shows the output produced by a code fragment sent to the shell in the echo
+		area when the shell buffer is currently invisible. This behavior can be controlled via
+		elpy-shell-echo-output (never, always, or only when shell invisible). Output echoing
+		is particularly useful if the custom variable [[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-display-buffer-after-send][elpy-shell-display-buffer-after-send]] is
+		set to nil (the default value). Then, no window is needed to display the shell
+		(thereby saving screen real estate), but the outputs can still be seen in the echo
+		area.
+
+	 elpy-shell-display-buffer-after-send (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-display-buffer-after-send][¶]]
+
+		Whether to display the Python shell after sending something to it (default nil).
+**** Syntax Checking[[https://elpy.readthedocs.io/en/latest/ide.html#syntax-checking][¶]]
+	 Whenever you save a file, Elpy will run a syntax check and highlight possible errors or
+	 warnings inline.
+
+	 C-c C-n (elpy-flymake-next-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-next-error][¶]]
+
+	 C-c C-p (elpy-flymake-previous-error)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-flymake-previous-error][¶]]
+
+		You can navigate between any error messages with these keys. The current error
+		will be shown in the minibuffer.
+
+	 Elpy uses the built-in [[https://www.gnu.org/software/emacs/manual/html_node/flymake/index.html#Top][Flymake]] library to find syntax errors on the fly, so see there for
+	 more configuration options.
+
+	 C-c C-v (elpy-check)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-check][¶]]
+
+		Alternatively, you can run a syntax check on the current file where the output is
+		displayed in a new buffer, giving you an overview and allowing you to jump to the
+		errors from there.
+
+		With a prefix argument, this will run the syntax check on all files in the current
+		project.
+
+	 python-check-command (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-python-check-command][¶]]
+
+		To change which command is used for syntax checks, you can customize this
+		option. By default, Elpy uses the flake8 program, which you have to install
+		separately. The [[https://elpy.readthedocs.io/en/latest/introduction.html#command-elpy-config][elpy-config]] command will prompt you to do this if Elpy can’t find
+		the program.
+
+		It is possible to create a single virtual env for the sole purpose of installing flake8
+		in there, and then simply link the command script to a directory inside your PATH,
+		meaning you do not need to install the program in every virtual env separately.
+**** Documentation[[https://elpy.readthedocs.io/en/latest/ide.html#documentation][¶]]
+	 Elpy provides a single interface to documentation.
+
+	 C-c C-d (elpy-doc)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-doc][¶]]
+
+		When point is on a symbol, Elpy will try and find the documentation for that object,
+		and display that. If it can’t find the documentation for whatever reason, it will try
+		and look up the symbol at point in pydoc. If it’s not there, either, it will prompt the
+		user for a string to look up in pydoc.
+
+		With a prefix argument, Elpy will skip all the guessing and just prompt the user for
+		a string to look up in pydoc.
+
+	 If the autodoc module is enabled (not by default) the documentation is automatically
+	 updated with the symbol at point or the currently selected company candidate.
+
+	 elpy-autodoc-delay (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-autodoc-delay][¶]]
+
+		The idle delay in seconds until documentation is updated automatically.
+**** Debugging[[https://elpy.readthedocs.io/en/latest/ide.html#debugging][¶]]
+	 Elpy provides an interface to [[https://docs.python.org/3/library/pdb.html][pdb]], the builtin Python debugger. Note that this interface
+	 is only available for Emacs 25 and above.
+
+	 C-c C-u d (elpy-pdb-debug-buffer)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][¶]]
+
+		Run pdb on the current buffer. If no breakpoints has been set using
+		[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][elpy-pdb-toggle-breakpoint-at-point]], the debugger will pause at the beginning of
+		the buffer. Else, the debugger will pause at the first breakpoint. Once pdb is
+		started, the [[https://docs.python.org/3/library/pdb.html#debugger-commands][pdb commands]] can be used to step through and look into the code
+		evaluation.
+
+		With a prefix argument C-u, ignore the breakpoints and always pause at the
+		beginning of the buffer.
+
+	 C-c C-u b (elpy-pdb-toggle-breakpoint-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-toggle-breakpoint-at-point][¶]]
+
+		Add (or remove) a breakpoint on the current line. Elpy adds a red circle to the
+		fringe to indicate the presence of a breakpoint. You can then use
+		[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-buffer][elpy-pdb-debug-buffer]] to start pdb and pause at each of the breakpoints.
+
+		With a prefix argument C-u, remove all the breakpoints.
+
+	 C-c C-u p (elpy-pdb-break-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-break-at-point][¶]]
+
+		Run pdb on the current buffer and pause at the cursor position.
+
+	 C-c C-u e (elpy-pdb-debug-last-exception)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-pdb-debug-last-exception][¶]]
+
+		Run post-mortem pdb on the last exception.
+**** Testing[[https://elpy.readthedocs.io/en/latest/ide.html#testing][¶]]
+	 Testing is an important part of programming. Elpy provides a central interface to
+	 testing, which allows for a good workflow for tests.
+
+	 Elpy’s test interface is built around Emacs’ [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation.html][compilation framework]]. Elpy will run test
+	 commands as a compilation job, with all the advantages this brings.
+
+	 C-c C-t (elpy-test)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-test][¶]]
+
+		Start a test run. This uses the currently configured test runner to discover and run
+		tests. If point is inside a test case, the test runner will run exactly that test case.
+		Otherwise, or if a prefix argument is given, it will run all tests.
+
+	 M-x elpy-set-test-runner[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-set-test-runner][¶]]
+
+		This changes the current test runner. Elpy supports the standard unittest discovery
+		runner, the Django discovery runner, nose, green, py.test and Twisted trial. You
+		can also write your own, as described in [[https://elpy.readthedocs.io/en/latest/extending.html#writing-test-runners][Writing Test Runners]].
+
+		Note on Django runners: Elpy tries to find manage.py within your project structure.
+		If it’s unable to find it, it falls back to django-admin.py. You must set the
+		environment variable DJANGO_SETTINGS_MODULE accordingly.
+
+	 This enables a good workflow. You write a test and use C-c C-t to watch it fail. You
+	 then go to your implementation file, for example using C-u C-c C-f, and make the test
+	 pass. You can use a key bound to recompile (I use <f5> for this) to just re-run that one
+	 test. Once that passes, you can use C-c C-t again to run all tests to make sure they all
+	 pass as well. Repeat.
+
+	 For an even more automated way, you can use [[https://github.com/jorgenschaefer/emacs-tdd/][tdd.el]], which will run your last compile
+	 command whenever you save a file.
+**** Refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#refactoring][¶]]
+	 C-c C-e (elpy-multiedit-python-symbol-at-point)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-multiedit-python-symbol-at-point][¶]]
+
+		Edit all occurrences of the symbol at point at once. This will highlight all such
+		occurrences, and editing one of them will edit all. This is an easy way to rename
+		identifiers.
+
+		If the backend does not support finding occurrences (currently only Jedi does), or
+		if a prefix argument is given, this will edit syntactic occurrences instead of
+		semantic ones. This can match more occurrences than it should, so be careful.
+		You can narrow the current buffer to the current function using C-x n d to restrict
+		where this matches.
+
+		Finally, if there is a region active, Elpy will edit all occurrences of the text in the
+		region.
+
+	 C-c C-r f (elpy-format-code)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-format-code][¶]]
+
+		Format code using the available formatter.
+
+		If a region is selected, only that region is formatted. Otherwise current buffer is
+		formatted.
+
+	 elpy-formatter (Customize Option)[[https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-formatter][¶]]
+
+		Allow to select the formatter you want to use amongst [[https://github.com/google/yapf][yapf]] , [[https://github.com/hhatto/autopep8][autopep8]] and [[https://github.com/ambv/black][black]].
+
+		[[https://github.com/google/yapf][yapf]] and [[https://github.com/hhatto/autopep8][autopep8]] can be configured with style files placed in the project root
+		directory (determined by elpy-project-root). [[https://github.com/ambv/black][black]] can be configured in the
+		pyproject.toml file of your project.
+
+	 Jedi refactoring[[https://elpy.readthedocs.io/en/latest/ide.html#jedi-refactoring][¶]]
+
+		The following commands take advantage of Jedi refactoring possibilities. They
+		all present a diff of the modifications before applying them, this allows to check
+		the ongoing modifications and cancel some of them if needed.
+
+	 C-c C-r r (elpy-refactor-rename)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-rename][¶]]
+
+		Rename all occurences of the symbol at point (variable, function, class, …). If
+		needed, rename occurences in other files as well.
+
+	 C-c C-r v (elpy-refactor-extract-variable)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-variable][¶]]
+
+		Move the selection to a new variable.
+
+	 C-c C-r f (elpy-refactor-extract-function)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-extract-function][¶]]
+
+		Move the selection to a new function.
+
+	 C-c C-r i (elpy-refactor-inline)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-refactor-inline][¶]]
+
+		Inline the variable at point. i.e. replace it with its defining expression.
+**** Profiling[[https://elpy.readthedocs.io/en/latest/ide.html#profiling][¶]]
+	 Elpy allows one to profile python scripts asynchronously using cProfile.
+	 M-x elpy-profile-buffer-or-region[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-profile-buffer-or-region][¶]]
+
+		Send the current buffer or region to the profiler and display the result with
+		elpy-profile-visualizer. The default visualizer is [[https://jiffyclub.github.io/snakeviz][snakeviz]], a browser-based
+		graphical profile viewer that can be installed with pip install snakeviz.
+		[[https://www.vrplumber.com/programming/runsnakerun][RunSnakeRun]] (Python-2 only GTK GUI) and [[https://github.com/pwaller/pyprof2calltree][pyprof2calltree]] (uses QCacheGrind
+		or KCacheGrind for display) are supported alternatives and can be similarly
+		installed with pip.
+**** Django[[https://elpy.readthedocs.io/en/latest/ide.html#django][¶]]
+
+	 Elpy has basic Django support such as parsing either manage.py or django-admin.py
+	 (If it does not find manage.py it falls back to django-admin.py) for command
+	 completion assistance. Can also start runserver automatically and you can give an ip
+	 address and port.
+
+	 C-c C-x c (elpy-django-command)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-django-command][¶]]
+
+		Choose what command you’d like to run via django-admin.py or manage.py.
+		Please note that for compatibility reasons, the shell command will use python
+		(instead of ipython by default).
+
+	 C-c C-x r (elpy-django-runserver)[[https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-django-runserver][¶]]
+
+		Start the development server command, runserver. Default arguments are
+		127.0.0.1 for ip address and 8000 for port. These can be changed via
+		elpy-django-server-ipaddr and elpy-django-server-port.
+
+	 [[https://elpy.readthedocs.io/en/latest/concepts.html][Next]][[https://elpy.readthedocs.io/en/latest/editing.html][Previous]] 
+
+** Evil
+*** insert mod
+**** tab
+If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
+*** ex mode : 
+**** evil-ex-define-cmd : 
+	 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)
+
+** ivy 
+*** keys
+**** Minibuffer bindings:
+ key             binding
+ ---             -------
+ C-c							Prefix Command
+ C-g							minibuffer-keyboard-quit
+ TAB							ivy-partial-or-done
+ C-j							ivy-alt-done
+ RET							ivy-done
+ C-o							hydra-ivy/body
+ C-r							ivy-reverse-i-search
+ C-s							ivy-next-line-or-history
+ C-v							ivy-scroll-up-command
+ ESC							Prefix Command
+ SPC							self-insert-command
+ $								ivy-magic-read-file-env
+ S-SPC						ivy-restrict-to-matches
+ C-'							ivy-avy
+ <down-mouse-1>	ignore
+ <mouse-1>				ivy-mouse-done
+ <mouse-3>				ivy-mouse-dispatching-done
+ <next>					ivy-scroll-up-command
+ <prior>					ivy-scroll-down-command
+ <remap>					Prefix Command
+ <right>					ivy-forward-char
+
+**** sort : 
+ C-c C-a					ivy-toggle-ignore
+ C-c C-o					ivy-occur
+ C-c C-s					ivy-rotate-sort
+****  <remap> <backward-delete-char-untabify>
+																 ivy-backward-delete-char
+ <remap> <backward-kill-word>		ivy-backward-kill-word
+ <remap> <beginning-of-buffer>		ivy-beginning-of-buffer
+ <remap> <delete-backward-char>	ivy-backward-delete-char
+ <remap> <delete-char>						ivy-delete-char
+ <remap> <describe-mode>					ivy-help
+ <remap> <end-of-buffer>					ivy-end-of-buffer
+ <remap> <forward-char>					ivy-forward-char
+ <remap> <kill-line>							ivy-kill-line
+ <remap> <kill-ring-save>				ivy-kill-ring-save
+ <remap> <kill-whole-line>				ivy-kill-whole-line
+ <remap> <kill-word>							ivy-kill-word
+ <remap> <next-line>							ivy-next-line
+ <remap> <previous-line>					ivy-previous-line
+ <remap> <scroll-down-command>		ivy-scroll-down-command
+ <remap> <scroll-up-command>			ivy-scroll-up-command
+**** ivy-read : 
+ C-M-a						ivy-read-action
+ C-M-j						ivy-immediate-done
+ M-RET						ivy-call
+ C-M-n						ivy-next-line-and-call
+ C-M-o						ivy-dispatching-call
+ C-M-p						ivy-previous-line-and-call
+ C-M-y						ivy-insert-current-full
+ M-i							ivy-insert-current
+ M-j							ivy-yank-word
+ M-n							ivy-next-history-element
+ M-o							ivy-dispatching-done
+ M-p							ivy-previous-history-element
+ M-r							ivy-toggle-regexp-quote
+ M-v							ivy-scroll-down-command
+
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
 a eww buffer stores a link to the current url of the eww buffer.
@@ -14865,38 +14890,10 @@ M-x
 customize-group 
 RET 
 company. 
-** read-aloud
-*** Install
-#+begin_src emacs-lisp :results output silent
-(package-refresh-contents)
-(use-package reverse-im
-  :ensure t
-  :custom
-  (reverse-im-input-methods '("russian-computer"))
-  :config
-  (reverse-im-mode t))
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
- (use-package read-aloud
-   :ensure t)
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
-#+end_src
-#+RESULTS:
-: t
-*** Docs
-https://github.com/gromnitsky/read-aloud.el
-**** Usage 
-***** read-aloud-this : 
-M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
-***** read-aloud-buf : 
-M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
-***** read-aloud-stop : 
-top reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
-***** read-aloud-change-engine : 
-M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
-
-
+** WindMove & FrameMove 
+https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
+;; Remap windmove keys to home keys
+(global-set-key (kbd "M-h") 'windmove-left)
+(global-set-key (kbd "M-j") 'windmove-down)
+(global-set-key (kbd "M-k") 'windmove-up)
+(global-set-key (kbd "M-l") 'windmove-right)
