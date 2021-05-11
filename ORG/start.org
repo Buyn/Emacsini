@@ -65,10 +65,8 @@ https://www.braveclojure.com/basic-emacs/
 **** Threats
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-(load "~/INI/hydra-cfg.el")
-(load "~/INI/org_agend_cfg.el")
-(load "~/INI/fullscreen-cfg.el")
-(load "~/INI/interface/input-methods-cfg.el")
+(define-key evil-normal-state-map (kbd "M-e M-f") 'eval-defun)
+
 #+end_src
 
 #+begin_src emacs-lisp :results output silent
@@ -234,8 +232,8 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/ELs/BuYn/shell.el")
 	----- not auto loadet -----
 	(find-file-other-frame "~/ELs/BuYn/ai-dungon.el")
-	(load "~/ELs/tts/tts-editor/tts-editor.el")
-	(load "~/ELs/BuYn/tts.el")
+	(find-file-other-frame "~/ELs/tts/tts-editor/tts-editor.el")
+	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
 ** org files
 *** lincks
@@ -1497,6 +1495,8 @@ You can disable highlighting of any of the supported delimiter types through the
 ** info\help
 *** info manual : 
 s - to seach in node of manual(not work in index)
+i - 
+g - 
    Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
    удобная систе показиваюшая мануалки по всем установленым модам
 f1-f - show funcrion doc string
@@ -2821,6 +2821,31 @@ together, or by taking them apart.
  Variable: split-string-default-separators
 
 	The default value of separators for split-string. Its usual value is "[ \f\t\n\r\v]+". 
+**** Modefing 
+***** replace in string : 
+****** replace-regexp-in-string : 
+(replace-regexp-in-string REGEXP REP STRING &optional FIXEDCASE
+LITERAL SUBEXP START)
+Replace all matches for REGEXP with REP in STRING.
+Return a new string containing the replacements.
+
+Optional arguments FIXEDCASE, LITERAL and SUBEXP are like the
+arguments with the same names of function ‘replace-match’.  If START
+is non-nil, start replacements at that index in STRING, and omit
+the first START characters of STRING from the return value.
+
+REP is either a string used as the NEWTEXT arg of ‘replace-match’ or a
+function.  If it is a function, it is called with the actual text of each
+match, and its value is used as the replacement text.  When REP is called,
+the match data are the result of matching REGEXP against a substring
+of STRING, the same substring that is the actual text of the match which
+is passed to REP as its argument.
+
+To replace only the first match (if any), make REGEXP match up to \'
+and replace a sub-expression, e.g.
+  (replace-regexp-in-string "\\(foo\\).*\\'" "bar" " foo foo" nil nil 1)
+    => " bar foo"
+
 
 *** Lisp Symbol
 **** Xah Lee. : 
@@ -5467,6 +5492,324 @@ https://drive.google.com/file/d/10mKcsFB0pDeLRM15T6QlmG4Rn979rBDl/view?usp=shari
 	 #+end_src
 *** Cool guid
  https://github.com/chrisdone/elisp-guide
+** Emacs [[https://www.emacswiki.org/emacs?search=%22RegularExpression%22][RegularExpression]]
+*** regular expression : 
+ A [[https://www.emacswiki.org/emacs?search=%22regular+expression%22][regular expression]] (abbreviated “[[https://www.emacswiki.org/emacs?search=%22regexp%22][regexp]]” or sometimes just “[[https://www.emacswiki.org/emacs?search=%22re%22][re]]”) is a
+ search-string with wildcards – and more. It is a pattern that is matched against the
+ text to be searched. See [[https://www.emacswiki.org/info-ref?find=Regexps][Regexps]]. Examples:
+
+     "alex"
+
+ A plain string is a regular expression that matches the string exactly. The above
+ regular expression matches “alex”.
+
+     "alexa?"
+
+ Some characters have special meanings in a regular expression. The question
+ mark, for example, says that the preceding expression (the character “a” in this case)
+ may or may not be present. The above regular expression matches “alex” or “alexa”.
+
+ Regexps are important to Emacs users in many ways, including these: 
+
+ ,* We search with them interactively. Try ‘C-M-s’ (command
+	isearch-forward-regexp).
+ ,* Emacs code uses them to parse text. We use regexps all the time, without knowing
+	it, when we use Emacs.
+
+ You can use a tool to construct regexps. For example, you can use ‘rx’ like this:
+
+     (rx (or (and "\*" (*? anything) "*/") (and "//" (*? anything) eol)))
+
+ To produce this regexp (which matches C-style multiline and single line comments):
+
+     \\*\\(?:.\\|\n\\)*?\\*/\\|//\\(?:.\\|\n\\)*?$
+
+ And there’s a package [[https://elpa.gnu.org/packages/xr.html][xr (available on GNU ELPA)]] that does the opposite
+ conversion, from regexps to a human-readable form.
+*** Regular Expression Syntax
+**** Regexp Syntax Basics
+	Any character matches itself, except for the list below.
+
+	The following characters are special : . * + ? ^ $ \ [ 
+
+	Between brackets [], the following are special : ] - ^ 
+
+	Many characters are special when they follow a backslash – see below.
+
+		.        any character (but newline)
+		*        previous character or group, repeated 0 or more time
+		+        previous character or group, repeated 1 or more time
+		?        previous character or group, repeated 0 or 1 time
+		^        start of line
+		$        end of line
+		[...]    any character between brackets
+		[^..]    any character not in the brackets
+		[a-z]    any character between a and z
+		\        prevents interpretation of following special char
+		\|       or
+		\w       word constituent
+		\b       word boundary
+		\sc      character with c syntax (e.g. \s- for whitespace char)
+		\( \)    start/end of group
+		\&lt; \&gt;    start/end of word (faulty rendering: backslash + less-than and backslash + greater-than)
+		\_< \_>  start/end of symbol
+		\` \'    start/end of buffer/string
+		\1       string matched by the first group
+		\n       string matched by the nth group
+		\{3\}    previous character or group, repeated 3 times
+		\{3,\}   previous character or group, repeated 3 or more times
+		\{3,6\}  previous character or group, repeated 3 to 6 times
+		\=       match succeeds if it is located at point
+
+	,*?, +?, and ?? are non-greedy versions of *, +, and ? – see [[https://www.emacswiki.org/emacs/NonGreedyRegexp][NonGreedyRegexp]]. Also,
+	\W, \B, and \Sc match any character that does not match \w, \b, and \sc.
+****  Character Groups
+
+	Characters are organized by category. Use C-u C-x = to display the category of the
+	character under the cursor.
+
+		\ca      ascii character
+		\Ca      non-ascii character (newline included)
+		\cl      latin character
+		\cg      greek character
+
+	[[https://www.emacswiki.org/info-ref?find=Syntax%20Descriptors][Syntax classes]] provide a shorthand for representing some groups of related
+	characters, hence they are also known as character classes. Syntax classes can
+	themselves be represented in a square-bracket-delimited, and they must also be
+	used between square brackets (more below). You can view all syntax classes [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Char-Classes.html][here]].
+	Some of the more useful square-bracket-delimited syntax classes are:
+
+		[:digit:]  a digit, same as [0-9]
+		[:alpha:]  a letter (an alphabetic character)
+		[:alnum:]  a letter or a digit (an alphanumeric character)
+		[:upper:]  a letter in uppercase
+		[:lower:]  a letter in lowercase
+		[:graph:]  a visible character
+		[:print:]  a visible character plus the space character
+		[:space:]  a whitespace character, as defined by the syntax table, but typically
+							 [ \t\r\n\v\f ], which includes the newline character
+		[:blank:]  a space or tab character
+		[:xdigit:] an hexadecimal digit
+		[:cntrl:]  a control character
+		[:ascii:]  an ascii character
+		[:nonascii:]  any non ascii character
+
+	Syntax classes can also be represented using backslashes: e.g.,
+
+		\s-   whitespace character        \s/   character quote character
+		\sw   word constituent            \s$   paired delimiter
+		\s_   symbol constituent          \s'   expression prefix
+		\s.   punctuation character       \s<   comment starter
+		\s(   open delimiter character    \s>   comment ender
+		\s)   close delimiter character   \s!   generic comment delimiter
+		\s"   string quote character      \s|   generic string delimiter
+		\s\   escape character
+
+	You can see the current [[https://www.emacswiki.org/info-ref?find=Syntax%20Tables][syntax table]] by typing C-h s. The syntax table depends on the
+	current mode. As expected, letters a..z are listed as word constituents in text-mode.
+	Other word constituents in this mode include A..Z, 0..9, $, %, currency units, accented
+	letters, kanjis. See [[https://www.emacswiki.org/emacs/EmacsSyntaxTable][EmacsSyntaxTable]] for details.
+****  Syntax Class Usage
+
+	One must remember that syntax classes must be used within square brackets,
+	as one would in specifying any other sequence to match or reject: e.g.
+	[[:upper:]\|[:digit:]\.]. This is easy to overlook when using
+	square-bracket-delimited syntax classes, since they include their own square
+	brackets! E.g., if searching for a single whitespace character in a regexp, this
+
+		[:space:]
+
+	will fail. Just remember to add a 2nd/outer pair of square brackets: e.g., this
+
+		[[:space:]]
+
+	will succeed in finding a single whitespace character, this
+
+		[[:space:]]*
+
+	will succeed in finding zero-or-more single whitespace characters, etc.
+****  Idiosyncrasies of Emacs Regular Expressions
+
+	,* In an interactive search, a space character stands for one or more whitespace
+	 characters (tabs are whitespace characters). You can use M-s SPC while searching
+	 or replacing to toggle between this behavior and treating spaces as literal spaces.
+	 Or put the following in your [[https://www.emacswiki.org/emacs/InitFile][InitFile]] to override this behaviour.
+
+									 (setq search-whitespace-regexp nil)
+
+	,* [^ … ] matches all characters not in the list, even newlines. Put a newline in the
+	 list if you want it not to be matched. You can enter a newline character using ‘C-o’,
+	 ‘C-q C-j’, ‘C-q 012 RET’, or as “\n” within an Emacs Lisp string. Note also that
+	 \s- matches whitespace, sometimes including newlines, but is mode-dependent.
+	,* Default case handling for replacing commands executes case conversion. This
+	 means that both upper and lower case match in the regexp, whereas the case in
+	 the replacement string is chosen according to the match syntax. Try for example
+	 replacing john by harry below. Case conversion can be toggled on/off by typing
+	 ‘M-c’ in the minibuffer during search. You can also set the variable
+	 case-fold-search to nil to disable case conversion; see [[https://www.emacswiki.org/emacs/CaseFoldSearch][CaseFoldSearch]] for
+	 more details. In the following example, only the last line would then be replaced.
+
+														 John  =>  Harry
+														 JOHN  =>  HARRY
+														 john  =>  harry
+
+	,* Backslashes must be double-quoted when used in Lisp code. Regular
+	 expressions are often specified using strings in [[https://www.emacswiki.org/emacs/EmacsLisp][EmacsLisp]]. Some abbreviations
+	 are available: \n for newline, \t for tab, \b for backspace, \u3501 for character with
+	 unicode value 3501, and so on. Backslashes must be entered as \\. Here are two
+	 ways to replace the decimal point by a comma (e.g. 1.5 -> 1,5), first by an
+	 interactive command, second by executing Lisp code (type C-x C-e after the
+	 expression to get it executed).
+
+						 M-x replace-regexp RET \([0-9]+\)\. RET \1, RET
+						(while (re-search-forward "\\([0-9]+\\)\\." nil t)
+													(replace-match "\\1,"))
+
+	,* The construct \d for any digit is not supported, use [0-9] or [:digit:] instead.
+***  Some Regexp Examples
+
+	 [-+[:digit:]]                     digit or + or - sign
+	 \(\+\|-\)?[0-9]+\(\.[0-9]+\)?     decimal number (-2 or 1.5 but not .2 or 1.)
+	 \&lt;\(\w+\) +\1\&gt;                     two consecutive, identical words
+	 \&lt;[[:upper:]]\w*                  word starting with an uppercase letter
+		+$                               trailing whitespaces (note the starting SPC)
+	 \w\{20,\}                         word with 20 letters or more
+	 \w+phony\&gt;                        word ending by phony
+	 \(19\|20\)[0-9]\{2\}              year 1900-2099
+	 ^.\{6,\}                          at least 6 symbols
+	 ^[a-zA-Z0-9_]\{3,16\}$            decent string for a user name
+	 <tag[^> C-q C-j ]*>\(.*?\)</tag>  html tag
+***  Some Emacs Commands that Use Regular Expressions
+
+	 C-M-s                   incremental forward search matching regexp
+	 C-M-r                   incremental backward search matching regexp
+	 replace-regexp          replace string matching regexp
+	 query-replace-regexp    same, but query before each replacement
+	 align-regexp            align, using strings matching regexp as delimiters
+	 highlight-regexp        highlight strings matching regexp
+	 occur                   show lines containing a match
+	 multi-occur             show lines in all buffers containing a match
+	 how-many                count the number of strings matching regexp
+	 keep-lines              delete all lines except those containing matches
+	 flush-lines             delete lines containing matches
+	 grep                    call unix grep command and put result in a buffer
+	 lgrep                   user-friendly interface to the grep command
+	 rgrep                   recursive grep
+	 dired-do-copy-regexp    copy files with names matching regexp
+	 dired-do-rename-regexp  rename files matching regexp
+	 find-grep-dired         display files containing matches for regexp with Dired
+
+	Note that list-matching-lines is an alias for occur and delete-matching-lines is
+	an alias for flush-lines. The command highlight-regexp is bound to C-x w h.
+	Also query-replace-regexp is bound by default to C-M-%, although some people
+	prefer using an alias, like M-x qrr. Put the following in your [[https://www.emacswiki.org/emacs/InitFile][InitFile]] to create such
+	alias.
+
+		 (defalias 'qrr 'query-replace-regexp)
+
+	See also: [[https://www.emacswiki.org/emacs/IncrementalSearch][IncrementalSearch]], [[https://www.emacswiki.org/emacs/ReplaceRegexp][ReplaceRegexp]], [[https://www.emacswiki.org/emacs/AlignCommands][AlignCommands]], [[https://www.emacswiki.org/emacs/OccurBuffer][OccurBuffer]],
+	[[https://www.emacswiki.org/emacs/DiredPower][DiredPower]]
+***  Tools for Constructing Regexps
+
+	,* Command ‘re-builder’ constructs a regular expression. You enter the regexp in
+	 a small window at the bottom of the frame. The first 200 matches in the [[https://www.emacswiki.org/emacs/buffer][buffer]] are
+	 highlighted, so you can see if the regexp does what you want. Use Lisp syntax,
+	 which means doubling backslashes and using \\\\ to match a literal backslash.
+	,* Macro ‘rx’ provides user-friendly syntax for regular expressions. For example, (rx
+	 (one-or-more blank) line-end) returns the regexp string
+	 "\\(?:[[:blank:]]+$\\)". See [[https://www.emacswiki.org/emacs/rx][rx]].
+	,* [[https://www.emacswiki.org/emacs/SymbolicRegexp][SymbolicRegexp]] is similar in aim to ‘rx’.
+***  Study and Practice
+
+	,* Read about regexps in the [[https://www.emacswiki.org/info-ref?find=Regexps][Elisp manual]]. See also [[https://www.emacswiki.org/emacs/RegexpReferences][RegexpReferences]]. Study
+	 [[https://www.emacswiki.org/emacs/EmacsLisp][EmacsLisp]] code that uses regexps.
+	,* Regexp searching (‘C-M-s’) is a great way to learn about regexps – see [[https://www.emacswiki.org/emacs/IncrementalSearch#RegexpSearches][Regexp
+	 Searches]]. Change your regexp on the fly and see immediately what difference the
+	 change makes.
+	,* Some examples of use (see also [[https://www.emacswiki.org/emacs/ReplaceRegexp][ReplaceRegexp]] and [[https://www.emacswiki.org/emacs/EmacsCrashRegexp][EmacsCrashRegexp]]):
+
+	 * Search for trailing whitespace: C-M-s SPC+$
+	 * Highlight all trailing whitespace: M-x highlight-regexp RET SPC+$ RET RET
+	 * Delete trailing whitespace: M-x replace-regexp RET SPC+$ RET RET (same as
+	 ‘M-x delete-trailing-whitespace’)
+	 * Search for open delimiters: C-M-s \s( 
+	 * Search for duplicated words (works across lines): C-M-s \(\<\w+\>\)\s-+\1
+	 * Count number of words in [[https://www.emacswiki.org/emacs/buffer][buffer]]: M-x how-many RET \< RET
+	 * Align words beginning with an uppercase letter followed by a lowercase letter:
+	 M-: (setq case-fold-search nil) RET then M-x align-regexp RET
+	 \<[[:upper:]][[:lower:]] RET
+	 * Replace word foo by bar (won’t replace fool by barl): M-x replace-regexp
+	 RET \<foo\> RET bar
+	 * Keep only the first two words on each line: M-x replace-regexp RET
+	 ^\(\W*\w+\W+\w+\).* RET \1 RET
+	 * Suppress [[https://www.emacswiki.org/emacs/line][line]]s beginning with ;;: M-x flush-lines RET ^;; RET
+	 * Remove the text after the first ; on each line: M-x replace-regexp RET
+	 \([^;]*\);.* RET \1 RET
+	 * Keep only lines that contain an email address: M-x keep-lines RET
+	 \w+\(\.\w+\)?@\(\w\|\.\)+ RET
+	 * Keep only one instance of consecutive empty lines: M-x replace-regexp RET
+	 ^C-q C-j\{2,\} RET C-q C-j RET
+	 * Keep words or letters in uppercase, one per line: M-x replace-regexp RET
+	 [^[:upper:]]+ RET C-o RET
+	 * List lines beginning with Chapter or Section: M-x occur RET
+	 ^\(Chapter\|Section\) RET
+	 * List lines with more than 80 characters: M-x occur RET ^.\{81,\} RET
+***  Use Icicles to Learn about Regexps
+
+	[[https://www.emacswiki.org/emacs/Icicles][Icicles]] provides these interactive ways to learn about regexps:
+
+	,* `C-`’ (‘icicle-search’) shows you regexp matches, as does ‘C-M-s’, but it can
+	 also show you (that is, highlight) regexp subgroup matches. Showing matched
+	 subgroups is very helpful for learning. There are two ways that you can use this
+	 Icicles feature:
+
+	 * You can seach for a regexp, but limit the search context, used for further
+	 searching, to a particular subgroup match. For example, you can search for and
+	 highlight Lisp argument lists, by using a regexp subgroup that matches lists,
+	 placing that subgroup after ‘defun’: (defun [^(]*\(([^(]*)\), that is, defun,
+	 followed by non-`(’ character(s), followed by `(’, possibly followed by non-`)’
+	 character(s), followed by `)’.
+	 * You can search for a regexp without limiting the search context to a subgroup
+	 match. In this case, Icicles highlights each subgroup match in a different color.
+	 Here’s an example, showing how each subgroup of the complex regexp
+	 (\([-a-z*]+\) *\((\(([-a-z]+ *\([^)]*\))\))\).* is matched:
+
+	[[https://www.emacswiki.org/emacs/IciclesSearchContextLevelsScreenshot][IciclesSearchContextLevelsScreenshot]]
+
+	,* `C-`’ also helps you learn by letting you use two simple regexps (search within a
+	 search) as an alternative to coming up with a single, complex regexp to do the
+	 same job. And, as with incremental search, you can change the second regexp on
+	 the fly to see immediately what difference the change makes. See [[https://www.emacswiki.org/emacs/Icicles_-_Search_Commands%2c_Overview][Icicles - Search
+	 Commands, Overview]]
+	,* ‘S-TAB’ during [[https://www.emacswiki.org/emacs/minibuffer][minibuffer]] input shows you all matches for your input string, which
+	 can be a regexp. So, just type a regexp whenever the minibuffer is active for
+	 [[https://www.emacswiki.org/emacs/completion][completion]] and hit ‘S-TAB’ to see what the regexp matches. Try this with
+	 [[https://www.emacswiki.org/emacs/command][command]] input (‘M-x’), [[https://www.emacswiki.org/emacs/buffer][buffer]] switching (‘C-x b’), file visiting (‘C-x f’), help
+	 (‘C-h f’, ‘C-h v’), and so on. Almost any time you type input in the minibuffer, you
+	 can type a regexp and use ‘S-TAB’ to see what it matches (and then choose one
+	 of the matching candidates to input, if you want).
+***  Questions
+****  Does Emacs support lookahead/lookbehind? 
+
+		No, Emacs does not support Perl-style lookahead/lookbehind expressions.
+
+	 Note: If you have Python installed, you can add the package [[https://github.com/benma/visual-regexp-steroids.el/][visual regexp steroids]],
+	 to use python based regular expressions. Interactive regular expressions (such as
+	 isearch-forward-regexp and regexp-replace) written using this package do support
+	 lookahead and lookbehind expressions.
+**** 	Does Emacs support possessive quantifiers such as ?+, *+, ++ ? 
+
+		No, Emacs does not support possessive quantifiers. 
+
+	 The escape sequence \cC represents any character of category “C”, and according
+	 to Emacs documentation invoked by “M-x describe-categories”, \c6 ought to match
+	 any digit. Yet the ASCII digits 0-9 are not matched by \c6. Is this an error, or just
+	 something on the to-do list? 
+
+	 -------------------------------------------------------------------------
+
+
+
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  

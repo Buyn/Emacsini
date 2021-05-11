@@ -28,6 +28,21 @@
 		)
   )
 
+;; *** buyn-cmd-start-syn :
+(defun buyn-cmd-start-syn (cmd-params)
+  "	buyn start new cmd process
+		as parametr  
+		get comand to execute
+		"
+  (shell-command
+		(concat "cmd"
+						" /c "
+						" start "
+						cmd-params
+						)
+		)
+  )
+
 ;; *** buyn-far :
 (defun buyn-far (cmd-params)
   "	buyn start new cmd process

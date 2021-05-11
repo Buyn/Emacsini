@@ -1,14 +1,18 @@
+; SetTitleMatchMode, 2
 #NoEnv  
 #SingleInstance, Force
 ;#Persistent
 SetTitleMatchMode, RegEx
+; SetKeyDelay, 10, 10
+
 
 IfWinExist, ahk_class Chrome_WidgetWin_1 
 	{
+	; WinGetActiveTitle, Title
 	WinGetClass, Title, A
 	ControlFocus, Chrome_RenderWidgetHostHWND2
-	ControlSend,,{space}, AI Dungeon - Google Chrome 
-	; Sleep 1000
+;	sleep, 500
+	ControlSend,,{backspace}{backspace}{backspace}{backspace}{backspace}/do{space}, AI Dungeon - Google Chrome 
 	WinActivate,ahk_class %Title%
 	; ControlFocus, %Title%
 	; MsgBox, %Title%
