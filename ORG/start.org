@@ -696,6 +696,38 @@ asdf asdf asdf asdf
 	limit it, you will have to give it a name.
  ,* Redo might screw with your cursors. Undo works very well.
 
+**** reader for emacs
+***** fb2-mode
+****** FictionBook2 reader for emacs.
+ https://github.com/spline1986/fb2-mode
+	Screenshot
+	Installation
+****** Add to your .emacs file:
+
+ #+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+ #+end_src
+ #+begin_src emacs-lisp :results output silent
+	 (use-package fb2-mode :ensure t
+		 ;; :load-path "~/ELs/Readers/fb2-mode"
+		 :load-path "~/ELs/"
+		 ;; :init
+		 ;; :config
+		 ;; (global-evil-mc-mode  1) ;; enable
+		 )
+ #+end_src
+#+begin_src emacs-lisp results output silent
+	(find-file-other-frame "f:/Books/Ranabe/Arifureta/1/1.fb2"
+#+end_src
+
+#+begin_src emacs-lisp results output silent
+(add-to-list 'load-path "path-to-fb2-mode-dir")
+(require 'fb2-mode)
+#+end_src
+****** Configure
+			fb2-show-images — if not nil then images in book will displayed (default t).
+			fb2-images-height — height of images in fb2-mode buffer (default 500).
+			fb2-replace-hard-spaces — if not nil then non-breaking spaces will replaced by spaces (default nil).
 **** evil-mc
 ***** install
 ****** refresh-contents : 

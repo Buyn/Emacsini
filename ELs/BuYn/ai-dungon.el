@@ -15,8 +15,7 @@
 		"))
 ;; ** ai-dungeon-buyn-press-cancel
 (defun ai-dungeon-buyn-press-cancel ()
-  "send Press cancel to Ai dungeon
-	"
+  "send Press cancel to Ai dungeon "
 	(skewer-eval "[...document.all].find(el => el.innerText === '󰅖').click();"))
 ;; ** ai-dungeon-buyn-press-send
 (defun ai-dungeon-buyn-press-send ()
@@ -39,11 +38,10 @@
 	(skewer-eval "document.querySelector('textarea').focus();"))
 ;; ** ai-dungeon-buyn-send-string-to-textarea
 (defun ai-dungeon-buyn-send-string-to-textarea (ins-text)
-  "Send string to Ai dangeon textarea
-	"
+  "Send string to Ai dangeon textarea"
 	(let ((tmp-command (concat
 								"document.querySelector('textarea').value=`"
-								ins-text
+								(ai-dungeon-buyn-filter-from-emaks ins-text)
 								"`;")))
 		(skewer-eval tmp-command)))
 
@@ -81,6 +79,7 @@
 			{label_batton.click();}
 		if (label_batton.ariaLabel !== result)
 			{skewer.log('ERROR= not found text on send');}")))
+
 ;; * log command
 ;; ** ai-dungeon-buyn-string-to-log
 (defun ai-dungeon-buyn-string-to-log (ins-text)
@@ -131,12 +130,15 @@
   "corectlast result Ai dangeon
 		and send result in repel log
 	"
-	;; (setq string-text (buffer-substring (region-beginning) (region-end)))
+	(ai-dungeon-buyn-press-editlast)
+	(ai-dungeon-buyn-set-focus-to-textarea)
 	(ai-dungeon-buyn-send-string-to-textarea
 		(buffer-substring (region-beginning) (region-end)))
 	(evil-normal-state)
+	(ai-dungeon-buyn-set-focus-to-textarea)
 	(ai-dungeon-buyn-ahk-for-char-in-textarea)
-	(ai-dungeon-buyn-press-send)
+	(sit-for 1)
+	;; (ai-dungeon-buyn-press-send)
 	(ai-dungeon-buyn-set-focus-to-textarea)
 	;; (sit-for 4)
 	;; (ai-dungeon-buyn-log-the-last)
@@ -148,11 +150,8 @@
 		and send result in repel log
 	"
 	(when status-text
-		(message (concat "get status =" status-text))
-		(message (concat "get regeon=" (buffer-substring (region-beginning) (region-end))))
-		(ai-dungeon-buyn-set-send status-text)
-		)
-	(ai-dungeon-buyn-send-string 
+		(ai-dungeon-buyn-set-send status-text))
+	(ai-dungeon-buyn-send-string  
 		(buffer-substring (region-beginning) (region-end))))
 
 ;; ** ai-dungeon-buyn-send-string
@@ -166,25 +165,40 @@
 	(sit-for 1)
 	(ai-dungeon-buyn-press-send)
 	(sit-for 4)
-	(ai-dungeon-buyn-log-the-last
-	(ai-dungeon-buyn-set-focus-to-textarea)
-	 ))
+	(ai-dungeon-buyn-log-the-last)
+	(ai-dungeon-buyn-set-focus-to-textarea))
+
+;; * Emaks string control
+;; ** ai-dungeon-buyn-send-region-to-emacs
+(defun ai-dungeon-buyn-send-region-to-emacs-buffer(to-buffer-name)
+  "result from Ai dangeon log
+		send to target buffer"
+	(let ((cur-region-text (buffer-substring (region-beginning) (region-end))))
+  (set-text-properties 0 (length cur-region-text) nil cur-region-text)
+	(with-current-buffer to-buffer-name (insert
+																			 (ai-dungeon-buyn-filter-from-aidungeon cur-region-text)))))
 
 ;; * filters commands
+;; ** ai-dungeon-buyn-filter-from-emaks : 
 (defun ai-dungeon-buyn-filter-from-emaks (string-text)
   "Filter string for browser to maskig
 		simbils with sleshes"
-	(
-	 (setq string-text string-text)
-	 string-text
-	 )
-  )
+	(replace-regexp-in-string "\\\"" "\"" 
+			(replace-regexp-in-string "\\\\n$" "" string-text)))
+;; ** ai-dungeon-buyn-filter-from-aidungeon : 
+(defun ai-dungeon-buyn-filter-from-aidungeon (string-text)
+  "Filter string for browser to maskig
+		simbils with sleshes"
+	(replace-regexp-in-string "\\\\n" "\n"
+		(replace-regexp-in-string "\\\\\"" "\""
+			(replace-regexp-in-string "^\"\\|\"$" "" string-text)))
+	)
 ;; * Hidra menu
 ;; ** defhydra
 (defhydra spc-ai-dungeon-menu (:color red)
 ;; *** hint
     "
-    _q_ quit     _j_retry    c_o_ntinue  _SPC_menu
+    _q_ quit     _j_retry    c_o_ntinue  _SPC_menu _l_og2buffer
     _L_loglast   _C_ancel    _R_etryP    _U_ndo
     _c_orectlast _d_oRegion  _s_ayRegion s_t_oryRegion 
     "
@@ -201,6 +215,7 @@
 		("d" (ai-dungeon-buyn-send-region "Do") :color blue)
 		("s" (ai-dungeon-buyn-send-region "Say") :color blue)
 		("t" (ai-dungeon-buyn-send-region "Story") :color blue)
+		("l" (ai-dungeon-buyn-send-region-to-emacs-buffer "Story.org") :color blue)
 ;; *** END of def
 	)
 ;; --------------------------------------
