@@ -415,6 +415,19 @@ https://github.com/a13/reverse-im.el
   (reverse-im-mode t))
 #+end_src
 
+**** request
+https://github.com/tkf/emacs-request
+#+begin_src emacs-lisp :results output silent
+		(package-refresh-contents)
+		(use-package request
+			:ensure t
+			;; :custom
+			;; (reverse-im-input-methods '("russian-computer"))
+			;; :config
+			;; (reverse-im-mode t)
+		)
+#+end_src
+
 **** tts-editor : 
 ***** load
 #+begin_src emacs-lisp results output silent
@@ -5961,8 +5974,6 @@ https://drive.google.com/file/d/10mKcsFB0pDeLRM15T6QlmG4Rn979rBDl/view?usp=shari
 	 something on the to-do list? 
 
 	 -------------------------------------------------------------------------
-
-
 
 * Help Docs Org
 ** Welcome to Org mode
