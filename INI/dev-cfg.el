@@ -114,9 +114,6 @@
 									)
 								))
 ;; --------------------------------------
-;; *** eval: 
-;; **** eval-defun : 
-(define-key evil-normal-state-map (kbd "M-e M-f") 'eval-defun)
 ;; *** --------------------------------------
 ;; ** PROG-MODE-HOOK CUSTOMIZATION
 	(add-hook 'prog-mode-hook '(lambda ()

@@ -18,6 +18,8 @@
 (require 'org)
 (global-set-key [(control f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/start.org")))
 (global-set-key [(meta f1)] (lambda () (interactive) (find-file-other-frame "~/ORG/tmp/tmp_links.org")))
+(global-set-key [(shift f1)] (lambda () (interactive) (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")))
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)

@@ -192,9 +192,10 @@
 (define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
+;; *** eval: 
 (define-key evil-normal-state-map (kbd "M-e M-l") 'eval-last-sexp)
-;; (define-key evil-normal-state-map (kbd "M-e M-f") 'eval-defun)
-;; *** search-forward & sexp M-e M-j : 
+(define-key evil-normal-state-map (kbd "M-e M-e") 'eval-defun)
+;; **** search-forward & sexp M-e M-j : 
 (define-key evil-normal-state-map (kbd "M-e M-j") 
 		'(lambda() (interactive)
 					(move-beginning-of-line nil)
