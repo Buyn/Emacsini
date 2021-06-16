@@ -2,125 +2,108 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '(("emackandboliohk.com"
-	[url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil])
- ("plantuml.com"
-	[url-cookie "ezCMPCCS" "true" "Sun, 06 Feb 2022 22:16:48 GMT" "/" "plantuml.com" nil])
- (".google.com"
-	[url-cookie "NID" "207=lT8jTbe4wObdwY4-lhfia1guKANy_n-BmKaWBu8QQ05Qz__Dak1nMNHuSJy7Xyj1aqOl-biXfvBVqtKJ1wzW6VxxYQ2fEPYIBl6cBD42Yrb2SofsvPMeod1ohbpp0yqVPbNr4JMbNW37RAO1cpz6oZpVVmK3ORTUQefJdsDomfM" "Thu, 15-Jul-2021 19:58:35 GMT" "/" ".google.com" nil])
- ("myraspberry.ru"
-	[url-cookie "siteStatistics" "7fd02860b1d73d55d79959da44ff36cd"
-							#("Вт янв 19 03:14:11 2038 GMT" 0 27
+ '(("sourceforge.net"
+	[url-cookie "VISITOR" "55c94821-583d-4d12-b2d2-059e94185876"
+							#("Сб мар 02 09:48:53 2030 GMT" 0 27
 								(charset windows-1251))
-							"/" "myraspberry.ru" nil]
-	[url-cookie "PHPSESSID" "d133d316ba0312c6b43b0402ec138c91"
-							#("Вс янв 17 23:34:05 2021 GMT" 0 27
+							"/" "sourceforge.net" nil])
+ (".star-control.com"
+	[url-cookie "phpbb3_8ocj9_sid" "8288bb120e8001f29c556e723da5f76f" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
+	[url-cookie "phpbb3_8ocj9_k" "" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
+	[url-cookie "phpbb3_8ocj9_u" "1" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil])
+ ("store.gettingthingsdone.com"
+	[url-cookie "vsettings" "" "Sat, 22-Jan-2022 08:00:00 GMT" "/" "store.gettingthingsdone.com" nil])
+ (".pikabu.ru"
+	[url-cookie "grex2" "%7B%22low_interval_new_20200831%22%3A%22exp48%22%7D"
+							#("Вс апр 25 05:08:23 2021 GMT" 0 27
 								(charset windows-1251))
-							"/" "myraspberry.ru" nil])
- ("www.wikiwand.com"
-	[url-cookie "wikiwand.firstLandingPage" "article_page"
-							#("Чт авг 20 01:11:17 2020 GMT" 0 27
+							"/" ".pikabu.ru" nil]
+	[url-cookie "pcid" "tYAlQIY1Yv2"
+							#("Чт янв 23 05:08:23 2031 GMT" 0 27
 								(charset windows-1251))
-							"/" "www.wikiwand.com" nil]
-	[url-cookie "wikiwand.firstLandingType" "direct"
-							#("Чт авг 20 01:11:17 2020 GMT" 0 27
+							"/" ".pikabu.ru" nil])
+ ("pikabu.ru"
+	[url-cookie "la" "1611551304_3197_3197___"
+							#("Чт янв 23 05:08:23 2031 GMT" 0 27
 								(charset windows-1251))
-							"/" "www.wikiwand.com" nil]
-	[url-cookie "wikiwand.p_c" "64"
-							#("Вт июл 21 02:11:17 2020 GMT" 0 27
+							"/" "pikabu.ru" nil]
+	[url-cookie "PHPSESS" "aqc25e6uflai8i1aeb6om0ighc"
+							#("Чт янв 28 05:08:23 2021 GMT" 0 27
 								(charset windows-1251))
-							"/" "www.wikiwand.com" nil])
+							"/" "pikabu.ru" nil])
+ ("nyxt.atlas.engineer"
+	[url-cookie "lack.session" "76d6d00bef3a8c29eaeeb983cf233ade0e718350" "Tue, 09 Jan 2142 00:44:36 GMT" "/" "nyxt.atlas.engineer" nil])
+ ("francescocirillo.com"
+	[url-cookie "_shopify_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil]
+	[url-cookie "_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil])
+ ("megogo.net"
+	[url-cookie "AB" "e30%3D"
+							#("Вс фев 23 14:38:27 2020 GMT" 0 27
+								(charset windows-1251))
+							"/" "megogo.net" nil]
+	[url-cookie "megogo_web_device_id" "d2ViX1R5Mk51ZlpQQWNtYU5NcjdFdUh0OGhZcHlPZ2JKc3RW"
+							#("Пт фев 22 00:50:27 2030 GMT" 0 27
+								(charset windows-1251))
+							"/" "megogo.net" nil])
+ (".stackoverflow.com"
+	[url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
+ (".stackexchange.com"
+	[url-cookie "prov" "c8152363-e55b-e345-a9d5-1eae219a8821" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
  (".thebalancesmb.com"
-	[url-cookie "pc" "1"
-							#("Пн июл 20 16:50:01 2020 GMT" 0 27
+	[url-cookie "TMog" "n39130ebf4dee483fb2def0b8864a6b2116"
+							#("Сб авг 07 19:34:08 2088 GMT" 0 27
 								(charset windows-1251))
 							"/" ".thebalancesmb.com" nil]
 	[url-cookie "Mint" "n39130ebf4dee483fb2def0b8864a6b2116"
 							#("Пн июл 20 16:50:01 2020 GMT" 0 27
 								(charset windows-1251))
 							"/" ".thebalancesmb.com" nil]
-	[url-cookie "TMog" "n39130ebf4dee483fb2def0b8864a6b2116"
-							#("Сб авг 07 19:34:08 2088 GMT" 0 27
+	[url-cookie "pc" "1"
+							#("Пн июл 20 16:50:01 2020 GMT" 0 27
 								(charset windows-1251))
 							"/" ".thebalancesmb.com" nil])
- (".stackexchange.com"
-	[url-cookie "prov" "c8152363-e55b-e345-a9d5-1eae219a8821" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
- (".stackoverflow.com"
-	[url-cookie "prov" "4d96b29b-fd06-b2db-f73f-cd2c87f9a650" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil])
- ("megogo.net"
-	[url-cookie "megogo_web_device_id" "d2ViX1R5Mk51ZlpQQWNtYU5NcjdFdUh0OGhZcHlPZ2JKc3RW"
-							#("Пт фев 22 00:50:27 2030 GMT" 0 27
+ ("www.wikiwand.com"
+	[url-cookie "wikiwand.p_c" "64"
+							#("Вт июл 21 02:11:17 2020 GMT" 0 27
 								(charset windows-1251))
-							"/" "megogo.net" nil]
-	[url-cookie "AB" "e30%3D"
-							#("Вс фев 23 14:38:27 2020 GMT" 0 27
+							"/" "www.wikiwand.com" nil]
+	[url-cookie "wikiwand.firstLandingType" "direct"
+							#("Чт авг 20 01:11:17 2020 GMT" 0 27
 								(charset windows-1251))
-							"/" "megogo.net" nil])
- ("francescocirillo.com"
-	[url-cookie "_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil]
-	[url-cookie "_shopify_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil])
- ("nyxt.atlas.engineer"
-	[url-cookie "lack.session" "76d6d00bef3a8c29eaeeb983cf233ade0e718350" "Tue, 09 Jan 2142 00:44:36 GMT" "/" "nyxt.atlas.engineer" nil])
- ("pikabu.ru"
-	[url-cookie "PHPSESS" "aqc25e6uflai8i1aeb6om0ighc"
-							#("Чт янв 28 05:08:23 2021 GMT" 0 27
+							"/" "www.wikiwand.com" nil]
+	[url-cookie "wikiwand.firstLandingPage" "article_page"
+							#("Чт авг 20 01:11:17 2020 GMT" 0 27
 								(charset windows-1251))
-							"/" "pikabu.ru" nil]
-	[url-cookie "la" "1611551304_3197_3197___"
-							#("Чт янв 23 05:08:23 2031 GMT" 0 27
+							"/" "www.wikiwand.com" nil])
+ ("myraspberry.ru"
+	[url-cookie "PHPSESSID" "d133d316ba0312c6b43b0402ec138c91"
+							#("Вс янв 17 23:34:05 2021 GMT" 0 27
 								(charset windows-1251))
-							"/" "pikabu.ru" nil])
- (".pikabu.ru"
-	[url-cookie "pcid" "tYAlQIY1Yv2"
-							#("Чт янв 23 05:08:23 2031 GMT" 0 27
+							"/" "myraspberry.ru" nil]
+	[url-cookie "siteStatistics" "7fd02860b1d73d55d79959da44ff36cd"
+							#("Вт янв 19 03:14:11 2038 GMT" 0 27
 								(charset windows-1251))
-							"/" ".pikabu.ru" nil]
-	[url-cookie "grex2" "%7B%22low_interval_new_20200831%22%3A%22exp48%22%7D"
-							#("Вс апр 25 05:08:23 2021 GMT" 0 27
-								(charset windows-1251))
-							"/" ".pikabu.ru" nil])
- ("store.gettingthingsdone.com"
-	[url-cookie "vsettings" "" "Sat, 22-Jan-2022 08:00:00 GMT" "/" "store.gettingthingsdone.com" nil])
- (".star-control.com"
-	[url-cookie "phpbb3_8ocj9_u" "1" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
-	[url-cookie "phpbb3_8ocj9_k" "" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil]
-	[url-cookie "phpbb3_8ocj9_sid" "8288bb120e8001f29c556e723da5f76f" "Tue, 22-Feb-2022 06:11:47 GMT" "/" ".star-control.com" nil])
- ("sourceforge.net"
-	[url-cookie "VISITOR" "55c94821-583d-4d12-b2d2-059e94185876"
-							#("Сб мар 02 09:48:53 2030 GMT" 0 27
-								(charset windows-1251))
-							"/" "sourceforge.net" nil]))
+							"/" "myraspberry.ru" nil])
+ (".google.com"
+	[url-cookie "NID" "207=lT8jTbe4wObdwY4-lhfia1guKANy_n-BmKaWBu8QQ05Qz__Dak1nMNHuSJy7Xyj1aqOl-biXfvBVqtKJ1wzW6VxxYQ2fEPYIBl6cBD42Yrb2SofsvPMeod1ohbpp0yqVPbNr4JMbNW37RAO1cpz6oZpVVmK3ORTUQefJdsDomfM" "Thu, 15-Jul-2021 19:58:35 GMT" "/" ".google.com" nil])
+ ("plantuml.com"
+	[url-cookie "ezCMPCCS" "true" "Wed, 08 Jun 2022 06:27:10 GMT" "/" "plantuml.com" nil]
+	[url-cookie "active_template::173770" "pub_site.1623133630" "Thu, 10 Jun 2021 06:27:10 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezepvv" "34" "Wed, 09 Jun 2021 06:27:10 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezovuuidtime_173770" "1623133630" "Thu, 10 Jun 2021 06:27:10 UTC" "/" "plantuml.com" nil])
+ ("emackandboliohk.com"
+	[url-cookie "_shopify_y" "6090f6f8-8f0e-4113-809c-78731cb54b19" "Wed, 21 Jul 2021 11:39:38 -0000" "/" "emackandboliohk.com" nil]))
 )
 (setq url-cookie-secure-storage
- '((".fandom.com"
-	[url-cookie "wikia_beacon_id" "QmE9K6Rqdj" "Fri, 01 Oct 2021 14:50:13 GMT" "/" ".fandom.com" t])
- (".youtube.com"
-	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t])
- ("realpython.com"
-	[url-cookie "csrftoken" "DOjfeQYiRqe3S73Vl6XJ6r3OEY91q2GxPEu6X5Win7KPUegn1vNjxLAfcP0IMYQW"
-							#("Чт янв 06 09:42:25 2022 GMT" 0 27
-								(charset windows-1251))
-							"/" "realpython.com" t])
- ("francescocirillo.com"
-	[url-cookie "secure_customer_sig" "" "Fri, 19 Nov 2021 03:57:31 GMT" "/" "francescocirillo.com" t])
- (".reddit.com"
-	[url-cookie "loid" "0000000000911yr6ew.2.1606264012000.Z0FBQUFBQmZ2YVRNMTZBVjZ4S0ZaXzJwRGozQjk2X2Jyc293R3lYem04Y3Z5WDZSSDdZLU9tSHlTZzg4cG5pSlgwNmk4RW41TUZiQTZkMHJGZ1ZZSTFBZ1NFRUoyOFZDZ3R4S181Yi1xX09md2xUWERnQ1UybWk3ZTZxbGtjTklVZ0gzVlRfMG5lQ0I" "Fri, 25 Nov 2022 00:26:52 GMT" "/" ".reddit.com" t]
-	[url-cookie "csv" "1"
-							#("Пт ноя 25 00:26:34 2022 GMT" 0 27
-								(charset windows-1251))
-							"/" ".reddit.com" t])
- ("reddit.com"
-	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTgxMTUyMjQsInN1YiI6Ii1SdHVBMFhKMzM3TmR6VDFaaVYtcEt0UktiSTAiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiXX0.9A_7vgMzVxdiCnVNWZFL7EVViVI_UpSUMi4u8UV4djQ" "Tue, 11 Apr 2023 03:29:04 GMT" "/" "reddit.com" t]
-	[url-cookie "edgebucket" "8xsDqKHwFcE8N79HIm"
-							#("Пт ноя 25 00:26:33 2022 GMT" 0 27
-								(charset windows-1251))
-							"/" "reddit.com" t])
- ("medium.com"
-	[url-cookie "uid" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
-	[url-cookie "sid" "1:esnthg0ktKQxQFddPKvm027zbIA2/tUwooH2/JDTvpLGO9KhHs00REB+ULcO+ALP" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
-	[url-cookie "optimizelyEndUserId" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t])
+ '(("emackandboliohk.com"
+	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
+ ("github.com"
+	[url-cookie "logged_in" "no" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t]
+	[url-cookie "_octo" "GH1.1.1496171597.1618234365" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t])
+ (".gamepedia.com"
+	[url-cookie "wikia_beacon_id" "7v5PDDJtN2" "Sat, 14 Aug 2021 23:23:56 GMT" "/" ".gamepedia.com" t])
  ("one-tab.com"
-	[url-cookie "tt" "ur7ZMVeSRyuk5Cv8zj6T1w"
+	[url-cookie "rt" "-"
 							#("Вс окт 13 12:31:38 2052 GMT" 0 27
 								(charset windows-1251))
 							"/" "one-tab.com" t]
@@ -128,17 +111,37 @@
 							#("Вс окт 13 12:31:38 2052 GMT" 0 27
 								(charset windows-1251))
 							"/" "one-tab.com" t]
-	[url-cookie "rt" "-"
+	[url-cookie "tt" "ur7ZMVeSRyuk5Cv8zj6T1w"
 							#("Вс окт 13 12:31:38 2052 GMT" 0 27
 								(charset windows-1251))
 							"/" "one-tab.com" t])
- (".gamepedia.com"
-	[url-cookie "wikia_beacon_id" "7v5PDDJtN2" "Sat, 14 Aug 2021 23:23:56 GMT" "/" ".gamepedia.com" t])
- ("github.com"
-	[url-cookie "_octo" "GH1.1.1496171597.1618234365" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t]
-	[url-cookie "logged_in" "no" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t])
- ("emackandboliohk.com"
-	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
+ ("medium.com"
+	[url-cookie "optimizelyEndUserId" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
+	[url-cookie "sid" "1:esnthg0ktKQxQFddPKvm027zbIA2/tUwooH2/JDTvpLGO9KhHs00REB+ULcO+ALP" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t]
+	[url-cookie "uid" "lo_04ee64db6389" "Wed, 12 Jan 2022 02:26:03 GMT" "/" "medium.com" t])
+ ("reddit.com"
+	[url-cookie "edgebucket" "8xsDqKHwFcE8N79HIm"
+							#("Пт ноя 25 00:26:33 2022 GMT" 0 27
+								(charset windows-1251))
+							"/" "reddit.com" t]
+	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTgxMTUyMjQsInN1YiI6Ii1SdHVBMFhKMzM3TmR6VDFaaVYtcEt0UktiSTAiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiXX0.9A_7vgMzVxdiCnVNWZFL7EVViVI_UpSUMi4u8UV4djQ" "Tue, 11 Apr 2023 03:29:04 GMT" "/" "reddit.com" t])
+ (".reddit.com"
+	[url-cookie "csv" "1"
+							#("Пт ноя 25 00:26:34 2022 GMT" 0 27
+								(charset windows-1251))
+							"/" ".reddit.com" t]
+	[url-cookie "loid" "0000000000911yr6ew.2.1606264012000.Z0FBQUFBQmZ2YVRNMTZBVjZ4S0ZaXzJwRGozQjk2X2Jyc293R3lYem04Y3Z5WDZSSDdZLU9tSHlTZzg4cG5pSlgwNmk4RW41TUZiQTZkMHJGZ1ZZSTFBZ1NFRUoyOFZDZ3R4S181Yi1xX09md2xUWERnQ1UybWk3ZTZxbGtjTklVZ0gzVlRfMG5lQ0I" "Fri, 25 Nov 2022 00:26:52 GMT" "/" ".reddit.com" t])
+ ("francescocirillo.com"
+	[url-cookie "secure_customer_sig" "" "Fri, 19 Nov 2021 03:57:31 GMT" "/" "francescocirillo.com" t])
+ ("realpython.com"
+	[url-cookie "csrftoken" "DOjfeQYiRqe3S73Vl6XJ6r3OEY91q2GxPEu6X5Win7KPUegn1vNjxLAfcP0IMYQW"
+							#("Чт янв 06 09:42:25 2022 GMT" 0 27
+								(charset windows-1251))
+							"/" "realpython.com" t])
+ (".youtube.com"
+	[url-cookie "VISITOR_INFO1_LIVE" "yJhwmADGAt8" "Sat, 10-Jul-2021 10:33:52 GMT" "/" ".youtube.com" t])
+ (".fandom.com"
+	[url-cookie "wikia_beacon_id" "QmE9K6Rqdj" "Fri, 01 Oct 2021 14:50:13 GMT" "/" ".fandom.com" t]))
 )
 
 ;; Local Variables:

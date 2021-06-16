@@ -534,7 +534,7 @@ _?_ help            _c_urrent file
 													^WWW  Menus^          
 ──────────────────────────^──────────^───────────────────────
 _d_el buffer   _L_ist      _B_ookmarks  _v_isual  _r_enameBuf
-_S_earchOtherF _s_earch    s_W_itch     _p_ast&go          
+_S_earchOtherF _s_earch    _E_WordOthrF _W_itch     _p_ast&go          
 _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit    
     "
 ;; ***** keys
@@ -578,6 +578,21 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 						(eww (buffer-substring
 								(line-beginning-position)
 								(line-beginning-position 2))))
+					(evil-quit)
+					(switch-to-buffer-other-frame buffer-name-to-close)))
+;; ****** "E" : 
+    ("E"  (
+			let (buffer-name-to-close (buffer-name))
+					(evil-window-split)
+					(if (use-region-p)
+							(eww-search-words)
+						(progn 
+								;; According to C-h f region-active-p, it seems that you should use use-region-p instead.
+								;; EDIT: I think that rebinding the key to the new command is a cleaner approach than the advice (other commands may be relying on the original version of eww-search).
+								;; (line-beginning-position)
+								;; (line-beginning-position 2)
+								;; (eww-search-words)))
+								(eww (read-string "Query: ")))
 					(evil-quit)
 					(switch-to-buffer-other-frame buffer-name-to-close)))
 ;; ****** "Y" : 
