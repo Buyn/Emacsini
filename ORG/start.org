@@ -183,6 +183,7 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
 	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
+
 *** Folding
 (find-file-other-frame "~/INI/folding-cfg.el")
 	(find-file-other-frame "~/INI/outshine_cfg.el")
@@ -1905,6 +1906,21 @@ g -
    удобная систе показиваюшая мануалки по всем установленым модам
 f1-f - show funcrion doc string
 f1-F - find funcrion in manual
+*** (apropos)
+Search Help
+найти во всём имаксе
+ иназвании функции и хелпы
+и описание вообще везде
+поиск продолжительный
+PATTERN can be a word, a list of words (separated by spaces),
+or a regexp (using some regexp special characters).  If it is a word,
+search for matches for that word as a substring.  If it is a list of words,
+search for matches for any two (or more) of those words.
+
+With C-u prefix, or if ‘apropos-do-all’ is non-nil,
+consider all symbols (if they match PATTERN).
+
+Returns list of symbols and documentation found.
 *** customize-group
 		Получить инфу по всем переменным
 		режима поскольку зачастую режима нет в мануале

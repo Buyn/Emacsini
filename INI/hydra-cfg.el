@@ -594,7 +594,7 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 								;; (eww-search-words)))
 								(eww (read-string "Query: ")))
 					(evil-quit)
-					(switch-to-buffer-other-frame buffer-name-to-close)))
+					(switch-to-buffer-other-frame buffer-name-to-close))))
 ;; ****** "Y" : 
     ("Y" (progn  
 			(setq x-select-enable-clipboard t)
