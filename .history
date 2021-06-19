@@ -24,3 +24,4 @@ cd ../../
 .\ELs\BuYn\chrom_d_spc_bs.ahk
 ./ELs/BuYn/chrom_d_spc_bs.ahk
 (exit)
+exit

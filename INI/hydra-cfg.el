@@ -466,10 +466,11 @@ _?_ help            _c_urrent file
 		("q" nil) 
 ;; ****** d : 
     ("d" (progn
-					 ;; (nil/body) 
-					 (mac-done-copy)
-					 ;; (org-menu/body)
-					 ) 
+					  ;; (nil/body) 
+						(evil-open-fold)
+					  (mac-done-copy)
+					  ;; (org-menu/body)
+					  ) 
 							:color blue)
 ;; ****** h : 
     ("h" (org--deadline-or-schedule nil 'scheduled 

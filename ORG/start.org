@@ -2272,6 +2272,1007 @@ Within Emacs, ~ at the beginning of a file name is expanded to your HOME directo
   #+END_SRC
 ** dired
 *** запуск dired
+
+    C-x d  ~/foo/*.el  <RET>
+    C-x d  ~/foo/*/*.el  <RET>
+
+   To display the Dired buffer in another window, use ‘C-x 4 d’
+(‘dired-other-window’).  ‘C-x 5 d’ (‘dired-other-frame’) displays the
+Dired buffer in a separate frame.
+
+		You can also invoke Dired by giving ‘C-x C-f’ (‘find-file’) a directory’s name.
+*** Chetshit 
+https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
+**** Dired Reference Card
+ (based on Dired in GNU Emacs 27)
+ Commands marked with (DX) require dired-x
+*****  Entering and Exiting Dired
+	run dired
+	C-x d
+	dired the directory of the file you are editing
+	C-x C-j (DX)
+	quit dired
+	q
+***** 	Motion Commands
+	move up to previous line
+	p
+	move down to next line
+	n
+	move up to previous directory line
+	<
+	move down to next directory line
+	>
+	move to next marked file
+	M-}
+	move to previous marked file
+	M-{
+	move up to previous subdirectory
+	M-C-p
+	move down to next subdirectory
+	M-C-n
+	move to parent directory
+	^
+	move to first child subdirectory
+	M-C-d
+***** 	Mouse Commands
+	visit file or directory
+	Mouse_Button_2
+***** 	Immediate Actions on Files
+	visit current file
+	f
+	view current file
+	v
+	visit current file in other window
+	o
+	create a new subdirectory
+	+
+	compare file at point with the one at mark
+	=
+***** 	Marking and Unmarking Files
+	mark a file or subdirectory for later commands
+	m
+	unmark a file or all files of a subdirectory
+	u
+	unmark all marked files in a buffer
+	M-delete
+	mark files with a given extension
+	 * .
+	mark all directories
+	 * /
+	mark all symlinks
+	 * @
+	mark all executables
+	 * *
+	invert marking
+	t
+	mark all files in the current subdir
+	 * s
+	mark file names matching a regular expression
+	 * %
+	change the marks to a different character
+	 * c
+	mark files for which Elisp expression returns t
+	 * ( (DX)
+***** 	Modifying the Dired Buffer
+	insert a subdirectory into this buffer
+	i
+	remove marked files from the listing
+	k
+	remove a subdir listing
+	C-u k
+	re-read all directories (retains all marks)
+	g
+	toggle sorting of current subdir by name/date
+	s
+	edit ls switches
+	C-u s
+	recover marks, hidden lines, and such (undo)
+	C-_
+	hide all subdirectories
+	M-$
+	hide or unhide subdirectory
+	$
+***** 	Commands on Files Marked or Specified
+	by the Prefix
+	copy file(s)
+	C
+	rename a file or move files to another directory
+	R
+	change ownership of file(s)
+	O
+	change the group of the file(s)
+	G
+	change mode of file(s)
+	M
+	print file(s)
+	P
+	convert filename(s) to lower case
+	% l
+	convert filename(s) to upper case
+	% u
+	delete marked (as opposed to flagged) file(s)
+	D
+	compress or uncompress file(s)
+	Z
+	run info on file
+	I (DX)
+	make symbolic link(s)
+	S
+	make relative symbolic link(s)
+	Y
+	make hard link(s)
+	H
+	search files for a regular expression
+	A
+	regexp query replace on marked files
+	Q
+	byte-compile file(s)
+	B
+	load file(s)
+	L
+	shell command on file(s)
+	!
+	asynchronous shell command on file(s)
+	&
+***** 	Flagging Files for Deletion
+	Unmark commands remove delete flags
+	flag file for deletion
+	d
+	flag all backup files (file names ending in ˜)
+	~
+	flag all auto-save files
+	#
+	flag various intermediate files
+	% &
+	flag numeric backups (ending in .˜1˜, .˜2˜, etc.)
+	.
+	execute the deletions requested (flagged files)
+	x
+	flag files matching a regular expression
+	% d
+***** 	Regular Expression Commands
+	mark filenames matching a regular expression
+	% m
+	copy marked files by regexp
+	% C
+	rename marked files by regexp
+	% R
+	hardlink
+	% H
+	symlink
+	% S
+	symlink, with relative paths
+	% Y
+	mark for deletion
+	% d
+***** 	Dired and Find
+	dired file(s) whose name matches a pattern M-x find-name-dired
+	dired file(s) that contain pattern
+	M-x find-grep-dired
+	dired file(s) based on find output
+	M-x find-dired
+***** 	Getting Help
+	dired help
+	h
+	dired summary (short help) and error log
+	?
+*** Edit like tekst
+		c-x c-q
+	Перевести в режим редактирования страници
+	по завершении 
+	с-с с-с
+	с- с-esk для отмены
+*** Evil mode 
+**** GitHub - emacs-evil/evil-collection:
+***** links
+A set of keybindings for evil-mode
+https://github.com/emacs-evil/evil-collection
+***** Evil Collection
+[[https://github.com/emacs-evil/evil-collection/actions][https://github.com/emacs-evil/evil-collection/workflows/build/badge.svg?branch=master]]
+[[https://melpa.org/#/evil-collection][https://melpa.org/packages/evil-collection-badge.svg]]
+[[https://stable.melpa.org/#/evil-collection][https://stable.melpa.org/packages/evil-collection-badge.svg]]
+
+This is a collection of [[https://github.com/emacs-evil/evil][Evil]] bindings for the parts of Emacs that Evil does not cover
+properly by default, such as help-mode, M-x calendar, Eshell and more.
+
+Warning: Expect some default bindings to change in the future.
+
+[[https://github.com/emacs-evil/evil-collection#goals][SVG Image]]Goals
+
+1 Reduce context switching: As soon as “moving around” gets hardwired to <hjkl>,
+ it becomes frustratingly inefficient not to have it everywhere.
+2 Community work: setting up bindings is tremendous work and joining force can
+ only save hours for all of Evil users out there. While not everyone may agree on the
+ chosen bindings, it helps to have something to start with rather than nothing at all. In
+ the end, users are free to override a subset of the proposed bindings to best fit
+ their needs.
+3 Consistency: Having all bindings defined in one place allows for enforcing
+ consistency across special modes and coordinating the community work to define
+ a reference implementation.
+
+[[https://github.com/emacs-evil/evil-collection#installation][SVG Image]]Installation
+
+,* Get the package, either from MELPA:
+
+M-x package-install RET evil-collection RET
+
+Or clone / download this repository and modify your load-path:
+
+(add-to-list 'load-path (expand-file-name "/path/to/evil-collection/" user-emacs-directory))
+
+,* Register the bindings, either all at once with
+
+(evil-collection-init)
+
+or mode-by-mode, for instance:
+
+(with-eval-after-load 'calendar (evil-collection-calendar-setup))
+
+or by providing an argument to evil-collection-init:
+
+(evil-collection-init 'calendar)
+
+The list of supported modes is configured by evil-collection-mode-list.
+
+evil-collection assumes evil-want-keybinding is set to nil and
+evil-want-integration is set to t before loading evil and evil-collection. Note
+some other packages may load evil (e.g. evil-leader) so bear that in mind when
+determining when to set the variables.
+
+See [[https://github.com/emacs-evil/evil-collection/issues/60][https://github.com/emacs-evil/evil-collection/issues/60]] and
+[[https://github.com/emacs-evil/evil/pull/1087][https://github.com/emacs-evil/evil/pull/1087]] for more details.
+
+For example:
+
+(setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+(setq evil-want-keybinding nil)
+(require 'evil)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
+
+Here’s another full TLDR use-package example.
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+NOTE: If you don’t like surprises but still want to use evil-collection-init, setting
+evil-collection-mode-list to nil and adding each mode manually might be a
+better option.
+
+[[https://github.com/emacs-evil/evil-collection#configuration][SVG Image]]Configuration
+
+Modify evil-collection-mode-list to disable or add any modes that should be
+evilified by evil-collection.
+
+ Variable  Default  Description  
+ evil-collection-company-use-tng  t  Set up autocompletion to  
+     be similar to Vim’s  
+     YouCompleteMe.  
+ evil-collection-calendar-want-org-bindings  nil  Set up Org functions in  
+     calendar keymap.  
+ evil-collection-outline-bind-tab-p  nil  Enable <tab>-based  
+     bindings in Outline mode.  
+ evil-collection-term-sync-state-and-mode-p  t  Synchronize insert/normal  
+     state with char/line-mode  
+     in term-mode.  
+ evil-collection-setup-minibuffer  nil  Set up Vim style bindings  
+     in the minibuffer.  
+ evil-collection-setup-debugger-keys  t  Set up debugger keys for  
+     certain modes.  
+ evil-collection-want-unimpaired-p  t  Set up unimpaired  
+     bindings globally.  
+ evil-collection-want-find-usages-bindings  t  Bind -find references-, etc  
+     to various modes.  
+
+For example, if you want to enable Evil in the minibuffer, you’ll have to turn it on
+explicitly by customizing evil-collection-setup-minibuffer to t. Some
+minibuffer-related packages such as Helm rely on this option.
+
+use-package example:
+
+(use-package evil-collection
+  :custom (evil-collection-setup-minibuffer t)
+  :init (evil-collection-init))
+
+[[https://github.com/emacs-evil/evil-collection#guidelines][SVG Image]]Guidelines
+
+The following rules serve as guiding principles to define the set of standard Evil
+bindings for various modes. Since special modes are by definition structurally
+incomparable, those rules cannot be expected to be applied universally.
+
+The rules are more-or-less sorted by priority.
+
+1 Don’t bind anything to : nor <escape>.
+2 Keep the movement keys when possible and sensible. 
+
+ * h, j, k, l
+ * w, W, b, B, e, E, ge, gE
+ * f, F, t, T, ;, =,=
+ * gg, G
+ * |
+ * (, )
+ * {, }
+ * %
+ * +, -, 0, ^, $
+ * C-i, C-o
+
+3 Keep the yanking and register keys when possible and sensible. 
+
+ * y, Y
+ * =”=
+
+4 Keep the search keys when possible and sensible. 
+
+ * /, ?
+ * #, *
+
+5 Keep the mark keys when possible and sensible. 
+
+ * m
+ * =’=, ~
+
+6 Keep the windowing keys when possible and sensible. 
+
+ * H, L, M
+ * C-e, C-y
+ * C-f, C-b
+ * C-d, C-u
+ * C-w-prefixed bindings.
+ * Some z-prefixed bindings (see below).
+
+7 The following keys are free when insert state does not make sense in the current
+ mode: 
+
+ * a, A, i, I
+ * c, C, r, R, s, S
+ * d, D, x, X
+ * o, O
+ * p, P
+ * =, <, >
+ * J
+ * ~ 
+
+ Any of those keys can be set to be a prefix key.
+
+8 Prefix keys: g and z are the ubiquitous prefix keys. 
+
+ * g generally stands for “go” and is best used for movements.
+ * z is used for scrolling, folding, spell-checking and more.
+
+9 Macro and action keys 
+
+ * @, q
+ * .
+
+10 Ensure terminal compatibility without sacrificing GUI key bindings. 
+
+ * Tab key 
+
+ * Tab key is recognized as <tab> in GUI and TAB in terminal. TAB equals C-i.
+ * C-i is bound to jumping forward for vim compatibility. If Shift+Tab is not
+ relevant, just bind g TAB to the function that Tab is bound to. If Shift+Tab is
+ relevant, bind g] and g TAB to the function that Tab is bound to, and bind g[
+ to the function that Shift+Tab is bound to for terminal compatibility.
+
+ * Enter key 
+
+ * Enter key is recognized as <return> in GUI and RET in terminal. RET equals
+ Ctrl+m.
+ * Bind only RET and M-RET. Or, bind RET and M-RET to the same functions
+ <return> and <M-return> are bound to.
+ * S-RET is impossible on terminal. Bind <S-return> and a vacant key to the
+ same function for terminal compatibility.
+
+[[https://github.com/emacs-evil/evil-collection#rationale][SVG Image]]Rationale
+
+Many special modes share the same set of similar actions. Those actions should
+share the same bindings across all modes whenever feasible.
+
+[[https://github.com/emacs-evil/evil-collection#motion-------gj-gk-c-j-c-k][SVG Image]]Motion ([, ], {, }, (, ), gj, gk, C-j, C-k)
+
+,* [ and ]: Use [- and ]- prefixed keys for navigation between sections. 
+
+ If the mode makes no difference between the end of a section and the beginning
+ of the next, use [ and ].
+
+,* gj and gk: synonym for [ and ]. That’s what [[https://github.com/emacs-evil/evil-magit][evil-magit]] does.
+
+Question: Should gj / gk rather be synonyms for C-j / C-k? They cannot emulate the
+behaviour of [] or ][.
+
+,* C-j, C-k: If there is granularity, i.e. subsections, use C-j and C-k to browse them.
+ This reflects [[https://github.com/emacs-evil/evil-magit][evil-magit]] and [[https://github.com/JorisE/evil-mu4e][evil-mu4e]] default bindings.
+,* {, }: If there is no paragraph structure, { and } can be used for sub-sectioning.
+,* (, ): If there is no sentence structure, ( and ) can be used for sub-sectioning.
+,* HJKL: hjkl can be used for atomic movements, but HJKL can usually not be used
+ because H, K and L are all universal (J is evil-join and usually does not make
+ sense in special modes).
+,* C-h should not be remapped: Since we have C-j and C-k for vertical motion, it
+ would make sense to use C-h and C-l for horizontal motion. There are some
+ shortcomings though: 
+
+ * In Vim, C-h works as backspace, but Evil does not follow that behaviour.
+ * In Emacs, it is a prefix key for all help-related commands, and so is <f1>.
+ * Most importantly, C-h is too widespread and ubiquitous to be replaced. So we
+ don’t.
+
+,* C-l: As a consequence of the former point, C-l is available.
+,* M-<hjkl>: Those keys are usually free in Evil but still bound to their Emacs default
+ (e.g. M-l is downcase-word). Besides, if C-j and C-k are already used, having M-j
+ and M-k might add up to the confusion.
+
+[[https://github.com/emacs-evil/evil-collection#quitting-q-zq-zz][SVG Image]]Quitting (q, ZQ, ZZ)
+
+In Vim, q is for recording macros. Vim quits with ZZ or ZQ. In most Emacs special
+modes, it stands for quitting while macros are recorded/played with <f3> and <f4>.
+
+A good rule of thumb would be:
+
+,* Always bind q, ZZ and ZQ to the mode specific quitting functions. If there is none,
+,* Bind q and ZZ to quit-window
+,* Bind ZQ to evil-quit
+,* If macros don’t make sense in current mode, then @ is available.
+
+[[https://github.com/emacs-evil/evil-collection#refreshing--reverting-gr][SVG Image]]Refreshing / Reverting (gr)
+
+,* gr is used for refreshing in [[https://github.com/emacs-evil/evil-magit][evil-magit]], [[https://github.com/JorisE/evil-mu4e][evil-mu4e]], and some Spacemacs
+ configurations (org-agenda and neotree among others).
+
+C-l is traditionally used to refresh the terminal screen. Since there does not seem to
+be any existing use of it, we leave the binding free for other uses.
+
+[[https://github.com/emacs-evil/evil-collection#marking][SVG Image]]Marking
+
+m defaults to evil-set-marker which might not be very useful in special modes. =’=
+can still be used as it can jump to other buffers.
+
+,* m: Mark or toggle mark, depending on what the mode offers. In visual mode, always
+ mark. With a numeric argument, toggle mark on that many following lines.
+,* u: Unmark current selection.
+,* U: Unmark all.
+,* ~: Toggle all marks. This mirrors the “invert-char” Vim command bound to ~ by
+ default.
+,* M: Mark all, if available. Otherwise use U~.
+,* *: Mark-prefix or mark all if current mode has no prefix. * is traditionally a wildcard.
+,* %: Mark regexp.
+,* x: Execute action on marks. This mirrors Dired’s binding of x.
+
+If * is used for marking, then # is free.
+
+Also note that Emacs inconsistently uses u and U to unmark.
+
+[[https://github.com/emacs-evil/evil-collection#selecting--filtering--narrowing--searching][SVG Image]]Selecting / Filtering / Narrowing / Searching
+
+,* s and S seem to be used in some places like [[https://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]]. 
+
+ * s: [s]elect/[s]earch/filter candidates according to a pattern.
+ * S: Remove filter and select all.
+
+,* = is usually free and its significance is obvious. It’s taken for zooming though.
+,* | is not free but the pipe symbolic is very tantalizing.
+
+[[https://github.com/emacs-evil/evil-collection#sorting][SVG Image]]Sorting
+
+,* o: Change the sort [o]rder.
+,* O: Sort in reverse order.
+
+There is no real consensus around which key to bind to sorting. What others do by
+default:
+
+,* package-menu uses S.
+,* M-x proced and Dired use s.
+,* profiler uses A and D.
+,* [[https://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] uses O.
+,* [[http://www.nongnu.org/ranger/][ranger]] uses o, inspired from [[http://mutt.org][Mutt]].
+
+[[https://github.com/emacs-evil/evil-collection#go-to-definition-gd-gd][SVG Image]]Go to definition (gd, gD)
+
+,* gd: [g]o to [d]efinition. This is mostly for programming modes. If there’s a
+ corresponding ‘pop’ action, use C-t.
+
+[[https://github.com/emacs-evil/evil-collection#go-to-references-etc-gr-ga][SVG Image]]Go to references, etc (gr, gA)
+
+When evil-collection-want-find-usages-bindings is set to t:
+
+,* gr: [g] to [r]eferences. This binding is also used for refresh/reverting modes in non
+ programming modes but is usually empty for programming modes.
+,* gA: [g]o to [A]ssignments.
+,* Additional bindings: There may be additional binds under this category. Please file
+ a Pull Request if so.
+
+[[https://github.com/emacs-evil/evil-collection#go-to-current-entity][SVG Image]]Go to current entity
+
+,* .: go to current entity (day for calendar, playing track for [[https://www.gnu.org/software/emms/][EMMS]]). Bind only if more
+ relevant than evil-repeat.
+
+[[https://github.com/emacs-evil/evil-collection#open-thing-at-point-ret-s-ret-m-ret-go-go][SVG Image]]Open thing at point (RET, S-RET, M-RET, go, gO)
+
+,* RET, S-RET, M-RET: Open thing at point in current window, open in other window and
+ display in other window respectively. The latter is like the former with the focus
+ remaining on the current window.
+,* go, gO: When available, same as S-RET and M-RET respectively. This is useful in
+ terminals where S-RET and M-RET might not work.
+
+[[https://github.com/emacs-evil/evil-collection#emacs-style-jumping-j][SVG Image]]Emacs-style jumping (J)
+
+,* J: [[https://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] has j and [[https://github.com/emacs-evil/evil-collection/blob/master/evil-mu4e][evil-mu4e]] uses J, so we use J too.
+
+Some special modes like [[https://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] and ibuffer offer to “jump” to a different buffer. This
+sometimes depends on the thing at point.
+
+This is not related to Evil jumps like C-i and C-o, nor to “go to definition”.
+
+[[https://github.com/emacs-evil/evil-collection#browse-url-gx][SVG Image]]Browse URL (gx)
+
+gx: go to URL. This is a default Vim binding.
+
+[[https://github.com/emacs-evil/evil-collection#help-][SVG Image]]Help (?)
+
+,* g? : is the standard key for help related commands.
+,* ? in places where backward search is not very useful.
+
+[[https://github.com/emacs-evil/evil-collection#history-browsing-c-n-c-p][SVG Image]]History browsing (C-n, C-p)
+
+C-n and C-p are standard bindings to browse the history elements.
+
+[[https://github.com/emacs-evil/evil-collection#bookmarking][SVG Image]]Bookmarking
+
+?
+
+[[https://github.com/emacs-evil/evil-collection#repl-gz][SVG Image]]REPL (gz)
+
+If the mode has a Go To REPL-type command, set it to gz.
+
+[[https://github.com/emacs-evil/evil-collection#zooming-----0][SVG Image]]Zooming (+, -, =, 0)
+
+,* + and - have obvious meanings.
+,* 0 has a somewhat intuitive meaning, plus it is next to + and - on QWERTY.
+,* = is useful as a synonym for + because it is the unshifted key of + on QWERTY.
+
+[[https://github.com/emacs-evil/evil-collection#debugging][SVG Image]]Debugging
+
+When debugging is on, debugger keys takes the most precedence.
+
+These keys will be set when there’s an available command for them.
+
+,* n : Step Over
+,* i : Step Into
+,* o : Step Out
+,* c : Continue/Resume Execution
+,* L : Locals
+,* t : Tracing
+,* q : Quit Debugging
+,* H : Continue until Point
+,* e : Evaluate Expression
+,* b : Set Breakpoint
+,* u : Unset Breakpoint
+,* > : Navigate to Next Frame
+,* < : Navigate to Previous Frame
+,* g? : Help
+,* J : Jump to debugger location
+,* R : Restart
+
+For debugging outside of debugger being on (e.g. setting initial breakpoints), we use
+similar keys to [[https://github.com/realgud/realgud][realgud]].
+
+,* f5 Start/Continue/Resume Execution
+,* S-f5 Continue Execution
+,* Mouse-1 Toggle Breakpoint
+,* f9 Toggle Breakpoint
+,* f10 Step Over
+,* f11 Step Into
+,* S-f11 Step Out
+
+[[https://github.com/emacs-evil/evil-collection#editable-buffers][SVG Image]]Editable Buffers
+
+For buffers where insert-state doesn’t make sense but buffer can be edited, (e.g.
+wdired or wgrep), pressing i will change into editable state.
+
+When this editable state is turned on,
+
+ZQ will abort and clear any changes. ZZ will finish and save any changes. ESC will exit
+editable state.
+
+[[https://github.com/emacs-evil/evil-collection#qwqetc][SVG Image]]:q/:wq/etc
+
+Modes with commands that can be bound to :q/:wq/etc will have those keys
+remapped.
+
+[[https://github.com/emacs-evil/evil-collection#key-translation][SVG Image]]Key Translation
+
+evil-collection-translate-key allows binding a key to the definition of another
+key in the same keymap (comparable to how Vim’s keybindings work). Its arguments
+are the states and keymaps to bind/look up the key(s) in followed optionally by
+keyword arguments (currently only :destructive) and key/replacement pairs. states
+should be nil for non-evil keymaps, and both states and keymaps can be a single
+symbol or a list of symbols.
+
+This function can be useful for making key swaps/cycles en masse. For example,
+someone who uses an alternate keyboard layout may want to retain the hjkl
+positions for directional movement in dired, the calendar, etc.
+
+Here’s an example for Colemak of making swaps in a single keymap:
+
+(evil-collection-translate-key nil 'evil-motion-state-map
+  ;; colemak hnei is qwerty hjkl
+  "n" "j"
+  "e" "k"
+  "i" "l"
+  ;; add back nei
+  "j" "e"
+  "k" "n"
+  "l" "i")
+
+Here’s an example of using evil-collection-setup-hook to cycle the keys for all
+modes in evil-collection-mode-list:
+
+(defun my-hjkl-rotation (_mode mode-keymaps &rest _rest)
+  (evil-collection-translate-key 'normal mode-keymaps
+    "n" "j"
+    "e" "k"
+    "i" "l"
+    "j" "e"
+    "k" "n"
+    "l" "i"))
+
+;; called after evil-collection makes its keybindings
+(add-hook 'evil-collection-setup-hook #'my-hjkl-rotation)
+
+(evil-collection-init)
+
+A more common use case of evil-collection-translate-key would be for keeping
+the functionality of some keys that users may bind globally. For example, SPC, [, and ]
+are bound in some modes. If you use these keys as global prefix keys that you never
+want to be overridden, you’ll want to give them higher priority than other evil
+keybindings (e.g. those made by (evil-define-key 'normal some-map ...)). To do
+this, you can create an “intercept” map and bind your prefix keys in it instead of in
+evil-normal-state-map:
+
+(defvar my-intercept-mode-map (make-sparse-keymap)
+  "High precedence keymap.")
+
+(define-minor-mode my-intercept-mode
+  "Global minor mode for higher precedence evil keybindings."
+  :global t)
+
+(my-intercept-mode)
+
+(dolist (state '(normal visual insert))
+  (evil-make-intercept-map
+   ;; NOTE: This requires an evil version from 2018-03-20 or later
+   (evil-get-auxiliary-keymap my-intercept-mode-map state t t)
+   state))
+
+(evil-define-key 'normal my-intercept-mode-map
+  (kbd "SPC f") 'find-file)
+;; ...
+
+You can then define replacement keys:
+
+(defun my-prefix-translations (_mode mode-keymaps &rest _rest)
+  (evil-collection-translate-key 'normal mode-keymaps
+    "C-SPC" "SPC"
+    ;; these need to be unbound first; this needs to be in same statement
+    "[" nil
+    "]" nil
+    "[[" "["
+    "]]" "]"))
+
+(add-hook 'evil-collection-setup-hook #'my-prefix-translations)
+
+(evil-collection-init)
+
+By default, the first invocation of evil-collection-translate-key will make a
+backup of the keymap. Each subsequent invocation will look up keys in the backup
+instead of the original. This means that a call to evil-collection-translate-key
+will always have the same behavior even if evaluated multiple times. When
+:destructive t is specified, keys are looked up in the keymap as it is currently. This
+means that a call to evil-collection-translate-key that swapped two keys would
+continue to swap/unswap them with each call. Therefore when :destructive t is
+used, all cycles/swaps must be done within a single call to
+evil-collection-translate-key. To make a comparison to Vim keybindings,
+:destructive t is comparable to Vim’s map, and :destructive nil is comparable
+to Vim’s noremap (where the “original” keybindings are those that existed in the
+keymap when evil-collection-translate-key was first called). You’ll almost
+always want to use the default behavior (especially in your init file). The limitation of
+:destructive nil is that you can’t translate a key to another key that was defined
+after the first evil-collection-translate-key, so :destructive t may be useful
+for interactive experimentation.
+
+evil-collection-swap-key is also provided as a wrapper around
+evil-collection-translate-key that allows swapping keys:
+
+(evil-collection-swap-key nil 'evil-motion-state-map
+  ";" ":")
+;; is equivalent to
+(evil-collection-translate-key nil 'evil-motion-state-map
+  ";" ":"
+  ":" ";")
+
+[[https://github.com/emacs-evil/evil-collection#third-party-packages][SVG Image]]Third-party packages
+
+Third-party packages are provided by several parties:
+
+ Major mode  Evil bindings  
+ lispy  [[https://github.com/noctuid/lispyville][lispyville]] or [[https://github.com/sp3ctum/evil-lispy][evil-lispy]]  
+ org  [[https://github.com/GuiltyDolphin/org-evil][org-evil]] or [[https://github.com/Somelauw/evil-org-mode][evil-org]]  
+ markdown  [[https://github.com/Somelauw/evil-markdown][evil-markdown]]  
+ ledger  [[https://github.com/atheriel/evil-ledger][evil-ledger]]  
+
+Should you know any suitable package not mentioned in this list, let us know and file
+an issue.
+
+Other references:
+
+,* [[https://github.com/syl20bnr/spacemacs/blob/master/doc/CONVENTIONS.org#key-bindings-conventions][Spacemacs]]
+,* [[https://github.com/hlissner/doom-emacs/tree/develop/modules/editor/evil][Doom Emacs]]
+
+[[https://github.com/emacs-evil/evil-collection#faq][SVG Image]]FAQ
+
+,* Making SPC work similarly to [[https://github.com/syl20bnr/spacemacs][spacemacs]]. 
+
+ evil-collection binds over SPC in many packages. To use SPC as a leader key
+ with the [[https://github.com/noctuid/general.el][general]] library:
+
+(use-package general
+  :ensure t
+  :init
+  (setq general-override-states '(insert
+                                  emacs
+                                  hybrid
+                                  normal
+                                  visual
+                                  motion
+                                  operator
+                                  replace))
+  :config
+  (general-define-key
+   :states '(normal visual motion)
+   :keymaps 'override
+   "SPC" 'hydra-space/body))
+   ;; Replace 'hydra-space/body with your leader function.
+    
+ See [[https://github.com/noctuid/evil-guide][noctuid’s evil guide]] for other approaches.
+
+,* Unintialized mode maps in evil-collection-setup-hook.
+ evil-collection-setup-hook is ran with a list of keymaps passed into it. Some
+ misconfigured modes may not have yet initialized their keymap at this time so the
+ value of the variable may be nil. In that case, an alternative is to use a mode-hook
+ to do any custom settings. 
+(add-hook 'evil-collection-setup-hook
+       (lambda (_mode keymaps)
+           (add-hook 'ediff-mode-hook
+             (lambda ()
+              (... keymaps ...)))))
+    
+ View [[https://github.com/emacs-evil/evil-collection/issues/196][196]] for more info.
+
+[[https://github.com/emacs-evil/evil-collection#modes-left-behind][SVG Image]]Modes left behind
+
+Some modes might still remain unsupported by this package. Should you be missing
+your <hjkl>, please feel free to do a pull request.
+
+[[https://github.com/emacs-evil/evil-collection#contributing][SVG Image]]Contributing
+
+We welcome any additional modes that are not already supported.
+
+All bindings in evil-collection are open to change so if there’s a better or more
+consistent binding, please [[https://github.com/emacs-evil/evil-collection/issues][open an issue]] or [[https://github.com/emacs-evil/evil-collection/pulls][submit a pull request]].
+
+Follow [[https://github.com/bbatsov/emacs-lisp-style-guide/][The Emacs Lisp Style Guide]] for coding conventions.
+
+[[https://github.com/erlang/otp/wiki/writing-good-commit-messages][Erlang/OTP]] has a good read for helpful commit messages.
+
+About
+
+A set of keybindings for evil-mode 
+
+Topics
+
+[[https://github.com/topics/emacs][emacs]][[https://github.com/topics/evil][evil]][[https://github.com/topics/bindings][bindings]][[https://github.com/topics/evil-mode][evil-mode]]
+
+Resources
+
+**** Jonathan Bennett's Blog
+***** links
+https://jonathanabennett.github.io/blog/2019/06/05/file-management-in-emacs-with-dired-mode/
+***** File Management in Emacs with dired-mode
+IMPORTANT NOTES
+Dired is Big
+dired has turned out to be a far, FAR bigger thing to learn than I had anticipated. That, coupled with the fact that my writing time vanished in the fires of the
+last week of school means I did not fully explore dired and will be returning to it later. Consider this merely an introduction to the very basics. I will be
+returning to this again in the future. 
+
+I use evil-collection
+
+All the keybindings I describe below are true on my system after installing evil-collection. If you are running pure Emacs, these keybindings will not work.
+In fact, some of them may do surprising things (I don't know, I used dired like three times before I installed evil-collection and two of them were by
+accident). I recommend using [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][this reference card]] from the GNU website to find the keybindings which match with what I am describing. 
+
+Cost of Context Switches
+
+As a teacher, I deal with context switches all day, and they are easily one of the biggest drains on my productivity. What is a context switch? Put simply, a
+context switch is when you have to change from one task, environment, or context to another. 
+
+Whether you're talking about software or wetware, there is a penalty to context switches. For a computer, this can be reduced through well-written software
+or by throwing more hardware at the problem. But for your brain, there is a fairly hard floor to how small you can make that penalty. 
+
+I'm pretty good at context switches because I have to be. My classes take a blended learning approach to delivering the content, my student progress
+through the curriculum at different paces. In a typical class of 15-20 students, I might have 10 different problems that the students might be working on. 
+
+Each of those problems is a computer program that I have to read, comprehend, and mentally check for bugs and syntax errors before I can give that
+student meaningful feedback on their work. If the student has encountered a fairly obscure bug, it can take me a bit of time to get a feel for what is
+happening. It's even worse if the student has written some tangled or misnamed code (For the love of all that is holy, kids, stop naming your functions
+MyFunction). There's no way for me to avoid the constant context switching in class (even if I tried to make them all complete the programs at the same time,
+they would use write pretty divergent solutions to some of them), but I do all I can to avoid it in other areas of my life. 
+
+There are lots of techniques for doing this, but one of them is to keep a consistent interface for the tasks which you are doing. One of the goals of this Year
+of Emacs project is to complete as many of my daily tasks as possible inside Emacs to see whether or not the adoption cost of using Emacs for that task is
+less than the cost of context switching out of Emacs to complete it. 
+
+End of Year Cleanup
+
+Right now, I'm in year-end cleanup mode. Notes from old classes need to be archived, plans for next year need to be started, and some files and folders
+need to be copied over. This is typically a lot of working with Finder. That involves a lot of working with the mouse. And mousing is one of the most expensive
+operations in terms of context switching for a touch typist. This high cost is because you lose your place on the home row. While each individual interaction
+with the mouse may not seem like much, it can end up happening a lot, which adds up quickly over time. 
+
+Working from the command line is possible, and I've done it before. But there is an interface issue there also because it isn't typically interactive. I want to
+move a few files, and then see the new directory listing right away. With the terminal, that's an extra command. 
+
+Furthermore, if you're working with a particularly full directory, ls is not a very efficient way of viewing the file listing. For example, the dired buffer with my
+Google drive folder (synced specifically so I can use dired to manage my Google Drive Files) had 123 lines. Try working with that in a terminal, at best you'll
+be seeing half the files at a time when you start out. That number might go down relatively quickly, but it's still more commands that you have to type in. 
+
+Basics using evil-collection
+
+One of the first challenges I had was that dired doesn't use Evil keybindings, even if you've installed evil-mode. I know a lot of people reading this will
+probably say I should just learn the Emacs keybindings. Sorry, that's not going to happen. Vim is instinctive for me at this point. When I see a text buffer, my
+first instinct is to j or k my way through the lines. It's so ingrained, I do it in text buffers where I have never had Vim keys. More than once, I have been
+typing while talking to a student and looked at my screen to see that the last line of my Google Doc had something like 5bctnJavaScript$ at the end. 
+
+This will be even more true in Emacs, where every other buffer I interact with right now (except Magit buffers) use Vim keys. So I need dired buffers to have
+Vim keys if I'm going to use them: enter evil-collection. 
+
+Evil-collection is a collection of keybindings for major modes that mimic (to a degree) Vim keybindings. While I could definitely roll my own keybindings using
+the :bind feature in use-package, it is actually pretty difficult to create consistent, memorable, and ergonomic keybindings. I like that there are already
+bindings I can use, which means I don't have to try to make up my own. Having said that, I one of the larger projects I plan on tackling over the summer is
+using hydra to replace evil-leader and use that to replace some of the multi-key chords needed in things like org-mode (C-c C-v t, I'm looking at you). 
+
+Here is the setup for evil-collection. 
+
+(use-package evil-collection
+  :after (evil)
+  :config
+  (setq evil-collection-mode-list '(dired))
+  (evil-collection-init))
+
+A couple of things to note here for people new to use-package. 
+
+1 Notice the use of :after (evil). This script will not load evil-collection until evil has been loaded. Because that is a list, you can add additional modes
+ to it. For example, if I was using the bindings for elpy, I might make that :after (evil elpy) to ensure that the elpy package was available before the
+ bindings for it were created.
+2 :config is code that is run after the package is loaded. :init is code that is run before the package is loaded. I initially tried to use :custom here, but it
+ didn't initialize the value correctly. I'm not sure why that was, as I was given to understand that :custom was designed to set variables needed by the
+ package.
+
+evil-collection-mode-list is a list containing the modes in which you want the evil-collection bindings. It defaults to all of the modes. Because I want to
+explicitly explore the bindings rather than just using them blindly, I am setting this variable explicitly and adding modes as I need them. It's possible that I
+won't like the bindings for some modes. I might also choose to roll hydras for some of them rather than using the evil-collection bindings. In all cases, I
+want to have control over what is set and what is not set in my Emacs setup. 
+
+Using dired
+
+Configuration
+
+While most new Emacsers assume that use-package is meant to install packages, it's actually meant to manage packages. What's the difference, you say?
+Well, dired is already installed in your Emacs, but you can still use use-package to set up dired. 
+
+Here is the setup I'm currently using. 
+
+(use-package dired
+:ensure nil
+:config
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired t
+        insert-directory-program "/usr/local/bin/gls"))
+:custom
+(dired-listing-switches "-aBhl --group-directories-first"))
+
+One important note here is the :ensure nil at the top. I have use-package-always-ensure set to t at the beginning of my Emacs.org. This means every
+package has :ensure t by default. 
+
+Ensure means (roughly) "This must be downloaded, find it from one of the package repositories." But dired isn't on the package repositories, it's built-in. So
+we need to set ensure to nil for this package. 
+
+Finally, we use the dired-listing-switches to pass a different set of switches to ls than the defaults. You can set this to whatever you like, the ones I've
+included here will do the following: List all entries, directories first, except backup files (those ending in ~), using the long listing format and human readable
+sizes. Play around on the command line until you get something you like, and then set your dired-listing-switches to that. 
+
+Mac OS Users
+
+As noted above, dired uses the ls command if possible to generate the directory listing. But Apple is using a non-GNU set of core-utils. That means that
+the listing switches for dired won't work correctly without telling it where to find a GNU version of the core-utils. 
+
+To begin, run brew install core-utils (Or the equivalent command on your package manager of choice). Now, you need to tell Emacs where to find those
+core-utils, but only when running Mac OS. That's what the when command in the listing above does. 
+
+Entering dired-mode
+
+The way I usually get into dired-mode is through the find-file command. As noted in my [[https://jonathanabennett.github.io/blog/2019/05/28/emacs.org-~-may-2019/][Emacs.org]] file, that is bound to <SPC> e on my system. Once there, if
+you select the top-most entry (/path/to/current/directory/.), you will open that directory in dired-mode. 
+
+You can also open dired-mode directly using C-x d and then supplying a directory path (using helm). 
+
+Using dired-mode
+
+Once in dired-mode, I can use the j and k keys to navigate up and down. While there are searching functions, I did not need them for what I was working on
+because I need to inspect pretty much every file as part of my end of year cleanup. 
+
+Once your cursor is on the line for a given file, you can press <RET> to open that buffer in the dired window. Because I'm working with the directory, I
+generally want to open it in the other window so I can keep my dired buffer open. For that, simply press S-<RET>. 
+
+But the real power of dired-mode is not in opening files, it is in changing the directory structure. To do this, you first mark the files or directories you wish to
+operate on. If you want to delete the files, you can simply mark them with d, which will mark them for deletion. After you have flagged them for deletion,
+pressing x will delete them. 
+
+Alternatively, pressing m while in dired mode will mark the file or directory for any action. This is what I usually do. After you have marked the files you wish to
+act on, pressing D or will delete them. Or, you can use R to rename them (this runs the mv command, so it can also be used to move them to another
+directory). I think the benefits of m over d are twofold. 
+
+First, you only have to remember a single, mnemonic command. Sure d makes sense for delete, but it doesn't actually delete the files. It only marks them for
+deletion. m for mark is a better mnemonic than d for mark for deletion. 
+
+Secondly, I like that the commands to operate on marked files are all uppercase. This is a solid reminder that you're about to do something. It separates and
+distinguishes potentially destructive actions from generally harmless ones. 
+
+You can use ^ to move up a directory, and <RET> on a sub-directory will open that directory in its own dired buffer. You can also create new directories with
++. 
+
+Once you are finished, you can then simply close the dired buffer with q. 
+
+Final Thoughts
+
+Dired really surprised me with how useful it is. I was certain that it would be useful, but it surprised me how quickly it surpassed the tools I had been using
+previously. In previous years, this process has taken me a week of 2-3 sessions a day, 1-2 hours per session. Much of that was the delay inherent in using a
+website (Google Drive, in this case), a lot of it is having to use the mouse, but whatever the reason, it was time consuming at a time of the year when I don't
+really have a lot of extra time. 
+
+This time, I was able to complete this over the course of about 5 hours. That includes the time I spent configuring and learning dired. My experience has
+typically been that any tool this useful (4x faster, give or take) takes a similarly long time to learn. 
+
+I will be the first to say that I have not learned everything there is to do with directories in Emacs. I have not touched dired-x, wdired, dired-aux, or any of
+the 3rd party packages that supplement dired. I have barely touched searching in a directory. I have only used 3 of the actions available (create directory,
+delete, rename). I have only used 1 of the means of marking. 
+
+Future Expansions
+
+There is now a way to get Google Drive directly in Emacs via GVFS. I haven't played with it because, well, I'm tired of fighting with my Mac right now and
+installing GVFS purports to be easy, but my experience has been that this is rarely as true as is implied. This would allow me to work with the Google Drive file
+structure via Emacs (with Tramp). This will worth together with [[https://github.com/ubolonton/pullover][pullover]], which has the tagline "Texting while driving (other apps) is dangerous. Let's pull over
+there to edit the text in Emacs instead!" 
+
+That sounds amazing. If it actually works, I hold to combine that with emacsclient and org-protocol to move even more things into Emacs. If anybody has
+worked on this and gotten it working, please let me know! 
+
+*** set view 
+		( - меняет показывать полные даные или частичные
+*** Двух понельный мод 
+*** копирования переименованни е удаление 
+*** Применить шел команды 
+*** шел в отдельной панели 
+*** Просмотр изображений 
 ** eww 
 **** other
 *** 2 Basic Usage
