@@ -1,3 +1,5 @@
+[[file:d:/Development/lisp/Dropbox/orgs/org-Brain/Raspberry Pi.org::*I2C][I2C]]
+
 #+begin_src translate 
 Ты работтаешь проверка?
 #+end_src
@@ -22,3 +24,7 @@
 
 #+RESULTS:
 : 5519.36
+* progn 
+#+begin_src emacs-lisp results output silent
+(load "~/INI/hydra-cfg.el")
+#+end_src

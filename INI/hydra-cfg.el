@@ -498,21 +498,35 @@ _?_ help            _c_urrent file
     "
 ;; ***** keys
 ;; ****** w : 
-    ("w" (query-replace
-								"/"
-								"\\"
-								nil
-								nil
-								(current-kill 0 "DO-NOT-MOVE"))
-								)
+    ("w" (if (eq evil-state 'visual)
+								(query-replace
+														"/"
+														"\\"
+														nil
+														(region-beginning)
+														(region-end)
+														(current-kill 0 "DO-NOT-MOVE"))
+								(query-replace
+														"/"
+														"\\"
+														nil
+														nil
+														(current-kill 0 "DO-NOT-MOVE"))))
 ;; ****** u : 
-    ("u" (query-replace
-								"\\"
-								"/"
-								nil
-								nil
-								(current-kill 0 "DO-NOT-MOVE"))
-								)
+    ("u" (if (eq evil-state 'visual)
+								(query-replace
+														"\\"
+														"/"
+														nil
+														(region-beginning)
+														(region-end)
+														(current-kill 0 "DO-NOT-MOVE"))
+								(query-replace
+														"\\"
+														"/"
+														nil
+														nil
+														(current-kill 0 "DO-NOT-MOVE"))))
 ;; ****** R : 
 	("R" revert-buffer) 
 ;; ****** q : 
