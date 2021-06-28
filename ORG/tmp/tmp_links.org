@@ -28,3 +28,6 @@
 #+begin_src emacs-lisp results output silent
 (load "~/INI/hydra-cfg.el")
 #+end_src
+
+#+RESULTS:
+: t
