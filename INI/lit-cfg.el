@@ -18,4 +18,8 @@
 ;; (find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
 (load "~/INI/lit-cfg/read-aloud-cfg.el")
 ;; --------------------------------------
+;; ** LOAD READERS MODS CUSTOMIZATION 
+;; (find-file-other-frame "~/INI/lit-cfg/reader-cfg.el") 
+(load "~/INI/lit-cfg/reader-cfg.el")
+;; --------------------------------------
 ;; *  --------------------------------------
