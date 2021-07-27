@@ -14,13 +14,11 @@
 (use-package fb2-mode
 	;; :ensure t
 	:load-path "~/ELs/Readers/fb2-mode"
-	;; :load-path "~/ELs/"
 	;; :init
 ;; *** :config : 
 	:config
 (add-to-list 'auto-mode-alist '("\\.fb2\\'" . fb2-mode))
 (add-to-list 'auto-mode-alist '("\\.fb\\'" . fb2-mode))
-	;; (global-evil-mc-mode  1) ;; enable
 ;; *** ===========END========= ) : 
 	)
 ;; *** Docs
@@ -43,7 +41,6 @@
 ;; *** :config : 
 	:config
 	(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-		;; (global-evil-mc-mode  1) ;; enable
 ;; *** ===========END========= ) : 
 	)
 ;; *** Docs
