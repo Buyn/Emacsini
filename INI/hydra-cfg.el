@@ -58,7 +58,7 @@
 ;; ***** keys
     ("q" nil)
     ("SPC" spc-main-menu98/body)
-    ("c" calc :color pink)
+    ("c" calc)
 		("o" hydra-outline/body) 
 		("d" hydra-ediff/body) 
 		("t" hydra-transpose/body) 
