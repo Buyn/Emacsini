@@ -271,7 +271,7 @@ D:\shell\Far\Far.exe
 			(find-file-other-frame "~/ELs/powerline/sm-package-powerline.el")notuse
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** HYDRA MENU
- (find-file-other-frame "~/INI/hydra-cfg.el")
+(find-file-other-frame "~/INI/hydra-cfg.el")
 *** literary 
 (find-file-other-frame "~/INI/lit-cfg.el")
 	(find-file-other-frame "~/INI/translate-cfg.el")
@@ -15343,6 +15343,30 @@ ${0}
 
 																																											 -
 #+end_src
+** TRANSLATE-MOD
+*** ob-translate
+Each block supports the following arguments:
+Argument	Description	Example	Default
+:src	Source language.
+#+BEGIN_SRC translate :src de	‘auto’ (for auto detection).
+:dest	Destination language(s).
+#+BEGIN_SRC translate :dest it,fr	‘en’ (for English).
+#+end_src
+
+:dest may be a single country-code, or a comma-separated list.
+перевод на украинский
+#+begin_src translate :dest uk
+#+end_src
+All defaults are customizable with M-x customize-group RET ob-translate.
+:dest may be a single country-code, or a comma-separated list.
+
+All defaults are customizable with M-x customize-group RET ob-translate.
+*** go-translate
+		хелпа нет
+		надо искать даженепомнюк как они работают
+*** google-translate
+		хелпа нет
+		надо искать даженепомнюк как они работают
 ** yasnippet
 *** Path to my snipets 
 cd D:\Development\lisp\HOME\.emacs.d\snippets\python-mode 

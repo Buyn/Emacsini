@@ -22,21 +22,7 @@
 	(add-to-list 'org-structure-template-alist '("t" "#+BEGIN_SRC translate ? \n\n#+END_SRC\n"))
 	(add-to-list 'org-structure-template-alist '("tr" "#+BEGIN_SRC translate :dest ru ? \n\n#+END_SRC\n"))
   )
-;; **** Docs
-;; ***** Options
-;; Each block supports the following arguments:
-;; Argument	Description	Example	Default
-;; :src	Source language.
-;; #+BEGIN_SRC translate :src de	‘auto’ (for auto detection).
-;; :dest	Destination language(s).
-;; #+BEGIN_SRC translate :dest it,fr	‘en’ (for English).
-;; :dest may be a single country-code, or a comma-separated list.
-;; перевод на украинский
-;; #+begin_src translate :dest uk
-;; All defaults are customizable with M-x customize-group RET ob-translate.
-;; :dest may be a single country-code, or a comma-separated list.
-
-;; All defaults are customizable with M-x customize-group RET ob-translate.
+;; **** --------------------------------------
 ;; *** google-translate
 ;; **** use-package google-translate
 (use-package google-translate :ensure t
@@ -44,8 +30,6 @@
   (google-translate-backend-method 'emacs)
   :config
    (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))
-;; **** Docs
-
 ;; **** --------------------------------------
 ;; *** go-translate
 ;; **** use-package go-translate
@@ -56,6 +40,5 @@
 	(setq go-translate-target-language "en")
 	(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
   )
-;; **** Docs
 ;; **** --------------------------------------
 ;; *  --------------------------------------

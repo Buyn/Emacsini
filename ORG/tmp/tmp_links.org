@@ -1,12 +1,19 @@
-[[file:d:/Development/lisp/Dropbox/orgs/org-Brain/Raspberry Pi.org::*I2C][I2C]]
-
+* translate : 
+** from ru
 #+begin_src translate 
-Ты работтаешь проверка?
+fetus
 #+end_src
 
 #+RESULTS:
-: Are you working verification?
+: fetus
 
+** from en
+#+begin_src translate :dest ru
+fetus
+#+end_src
+
+#+RESULTS:
+: плод
 * link to 
 * Calc 
 ** sendbox
