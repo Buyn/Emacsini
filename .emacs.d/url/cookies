@@ -3,7 +3,12 @@
 
 (setq url-cookie-storage
  '(("plantuml.com"
-	[url-cookie "ezCMPCCS" "true" "Wed, 08 Jun 2022 06:27:10 GMT" "/" "plantuml.com" nil])
+	[url-cookie "ezCMPCCS" "true" "Sat, 20 Aug 2022 22:32:56 GMT" "/" "plantuml.com" nil]
+	[url-cookie "active_template::173770" "pub_site.1629498776" "Sun, 22 Aug 2021 22:32:56 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezepvv" "110" "Sat, 21 Aug 2021 22:32:56 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezovuuidtime_173770" "1629498776" "Sun, 22 Aug 2021 22:32:56 UTC" "/" "plantuml.com" nil])
+ (".google.com"
+	[url-cookie "NID" "221=cq7vS8oQHf2VlHHKps0EWaur4RPcJlHMfmuWSlCZ3o2q4am65T8KVNJo5bcw90VwC6XCNBDF4hNT7yE8Xo5ngCl9ljbZzpPnzaucA9yZbYWhSeCZPVtUle_usv7v6FBaER9OOtfG4-5VaGDsur36SX2zrLpmbp39a22ZWxThTek" "Tue, 08-Feb-2022 10:29:02 GMT" "/" ".google.com" nil])
  ("myraspberry.ru"
 	[url-cookie "siteStatistics" "7fd02860b1d73d55d79959da44ff36cd"
 							#("Вт янв 19 03:14:11 2038 GMT" 0 27
@@ -102,6 +107,10 @@
 (setq url-cookie-secure-storage
  '((".fandom.com"
 	[url-cookie "wikia_beacon_id" "QmE9K6Rqdj" "Fri, 01 Oct 2021 14:50:13 GMT" "/" ".fandom.com" t])
+ (".wikipedia.org"
+	[url-cookie "WMF-Last-Access-Global" "09-Aug-2021" "Fri, 10 Sep 2021 00:00:00 GMT" "/" ".wikipedia.org" t])
+ ("en.wikipedia.org"
+	[url-cookie "WMF-Last-Access" "09-Aug-2021" "Fri, 10 Sep 2021 00:00:00 GMT" "/" "en.wikipedia.org" t])
  (".pikabu.ru"
 	[url-cookie "pcid" "tYAlQIY1Yv2"
 							#("Вс июл 27 21:59:48 2031 GMT" 0 27
@@ -143,8 +152,6 @@
 							#("Вс окт 13 12:31:38 2052 GMT" 0 27
 								(charset windows-1251))
 							"/" "one-tab.com" t])
- (".gamepedia.com"
-	[url-cookie "wikia_beacon_id" "7v5PDDJtN2" "Sat, 14 Aug 2021 23:23:56 GMT" "/" ".gamepedia.com" t])
  ("github.com"
 	[url-cookie "_octo" "GH1.1.1496171597.1618234365" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t]
 	[url-cookie "logged_in" "no" "Tue, 12 Apr 2022 13:32:45 GMT" "/" "github.com" t])

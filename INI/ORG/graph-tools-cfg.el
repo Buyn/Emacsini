@@ -13,10 +13,19 @@
   :config
 	(setq org-plantuml-jar-path 
 		(expand-file-name "~/AddApps/plantuml/plantuml.1.2021.0.jar"))
+	(setq plantuml-jar-path "~/AddApps/plantuml/plantuml.1.2021.0.jar")
+	(setq plantuml-default-exec-mode 'jar)
+	;; (setq plantuml-output-type "txt")
 	(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 	(org-babel-do-load-languages 
 		'org-babel-load-languages 
 		'((plantuml . t)))
+	(define-key plantuml-mode-map (kbd "<f5>") '(lambda() (interactive)
+					(save-some-buffers 'no-confirm)
+					(org-save-all-org-buffers)
+					(evil-normal-state)
+					(plantuml-preview 1)))				
+	(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 ;; *** end use-package : 
 	)
 

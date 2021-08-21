@@ -10289,11 +10289,6 @@ https://plantuml.com/class-diagram
 	@enduml    
 	*    
 ****** 	Label on relations    
-	*    
-	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=4a705b44651caa593322e3df95b279f4&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-     
 	It is possible to add a label on the relation, using :, followed by the text    
 	of the label.     
      
@@ -10821,11 +10816,6 @@ https://plantuml.com/class-diagram
 	@enduml    
 	*    
 ****** 	Packages    
-	*    
-	[[http://alphadoc.plantuml.com/action/dokuwiki/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-	[[http://alphadoc.plantuml.com/action/asciidoc/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-	[[http://alphadoc.plantuml.com/action/markdown/en/class-diagram?do=edit&title=27fe4eb3edbaff8f250e2d51f7462681&orig=https%3A%2F%2Fplantuml.com%2Fen%2Fclass-diagram][*]]    
-     
 	You can define a package using the package keyword, and optionally    
 	declare a background color for your package (Using a html color code    
 	or name).     
