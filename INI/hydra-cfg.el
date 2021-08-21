@@ -493,7 +493,7 @@ _?_ help            _c_urrent file
     "
                 ^Emacs-mode  Menus^          
     ────────────^─────────────────^───────────────────
-     To _w_in Format    To _u_nix Format _s_av-tex2reg
+     To _w_in Format    To _u_nix Format _s_av-tex2reg _W_inBuffer1251
      _q_uit						  _R_evert buffer  _i_ns-reg2tex
     "
 ;; ***** keys
@@ -529,6 +529,8 @@ _?_ help            _c_urrent file
 														(current-kill 0 "DO-NOT-MOVE"))))
 ;; ****** R : 
 	("R" revert-buffer) 
+;; ****** W : 
+	("W" (revert-buffer-with-coding-system "windows-1251")) 
 ;; ****** q : 
 	("q" nil) 
 ;; ****** s : 
