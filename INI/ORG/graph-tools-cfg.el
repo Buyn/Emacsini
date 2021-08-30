@@ -12,8 +12,8 @@
 ;; *** :config : 
   :config
 	(setq org-plantuml-jar-path 
-		(expand-file-name "~/AddApps/plantuml/plantuml.1.2021.0.jar"))
-	(setq plantuml-jar-path "~/AddApps/plantuml/plantuml.1.2021.0.jar")
+		(expand-file-name "~/AddApps/plantuml/plantuml.jar"))
+	(setq plantuml-jar-path "~/AddApps/plantuml/plantuml.jar")
 	(setq plantuml-default-exec-mode 'jar)
 	;; (setq plantuml-output-type "txt")
 	(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))

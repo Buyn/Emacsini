@@ -44,7 +44,7 @@
 								(charset windows-1251))
 							"/" "pikabu.ru" nil])
  ("nyxt.atlas.engineer"
-	[url-cookie "lack.session" "76d6d00bef3a8c29eaeeb983cf233ade0e718350" "Tue, 09 Jan 2142 00:44:36 GMT" "/" "nyxt.atlas.engineer" nil])
+	[url-cookie "lack.session" "76d6d00bef3a8c29eaeeb983cf233ade0e718350" "Mon, 22 Apr 2143 21:21:36 GMT" "/" "nyxt.atlas.engineer" nil])
  ("francescocirillo.com"
 	[url-cookie "_shopify_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil]
 	[url-cookie "_y" "0504997b-3b09-431f-ad39-4b5cde5aea43" "Fri, 19-Nov-21 03:57:31 GMT" "/" "francescocirillo.com" nil])
@@ -99,10 +99,10 @@
  (".google.com"
 	[url-cookie "NID" "221=cq7vS8oQHf2VlHHKps0EWaur4RPcJlHMfmuWSlCZ3o2q4am65T8KVNJo5bcw90VwC6XCNBDF4hNT7yE8Xo5ngCl9ljbZzpPnzaucA9yZbYWhSeCZPVtUle_usv7v6FBaER9OOtfG4-5VaGDsur36SX2zrLpmbp39a22ZWxThTek" "Tue, 08-Feb-2022 10:29:02 GMT" "/" ".google.com" nil])
  ("plantuml.com"
-	[url-cookie "ezovuuidtime_173770" "1629582404" "Mon, 23 Aug 2021 21:46:44 UTC" "/" "plantuml.com" nil]
-	[url-cookie "ezepvv" "106" "Sun, 22 Aug 2021 21:46:44 UTC" "/" "plantuml.com" nil]
-	[url-cookie "active_template::173770" "pub_site.1629582404" "Mon, 23 Aug 2021 21:46:44 UTC" "/" "plantuml.com" nil]
-	[url-cookie "ezCMPCCS" "true" "Sun, 21 Aug 2022 21:46:44 GMT" "/" "plantuml.com" nil]))
+	[url-cookie "ezCMPCCS" "true" "Tue, 30 Aug 2022 18:33:10 GMT" "/" "plantuml.com" nil]
+	[url-cookie "active_template::173770" "pub_site.1630348390" "Wed, 01 Sep 2021 18:33:10 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezepvv" "133" "Tue, 31 Aug 2021 18:33:10 UTC" "/" "plantuml.com" nil]
+	[url-cookie "ezovuuidtime_173770" "1630348390" "Wed, 01 Sep 2021 18:33:10 UTC" "/" "plantuml.com" nil]))
 )
 (setq url-cookie-secure-storage
  '(("emackandboliohk.com"

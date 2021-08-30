@@ -242,7 +242,7 @@ D:\shell\Far\Far.exe
 (find-file-other-frame "~/INI/org-cfg.el")
 	(find-file-other-frame "~/INI/org_agend_cfg.el")
 	(find-file-other-frame "~/INI/babel-cfg.el")
-	(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
+		(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
 	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
 
@@ -14845,6 +14845,456 @@ You will find the complete documentation about ditaa on:
     ditaa.sourceforge.net
     github.com/stathissideris/ditaa
 
+**** Diagrams 
+***** MindMap
+******  MindMap  * [[https://plantuml.com/mindmap-diagram#d7b611f2392a9772][OrgMode syntax]]  
+ Submit   * [[https://plantuml.com/mindmap-diagram#2971d30e503e588e][Markdown syntax]]  
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#0][*Edit in Dokuwiki]]  * [[https://plantuml.com/mindmap-diagram#f2e4466bf5f64a4f][Arithmetic notation]]  
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#0][*Edit in Asciidoc]]  * [[https://plantuml.com/mindmap-diagram#c52a6bf8d847484d][Multilines]]  
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#0][*Edit in Markdown]]  * [[https://plantuml.com/mindmap-diagram#5d50889672f6f860][Colors]]  
+   * [[https://plantuml.com/mindmap-diagram#d97958298b577d46][Removing box]]  
+ MindMap diagram are still in beta: the syntax may change without notice.   * [[https://plantuml.com/mindmap-diagram#fbe1d8b1a91aa486][Changing diagram direction]]  
+   * [[https://plantuml.com/mindmap-diagram#d23dee2d0707a741][Complete example]]  
+ *OrgMode syntax  * [[https://plantuml.com/mindmap-diagram#edc06c934e9e5fc5][Changing style]]  
+ Submit   * [[https://plantuml.com/mindmap-diagram#9a9f568761f736f4][Word Wrap]]  
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#1][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#1][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#1][*Edit in Markdown]]    
+     
+****** This syntax is compatible with OrgMode     
+  🎉 Copied!   @startmindmap      
+  *  * Debian      
+    ** Ubuntu      
+    *** Linux Mint      
+    *** Kubuntu      
+    *** Lubuntu      
+    *** KDE Neon      
+    ** LMDE      
+    ** SolydXK      
+    ** SteamOS      
+    ** Raspbian with a very long name      
+    *** <s>Raspmbc</s> => OSMC      
+    *** <s>Raspyfi</s> => Volumio      
+    @endmindmap      
+    *      
+     
+******  *Markdown syntax    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#2][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#2][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#2][*Edit in Markdown]]    
+     
+ This syntax is compatible with Markdown     
+     
+  🎉 Copied!   @startmindmap      
+  *  * root node      
+    	* some first level node      
+    		* second level node      
+    		* another second level node      
+    	* another first level node      
+    @endmindmap      
+    *      
+     
+******  *Arithmetic notation    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#3][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#3][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#3][*Edit in Markdown]]    
+     
+ You can use the following notation to choose diagram side.     
+     
+  🎉 Copied!   @startmindmap      
+  *  + OS      
+    ++ Ubuntu      
+    +++ Linux Mint      
+    +++ Kubuntu      
+    +++ Lubuntu      
+    +++ KDE Neon      
+    ++ LMDE      
+    ++ SolydXK      
+    ++ SteamOS      
+    ++ Raspbian      
+    -- Windows 95      
+    -- Windows 98      
+    -- Windows NT      
+    --- Windows 8      
+    --- Windows 10      
+    @endmindmap      
+    *      
+     
+******  *Multilines    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#4][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#4][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#4][*Edit in Markdown]]    
+     
+ You can use : and ; to have multilines box.     
+     
+  🎉 Copied!   @startmindmap      
+  *  * Class Templates      
+    **:Example 1      
+    <code>      
+    template <typename T>      
+    class cname{      
+    void f1()<U+003B>      
+    ...      
+    }      
+    </code>      
+    ;      
+    **:Example 2      
+    <code>      
+    other template <typename T>      
+    class cname{      
+    ...      
+    </code>      
+    ;      
+    @endmindmap      
+    *      
+     
+  🎉 Copied!   @startmindmap      
+  *  + root      
+    **:right_1.1      
+    right_1.2;      
+    ++ right_2      
+          
+    left side      
+          
+    -- left_1      
+    -- left_2      
+    **:left_3.1      
+    left_3.2;      
+    @endmindmap      
+    *      
+     
+******  *Colors    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#5][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#5][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#5][*Edit in Markdown]]    
+     
+ It is possible to change node [[https://plantuml.com/color][color]].     
+     
+ With inline color    
+     
+ * OrgMode syntax mindmap    
+     
+  🎉 Copied!   @startmindmap      
+  *  *[#Orange] Colors      
+    **[#lightgreen] Green      
+    **[#FFBBCC] Rose      
+    **[#lightblue] Blue      
+    @endmindmap      
+    *      
+     
+******* Arithmetic notation syntax mindmap    
+     
+   🎉 Copied!   @startmindmap      
+   *  +[#Orange] Colors      
+     ++[#lightgreen] Green      
+     ++[#FFBBCC] Rose      
+     --[#lightblue] Blue      
+     @endmindmap      
+     *      
+     
+******* Markdown syntax mindmap    
+     
+   🎉 Copied!   @startmindmap      
+   *  *[#Orange] root node      
+			*[#lightgreen] some first level node      
+       *[#FFBBCC] second level node      
+       *[#lightblue] another second level node      
+			*[#lightgreen] another first level node      
+     @endmindmap      
+     *      
+     
+	With style color    
+     
+******* OrgMode syntax mindmap    
+     
+   🎉 Copied!   @startmindmap      
+   *  <style>      
+     mindmapDiagram {      
+       .green {      
+         BackgroundColor lightgreen      
+       }      
+       .rose {      
+         BackgroundColor #FFBBCC      
+       }      
+       .your_style_name {      
+         BackgroundColor lightblue      
+       }      
+     }      
+     </style>      
+     * Colors      
+     ** Green <<green>>      
+     ** Rose <<rose>>      
+     ** Blue <<your_style_name>>      
+     @endmindmap      
+     *      
+     
+******* Arithmetic notation syntax mindmap    
+     
+   🎉 Copied!   @startmindmap      
+   *  <style>      
+     mindmapDiagram {      
+       .green {      
+         BackgroundColor lightgreen      
+       }      
+       .rose {      
+         BackgroundColor #FFBBCC      
+       }      
+       .your_style_name {      
+         BackgroundColor lightblue      
+       }      
+     }      
+     </style>      
+     + Colors      
+     ++ Green <<green>>      
+     ++ Rose <<rose>>      
+     -- Blue <<your_style_name>>      
+     @endmindmap      
+     *      
+     
+	* Markdown syntax mindmap    
+     
+   🎉 Copied!   @startmindmap      
+   *  <style>      
+     mindmapDiagram {      
+       .green {      
+         BackgroundColor lightgreen      
+       }      
+       .rose {      
+         BackgroundColor #FFBBCC      
+       }      
+       .your_style_name {      
+         BackgroundColor lightblue      
+       }      
+     }      
+     </style>      
+     * root node      
+			* some first level node <<green>>      
+       * second level node <<rose>>      
+       * another second level node <<your_style_name>>      
+			* another first level node <<green>>      
+     @endmindmap      
+     *      
+     
+******  Removing box    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#6][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#6][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#6][*Edit in Markdown]]    
+     
+ You can remove the box drawing using an underscore.     
+     
+  🎉 Copied!   @startmindmap      
+  *  * root node      
+    ** some first level node      
+    ***_ second level node      
+    ***_ another second level node      
+    ***_ foo      
+    ***_ bar      
+    ***_ foobar      
+    ** another first level node      
+    @endmindmap      
+    *      
+     
+  🎉 Copied!   @startmindmap      
+  *  *_ root node      
+    **_ some first level node      
+    ***_ second level node      
+    ***_ another second level node      
+    ***_ foo      
+    ***_ bar      
+    ***_ foobar      
+    **_ another first level node      
+    @endmindmap      
+    *      
+     
+  🎉 Copied!   @startmindmap      
+  *  + root node      
+    ++ some first level node      
+    +++_ second level node      
+    +++_ another second level node      
+    +++_ foo      
+    +++_ bar      
+    +++_ foobar      
+    ++_ another first level node      
+    -- some first right level node      
+    --_ another first right level node      
+    @endmindmap      
+    *      
+     
+******  *Changing diagram direction    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#7][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#7][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#7][*Edit in Markdown]]    
+     
+ It is possible to use both sides of the diagram.     
+     
+  🎉 Copied!   @startmindmap      
+  *  * count      
+    ** 100      
+    *** 101      
+    *** 102      
+    ** 200      
+          
+    left side      
+          
+    ** A      
+    *** AA      
+    *** AB      
+    ** B      
+    @endmindmap      
+    *      
+     
+ *Complete example    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#8][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#8][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#8][*Edit in Markdown]]    
+     
+  🎉 Copied!   @startmindmap      
+  *  caption figure 1      
+    title My super title      
+          
+    * <&flag>Debian      
+    ** <&globe>Ubuntu      
+    *** Linux Mint      
+    *** Kubuntu      
+    *** Lubuntu      
+    *** KDE Neon      
+    ** <&graph>LMDE      
+    ** <&pulse>SolydXK      
+    ** <&people>SteamOS      
+    ** <&star>Raspbian with a very long name      
+    *** <s>Raspmbc</s> => OSMC      
+    *** <s>Raspyfi</s> => Volumio      
+          
+    header      
+    My super header      
+    endheader      
+          
+    center footer My super footer      
+          
+    legend right      
+      Short      
+      legend      
+    endlegend      
+    @endmindmap      
+    *      
+     
+******  *Changing style    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#9][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#9][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#9][*Edit in Markdown]]    
+     
+ node, depth    
+     
+  🎉 Copied!   @startmindmap      
+  *  <style>      
+    mindmapDiagram {      
+        node {      
+            BackgroundColor lightGreen      
+        }      
+        :depth(1) {      
+          BackGroundColor white      
+        }      
+    }      
+    </style>      
+    * Linux      
+    ** NixOS      
+    ** Debian      
+    *** Ubuntu      
+    **** Linux Mint      
+    **** Kubuntu      
+    **** Lubuntu      
+    **** KDE Neon      
+    @endmindmap      
+    *      
+     
+ boxless    
+     
+  🎉 Copied!   @startmindmap      
+  *  <style>      
+    mindmapDiagram {      
+      node {      
+        BackgroundColor lightGreen      
+      }      
+      boxless {      
+        FontColor darkgreen      
+      }      
+    }      
+    </style>      
+    * Linux      
+    ** NixOS      
+    ** Debian      
+    ***_ Ubuntu      
+    **** Linux Mint      
+    **** Kubuntu      
+    **** Lubuntu      
+    **** KDE Neon      
+    @endmindmap      
+    *      
+     
+ *Word Wrap    
+ Submit     
+ [[http://alphadoc.plantuml.com/doc/dokuwiki/en/mindmap-diagram#10][*Edit in Dokuwiki]]    
+ [[http://alphadoc.plantuml.com/doc/asciidoc/en/mindmap-diagram#10][*Edit in Asciidoc]]    
+ [[http://alphadoc.plantuml.com/doc/markdown/en/mindmap-diagram#10][*Edit in Markdown]]    
+     
+ Using MaximumWidth setting you can control automatic word wrap. Unit used is pixel.     
+     
+  🎉 Copied!   @startmindmap      
+  *        
+          
+    <style>      
+    node {      
+        Padding 12      
+        Margin 3      
+        HorizontalAlignment center      
+        LineColor blue      
+        LineThickness 3.0      
+        BackgroundColor gold      
+        RoundCorner 40      
+        MaximumWidth 100      
+    }      
+          
+    rootNode {      
+        LineStyle 8.0;3.0      
+        LineColor red      
+        BackgroundColor white      
+        LineThickness 1.0      
+        RoundCorner 0      
+        Shadowing 0.0      
+    }      
+          
+    leafNode {      
+        LineColor gold      
+        RoundCorner 0      
+        Padding 3      
+    }      
+          
+    arrow {      
+        LineStyle 4      
+        LineThickness 0.5      
+        LineColor green      
+    }      
+    </style>      
+          
+    * Hi =)      
+    ** sometimes i have node in wich i want to write a long text      
+    *** this results in really huge diagram      
+    **** of course, i can explicit split with a\nnew line      
+    **** but it could be cool if PlantUML was able to split long lines, maybe with an option       
+          
+    @endmindmap      
+    *      
+-------------------------------------------------------------------------
+
+
 **** exempls
 ***** seqvese
 	#+begin_src plantuml :file e:\Temp\my-diagram.png
@@ -15461,6 +15911,37 @@ ${0}
 
 																																											 -
 #+end_src
+*** SVG 
+**** exepl 
+***** 01
+(require 'svg)
+(insert-image
+(svg-image
+(let ((svg (svg-create 100 100)))
+(svg-circle svg 50 50 20 :stroke-width 6 :stroke 'blue :fill 'yellow)
+svg)))  
+***** tmp.svg file
+image mode
+c-c c-c to text
+<svg width="100" height="100">
+<rect
+x="0"
+y="0"
+width="100"
+height="10"
+fill="blue"
+/>
+</svg> 
+***** svg-insert-image
+#+begin_src emacs-lisp :tangle yes
+(setf svg (svg-create 400 400))
+(setq svg (svg-create 800 800 :stroke "orange" :stroke-width 5))
+(svg-circle svg 50 50 20 :stroke-width 6 :stroke 'blue :fill 'yellow)
+(svg-circle svg 100 50 20 :stroke-width 6 :stroke 'blue :fill 'yellow)
+(save-excursion (goto-char (point-max)) (svg-insert-image svg))
+(svg-circle svg 100 50 20 :stroke-width 6 :stroke 'blue :fill 'yellow)
+#+end_src
+
 ** TRANSLATE-MOD
 *** ob-translate
 Each block supports the following arguments:

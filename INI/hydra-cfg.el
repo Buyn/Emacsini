@@ -530,7 +530,7 @@ _?_ help            _c_urrent file
 ;; ****** R : 
 	("R" revert-buffer) 
 ;; ****** W : 
-	("W" (revert-buffer-with-coding-system "windows-1251")) 
+	("W" (revert-buffer-with-coding-system 'windows-1251)) 
 ;; ****** q : 
 	("q" nil) 
 ;; ****** s : 
