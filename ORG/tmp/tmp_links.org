@@ -1,11 +1,11 @@
 * translate : 
 ** from ru
 #+begin_src translate 
-fetus
+У тебя Надираюший задницу герой! С сумашедшими параметрами для его уровня! Ты крут!
 #+end_src
 
 #+RESULTS:
-: fetus
+: You've got a kick ass hero! With crazy parameters for his level! You are awesome!
 
 ** from en
 #+begin_src translate :dest ru
@@ -17,20 +17,43 @@ fetus
 * link to 
 * Calc 
 ** sendbox
+		#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5
+			((a+b)^3 + sqrt(c)) / (2x+1)
+		#+END_SRC
+
 #+begin_src emacs-lisp :tangle yes
-(setq low 2409.68)
-(setq hih 3109.68)
+(setq сутки10 100)
+(setq час10 100)
+(setq минут10 100)
+(setq сутки12 24)
+(setq час12 60)
+(setq минут12 60)
 #+end_src
 
 #+RESULTS:
-: 3109.68
+: 60
 
 #+begin_src emacs-lisp :tangle yes
-(+ hih low)
+(setq cof24 (/ сутки10 сутки12))
 #+end_src
 
 #+RESULTS:
-: 5519.36
+: 4
+
+#+begin_src emacs-lisp :tangle yes
+(setq cof10 (/  сутки12 сутки10))
+#+end_src
+
+#+RESULTS:
+: 0
+
+#+begin_src emacs-lisp :tangle yes
+(* сутки10 cof10)
+#+end_src
+
+#+RESULTS:
+: 0
+
 * progn 
 #+begin_src emacs-lisp results output silent
 (load "~/INI/hydra-cfg.el")

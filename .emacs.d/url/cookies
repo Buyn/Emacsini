@@ -99,10 +99,7 @@
  (".google.com"
 	[url-cookie "NID" "221=cq7vS8oQHf2VlHHKps0EWaur4RPcJlHMfmuWSlCZ3o2q4am65T8KVNJo5bcw90VwC6XCNBDF4hNT7yE8Xo5ngCl9ljbZzpPnzaucA9yZbYWhSeCZPVtUle_usv7v6FBaER9OOtfG4-5VaGDsur36SX2zrLpmbp39a22ZWxThTek" "Tue, 08-Feb-2022 10:29:02 GMT" "/" ".google.com" nil])
  ("plantuml.com"
-	[url-cookie "ezCMPCCS" "true" "Tue, 30 Aug 2022 18:33:10 GMT" "/" "plantuml.com" nil]
-	[url-cookie "active_template::173770" "pub_site.1630348390" "Wed, 01 Sep 2021 18:33:10 UTC" "/" "plantuml.com" nil]
-	[url-cookie "ezepvv" "133" "Tue, 31 Aug 2021 18:33:10 UTC" "/" "plantuml.com" nil]
-	[url-cookie "ezovuuidtime_173770" "1630348390" "Wed, 01 Sep 2021 18:33:10 UTC" "/" "plantuml.com" nil]))
+	[url-cookie "ezCMPCCS" "true" "Tue, 23 Aug 2022 04:08:54 GMT" "/" "plantuml.com" nil]))
 )
 (setq url-cookie-secure-storage
  '(("emackandboliohk.com"
@@ -147,7 +144,7 @@
 	[url-cookie "secure_customer_sig" "" "Fri, 19 Nov 2021 03:57:31 GMT" "/" "francescocirillo.com" t])
  ("realpython.com"
 	[url-cookie "csrftoken" "DOjfeQYiRqe3S73Vl6XJ6r3OEY91q2GxPEu6X5Win7KPUegn1vNjxLAfcP0IMYQW"
-							#("Чт янв 06 09:42:25 2022 GMT" 0 27
+							#("Сб сен 03 22:36:06 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" "realpython.com" t])
  (".pikabu.ru"
