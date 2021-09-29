@@ -188,6 +188,9 @@
 ;FIXME: move selected
 ;TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
+;; **** FIXME: move selected
+;; **** TODO: meta m+p copy line \ selection
+;; -------------------------------------- }}}
 ;; *** move-word : 
 ;; **** M-m M-L : 
 (define-key evil-normal-state-map (kbd "M-m M-L") '(lambda() (interactive)
@@ -195,8 +198,8 @@
 ;; **** M-m M-H : 
 (define-key evil-normal-state-map (kbd "M-m M-H") '(lambda() (interactive)
 (transpose-words -1)))
-;FIXME: move selected
-;TODO: meta m+p copy line \ selection
+;; **** FIXME: move selected
+;; **** TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
 ;; ** Devolopment  {{{
 (define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
