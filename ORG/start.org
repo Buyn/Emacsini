@@ -1371,9 +1371,6 @@ Working?
 
 D:\inet\browser\Comodo\Dragon\dragon.exe
 D:\inet\browser\Comodo\Dragon\dragon.exe https://mail.google.com/mail/u/0/#inbox
-
-
-
 * Help Docs Emacs 
 ** To set on a file by file 
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
@@ -16093,7 +16090,6 @@ cd D:\Development\lisp\HOME\.emacs.d\elpa\yasnippet-snippets-20200122.1140\snipp
 		 снипеты из твоей папки переписывают орегиналые
 		 если уних совподают имен
 		 снипеты подгрухаются вместе емаком
-		 и невкурсе если они сменились
 		 по команда из меню all - a  
 yas-reload-all переподгружает их
 **** manual

@@ -35,7 +35,7 @@
   (interactive "P")
 		(display-line-numbers-mode t)
 		(company-fuzzy-mode 1)
-		(setq company-minimum-prefix-length 1)
+		(setq company-minimum-prefix-length 3)
 		(setq company-show-numbers t)
 		(setq company-idle-delay 0.1)
 		(setq outshine-mode 1))
@@ -62,7 +62,7 @@
 	(add-hook 'prog-mode-hook (lambda () 
 		(setq company-show-numbers t)
 		(setq company-fuzzy-mode 1)
-		(setq company-minimum-prefix-length 1)
+		(setq company-minimum-prefix-length 3)
 		(setq company-idle-delay 0.1)))
 ;; ***  END use-package 
   )

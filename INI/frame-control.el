@@ -63,10 +63,9 @@
 (global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
 ;; (define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
 			;; (display-buffer (last-buffer))))
-(define-key evil-normal-state-map "ZT" '(lambda() (interactive)
-			(let (buffer-name-to-close (buffer-name))
-			(evil-quit)
-			(switch-to-buffer-other-frame buffer-name-to-close))))
+(define-key evil-normal-state-map "ZN" '(lambda() (interactive)
+			(make-frame-command)
+			(switch-to-buffer-other-frame (evil-buffer-new 0 "*new*"))))
 (global-set-key (kbd " M-g M-t M-j") '(lambda() (interactive)
 			(let (buffer-name-to-close (buffer-name))
 			(evil-quit)
@@ -105,7 +104,7 @@
 					(unbury-buffer)))
 (define-key evil-normal-state-map "ZJ" '(lambda() (interactive)
 					(bury-buffer)))
-(define-key evil-normal-state-map "ZN" '(lambda() (interactive)
+(define-key evil-normal-state-map "Zn" '(lambda() (interactive)
 					(evil-buffer-new 0 "*new*")))
 ;; --------------------------------------
 ;; * FULLSCREEN-MOD CUSTOMIZATION;  {{{
