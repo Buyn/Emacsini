@@ -332,6 +332,15 @@ D:\shell\Far\Far.exe
 (find-file "~/ORG/gtd/gtd.org")
 (find-file "~/ORG/gtd/inbox.org")
 (find-file "~/ORG/gtd/tickler.org")
+*** tutor.org
+#+begin_src emacs-lisp :tangle yes
+(find-file-other-frame "D:/Development/lisp/Dropbox/Office/Progects/Tutor/Main/tutor.org")
+#+end_src
+
+#+RESULTS:
+: #<buffer tutor.org>
+
+
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 

@@ -105,12 +105,10 @@
 							"/" "sourceforge.net" nil]))
 )
 (setq url-cookie-secure-storage
- '((".fandom.com"
-	[url-cookie "wikia_beacon_id" "QmE9K6Rqdj" "Fri, 01 Oct 2021 14:50:13 GMT" "/" ".fandom.com" t])
- (".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "28-Sep-2021" "Sat, 30 Oct 2021 12:00:00 GMT" "/" ".wikipedia.org" t])
+ '((".wikipedia.org"
+	[url-cookie "WMF-Last-Access-Global" "18-Oct-2021" "Fri, 19 Nov 2021 12:00:00 GMT" "/" ".wikipedia.org" t])
  ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "28-Sep-2021" "Sat, 30 Oct 2021 12:00:00 GMT" "/" "en.wikipedia.org" t])
+	[url-cookie "WMF-Last-Access" "18-Oct-2021" "Fri, 19 Nov 2021 12:00:00 GMT" "/" "en.wikipedia.org" t])
  (".pikabu.ru"
 	[url-cookie "pcid" "tYAlQIY1Yv2"
 							#("Вс июл 27 21:59:48 2031 GMT" 0 27
@@ -161,6 +159,8 @@
 	[url-cookie "optimizelyEndUserId" "lo_04ee64db6389" "Mon, 08 Aug 2022 08:07:03 GMT" "/" "codeburst.io" t])
  (".theguardian.com"
 	[url-cookie "GU_mvt_id" "718415" "Mon, 20 Dec 2021 20:14:42 GMT" "/" ".theguardian.com" t])
+ ("t.me"
+	[url-cookie "stel_ssid" "903d9dd506e9a355ff_15585891650229158147" "Thu, 28 Oct 2021 10:16:15 GMT" "/" "t.me" t])
  ("emackandboliohk.com"
 	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t]))
 )
