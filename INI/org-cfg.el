@@ -23,7 +23,7 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-(reveal-mode 1)
+(global-reveal-mode 1)
 (setq org-edit-src-content-indentation 0)
 ;; (global-set-key (kbd "C-c l") 'org-store-link)
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
