@@ -15,6 +15,15 @@ fetus
 #+RESULTS:
 : плод
 * link to 
+* Give 
+smba2 = PB12
+smba3 = PB9
+smba1 = PB5
+scl3 = PA8
+
+scl1 = PB6
+sda1 = PB7
+
 * Calc 
 ** sendbox
 		#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5

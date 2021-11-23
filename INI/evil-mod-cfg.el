@@ -254,7 +254,8 @@
 						)
 				)))
 ;; -------------------------------------- }}}
-;; ** Insert State F2 save {{{
+;; ** Insert State {{{
+;; *** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
 								(evil-normal-state)))
@@ -270,6 +271,9 @@
 								(save-some-buffers 'no-confirm)
 								(evil-normal-state)))
 ;; -------------------------------------- }}}
+;; *** Insert State keys {{{
+   (define-key evil-insert-state-map (kbd "c-h") '(lambda() (interactive)
+												  (backward-delete-char-untabify)))
 ;; ** toggle input method in evil normal state
 (define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
 ;; -------------------------------------- 
