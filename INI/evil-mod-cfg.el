@@ -272,8 +272,9 @@
 								(evil-normal-state)))
 ;; -------------------------------------- }}}
 ;; *** Insert State keys {{{
-   (define-key evil-insert-state-map (kbd "c-h") '(lambda() (interactive)
-												  (backward-delete-char-untabify)))
+   (define-key evil-insert-state-map (kbd "C-h") '(lambda() (interactive)
+												  (backward-delete-char-untabify 1))) 
+;; -------------------------------------- }}}
 ;; ** toggle input method in evil normal state
 (define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
 ;; -------------------------------------- 
