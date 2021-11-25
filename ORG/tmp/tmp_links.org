@@ -65,7 +65,7 @@ sda1 = PB7
 
 * progn 
 #+begin_src emacs-lisp results output silent
-(load "~/INI/hydra-cfg.el")
+(setq org-hide-leading-stars t)
 #+end_src
 
 #+RESULTS:
