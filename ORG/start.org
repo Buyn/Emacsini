@@ -1332,6 +1332,54 @@ asdf asdf asdf asdf
 	,* evil-repeat works only for some commands. In particular it doesn’t work for
 	 delete. It will also interfere with the cursor positions during an undo or redo
 	 operation.
+**** company-jedi
+#+begin_src emacs-lisp :tangle yes
+(use-package company-jedi 
+	:ensure t
+	;; :init
+	;; (elpy-enable)
+	:config
+	(defun my/python-mode-hook ()
+	(add-to-list 'company-backends 'company-jedi))
+	(add-hook 'python-mode-hook 'my/python-mode-hook)
+	(define-key evil-insert-state-map (kbd "C-SPC") 'company-jedi)
+	)
+#+end_src
+
+#+RESULTS:
+: t
+
+**** jedi
+#+begin_src emacs-lisp :tangle yes
+(use-package jedi 
+	:ensure t
+	;; :init
+	;; (elpy-enable)
+	:config
+	; move quick-help tooltips to the minibuffer
+	;; (setq jedi:tooltip-method nil)
+
+	; don't auto-complete unless requested
+	(setq ac-auto-start nil)
+	(setq ac-auto-show-menu nil)
+	;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+	(add-hook 'python-mode-hook 'jedi:setup)
+	(setq jedi:complete-on-dot t)  
+	)
+#+end_src
+    M-x el-get-install RET jedi RET or
+    M-x package-install RET jedi RET or
+    (manually install...)
+Configure Emacs using this:
+(add-hook 'python-mode-hook 'jedi:setup)
+(jedi:install-server)
+(setq jedi:complete-on-dot t)  
+
+(autoload 'jedi:setup "jedi" nil t) for test
+
+
+
+(add-hook 'python-mode-hook 'jedi:setup)
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
