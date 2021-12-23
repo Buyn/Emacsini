@@ -1,20 +1,21 @@
 * translate : 
 ** from ru
 #+begin_src translate 
-У тебя Надираюший задницу герой! С сумашедшими параметрами для его уровня! Ты крут!
+точный расчёт
 #+end_src
 
 #+RESULTS:
-: You've got a kick ass hero! With crazy parameters for his level! You are awesome!
+: accurate calculation
 
 ** from en
 #+begin_src translate :dest ru
-fetus
+She will not cease; and how she loves to dance
 #+end_src
 
 #+RESULTS:
-: плод
+: Она не перестанет; и как она любит танцевать
 * link to 
+[[file:d:/Development/lisp/Dropbox/orgs/capture/Manabook.org::*Trading ebay][Trading ebay]]
 * Give 
 smba2 = PB12
 smba3 = PB9
@@ -62,8 +63,30 @@ sda1 = PB7
 
 #+RESULTS:
 : 0
+** Conveert 
+(format "%x" 1000)  ; decimal to hex. Returns a
+(format "%d" #xe8) ; hex a to decimal. Returns 10.
+** run 
+(calc)
+*** doc
+**** Hex\dec
+    Type any number. For example, 10.
+    Type “d6” to turn the display into hexadecimal form.
+    Type “d0” to turn the display into decimal form.
 
 * progn 
+#+begin_src emacs-lisp results output silent
+(setq org-hide-leading-stars t)
+(setq ac-auto-start nil)
+(setq ac-auto-show-menu nil)
+;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)  
+(setq org-adapt-indentation nil)
+#+end_src
+
+#+RESULTS:
+
 #+begin_src emacs-lisp :tangle yes
 (use-package jedi 
 	:ensure t
@@ -78,13 +101,3 @@ sda1 = PB7
 	(setq jedi:complete-on-dot t)  
 	)
 #+end_src
-
-#+RESULTS:
-: t
-
-#+begin_src emacs-lisp results output silent
-(setq org-hide-leading-stars t)
-(setq org-adapt-indentation nil)
-#+end_src
-
-#+RESULTS:

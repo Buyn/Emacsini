@@ -455,7 +455,7 @@ _?_ help            _c_urrent file
 ────────────^───────────────^───────────────────
 	_d_oneMACRO  A_r_hiv TODO    a_g_enda 
 	_t_odo set  _h_+1h _n_+13h  _q_uit   
- _s_how image
+ _s_how image _b_uffersInder
     "
 ;; ***** keys
 ;; ****** one-line keys
@@ -479,6 +479,12 @@ _?_ help            _c_urrent file
 ;; ****** n : 
     ("n" (org--deadline-or-schedule nil 'scheduled 
 							 (curent-time-format-hh-mm 13 0))
+					:color blue)
+;; ****** b Idirect buffer : 
+    ("b" (progn
+						(org-tree-to-indirect-buffer)
+						(define-key evil-normal-state-map (kbd "g SPC") 
+							`org-tree-to-indirect-buffer))
 					:color blue)
 ;; ***** END of def
 	)
@@ -729,7 +735,8 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 						(setq pixel-wait 0.1)
 						(define-key evil-normal-state-map (kbd "SPC") 
 							(lambda() (interactive)
-								(evil-window-middle)
+								;; (evil-window-middle)
+								(evil-window-bottom)
 								(pixel-scroll-pixel-up 666)))
 						(message "Reader is on")))
 			  "toggle reader")
@@ -737,8 +744,7 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("f" (setq pixel-wait (- pixel-wait 0.1))
 					(format "faster spd:%s" (- 1 pixel-wait)) :color pink)
 ;; **** s : 
-	("s" (setq pixel-wait (+ pixel-wait 0.1))
-					"slower":color pink)
+	("s" (setq pixel-wait (+ pixel-wait 0.1)) "slower":color pink)
 ;; **** t : 
 	("t" read-aloud-this "aloudThis")
 ;; **** B : 

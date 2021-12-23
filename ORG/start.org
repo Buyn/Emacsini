@@ -1332,54 +1332,6 @@ asdf asdf asdf asdf
 	,* evil-repeat works only for some commands. In particular it doesn’t work for
 	 delete. It will also interfere with the cursor positions during an undo or redo
 	 operation.
-**** company-jedi
-#+begin_src emacs-lisp :tangle yes
-(use-package company-jedi 
-	:ensure t
-	;; :init
-	;; (elpy-enable)
-	:config
-	(defun my/python-mode-hook ()
-	(add-to-list 'company-backends 'company-jedi))
-	(add-hook 'python-mode-hook 'my/python-mode-hook)
-	(define-key evil-insert-state-map (kbd "C-SPC") 'company-jedi)
-	)
-#+end_src
-
-#+RESULTS:
-: t
-
-**** jedi
-#+begin_src emacs-lisp :tangle yes
-(use-package jedi 
-	:ensure t
-	;; :init
-	;; (elpy-enable)
-	:config
-	; move quick-help tooltips to the minibuffer
-	;; (setq jedi:tooltip-method nil)
-
-	; don't auto-complete unless requested
-	(setq ac-auto-start nil)
-	(setq ac-auto-show-menu nil)
-	;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-	(add-hook 'python-mode-hook 'jedi:setup)
-	(setq jedi:complete-on-dot t)  
-	)
-#+end_src
-    M-x el-get-install RET jedi RET or
-    M-x package-install RET jedi RET or
-    (manually install...)
-Configure Emacs using this:
-(add-hook 'python-mode-hook 'jedi:setup)
-(jedi:install-server)
-(setq jedi:complete-on-dot t)  
-
-(autoload 'jedi:setup "jedi" nil t) for test
-
-
-
-(add-hook 'python-mode-hook 'jedi:setup)
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -17377,6 +17329,8 @@ Suitable functions to add to these lists might be:
 		elpy-django-server-ipaddr and elpy-django-server-port.
 
 	 [[https://elpy.readthedocs.io/en/latest/concepts.html][Next]][[https://elpy.readthedocs.io/en/latest/editing.html][Previous]] 
+*** Flymake 
+нужно стартовать отдельно после запуска
 
 ** Evil
 *** insert mod
@@ -17495,6 +17449,25 @@ M-x
 customize-group 
 RET 
 company. 
+*** company fuze search
+**** in file
+	(find-file-other-frame "~/INI/autocomplete-cfg.el")
+**** Why is company-fuzzy not working?
+Try log out the company-backends and make sure company-fuzzy-all-other-backends is the only backends in you list. If it's not, enable company-fuzzy-mode to swap out all backends and hand it over to company-fuzzy to manage it.
+
+(message "%s" company-backends)
+						; '(company-fuzzy-all-other-backends)
+(message "%s" company-fuzzy--backends)
+  ; .. backends has been handed over to `company-fuzzy`
+
+(company-fuzzy-mode 1)
+**** Can working in clobal mode and not in bufer 
+пологаю что связа стем что он перезапуукает фуз
+и перереключат словари
+что б это работало постояно
+нужно правельно настроить словари
+(company-fuzzy-mode 1)   
+
 ** WindMove & FrameMove 
 https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
 ;; Remap windmove keys to home keys
@@ -17657,3 +17630,52 @@ In case the bug is specific to an EPUB document, please send attach it to your e
 Alternatives
 
 The first one I've heard of is epubmode.el which is, well, see for yourself. You might find ereader more useful, especially if you're after Org integration and annotation support.
+** Ауто комплит
+*** company-jedi
+#+begin_src emacs-lisp :tangle yes
+(use-package company-jedi 
+	:ensure t
+	;; :init
+	;; (elpy-enable)
+	:config
+	(defun my/python-mode-hook ()
+	(add-to-list 'company-backends 'company-jedi))
+	(add-hook 'python-mode-hook 'my/python-mode-hook)
+	(define-key evil-insert-state-map (kbd "C-SPC") 'company-jedi)
+	)
+#+end_src
+
+#+RESULTS:
+: t
+
+*** jedi
+#+begin_src emacs-lisp :tangle yes
+(use-package jedi 
+	:ensure t
+	;; :init
+	;; (elpy-enable)
+	:config
+	; move quick-help tooltips to the minibuffer
+	;; (setq jedi:tooltip-method nil)
+
+	; don't auto-complete unless requested
+	(setq ac-auto-start nil)
+	(setq ac-auto-show-menu nil)
+	;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+	(add-hook 'python-mode-hook 'jedi:setup)
+	(setq jedi:complete-on-dot t)  
+	)
+#+end_src
+    M-x el-get-install RET jedi RET or
+    M-x package-install RET jedi RET or
+    (manually install...)
+Configure Emacs using this:
+(add-hook 'python-mode-hook 'jedi:setup)
+(jedi:install-server)
+(setq jedi:complete-on-dot t)  
+
+(autoload 'jedi:setup "jedi" nil t) for test
+
+
+
+(add-hook 'python-mode-hook 'jedi:setup)
