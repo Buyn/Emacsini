@@ -127,7 +127,21 @@ https://www.braveclojure.com/basic-emacs/
  (какой вывод можно сделать из случившейся истории).
 ** progn : 
 #+begin_src emacs-lisp :results output silent
-(define-key evil-normal-state-map (kbd "M-e M-f") 'eval-defun)
+ #+begin_src emacs-lisp :results output silent
+	 ;; (package-refresh-contents)
+	 (use-package multiple-cursors :ensure t
+		 :config
+		 (define-key evil-visual-state-map "zi" 'mc/edit-lines)
+		 (define-key evil-visual-state-map "zn" 'mc/mark-next-like-this)
+		 (define-key evil-visual-state-map "zp" 'mc/mark-previous-like-this)
+		 (define-key evil-visual-state-map "zo" 'mc/mark-all-like-this)
+		 (define-key evil-visual-state-map "zN" 'mc/skip-to-next-like-this)
+		 (define-key evil-visual-state-map "zP" 'mc/skip-to-previous-like-this)
+		 (define-key evil-visual-state-map "zI" 'mc/mark-all-in-region)
+		 (define-key evil-visual-state-map "zO" 'mc/mark-all-like-this-in-defun)
+		 (define-key evil-visual-state-map "z1" 'mc/insert-numbers)
+		 )
+ #+end_src
 
 #+end_src
 
@@ -184,7 +198,9 @@ open macros file
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (fset 'outline_next
-   (kmacro-lambda-form [?I ?* ?* ?* ?* ?  escape ?k ?z ?a ?j ?j] 0 "%d"))
+   ;; (kmacro-lambda-form [?I ?* ?* ?* ?* ?  escape ?k ?z ?a ?j ?j] 0 "%d")
+	(kmacro-lambda-form [?п ?р M-return ?л ?я ?с ?о] 0 "%d")
+)
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (global-set-key (kbd "<f6>") 'outline_next)
@@ -194,6 +210,7 @@ open macros file
 #+end_src
 ** Calc 
 *** random
+**** exempls
 		Выдаёт между 0-1
 (random 2)
 		Выдаёт между 0-99
@@ -202,6 +219,14 @@ open macros file
 (+ (random 100) 1)
 		Выдаёт между 10-100 (проверил)
 (+ (random 91) 10)
+**** die
+(defun die (arg)
+	(+ (random (+ arg 1)) 1))
+(defun d6 ()
+	(die 6))
+(d6)
+(+ (d6) (d6) (d6) (d6))
+
 *** time 
 (setq-local pom 25)
 (setq-local h 60)
@@ -440,54 +465,6 @@ jump source location from PDF	C-mouse-1
 ****** Miscellaneous	
 Refresh File (e.g., after recompiling source)	g
 Print File	C-c C-p
-**** ahk
-***** ahk-mode : 
-ahk-mode is an available package.
-#+begin_src emacs-lisp :tangle yes
-(package-refresh-contents)
-(use-package ahk-mode
-							:ensure t)
-#+end_src
-
-any ahk script, then type “M-x ahk-mode”, you'll see the
-source code syntax colored.
-
-To have Emacs automatically load the file when it restarts, and
-automatically use the mode when opening files ending in “.ahk”, do this:
-
-This package is located within Melpa.  To install, add
-("melpa" . "http://melpa.org/packages/") to package-archives and
-execute "M-x package-install RET ahk-mode RET".
-
-FEATURES
-
-When opening a script file you will get:
-- syntax highlighting
-- Commenting - provide functions for block and standard commenting
-- Imenu - jump to a function / label within a buffer
-- Execute scripts
-- Auto complete - adds options for `company-mode' and `auto-complete-mode'
-
-D:\scripts\ahk 
-
-D:/scripts/ahk/Magic_Carpet.ahk 
-
-(find-file-other-frame "D:/scripts/ahk/Magic_Carpet.ahk")
-D:/scripts/ahk/Magic_Carpet.ahk 
-***** xahk-mode : 
-xahk-mode is an available package.
-**** reverse-im
-https://github.com/a13/reverse-im.el
-#+begin_src emacs-lisp :results output silent
-(package-refresh-contents)
-(use-package reverse-im
-  :ensure t
-  :custom
-  (reverse-im-input-methods '("russian-computer"))
-  :config
-  (reverse-im-mode t))
-#+end_src
-
 **** request
 ***** install
  https://github.com/tkf/emacs-request
@@ -784,34 +761,25 @@ D:\Development\lisp\Home\ELs\tts\tts-editor\tts-editor.el
 		 (define-key evil-visual-state-map "zP" 'mc/skip-to-previous-like-this)
 		 (define-key evil-visual-state-map "zI" 'mc/mark-all-in-region)
 		 (define-key evil-visual-state-map "zO" 'mc/mark-all-like-this-in-defun)
-		 (define-key evil-visual-state-map "zN" 'mc/insert-numbers)
+		 (define-key evil-visual-state-map "z1" 'mc/insert-numbers)
 		 )
  #+end_src
 
- #+begin_src emacs-lisp :tangle yes
-	(use-package read-aloud
-		:ensure t)
- #+end_src
-
- #+begin_src emacs-lisp :tangle yes
-	 (load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
- #+end_src
- #+RESULTS:
- : t
 ***** test 
 asdf asdf
-asdf asdf
-asdf asdf
+ываываываasdf a1s1f
+aываsdf aываsdf asdf asdf
+asdf 0121sdf 1asdf asdf
 asdf asdf asdf asdf
 asdf asdf
+asdf asdf asdf
 asdf asdf
-asdf asdf
-asdf asdf asdf asdf
-asdf asdf asdf asdf
-asdf asdf asdf asdf
-asdf asdf
+asdf 0a121sdf 1asdf asdf
 asdf asdf asdf asdf
 asdf asdf
+asdf asdf asdf
+asdf asdf
+asdf asdf asdf asdf
 asdf asdf asdf asdf
 asdf asdf
 asdf asdf asdf asdf
@@ -17679,3 +17647,50 @@ Configure Emacs using this:
 
 
 (add-hook 'python-mode-hook 'jedi:setup)
+** ahk
+*** ahk-mode : 
+ahk-mode is an available package.
+#+begin_src emacs-lisp :tangle yes
+(package-refresh-contents)
+(use-package ahk-mode
+							:ensure t)
+#+end_src
+
+any ahk script, then type “M-x ahk-mode”, you'll see the
+source code syntax colored.
+
+To have Emacs automatically load the file when it restarts, and
+automatically use the mode when opening files ending in “.ahk”, do this:
+
+This package is located within Melpa.  To install, add
+("melpa" . "http://melpa.org/packages/") to package-archives and
+execute "M-x package-install RET ahk-mode RET".
+
+FEATURES
+
+When opening a script file you will get:
+- syntax highlighting
+- Commenting - provide functions for block and standard commenting
+- Imenu - jump to a function / label within a buffer
+- Execute scripts
+- Auto complete - adds options for `company-mode' and `auto-complete-mode'
+
+D:\scripts\ahk 
+
+D:/scripts/ahk/Magic_Carpet.ahk 
+
+(find-file-other-frame "D:/scripts/ahk/Magic_Carpet.ahk")
+D:/scripts/ahk/Magic_Carpet.ahk 
+*** xahk-mode : 
+xahk-mode is an available package.
+** reverse-im
+https://github.com/a13/reverse-im.el
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+#+end_src
