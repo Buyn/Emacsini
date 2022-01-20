@@ -15,7 +15,7 @@ She will not cease; and how she loves to dance
 #+RESULTS:
 : Она не перестанет; и как она любит танцевать
 * link to 
-[[file:d:/Development/lisp/Dropbox/orgs/capture/Manabook.org::*Trading ebay][Trading ebay]]
+[[file:~/ORG/start.org::*My commands][My commands]]
 * Give 
 smba2 = PB12
 smba3 = PB9

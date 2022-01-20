@@ -3,6 +3,39 @@
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
+** Настроение 
+*** Uplin
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+#+end_src
+*** Unreal Tournament 2004 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\VA - Unreal History Music (1997-2007)\\Kevin Riepl - Unreal Tournament 2004 (2004)\"")
+#+end_src
+
+*** UFO Aftershock
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\UFO Aftershock\"")
+#+end_src
+*** X-COM Apocalypse
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\X-COM Apocalypse Soundtrack (by John Broomhall) [1997]\"")
+#+end_src
+
+*** Anno 2070
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Anno 2070\"")
+#+end_src
+*** Darkest Dungeon
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Darkest Dungeon by Stuart Chatwood (2016) [MP3, V0]\"")
+#+end_src
+
+*** Minecraft - Volume Alpha
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\C418 - Minecraft Score (2011-2013)\\2011 - Minecraft - Volume Alpha\"")
+#+end_src
+
 ** Like a craftsman entering his workshop : 
 Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
 https://www.braveclojure.com/basic-emacs/
@@ -207,6 +240,34 @@ open macros file
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (find-file-other-frame "~/keymac/outline_next.el")
+#+end_src
+*** mask_win_path : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/mask_win_path.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'mask_win_path
+   (kmacro-lambda-form [?\C-\M-  ?\M-% ?\\ return ?\\ ?\\ return ?! ?g ?v ?\M-% ?\" delete return ?\\ ?\" return ?!] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6>") 'mask_win_path)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/mask_win_path.el")
+#+end_src
+*** ins_bufer_next : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/ins_bufer_next.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'ins_bufer_next
+   (kmacro-lambda-form [?o escape ?\C-v escape ?\M-c ?\M-o] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f5>") 'ins_bufer_next)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/ins_bufer_next.el")
 #+end_src
 ** Calc 
 *** random
@@ -1952,6 +2013,11 @@ you can give each daemon its own server name like this:
 	"D:/Development/lisp/Dropbox/Office/Progects/Vadim/Tochil/Tochil.org"
 	)
 			#+end_src
+***** buyn-cmd-start
+****** dragon - Buyn.max
+#+begin_src elisp :tangle yes
+	(buyn-cmd-start "D:/inet/browser/Comodo/Dragon/dragon.exe https://mail.google.com/mail/u/0/#inbox")
+#+end_src
 
 *** 44 Saving Emacs Sessions
 [[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
@@ -15387,6 +15453,32 @@ You will find the complete documentation about ditaa on:
 
 
 **** exempls
+***** My user cose and component style 
+E:\Temp\my-TTRPG.jpg 
+#+HEADER: :noweb yes 
+#+HEADER: :file e:\Temp\my-TTRPG.jpg
+ #+begin_src plantuml :results output silent
+skinparam componentStyle rectangle
+
+title my Table Top RPG System
+i2c_driver_stm "master cmd" <|..+ "slave msg" i2c_driver 
+"my Table Top RPG System" <--> "(sdf sdfsdf)"
+[First component]
+[Another component] as Comp2
+component Comp3
+[Last\ncomponent] as Comp4 
+(Last\nusecose) as Comp5 
+
+Comp2 <---> Comp3
+
+note right of Comp2
+  A note can also
+  be on several lines
+end note
+
+note left of Comp3 : Web\nService only
+ #+end_src
+
 ***** seqvese
 	#+begin_src plantuml :file e:\Temp\my-diagram.png
 	title Authentication Sequence
@@ -15478,7 +15570,6 @@ m1 : <size:48>It is New Text</size>
 	#+end_src
 	#+RESULTS:
 	[[file:e:\Temp\my-diagram.png]]
-
 **** plantuml-mode 
 ***** doc
 ****** github 
