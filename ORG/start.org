@@ -8,6 +8,15 @@
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
 #+end_src
+*** Satellite Reign
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
+#+end_src
+
+*** Syndicate
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Syndicate (MP3) +\"")
+#+end_src
 *** Unreal Tournament 2004 
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\VA - Unreal History Music (1997-2007)\\Kevin Riepl - Unreal Tournament 2004 (2004)\"")
@@ -17,11 +26,14 @@
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\UFO Aftershock\"")
 #+end_src
+*** Black & White
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Black & White\"")
+#+end_src
 *** X-COM Apocalypse
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\X-COM Apocalypse Soundtrack (by John Broomhall) [1997]\"")
 #+end_src
-
 *** Anno 2070
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Anno 2070\"")
@@ -36,6 +48,34 @@
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\C418 - Minecraft Score (2011-2013)\\2011 - Minecraft - Volume Alpha\"")
 #+end_src
 
+*** Giants - Citizen Kabuto
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Giants - Citizen Kabuto\"")
+#+end_src
+
+*** 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
+#+end_src
+ 
+
+*** Diablo 1996-2011
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2011 The Music of Diablo 1996-2011 -Diablo 15 Year Anniversary-\"")
+#+end_src
+*** Diablo II
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2000 Diablo II Soundtrack\"")
+#+end_src
+*** Diablo II Expansion Set -Lord of Destruction
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2001 Diablo II Expansion Set -Lord of Destruction- Soundtrack Audio CD\"")
+#+end_src
+
+*** Magic Carpet
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
+#+end_src
 ** Like a craftsman entering his workshop : 
 Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
 https://www.braveclojure.com/basic-emacs/
