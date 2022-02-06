@@ -53,7 +53,7 @@
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Giants - Citizen Kabuto\"")
 #+end_src
 
-*** 
+*** Freedom Fighters
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
 #+end_src

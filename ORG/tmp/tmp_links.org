@@ -15,7 +15,7 @@ She will not cease; and how she loves to dance
 #+RESULTS:
 : Она не перестанет; и как она любит танцевать
 * link to 
-[[file:~/ORG/start.org::*My commands][My commands]]
+[[file:d:/Development/lisp/Dropbox/orgs/capture/Pensieve.org::*Выбрать игровой движок][Выбрать игровой движок]]
 * Give 
 smba2 = PB12
 smba3 = PB9
@@ -24,7 +24,7 @@ scl3 = PA8
 
 scl1 = PB6
 sda1 = PB7
-
+* Texts
 * Calc 
 ** sendbox
 		#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5
