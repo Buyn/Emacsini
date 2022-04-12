@@ -61,6 +61,8 @@
 (global-set-key (kbd " M-g M-t M-b") 'switch-to-buffer-other-frame)
 (define-key evil-normal-state-map "ZO" 'switch-to-buffer-other-frame)
 (global-set-key (kbd " M-g M-t M-d") 'ido-dired-other-frame)
+(setq org-indirect-buffer-display `new-frame)
+(global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
 ;; (define-key evil-normal-state-map (kbd "gbb") '(lambda() (interactive)
 			;; (display-buffer (last-buffer))))
 (define-key evil-normal-state-map "ZN" '(lambda() (interactive)

@@ -110,7 +110,8 @@
 	[url-cookie "secure_customer_sig" "" "Fri, 22 Jul 2039 00:03:38 -0000" "/" "emackandboliohk.com" t])
  (".fandom.com"
 	[url-cookie "_b2" "gpygqdZLoR.1643312892632" "Sat, 27 Jan 2024 19:48:12 GMT" "/" ".fandom.com" t]
-	[url-cookie "wikia_beacon_id" "QjNxu83a-k" "Tue, 26 Jul 2022 19:48:12 GMT" "/" ".fandom.com" t])
+	[url-cookie "wikia_beacon_id" "QjNxu83a-k" "Tue, 26 Jul 2022 19:48:12 GMT" "/" ".fandom.com" t]
+	[url-cookie "wikia_session_id" "1KZnoRd2mO" "Sun, 06 Feb 2022 10:17:29 GMT" "/" ".fandom.com" t])
  ("codeburst.io"
 	[url-cookie "optimizelyEndUserId" "lo_04ee64db6389" "Mon, 08 Aug 2022 08:07:03 GMT" "/" "codeburst.io" t]
 	[url-cookie "sid" "1:8NsHRB9VIIYNTa/1ZaLNd8OG+lyWPElZWzXhiNJy3TXptUjI3UnBO6qftm8jFf4k" "Mon, 08 Aug 2022 08:07:03 GMT" "/" "codeburst.io" t]
@@ -154,9 +155,9 @@
 								(charset windows-1251))
 							"/" ".pikabu.ru" t])
  ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "28-Jan-2022" "Tue, 01 Mar 2022 00:00:00 GMT" "/" "en.wikipedia.org" t])
+	[url-cookie "WMF-Last-Access" "06-Feb-2022" "Thu, 10 Mar 2022 00:00:00 GMT" "/" "en.wikipedia.org" t])
  (".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "28-Jan-2022" "Tue, 01 Mar 2022 00:00:00 GMT" "/" ".wikipedia.org" t]))
+	[url-cookie "WMF-Last-Access-Global" "06-Feb-2022" "Thu, 10 Mar 2022 00:00:00 GMT" "/" ".wikipedia.org" t]))
 )
 
 ;; Local Variables:

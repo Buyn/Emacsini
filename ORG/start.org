@@ -200,7 +200,9 @@ https://www.braveclojure.com/basic-emacs/
  (какой вывод можно сделать из случившейся истории).
 ** progn : 
 #+begin_src emacs-lisp :results output silent
- #+begin_src emacs-lisp :results output silent
+(setq org-indirect-buffer-display `new-frame)
+(global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
+
 	 ;; (package-refresh-contents)
 	 (use-package multiple-cursors :ensure t
 		 :config
@@ -215,8 +217,6 @@ https://www.braveclojure.com/basic-emacs/
 		 (define-key evil-visual-state-map "z1" 'mc/insert-numbers)
 		 )
  #+end_src
-
-#+end_src
 
 #+begin_src emacs-lisp :results output silent
 (setq minimap-major-modes '())
