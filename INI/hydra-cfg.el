@@ -646,6 +646,7 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 			(setq x-select-enable-clipboard nil)
 			)
 		"reg2clipbord")
+  ("s" (copy-to-buffer) "send2Buff")
   ("w" (progn  
 			(setq x-select-enable-clipboard t)
 			;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
