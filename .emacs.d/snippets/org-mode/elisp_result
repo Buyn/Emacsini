@@ -2,6 +2,6 @@
 # name: emacs-lisp with result
 # key: elisp_r 
 # --
-#+begin_src ${1:emacs-lisp} ${2:results output} ${3:silent}
+#+begin_src ${1:emacs-lisp} ${2: :results output} ${3:silent}
 $0
 #+end_src
