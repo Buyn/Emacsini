@@ -11,9 +11,35 @@
 ;; --------------------------------------
 ;; ** functions
 ;; *** buyn-read-aloud-start :
+(defun buyn-reader-start (cmd-params)
+  "	Старт озвучки с курсора и установка пробела на стоп команду
+		и установка ф8 на активацию читалки
+		"
+			(read-aloud-buf)
+			(define-key evil-normal-state-map (kbd "SPC")
+				'buyn-read-aloud-stop
+			(define-key evil-normal-state-map (kbd "F8")
+				'buyn-reader-start
+			(message "read-aloud is start"))))
+
+;; *** buyn-read-aloud-go :
+(defun buyn-read-aloud-go (cmd-params)
+  "	Старт озвучки с курсора и установка пробела на стоп команду
+		"
+			(read-aloud-buf)
+			(define-key evil-normal-state-map (kbd "SPC")
+				'buyn-read-aloud-stop))
+
 ;; *** buyn-read-aloud-stop :
-;; *** buyn-reader-stop :
-(defun buyn-reader-stop (cmd-params)
+(defun buyn-read-aloud-stop (cmd-params)
+  "	Стop озвучки и установка пробела на старт озвучки
+		"
+			(read-aloud-stop)
+			(define-key evil-normal-state-map (kbd "SPC")
+				'buyn-read-aloud-go))
+
+;; *** buyn-reader-end :
+(defun buyn-reader-end (cmd-params)
   "	устанавливает пробел на добовление символа
 и отключает плавное движение
 		"
@@ -27,15 +53,22 @@
   "	ставит пробел на плавноесть движения
 и ф8 на на переключени на озвучку голосом
 		"
-  (shell-command
-		(concat "cmd"
-						" /c "
-						" start "
-						cmd-params
-						" &"
-						)))
+	(pixel-scroll-mode 1)
+	(setq scroll-preserve-screen-position 1)
+	(setq pixel-wait 0.1)
+	(define-key evil-normal-state-map (kbd "SPC") 
+		'buyn-reader-go)
+	(define-key evil-normal-state-map (kbd "F8") 
+		'buyn-read-aloud-start))
 
 ;; --------------------------------------
+;; *** buyn-reader-stop :
+;; Ненаписано но
+;; былобы не плоха устанвливать на пробел
+;; команду контал джи
+;; но понятия не имею как её передать  
+;; негде не встретил 
+
 ;; *** buyn-reader-go :
 (defun buyn-reader-go (cmd-params)
   "	ставит пробел на плавноесть движения
