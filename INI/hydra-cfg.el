@@ -724,28 +724,8 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ;; "Reader menu spd: %(* 10 (- 1 pixel-wait))"
 ;; **** r : 
 	("r" (if (bound-and-true-p pixel-scroll-mode)
-					(progn
-						(pixel-scroll-mode -1)
-						(setq scroll-preserve-screen-position nil)
-						(define-key evil-normal-state-map (kbd "SPC") 
-									'khaoos-insert-one-char)
-						(message "Reader is off"))
-					(progn
-						(pixel-scroll-mode 1)
-						(setq scroll-preserve-screen-position 1)
-						(setq pixel-wait 0.1)
-						(define-key evil-normal-state-map (kbd "SPC") 
-							(lambda() (interactive)
-								(evil-window-middle)
-								(next-line 9)
-								;; (evil-window-bottom)
-								(pixel-scroll-pixel-up 666)))
-						(define-key evil-normal-state-map (kbd "F8") 
-							(lambda() (interactive)
-								(read-aloud-buf)
-								(define-key evil-normal-state-map (kbd "SPC") )
-								))
-						(message "Reader is on")))
+					(buyn-reader-end)
+					(buyn-reader-start))
 			  "toggle reader")
 ;; **** f : 
 	("f" (setq pixel-wait (- pixel-wait 0.1))
