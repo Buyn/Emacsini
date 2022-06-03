@@ -8,6 +8,11 @@
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
 #+end_src
+*** Dragon Age
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+#+end_src
+\"F:\\Audio\\Games\\Dragon Age\" 
 *** Satellite Reign
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
@@ -114,18 +119,11 @@ https://www.braveclojure.com/basic-emacs/
 		)
   )
 ** Templats 
-*** Туду
-**** сделать
-**** в процесе
-**** завершно
 *** Kanban
 **** in progress 
+**** urgent 
 **** todo
 **** done
-*** Pomodoro
-**** Pomodoro 
-**** arhiv 
-**** todo
 *** Ezenhaur 
 **** Срочное и важное
 **** Срочное но не важное
@@ -136,6 +134,14 @@ https://www.braveclojure.com/basic-emacs/
 **** Weaknesses
 **** Opportunities
 **** Threats
+*** Туду
+**** сделать
+**** в процесе
+**** завершно
+*** Pomodoro
+**** Pomodoro 
+**** arhiv 
+**** todo
 *** Пропп
 **** зачин
 ***** 1.  Жили-были.
@@ -309,6 +315,51 @@ open macros file
 #+begin_src emacs-lisp :results output silent
 (find-file-other-frame "~/keymac/ins_bufer_next.el")
 #+end_src
+*** cls-tab-line : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/cls-tab-line.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'cls-tab-line
+   (kmacro-lambda-form [?g ?h tab tab ?\C-c ?  tab ?\C-c ?  tab ?\C-c ?  tab ?\C-c ?  ?j ?g ?h] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f5>") 'cls-tab-line)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/cls-tab-line.el")
+#+end_src
+*** mac-done-copy : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/mac-done-copy.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'mac-done-copy
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("zodzadd`dpza``" 0 "%d")) arg)))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6>") 'mac-done-copy)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/mac-done-copy.el")
+#+end_src
+
+*** ins-tree-link : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/ins-tree-link.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'ins-tree-link
+   (lambda (&optional arg) "Keyboard macro."
+		(interactive "p") (kmacro-exec-ring-item '([C-return 32 32 3 12 return return] 0 "%d") arg)))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6>") 'ins-tree-link)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/ins-tree-link.el")
+#+end_src
+
 ** Calc 
 *** random
 **** exempls
@@ -404,6 +455,7 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
 	(find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
 	(find-file-other-frame "~/INI/lit-cfg/reader-cfg.el") 
+	(find-file-other-frame "~/ELs/BuYn/reader.el")
 *** Programing
 (find-file-other-frame "~/INI/dev-cfg.el")
 	(find-file-other-frame "~/INI/autocomplete-cfg.el")
@@ -17825,3 +17877,4 @@ https://github.com/a13/reverse-im.el
   :config
   (reverse-im-mode t))
 #+end_src
+

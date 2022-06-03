@@ -19,7 +19,11 @@
 (load "~/INI/lit-cfg/read-aloud-cfg.el")
 ;; --------------------------------------
 ;; ** LOAD READERS MODS CUSTOMIZATION 
-;; (find-file-other-frame "~/INI/lit-cfg/reader-cfg.el") 
+;; (find-file-other-frame "~/INI/lit-cfg/reader-cfg.el")
 (load "~/INI/lit-cfg/reader-cfg.el")
+;; --------------------------------------
+;; * LOAD BUYN's ELISP DEFUNS
+;; (find-file-other-frame "~/ELs/BuYn/reader.el")
+(load "~/ELs/BuYn/reader.el")
 ;; --------------------------------------
 ;; *  --------------------------------------

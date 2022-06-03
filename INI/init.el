@@ -34,7 +34,8 @@
 (load "~/INI/folding-cfg.el")
 ;; --------------------------------------
 ;; * LITERARY-MODS CUSTOMIZATION
-;; (find-file "~/INI/lit-cfg.el") 
+;; (find-file "~/INI/lit-cfg.el")
+;; (find-file-other-frame "~/INI/lit-cfg.el")
 (load "~/INI/lit-cfg.el")
 ;; --------------------------------------
 ;; * DEVELOPMENT-MODs CUSTOMIZATION

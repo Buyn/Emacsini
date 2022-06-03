@@ -18,13 +18,13 @@
 ;; Better imenu
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 ;; js2-refactor and xref-js2
-;; ** use-package js2-refactor
+;; ** D use-package js2-refactor
 (use-package js2-refactor
   :disabled
 	:ensure t
 ;; *** END of use-package hydra
   )
-;; ** use-package xref-js2
+;; ** D use-package xref-js2
 (use-package xref-js2 :ensure t
   :disabled
   :config
@@ -42,7 +42,7 @@
   )
 
 ;; --------------------------------------
-;; * ---------      Tern & Company     ----
+;; * D ---------      Tern & Company     ----
 ;; may need add this commands for node.js
 ;; set "PATH=%PATH%;D:\Development\JS\nodejs\"
 ;; (setenv "PATH" (concat (getenv "PATH") "D:/Development/JS/nodejs"))
@@ -72,14 +72,15 @@
 ;; --------------------------------------
 ;; * skewer-mode
 ;; --------------------------------------
-;; ** use-package xref-js2
+;; ** use-package skewer-mode
 (use-package skewer-mode :ensure t
   ;; :disabled
+;; ** :config : 
   :config
 	(add-hook 'js2-mode-hook 'skewer-mode)
 	(add-hook 'css-mode-hook 'skewer-css-mode)
 	(add-hook 'html-mode-hook 'skewer-html-mode)
-;; *** END of use-package hydra
+;; ** END of use-package
   )
 ;; --------------------------------------
 
