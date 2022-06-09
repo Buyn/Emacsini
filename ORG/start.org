@@ -1479,7 +1479,7 @@ asdf asdf asdf asdf
 		(setq graphviz-dot-indent-width 4)
 		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe"))
 #+end_src
-#+begin_src emacs-lisp  :results output silent
+#+begin_src emacs-lisp :results output silent
 (use-package company-graphviz-dot)
 #+end_src
 
@@ -9590,6 +9590,7 @@ keywords).
 (use-package foo)
 This loads in the package foo, but only if foo is available on your system. If not, a warning is logged to the *Messages* buffer.
 *** :init :config
+**** :init : 
 Use the :init keyword to execute code before a package is loaded. It accepts one or more forms, up to the next keyword:
 
 (use-package foo
@@ -9615,6 +9616,9 @@ As you might expect, you can use :init and :config together:
   :config
   (use-package moccur-edit))
 In this case, I want to autoload the commands isearch-moccur and isearch-all from color-moccur.el, and bind keys both at the global level and within the isearch-mode-map (see next section). When the package is actually loaded (by using one of these commands), moccur-edit is also loaded, to allow editing of the moccur buffer.
+**** :init load-path : 
+:init
+	(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
 *** Key-binding
 Another common thing to do when loading a module is to bind a key to primary commands within that module:
 
@@ -16436,7 +16440,6 @@ Add the MELPA archive to the list of archives used by the Emacs package manager 
 
 Evaluate above code or restart Emacs.
 ***** Setting up use-package
-
 Add the use-package package to your Emacs by adding the following lines to your start-up file.
 
 (unless (package-installed-p 'use-package)

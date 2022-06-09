@@ -46,19 +46,20 @@
 ;; *** --------------------------------------
 
 ;; ** ORG BABEL OB-DOT:
+;; (add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
 (use-package ob-dot
 ;; *** :ensure :
 	;; :ensure t
 ;; *** :init :
-  :init
-(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+:init
+	(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
 ;; *** :disabled : 
-  :disabled
+  ;; :disabled
 ;; *** :config :
 	:config
 	(org-babel-do-load-languages
-			org-babel-load-languages
-			((dot . t)))
+			'org-babel-load-languages
+			'((dot . t)))
 ;; *** end use-package :
 	)
 
