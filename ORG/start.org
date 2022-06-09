@@ -1,9 +1,9 @@
 * Wellcome! Don`t panic!
-** Set 
+** Set
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
-** Настроение 
+** Настроение
 *** Uplin
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
@@ -13,7 +13,7 @@
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
 #+end_src
 \"F:\\Audio\\Games\\Dragon Age\" 
-*** Satellite Reign
+*** [#B] Satellite Reign
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
 #+end_src
@@ -80,7 +80,7 @@
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
 #+end_src
-** Like a craftsman entering his workshop : 
+** Like a craftsman entering his workshop :
 Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
 https://www.braveclojure.com/basic-emacs/
 | |_| |_| |           | |_| |_| |
@@ -99,7 +99,7 @@ https://www.braveclojure.com/basic-emacs/
   |__|      ||_|_|_||      |__|
  /   |      ||_|_|_||      |   \
 =================================
-** Tmp  
+** Tmp
 [~/../../../274px.png]]
 
 (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
@@ -117,7 +117,7 @@ https://www.braveclojure.com/basic-emacs/
 						unix-path-to-file)
 		)
   )
-** Templats 
+** Templats
 *** Kanban
 **** in progress 
 **** urgent 
@@ -203,7 +203,14 @@ https://www.braveclojure.com/basic-emacs/
  (пир на весь мир, свадьба, пол царства в пидачу).
 ***** 28. Мораль 
  (какой вывод можно сделать из случившейся истории).
-** progn : 
+** progn :
+
+#+begin_src emacs-lisp :results output silent
+(load "~/ELs/BuYn/reader.el")
+
+(load "~/INI/hydra-cfg.el")
+
+ #+end_src
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
 (global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
@@ -231,7 +238,7 @@ https://www.braveclojure.com/basic-emacs/
 (setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
 #+end_src
 
-** Macros 
+** Macros
 *** done
 #+begin_src emacs-lisp :results output silent
 	(load-file "~/keymac/mac-done-copy.el")
@@ -359,7 +366,7 @@ open macros file
 (find-file-other-frame "~/keymac/ins-tree-link.el")
 #+end_src
 
-** Calc 
+** Calc
 *** random
 **** exempls
 		Выдаёт между 0-1
@@ -387,7 +394,7 @@ open macros file
 (/ h pom)
 (* 4 pom)
 (min-to-houre 100)
-** Cards todo 
+** Cards todo
 *** New Project
 **** new org
 (find-file-other-frame "~/../Dropbox/Office/Progects/Audit/MFA/MFA.org")
@@ -429,13 +436,13 @@ D:\shell\Far\Far.exe
 	но содержит в себе огромное количество класных решенией
 	которые нужно перенести в outshine-mod
 		(find-file-other-frame "~/ELs/Evil/origami_triplebrase.el")
-*** frame : 
+*** frame
 	(find-file-other-frame "~/INI/frame-control.el")
 															WINDMOVE
 	(find-file-other-frame "~/INI/fullscreen-cfg.el")
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
-*** Other 
+*** Other
 (find-file-other-frame "~/INI/advnsed-selections-cfg.el")
 (find-file-other-frame "~/INI/www-cfg.el") 
 *** interface
@@ -448,7 +455,7 @@ D:\shell\Far\Far.exe
 		(find-file-other-frame "~/INI/interface/spaceline-cfg.el") notuse
 *** HYDRA MENU
 (find-file-other-frame "~/INI/hydra-cfg.el")
-*** literary 
+*** literary
 (find-file-other-frame "~/INI/lit-cfg.el")
 	(find-file-other-frame "~/INI/translate-cfg.el")
 	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
@@ -1452,6 +1459,77 @@ asdf asdf asdf asdf
 	,* evil-repeat works only for some commands. In particular it doesn’t work for
 	 delete. It will also interfere with the cursor positions during an undo or redo
 	 operation.
+**** dot
+***** bable
+****** install
+#+begin_src emacs-lisp :results output silent
+(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+(use-package ob-dot 
+	:ensure t
+	:config
+	(org-babel-do-load-languages
+			org-babel-load-languages
+			((dot . t))))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package graphviz-dot-mode
+	:ensure t
+	:config
+		(setq graphviz-dot-indent-width 4)
+		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe"))
+#+end_src
+#+begin_src emacs-lisp  :results output silent
+(use-package company-graphviz-dot)
+#+end_src
+
+****** exempl
+(org-babel-do-load-languages
+    org-babel-load-languages
+    ((dot . t)))
+
+
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 4))
+
+(use-package company-graphviz-dot
+  )
+
+(load "~/ELs/Org/Babel/ob-dot.el")
+
+(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+(use-package read-aloud :ensure t
+  ;; :config
+)
+****** experement
+******* 1
+#+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
+graph graphname { 
+		a -- b; 
+		b -- c;
+		b -- d;
+		d -- a;
+	} 
+#+end_src
+
+#+RESULTS:
+[[file:e:\Temp\my-dot-diagram.png]]
+
+******* 1
+#+begin_src dot :file e:\Temp\my-dot-diagram.png 
+graph graphname { 
+		a -- b; 
+		b -- c;
+		b -- d;
+		d -- a;
+	} 
+#+end_src
+
+#+RESULTS:
+[[file:e:\Temp\my-dot-diagram.png]]
+
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -1489,7 +1567,7 @@ Working?
 
 [[shell:echo "dfgdfg max"]
 [Working?]]
-** Run windows command 
+** Run windows command
 *** dragon - Buyn.max
 #+begin_src elisp :tangle yes
 	(buyn-cmd-start "D:/inet/browser/Comodo/Dragon/dragon.exe https://mail.google.com/mail/u/0/#inbox")
@@ -1500,8 +1578,8 @@ Working?
 
 D:\inet\browser\Comodo\Dragon\dragon.exe
 D:\inet\browser\Comodo\Dragon\dragon.exe https://mail.google.com/mail/u/0/#inbox
-* Help Docs Emacs 
-** To set on a file by file 
+* Help Docs Emacs
+** To set on a file by file
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
     #  local variables:
     #    eval: (visual-line-mode t)
@@ -1526,7 +1604,7 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
 *** describe-package (найти пакаджи на сервере и описанить)
 describe-package
 
-** load require: 
+** load require:
 	#+begin_src emacs-lisp :tangle yes
 (eval-after-load 'company
   '(add-to-list
@@ -1537,7 +1615,7 @@ describe-package
 (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key "\t" 'company-complete-common)
 	#+end_src
-** Keyborde help 
+** Keyborde help
 *** evaluate
 ****    27.9 Evaluating Emacs Lisp Expressions
 Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
@@ -1641,7 +1719,7 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 ‘C-M-d’
      Move down in parenthesis structure (‘down-list’).
 *** Intends 
-** Environment Variable 
+** Environment Variable
 *** "PATH" : 
 **** Описание бага\фичи
 	 переменая енворемент обновляется только после перезапуска системы
@@ -1917,7 +1995,7 @@ system, the user’s UID, and so on.
 **** Variable: tty-erase-char
  This variable holds the erase character that was selected
  in the system’s terminal driver, before Emacs was started.
-** Customize 
+** Customize
 *** by menu
 To customize rainbow-delimiters mode, you can use:
 M-x customize-group rainbow-delimiters
@@ -1975,7 +2053,7 @@ Returns list of symbols and documentation found.
 зато кажется это генерится автоматически
 и там вполне полный хелп по каждой переменной
 M-x customize-group RET company. 
-** run 
+** run
 *** run multiple Emacs servers : 
    You can run multiple Emacs servers on the same machine by giving each
 one a unique “server name”, using the variable ‘server-name’.  For
@@ -3430,7 +3508,7 @@ worked on this and gotten it working, please let me know!
 *** Применить шел команды 
 *** шел в отдельной панели 
 *** Просмотр изображений 
-** eww 
+** eww
 **** other
 *** 2 Basic Usage
  You can open a URL or search the web with the command ‘M-x eww’.  If the
@@ -3609,11 +3687,135 @@ Original value was
 # (setq explicit-sh.exe-args '("--login" "-i"))
 # (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 
-** Folding 
+** Folding
 *** HideShow
 Invoke HideShow mode with M-x hs-minor-mode.
 
-** Thems 
+** encoding 
+*** comsnd for normal
+#+begin_src emacs-lisp results: output silent
+(revert-buffer-with-coding-system 'utf-8)
+#+end_src
+*** в теременале вроде
+после компиляции окна 
+-*- mode: compilation; default-directory: "e:/Temp/" -*-
+Compilation started at Wed Jun  8 16:47:50
+
+"~/AddApps/Graphviz/bin/dot.ex" -Tpng "e:/Temp/my-dot.dot" -o "e:/Temp/my-dot.png"
+Ñèñòåìå íå óäàåòñÿ íàéòè óêàçàííûé ïóòü.
+
+после команды
+revert-buffer-with-coding-system 
+  cp1251 (alias of windows-1251)
+превратилось
+
+Системе не удается найти указанный путь.
+
+*** des
+**** from babel otpute
+Coding system for saving this buffer:
+  Not set locally, use the default.
+Default coding system (for new files):
+  U -- utf-8-dos (alias: mule-utf-8-dos cp65001-dos)
+
+Coding system for keyboard input:
+  = -- no-conversion (alias: binary)
+
+Coding system for terminal output:
+  b -- cp1251 (alias of windows-1251)
+
+Coding system for inter-client cut and paste:
+  U -- utf-16le-dos
+
+Defaults for subprocess I/O:
+  decoding: U -- utf-8-dos (alias: mule-utf-8-dos cp65001-dos)
+
+  encoding: U -- utf-8-unix (alias: mule-utf-8-unix cp65001-unix)
+
+
+Priority order for recognizing coding systems when reading files:
+  1. utf-8 (alias: mule-utf-8 cp65001)
+  2. iso-2022-7bit 
+  3. iso-latin-1 (alias: iso-8859-1 latin-1)
+  4. iso-2022-7bit-lock (alias: iso-2022-int-1)
+  5. iso-2022-8bit-ss2 
+  6. emacs-mule 
+  7. raw-text 
+  8. iso-2022-jp (alias: junet)
+  9. in-is13194-devanagari (alias: devanagari)
+  10. chinese-iso-8bit (alias: cn-gb-2312 euc-china euc-cn cn-gb gb2312)
+  11. utf-8-auto 
+  12. utf-8-with-signature 
+  13. utf-16 
+  14. utf-16be-with-signature (alias: utf-16-be)
+  15. utf-16le-with-signature (alias: utf-16-le)
+  16. utf-16be 
+  17. utf-16le 
+  18. japanese-shift-jis (alias: shift_jis sjis)
+  19. chinese-big5 (alias: big5 cn-big5 cp950)
+  20. undecided 
+
+  Other coding systems cannot be distinguished automatically
+  from these, and therefore cannot be recognized automatically
+  with the present coding system priorities.
+
+Particular coding systems specified for certain file names:
+
+  OPERATION	TARGET PATTERN		CODING SYSTEM(s)
+  ---------	--------------		----------------
+  File I/O			"\\.\\(arc\\|zip\\|lzh\\|lha\\|zoo\\|[jew]ar\\|xpi\\|rar\\|7z\\|ARC\\|ZIP\\|LZH\\|LHA\\|ZOO\\|[JEW]AR\\|XPI\\|RAR\\|7Z\\)\\'"
+																				no-conversion-multibyte
+								"\\.\\(exe\\|EXE\\)\\'"	no-conversion
+								"\\.\\(sx[dmicw]\\|odt\\|tar\\|t[bg]z\\)\\'"
+																				no-conversion
+								"\\.\\(gz\\|Z\\|bz\\|bz2\\|xz\\|gpg\\)\\'"
+																				no-conversion
+								"\\.\\(jpe?g\\|png\\|gif\\|tiff?\\|p[bpgn]m\\)\\'"
+																				no-conversion
+								"\\.pdf\\'"							no-conversion
+								"/#[^/]+#\\'"						utf-8-emacs-unix
+								"\\.tzst\\'"						(no-conversion . no-conversion)
+								"\\.zst\\'"							(no-conversion . no-conversion)
+								"\\.dz\\'"							(no-conversion . no-conversion)
+								"\\.txz\\'"							(no-conversion . no-conversion)
+								"\\.xz\\'"							(no-conversion . no-conversion)
+								"\\.lzma\\'"						(no-conversion . no-conversion)
+								"\\.lz\\'"							(no-conversion . no-conversion)
+								"\\.g?z\\'"							(no-conversion . no-conversion)
+								"\\.\\(?:tgz\\|svgz\\|sifz\\)\\'"
+																				(no-conversion . no-conversion)
+								"\\.tbz2?\\'"						(no-conversion . no-conversion)
+								"\\.bz2\\'"							(no-conversion . no-conversion)
+								"\\.Z\\'"								(no-conversion . no-conversion)
+								"\\.elc\\'"							utf-8-emacs
+								"\\.el\\'"							prefer-utf-8
+								"\\.utf\\(-8\\)?\\'"		utf-8
+								"\\.xml\\'"							xml-find-file-coding-system
+								"\\(\\`\\|/\\)loaddefs.el\\'"
+																				(raw-text . raw-text-unix)
+								"\\.tar\\'"							(no-conversion . no-conversion)
+								"\\.po[tx]?\\'\\|\\.po\\."
+																				po-find-file-coding-system
+								"\\.\\(tex\\|ltx\\|dtx\\|drv\\)\\'"
+																				latexenc-find-file-coding-system
+								""											(undecided)
+  Process I/O		"[pP][lL][iI][nN][kK]"	(undecided-dos . undecided-dos)
+								"[cC][mM][dD][pP][rR][oO][xX][yY]"
+																				(undecided-dos . undecided-dos)
+  Network I/O	nothing specified
+**** удачно выбраное сообщение из терменала 
+  b -- cp1251 (alias of windows-1251)
+**** лист используемых 
+(revert-buffer-with-coding-system 'utf-8)
+(revert-buffer-with-coding-system 'utf-8-dos)
+(revert-buffer-with-coding-system 'utf-8-unix)
+(revert-buffer-with-coding-system 'utf-8-mac)
+(revert-buffer-with-coding-system 'windows-1251)
+(revert-buffer-with-coding-system 'windows-1251-unix)
+(revert-buffer-with-coding-system 'windows-1251-dos)
+(revert-buffer-with-coding-system 'windows-1251-mac)
+
+** Thems
 *** face 
 **** note like 
 (custom-set-faces
@@ -9376,7 +9578,7 @@ much the same way as you can for TODO keywords (see Faces for TODO
 keywords). 
 * Help Docs Gnus
   The Emacs news and email reader.
-* Help Docs Mods 
+* Help Docs Mods
 ** use-package
 *** Getting started
 ;; This is only needed once, near the top of the file
@@ -9753,9 +9955,9 @@ To disable it again you can use:
 (quelpa-use-package-deactivate-advice)
 **** use quelpa : 
 (quelpa '(hydra :repo "abo-abo/hydra" :fetcher github))
-
-** skewer-mode
-*** use-package : 
+** web 
+*** skewer-mode
+**** use-package : 
 #+begin_src emacs-lisp :results output silent
 (package-refresh-contents)
 (use-package skewer-mode :ensure t
@@ -9766,9 +9968,9 @@ To disable it again you can use:
 #+end_src
 
 
-*** Exempl 
-**** make server
-***** ferst
+**** Exempl 
+***** make server
+****** ferst
 #+begin_src emacs-lisp :tangle yes
 (find-file-other-frame "~/../../version-control/GitHub/HTML/skewer/myskewer.js")
 #+end_src
@@ -9794,7 +9996,7 @@ To disable it again you can use:
 	(httpd-start)
 	#+end_src
 	#+RESULTS:
-***** boids-js
+****** boids-js
 https://github.com/skeeto/boids-js
 Skewer -- Emacs browser interaction - YouTube
 https://www.youtube.com/watch?v=4tyTgyzUJqM
@@ -9834,18 +10036,18 @@ https://www.youtube.com/watch?v=4tyTgyzUJqM
 
 	#+RESULTS:
 
-**** connect to server
+***** connect to server
 http://localhost:8080/hello.html
 http://localhost:4242/example.html
 
 	#+begin_src emacs-lisp :tangle yes
 (httpd-stop)
 	#+end_src
-**** start repl
+***** start repl
 A REPL into the browser can be created with 
 M-x skewer-repl, or C-c C-z. This
-**** repl command 
-***** console.log : 
+***** repl command 
+****** console.log : 
 console.log
 ('hey!')
 
@@ -9853,18 +10055,18 @@ console.log
 ('hello world!')
 
 console.log ('hello world!');
-***** alert : 
+****** alert : 
 alert('hey!');
-***** skewer.log : 
+****** skewer.log : 
 skewer.log("hi from brobser!");
-**** live edit html 
-**** live edit js 
+***** live edit html 
+***** live edit js 
 JS2-mode
 
  C-x C-e
-*** Docs
-**** Skewer: live web development with Emacs
-***** links
+**** Docs
+***** Skewer: live web development with Emacs
+****** links
  GitHub - skeeto/skewer-mode: Live web development in Emacs
  https://github.com/skeeto/skewer-mode
 
@@ -9884,8 +10086,8 @@ Dependencies:
 ,* [[https://github.com/mooz/js2-mode][js2-mode]] (available on ELPA)
 
 Skewer requires Emacs 24.3 or later.
-***** Usage
-****** Quick version
+****** Usage
+******* Quick version
 
 If Skewer was installed from MELPA, skip to step 3.
 
@@ -9915,12 +10117,12 @@ The result of the expression is echoed in the minibuffer.
 
 Additionally, css-mode and html-mode get similar sets of bindings for modifying the
 CSS rules and HTML on the current page.
-****** CSS
+******* CSS
 
 ,* C-x C-e: Load the declaration at the point.
 ,* C-M-x: Load the entire rule around the point.
 ,* C-c C-k: Load the current buffer as a stylesheet.
-****** HTML
+******* HTML
 ,* C-M-x: Load the HTML tag immediately around the point.
 
 Note: run-skewer uses browse-url to launch the browser. This may require further
@@ -9935,7 +10137,7 @@ Sometimes Skewer's long polls from the browser will timeout after a number of ho
 of inactivity. If you find the browser disconnected from Emacs for any reason, use the
 browser's console to call skewer() to reconnect. This avoids a page reload, which
 would lose any fragile browser state you might care about.
-***** Manual version
+****** Manual version
 To skewer your own document rather than the provided blank one,
 
 1 Load the dependencies
@@ -9953,19 +10155,19 @@ More information below.
 Don't copy skewer.js anywhere or use it directly. Emacs hosts this script itself,
 manipulating it in memory before it reaches the browser. Always access it through the
 servlet on the Emacs webserver as /skewer.
-***** Browser Support
+****** Browser Support
 Skewer is known to work properly with Firefox, Chrome, Safari, Opera, and IE8+.
 Except for CSS and HTML, Skewer will work in IE7 when document.querySelector
 and JSON are polyfilled. If you find any other JavaScript-supported browser that
 doesn't work with Skewer, please report it.
-***** REPL
+****** REPL
 A REPL into the browser can be created with M-x skewer-repl, or C-c C-z. This
 should work like a console within the browser. Messages can be logged to this REPL
 with skewer.log() (like console.log()).
 
 Results of expressions evaluated in the REPL are printed more verbosely than in the
 minibuffer, when possible. This may help in debugging.
-***** Skewering with CORS
+****** Skewering with CORS
 Skewer supports [[http://en.wikipedia.org/wiki/Cross-origin_resource_sharing][Cross-origin Resource Sharing (CORS)]]. This means you can
 Skewer a document hosted from any server without needing any special changes on
 that server, except for including /skewer as a script in that document.
@@ -9987,7 +10189,7 @@ javascript:(function(){var d=document;var s=d.createElement('script');s.src='htt
 With a browser plugin like [[https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en][Custom Javascript for Websites]], you can use the
 bookmarklet to auto-skewer specific domains, saving you a mouse click on each
 reload.
-***** bower
+****** bower
 Also provided are some functions for loading libraries from the bower infrastructure
 on the fly. This is accessed with skewer-bower-load. For example, I often find it
 useful to load jQuery when skewering a page that doesn't have jQuery installed.
@@ -9997,7 +10199,7 @@ infrastructure being used. Unfortunately this infrastructure is a mess right now
 packages are in some sort of broken state -- missing dependencies, missing
 metadata, broken metadata, or an invalid repository URL. Some of this is due to
 under-specification of the metadata by the bower project.
-***** Motivation
+****** Motivation
 
 I wanted something like [[https://github.com/swank-js/swank-js][swank-js]] but without all the painful setup. Having already
 written an Emacs web server I was halfway there. It took relatively little code to
@@ -10007,8 +10209,8 @@ I also didn't want to rely a browser-specific feature, like MozRepl or WebKit's 
 debugger ([[https://github.com/jscheid/kite][kite]]).
 
 The name refers to the idea that Emacs is skewering the browser from server-side.
-**** package - How to use skewer-mode? 
-***** currently struggling : 
+***** package - How to use skewer-mode? 
+****** currently struggling : 
 https://emacs.stackexchange.com/questions/2376/how-to-use-skewer-mode
 I am currently struggling to use skewer-mode in Emacs.
 
@@ -10053,7 +10255,7 @@ asked Oct 20 '14 at 18:31
 
 3 Answers 
 
-***** start the http server : 
+****** start the http server : 
 TLDR; You have to start the http server ([[https://github.com/skeeto/emacs-web-server][simple-http]]) and load your HTML files
 through it.
 
@@ -10122,7 +10324,7 @@ answered Oct 23 '14 at 18:31
  src="http://localhost:8080/skewer"></script>\ (can't edit - edits must be
  >=6 characters) – [[https://emacs.stackexchange.com/users/18327/kai-dj][kai-dj]] Sep 18 '18 at 13:36 SVG Image 
 
-***** Instead of running the demo : 
+****** Instead of running the demo : 
 Instead of running the demo, just perform these minimal steps to ensure that
 everything is working correctly.
 
@@ -10148,14 +10350,14 @@ You should see an alert box on the page.
  https://github.com/skeeto/skewer-mode#manual-version
  in your browser. – [[https://emacs.stackexchange.com/users/294/gambo][Gambo]] Oct 20 '14 at 19:52 SVG Image 
 
-***** In case port 8080 is already in use : 
+****** In case port 8080 is already in use : 
 In case port 8080 is already in use: 
 
 you can configure skewer/simple-httpd to use another port by customizing the
 httpd-port variable. (M-x customize-variable<ret>httpd-port)
 
 [[https://emacs.stackexchange.com/a/32372][Share]]
-** Graph  
+** Graph
 *** PLANTUML
 **** Guide : 
 ***** Welcome to The Hitchhiker’s Guide to PlantUML! — The Hitchhiker's Guide to PlantUML documentation
@@ -15788,7 +15990,6 @@ m1 : <size:48>It is New Text</size>
 
  If you are using SVG rendering and plantuml-preview shows you an empty buffer, chances are something is wrong with the PlantUML output. While inside the preview buffer, hit C-c C-c to switch to the textual mode and see if the output is valid SVG.
 
-
 *** DITAA
 **** DIagrams Through Ascii Art 
 ***** Command line
@@ -16184,7 +16385,7 @@ ${0}
 
 																																											 -
 #+end_src
-*** SVG 
+*** SVG
 **** exepl 
 ***** 01
 (require 'svg)
@@ -16214,6 +16415,191 @@ fill="blue"
 (save-excursion (goto-char (point-max)) (svg-insert-image svg))
 (svg-circle svg 100 50 20 :stroke-width 6 :stroke 'blue :fill 'yellow)
 #+end_src
+
+*** graphviz-dot-mode
+**** Emacs package :
+Emacs package for working with Graphviz DOT-format files.
+
+The features of this package help you to create .dot or .gv files containing syntax compatible with Graphviz and use Graphviz to convert these files to diagrams. Graphviz is a set of open source graph visualization tools created by AT&T Labs Research. A graph is a way of representing information as a network of connected nodes (shapes) and edges (lines).
+**** Installing
+***** Installing Dependencies
+This of course depends on Emacs and Graphviz. Installation from the command prompt should be something like
+
+$ sudo dnf install emacs graphviz
+***** Setting up MELPA
+Add the MELPA archive to the list of archives used by the Emacs package manager by adding the following lines to your .emacs or other Emacs start-up file.
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+Evaluate above code or restart Emacs.
+***** Setting up use-package
+
+Add the use-package package to your Emacs by adding the following lines to your start-up file.
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+Evaluate above code or restart Emacs.
+***** Setting up graphviz-dot-mode
+Now you can finally add Graphviz support to your Emacs by adding the following lines to your start-up file.
+
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 4))
+
+(use-package company-graphviz-dot
+  )
+
+Evaluate above code or restart Emacs.
+**** Using graphviz-dot-mode
+***** Using graphviz-dot-mode
+Once installation and setup is completed, usage is as simple as creating or opening a .dot file with C-x C-f (find-file). The file will open in dot mode. Syntax should be highlighted, completion should work and viewing your work is only one keystroke away with C-c C-p. Some useful commands are described below.
+Indenting
+
+    C-M-q (graphviz-dot-indent-graph)
+
+    This command will indent the graph, digraph, or subgraph at point and any subgraph within it.
+
+    TAB
+
+    This key will automatically indent the line.
+***** Completion
+Completion makes use of company-mode:
+    company-complete
+
+    This command will complete the attribute or value keyword at point. If more than one completion is possible, a list with suggestions is displayed.
+***** Commenting
+
+    M-; (comment-dwim)
+
+    This command will perform the comment command you want (Do What I Mean). If the region is active and transient-mark-mode is on, it will comment the region, unless it only consists of comments, in which case it will un-comment the region. Else, if the current line is empty, it will insert a blank comment line, otherwise it will append a comment to the line and indent it.
+
+    Use C-u M-; to kill the comment on the current line.
+
+    C-x C-; (comment-line)
+
+    This command will comment or un-comment the current line.
+
+    M-j (comment-indent-newline)
+
+    This command will break line the at point and indent, continuing a comment if within one. This indents the body of the continued comment under the previous comment line.
+***** Compiling
+
+    C-c C-c (compile)
+
+    This command compiles the current dot file visited by the Emacs buffer. The output file is in the same directory and has the extension determined by the variable graphviz-dot-preview-extension.
+
+    C-x ` (next-error)
+
+    This command will jump to the location in the source file of the next error from the most recent compile. Use C-c c to compile first.
+***** Viewing
+
+    C-c C-p (graphviz-dot-preview)
+
+    This command compiles and then (if it compiled successfully) shows the output of the current dot file visited by the Emacs buffer, provided that Emacs is running on a graphical display capable of displaying the graphic file output by dot.
+
+    See image-file-name-extensions to customize the graphic files that can be displayed.
+
+    C-c v (graphviz-dot-view)
+
+    This command invokes an external viewer specified by the variable graphviz-dot-view-command. If graphviz-dot-view-edit-command is t, you will be prompted to enter a new graphviz-dot-view-command. If graphviz-dot-save-before-view is t, the buffer is saved before the external viewer command is invoked.
+
+    See https://graphviz.gitlab.io/resources/ for a list of Graphviz viewers.
+**** Customizing
+***** graphviz-dot-customize : 
+You may customize variables by typing
+M-x graphviz-dot-customize RET
+or by setting them to different values in your start-up file.
+***** graphviz-dot-dot-program : 
+    graphviz-dot-dot-program string, default: “dot”
+    This variable determines the command name (and path, if necessary) used to invoke the Graphviz dot program. The C-c C-c (compile) function invokes this command.
+***** graphviz-dot-preview-extension : 
+    graphviz-dot-preview-extension string, default “png”
+    This variable determines the file extension used for the C-c C-c (compile) and C-c C-p (graphviz-dot-preview) functions. The format for the compile command is
+    dot -T<extension> <filename>.dot > <filename>.<extension>
+***** graphviz-dot-save-before-view : 
+    graphviz-dot-save-before-view boolean, default t
+    This variable controls whether the buffer will be saved to the visited file before the C-c C-v (graphviz-dot-view) function invokes the external dot-file viewer command. Set this boolean variable to t (true) or nil (false).
+***** graphviz-dot-view-command : 
+    graphviz-dot-view-command string, default: “dotty %s”
+
+    This variable determines the command name (and path, if necessary) used to invoke an external dot-file viewer program. The C-c C-v (graphviz-dot-view) function invokes this command. The name of the file visited by the buffer will be substituted for %s in this string.
+
+    See https://graphviz.gitlab.io/resources/ for a list of Graphviz viewers.
+***** graphviz-dot-view-edit-command : 
+    graphviz-dot-view-edit-command boolean, default: nil
+
+    This variable controls whether you will be prompted for the external dot-file viewer command name when you use C-c C-v graphviz-dot-view. Set this to t (true) to be prompted to edit the viewer command variable graphviz-dot-view-command every time you use C-c C-v or nil to avoid the prompt.
+***** graphviz-dot-indent-width : 
+    graphviz-dot-indent-width integer, default: default-tab-width
+
+    This variable determines the indentation used in graphviz-dot-mode buffers.
+***** graphviz-dot-mode-hook : 
+    graphviz-dot-mode-hook list of functions, default: nil
+    This variable determines which functions are called when graphviz-dot-mode starts. To use it, add a line like below to your .emacs or other startup file.
+(add-hook 'graphviz-dot-mode-hook 'my-hook)
+**** Support :
+Support
+
+    Issues, requests and questions can go on its issue tracker: https://github.com/ppareit
+
+    /graphviz-dot-mode/issues
+    This mode is maintained at its github page: https://github.com/ppareit/graphviz-dot-mode
+    You can support the maintainer through a paypal donation
+**** Credits
+graphviz-dot-mode was written by:
+
+    Pieter Pareit pieter.pareit@gmail.com
+    Rubens Ramos rubensr@users.sourceforge.net
+    Eric Anderson http://www.ece.cmu.edu/~andersoe/
+    Daniel Birket danielb@birket.com
+
+Other contributors are noted in the version history in the graphviz-dot-mode.el file and the commit history on GitHub.
+
+The source code is maintained on GitHub at https://github.com/ppareit/graphviz-dot-mode by Pieter Pareit (pieter.pareit@gmail.com).
+About
+
+Emacs mode for the DOT language, used by graphviz.
+ppareit.github.io/graphviz-dot-mode
+Resources
+Readme
+License
+GPL-2.0 license
+Stars
+182 stars
+Watchers
+12 watching
+Forks
+44 forks
+Releases
+3 tags
+Packages
+No packages published
+Contributors 20
+
+    @ppareit
+    @ljos
+    @daniel-birket
+    @petere
+    @phst
+    @barik
+    @DamienCassou
+    @PierreTechoueyres
+    @kanru
+    @kryde
+    @tarsius
+
++ 9 contributors
+Languages
+
+Emacs Lisp 94.9%
+
+    Makefile 5.1% 
 
 ** TRANSLATE-MOD
 *** ob-translate
@@ -16416,163 +16802,6 @@ an indentation marker, $>, somewhere on the line.
 http://joaotavora.github.io/yasnippet/snippet-organization.html	
 ***** Reference
 http://joaotavora.github.io/yasnippet/snippet-reference.html#yas-wrap-around-region
-** read-aloud
-*** Install
-#+begin_src emacs-lisp :results output silent
-(package-refresh-contents)
-(use-package reverse-im
-  :ensure t
-  :custom
-  (reverse-im-input-methods '("russian-computer"))
-  :config
-  (reverse-im-mode t))
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
- (use-package read-aloud
-   :ensure t)
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
-#+end_src
-#+RESULTS:
-: t
-*** Docs
-**** Usage 
-***** read-aloud-this : 
-M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
-***** read-aloud-buf : 
-M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
-***** read-aloud-stop : 
-top reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
-***** read-aloud-change-engine : 
-M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
-**** read-aloud-test : 
-(read-aloud-test)
-**** read-aloud.el
-https://github.com/gromnitsky/read-aloud.el
-A simple interface to TTS engines.
-
-The package uses an external text-to-speech engine (like flite) to pronounce the word at or near point, the selected region or a whole buffer.
-
-A screenshot of running read-aloud.el
-Requirements
-
-    Emacs 24.4+
-    A working TTS engine that has a CLI for managing it.
-
-Installation
-
-    Setup at least one of the supported TTS engines (see below).
-
-    Add to ~/.emacs:
-
-     (load-file "/the/repo/dir/read-aloud.el")
-
-Usage
-
-    M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
-
-    M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
-
-To stop reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
-
-    M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
-
-Supported TTS Engines
-speech-dispatcher
-
-... is the default one in read-aloud.el. It contains a daemon that hides from the user all the details of a chosen tts engine. To communicate w/ the daemon, read-aloud.el employs spd-say CL util.
-
-On Fedora 24:
-
-# dnf install speech-dispatcher-flite speech-dispatcher-utils
-
-$ mkdir ~/.config/speech-dispatcher
-$ cp /etc/speech-dispatcher/speechd.conf !$
-$ $EDITOR !$
-
-For example:
-
-$ grep '^[^#]' ~/.config/speech-dispatcher/speechd.conf
-LogLevel  3
-LogDir  "default"
-DefaultRate  40
-DefaultVolume 100
-AudioOutputMethod "alsa"
-DefaultModule flite
-
-Test it:
-
-$ spd-say hello
-
-flite
-
-... is the easiest one to install & use. For example, on Fedora 24:
-
-# dnf install flite
-
-Test it:
-
-$ echo hello | flite
-
-Add to ~/.emacs:
-
-(setq read-aloud-engine "flite")
-
-Microsoft Speech API
-
-Jampal provides a CL interface to SAPI. Install it, then test via:
-
-> echo hello | cscript "C:\Program Files\Jampal\ptts.vbs"
-
-Add to ~/.emacs:
-
-(setq read-aloud-engine "jampal")
-
-macOS Speech Synthesis
-
-Add to ~/.emacs:
-
-(setq read-aloud-engine "say")
-
-By default it uses the settings from System Preferences.
-Configuration
-
-To add/modify a tts engine, you'll need to edit read-aloud-engines plist. Here is the example for Windows:
-
-(lax-plist-put read-aloud-engines "jampal.en"
-  '(cmd "cscript"
-		args ("C:\\Program Files\\Jampal\\ptts.vbs" "-r" "8")) )
-
-args should be a list or nil. To select a new entry,
-
-(setq read-aloud-engine "jampal.en")
-
-The CL util that communicates w/ the engine must wait until the text was fully pronounced (e.g. not exit immediately), otherwise (read-aloud-buf) won't be able to distinguish whether it's time to feed the engine w/ another chunk of the text. This is why we use spd-say w/ -w CLO.
-
-You can edit the face that (read-aloud-buf) uses w/ the usual
-
-M-x customize-face RET read-aloud-text-face
-
-A Smoke Test
-
-After you have configured your system tts engine, do
-
-M-x eval-expression RET (read-aloud-test) RET
-
-It should open 2 tmp windows: 1 log window & 1 w/ a sample text, then it should start reading automatically. After it finishes you may safely kill those 2 buffers.
-Bugs
-
-    Testes only under Fedora 24 & Emacs 25.1.1-rc1.
-
-    The algo of picking up the portions of the text in read-aloud-buf is independent of a major mode & suited only for English texts.
-
-License
-
-MIT.
-
 ** hidra mod 
     https://github.com/abo-abo/hydra
 This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
@@ -17562,62 +17791,6 @@ In an eww buffer function `org-eww-copy-for-org-mode' kills either
 a region or the whole buffer if no region is set and transforms the
 text on the fly so that it can be pasted into an org-mode buffer
 with hot links.
-** company-mode 
-*** keys
-Completion will start automatically after you type a few letters. Use M-n and M-p to select, <return> to complete or <tab> to complete the common part. Search through the completions with C-s, C-r and C-o. Press M-(digit) to quickly complete with one of the first 10 candidates.
-
-Type M-x company-complete to initiate completion manually. Bind this command to a key combination of your choice.
-
-When the completion candidates are shown, press <f1> to display the documentation for the selected candidate, or C-w to see its source. Not all back-ends support this.
-*** backends
-To see or change the list of enabled back-ends, type M-x customize-variable RET company-backends. Also see its description for information on writing a back-end.
-
-For information on specific back-ends, also check out the comments inside the respective files.
-
-For more information, type M-x describe-function RET company-mode.
-
-To customize other aspects of its behavior, type M-x customize-group RET company
-*** completion-styles
-**** exempls
-(setq completion-styles '(partial-completion substring emacs22))
-**** completion-styles’ begins with ‘basic’ by default : 
- <…> I want to complete ‘eval-when-compile’ and I know there are several functions beginning with ‘eval’, but there are fewer which have ‘when’ in their names. So I type ‘when’ and company lists ‘eval-when-compile’ too among others with ‘when’ in the name.
-
-Similarly to iswitchb. Iswitchb is great, because I don’t have to type the beginning of the buffer name, I can type any part of it.
-
-<…> Better yet: obey ‘completion-styles’, so the user can choose between ‘prefix’, ‘substring’, ‘partial-completion’, or any other style she likes.
-    Note that ‘completion-styles’ begins with ‘basic’ by default, and all styles are tried in turn. So unless you customize this variable, if you just type ‘when’, you won’t get ‘eval-when-compile’ among the candidates. You’ll have to input a prefix that doesn’t have any matches when using the ‘basic’ style.
-
-*** You can start completion with an empty prefix : 
-The search feature was actually inspired by the way I use iswitchb. You can start completion with an empty prefix, type C-s, search for “when”, and press C-o to limit the search. – nschum
-
-I’ve written another command named ‘company-filter-candidates’ that will probably be (edit: is) in version 0.2. It works like automatically pressing C-o after every search char. The search still has to be started manually (i.e. one key stroke).
-
-*** customize  company : 
-		Получить инфу по всем переменным
-M-x 
-customize-group 
-RET 
-company. 
-*** company fuze search
-**** in file
-	(find-file-other-frame "~/INI/autocomplete-cfg.el")
-**** Why is company-fuzzy not working?
-Try log out the company-backends and make sure company-fuzzy-all-other-backends is the only backends in you list. If it's not, enable company-fuzzy-mode to swap out all backends and hand it over to company-fuzzy to manage it.
-
-(message "%s" company-backends)
-						; '(company-fuzzy-all-other-backends)
-(message "%s" company-fuzzy--backends)
-  ; .. backends has been handed over to `company-fuzzy`
-
-(company-fuzzy-mode 1)
-**** Can working in clobal mode and not in bufer 
-пологаю что связа стем что он перезапуукает фуз
-и перереключат словари
-что б это работало постояно
-нужно правельно настроить словари
-(company-fuzzy-mode 1)   
-
 ** WindMove & FrameMove 
 https://truthseekers.io/lessons/an-introduction-to-emacs-everything-you-need-to-know-to-get-started/
 ;; Remap windmove keys to home keys
@@ -17780,6 +17953,163 @@ In case the bug is specific to an EPUB document, please send attach it to your e
 Alternatives
 
 The first one I've heard of is epubmode.el which is, well, see for yourself. You might find ereader more useful, especially if you're after Org integration and annotation support.
+*** read-aloud
+**** Install
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+ (use-package read-aloud
+   :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+	(load "~/ELs/text-to-speech/read-aloud/read-aloud.el")
+#+end_src
+#+RESULTS:
+: t
+**** Docs
+***** Usage 
+****** read-aloud-this : 
+M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
+****** read-aloud-buf : 
+M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
+****** read-aloud-stop : 
+top reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
+****** read-aloud-change-engine : 
+M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
+***** read-aloud-test : 
+(read-aloud-test)
+***** read-aloud.el
+https://github.com/gromnitsky/read-aloud.el
+A simple interface to TTS engines.
+
+The package uses an external text-to-speech engine (like flite) to pronounce the word at or near point, the selected region or a whole buffer.
+
+A screenshot of running read-aloud.el
+Requirements
+
+    Emacs 24.4+
+    A working TTS engine that has a CLI for managing it.
+
+Installation
+
+    Setup at least one of the supported TTS engines (see below).
+
+    Add to ~/.emacs:
+
+     (load-file "/the/repo/dir/read-aloud.el")
+
+Usage
+
+    M-x read-aloud-this -- pronounce either the selection or a word under the pointer.
+
+    M-x read-aloud-buf -- read the buffer starting from the current cursor position, highlighting the text as it moves down the buffer. Useful only for plain text files.
+
+To stop reading at any time you either run any of the commands above again, or do M-x read-aloud-stop.
+
+    M-x read-aloud-change-engine -- select another engine (for this Emacs session). It also shows which one is the current.
+
+Supported TTS Engines
+speech-dispatcher
+
+... is the default one in read-aloud.el. It contains a daemon that hides from the user all the details of a chosen tts engine. To communicate w/ the daemon, read-aloud.el employs spd-say CL util.
+
+On Fedora 24:
+
+# dnf install speech-dispatcher-flite speech-dispatcher-utils
+
+$ mkdir ~/.config/speech-dispatcher
+$ cp /etc/speech-dispatcher/speechd.conf !$
+$ $EDITOR !$
+
+For example:
+
+$ grep '^[^#]' ~/.config/speech-dispatcher/speechd.conf
+LogLevel  3
+LogDir  "default"
+DefaultRate  40
+DefaultVolume 100
+AudioOutputMethod "alsa"
+DefaultModule flite
+
+Test it:
+
+$ spd-say hello
+
+flite
+
+... is the easiest one to install & use. For example, on Fedora 24:
+
+# dnf install flite
+
+Test it:
+
+$ echo hello | flite
+
+Add to ~/.emacs:
+
+(setq read-aloud-engine "flite")
+
+Microsoft Speech API
+
+Jampal provides a CL interface to SAPI. Install it, then test via:
+
+> echo hello | cscript "C:\Program Files\Jampal\ptts.vbs"
+
+Add to ~/.emacs:
+
+(setq read-aloud-engine "jampal")
+
+macOS Speech Synthesis
+
+Add to ~/.emacs:
+
+(setq read-aloud-engine "say")
+
+By default it uses the settings from System Preferences.
+Configuration
+
+To add/modify a tts engine, you'll need to edit read-aloud-engines plist. Here is the example for Windows:
+
+(lax-plist-put read-aloud-engines "jampal.en"
+  '(cmd "cscript"
+		args ("C:\\Program Files\\Jampal\\ptts.vbs" "-r" "8")) )
+
+args should be a list or nil. To select a new entry,
+
+(setq read-aloud-engine "jampal.en")
+
+The CL util that communicates w/ the engine must wait until the text was fully pronounced (e.g. not exit immediately), otherwise (read-aloud-buf) won't be able to distinguish whether it's time to feed the engine w/ another chunk of the text. This is why we use spd-say w/ -w CLO.
+
+You can edit the face that (read-aloud-buf) uses w/ the usual
+
+M-x customize-face RET read-aloud-text-face
+
+A Smoke Test
+
+After you have configured your system tts engine, do
+
+M-x eval-expression RET (read-aloud-test) RET
+
+It should open 2 tmp windows: 1 log window & 1 w/ a sample text, then it should start reading automatically. After it finishes you may safely kill those 2 buffers.
+Bugs
+
+    Testes only under Fedora 24 & Emacs 25.1.1-rc1.
+
+    The algo of picking up the portions of the text in read-aloud-buf is independent of a major mode & suited only for English texts.
+
+License
+
+MIT.
+
 ** Ауто комплит
 *** company-jedi
 #+begin_src emacs-lisp :tangle yes
@@ -17829,6 +18159,62 @@ Configure Emacs using this:
 
 
 (add-hook 'python-mode-hook 'jedi:setup)
+*** company-mode 
+**** keys
+Completion will start automatically after you type a few letters. Use M-n and M-p to select, <return> to complete or <tab> to complete the common part. Search through the completions with C-s, C-r and C-o. Press M-(digit) to quickly complete with one of the first 10 candidates.
+
+Type M-x company-complete to initiate completion manually. Bind this command to a key combination of your choice.
+
+When the completion candidates are shown, press <f1> to display the documentation for the selected candidate, or C-w to see its source. Not all back-ends support this.
+**** backends
+To see or change the list of enabled back-ends, type M-x customize-variable RET company-backends. Also see its description for information on writing a back-end.
+
+For information on specific back-ends, also check out the comments inside the respective files.
+
+For more information, type M-x describe-function RET company-mode.
+
+To customize other aspects of its behavior, type M-x customize-group RET company
+**** completion-styles
+***** exempls
+(setq completion-styles '(partial-completion substring emacs22))
+***** completion-styles’ begins with ‘basic’ by default : 
+ <…> I want to complete ‘eval-when-compile’ and I know there are several functions beginning with ‘eval’, but there are fewer which have ‘when’ in their names. So I type ‘when’ and company lists ‘eval-when-compile’ too among others with ‘when’ in the name.
+
+Similarly to iswitchb. Iswitchb is great, because I don’t have to type the beginning of the buffer name, I can type any part of it.
+
+<…> Better yet: obey ‘completion-styles’, so the user can choose between ‘prefix’, ‘substring’, ‘partial-completion’, or any other style she likes.
+    Note that ‘completion-styles’ begins with ‘basic’ by default, and all styles are tried in turn. So unless you customize this variable, if you just type ‘when’, you won’t get ‘eval-when-compile’ among the candidates. You’ll have to input a prefix that doesn’t have any matches when using the ‘basic’ style.
+
+**** You can start completion with an empty prefix : 
+The search feature was actually inspired by the way I use iswitchb. You can start completion with an empty prefix, type C-s, search for “when”, and press C-o to limit the search. – nschum
+
+I’ve written another command named ‘company-filter-candidates’ that will probably be (edit: is) in version 0.2. It works like automatically pressing C-o after every search char. The search still has to be started manually (i.e. one key stroke).
+
+**** customize  company : 
+		Получить инфу по всем переменным
+M-x 
+customize-group 
+RET 
+company. 
+**** company fuze search
+***** in file
+	(find-file-other-frame "~/INI/autocomplete-cfg.el")
+***** Why is company-fuzzy not working?
+Try log out the company-backends and make sure company-fuzzy-all-other-backends is the only backends in you list. If it's not, enable company-fuzzy-mode to swap out all backends and hand it over to company-fuzzy to manage it.
+
+(message "%s" company-backends)
+						; '(company-fuzzy-all-other-backends)
+(message "%s" company-fuzzy--backends)
+  ; .. backends has been handed over to `company-fuzzy`
+
+(company-fuzzy-mode 1)
+***** Can working in clobal mode and not in bufer 
+пологаю что связа стем что он перезапуукает фуз
+и перереключат словари
+что б это работало постояно
+нужно правельно настроить словари
+(company-fuzzy-mode 1)   
+
 ** ahk
 *** ahk-mode : 
 ahk-mode is an available package.

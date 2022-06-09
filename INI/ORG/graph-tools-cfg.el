@@ -7,9 +7,9 @@
 ;; * PLANTUML MODE
 ;; ** plantuml use-package: 
 (use-package plantuml-mode :ensure t
-;; *** :init : 
+;; *** :init :
   ;; :init
-;; *** :config : 
+;; *** :config :
   :config
 	(setq org-plantuml-jar-path 
 		(expand-file-name "~/AddApps/plantuml/plantuml.jar"))
@@ -26,11 +26,47 @@
 					(evil-normal-state)
 					(plantuml-preview 1)))				
 	(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-;; *** end use-package : 
+;; *** end use-package :
 	)
 
 ;; *** --------------------------------------
 
+;; * GRAPHVIZ-DOT
+;; ** GRAPHVIZ DOT MODE:
+(use-package graphviz-dot-mode :ensure t
+;; *** :init :
+  ;; :init
+;; *** :config :
+	:config
+		(setq graphviz-dot-indent-width 4)
+		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe")
+;; *** end use-package :
+	)
+
+;; *** --------------------------------------
+
+;; ** ORG BABEL OB-DOT:
+(use-package ob-dot
+;; *** :ensure :
+	;; :ensure t
+;; *** :init :
+  :init
+(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+;; *** :disabled : 
+  :disabled
+;; *** :config :
+	:config
+	(org-babel-do-load-languages
+			org-babel-load-languages
+			((dot . t)))
+;; *** end use-package :
+	)
+
+;; *** --------------------------------------
+
+;; ** COMPANY GRAPHVIZ DOT:
+(use-package company-graphviz-dot)
+;;  --------------------------------------
 ;; * DITAA MODE
 (use-package ob-ditaa 
   ;; :init
@@ -50,7 +86,7 @@
 	(local-set-key (kbd "<f3>") 
 		'artist-select-op-line)     ; f3 = line
 	(local-set-key (kbd "<f4>") 
-		'artist-select-op-square) ; f4 = rectangle
+		'artist-select-op-square)   ; f4 = rectangle
 	(local-set-key (kbd "<f5>") 
 		'artist-select-op-ellipse)  ; f5 = ellipse
 	(local-set-key (kbd "<f6>") 
