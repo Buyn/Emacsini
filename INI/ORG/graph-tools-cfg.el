@@ -20,7 +20,7 @@
 	(org-babel-do-load-languages 
 		'org-babel-load-languages 
 		'((plantuml . t)))
-	(define-key plantuml-mode-map (kbd "<f5>") '(lambda() (interactive)
+	(define-key plantuml-mode-map (kbd "<f8>") '(lambda() (interactive)
 					(save-some-buffers 'no-confirm)
 					(org-save-all-org-buffers)
 					(evil-normal-state)
@@ -39,7 +39,7 @@
 ;; *** :config :
 	:config
 		(setq graphviz-dot-indent-width 4)
-		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe")
+		(setq graphviz-dot-dot-program (expand-file-name  "~/AddApps/Graphviz/bin/dot.exe"))
 ;; *** end use-package :
 	)
 

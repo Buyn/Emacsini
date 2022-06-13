@@ -3,6 +3,21 @@
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
+** разобратся 
+*** 1
+C-g	minibuffer-keyboard-quit
+(keyboard-escape-quit)
+
+It is bound to C-g.
+
+(keyboard-quit)
+
+This function has :around advice: ‘ad-Advice-keyboard-quit’.
+
+Signal a ‘quit’ condition.
+During execution of Lisp code, this character causes a quit directly.
+At top-level, as an editor command, this simply beeps.
+
 ** Настроение
 *** Uplin
 #+begin_src elisp :results output silent
@@ -460,7 +475,7 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/translate-cfg.el")
 	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
 	(find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
-	(find-file-other-frame "~/INI/lit-cfg/reader-cfg.el") 
+	(find-file-other-frame "~/INI/lit-cfg/reader-cfg.el")
 	(find-file-other-frame "~/ELs/BuYn/reader.el")
 *** Programing
 (find-file-other-frame "~/INI/dev-cfg.el")
@@ -535,6 +550,7 @@ D:\shell\Far\Far.exe
 (load "~/INI/hydra-cfg.el")
 (load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
+(load "~/ELs/BuYn/reader.el")
 (load "~/INI/vanila_cfg.el")
 (load "~/INI/origami_cfg.el")
 (load "~/INI/folding-cfg.el")
@@ -1459,76 +1475,13 @@ asdf asdf asdf asdf
 	,* evil-repeat works only for some commands. In particular it doesn’t work for
 	 delete. It will also interfere with the cursor positions during an undo or redo
 	 operation.
-**** dot
-***** bable
-****** install
+**** chess.el
+
 #+begin_src emacs-lisp :results output silent
-(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
-(use-package ob-dot 
-	:ensure t
-	:config
-	(org-babel-do-load-languages
-			org-babel-load-languages
-			((dot . t))))
+ (package-refresh-contents)
+ (package-install "chess.el"
+ )
 #+end_src
-#+begin_src emacs-lisp :results output silent
-(package-refresh-contents)
-(use-package graphviz-dot-mode
-	:ensure t
-	:config
-		(setq graphviz-dot-indent-width 4)
-		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe"))
-#+end_src
-#+begin_src emacs-lisp :results output silent
-(use-package company-graphviz-dot)
-#+end_src
-
-****** exempl
-(org-babel-do-load-languages
-    org-babel-load-languages
-    ((dot . t)))
-
-
-(use-package graphviz-dot-mode
-  :ensure t
-  :config
-  (setq graphviz-dot-indent-width 4))
-
-(use-package company-graphviz-dot
-  )
-
-(load "~/ELs/Org/Babel/ob-dot.el")
-
-(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
-(use-package read-aloud :ensure t
-  ;; :config
-)
-****** experement
-******* 1
-#+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
-graph graphname { 
-		a -- b; 
-		b -- c;
-		b -- d;
-		d -- a;
-	} 
-#+end_src
-
-#+RESULTS:
-[[file:e:\Temp\my-dot-diagram.png]]
-
-******* 1
-#+begin_src dot :file e:\Temp\my-dot-diagram.png 
-graph graphname { 
-		a -- b; 
-		b -- c;
-		b -- d;
-		d -- a;
-	} 
-#+end_src
-
-#+RESULTS:
-[[file:e:\Temp\my-dot-diagram.png]]
 
 ** setings
 *** systems paths
@@ -16603,6 +16556,76 @@ Languages
 Emacs Lisp 94.9%
 
     Makefile 5.1% 
+
+**** bable
+***** install
+#+begin_src emacs-lisp :results output silent
+(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+(use-package ob-dot 
+	:ensure t
+	:config
+	(org-babel-do-load-languages
+			org-babel-load-languages
+			((dot . t))))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package graphviz-dot-mode
+	:ensure t
+	:config
+		(setq graphviz-dot-indent-width 4)
+		(setq graphviz-dot-dot-program "~/AddApps/Graphviz/bin/dot.exe"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(use-package company-graphviz-dot)
+#+end_src
+
+***** exempl
+(org-babel-do-load-languages
+    org-babel-load-languages
+    ((dot . t)))
+
+
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 4))
+
+(use-package company-graphviz-dot
+  )
+
+(load "~/ELs/Org/Babel/ob-dot.el")
+
+(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+(use-package read-aloud :ensure t
+  ;; :config
+)
+***** experement
+****** 1
+#+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
+graph graphname { 
+		a -- b; 
+		b -- c;
+		b -- d;
+		d -> a;
+	} 
+#+end_src
+
+#+RESULTS:
+[[file:e:\Temp\my-dot-diagram.png]]
+
+****** 1
+#+begin_src dot :file e:\Temp\my-dot-diagram.png 
+graph graphname { 
+		a -- b; 
+		b -- c;
+		b -- d;
+		d -- a;
+	} 
+#+end_src
+
+#+RESULTS:
+[[file:e:\Temp\my-dot-diagram.png]]
 
 ** TRANSLATE-MOD
 *** ob-translate

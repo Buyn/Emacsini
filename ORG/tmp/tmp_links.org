@@ -25,6 +25,18 @@ scl3 = PA8
 scl1 = PB6
 sda1 = PB7
 * Texts
+#+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
+graph graphname { 
+		a -- b; 
+		b -- c;
+		b -- d;
+		d -- a;
+	} 
+#+end_src
+
+#+RESULTS:
+[[file:e:\Temp\my-dot-diagram.png]]
+
 * Calc 
 ** sendbox
 		#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5
