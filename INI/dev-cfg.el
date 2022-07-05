@@ -120,6 +120,8 @@
 ;; *** line-numbers-mode
 		;; (setq display-line-numbers-mode t)
 		(display-line-numbers-mode t)
+;; *** highlight-indentation-mode : 
+		(highlight-indentation-mode t)
 ;; *** outshine-mode : 
 		;; #'outshine-mode on in outshine cfg
 		;; (find-file-other-frame "~/INI/outshine_cfg.el")
