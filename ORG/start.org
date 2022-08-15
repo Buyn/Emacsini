@@ -2323,6 +2323,12 @@ simpler to use a keyboard macro counter.
 
 
 
+***** 13.7 Keyboard Macro Registers
+If you need to execute a keyboard macro (*note Keyboard Macros::)
+frequently, it is more convenient to put it in a register or save it
+(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
+stores the last keyboard macro in register R.
+=============================
 ** Registers
 *** keybord help
 **** 13.2 Saving Text in Registers
@@ -2344,6 +2350,8 @@ simpler to use a keyboard macro counter.
 
 ‘M-x prepend-to-register <RET> R’
      Prepend region to text in register R.
+		 
+
 **** position : 
  ‘C-x r <SPC> R’
 			Record the position of point and the current buffer in register R

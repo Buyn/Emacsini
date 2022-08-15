@@ -500,7 +500,7 @@ _?_ help            _c_urrent file
                 ^Emacs-mode  Menus^          
     ────────────^─────────────────^───────────────────
      To _w_in Format    To _u_nix Format _s_av-tex2reg _W_inBuffer1251
-     _q_uit						  _R_evert buffer  _i_ns-reg2tex
+     _q_uit						  _R_evert buffer  _i_ns-reg2tex _m_askSlesh
     "
 ;; ***** keys
 ;; ****** w : 
@@ -533,6 +533,11 @@ _?_ help            _c_urrent file
 														nil
 														nil
 														(current-kill 0 "DO-NOT-MOVE"))))
+;; ****** m : 
+    ("m" (progn
+					(unless (fboundp 'mask_win_path)
+							(load-file "~/keymac/mask_win_path.el"))
+					(mask_win_path)))
 ;; ****** R : 
 	("R" revert-buffer) 
 ;; ****** W : 
