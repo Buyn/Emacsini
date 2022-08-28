@@ -494,7 +494,7 @@ _?_ help            _c_urrent file
 
 ;; *** emacs menu
 ;; **** defhydra
-(defhydra hydra-emacs-menu (:color pink)
+(defhydra hydra-emacs-menu (:color blue)
 ;; ***** hint
     "
                 ^Emacs-mode  Menus^          
