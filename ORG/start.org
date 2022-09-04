@@ -548,11 +548,11 @@ D:\shell\Far\Far.exe
 *Help Docs Emacs 
 * Команды
 ** reload init files
+(load "~/INI/hydra-cfg.el")
+(load "~/INI/frame-control.el")
 (load "~/INI/lua-cfg.el")
 (load "~/ELs/BuYn/shell.el")
-(load "~/INI/hydra-cfg.el")
 (load "~/INI/evil-mod-cfg.el")
-(load "~/INI/frame-control.el")
 (load "~/ELs/BuYn/reader.el")
 (load "~/INI/vanila_cfg.el")
 (load "~/INI/origami_cfg.el")
