@@ -142,6 +142,219 @@ https://www.braveclojure.com/basic-emacs/
 **** urgent 
 **** todo
 **** done
+*** Стадии 
+**** концепция
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+**** Пруф оф концепт
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+**** тестовый
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+**** мвп
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+**** Бета
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+**** Альфа 
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+
+
 *** Ezenhaur 
 **** Срочное и важное
 **** Срочное но не важное
@@ -224,9 +437,26 @@ https://www.braveclojure.com/basic-emacs/
  (какой вывод можно сделать из случившейся истории).
 ** progn :
 #+begin_src emacs-lisp :results output silent
-(load "~/INI/dev-cfg.el")
-
-(load "~/INI/hydra-cfg.el")
+(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+(global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					))
+(define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					))
+(define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
+					(save-buffer)
+					(kill-buffer (current-buffer))
+					))
+(define-key evil-normal-state-map "ZC" '(lambda() (interactive)
+					(save-buffer)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
 
  #+end_src
 #+begin_src emacs-lisp :results output silent
@@ -384,6 +614,21 @@ open macros file
 (find-file-other-frame "~/keymac/ins-tree-link.el")
 #+end_src
 
+*** calc-all : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/calc-all.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'calc-all
+   (kmacro-lambda-form [?\C-u ?\C-c ?*] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6>") 'calc-all)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/calc-all.el")
+#+end_src
+
 ** Calc
 *** random
 **** exempls
@@ -457,7 +702,7 @@ D:\shell\Far\Far.exe
 *** frame
 	(find-file-other-frame "~/INI/frame-control.el")
 															WINDMOVE
-	(find-file-other-frame "~/INI/fullscreen-cfg.el")
+		(find-file-other-frame "~/INI/fullscreen-cfg.el")
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
 *** Other
@@ -549,10 +794,10 @@ D:\shell\Far\Far.exe
 * Команды
 ** reload init files
 (load "~/INI/hydra-cfg.el")
+(load "~/INI/evil-mod-cfg.el")
 (load "~/INI/frame-control.el")
 (load "~/INI/lua-cfg.el")
 (load "~/ELs/BuYn/shell.el")
-(load "~/INI/evil-mod-cfg.el")
 (load "~/ELs/BuYn/reader.el")
 (load "~/INI/vanila_cfg.el")
 (load "~/INI/origami_cfg.el")
@@ -8711,6 +8956,45 @@ https://orgmode.org/org.html#Advanced-features
 ***** + : 
  $5=@1$3*($2^2)::@2$4= @2$3::$4=$3+@-1$4::@>$4=0:: 
  @2$6=@2$5::$6=$5+@-1$6::@>$6=0
+**** Math functions
+Formulas can include standard math functions:
+Function	Description
+exp(c)	exponential
+log(c)	natural logarithm
+log10(c)	log base 10
+sqrt(c)	square-root
+vmin(v)	minimum of vector (non blanks)
+vmax(v)	maximum of vector (non blanks)
+vmean(v)	mean of vector (non blanks)
+vmedian(v)	median of vector (non blanks)
+vsdev(v)	standard deviation of vector (non blanks)
+vvar(v)	variance of vector (non blanks)
+vcov(v1, v2)	covariance of two vector (non blanks)
+vcor(v1, v2)	correlation of two vector (non blanks)
+**** vectors : 
+vsum(v)	sum of vector
+vprod(v)	product of vector
+vcount(v)	length of vector (non blanks)
+vlen(v)	length of vector (non blanks)
+vmin(v)	minimum of vector (non blanks)
+vmax(v)	maximum of vector (non blanks)
+vmean(v)	mean of vector (non blanks)
+vmedian(v)	median of vector (non blanks)
+vsdev(v)	standard deviation of vector (non blanks)
+vvar(v)	variance of vector (non blanks)
+vcov(v1, v2)	covariance of two vector (non blanks)
+vcor(v1, v2)	correlation of two vector (non blanks)
+**** Optional modes
+A formula can be appended by a semi-colon and one or more optional mode strings that is passed on to the calculation engine (calc) to alter the format of the result. The mode strings are described in the following table:
+Mode option	Example	Description
+p	;p10	set calculation precision to 10 decimal places
+n,s,e,f	;s3	normal, scientific, engineering or fixed formatting. Example indicates scientific formatting with 3-1=2 decimal places.
+D,R	;D	degrees or radians
+F,S	;F	fraction (ratio) and symbolic (standard) format.
+N	;N	interpret all fields as numbers, making non-numerics 0 values
+E	;E	keep empty cells in the range
+L	;L	treat the values as literal
+Alternatively, printf style formatting can be used... 
 
 *** Keys 
 **** Re-aligning and
@@ -9059,6 +9343,34 @@ reply when prompted for the formula, or to edit the ‘TBLFM’ keyword.
    You may edit the ‘TBLFM’ keyword directly and re-apply the changed
 equations with ‘C-c C-c’ in that line or with the normal recalculation
 commands in the table.
+
+*** Add formulas
+**** := : 
+A formula can be added a number of ways:
+    by starting a cells entry with := and then add the formula (e.g. $2*2 to multiply the value in the second column by 2).
+
+    | Date         | Numeric | Category 1 | Category 2 |   |
+    |--------------+---------+------------+------------+---|
+    | <2013-01-14> |    15.0 | B          | C          |:=$2*2 |
+    | <2013-01-14> |    10.0 | A          | C          |   |
+    | <2013-01-15> |    12.5 | A          | A          |   |  
+    			  
+
+    Note, this formula does not specify any rows and therefore is will substitute in the corresponding row.
+
+    Then type C-c C-c.The formula will be replaced by the result of the formula, and the formula itself will be appended to the bottom of the table.
+
+    | Date         | Numeric | Category 1 | Category 2 |     |
+    |--------------+---------+------------+------------+-----|
+    | <2013-01-14> |    15.0 | B          | C          | 30. |
+    | <2013-01-14> |    10.0 | A          | C          |     |
+    | <2013-01-15> |    12.5 | A          | A          |     |
+    #+TBLFM: @2$5=$2*2
+    			  
+
+    by directly adding the formula to a #+TBLFM: specification (see above result)
+    To paste a column formula in a cell C-c *
+    To paste a formula into each row of a column C-u C-c * 
 
 ** Tags 
 Two: Which tags do you use most?
@@ -15831,6 +16143,32 @@ m1 : <size:48>It is New Text</size>
 	#+end_src
 	#+RESULTS:
 	[[file:e:\Temp\my-diagram.png]]
+***** Legacy HTML Use image
+You can mix Creole with the following HTML tags:
+
+    <b> for bold text
+    <u> or <u:#AAAAAA> or <u:[[color|colorName]]> for underline
+    <i> for italic
+    <s> or <s:#AAAAAA> or <s:[[color|colorName]]> for strike text
+    <w> or <w:#AAAAAA> or <w:[[color|colorName]]> for wave underline text
+    <plain> for plain text
+    <color:#AAAAAA> or <color:[[color|colorName]]>
+    <back:#AAAAAA> or <back:[[color|colorName]]> for background color
+    <size:nn> to change font size
+    <img:file> : the file must be accessible by the filesystem
+    <img:http://plantuml.com/logo3.png> : the URL must be available from the Internet
+#+begin_src plantuml :tangle yes
+@startuml
+	:* You can change <color:red>text color</color>
+	* You can change <back:cadetblue>background color</back>
+	* You can change <size:18>size</size>
+	* You use <u>legacy</u> <b>HTML <i>tag</i></b>
+	* You use <u:red>color</u> <s:green>in HTML</s> <w:#0000FF>tag</w>
+	----
+	* Use image : <img:http://plantuml.com/logo3.png>
+	;
+@enduml
+#+end_src
 **** plantuml-mode 
 ***** doc
 ****** github 
@@ -15957,6 +16295,326 @@ m1 : <size:48>It is New Text</size>
  Blank previews
 
  If you are using SVG rendering and plantuml-preview shows you an empty buffer, chances are something is wrong with the PlantUML output. While inside the preview buffer, hit C-c C-c to switch to the textual mode and see if the output is valid SVG.
+**** setings FAQ 
+***** I want to generate huge diagrams!
+
+PlantUML limits image width and height to 4096. There is an environment variable that you can set to override this limit: PLANTUML_LIMIT_SIZE. You have to define this variable before launching PlantUML, something like:
+
+set PLANTUML_LIMIT_SIZE=8192
+
+or
+
+setenv PLANTUML_LIMIT_SIZE 8192
+
+Another way is an option in the command line:
+
+java -DPLANTUML_LIMIT_SIZE=8192 -jar /path/to/plantuml.jar ...
+
+Note that if you generate very big diagrams, (for example, something like 20 000 x 10 000 pixels), you can have some memory issues. The solution is to add this parameter to the java vm : -Xmx1024m.
+***** Frequently Asked Questions (FAQ)
+****** What's the goal of PlantUML?
+
+PlantUML is used to draw UML diagrams, using a simple and human readable text description.
+Be careful, because it does not prevent you from drawing inconsistent diagrams (such as having two classes inheriting from each other, for example). So it's more a drawing tool than a modeling tool.
+[Back to top]
+How long do the images generated by PlantUML Server live for?
+
+Links to png or svg generated by PlantUML Server are valid forever (that is as long as the server is up).
+However, we do not store any diagrams on our servers.
+
+This may sound contradictory. It is not: the whole diagram is compressed into the URL itself. When the server receives the URL, it decompresses the URL to retrieve the diagram text and generates the image. There is no need to store anything. Even if the server is down, you can retrieve the diagram using the flag -decodeurl with the command line. Furthermore, the diagram data is stored in PNG metadata, so you can fetch it even from a downloaded image.
+
+Occasionally we may activate HTTP traces on our server. This is mainly for performance issues (when we have some) to understand the traffic we get. Once the issue solved, we turn back off HTTP traces and we remove the logs.
+
+Concerning sensitive content: even if we do not store the generated diagrams, please be aware that all traffic goes through HTTP, so it's easy to catch.
+
+So you should probably install a local server on your own network if you plan to generate diagrams with sensitive information. You can do this with no Java/J2EE knowledge since there is a tiny web server included in PlantUML.jar.
+[Back to top]
+It does not work on my config!
+
+PlantUML has been installed on various systems, and some users have reported minor issues when installing it.
+You can have a look on this page which give advises if something is wrong.
+[Back to top]
+Which version of Graphviz should I use?
+
+You have more information about Graphviz about Graphviz here.
+
+The following version have been tested, and are known to work:
+
+    2.26.3
+    2.28
+    2.30.1
+    2.34
+    2.36
+    2.38
+    2.44
+
+Note that versions 2.39 to 2.42 do not work very well with PlantUML.
+
+With version 2.44, under Windows, you may have to run dot -c in a command line to finalize the installation, like in the following example:
+
+You may have to run dot -c with Administrator Right.
+
+Another option is to install Win32 version of GraphViz 2.44 which does not require this post-install process.
+
+If you compile Graphviz by yourself, you have to build it with libexpat in order to work with PlantUML.
+[Back to top]
+****** Is this mature? I don't see any new release?
+
+Google Trends are somehow positive. And there are few books that mention PlantUML. So yes, it's mature.
+
+Note that PlantUML is developed with continuous integration in mind. That means that there are new releases quite often, with (hopefully!) backward compatibility. So the file PlantUML.jar may changed over time, while keeping the same name.
+
+If you want to know the exact version you are using, you can type in the command line:
+
+java -jar plantuml.jar -version
+
+or use the following small special diagram description:
+
+@startuml
+version
+@enduml
+
+[Back to top]
+****** How to know if a new release is available?
+
+To check if a newer version is available for download, you can go to the download page.
+
+You can also subscribe to the following rss flows:
+
+    Recent activities on the Q&A forum
+    Recent questions and answers on the Q&A forum
+
+Or you can use the command line:
+
+java -jar plantuml.jar -version
+
+Or use the following small special diagram description:
+
+@startuml
+version
+@enduml
+
+[Back to top]
+****** I have an error message with the Eclipse Plugin.
+
+If you have the following error message :
+
+The currently displayed page contains invalid values
+
+when displaying the Windows/Preferences/PlantUML, you should try to quit Eclipse and use the -clean flag on the command line:
+
+eclipse -clean
+
+[Back to top]
+****** I want to generate huge diagrams!
+
+PlantUML limits image width and height to 4096. There is an environment variable that you can set to override this limit: PLANTUML_LIMIT_SIZE. You have to define this variable before launching PlantUML, something like:
+
+set PLANTUML_LIMIT_SIZE=8192
+
+or
+
+setenv PLANTUML_LIMIT_SIZE 8192
+
+Another way is an option in the command line:
+
+java -DPLANTUML_LIMIT_SIZE=8192 -jar /path/to/plantuml.jar ...
+
+Note that if you generate very big diagrams, (for example, something like 20 000 x 10 000 pixels), you can have some memory issues. The solution is to add this parameter to the java vm : -Xmx1024m.
+[Back to top]
+****** I have issues with accented characters.
+
+Characters encoding is a subtle thing... By default, PlantUML use the default charset of your platform, which may or may not be UTF-8 . If you want to know which charset you are using, you can type the following command:
+
+java -jar plantuml.jar -help
+
+...
+-charset XYZ To use a specific charset (default is windows-1252)
+...
+
+If you want to use a different charset, for example UTF-8, you can use the -charset flag :
+
+java -jar plantuml.jar -charset UTF-8 ...
+
+You can also find here information about unicode . Note that even if Java does not support B.O.M. (Byte Order Mark) in UTF-8 format file, a workaround has been put into PlantUML, so this should not be an issue.
+[Back to top]
+****** I have issues with Asian characters.
+
+Some Japanese users reported that they have to set the LANG variable to ja_JP.UTF-8 in their shell before launching PlantUML.
+
+export LANG = ja_JP.UTF-8
+
+Since the new architecture, it should simply work, because Java knows how to draw East Asian characters.
+[Back to top]
+How to generate EPS?
+
+You can use the -eps flag in the command line, or format="eps" in the ANT task.
+[Back to top]
+What about XMI?
+
+Work is in progress.
+[Back to top]
+****** Is @startuml needed in with -pipe flag?
+
+Short answer: You do have to use @startuml (or @startditaa/@startjcckit...) when starting a diagram.
+
+Long answer:
+
+The @startuml/@startditaa/@startjcckit is useful to determine the type of diagram (uml, ditaa, jcckit...), and because you can optionally put a filename after the @startXYZ. This also allows to have several diagrams inside the same file.
+
+Earlier versions of PlantUML were not supporting ditaa or jcckit. When you use -pipe flag, since the diagram is generated to standard output, there could be only one diagram in the standard input. And there is no need to specify a filename. For all those reasons, @startuml was not needed when using -pipe flag at that time.
+
+Later, it has been decided to normalize this, and to impose @startXYZ everywhere, even with -pipe flag, because it was confusing for users. Unfortunately, since some existing scripts were already using the fact that @startuml is not needed in -pipe flag, it has been decided to keep this as a deprecated option, just to allow older scripts to run. We indeed do pay attention of ascending compatibility.
+
+For newer scripts, you should not rely on this, and use @startXYZ/@endXYZ with the -pipe flag.
+[Back to top]
+****** Under which license is PlantUML distributed?
+
+PlantUML is distributed under the GPL license.
+You can print the license using the command line option:
+
+java -jar plantuml.jar -license
+
+Or you can use the special diagram:
+
+@startuml
+license
+@enduml
+
+[Back to top]
+****** I don't like GPL!
+
+You can also use:
+
+    LGPL license
+    Apache license
+    Eclipse Public license
+    MIT license
+
+Those versions miss few features (DITAA for example), but are 100% able to generate UML diagrams.
+
+You can print the license of these versions using the command line option:
+
+java -jar plantuml.jar -license
+
+Or you can use the special diagram:
+
+@startuml
+license
+@enduml
+
+[Back to top]
+****** Are images generated by PlantUML covered by the GPL/LGPL/ASL/EPL/MIT license?
+
+No, they are not.
+
+Images (whatever their format : PNG, SVG...) generated by the execution of PlantUML are owned by the author of their corresponding sources code (that is, their textual description in PlantUML language).
+
+Images generated by the execution of PlantUML are not considered as covered work. You can do whatever you want with them.
+
+The generated images can then be used without any reference to the GPL/LGPL/ASL/EPL/MIT license. It is not even necessary to stipulate that they have been generated with PlantUML, although this will be appreciated by PlantUML team.
+
+There is an exception : if the textual description in PlantUML language is also covered by some license (like the GPL/LGPL/ASL/EPL/MIT), then the generated images are logically covered by this license.
+[Back to top]
+Can I redistribute the LGPL binary file PlantUML.jar and if there any constraints about it?
+
+As long as you do not modify the Java source code and the jar file, you can integrate PlantUML.jar in your own closed source software.
+
+The only constraint is that you have to mention somewhere in your own license or in your documentation that you are using PlantUML and that PlantUML is distributed under LGPL.
+
+You can then even sell your software and earn money, without any other constraints (although donation will be appreciate in that case :-)
+
+[Back to top]
+****** What is the license of the PlantUML syntax?
+
+There are no license for the PlantUML syntax itself : this means that everybody can use it.
+
+So you can use PlantUML comments into your own code : those comments are owned by yourself, and are not considered as covered work, and are not covered by the GPL/LGPL/APL/EPL/MIT license.
+
+Only the current implementation (that is, PlantUML program) is licensed under GPL, LGPL, ASL, EPL or MIT. On the other hand note that the documentation (examples, notices, ...) published in the PlantUML website is copyrighted. But you can still write your own documentation.
+[Back to top]
+****** What does EmptySvgException mean?
+
+PlantUML is using Graphviz to generate some diagrams. So PlantUML is launching dot program and retrieve the information generated by dot as a SVG flow.
+
+This message means that PlantUML is getting an empty flow from dot execution, and therefore cannot generate UML diagrams. There may be several reasons why this happens:
+
+    There is an issue with your Graphviz installation. Try a very simple diagram, with only one class for example.
+    Your version of Graphviz is too old and is crashing with information provided by PlantUML. Check your version with testdot
+    Your diagram is too complex.
+    There is a bug in PlantUML and/or in dot.
+
+[Back to top]
+****** Could not initialize class net.sourceforge.plantuml.ugraphic.UFont
+
+If you have the error message java.lang.NoClassDefFoundError: Could not initialize class net.sourceforge.plantuml.ugraphic.UFont, it probably means that there are no fonts installed on your server.
+
+You can solve it by adding fontconfig on your system:
+
+sudo yum install fontconfig
+
+or
+
+sudo apt-get install fontconfig
+
+[Back to top]
+****** I have a message complaining about X11 or headless!
+
+If you are running PlantUML on a linux server without graphical capability, you may have some error message:
+
+    Can't connect to X11 window
+    X11 connection rejected because of wrong authentication.
+    HeadlessException
+
+Basically, this is because PlantUML needs to have access to some graphical resources (more information here). You can turn PlantUML to headless mode, using the flag -Djava.awt.headless=true. For example:
+
+/usr/bin/java -Djava.awt.headless=true -jar /data/PlantUml/plantuml.jar ...
+
+[Back to top]
+****** I have an UnsatisfiedLinkError under Mac OS X!
+
+Under Mac OS X, if you have some error message like:
+
+Error java.lang.UnsatisfiedLinkError / liblwawt.dylib /libosxapp.dylib
+
+You need to follow the instructions on http://stackoverflow.com/questions/25914757/osx-yosemite-jvm-shared-library-does-not-contain-the-jni-createjavavm-symbol:
+
+    Download and install the package: JavaForOSX.
+    Found the file AptanaStidio3.ini, the file by default located under the directory here: /Applications/Aptana Studio 3/AptanaStudio3.app/Contents/MacOS
+    Add -vm argument to specify the java which will be used to lunch Aptana Studio: -vm /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java
+
+This seems to work only under Java 6, so you may define the following alias to be used in your scripts.
+
+alias java6="export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0)"
+
+[Back to top]
+****** PlantUML scripts are grabbing keyboard/window focus!
+
+Depending on your configuration, you can try the flag -Djava.awt.headless=true.
+For example:
+
+/usr/bin/java -Djava.awt.headless=true -jar /path/to/plantuml.jar ...
+
+[Back to top]
+****** I found an issue, but I cannot provide my diagram showing the issue because my diagram contains confidential data
+
+There is a -cypher option the command line that generates a .preproc file instead of regular image file.
+
+The .preproc generated file looks like the input diagram expect that all words (except PlantUML language keywords) have been replaced by a random set of letters.
+
+You can double check this by running several time the -cypher option (you will get a different text each time). You may also look at the Cypher.java class used to execute this transformation to be sure that there are no backdoor there to retrieve back your original diagram.
+
+If there is an issue in your original diagram, the same issue is likely to also occur with the cyphered one. Since the cyphered text is really meaningless, you can safely share it with us : there will be no way for us to guess what you are really working on.
+
+But we will be able to reproduce the issue and fix it so that you can have your original (and confidential) diagram working.
+
+[Back to top]
+****** I have a question that is not here!
+
+You can use the forum facility.
+
+Someone will try to answer your question there. 
 
 *** DITAA
 **** DIagrams Through Ascii Art 

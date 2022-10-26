@@ -164,7 +164,7 @@
 (global-set-key (kbd " M-g M-t M-h M-a") 'xref-find-definitions-other-frame)
 ;; --------------------------------------
 ;; ** FRAMS CLOSE  {{{
-(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
+(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 (global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
@@ -173,6 +173,18 @@
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					))
+(define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					))
+(define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
+					(save-buffer)
+					(kill-buffer (current-buffer))
+					))
+(define-key evil-normal-state-map "ZC" '(lambda() (interactive)
+					(save-buffer)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+
 ;; ** Buffer control  {{{
 (define-key evil-normal-state-map "ZI" '(lambda() (interactive)
 					(ivy-switch-buffer)))
