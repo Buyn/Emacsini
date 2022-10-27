@@ -165,10 +165,12 @@
 ;; --------------------------------------
 ;; ** FRAMS CLOSE  {{{
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(delete-frame)))
+(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 (define-key evil-normal-state-map "ZW" '(lambda() (interactive)
-					(delete-frame)))
+					(evil-quit)))
 (define-key evil-normal-state-map "ZE" '(lambda() (interactive)
 					(save-buffer)
 					(evil-quit)))

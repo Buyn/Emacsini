@@ -438,10 +438,12 @@ https://www.braveclojure.com/basic-emacs/
 ** progn :
 #+begin_src emacs-lisp :results output silent
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(delete-frame)))
+(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 (define-key evil-normal-state-map "ZW" '(lambda() (interactive)
-					(delete-frame)))
+					(evil-quit)))
 (define-key evil-normal-state-map "ZE" '(lambda() (interactive)
 					(save-buffer)
 					(evil-quit)))
@@ -621,7 +623,7 @@ open macros file
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (fset 'calc-all
-   (kmacro-lambda-form [?\C-u ?\C-c ?*] 0 "%d"))
+   (kmacro-lambda-form [escape ?\C-u ?\C-c ?*] 0 "%d"))
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (global-set-key (kbd "<f6>") 'calc-all)
