@@ -31,13 +31,22 @@
 ;;  Usage below.
   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
 	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
-	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
+	(define-key org-brain-visualize-mode-map (kbd "S-C-<return>")
 		'(lambda() (interactive)
 			(push-button)
 			(org-brain-goto-current) 
 			(let (buffer-name-to-close (buffer-name))
 			(evil-quit)
 			(switch-to-buffer-other-frame buffer-name-to-close))))
+	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
+		'(lambda() (interactive)
+				(push-button)
+				(org-brain-goto-current) 
+				(let (buffer-name-to-close (buffer-name))
+				(evil-quit)
+				(org-brain-visualize-back)
+				(switch-to-buffer-other-frame buffer-name-to-close))))
+;; *org-brain*
 
 ;; **** org-id : 
 ;; 4 org-brain use org-id in order to speed things up. Because of this, the variable

@@ -3,6 +3,52 @@
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
+** progn :
+#+begin_src emacs-lisp :results output silent
+	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
+	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
+		'(lambda() (interactive)
+			(push-button)
+			(org-brain-goto-current) 
+			(let (buffer-name-to-close (buffer-name))
+			(evil-quit)
+			(switch-to-buffer-other-frame buffer-name-to-close))))
+	(define-key org-brain-visualize-mode-map (kbd "S-C-<return>")
+		'(lambda() (interactive)
+				(push-button)
+				(org-brain-goto-current) 
+				(let (buffer-name-to-close (buffer-name))
+				(evil-quit)
+				(org-brain-visualize-back)
+				(switch-to-buffer-other-frame buffer-name-to-close))))
+ #+end_src
+#+begin_src emacs-lisp :results output silent
+(setq org-indirect-buffer-display `new-frame)
+(global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
+
+	 ;; (package-refresh-contents)
+	 (use-package multiple-cursors :ensure t
+		 :config
+		 (define-key evil-visual-state-map "zi" 'mc/edit-lines)
+		 (define-key evil-visual-state-map "zn" 'mc/mark-next-like-this)
+		 (define-key evil-visual-state-map "zp" 'mc/mark-previous-like-this)
+		 (define-key evil-visual-state-map "zo" 'mc/mark-all-like-this)
+		 (define-key evil-visual-state-map "zN" 'mc/skip-to-next-like-this)
+		 (define-key evil-visual-state-map "zP" 'mc/skip-to-previous-like-this)
+		 (define-key evil-visual-state-map "zI" 'mc/mark-all-in-region)
+		 (define-key evil-visual-state-map "zO" 'mc/mark-all-like-this-in-defun)
+		 (define-key evil-visual-state-map "z1" 'mc/insert-numbers)
+		 )
+ #+end_src
+
+#+begin_src emacs-lisp :results output silent
+(setq minimap-major-modes '())
+#+end_src
+
+#+begin_src emacs-lisp :results output silent
+(setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
+#+end_src
+
 ** разобратся 
 *** 1
 C-g	minibuffer-keyboard-quit
@@ -435,44 +481,6 @@ https://www.braveclojure.com/basic-emacs/
  (пир на весь мир, свадьба, пол царства в пидачу).
 ***** 28. Мораль 
  (какой вывод можно сделать из случившейся истории).
-** progn :
-#+begin_src emacs-lisp :results output silent
-	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
-	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
-		'(lambda() (interactive)
-			(push-button)
-			(org-brain-goto-current) 
-			(let (buffer-name-to-close (buffer-name))
-			(evil-quit)
-			(switch-to-buffer-other-frame buffer-name-to-close))))
- #+end_src
-#+begin_src emacs-lisp :results output silent
-(setq org-indirect-buffer-display `new-frame)
-(global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
-
-	 ;; (package-refresh-contents)
-	 (use-package multiple-cursors :ensure t
-		 :config
-		 (define-key evil-visual-state-map "zi" 'mc/edit-lines)
-		 (define-key evil-visual-state-map "zn" 'mc/mark-next-like-this)
-		 (define-key evil-visual-state-map "zp" 'mc/mark-previous-like-this)
-		 (define-key evil-visual-state-map "zo" 'mc/mark-all-like-this)
-		 (define-key evil-visual-state-map "zN" 'mc/skip-to-next-like-this)
-		 (define-key evil-visual-state-map "zP" 'mc/skip-to-previous-like-this)
-		 (define-key evil-visual-state-map "zI" 'mc/mark-all-in-region)
-		 (define-key evil-visual-state-map "zO" 'mc/mark-all-like-this-in-defun)
-		 (define-key evil-visual-state-map "z1" 'mc/insert-numbers)
-		 )
- #+end_src
-
-#+begin_src emacs-lisp :results output silent
-(setq minimap-major-modes '())
-#+end_src
-
-#+begin_src emacs-lisp :results output silent
-(setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
-#+end_src
-
 ** Macros
 *** done
 #+begin_src emacs-lisp :results output silent
