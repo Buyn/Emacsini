@@ -437,30 +437,14 @@ https://www.braveclojure.com/basic-emacs/
  (какой вывод можно сделать из случившейся истории).
 ** progn :
 #+begin_src emacs-lisp :results output silent
-(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
-					(delete-frame)))
-(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					(evil-quit)))
-(define-key evil-normal-state-map "ZW" '(lambda() (interactive)
-					(evil-quit)))
-(define-key evil-normal-state-map "ZE" '(lambda() (interactive)
-					(save-buffer)
-					(evil-quit)))
-(global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					(evil-quit)))
-(define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					))
-(define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
-					(save-buffer)
-					(kill-buffer (current-buffer))
-					))
-(define-key evil-normal-state-map "ZC" '(lambda() (interactive)
-					(save-buffer)
-					(kill-buffer (current-buffer))
-					(evil-quit)))
+	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
+	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
+		'(lambda() (interactive)
+			(push-button)
+			(org-brain-goto-current) 
+			(let (buffer-name-to-close (buffer-name))
+			(evil-quit)
+			(switch-to-buffer-other-frame buffer-name-to-close))))
  #+end_src
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
@@ -16026,7 +16010,84 @@ You will find the complete documentation about ditaa on:
     @endmindmap      
     *      
 -------------------------------------------------------------------------
+***** MindMap more help
+****** Insert the PlantUML mindmap into diagrams.net
+    In the diagrams.net or draw.io editor, click Arrange > Insert > Advanced > PlantUML.
+    Add the text for your mindmap into the text field, and click Insert.
+    Generate a mindmap from text in diagrams.net by inserting PlantUML in arithmetic notation via Arrange > Insert > Advanced > PlantUML
 
+The diagram will be generated and inserted as an SVG image on the drawing canvas.
+Generate a mindmap from text in diagrams.net by inserting PlantUML in arithmetic notation via Arrange > Insert > Advanced > PlantUML
+
+Hover over the mindmap on the drawing canvas to see a tooltip with the PlantUML text.
+
+If you see an error on the drawing canvas, there is likely a mistake in the text notation. Double check the PlantUML for mistakes, and make sure you use the arithmetic notation, and not the Markdown or OrgMode syntax for your mindmap.
+If you see this error when inserting PlantUML, double check that you are using arithmetic notation in your text mindmap, and everything is correct
+
+Double click on the mindmap to open and edit the PlantUML text. Click Apply when you have finished, and the diagram on the canvas will be regenerated.
+Generate a mindmap from text in diagrams.net by inserting PlantUML in arithmetic notation via Arrange > Insert > Advanced > PlantUML
+****** Do more with your PlantUML mindmaps
+    Add a second root topic - + second topic
+    Add colours - [#colour-name or RGB value] (directly after the indicator characters)
+    Add an icon - <&star> (directly before the topic text)
+    Strike through topics - <s>topic</s>
+    Add one or more of the following, as shown in the example below:
+        heading
+        caption
+        section heading
+        footer
+        legend
+
+Mindmaps are easy to create from text with diagrams.net and PlantUML
+Open this example in diagrams.net
+****** Example: Tasks in a one-sided mindmap
+
+@startuml
+@startmindmap
+
+caption Tasks
+title Onboarding and offboarding tasks
+
++[#lightgreen] Onboarding
+++ Prior to first day
++++_ <&star>Contract signed
++++_ Employee handbook
++++_ IT equipment reserved
+++ First day
++++_ <&people>Office tour
++++_ <&people>Team intros
++++ Account setup
+++ First week
++++_ <&people>Shadow team members
++++_ Software training
+++ First month
++++_ Assign projects/tasks
++++_ Set goals
++++_ <&people>Get team feedback
+
++[#orange] Offboarding
+++ <&people>Feedback and review
+++[#999999] <s>Exit interview</s>
+++ Tasks/projects reassigned
++++_ <&people>Handover
+++ Account deactivation/deletion
+++ IT hardware return
+
+header
+Currently under review
+endheader
+
+legend right
+  <&star> priority
+  <&people> meetings
+endlegend
+
+center footer Last updated: May
+
+@endmindmap 
+@enduml
+
+Refer to the PlantUML language specification for the full set of options in the various supported syntaxes.
 
 **** exempls
 ***** My user cose and component style 
