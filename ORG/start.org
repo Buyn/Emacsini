@@ -3,6 +3,25 @@
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
+** Like a craftsman entering his workshop :
+Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
+https://www.braveclojure.com/basic-emacs/
+| |_| |_| |           | |_| |_| |
+ \ _____ /      o_     \ _____ /
+  |     |       |_|     |     |
+  |  |  |       |       |  |  |
+  |   _ l _   _ | _   _ l _   |
+  |  | |_| |_| ||| |_| |_| |  |
+  |  |                     |  |
+  || |                     | ||
+  |  |        _____        |  |
+  |  |       /_|_|_\       |  |
+  |  |      /|_|_|_|\      |  |
+  |  |      ||_|_|_||      |  |
+  |  |      ||_|_|_||      |  |
+  |__|      ||_|_|_||      |__|
+ /   |      ||_|_|_||      |   \
+=================================
 ** progn :
 #+begin_src emacs-lisp :results output silent
 	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
@@ -145,25 +164,6 @@ At top-level, as an editor command, this simply beeps.
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
 #+end_src
-** Like a craftsman entering his workshop :
-Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
-https://www.braveclojure.com/basic-emacs/
-| |_| |_| |           | |_| |_| |
- \ _____ /      o_     \ _____ /
-  |     |       |_|     |     |
-  |  |  |       |       |  |  |
-  |   _ l _   _ | _   _ l _   |
-  |  | |_| |_| ||| |_| |_| |  |
-  |  |                     |  |
-  || |                     | ||
-  |  |        _____        |  |
-  |  |       /_|_|_\       |  |
-  |  |      /|_|_|_|\      |  |
-  |  |      ||_|_|_||      |  |
-  |  |      ||_|_|_||      |  |
-  |__|      ||_|_|_||      |__|
- /   |      ||_|_|_||      |   \
-=================================
 ** Tmp
 [~/../../../274px.png]]
 
@@ -1725,6 +1725,18 @@ asdf asdf asdf asdf
  (package-install "chess.el"
  )
 #+end_src
+**** projectile : 
+***** package-install : 
+(package-install 'projectile)
+***** use-package : 
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ;; ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+***** docs 
 
 ** setings
 *** systems paths

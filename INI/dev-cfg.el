@@ -11,6 +11,15 @@
 ;; (find-file "~/INI/autocomplete-cfg.el")
 (load "~/INI/autocomplete-cfg.el")
 ;; --------------------------------------
+;; ** PROJECTILE CUSTOMIZATION
+(use-package projectile
+  :ensure t
+  ;; :init
+  ;; (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+;; --------------------------------------
 ;; ** SNIPPETS-MOD CUSTOMIZATION
 ;; (find-file "~/INI/snippets-cfg.el")
 (load "~/INI/snippets-cfg.el")
@@ -122,6 +131,8 @@
 		(display-line-numbers-mode t)
 ;; *** highlight-indentation-mode : 
 		(highlight-indentation-mode t)
+;; *** projectile-mode : 
+		(projectile-mode +1)
 ;; *** outshine-mode : 
 		;; #'outshine-mode on in outshine cfg
 		;; (find-file-other-frame "~/INI/outshine_cfg.el")
