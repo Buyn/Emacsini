@@ -8,7 +8,7 @@
 ;; * DEVELOPMENT-MODs CUSTOMIZATION
 ;; --------------------------------------
 ;; ** AUTOCOMPLETE-MOD CUSTOMIZATION
-;; (find-file "~/INI/autocomplete-cfg.el")
+;; (find-file-other-frame "~/INI/autocomplete-cfg.el")
 (load "~/INI/autocomplete-cfg.el")
 ;; --------------------------------------
 ;; ** PROJECTILE CUSTOMIZATION

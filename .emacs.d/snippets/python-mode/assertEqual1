@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: assertEqual_my
-# key: ase1
+# name: assertEqual
+# key: ase
 # group: testing
 # --
-self.assertEqual($1, $2)
+self.assertEqual(${1:test}, $2)

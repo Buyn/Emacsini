@@ -38,7 +38,6 @@
 	(define-key evil-normal-state-map (kbd "M-e M-f M-d") 'elpy-goto-definition)
 	(define-key evil-normal-state-map (kbd "M-e M-f M-D") 'elpy-goto-definition-other-window)
 	;; (define-key evil-insert-state-map (kbd "<f8>") '(lambda() (interactive)
-
 	;; 			(org-save-all-org-buffers)
 	;; 			(save-some-buffers 'no-confirm)
 	;; 			(evil-normal-state)

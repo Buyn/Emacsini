@@ -24,22 +24,26 @@ https://www.braveclojure.com/basic-emacs/
 =================================
 ** progn :
 #+begin_src emacs-lisp :results output silent
-	(define-key org-brain-visualize-mode-map (kbd "M-f") 'avy-goto-word-1)
-	(define-key org-brain-visualize-mode-map (kbd "C-<return>")
-		'(lambda() (interactive)
-			(push-button)
-			(org-brain-goto-current) 
-			(let (buffer-name-to-close (buffer-name))
-			(evil-quit)
-			(switch-to-buffer-other-frame buffer-name-to-close))))
-	(define-key org-brain-visualize-mode-map (kbd "S-C-<return>")
-		'(lambda() (interactive)
-				(push-button)
-				(org-brain-goto-current) 
-				(let (buffer-name-to-close (buffer-name))
-				(evil-quit)
-				(org-brain-visualize-back)
-				(switch-to-buffer-other-frame buffer-name-to-close))))
+;; *** MONITOR 1 FRAME POSITION LIST
+(setq buyn-monitr-1-position-7 '(0		 0))
+(setq buyn-monitr-1-position-8 '(640	 0))
+(setq buyn-monitr-1-position-9 '(1286	 0))
+(setq buyn-monitr-1-position-4 '(0		 360))
+(setq buyn-monitr-1-position-5 '(640	 360))
+(setq buyn-monitr-1-position-6 '(1286	 360))
+(setq buyn-monitr-1-position-1 '(0		 570))
+(setq buyn-monitr-1-position-2 '(640	 570))
+(setq buyn-monitr-1-position-3 '(1286	 570))
+;; *** MONITOR 2 FRAME POSITION LIST
+(setq buyn-monitr-2-position-7 '(1920	 0))
+(setq buyn-monitr-2-position-8 '(2115	 0))
+(setq buyn-monitr-2-position-9 '(2310	 0))
+(setq buyn-monitr-2-position-4 '(1920	 412))
+(setq buyn-monitr-2-position-5 '(2115	 412))
+(setq buyn-monitr-2-position-6 '(2310	 412))
+(setq buyn-monitr-2-position-1 '(1920  752))
+(setq buyn-monitr-2-position-2 '(2115  752))
+(setq buyn-monitr-2-position-3 '(2310	 752))
  #+end_src
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
@@ -141,8 +145,6 @@ At top-level, as an editor command, this simply beeps.
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
 #+end_src
- 
-
 *** Diablo 1996-2011
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2011 The Music of Diablo 1996-2011 -Diablo 15 Year Anniversary-\"")
@@ -191,74 +193,122 @@ At top-level, as an editor command, this simply beeps.
 *** Стадии 
 **** концепция
 ***** табле
-| 0                      | S | R | - |   |
-|------------------------+---+---+---+---|
-| Анализ                 |   |   | 0 |   |
-| Рефакторин             |   |   | 0 |   |
-| Програмирование        |   |   | 0 |   |
-| Инжинриг Сруктуры      |   |   | 0 |   |
-| Работа над интерфейсом |   |   | 0 |   |
-| Оранизационая работа   |   |   | 0 |   |
-| Работа с клиентом      |   |   | 0 |   |
-| Сбор информации        |   |   | 0 |   |
-|------------------------+---+---+---+---|
-| 0                      | 0 | 0 | 0 |   |
-#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
-#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
-***** Kanban
-****** in progress 
-****** urgent 
-****** todo
-****** done
-***** SRC 
-****** sandbox.py
+| 0                      | S | R | - | R% |
+|------------------------+---+---+---+----|
+| Анализ                 |   |   | 0 |    |
+| Рефакторин             |   |   | 0 |    |
+| Програмирование        |   |   | 0 |    |
+| Инжинриг Сруктуры      |   |   | 0 |    |
+| Работа над интерфейсом |   |   | 0 |    |
+| Оранизационая работа   |   |   | 0 |    |
+| Работа с клиентом      |   |   | 0 |    |
+| Сбор информации        |   |   | 0 |    |
+|------------------------+---+---+---+----|
+| 0                      | 0 | 0 | 0 |    |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::$5=($3/@>$3)*100::@1$1=(@10$2-@10$3)*25/60::@10$1=@10$3*25/60
+
+***** таблица день 
+| Date            |  N | R  |  D |         H |
+|-----------------+----+----+----+-----------|
+| [2022-10-28 Пт] | 63 |  5 |  5 | 2.0833333 |
+| [2022-10-28 Пт] | 63 | 11 |  6 |       2.5 |
+| [2022-10-29 Сб] | 63 | 20 |  9 |      3.75 |
+| [2022-10-30 Вс] | 63 | 30 | 10 | 4.1666667 |
+| [2022-11-01 Вт] | 63 | 37 |  7 | 2.9166667 |
+| [2022-11-02 Ср] | 63 | 44 |  7 | 2.9166667 |
+| [2022-11-10 Ср] | 63 | 48 |  4 | 1.6666667 |
+| [2022-11-13 Вс] | 63 | 51 |  3 |      1.25 |
+| [2022-11-14 Пн] | 63 | 56 |  5 | 2.0833333 |
+| [2022-11-15 Вт] | 63 | 60 |  4 | 1.6666667 |
+| [2022-11-16 Ср] | 79 | 63 |  3 |      1.25 |
+| [2022-11-18 Пт] | 79 | 69 |  6 |       2.5 |
+|-----------------+----+----+----+-----------|
+| 5               | 79 | 10 | 69 |     28.75 |
+#+TBLFM: @>$4=vsum(@I..@II)::@>$3=@>$2 - @>$4::$4=$3-@-1$3::$5=($4*25)/60
+
+***** таблица день 
+| Date            |   N |     |   D |          H |
+|-----------------+-----+-----+-----+------------|
+| [2022-10-28 Пт] |  63 |   5 |   5 |  2.0833333 |
+| [2022-10-28 Пт] |  63 |  11 |   6 |        2.5 |
+| [2022-10-29 Сб] |  63 |  20 |   9 |       3.75 |
+| [2022-10-30 Вс] |  63 |  30 |  10 |  4.1666667 |
+| [2022-11-01 Вт] |  63 |  37 |   7 |  2.9166667 |
+| [2022-11-02 Ср] |  63 |  44 |   7 |  2.9166667 |
+| [2022-11-10 Ср] |  63 |  48 |   4 |  1.6666667 |
+| [2022-11-13 Вс] |  63 |  51 |   3 |       1.25 |
+| [2022-11-14 Пн] |  63 |  56 |   5 |  2.0833333 |
+| [2022-11-15 Вт] |  63 |  60 |   4 |  1.6666667 |
+| [2022-11-16 Ср] |  79 |  63 |   3 |       1.25 |
+| [2022-11-18 Пт] |  95 |  71 |   8 |  3.3333333 |
+| [2022-11-19 Сб] |  95 |  75 |   4 |  1.6666667 |
+| [2022-11-20 Вс] |  95 |  82 |   7 |  2.9166667 |
+| [2022-11-21 Пн] | 103 |  87 |   5 |  2.0833333 |
+| [2022-11-22 Вт] | 103 |  90 |   3 |       1.25 |
+| [2022-11-24 Чт] | 113 |  93 |   3 |       1.25 |
+| [2022-11-26 Сб] | 126 |  97 |   4 |  1.6666667 |
+| [2022-11-28 Вс] | 126 | 101 |   4 |  1.6666667 |
+| [2022-11-29 Вт] | 126 | 103 |   2 | 0.83333333 |
+| [2022-11-30 Ср] | 126 | 104 |   1 | 0.41666667 |
+| [2022-12-02 Пт] | 126 | 106 |   2 | 0.83333333 |
+| [2022-12-03 Сб] | 128 | 109 |   3 |       1.25 |
+| [2022-12-04 Вс] | 128 | 110 |   1 | 0.41666667 |
+| [2022-12-05 Пн] | 128 | 114 |   4 |  1.6666667 |
+| [2022-12-07 Ср] | 128 | 116 |   2 | 0.83333333 |
+| [2022-12-08 Чт] | 148 | 119 |   3 |       1.25 |
+| [2022-12-09 Пт] | 148 | 120 |   1 | 0.41666667 |
+|-----------------+-----+-----+-----+------------|
+| 5               | 148 |  28 | 120 |         50 |
+#+TBLFM: @>$4=vsum(@I..@II)::@>$3=@>$2 - @>$4::$4=$3-@-1$3::$5=($4*25)/60
+
+****** Kanban
+******* in progress 
+******* urgent 
+******* todo
+******* done
+****** SRC 
+******* sandbox.py
 #+begin_src emacs-lisp :results output silent
 (find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
 #+end_src
-***** far 
+****** far 
 #+begin_src elisp :results output silent
 (buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
 #+end_src
-***** Uml 
+****** Uml 
 #+begin_src emacs-lisp :results output silent
 		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
 #+end_src
-
-**** Пруф оф концепт
+****** описание 
+не содержит в себе кода как такого
+это описание того как должен выглядит конечны продук
+в качествет кода использутся примеры кода
+и технологий которые можно просото запустить
+и которые используются как референысы
+на этой стадии делается грубое передставление проекта
+распределяются имена предвариттерлые
+делатся грубй умл
+скорей как костяк возможно далёкий от чеголибо реального
+всё это должно выражать каккие вопросы не понятны
+и на какие нужно получить ответы
+а не задаёт долнейшее их пременен
+чем больше вопрос задана и дырок непонимания
+обнаружено тем лучше
 ***** табле
-| 0                      | S | R | - |   |
-|------------------------+---+---+---+---|
-| Анализ                 |   |   | 0 |   |
-| Рефакторин             |   |   | 0 |   |
-| Програмирование        |   |   | 0 |   |
-| Инжинриг Сруктуры      |   |   | 0 |   |
-| Работа над интерфейсом |   |   | 0 |   |
-| Оранизационая работа   |   |   | 0 |   |
-| Работа с клиентом      |   |   | 0 |   |
-| Сбор информации        |   |   | 0 |   |
-|------------------------+---+---+---+---|
-| 0                      | 0 | 0 | 0 |   |
-#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
-#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
-***** Kanban
-****** in progress 
-****** urgent 
-****** todo
-****** done
-***** SRC 
-****** sandbox.py
-#+begin_src emacs-lisp :results output silent
-(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
-#+end_src
-***** far 
-#+begin_src elisp :results output silent
-(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
-#+end_src
-***** Uml 
-#+begin_src emacs-lisp :results output silent
-		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
-#+end_src
-
+| 9.5833333              |   S |   R |  - |   R% |
+|------------------------+-----+-----+----+------|
+| Анализ                 |  13 |   9 |  4 |  7.2 |
+| Програмирование        |  97 |  84 | 13 | 67.2 |
+| Рефакторин             |  13 |  10 |  3 |   8. |
+| Отладка \ Dеbug        |  13 |  10 |  3 |   8. |
+| Инжинриг Сруктуры      |   1 |   1 |  0 |  0.8 |
+| Работа над интерфейсом |   0 |     |  0 |    0 |
+| Оранизационая работа   |   6 |   6 |  0 |  4.8 |
+| Работа с клиентом      |   5 |   5 |  0 |   4. |
+| Сбор информации        |   0 |     |  0 |    0 |
+|------------------------+-----+-----+----+------|
+| 52.083333              | 148 | 125 | 23 |  100 |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::$5=($3/@>$3)*100::@1$1=(@11$2-@11$3)*25/60::@11$1=@11$3*25/60
 **** тестовый
 ***** табле
 | 0                      | S | R | - |   |
@@ -294,6 +344,57 @@ At top-level, as an editor command, this simply beeps.
 		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
 #+end_src
 
+***** описание 
+на этой стадии пытаемся получить ответы на задные вопросы
+пытаемся в конце стадии заполнить предпологаемый умл
+и ответить на вопросы кодом
+код может не быть связан в проек или разбит на классы
+задача просто ответить на вопросы всё ли работает
+и всё ли понятно как реализовать
+какие понадобятся усилия
+**** Пруф оф концепт
+***** табле
+| 0                      | S | R | - |   |
+|------------------------+---+---+---+---|
+| Анализ                 |   |   | 0 |   |
+| Рефакторин             |   |   | 0 |   |
+| Програмирование        |   |   | 0 |   |
+| Инжинриг Сруктуры      |   |   | 0 |   |
+| Работа над интерфейсом |   |   | 0 |   |
+| Оранизационая работа   |   |   | 0 |   |
+| Работа с клиентом      |   |   | 0 |   |
+| Сбор информации        |   |   | 0 |   |
+|------------------------+---+---+---+---|
+| 0                      | 0 | 0 | 0 |   |
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::@10$1=@10$3*25/60::@1$1=(@10$2-@10$3)*25/60
+#+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::@10$1=@10$2-@10$3::@1$1=@10$1*25/60
+***** Kanban
+****** in progress 
+****** urgent 
+****** todo
+****** done
+***** SRC 
+****** sandbox.py
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/Src/sandbox.py")
+#+end_src
+***** far 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "f D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\DOCs D:\\Development\\version-control\\GitHub\\Zmei\\Sontex\\Src\\Data_files")
+#+end_src
+***** Uml 
+#+begin_src emacs-lisp :results output silent
+		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
+#+end_src
+
+***** описание 
+стадия когда на основе предварительного умл
+и представленией пытаемся реализовать некоторые 
+функци может даже просто одну самую главную
+остальные стараемся наметить заглушками
+выводом тестовых сообщений 
+или симвалической реализацией
+умл преобретает законченую форму
 **** мвп
 ***** табле
 | 0                      | S | R | - |   |
@@ -329,6 +430,13 @@ At top-level, as an editor command, this simply beeps.
 		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
 #+end_src
 
+***** описание 
+выделаются набор функций главных для приложения
+реализация которых позволит считать фазу законченой
+при реализациии стади убеждаемся вверности умл
+и коректируем его при выевление ошибок
+на оканчани стадии продукт выпоняет свои функции
+но далёк от оканчательной формы
 **** Бета
 ***** табле
 | 0                      | S | R | - |   |
@@ -364,6 +472,12 @@ At top-level, as an editor command, this simply beeps.
 		(find-file-other-frame "D:/Development/version-control/GitHub/Zmei/Sontex/DOCs/uml.org")
 #+end_src
 
+***** описание 
+	Выделаем сдадии добовления функциона и фич
+Создаём роуд меп
+на оканчании стадии продук должен быть передан 
+тестовй групе\клиенту для получения фидбека
+потому он должен находится в юзер френли форме
 **** Альфа 
 ***** табле
 | 0                      | S | R | - |   |
@@ -400,6 +514,28 @@ At top-level, as an editor command, this simply beeps.
 #+end_src
 
 
+
+***** описание 
+	Стадия начинается в момент получения от клиента
+фидбека
+и направлена на создания цикла обратной связи с клиентом
+устранения выевленых недочётов
+и повторения цикла обратной связи
+стадия завиршается в момент устранения всех очевидных недочётов
+и продукт переходит в оканчательную релизную стадию
+**** сум ап Табелс
+***** сумап Табел
+| название стадии | Начали          | план | закончали       | план | end |     часов |
+|-----------------+-----------------+------+-----------------+------+-----+-----------|
+| концепция       | [2022-09-16 Пт] |      | [2022-10-31 Пн] |      |  16 | 6.6666667 |
+| тестовый        | [2022-10-24 Пн] |      | [2022-10-31 Пн] |   62 |  52 | 21.666667 |
+| Пруф оф концепт | [2022-10-28 Пт] |   63 | [2022-12-16 Пт] |  163 | 149 | 62.083333 |
+| мвп             |                 |      |                 |      |     |           |
+| Бета            |                 |      |                 |      |     |           |
+| Альфа           |                 |      |                 |      |     |           |
+|-----------------+-----------------+------+-----------------+------+-----+-----------|
+|                 |                 |      |                 |      |     | 90.416667 |
+#+TBLFM: @>$7=vsum(@<<$7..@>>$7)
 
 *** Ezenhaur 
 **** Срочное и важное
@@ -622,6 +758,21 @@ open macros file
 #+end_src
 #+begin_src emacs-lisp :results output silent
 (find-file-other-frame "~/keymac/calc-all.el")
+#+end_src
+
+*** convert-ru-point : 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/convert-ru-point.el")
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(fset 'convert-ru-point
+   (kmacro-lambda-form [?ð ?ð ?J ?F ?, ?r ?.] 0 "%d"))
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(global-set-key (kbd "<f6><f6>") 'convert-ru-point)
+#+end_src
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/convert-ru-point.el")
 #+end_src
 
 ** Calc
@@ -1725,18 +1876,241 @@ asdf asdf asdf asdf
  (package-install "chess.el"
  )
 #+end_src
-**** projectile : 
+**** org-recipes
 ***** package-install : 
-(package-install 'projectile)
+#+begin_src emacs-lisp :results output silent
+;; (package-install "org-recipes")
+;; (package-install `org-recipes)
+#+end_src
 ***** use-package : 
-(use-package projectile
-  :ensure t
-  :init
-  (projectile-mode +1)
-  :bind (:map projectile-mode-map
-              ;; ("s-p" . projectile-command-map)
-              ("C-c p" . projectile-command-map)))
-***** docs 
+ #+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package org-recipes :ensure t
+	:load-path "~/ELs/Org/org-recipes"
+	;; :load-path "~/ELs/"
+	;; :init
+	:config
+	(setq org-recipes-file-list '("~/Org/recipes/main.org"))
+)
+ #+end_src
+***** el 
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/ELs/Org/org-recipes/org-recipes.el")
+#+end_src
+***** docs
+****** org-recipes git : 
+******* org-recipes - A code snippet navigator and collector with Org
+This package collects code snippets under the inner-most Org heading. In the
+context of this package, such an Org heading is called a Recipe. It provides the
+following features:
+
+,* List all Org headings with at least a code snippet.
+
+,* Each entry can be visited for viewing.
+
+,* Insert code from a recipes into the current buffer, or a specific file if the code block
+ explicitly specifies. The description text is stripped and all code snippets are
+ concatenated into a single snippet and then it is insert into current buffer.
+  Compose recipes to generate code all at once.
+******* file list : 
+The snippets are retrieved by scanning the file list in org-recipes-file-list. If
+org-wiki is available, it automatically retrieves the list from org-wiki.
+******* Example
+Suppose we have an org file with the following snippets:
+
+,* Python
+,** Recipes
+,*** Find HTML tags with a Beautiful Soup object
+API:
+
+#+BEGIN_SRC python
+  findAll(tag, attributes, recursive, text, limit, keywords)
+  find(tag, attributes, recursive, text, keywords)
+#+END_SRC
+
+Example:
+
+#+BEGIN_SRC python
+     .findAll({"h1","h2","h3","h4","h5","h6"})
+     .findAll("span", {"class":"green", "class":"red"})
+     .findAll(text="the prince")
+#+END_SRC
+
+,*** Parse HTML/XML with BeautifulSoup
+1. Get the HTML structure of a URL:
+   #+BEGIN_SRC python
+     html = urlopen("http://en.wikipedia.org"+articleUrl)
+   #+END_SRC
+
+2. Use BeautifulSoup to parse:
+     #+BEGIN_SRC python
+       bsObj = BeautifulSoup(html, "lxml")
+     #+END_SRC
+
+3. Then, retrieve any data with Python e.g. regex:
+
+#+BEGIN_SRC python
+  bsObj.find("div", {"id":"bodyContent"}).findAll("a",href=re.compile("^(/wiki/)((?!:).)*$"))
+#+END_SRC
+
+Then, running the command org-recipes will display it like this:
+
+[[https://github.com/tuhdo/org-recipes/blob/master/helm-org-snippets.png][helm-org-snippets]]
+
+Finally, pressing C-c i inserts the raw code under a heading:
+
+findAll(tag, attributes, recursive, text, limit, keywords)
+find(tag, attributes, recursive, text, keywords)
+.findAll({"h1","h2","h3","h4","h5","h6"})
+.findAll("span", {"class":"green", "class":"red"})
+.findAll(text="the prince")
+******* Why another snippet tool?
+Have you ever encountered this recurring pattern when writing code:
+
+,* You learned about the usage of a particular complex API; or, you happen to read
+ an interesting piece of code in an open source project that you believe can be
+ reused for the future; or you simply store common code snippets that is used
+ everywhere e.g. code related to get command line options, code that open/close
+ threads/processes...
+
+,* As time passes, you forgot most of the knowledge what you acquired today. So,
+ you store it in some sort of storage, e.g. a plain file, a Markdown file, a plain source
+ file with comments, etc,.
+
+,* However, as you accumulate many little snippets over the year, it is becoming
+ more and more time consuming to search and retrieve the necessary snippets.
+ Sometimes, it is faster just to type into the web browser that is always opened.
+
+,* Once you retrieve the correct snippets, you want to copy and paste it into the main
+ working buffer to start modify to suit the problem at hands. However, the snippets
+ might not be free: a snippet can be divided into different sections, each with its
+ own description to quickly remind you what this code snippet does.
+
+,* You tediously copy/paste parts of a code snippet scattered in its file.
+
+This package automates the above process. How about [[https://github.com/joaotavora/yasnippet][yasnippet]]? Despite being
+similar, this package solves a different problem: it is a snippet navigator and
+collector, leveraged by the powerful org-mode, while yasnippet is a templating
+system. In my opinion, yasnippet is best for creating snippets of language syntaxes
+e.g. templates for if, while... syntaxes in C, Java.
+
+On the other hand, in org-recipe, each recipe can contain a code snippet similar to
+yasnippet and more: the descriptive text that gives the context of the code, which
+means everything that Org supports! By managing code snippets in such a way,
+users can create their personal code wiki, but the relevant source code in the wiki
+can immediately appear in the current working buffer, as demonstrated in the
+Example section.
+
+If you use [[https://github.com/caiorss/org-wiki][org-wiki]], all the wiki files are automatically used.
+******* Usage
+******** Recipe format
+Each recipe is an Org heading, with code blocks in it:
+,* Hello World recipe
+:PROPERTIES:
+:SYMBOL:   HelloWorld
+:END:
+
+This is a code block for inserting in the current working buffer:
+
+#+begin_src python
+print("Hello world")
+#+end_src
+
+This code block is also inserted in the current buffer:
+
+#+begin_src python
+print("Another hello world")
+#+end_src
+
+This is a code block for inserting in a file, as specified by :file parameter:
+
+#+begin_src python :file "test.py"
+print("File hello world")
+#+end_src
+******** Major mode filtering
+To prevent unncessary snippets to appear in the list, you can put a keyword in an Org
+file that explicitly specify which major modes the file is applicable, then only buffer
+with such major modes will get the snippets from the Org file.
+
+For example, at the very beginning, right after the title:
+
+#+TITLE: C code snippets
+#+MODE: c, c++
+
+Then, the snippets in the file will only appear when the current buffer is in c-mode or
+c++-mode.
+******** Composite Recipe
+An Org source block can be composed of various other recipes before or after its
+main body. For example:
+
+,* Process connection
+
+#+begin_src c++ :pre-recipe '(PrepareSocket Bind Open Listen) :post-recipe '(CloseSocket)
+
+....code for processing connections ...
+
+#+end_src
+
+When added with the parameter :pre-recipe, all recipes inside the list is inserted
+before the main code body of the source block. Similarly, recipes in :post-recipe
+are inserted after the main code body.
+
+This feature enables reusability.
+******** Option: org-recipes-file-list
+This option is a list of files that org-recipes processes to retrieve the list of code
+snippets.
+******** Command: org-recipes
+Run the command org-recipes to get all Org headings with snippets. Then, you can
+either:
+
+,* Run persistent action to view the snippet.
+,* Press C-c i to insert the tangled source code in a heading.
+******** Command: org-recipes-dwim
+A recipe can be assigned with a name:
+
+,* Hello World Recipe
+:PROPERTIES:
+:SYMBOL:   HelloWorld
+:END:
+
+This is a code block for inserting in the current working buffer:
+
+#+begin_src python
+print("Hello world")
+#+end_src
+
+The :SYMBOL: property gives a recipe a name. A command to expand code based
+on the object at point. An object can either be:
+
+,* A recipe name: in this case, the code snippet from the recipe with the name is
+ inserted into theh current buffer, or a file (if a code snippet specifies). For
+ example, when the cursor is on the symbol HelloWorld in a buffer, running
+ org-recipes-dwim expands the code snippets in Hello World Recipe above.
+
+,* A list that is a collection of multipole recipes: in this case, code snippets from all
+ recipes are collected and inserted into current buffer (if a code snippet specifies).
+ For example, if we have the recipe list: (RecipeA RecipeB RecipeC) in a buffer,
+ when running org-recipes-dwim, all the snippets in the recipe list is inserted
+ appropriately.
+******* Future Plan
+[[https://github.com/tuhdo/org-recipes#x-filter-snippets-by-major-mode][SVG Image]][X] Filter snippets by major mode
+
+Currently, all code snippets from all Org files are retrieved. It should be filtered
+according to major mode to only retrieve the relevant ones.
+
+This can be done with two methods:
+
+,* [X] Each Org file should be able to annotate that it is applicable for a major
+ mode, so org-recipes can avoid unncessary parsing. If an Org file is not assigned
+ to a major mode, then proceed as usual.
+
+,* [X] Only source blocks that are relevant to the current major mode are retrieve.
+***** open org-recipes
+****** main 
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/Org/recipes/main.org")
+#+end_src
+D:\Development\lisp\Home\ORG\Recipes\main.org 
 
 ** setings
 *** systems paths
@@ -1927,6 +2301,14 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 ‘C-M-d’
      Move down in parenthesis structure (‘down-list’).
 *** Intends 
+*** replace-string : 
+M-x replace-string RET ; RET C-q C-j.
+
+    C-q for quoted-insert,
+
+    C-j is a newline.
+
+
 ** Environment Variable
 *** "PATH" : 
 **** Описание бага\фичи
@@ -19041,3 +19423,514 @@ https://github.com/a13/reverse-im.el
   :config
   (reverse-im-mode t))
 #+end_src
+** projectile : 
+*** package-install : 
+(package-install 'projectile)
+*** use-package : 
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ;; ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+*** docs 
+**** Usage
+	Everything in this section assumes you’ve enabled projectile-mode.
+Basic setup
+
+In this section we’ll cover the bare minimum of setup you might want to do. Projectile works fine with no setup, but if you tweak the configuration a bit you’ll get more out of it.
+
+Check out the "Configuration" section of the manual for a lot more information about configuring Projectile.
+Automated Project Discovery
+
+To add a project to Projectile’s list of known projects, open a file in the project. If you have a projects directory, you can tell Projectile about all of the projects in it with the command M-x projectile-discover-projects-in-directory.
+
+You can go one step further and set a list of folders which Projectile is automatically going to check for projects on startup.
+
+Recursive discovery is configured by specifying the search depth in a cons cell:
+
+(setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))
+
+You can suppress the auto-discovery of projects on startup by setting projectile-auto-discover to nil. You can manually trigger the project discovery using M-x projectile-discover-projects-in-search-path.
+Minibuffer Completion
+
+While Projectile works fine with Emacs’s default minibuffer completion system you’re highly encouraged to use some powerful alternative like ido, ivy, selectrum or vertico.
+	If you’re going to use the ido completion it’s highly recommended that you install the optional flx-ido package, which provides a much more powerful alternative to ido's built-in flex matching. Similarly, for selectrum it’s a good idea to enable prescient (a package similar to flx).
+Installing External Tools
+	Windows users can ignore this section unless they are using Emacs via WSL or cygwin.
+
+It’s recommended to install the following command-line tools:
+
+    fd (a super-fast alternative to find)
+
+    ag (a.k.a. the_silver_searcher, a powerful alternative to grep) or rg (a.k.a. ripgrep)
+
+Projectile will make use of them automatically when available, and fallback to the standard Unix tools otherwise.
+	You should also install the Emacs packages ag, ripgrep or rg if you want to make sure of Projectile’s commands projectile-ag and projectile-ripgrep.
+Basic Usage
+
+Just open some file in a version-controlled (e.g. git) or a project (e.g. maven) directory that’s recognized by Projectile and you’re ready for action. Projectile happens to recognize out of the box every common VCS and many popular project types for various programming languages. You can learn more about Projectile’s notion of a project here.
+	The extent of the support for every VCS differs and Git is the best supported one. Projectile supports some advanced features like working with Git submodules and using git-grep instead GNU grep.
+
+You need to know only a handful of Projectile commands to start benefiting from it.
+
+    Find file in current project (s-p f)
+
+    Switch project (s-p p) (you can also switch between open projects with s-p q)
+
+    Grep (search for text/regexp) in project (s-p s g)
+
+    Replace in project (s-p r)
+
+    Find references in project (s-p ? or s-p s x)
+
+    Invoke any Projectile command via the Projectile Commander (s-p m)
+
+    Toggle between implementation and test (s-p t)
+
+    Toggle between related files (e.g. foo.h <→ foo.c and Gemfile <→ Gemfile.lock) (s-p a)
+
+    Run a shell command in the root of the project (s-p ! for a sync command and s-p & for an async command)
+
+    Run various pre-defined project commands like:
+
+        build/compile project (s-p c)
+
+        test project (s-p T)
+
+The next section lists many more commands, but the basics can get you pretty far.
+Interactive Commands
+	Projectile doesn’t have a default key prefix for its commands, but all the examples in the manual assume you’ve opted for s-p (super-p).
+
+Here’s a list of the interactive Emacs Lisp functions, provided by Projectile:
+Keybinding 	Description
+
+s-p f
+	
+
+Display a list of all files in the project. With a prefix argument it will clear the cache first.
+
+s-p F
+	
+
+Display a list of all files in all known projects.
+
+s-p g
+	
+
+Display a list of all files at point in the project. With a prefix argument it will clear the cache first.
+
+s-p 4 f
+	
+
+Jump to a project’s file using completion and show it in another window.
+
+s-p 4 g
+	
+
+Jump to a project’s file based on context at point and show it in another window.
+
+s-p 5 f
+	
+
+Jump to a project’s file using completion and show it in another frame.
+
+s-p 5 g
+	
+
+Jump to a project’s file based on context at point and show it in another frame.
+
+s-p d
+	
+
+Display a list of all directories in the project. With a prefix argument it will clear the cache first.
+
+s-p 4 d
+	
+
+Switch to a project directory and show it in another window.
+
+s-p 5 d
+	
+
+Switch to a project directory and show it in another frame.
+
+s-p T
+	
+
+Display a list of all test files(specs, features, etc) in the project.
+
+s-p l
+	
+
+Display a list of all files in a directory (that’s not necessarily a project)
+
+s-p s g
+	
+
+Run grep on the files in the project.
+
+M-- s-p s g
+	
+
+Run grep on projectile-grep-default-files in the project.
+
+s-p s s
+	
+
+Runs ag (the_silver_searcher) on the project, performing a literal search. Requires the presence of ag.el. With a prefix argument it will perform a regex search.
+
+s-p s r
+	
+
+Runs rg (ripgrep) on the project, performing a literal search. Requires the presence of rg.el or ripgrep.el. With a prefix argument it will perform a regex search.
+
+s-p s x
+	
+
+Find references to the symbol at point within the project. Uses internally the xref library.
+
+s-p v
+	
+
+Run vc-dir on the root directory of the project.
+
+s-p V
+	
+
+Browse dirty version controlled projects.
+
+s-p b
+	
+
+Display a list of all project buffers currently open.
+
+s-p 4 b
+	
+
+Switch to a project buffer and show it in another window.
+
+s-p 5 b
+	
+
+Switch to a project buffer and show it in another frame.
+
+s-p 4 C-o
+	
+
+Display a project buffer in another window without selecting it.
+
+s-p a
+	
+
+Switch between files with the same name but different extensions.
+
+s-p 4 a
+	
+
+Switch between files with the same name but different extensions in other window.
+
+s-p 5 a
+	
+
+Switch between files with the same name but different extensions in other frame.
+
+s-p o
+	
+
+Runs multi-occur on all project buffers currently open.
+
+s-p r
+	
+
+Runs interactive query-replace on all files in the projects.
+
+s-p i
+	
+
+Invalidates the project cache (if existing).
+
+s-p R
+	
+
+Regenerates the projects TAGS file.
+
+s-p j
+	
+
+Find tag in project’s TAGS file.
+
+s-p k
+	
+
+Kills all project buffers.
+
+s-p D
+	
+
+Opens the root of the project in dired.
+
+s-p 4 D
+	
+
+Opens the root of the project in dired in another window.
+
+s-p 5 D
+	
+
+Opens the root of the project in dired in another frame.
+
+s-p e
+	
+
+Shows a list of recently visited project files.
+
+s-p left
+	
+
+Switch to the previous project buffer.
+
+s-p right
+	
+
+Switch to the next project buffer.
+
+s-p E
+	
+
+Opens the root dir-locals-file of the project.
+
+s-p !
+	
+
+Runs shell-command in the root directory of the project.
+
+s-p &
+	
+
+Runs async-shell-command in the root directory of the project.
+
+s-p C
+	
+
+Runs a standard configure command for your type of project.
+
+s-p c
+	
+
+Runs a standard compilation command for your type of project.
+
+s-p P
+	
+
+Runs a standard test command for your type of project.
+
+s-p t
+	
+
+Toggle between an implementation file and its test file.
+
+s-p 4 t
+	
+
+Jump to implementation or test file in other window.
+
+s-p 5 t
+	
+
+Jump to implementation or test file in other frame.
+
+s-p z
+	
+
+Adds the currently visited file to the cache.
+
+s-p p
+	
+
+Display a list of known projects you can switch to.
+
+s-p q
+	
+
+Display a list of open projects you can switch to.
+
+s-p S
+	
+
+Save all project buffers.
+
+s-p m
+	
+
+Run the commander (an interface to run commands with a single key).
+
+s-p x e
+	
+
+Start or visit an eshell for the project.
+
+s-p x i
+	
+
+Start or visit an ielm (Elisp REPL) for the project.
+
+s-p x t
+	
+
+Start or visit an ansi-term for the project.
+
+s-p x s
+	
+
+Start or visit a shell for the project.
+
+s-p x g
+	
+
+Start or visit a gdb for the project.
+
+s-p x v
+	
+
+Start or visit a vterm for the project.
+
+s-p ESC
+	
+
+Switch to the most recently selected Projectile buffer.
+
+If you ever forget any of Projectile’s keybindings just do a:
+
+s-p C-h
+Customizing Projectile’s Keybindings
+
+It is possible to add additional commands to projectile-command-map referenced by the prefix key in projectile-mode-map. You can add multiple keymap prefix for all commands. Here’s an example that adds super-, as a command prefix:
+
+(define-key projectile-mode-map (kbd "s-,") 'projectile-command-map)
+
+You can also bind the projectile-command-map to any other map you’d like (including the global keymap).
+	For some common commands you might want to take a little shortcut and leverage the fairly unused Super key (by default Command on Mac keyboards and Windows on Win keyboards).
+
+Here’s something you can add to your Emacs config:
+
+(define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+(define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+(define-key projectile-mode-map [?\s-f] 'projectile-find-file)
+(define-key projectile-mode-map [?\s-g] 'projectile-grep)
+
+	Note that the Super keybindings are not usable in Windows, as Windows makes heavy use of such keybindings itself. Emacs Prelude already adds those extra keybindings.
+Projectile Commander
+
+Projectile’s Commander (projectile-commander) is a nifty utility for those of you who are struggling to remember a lot of keybindings. It provides a simple interface to most of Projectile’s commands via 1-character shortcuts that you need to press after invoking the commander (e.g. via s-p m).
+
+The commander was created with the idea to provide a powerful project switching command (it will be triggered if you press C-u s-p p), but it’s very useful on its own as well.
+
+Keybinding
+	
+
+Description
+
+?
+	
+
+Commander help buffer.
+
+D
+	
+
+Open project root in dired.
+
+R
+	
+
+Regenerate the project’s etags/gtags.
+
+T
+	
+
+Find test file in project.
+
+V
+	
+
+Browse dirty projects
+
+a
+	
+
+Run ag on project.
+
+b
+	
+
+Switch to project buffer.
+
+d
+	
+
+Find directory in project.
+
+e
+	
+
+Find recently visited file in project.
+
+f
+	
+
+Find file in project.
+
+g
+	
+
+Run grep on project.
+
+j
+	
+
+Find tag in project.
+
+k
+	
+
+Kill all project buffers.
+
+o
+	
+
+Run multi-occur on project buffers.
+
+r
+	
+
+Replace a string in the project.
+
+s
+	
+
+Switch project.
+
+v
+	
+
+Open project root in vc-dir or magit.
+
+You can add additional commands to the commander like this:
+
+(def-projectile-commander-method ?f
+  "Find file in project."
+  (projectile-find-file))
+
+Place such snippets after projectile-mode's init code.
+Using Projectile with project.el
+
+Starting with version 2.7 Projectile bundles some integration with project.el that makes project.el use by default Projectile’s project lookup function (projectile-project-root) and project file lookup function (projectile-project-files).
+	You can read more about the implementation details of the integration here.
+
+That’s useful as some packages (e.g. eglot) support natively only project.el's API for project discovery. Fortunately, project.el makes it easy to install additional project lookup functions and that’s exactly what Projectile does.
+
+The popular xref package also relies on project.el to infer the project for helpful commands like xref-find-references (M-?), so it’s useful to teach it about Projectile’s project discovery logic.
+	Projectile provides its own alternative to xref-find-references that’s named projectile-find-references (s-p ? or s-p s-x) and is using xref internally. 
+**** 

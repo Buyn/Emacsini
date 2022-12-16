@@ -13,3 +13,4 @@ emacs_demon.cmd~
 *.el~
 .bash_history
 .virtualenvs
+.authinfo

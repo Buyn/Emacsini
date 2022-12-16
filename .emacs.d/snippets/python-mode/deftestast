@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: deftest with stract
-# key: t*
+# key: tf*
 # group: testing
 # --
 # ** test_${1:name} : 
