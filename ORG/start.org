@@ -188,6 +188,7 @@ At top-level, as an editor command, this simply beeps.
 *** Kanban
 **** in progress 
 **** urgent 
+**** dezine 
 **** todo
 **** done
 *** Стадии 
@@ -883,6 +884,7 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/INI/dev/clojure-cfg.el")
 	(find-file-other-frame "~/INI/dev/autohotkey-cfg.el")
 	(find-file-other-frame "~/INI/dev/unity-cfg.el")
+	(find-file-other-frame "~/INI/dev/formats-mods-cfg.el")
 	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
 	(find-file-other-frame "~/INI/flycheck-cfg.el")
 *** My Elisp
@@ -952,6 +954,8 @@ D:\shell\Far\Far.exe
 (load "~/INI/lit-cfg.el")
 (load "~/INI/dev-cfg.el")
 (load "~/INI/interface-mods.el")
+(load "~/ELs/BuYn/shell.el")
+
 ** load init files
 (load "~/INI/org-brain-cfg.el")
 ** открыть
@@ -1281,7 +1285,6 @@ Examples
  :success (cl-function
  (lambda (&key data &allow-other-keys)
              (message "I sent: %S" (assoc-default 'json data)))))
-
 
 
 **** tts-editor : 
@@ -2111,7 +2114,6 @@ This can be done with two methods:
 (find-file-other-frame "~/Org/recipes/main.org")
 #+end_src
 D:\Development\lisp\Home\ORG\Recipes\main.org 
-
 ** setings
 *** systems paths
 (setq exec-path (append exec-path '("D:/Development/CPP/CMake/bin/")))
@@ -9760,6 +9762,24 @@ A formula can be added a number of ways:
     by directly adding the formula to a #+TBLFM: specification (see above result)
     To paste a column formula in a cell C-c *
     To paste a formula into each row of a column C-u C-c * 
+
+*** use lisp code
+**** sorce blok
+#+NAME: add
+#+begin_src emacs-lisp
+  (+ a b)
+  ; feel free to use as many lines or comments here!
+  ; press C-c ' here to edit in emacs-lisp-mode
+#+END_SRC
+
+|----+----+-----|
+|  a |  b | a+b |
+|----+----+-----|
+|  1 |  2 |   3 |
+| 10 | 10 |  20 |
+|  5 | -7 |  -2 |
+|----+----+-----|
+#+TBLFM: $3='(org-sbe "add" (a $1) (b $2))
 
 ** Tags 
 Two: Which tags do you use most?
@@ -19934,3 +19954,67 @@ That’s useful as some packages (e.g. eglot) support natively only project.el's
 The popular xref package also relies on project.el to infer the project for helpful commands like xref-find-references (M-?), so it’s useful to teach it about Projectile’s project discovery logic.
 	Projectile provides its own alternative to xref-find-references that’s named projectile-find-references (s-p ? or s-p s-x) and is using xref internally. 
 **** 
+** yaml-mode : 
+RECRUITMENTS
+    I have not used emacs and this library for a long time,
+    so I recruit maintainers or collaborators for all yaml-mode users.
+    If you are interested in maintaining or collaborating with this library,
+    please contact me.
+
+NAME
+    yaml-mode - Simple major mode to edit YAML file for emacs
+
+REQUIREMENTS
+    Emacs 24.1
+
+SYNOPSIS
+    To install, just drop this file into a directory in your
+    `load-path' and (optionally) byte-compile it.  To automatically
+    handle files ending in '.yml', add something like:
+
+    (require 'yaml-mode)
+    (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+    to your .emacs file.
+
+    Unlike python-mode, this mode follows the Emacs convention of not
+    binding the ENTER key to `newline-and-indent'.  To get this
+    behavior, add the key definition to `yaml-mode-hook':
+
+    (add-hook 'yaml-mode-hook
+      '(lambda ()
+        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+DESCRIPTION
+    yaml-mode is major mode for emacs.
+
+INSTALL
+    You can install yaml-mode typing below.
+
+        % make
+        % make install
+
+        or
+
+        % make PREFIX=/your/home/dir
+        % make install PREFIX=/your/home/dir
+
+SETTING
+    see SYNOPSIS.
+
+AUTHOR
+    Yoshiki Kurihara <kurihara@cpan.org> Copyright (C) 2010 by Free Software
+    Foundation, Inc.
+
+    This file is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This file is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.

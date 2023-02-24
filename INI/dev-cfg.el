@@ -58,6 +58,10 @@
 ;; (find-file-other-frame "~/INI/js-cfg.el") 
 (load "~/INI/js-cfg.el")
 ;; --------------------------------------
+;; ** FORMATS-MOD CUSTOMIZATION
+;; (find-file-other-frame "~/INI/dev/formats-mods-cfg.el")
+(load "~/INI/dev/formats-mods-cfg.el")
+;; --------------------------------------
 ;; ** FLYCHECK CUSTOMIZATION
 (load "~/INI/flycheck-cfg.el")
 ;; (find-file "~/INI/flycheck-cfg.el") 

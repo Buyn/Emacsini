@@ -1,11 +1,12 @@
 * translate : 
 ** from ru
 #+begin_src translate 
-Как Ты думаешь какие обычно размеры торговых автоматов?
+подробней про : 
 #+end_src
 
 #+RESULTS:
-: What do you think the usual sizes of vending machines are?
+: more about: close their eyes and try to resist the urge to open them
+
 
 ** from en
 #+begin_src translate :dest ru
@@ -38,10 +39,45 @@ graph graphname {
 [[file:e:\Temp\my-dot-diagram.png]]
 
 * Calc 
-** sendbox
-		#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5
-			((a+b)^3 + sqrt(c)) / (2x+1)
-		#+END_SRC
+** sandbox
+#+BEGIN_SRC elisp
+(/ 
+	12000
+	750
+	)
+#+END_SRC
+
+#+RESULTS:
+: 16
+
+#+BEGIN_SRC elisp
+(/ 
+	5000
+	220
+	)
+#+END_SRC
+
+#+RESULTS:
+: 22
+
+
+#+BEGIN_SRC elisp
+(+ 
+	(* 200 36)
+	(* 1000 25)
+	(* 2000 15)
+	(* 5000 8)
+	(* 20000 5)
+	)
+#+END_SRC
+
+		#+RESULTS:
+		: 202200
+		
+
+#+BEGIN_SRC calc :var a=2 b=9 c=64 x=5
+((a+b)^3 + sqrt(c)) / (2x+1)
+#+END_SRC
 
 #+begin_src emacs-lisp :tangle yes
 (setq сутки10 100)
@@ -87,6 +123,7 @@ graph graphname {
     Type “d0” to turn the display into decimal form.
 
 * read
+** 
 * progn 
 #+begin_src emacs-lisp results output silent
 (setq org-hide-leading-stars t)
