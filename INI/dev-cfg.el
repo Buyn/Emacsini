@@ -30,6 +30,7 @@
 ;; --------------------------------------
 ;; ** PYTHON-MOD CUSTOMIZATION
 ;; (find-file "~/INI/python-cfg.el") 
+;; (find-file-other-frame "~/INI/python-cfg.el")
 (load "~/INI/python-cfg.el")
 ;; --------------------------------------
 ;; ** LUA-MOD CUSTOMIZATION

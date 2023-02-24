@@ -83,7 +83,7 @@
 	;; (elpy-enable)
 	:config
 	; move quick-help tooltips to the minibuffer
-	;; (setq jedi:tooltip-method nil)
+	(setq jedi:tooltip-method nil)
 
 	; don't auto-complete unless requested
 	(setq ac-auto-start nil)
