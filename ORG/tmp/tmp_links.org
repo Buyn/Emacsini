@@ -41,14 +41,14 @@ graph graphname {
 * Calc 
 ** sandbox
 #+BEGIN_SRC elisp
-(/ 
-	12000
-	750
+(* 
+	(/ 0.02 100)
+	1000000
 	)
 #+END_SRC
 
 #+RESULTS:
-: 16
+: 200.0
 
 #+BEGIN_SRC elisp
 (/ 

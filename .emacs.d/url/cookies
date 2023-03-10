@@ -2,13 +2,27 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".pikabu.ru"
-	[url-cookie "grex2" "%7B%22com_active_members_hide_20220418%22%3A%22gr1%22%7D"
-							#("Сб авг 13 02:21:19 2022 GMT" 0 27
+ '(("pikabu.ru"
+	[url-cookie "la" "1652581288_14594_14594___"
+							#("Ср май 12 02:21:19 2032 GMT" 0 27
 								(charset windows-1251))
-							"/" ".pikabu.ru" nil])
+							"/" "pikabu.ru" nil]
+	[url-cookie "PHPSESS" "hc9f997gn8bskd0mjhoaopt5a2"
+							#("Ср май 18 02:21:19 2022 GMT" 0 27
+								(charset windows-1251))
+							"/" "pikabu.ru" nil])
+ (".google.com"
+	[url-cookie "NID" "511=YhCKyFN4w1VK6sZ10VTeB3a-tptAv2cpKgFfv5r3bEu601CBBlGeOBRLlSA126esc0Maohm4fnUwsC9GpyYcV22OmK6SdkRtVsnGGiQcCevnL_pWhb6e5bvvZJe5F7bCkGV700mDX5uHroWMXlanj9G2V8KrtxXDnDVEyf_xDyI" "Sat, 27-May-2023 20:47:15 GMT" "/" ".google.com" nil])
  (".rezka.ag"
-	[url-cookie "dle_user_id" "deleted"
+	[url-cookie "dle_user_token" "46e4e7a0cc609ea6c0b98519640da7dc"
+							#("Ср сен 06 07:57:41 2023 GMT" 0 27
+								(charset windows-1251))
+							"/" ".rezka.ag" nil]
+	[url-cookie "dle_user_taken" "1"
+							#("Ср сен 06 07:57:41 2023 GMT" 0 27
+								(charset windows-1251))
+							"/" ".rezka.ag" nil]
+	[url-cookie "dle_hash" "deleted"
 							#("Вт сен 06 07:57:41 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" ".rezka.ag" nil]
@@ -16,53 +30,45 @@
 							#("Вт сен 06 07:57:41 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" ".rezka.ag" nil]
-	[url-cookie "dle_hash" "deleted"
+	[url-cookie "dle_user_id" "deleted"
 							#("Вт сен 06 07:57:41 2022 GMT" 0 27
 								(charset windows-1251))
-							"/" ".rezka.ag" nil]
-	[url-cookie "dle_user_taken" "1"
-							#("Ср сен 06 07:57:41 2023 GMT" 0 27
-								(charset windows-1251))
-							"/" ".rezka.ag" nil]
-	[url-cookie "dle_user_token" "46e4e7a0cc609ea6c0b98519640da7dc"
-							#("Ср сен 06 07:57:41 2023 GMT" 0 27
-								(charset windows-1251))
 							"/" ".rezka.ag" nil])
- (".google.com"
-	[url-cookie "NID" "511=YhCKyFN4w1VK6sZ10VTeB3a-tptAv2cpKgFfv5r3bEu601CBBlGeOBRLlSA126esc0Maohm4fnUwsC9GpyYcV22OmK6SdkRtVsnGGiQcCevnL_pWhb6e5bvvZJe5F7bCkGV700mDX5uHroWMXlanj9G2V8KrtxXDnDVEyf_xDyI" "Sat, 27-May-2023 20:47:15 GMT" "/" ".google.com" nil])
- ("pikabu.ru"
-	[url-cookie "PHPSESS" "hc9f997gn8bskd0mjhoaopt5a2"
-							#("Ср май 18 02:21:19 2022 GMT" 0 27
+ ("timeout.com"
+	[url-cookie "_TO_Canary" "False" "Tue, 14 Mar 2023 00:21:49 GMT" "/" "timeout.com" nil])
+ (".pikabu.ru"
+	[url-cookie "grex2" "%7B%22com_active_members_hide_20220418%22%3A%22gr1%22%7D"
+							#("Сб авг 13 02:21:19 2022 GMT" 0 27
 								(charset windows-1251))
-							"/" "pikabu.ru" nil]
-	[url-cookie "la" "1652581288_14594_14594___"
-							#("Ср май 12 02:21:19 2032 GMT" 0 27
-								(charset windows-1251))
-							"/" "pikabu.ru" nil]))
+							"/" ".pikabu.ru" nil]))
 )
 (setq url-cookie-secure-storage
- '((".pikabu.ru"
-	[url-cookie "pcid" "NcImKVc4Cv2"
-							#("Ср май 12 02:21:19 2032 GMT" 0 27
-								(charset windows-1251))
-							"/" ".pikabu.ru" t])
- ("reddit.com"
-	[url-cookie "edgebucket" "KZn7y22XF6STjVMVoG"
-							#("Вс сен 08 10:17:59 2024 GMT" 0 27
-								(charset windows-1251))
-							"/" "reddit.com" t]
-	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI4MDQ5NjksInN1YiI6Ii1WUzY4N1VfZ0ZfSmViZzhsNGItQ1cwS0hoZmV0OFEiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiLCJwaWkiXX0._rHKZQkqCaYb4w2QFPICQDSZ30HJowNrXxxW7r1BD0A" "Mon, 09 Sep 2024 10:18:09 GMT" "/" "reddit.com" t])
+ '(("github.com"
+	[url-cookie "logged_in" "no" "Mon, 28 Aug 2023 02:13:14 GMT" "/" "github.com" t]
+	[url-cookie "_octo" "GH1.1.1002810272.1661652794" "Mon, 28 Aug 2023 02:13:14 GMT" "/" "github.com" t])
+ ("livejournal.com"
+	[url-cookie "ljprof" "f2699f4996a9ab13862cc8fbd1215423d9c9787e8cd992e1b" "Wed, 15 Dec 2027 21:46:14 GMT" "/" "livejournal.com" t])
  (".reddit.com"
+	[url-cookie "loid" "0000000000sc4bjggy.2.1662718689000.Z0FBQUFBQmpHeExodms1clU1Um9MaTU4Z3F3UHlWeTIxcVNsWlhjMUFBY0prUkdxdUFrSkRzWkM3UDEteEFhU3NsTVBNY1lCQlQyQWNKSC0zaVB2Wk9tLXRqcGFqVWhFNXRGanhHMmNZbVpSTV9WLXBWbWI3dVVnRmRjMktib29DNmFUc0Y0XzV0V2s" "Mon, 09 Sep 2024 10:18:09 GMT" "/" ".reddit.com" t]
 	[url-cookie "csv" "2"
 							#("Вс сен 08 10:18:00 2024 GMT" 0 27
 								(charset windows-1251))
-							"/" ".reddit.com" t]
-	[url-cookie "loid" "0000000000sc4bjggy.2.1662718689000.Z0FBQUFBQmpHeExodms1clU1Um9MaTU4Z3F3UHlWeTIxcVNsWlhjMUFBY0prUkdxdUFrSkRzWkM3UDEteEFhU3NsTVBNY1lCQlQyQWNKSC0zaVB2Wk9tLXRqcGFqVWhFNXRGanhHMmNZbVpSTV9WLXBWbWI3dVVnRmRjMktib29DNmFUc0Y0XzV0V2s" "Mon, 09 Sep 2024 10:18:09 GMT" "/" ".reddit.com" t])
- ("livejournal.com"
-	[url-cookie "ljprof" "f2699f4996a9ab13862cc8fbd1215423d9c9787e8cd992e1b" "Wed, 15 Dec 2027 21:46:14 GMT" "/" "livejournal.com" t])
- ("github.com"
-	[url-cookie "_octo" "GH1.1.1002810272.1661652794" "Mon, 28 Aug 2023 02:13:14 GMT" "/" "github.com" t]
-	[url-cookie "logged_in" "no" "Mon, 28 Aug 2023 02:13:14 GMT" "/" "github.com" t]))
+							"/" ".reddit.com" t])
+ ("reddit.com"
+	[url-cookie "token_v2" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI4MDQ5NjksInN1YiI6Ii1WUzY4N1VfZ0ZfSmViZzhsNGItQ1cwS0hoZmV0OFEiLCJsb2dnZWRJbiI6ZmFsc2UsInNjb3BlcyI6WyIqIiwiZW1haWwiLCJwaWkiXX0._rHKZQkqCaYb4w2QFPICQDSZ30HJowNrXxxW7r1BD0A" "Mon, 09 Sep 2024 10:18:09 GMT" "/" "reddit.com" t]
+	[url-cookie "edgebucket" "KZn7y22XF6STjVMVoG"
+							#("Вс сен 08 10:17:59 2024 GMT" 0 27
+								(charset windows-1251))
+							"/" "reddit.com" t])
+ ("en.wikipedia.org"
+	[url-cookie "WMF-Last-Access" "03-Mar-2023" "Tue, 04 Apr 2023 12:00:00 GMT" "/" "en.wikipedia.org" t])
+ (".wikipedia.org"
+	[url-cookie "WMF-Last-Access-Global" "03-Mar-2023" "Tue, 04 Apr 2023 12:00:00 GMT" "/" ".wikipedia.org" t])
+ (".pikabu.ru"
+	[url-cookie "pcid" "NcImKVc4Cv2"
+							#("Ср май 12 02:21:19 2032 GMT" 0 27
+								(charset windows-1251))
+							"/" ".pikabu.ru" t]))
 )
 
 ;; Local Variables:

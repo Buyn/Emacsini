@@ -86,6 +86,28 @@ This function has :around advice: ‘ad-Advice-keyboard-quit’.
 Signal a ‘quit’ condition.
 During execution of Lisp code, this character causes a quit directly.
 At top-level, as an editor command, this simply beeps.
+*** fonts 
+(add-to-list 'default-frame-alist
+             ;; '(font . "Ubuntu Mono")
+             '(font . "Comic Sans MS")
+						 )
+jokerman
+papirus
+E:\Temp\Fonts\papyrus.zip 
+E:\Temp\Fonts\exodus.zip 
+"E:\Temp\Fonts\comic shanns.otf" 
+E:\Temp\Fonts\Edwardian-Script-ITC.zip 
+"E:\Temp\Fonts\Bamboo Regular.ttf" wutang 
+trajan
+E:\Temp\Fonts\Trajan-Pro-Regular.zip 
+Curlz MT
+E:\Temp\Fonts\CURLZ___.TTF 
+"E:\Temp\Fonts\Kinescope Regular.otf" 
+E:\Temp\Fonts\Cyberpunk-Regular.ttf 
+"E:\Temp\Fonts\Gotham Book Font.otf" 
+E:\Temp\Fonts\Miss_Fajardose.zip 
+E:\Temp\Fonts\resident-evil-cufonfonts.zip 
+E:\Temp\Fonts\Scary-Font.zip 
 
 ** Настроение
 *** Uplin

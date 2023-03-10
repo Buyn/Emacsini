@@ -500,7 +500,7 @@ _?_ help            _c_urrent file
                 ^Emacs-mode  Menus^          
     ────────────^─────────────────^───────────────────
      To _w_in Format    To _u_nix Format _s_av-tex2reg _W_inBuffer1251
-     _q_uit						  _R_evert buffer  _i_ns-reg2tex _m_askSlesh
+     _q_uit       _f_onts		  _R_evert buffer  _i_ns-reg2tex _m_askSlesh
     "
 ;; ***** keys
 ;; ****** w : 
@@ -538,6 +538,8 @@ _?_ help            _c_urrent file
 					(unless (fboundp 'mask_win_path)
 							(load-file "~/keymac/mask_win_path.el"))
 					(mask_win_path)))
+;; ****** f : 
+    ("f" hydra-emaks-fonts/body)
 ;; ****** R : 
 	("R" revert-buffer) 
 ;; ****** W : 
@@ -745,6 +747,39 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("S" read-aloud-stop "StopAloud")
 ;; **** E : 
 	("E" read-aloud-change-engine "AloudEngine")
+;; **** q : 
+	("q" nil "quit"))
+;; --------------------------------------
+;; *** hydra-emaks-fonts
+(defhydra hydra-emaks-fonts (:color blue)
+  "fonts menu "
+;; **** u : 
+	("u" (set-frame-font "Ubuntu Mono" nil nil)
+			  "UbuntuMono")
+;; **** c : 
+	("c" (set-frame-font "comic sans ms" nil nil)
+			  "ComicSansMS")
+;; **** C : 
+	("C" (set-frame-font "comic Mono" nil nil)
+			  "ComicMono")
+;; **** p : 
+	("p" (set-frame-font "Papyrus" nil nil)
+			  "Papyrus")
+;; **** P : 
+	("P" (set-frame-font "Comic Papyrus" nil nil)
+			  "ComicPapyrus")
+;; **** e : 
+	("e" (set-frame-font "Edwardian Script ITC" nil nil)
+			  "EdwardianS")
+;; **** b : 
+	("b" (set-frame-font "Bamboo" nil nil)
+			  "Bamboo")
+;; **** k : 
+	("k" (set-frame-font "Celtic Knots" nil nil)
+			  "KelticKnots")
+;; **** t : 
+	("t" (set-frame-font "Times New Roman" nil nil)
+			  "TimesNewRoman")
 ;; **** q : 
 	("q" nil "quit"))
 ;; --------------------------------------
