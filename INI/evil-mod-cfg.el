@@ -145,8 +145,8 @@
 				(yank)))
 ;; -------------------------------------- }}}
 ;; ** Movements  {{{
-(define-key evil-normal-state-map "gl" 'move-end-of-line)
-(define-key evil-normal-state-map "gh" 'move-beginning-of-line)
+(define-key evil-normal-state-map "gh" 'evil-first-non-blank-of-visual-line)
+(define-key evil-normal-state-map "gl" 'evil-end-of-visual-line)
 (define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
 (define-key evil-normal-state-map (kbd "gk") 'previous-logical-line)
 ;; (define-key evil-normal-state-map  "gj" 'evil-next-visual-line)
