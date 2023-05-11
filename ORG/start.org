@@ -29,6 +29,7 @@ https://www.braveclojure.com/basic-emacs/
 (define-key evil-normal-state-map  "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
 (define-key evil-normal-state-map (kbd "gk") 'previous-logical-line)
+(setq evil-cross-lines t)
  #+end_src
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)

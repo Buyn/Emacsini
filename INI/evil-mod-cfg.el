@@ -10,6 +10,7 @@
 ;; ** use-package evil
 (global-visual-line-mode t)
 (setq evil-respect-visual-line-mode t)
+(setq evil-cross-lines t)
 (use-package evil :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
