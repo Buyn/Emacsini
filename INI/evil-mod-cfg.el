@@ -8,9 +8,15 @@
 ;; * EVIL-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; ** use-package evil
+(global-visual-line-mode t)
+(setq evil-respect-visual-line-mode t)
 (use-package evil :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
+		;; :init
+		;; 	(global-visual-line-mode t)
+		;; 	(setq evil-respect-visual-line-mode nil)
+
 ;; *** END of use-package evil
   )
 (require 'evil)
@@ -140,10 +146,10 @@
 ;; ** Movements  {{{
 (define-key evil-normal-state-map "gl" 'move-end-of-line)
 (define-key evil-normal-state-map "gh" 'move-beginning-of-line)
-;; (define-key evil-normal-state-map (kbd "gj") 'evil-next-visual-line)
-;; (define-key evil-normal-state-map (kbd "gk") 'evil-previous-visual-line)
-(define-key evil-normal-state-map  "gj" 'evil-next-visual-line)
-(define-key evil-normal-state-map  "gk" 'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
+(define-key evil-normal-state-map (kbd "gk") 'previous-logical-line)
+;; (define-key evil-normal-state-map  "gj" 'evil-next-visual-line)
+;; (define-key evil-normal-state-map  "gk" 'evil-previous-visual-line)
 ;; --------------------------------------  }}}
 ;; ** Grabing  {{{
 ;; *** move-line : 
