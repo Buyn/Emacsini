@@ -24,7 +24,11 @@ https://www.braveclojure.com/basic-emacs/
 =================================
 ** progn :
 #+begin_src emacs-lisp :results output silent
-
+(custom-set-variables
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ ;; Finally got around to customizing the vertical split to be the default one (last line in the config):
+ ;; '(ediff-diff-options "-w")
+ '(ediff-split-window-function 'split-window-horizontally))
 (define-key evil-normal-state-map  "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map  "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
@@ -2244,950 +2248,108 @@ Replace With: ^J
 
 So how does it work? Well, we tell Emacs to search for any two or more newlines that are at the beginning of a string – where each line is considered a string by Emacs – and because we search for two or more we skip the ones that only have a single newline. So if there are 10 newlines in a row, we replace them all in one fell swoop with a single newline. You can omit the replacement newline to remove them altogether!
 * Help Docs Emacs
-** To set on a file by file
-To set the VisualLineMode on a file by file basis using emacs local variables, try:
-    #  local variables:
-    #    eval: (visual-line-mode t)
-** Install package
-*** lisp auto code
-		#+begin_src emacs-lisp :tangle yes
- (unless (package-installed-p 'yasnippet-snippets)
-   (package-install 'yasnippet-snippets))
- (require 'yasnippet-snippets)
-		#+end_src
-*** устанавливать в ручную : 
-;; только если устанавливать в ручную
-;; (add-to-list 'load-path
-;;               "~/.emacs.d/plugins/yasnippet")
-*** autoload : 
-(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
-*** eval-after-load : 
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
-*** describe-package (найти пакаджи на сервере и описанить)
-describe-package
+** Tools 
+*** ediff : 
+**** set vertical
+I've been using ediff for about a year now, and always pressing "|" to switch from the default horizontal split to a vertical split.
 
-** load require:
-	#+begin_src emacs-lisp :tangle yes
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony-c-headers company-irony)))
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(global-set-key "\t" 'company-complete-common)
-	#+end_src
-** Keyborde help
-*** evaluate
-**** 27.9 Evaluating Emacs Lisp Expressions
-Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
-Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
-M-:
-    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
-~C-x C-e~
-    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
-~C-M-x (in Emacs Lisp mode)~
-~M-x eval-defun~
-    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
-~M-x eval-region~
-    Evaluate all the Emacs Lisp expressions in the region.
-~M-x eval-buffer~
-    Evaluate all the Emacs Lisp expressions in the buffer. 
+Finally got around to customizing the vertical split to be the default one (last line in the config):
 
-M-: (eval-expression) reads an expression using the minibuffer, and evaluates it. (Before evaluating the expression, the current buffer switches back to the buffer that was current when you typed M-:, not the minibuffer into which you typed the expression.)
+(custom-set-variables
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(ediff-diff-options "-w")
+ '(ediff-split-window-function 'split-window-horizontally))
 
-The command C-x C-e (eval-last-sexp) evaluates the Emacs Lisp expression preceding point in the buffer, and displays the value in the echo area. When the result of an evaluation is an integer, it is displayed together with the value in other formats (octal, hexadecimal, and character if eval-expression-print-maximum-character, described below, allows it).
+*** eShell
+**** doc
+***** commands
+****** [so] Is it therefore possible to see what actual elisp is being invoked...
+https://emacs.stackexchange.com/questions/14979/access-to-the-elisp-commands-behind-eshell-commands/14981#14981
 
-If M-: or C-x C-e is given a prefix argument, it inserts the value into the current buffer at point, rather than displaying it in the echo area. If the prefix argument is zero, any integer output is inserted together with its value in other formats (octal, hexadecimal, and character). Such a prefix argument also prevents abbreviation of the output according to the variables eval-expression-print-level and eval-expression-print-length (see below). Similarly, a prefix argument of -1 overrides the effect of eval-expression-print-length.
-
-The eval-defun command is bound to C-M-x in Emacs Lisp mode. It evaluates the top-level Lisp expression containing or following point, and prints the value in the echo area. In this context, a top-level expression is referred to as a “defun”, but it need not be an actual defun (function definition). In particular, this command treats defvar expressions specially. Normally, evaluating a defvar expression does nothing if the variable it defines already has a value. But this command unconditionally resets the variable to the initial value specified by the defvar; this is convenient for debugging Emacs Lisp programs. defcustom and defface expressions are treated similarly. Note that the other commands documented in this section do not have this special feature.
-
-With a prefix argument, C-M-x instruments the function definition for Edebug, the Emacs Lisp Debugger. See Instrumenting for Edebug.
-
-The command M-x eval-region parses the text of the region as one or more Lisp expressions, evaluating them one by one. M-x eval-buffer is similar but evaluates the entire buffer.
-
-The options eval-expression-print-level and eval-expression-print-length control the maximum depth and length of lists to print in the result of the evaluation commands before abbreviating them. Supplying a zero prefix argument to eval-expression or eval-last-sexp causes lists to be printed in full. eval-expression-debug-on-error controls whether evaluation errors invoke the debugger when these commands are used; its default is t. eval-expression-print-maximum-character prevents integers which are larger than it from being displayed as characters. 
-5.31 How do I execute (“evaluate”) a piece of Emacs Lisp code?
-There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp form:
-    If you want it evaluated every time you run Emacs, put it in a file named .emacs in your home directory. This is known as “your .emacs file,” and contains all of your personal customizations.
-    You can type the form in the *scratch* buffer, and then type <LFD> (or C-j) after it. The result of evaluating the form will be inserted in the buffer.
-    ~In emacs-lisp-mode~, typing ~C-M-x~ evaluates a top-level form before or around point.
-    Typing ~C-x C-e~ in ~any buffer~ evaluates the Lisp form immediately before point and prints its value in the echo area.
-    Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
-    You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
-    The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
-**** python
-***** run unit test
- C-c C-t [elpy-test]
-
-*** get help 
-**** get menu command 
-     Some of the commands in the menu bar have ordinary key bindings as well;
-	if so, a key binding is shown after the item itself. 
- To view the full ~command name~ and documentation for a menu item, type ~C-h k~,
-	and then select the menu bar with the mouse in the usual way (see Key Help). 
-*** coment line 
-26.5.1 Comment Commands
-The following commands operate on comments:
-M-;
-    Insert or realign comment on current line; if the region is active, comment or uncomment the region instead (comment-dwim).
-~C-x C-;~
-    Comment or uncomment the current line (comment-line). If the region is active, comment or uncomment the lines in the region instead.
-C-u M-;
-    Kill comment on current line (comment-kill).
-C-x ;
-    Set comment column (comment-set-column).
-C-M-j
-M-j
-    Like <RET> followed by inserting and aligning a comment (comment-indent-new-line). See Multi-Line Comments.
-M-x comment-region
-C-c C-c (in C-like modes)
-    Add comment delimiters to all the lines in the region. 
-
-The command to create or align a comment is M-; (comment-dwim). The word “dwim” is an acronym for “Do What I Mean”; it indicates that this command can be used for many different jobs relating to comments, depending on the situation where you use it.
-When a region is active (see Mark), M-; either adds comment delimiters to the region, or removes them. If every line in the region is already a comment, it uncomments each of those lines by removing their comment delimiters. Otherwise, it adds comment delimiters to enclose the text in the region.
-If you supply a prefix argument to M-; when a region is active, that specifies the number of comment delimiters to add or delete. A positive argument n adds n delimiters, while a negative argument -n removes n delimiters.
-If the region is not active, and there is no existing comment on the current line, M-; adds a new comment to the current line. If the line is blank (i.e., empty or containing only whitespace characters), the comment is indented to the same position where <TAB> would indent to (see Basic Indent). If the line is non-blank, the comment is placed after the last non-whitespace character on the line. Emacs tries to fit the comment between the columns specified by the variables comment-column and comment-fill-column (see Options for Comments), if possible. Otherwise, it will choose some other suitable position, usually separated from the non-comment text by at least one space. In each case, Emacs places point after the comment's starting delimiter, so that you can start typing the comment text right away.
-You can also use M-; to align an existing comment. If a line already contains the comment-start string, M-; realigns it to the conventional alignment and moves point after the comment's starting delimiter. As an exception, comments starting in column 0 are not moved. Even when an existing comment is properly aligned, M-; is still useful for moving directly to the start of the comment text.
-~C-x C-;~ (comment-line) comments or uncomments complete lines. When a region is active (see Mark), C-x C-; either comments or uncomments the lines in the region. If the region is not active, this command comments or uncomments the line point is on. With a positive prefix argument n, it operates on n lines starting with the current one; with a negative n, it affects n preceding lines. After invoking this command with a negative argument, successive invocations with a positive argument will operate on preceding lines as if the argument were negated.
-C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
-The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
-For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
-*** Rebind keys
-**** keys to keys
-(global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
-*** Movement 
-‘C-M-a’
-‘C-M-e’
-   Move point to the beginning or end of the current function or
-[[info:emacs#Motion in C][info:emacs#Motion in C]]  
-‘C-M-f’
-     Move forward over a balanced expression (‘forward-sexp’).
-‘C-M-b’
-     Move backward over a balanced expression (‘backward-sexp’).
-‘C-M-k’
-     Kill balanced expression forward (‘kill-sexp’).
-‘C-M-t’
-     Transpose expressions (‘transpose-sexps’).
-‘C-M-@’
-‘C-M-<SPC>’
-     Put mark after following expression (‘mark-sexp’).
-‘C-M-n’
-     Move forward over a parenthetical group (‘forward-list’).
-‘C-M-p’
-     Move backward over a parenthetical group (‘backward-list’).
-‘C-M-u’
-     Move up in parenthesis structure (‘backward-up-list’).
-‘C-M-d’
-     Move down in parenthesis structure (‘down-list’).
-*** Intends 
-*** replace-string : 
-M-x replace-string RET ; RET C-q C-j.
-
-    C-q for quoted-insert,
-
-    C-j is a newline.
+Yes. They are all located in the eshell folder under Resources/elisp in the Emacs app folder. See screenshot of files on my computer. 
 
 
-** Environment Variable
-*** "PATH" : 
-**** Описание бага\фичи
-	 переменая енворемент обновляется только после перезапуска системы
- тоесть после установки нового софта - он не виден даже после перезапуска емак
- ещё могут быть проблемы посколько есть переменая пути систему
- а есть переменая запуска емака и есть переменая рабочей деректории емака
-***** решение:
-	  установить инворемнт перемуную в ручную для запушеного еворемента
-	  из емака
-***** фича
-	  есть возможность поексмеремтиовать 
-	  если нет уверености что всё настроено как надо
-**** setenv "PATH" : 
-  ;; example of setting env var named “path”, by appending a new path to existing path
-  (setenv "PATH"
-	(concat
-	 "C:/cygwin/usr/local/bin" ";"
-	 "C:/cygwin/usr/bin" ";"
-	 "C:/cygwin/bin" ";"
-	 (getenv "PATH")
-	)
-  )
-**** getenv "PATH" : 
- (to evaluate elisp code, select it and Alt+x eval-region.
- [see Evaluate Emacs Lisp Code])
-	 (getenv "PATH")
-**** edit in file
-	 copy to *scratch*
-(progn
-(forward-line 3)
-(insert (getenv "PATH"))
-)
-  (setenv "PATH"
-"
+  So I'd like to have the actual elisp...
 
-"
-)
-*** SHELL : 
-If the path printed by evaluating (getenv "SHELL") in Emacs points at bash
-or zsh, this should work fine.
-**** getenv : 
-(getenv "SHELL")
+
+Open any of those files to see the actual elisp code. For example, ls command with its normal switches is implemented in em-ls.el file by John Wiegley and its core uses expand-file-name function.
+
+How to find which lisp file provides what shell command? Open eshell prompt and then type, say you want to know where kill is in elisp:
+
+which kill
+
+
+will tell you that 
+
+eshell/kill is a compiled Lisp function in `esh-proc.el'
+
+
+What other commands are available in eshell?
+
+see the [manual][2]
+
+
+
+  there is no way I know of running eshell commands as Babel "code blocks."
+
+
+There are no special eshell commands per se. Eshell mimics standard unix shell commands using existing lisp functions. You can invoke those same functions in org-babel lisp blocks without any mediating functions implemented in eshell. 
+    
+****** so find-function
+        e.g.: M-x find-function RET eshell/ls RET
+
+I like having find-function bound to C-hC-f as a variant on the standard describe-function binding (via which you can also indirectly get to the code, FYI).
+
+You could also use the following:
+#+BEGIN_SRC shell
+(defun eshell/goto (name)
+  "Visit the source code for the specified eshell command."
+  (let ((func (eshell-find-alias-function name)))
+    (if func
+        (find-function func)
+      (error "%s is not an elisp function" name))))
+#+END_SRC
+$ goto ls
+
+
+If you want to know what's implemented in elisp and what isn't, you could just ask Emacs to complete on eshell/
+
+e.g.: C-uC-ha eshell/ RET
+*** Shell
+**** Описание 
+используется для запуска других процесов
+может сильно влиять на работу режимов
+поскольку процес может запускатся из eshell
+но при этом глючить в шеле
+и как результат нечего не будет работать
+просто потому что в винде
+нужно заменить на чтонить другое
+**** explicit-shell-file-name : 
+You can start an interactive shell in Emacs by typing M-x shell. 
+By default, this will start the standard Windows shell cmd.exe. 
+Emacs uses the SHELL environment variable to determine which
+program to use as the shell.  To instruct Emacs to use a non-default
+shell, you can either set this environment variable, or customize
+explicit-shell-file-name.  You can also customize
+**** shell-file-name : 
+shell-file-name to change the shell that will be used by
+subprocesses that are started with shell-command and
+related non-interactive shell commands.
+
 "D:/Development/lisp/Emacs/libexec/emacs/26.2/x86_64-w64-mingw32/cmdproxy.exe"
-
-*** exec-path
-**** Difference between exec-path and PATH
-	 The value of environment variable “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
-	 The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
-
-(when (string-equal system-type "windows-nt")
-  (setq exec-path
-'(
-"C:/Program Files (x86)/Emacs/emacs/bin/"
-"C:/Program Files (x86)/Emacs/EmacsW32/gnuwin32/bin/"
-"C:/Windows/system32/"
-"C:/Windows/"
-"C:/Windows/System32/Wbem/"
-"C:/Windows/system32/WindowsPowerShell/v1.0/"
-)
- ))
-**** показать exec-path
-(message exec-path)
-  (setq exec-path)
-**** set
-    (setq exec-path (append exec-path '("/sw/bin")))
-    (setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
-**** Emacs Lisp Code for Setting PATH and exec-path in sync
-(when (string-equal system-type "windows-nt")
-  (let (
-        (mypaths
-         '(
-           "C:/Python27"
-           ;; "C:/Python32"
-           "C:/strawberry/c/bin"
-           "C:/strawberry/perl/site/bin"
-           "C:/strawberry/perl/bin"
-
-           "C:/Users/h3/AppData/Roaming/npm"
-           "C:/Program Files (x86)/nodejs/"
-
-           "C:/cygwin/usr/local/bin"
-           "C:/cygwin/usr/bin"
-           "C:/cygwin/bin"
-
-           "C:/Program Files (x86)/ErgoEmacs/msys/bin"
-           "C:/Program Files (x86)/Mozilla Firefox/"
-           "C:/Program Files (x86)/Opera"
-           "C:/Program Files (x86)/Safari"
-           "C:/Users/h3/AppData/Local/Google/Chrome/Application"
-           ) )
-        )
-
-    (setenv "PATH" (mapconcat 'identity mypaths ";") )
-
-    (setq exec-path (append mypaths (list "." exec-directory)) )
-    ) )
-*** Operating System Environment
-Emacs provides access to variables in the operating system environment
-through various functions.  These variables include the name of the
-system, the user’s UID, and so on.
-**** Variable: system-configuration
- This variable holds the standard GNU configuration name for the
- hardware/software configuration of your system, as a string.  For
- example, a typical value for a 64-bit GNU/Linux system is
- ‘"x86_64-unknown-linux-gnu"’.
-**** Variable: system-type
- The value of this variable is a symbol indicating the type of operating
- system Emacs is running on.  The possible values are:
-	We do not wish to add new symbols to make finer distinctions unless it
-	is absolutely necessary!  In fact, we hope to eliminate some of these
-	alternatives in the future.  If you need to make a finer distinction
-	than system-type allows for, you can test
-	system-configuration, e.g., against a regexp.
-***** aix
-  IBM’s AIX.
-***** berkeley-unix
-   Berkeley BSD and its variants.
-***** cygwin
-	Cygwin, a Posix layer on top of MS-Windows.
-***** 	darwin
-	 Darwin (Mac OS X).
-***** 	gnu
-	 The GNU system (using the GNU kernel, which consists of the HURD and Mach).
-***** 	gnu/linux
-	 A GNU/Linux system—that is, a variant GNU system, using the Linux
-	 kernel.  (These systems are the ones people often call “Linux”, but
-	 actually Linux is just the kernel, not the whole system.)
-***** 	gnu/kfreebsd
-	 A GNU (glibc-based) system with a FreeBSD kernel.
-***** 	hpux
-	 Hewlett-Packard HPUX operating system.
-***** 	irix
-	 Silicon Graphics Irix system.
-***** 	nacl
-	 Google Native Client (NaCl) sandboxing system.
-***** 	ms-dos
-	 Microsoft’s DOS.  Emacs compiled with DJGPP for MS-DOS binds
-	 system-type to ms-dos even when you run it on MS-Windows.
-***** 	usg-unix-v
-	 AT&T Unix System V.
-***** 	windows-nt
-	 Microsoft Windows NT, 9X and later.  The value of system-type
-	 is always windows-nt, e.g., even on Windows 10.
-**** Function: system-name
- This function returns the name of the machine you are running on, as a
- string.
-**** User Option: mail-host-address
- If this variable is non-nil, it is used instead of
- system-name for purposes of generating email addresses.  For
- example, it is used when constructing the default value of
- user-mail-address.  See User Identification.  (Since this is
- done when Emacs starts up, the value actually used is the one saved when
- Emacs was dumped.  See Building Emacs.)
-**** Command: getenv var &optional frame
-
- This function returns the value of the environment variable var,
- as a string.  var should be a string.  If var is undefined
- in the environment, getenv returns nil.  It returns
- ‘""’ if var is set but null.  Within Emacs, a list of environment
- variables and their values is kept in the variable process-environment.
-
-
- (getenv "USER")
-      ⇒ "lewis"
-
-
- The shell command printenv prints all or part of the environment:
-
-
- bash$ printenv
- PATH=/usr/local/bin:/usr/bin:/bin
- USER=lewis
- TERM=xterm
- SHELL=/bin/bash
- HOME=/home/lewis
- …
-**** Command: setenv variable &optional value substitute
- This command sets the value of the environment variable named
- variable to value.  variable should be a string.
- Internally, Emacs Lisp can handle any string.  However, normally
- variable should be a valid shell identifier, that is, a sequence
- of letters, digits and underscores, starting with a letter or
- underscore.  Otherwise, errors may occur if subprocesses of Emacs try
- to access the value of variable.  If value is omitted or
- nil (or, interactively, with a prefix argument), setenv
- removes variable from the environment.  Otherwise, value
- should be a string.
-
- If the optional argument substitute is non-nil, Emacs
- calls the function substitute-env-vars to expand any
- environment variables in value.
-
- setenv works by modifying process-environment; binding
- that variable with let is also reasonable practice.
-
- setenv returns the new value of variable, or nil
- if it removed variable from the environment.
-**** Variable: process-environment
- This variable is a list of strings, each describing one environment
- variable.  The functions getenv and setenv work by means
- of this variable.
-
-
- process-environment
- => ("PATH=/usr/local/bin:/usr/bin:/bin"
-     "USER=lewis"
-     "TERM=xterm"
-     "SHELL=/bin/bash"
-     "HOME=/home/lewis"
-     …)
-
-
- If process-environment contains multiple elements that
- specify the same environment variable, the first of these elements
- specifies the variable, and the others are ignored.
-**** Variable: initial-environment
- This variable holds the list of environment variables Emacs inherited
- from its parent process when Emacs started.
-**** Variable: path-separator
- This variable holds a string that says which character separates
- directories in a search path (as found in an environment variable).  Its
- value is ":" for Unix and GNU systems, and ";" for MS systems.
-**** Function: parse-colon-path path
- This function takes a search path string such as the value of
- the PATH environment variable, and splits it at the separators,
- returning a list of directory names.  nil in this list means
- the current directory.  Although the function’s name says
- “colon”, it actually uses the value of path-separator.
- (parse-colon-path ":/foo:/bar")
-      => (nil "/foo/" "/bar/")
-**** Variable: invocation-name
- This variable holds the program name under which Emacs was invoked.  The
- value is a string, and does not include a directory name.
-**** Variable: invocation-directory
- This variable holds the directory from which the Emacs executable was
- invoked, or nil if that directory cannot be determined.
-**** Variable: installation-directory
- If non-nil, this is a directory within which to look for the
- lib-src and etc subdirectories.  In an installed Emacs,
- it is normally nil.  It is non-nil
- when Emacs can’t find those directories in their standard installed
- locations, but can find them in a directory related somehow to the one
- containing the Emacs executable (i.e., invocation-directory).
-**** Function: load-average &optional use-float
- This function returns the current 1-minute, 5-minute, and 15-minute
- system load averages, in a list.  The load average indicates the
- number of processes trying to run on the system.
-
- By default, the values are integers that are 100 times the system load
- averages, but if use-float is non-nil, then they are
- returned as floating-point numbers without multiplying by 100.
-
- If it is impossible to obtain the load average, this function signals
- an error.  On some platforms, access to load averages requires
- installing Emacs as setuid or setgid so that it can read kernel
- information, and that usually isn’t advisable.
-
- If the 1-minute load average is available, but the 5- or 15-minute
- averages are not, this function returns a shortened list containing
- the available averages.
-
-
- (load-average)
-      ⇒ (169 48 36)
- (load-average t)
-      ⇒ (1.69 0.48 0.36)
-
-
- The shell command uptime returns similar information.
-**** Function: emacs-pid
- This function returns the process ID of the Emacs process,
- as an integer.
-**** Variable: tty-erase-char
- This variable holds the erase character that was selected
- in the system’s terminal driver, before Emacs was started.
-** Customize
-*** by menu
-To customize rainbow-delimiters mode, you can use:
-M-x customize-group rainbow-delimiters
-Color Scheme
-
-customize-group rainbow-delimiters-faces has the faces for successive nested pairs of delimiters. You can change them through emacs customize or in your color theme or dot-emacs.
-
-The face rainbow-delimiters-unmatched-face is used for unmatched closing delimiters.
-
-Zenburn and Solarized themes have their own colors for these faces.
-
-deftheme/color-theme.el: Further information is at the top of rainbow-delimiters.el.
-Stop Highlighting Certain Delimiters
-
-You can disable highlighting of any of the supported delimiter types through the customize interface, in the Toggle Delimiters section. 
-*** using command
-используя названия из меню можно подобрать подходяшию команду
-на основе примера
-	;; (custom-theme-set-faces
-	;; 'material
-	;; `(outline-1 ((t (:height 1.25 :weight bold))))
-	;; `(outline-2 ((t (:height 1.15 :weight bold))))
-	;; `(outline-3 ((t (:height 1.05 :weight bold))))
-	;; `(outline-4 ((t (:height 1.95 :weight bold))))
-	;; `(outline-5 ((t (:height 1.85 :weight bold))))
-	;; `(outline-6 ((t (:height 1.75 :weight bold))))
-	;; `(outline-7 ((t (:height 1.65 :weight bold))))
-** info\help
-*** info manual : 
-s - to seach in node of manual(not work in index)
-i - 
-g - 
-   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
-   удобная систе показиваюшая мануалки по всем установленым модам
-f1-f - show funcrion doc string
-f1-F - find funcrion in manual
-*** (apropos)
-Search Help
-найти во всём имаксе
- иназвании функции и хелпы
-и описание вообще везде
-поиск продолжительный
-PATTERN can be a word, a list of words (separated by spaces),
-or a regexp (using some regexp special characters).  If it is a word,
-search for matches for that word as a substring.  If it is a list of words,
-search for matches for any two (or more) of those words.
-
-With C-u prefix, or if ‘apropos-do-all’ is non-nil,
-consider all symbols (if they match PATTERN).
-
-Returns list of symbols and documentation found.
-*** customize-group
-		Получить инфу по всем переменным
-		режима поскольку зачастую режима нет в мануале
-зато кажется это генерится автоматически
-и там вполне полный хелп по каждой переменной
-M-x customize-group RET company. 
-** run
-*** run multiple Emacs servers : 
-   You can run multiple Emacs servers on the same machine by giving each
-one a unique “server name”, using the variable ‘server-name’.  For
-example, ‘M-x set-variable <RET> server-name <RET> "foo" <RET>’ sets the
-server name to ‘foo’.  The ‘emacsclient’ program can specify a server by
-name, using the ‘-s’ or the ‘-f’ option (*note emacsclient Options::),
-depending on whether or not the server uses a TCP socket (*note TCP
-Emacs server::).
-
-   If you want to run multiple Emacs daemons (*note Initial Options::),
-you can give each daemon its own server name like this:
-
-       emacs --daemon=foo
-
-*** Subprocesses
-**** 36.1 Functions that Create Subprocesses
-***** three primitives : 
-	There are three primitives that create a new subprocess in which to run
-	a program.  One of them, ~make-process~, creates an asynchronous
-	process and returns a process object (see Asynchronous Processes).
-	The other two, =call-process= and =call-process-region=,
-	create a synchronous process and do not return a process object
-	(see Synchronous Processes).  There are various higher-level
-	functions that make use of these primitives to run particular types of
-	process.
-
-	Synchronous and asynchronous processes are explained in the following
-	sections.  Since the three functions are all called in a similar
-	fashion, their common arguments are described here.
-
-	In all cases, the functions specify the program to be run.  An error
-	is signaled if the file is not found or cannot be executed.  If the
-	file name is relative, the variable exec-path contains a list
-	of directories to search.  Emacs initializes exec-path when it
-	starts up, based on the value of the environment variable PATH.
-	The standard file name constructs, ‘~’, ‘.’, and ‘..’,
-	are interpreted as usual in exec-path, but environment variable
-	substitutions (‘$HOME’, etc.) are not recognized; use
-	substitute-in-file-name to perform them (see File Name Expansion).  nil in this list refers to
-	default-directory.
-
-	Executing a program can also try adding suffixes to the specified
-	name:
-***** User Option: exec-suffixes
-   This variable is a list of suffixes (strings) to try adding to the
-   specified program file name.  The list should include "" if you
-   want the name to be tried exactly as specified.  The default value is
-   system-dependent.
-
-   Please note: The argument program contains only the
-   name of the program file; it may not contain any command-line
-   arguments.  You must use a separate argument, args, to provide
-   those, as described below.
-
-   Each of the subprocess-creating functions has a buffer-or-name
-   argument that specifies where the output from the program will go.  It
-   should be a buffer or a buffer name; if it is a buffer name, that will
-   create the buffer if it does not already exist.  It can also be
-   nil, which says to discard the output, unless a custom filter
-   function handles it.  (See Filter Functions, and Read and Print.)  Normally, you should avoid having multiple processes send
-   output to the same buffer because their output would be intermixed
-   randomly.  For synchronous processes, you can send the output to a
-   file instead of a buffer (and the corresponding argument is therefore
-   more appropriately called destination).  By default, both
-   standard output and standard error streams go to the same destination,
-   but all the 3 primitives allow optionally to direct the standard error
-   stream to a different destination.
-
-   All three of the subprocess-creating functions allow to specify
-   command-line arguments for the process to run. For call-process
-   and call-process-region, these come in the form of a
-   &rest argument, args.  For make-process, both the
-   program to run and its command-line arguments are specified as a list
-   of strings.  The command-line arguments must all be strings, and they
-   are supplied to the program as separate argument strings.  Wildcard
-   characters and other shell constructs have no special meanings in
-   these strings, since the strings are passed directly to the specified
-   program.
-
-   The subprocess inherits its environment from Emacs, but you can
-   specify overrides for it with process-environment.  See System Environment.  The subprocess gets its current directory from the
-   value of default-directory.
-***** Variable: exec-directory
-   The value of this variable is a string, the name of a directory that
-   contains programs that come with GNU Emacs and are intended for Emacs
-   to invoke.  The program movemail is an example of such a program;
-   Rmail uses it to fetch new mail from an inbox.
-***** User Option: exec-path
-   The value of this variable is a list of directories to search for
-   programs to run in subprocesses.  Each element is either the name of a
-   directory (i.e., a string), or nil, which stands for the default
-   directory (which is the value of default-directory).
-   See executable-find, for the details of this search.
-
-
-   The value of exec-path is used by call-process and
-   start-process when the program argument is not an absolute
-   file name.
-
-   Generally, you should not modify exec-path directly.  Instead,
-   ensure that your PATH environment variable is set appropriately
-   before starting Emacs.  Trying to modify exec-path
-   independently of PATH can lead to confusing results.
-**** exempl
-***** shell link
- [shell:D:\scripts\CMD\CygWin\vim.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
-
- [shell:D:\Development\lisp\HOME\emacs_Run.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
- (shell  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt")
- [shell:D:\scripts\CMD\emagus\run_far.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\"]
-
- [shell:D:\Development\lisp\HOME\emacs_client.cmd  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
-***** shell-command  : 
- (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
-
- (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
-
- (shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
-***** start-process : 
- (start-process "12" nil "d:/Development/lisp/Emacs/bin/runemacs.exe")
-
-**** My commands 
-***** buyn-start-emagus : 
-			#+begin_src emacs-lisp :tangle yes
-	(buyn-start-emagus 
-	"D:/Development/lisp/Dropbox/Office/Progects/Vadim/Tochil/Tochil.org"
-	)
-			#+end_src
-***** buyn-cmd-start
-****** dragon - Buyn.max
-#+begin_src elisp :tangle yes
-	(buyn-cmd-start "D:/inet/browser/Comodo/Dragon/dragon.exe https://mail.google.com/mail/u/0/#inbox")
-#+end_src
-
-*** 44 Saving Emacs Sessions
-[[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
-** keyboard macro
-*** help
-**** info links
-	[[info:emacs#Keyboard Macros][info:emacs#Keyboard Macros]]
-**** keys : 
-***** base
-	‘C-u <F3>’
-	‘C-u C-x (’
-			 Re-execute last keyboard macro, then append keys to its definition.
-	‘C-u C-u <F3>’
-	‘C-u C-u C-x (’
-			 Append keys to the last keyboard macro without re-executing it.
-	‘C-x C-k r’
-			 Run the last keyboard macro on each line that begins in the region
-			 (‘apply-macro-to-region-lines’).
-***** 17.6 Editing a Keyboard Macro
-‘C-x C-k C-e’
-     Edit the last defined keyboard macro (‘kmacro-edit-macro’).
-‘C-x C-k e NAME <RET>’
-     Edit a previously defined keyboard macro NAME (‘edit-kbd-macro’).
-‘C-x C-k l’
-     Edit the last 300 keystrokes as a keyboard macro
-     (‘kmacro-edit-lossage’).
-***** name save session Bind 
-‘C-x C-k n’
-     Give a command name (for the duration of the Emacs session) to the
-     most recently defined keyboard macro (‘kmacro-name-last-macro’).
-‘C-x C-k b’
-     Bind the most recently defined keyboard macro to a key sequence
-     (for the duration of the session) (‘kmacro-bind-to-key’).
-‘M-x insert-kbd-macro’
-     Insert in the buffer a keyboard macro’s definition, as Lisp code.
-		 
-
-   Once a macro has a command name, you can save its definition in a
-file.  Then it can be used in another editing session.  First, visit the
-file you want to save the definition in.  Then use this command:
-
-     M-x insert-kbd-macro <RET> MACRONAME <RET>
-
-This inserts some Lisp code that, when executed later, will define the
-same macro with the same definition it has now.  (You don’t need to
-understand Lisp code to do this, because ‘insert-kbd-macro’ writes the
-Lisp code for you.)  Then save the file.  You can load the file later
-with ‘load-file’ (*note Lisp Libraries::).  If the file you save in is
-your init file ‘~/.emacs’ (*note Init File::) then the macro will be
-defined each time you run Emacs.
-   If you give ‘insert-kbd-macro’ a numeric argument, it makes
-additional Lisp code to record the keys (if any) that you have bound to
-MACRONAME, so that the macro will be reassigned the same keys when you
-load the file.
-
-***** ring 
-‘C-x C-k C-k’
-    Execute the keyboard macro at the head of the ring
-    (‘kmacro-end-or-call-macro-repeat’).
-‘C-x C-k C-n’
-    Rotate the keyboard macro ring to the next macro (defined earlier)
-    (‘kmacro-cycle-ring-next’).
-‘C-x C-k C-p’
-    Rotate the keyboard macro ring to the previous macro (defined
-    later) (‘kmacro-cycle-ring-previous’).
-C-x C-k C-d
-		delete it from the macro ring.
-***** 17.4 Executing Macros with Variations
-In a keyboard macro, you can create an effect similar to that of
-‘query-replace’, in that the macro asks you each time around whether to
-make a change.
-
-‘C-x q’
-     When this point is reached during macro execution, ask for
-     confirmation (‘kbd-macro-query’).
-***** 17.3 Counter The Keyboard Macro 
-****** associated counter : 
-Each keyboard macro has an associated counter, which is initialized to 0
-when you start defining the macro.  This “current counter” allows you to
-insert a number into the buffer that depends on the number of times the
-macro has been called.  The counter is normally incremented each time
-its value is inserted into the buffer.
-
-****** Insert the keyboard macro : 
-   In addition to the current counter, keyboard macros also maintain the
-“previous counter”, which records the value the current counter had last
-time it was incremented or set.  Note that incrementing the current
-counter by zero, e.g., with ‘C-u 0 C-x C-k C-i’, also records the value
-of the current counter as the previous counter value.
-
-‘C-x C-k C-i’
-     Insert the keyboard macro counter value in the buffer
-     (‘kmacro-insert-counter’).
-****** keyboard : 
-‘<F3>’
-     In a keyboard macro definition, insert the keyboard macro counter
-     value in the buffer (‘kmacro-start-macro-or-insert-counter’).
-‘C-x C-k C-c’
-     Set the keyboard macro counter (‘kmacro-set-counter’).
-‘C-x C-k C-a’
-     Add the prefix arg to the keyboard macro counter
-     (‘kmacro-add-counter’).
-‘C-x C-k C-f’
-     Specify the format for inserting the keyboard macro counter
-     (‘kmacro-set-format’).
-
-****** <F3> : 
-   When you are defining a keyboard macro, the command <F3>
-(‘kmacro-start-macro-or-insert-counter’) inserts the current value of
-the keyboard macro’s counter into the buffer, and increments the counter
-by 1.  (If you are not defining a macro, <F3> begins a macro definition
-instead.  *Note Basic Keyboard Macro::.)  You can use a numeric prefix
-argument to specify a different increment.  If you just specify a ‘C-u’
-prefix, that inserts the previous counter value, and doesn’t change the
-current value.
-
-   As an example, let us show how the keyboard macro counter can be used
-to build a numbered list.  Consider the following key sequence:
-
-     <F3> C-a <F3> . <SPC> <F4>
-
-As part of this keyboard macro definition, the string ‘0. ’ was inserted
-into the beginning of the current line.  If you now move somewhere else
-in the buffer and type <F4> to invoke the macro, the string ‘1. ’ is
-inserted at the beginning of that line.  Subsequent invocations insert
-‘2. ’, ‘3. ’, and so forth.
-
-****** C-x C-k C-i’ (‘kmacro-insert-counter’) : 
-   The command ‘C-x C-k C-i’ (‘kmacro-insert-counter’) does the same
-thing as <F3>, but it can be used outside a keyboard macro definition.
-When no keyboard macro is being defined or executed, it inserts and
-increments the counter of the macro at the head of the keyboard macro
-ring.
-
-****** ‘C-x C-k C-c’ (‘kmacro-set-counter’) : 
-   The command ‘C-x C-k C-c’ (‘kmacro-set-counter’) sets the current
-macro counter to the value of the numeric argument.  If you use it
-inside the macro, it operates on each repetition of the macro.  If you
-specify just ‘C-u’ as the prefix, while executing the macro, that resets
-the counter to the value it had at the beginning of the current
-repetition of the macro (undoing any increments so far in this
-repetition).
-
-****** ‘C-x C-k C-a’ (‘kmacro-add-counter’) : 
-   The command ‘C-x C-k C-a’ (‘kmacro-add-counter’) adds the prefix
-argument to the current macro counter.  With just ‘C-u’ as argument, it
-resets the counter to the last value inserted by any keyboard macro.
-(Normally, when you use this, the last insertion will be in the same
-macro and it will be the same counter.)
-
-****** ‘C-x C-k C-f’ (‘kmacro-set-format’) : 
-   The command ‘C-x C-k C-f’ (‘kmacro-set-format’) prompts for the
-format to use when inserting the macro counter.  The default format is
-‘%d’, which means to insert the number in decimal without any padding.
-You can exit with empty minibuffer to reset the format to this default.
-You can specify any format string that the ‘format’ function accepts and
-that makes sense with a single integer extra argument (*note
-(elisp)Formatting Strings::).  Do not put the format string inside
-double quotes when you insert it in the minibuffer.
-
-   If you use this command while no keyboard macro is being defined or
-executed, the new format affects all subsequent macro definitions.
-Existing macros continue to use the format in effect when they were
-defined.  If you set the format while defining a keyboard macro, this
-affects the macro being defined from that point on, but it does not
-affect subsequent macros.  Execution of the macro will, at each step,
-use the format in effect at that step during its definition.  Changes to
-the macro format during execution of a macro, like the corresponding
-changes during its definition, have no effect on subsequent macros.
-
-   The format set by ‘C-x C-k C-f’ does not affect insertion of numbers
-stored in registers.
-****** register as a counter : 
-   If you use a register as a counter, incrementing it on each
-repetition of the macro, that accomplishes the same thing as a keyboard
-macro counter.  *Note Number Registers::.  For most purposes, it is
-simpler to use a keyboard macro counter.
-
-
-
-***** 13.7 Keyboard Macro Registers
-If you need to execute a keyboard macro (*note Keyboard Macros::)
-frequently, it is more convenient to put it in a register or save it
-(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
-stores the last keyboard macro in register R.
-=============================
-** Registers
-*** keybord help
-**** 13.2 Saving Text in Registers
-‘C-x r r R’
-     Copy the region-rectangle into register R
-     (‘copy-rectangle-to-register’).  With numeric argument, delete it
-     as well.
-‘C-x r s R’
-     Copy region into register R (‘copy-to-register’).
-‘C-x r i R’
-     Insert text from register R (‘insert-register’).
-‘M-x append-to-register <RET> R’
-     Append region to text in register R.
-
-     When register R contains text, you can use ‘C-x r +’
-     (‘increment-register’) to append to that register.  Note that
-     command ‘C-x r +’ behaves differently if R contains a number.
-     *Note Number Registers::.
-
-‘M-x prepend-to-register <RET> R’
-     Prepend region to text in register R.
-		 
-
-**** position : 
- ‘C-x r <SPC> R’
-			Record the position of point and the current buffer in register R
-			(‘point-to-register’).
- ‘C-x r j R’
-			Jump to the position and buffer saved in register R
-			(‘jump-to-register’).
-     (set-register R '(file . NAME))
-For example,
-     (set-register ?z '(file . "/gd/gnu/emacs/19.0/src/ChangeLog"))
-puts the file name shown in register ‘z’.
-**** 13.8 Bookmarks
-‘C-x r m <RET>’
-     Set the bookmark for the visited file, at point.
-‘C-x r m BOOKMARK <RET>’
-     Set the bookmark named BOOKMARK at point (‘bookmark-set’).
-‘C-x r M BOOKMARK <RET>’
-     Like ‘C-x r m’, but don’t overwrite an existing bookmark.
-‘C-x r b BOOKMARK <RET>’
-     Jump to the bookmark named BOOKMARK (‘bookmark-jump’).
-‘C-x r l’
-     List all bookmarks (‘list-bookmarks’).
-‘M-x bookmark-save’
-     Save all the current bookmark values in the default bookmark file.
-‘M-x bookmark-load <RET> FILENAME <RET>’
-     Load a file named FILENAME that contains a list of bookmark values.
-     You can use this command, as well as ‘bookmark-write’, to work with
-     other files of bookmark values in addition to your default bookmark
-     file.
-
-‘M-x bookmark-write <RET> FILENAME <RET>’
-     Save all the current bookmark values in the file FILENAME.
-
-‘M-x bookmark-delete <RET> BOOKMARK <RET>’
-     Delete the bookmark named BOOKMARK.
-
-‘M-x bookmark-insert-location <RET> BOOKMARK <RET>’
-     Insert in the buffer the name of the file that bookmark BOOKMARK
-     points to.
-
-‘M-x bookmark-insert <RET> BOOKMARK <RET>’
-     Insert in the buffer the _contents_ of the file that bookmark
-     BOOKMARK points to.
-
-==============
-**** 13.4 Saving Window Configurations in Registers
-‘C-x r w R’
-     Save the state of the selected frame’s windows in register R
-     (‘window-configuration-to-register’).
-‘C-x r f R’
-     Save the state of all frames, including all their windows, in
-     register R (‘frameset-to-register’).
-
-   Use ‘C-x r j R’ to restore a window or frame configuration.  This is
-  If you wish to delete these frames
-instead, use ‘C-u C-x r j R’.
-
-==============================================
-**** 13.7 Keyboard Macro Registers
-If you need to execute a keyboard macro (*note Keyboard Macros::)
-frequently, it is more convenient to put it in a register or save it
-(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
-stores the last keyboard macro in register R.
-=============================
-**** 13.5 Keeping Numbers in Registers
-‘C-u NUMBER C-x r n R’
-     Store NUMBER into register R (‘number-to-register’).
-‘C-u NUMBER C-x r + R’
-     If R contains a number, increment the number in that register by
-     NUMBER.  Note that command ‘C-x r +’ (‘increment-register’) behaves
-     differently if R contains text.  *Note Text Registers::.
-=================================
-** Options
-*** Visual
-*** Home 
-**** 3.5 Where do I put my init file?
-***** file
-On Windows, the .emacs file may be called _emacs for backward compatibility with DOS and FAT filesystems where filenames could not start with a dot. Some users prefer to continue using such a name due to historical problems various Windows tools had in the past with file names that begin with a dot. In Emacs 22 and later, the init file may also be called .emacs.d/init.el. Many of the other files that are created by lisp packages are now stored in the .emacs.d directory too, so this keeps all your Emacs related files in one place.
-
-All the files mentioned above should go in your HOME directory. The HOME directory is determined by following the steps below:
-
-***** environment variable HOME
-    If the environment variable HOME is set, use the directory it indicates.
-***** registry
-    If the registry entry HKCU\SOFTWARE\GNU\Emacs\HOME is set, use the directory it indicates.
-    If the registry entry HKLM\SOFTWARE\GNU\Emacs\HOME is set, use the directory it indicates. Not recommended, as it results in users sharing the same HOME directory.
-***** if HOME was not set
-    If C:\.emacs exists, then use C:/. This is for backward compatibility, as previous versions defaulted to C:/ if HOME was not set.
-    Use the user's AppData directory, usually a directory called AppData under the user's profile directory, the location of which varies according to Windows version and whether the computer is part of a domain. 
-
-***** Within Emacs, ~
-Within Emacs, ~ at the beginning of a file name is expanded to your HOME directory, so you can always find your .emacs file by typing the command C-x C-f ~/.emacs. 
-*** Text Eltments
-**** Parenthesis
-***** 5.27 How do I show which parenthesis matches the one I’m looking at?
-  Call show-paren-mode in your .emacs file:
-  (show-paren-mode 1)
-
-  You can also enable this mode by selecting the ‘Paren Match Highlighting’ option from the ‘Options’ menu of the Emacs menu bar at the top of any Emacs frame.
-
-  Alternatives to this mode include:
-
-  If you’re looking at a right parenthesis (or brace or bracket) you can delete it and reinsert it. Emacs will momentarily move the cursor to the matching parenthesis.
-
-  C-M-f (forward-sexp) and C-M-b (backward-sexp) will skip over one set of balanced parentheses, so you can see which parentheses match. (You can train it to skip over balanced brackets and braces at the same time by modifying the syntax table.)
-
-  Here is some Emacs Lisp that will make the % key show the matching parenthesis, like in vi. In addition, if the cursor isn’t over a parenthesis, it simply inserts a % like normal.
-  #+BEGIN_SRC elisp
-;; By an unknown contributor
-(global-set-key "%" 'match-paren)
-(defun match-paren (arg)
-"Go to the matching paren if on a paren; otherwise insert %."
-    (interactive "p")
-    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
-	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
-	    (t (self-insert-command (or arg 1)))))
-  #+END_SRC
-** dired
-*** запуск dired
+Original value was 
+"C:/msys64/home/Administrator/emacs-build/build/emacs-26.2/x86_64/nt/cmdproxy.exe"
+**** to git hub
+(setq explicit-shell-file-name "d:/Development/version-control.APP/Git/bin/sh.exe")
+(setq shell-file-name "sh")
+(setq explicit-sh.exe-args '("--noediting" "--login" "-i"))
+(setenv "SHELL" shell-file-name)
+
+# (setq explicit-sh.exe-args '("--login" "-i"))
+# (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+
+*** dired
+**** запуск dired
 
     C-x d  ~/foo/*.el  <RET>
     C-x d  ~/foo/*/*.el  <RET>
@@ -3197,7 +2359,7 @@ Within Emacs, ~ at the beginning of a file name is expanded to your HOME directo
 Dired buffer in a separate frame.
 
 		You can also invoke Dired by giving ‘C-x C-f’ (‘find-file’) a directory’s name.
-*** Emacs: Batch Rename Files
+**** Emacs: Batch Rename Files
 By Xah Lee. Date: 2007-08-30. Last updated: 2021-07-19.
 To rename multiple files in emacs, the most easy way is:
 
@@ -3206,19 +2368,19 @@ Alt + x dired-toggle-read-only 【Ctrl + x Ctrl + q】.
 Then, just edit the file names. (You can use Alt + x query-replace or Alt + x query-replace-regexp [see Emacs: Find Replace in Current File] or rectangle commands. [see Emacs: Edit Column Text, Rectangle Commands])
 When done, wdired-finish-edit 【Ctrl + c Ctrl + c】 to commit the changes.
 To abort, Alt + x wdired-abort-changes 【Ctrl + c Ctrl + k】.
-*** Chetshit 
+**** Chetshit 
 https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
-**** Dired Reference Card
+***** Dired Reference Card
  (based on Dired in GNU Emacs 27)
  Commands marked with (DX) require dired-x
-*****  Entering and Exiting Dired
+******  Entering and Exiting Dired
 	run dired
 	C-x d
 	dired the directory of the file you are editing
 	C-x C-j (DX)
 	quit dired
 	q
-***** 	Motion Commands
+****** 	Motion Commands
 	move up to previous line
 	p
 	move down to next line
@@ -3239,10 +2401,10 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	^
 	move to first child subdirectory
 	M-C-d
-***** 	Mouse Commands
+****** 	Mouse Commands
 	visit file or directory
 	Mouse_Button_2
-***** 	Immediate Actions on Files
+****** 	Immediate Actions on Files
 	visit current file
 	f
 	view current file
@@ -3253,7 +2415,7 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	+
 	compare file at point with the one at mark
 	=
-***** 	Marking and Unmarking Files
+****** 	Marking and Unmarking Files
 	mark a file or subdirectory for later commands
 	m
 	unmark a file or all files of a subdirectory
@@ -3278,7 +2440,7 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	 * c
 	mark files for which Elisp expression returns t
 	 * ( (DX)
-***** 	Modifying the Dired Buffer
+****** 	Modifying the Dired Buffer
 	insert a subdirectory into this buffer
 	i
 	remove marked files from the listing
@@ -3297,7 +2459,7 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	M-$
 	hide or unhide subdirectory
 	$
-***** 	Commands on Files Marked or Specified
+****** 	Commands on Files Marked or Specified
 	by the Prefix
 	copy file(s)
 	C
@@ -3339,7 +2501,7 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	!
 	asynchronous shell command on file(s)
 	&
-***** 	Flagging Files for Deletion
+****** 	Flagging Files for Deletion
 	Unmark commands remove delete flags
 	flag file for deletion
 	d
@@ -3355,7 +2517,7 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	x
 	flag files matching a regular expression
 	% d
-***** 	Regular Expression Commands
+****** 	Regular Expression Commands
 	mark filenames matching a regular expression
 	% m
 	copy marked files by regexp
@@ -3370,29 +2532,29 @@ https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
 	% Y
 	mark for deletion
 	% d
-***** 	Dired and Find
+****** 	Dired and Find
 	dired file(s) whose name matches a pattern M-x find-name-dired
 	dired file(s) that contain pattern
 	M-x find-grep-dired
 	dired file(s) based on find output
 	M-x find-dired
-***** 	Getting Help
+****** 	Getting Help
 	dired help
 	h
 	dired summary (short help) and error log
 	?
-*** Edit like tekst
+**** Edit like tekst
 		c-x c-q
 	Перевести в режим редактирования страници
 	по завершении 
 	с-с с-с
 	с- с-esk для отмены
-*** Evil mode 
-**** GitHub - emacs-evil/evil-collection:
-***** links
+**** Evil mode 
+***** GitHub - emacs-evil/evil-collection:
+****** links
 A set of keybindings for evil-mode
 https://github.com/emacs-evil/evil-collection
-***** Evil Collection
+****** Evil Collection
 [[https://github.com/emacs-evil/evil-collection/actions][https://github.com/emacs-evil/evil-collection/workflows/build/badge.svg?branch=master]]
 [[https://melpa.org/#/evil-collection][https://melpa.org/packages/evil-collection-badge.svg]]
 [[https://stable.melpa.org/#/evil-collection][https://stable.melpa.org/packages/evil-collection-badge.svg]]
@@ -4009,10 +3171,10 @@ Topics
 
 Resources
 
-**** Jonathan Bennett's Blog
-***** links
+***** Jonathan Bennett's Blog
+****** links
 https://jonathanabennett.github.io/blog/2019/06/05/file-management-in-emacs-with-dired-mode/
-***** File Management in Emacs with dired-mode
+****** File Management in Emacs with dired-mode
 IMPORTANT NOTES
 Dired is Big
 dired has turned out to be a far, FAR bigger thing to learn than I had anticipated. That, coupled with the fact that my writing time vanished in the fires of the
@@ -4191,63 +3353,63 @@ there to edit the text in Emacs instead!"
 That sounds amazing. If it actually works, I hold to combine that with emacsclient and org-protocol to move even more things into Emacs. If anybody has
 worked on this and gotten it working, please let me know! 
 
-*** set view 
+**** set view 
 		( - меняет показывать полные даные или частичные
-*** Двух понельный мод 
-*** копирования переименованни е удаление 
-*** Применить шел команды 
-*** шел в отдельной панели 
-*** Просмотр изображений 
-** eww
-**** other
-*** 2 Basic Usage
+**** Двух понельный мод 
+**** копирования переименованни е удаление 
+**** Применить шел команды 
+**** шел в отдельной панели 
+**** Просмотр изображений 
+*** eww
+***** other
+**** 2 Basic Usage
  You can open a URL or search the web with the command ‘M-x eww’.  If the
  input doesn’t look like a URL or domain name the web will be searched
  via ‘eww-search-prefix’.  The default search engine is DuckDuckGo
  (https://duckduckgo.com).  If you want to open a file either prefix the
  file name with ‘file://’ or use the command ‘M-x eww-open-file’.
 If loading the URL was successful the buffer ‘*eww*’ is opened and
-*** keys
-**** ‘q’ :  eww-quit : 
+**** keys
+***** ‘q’ :  eww-quit : 
  the web page is rendered in it.  You can leave EWW by pressing ‘q’ or
  
  exit the browser by calling ‘eww-quit’. 
-**** ‘g’ : (‘eww-reload’). 
+***** ‘g’ : (‘eww-reload’). 
  To reload the web page hit ‘g’
  (‘eww-reload’). 
-**** ‘w’ : (‘eww-copy-page-url’) : 
+***** ‘w’ : (‘eww-copy-page-url’) : 
  Pressing ‘w’ (‘eww-copy-page-url’) will copy the
  current URL to the kill ring.
-**** M-<RET> : ‘eww-open-in-new-buffer’
+***** M-<RET> : ‘eww-open-in-new-buffer’
 		The ‘M-<RET>’ command (‘eww-open-in-new-buffer’) opens the URL at
  point in a new EWW buffer, akin to opening a link in a new “tab” in
  other browsers.
-**** ‘R’ command (‘eww-readable’) : 
+***** ‘R’ command (‘eww-readable’) : 
 		The ‘R’ command (‘eww-readable’) will attempt to determine which part
  of the document contains the “readable” text, and will only display this
  part.  This usually gets rid of menus and the like.
-**** ‘F’ command (‘eww-toggle-fonts’) : 
+***** ‘F’ command (‘eww-toggle-fonts’) : 
 		The ‘F’ command (‘eww-toggle-fonts’) toggles whether to use
  variable-pitch fonts or not.  This sets the ‘shr-use-fonts’ variable.
-**** ‘M-C’ command (‘eww-toggle-colors’) : 
+***** ‘M-C’ command (‘eww-toggle-colors’) : 
 		The ‘M-C’ command (‘eww-toggle-colors’) toggles whether to use
  HTML-specified colors or not.  This sets the ‘shr-use-colors’ variable.
-**** ‘d’ (‘eww-download’) : 
+***** ‘d’ (‘eww-download’) : 
 		A URL under the point can be downloaded with ‘d’ (‘eww-download’).
  The file will be written to the directory specified in
  ‘eww-download-directory’ (Default: ‘~/Downloads/’).
 
-**** ‘l’ (‘eww-back-url’) : 
+***** ‘l’ (‘eww-back-url’) : 
 		EWW remembers the URLs you have visited to allow you to go back and
  forth between them.  By pressing ‘l’ (‘eww-back-url’) you go to the
  previous URL. 
-**** ‘r’ (‘eww-forward-url’) : 
+***** ‘r’ (‘eww-forward-url’) : 
  You can go forward again with ‘r’ (‘eww-forward-url’).
-**** ‘H’ (‘eww-list-histories’) : 
+***** ‘H’ (‘eww-list-histories’) : 
  If you want an overview of your browsing history press ‘H’
  (‘eww-list-histories’) to open the history buffer ‘*eww history*’.  The
  history is lost when EWW is quit. 
-****  can use bookmarks.
+*****  can use bookmarks.
  If you want to remember websites you
  can use bookmarks.
 		Along with the URLs visited, EWW also remembers both the rendered
@@ -4256,28 +3418,28 @@ If loading the URL was successful the buffer ‘*eww*’ is opened and
  keep their number within a set limit, as specified by
  ‘eww-history-limit’; the default being 50.  This variable could also be
  set to ‘nil’ to allow for the history list to grow indefinitely.
-**** ‘b’ (‘eww-add-bookmark’)  : 
+***** ‘b’ (‘eww-add-bookmark’)  : 
 		EWW allows you to “bookmark” URLs.  Simply hit ‘b’
 		
  (‘eww-add-bookmark’) to store a bookmark for the current website.  You
  
-**** ‘B’ (‘eww-list-bookmarks’) : 
+***** ‘B’ (‘eww-list-bookmarks’) : 
  can view stored bookmarks with ‘B’ (‘eww-list-bookmarks’).  This will
  open the bookmark buffer ‘*eww bookmarks*’.
 
-**** PDFs are viewed : 
+***** PDFs are viewed : 
 		PDFs are viewed inline, by default, with ‘doc-view-mode’, but this
  can be customized by using the mailcap (*note (emacs-mime)mailcap::)
  mechanism, in particular ‘mailcap-mime-data’.
-**** ‘S’ (‘eww-list-buffers’) : 
+***** ‘S’ (‘eww-list-buffers’) : 
 		To get summary of currently opened EWW buffers, press ‘S’
  (‘eww-list-buffers’).  The ‘*eww buffers*’ buffer allows you to quickly
  kill, flip through and switch to specific EWW buffer.  
-**** ‘s’ (‘eww-switch-to-buffer’). : 
+***** ‘s’ (‘eww-switch-to-buffer’). : 
 To switch EWW
  buffers through a minibuffer prompt, press ‘s’ (‘eww-switch-to-buffer’).
 
-**** ‘&’ (‘eww-browse-with-external-browser’) : 
+***** ‘&’ (‘eww-browse-with-external-browser’) : 
 		Although EWW and shr.el do their best to render webpages in GNU Emacs
  some websites use features which can not be properly represented or are
  not implemented (E.g., JavaScript).  If you have trouble viewing a
@@ -4289,94 +3451,1235 @@ To switch EWW
  can tell EWW to open specific content automatically in an external
  browser by customizing ‘eww-use-external-browser-for-content-type’.
 
-** eShell
-*** doc
-**** commands
-***** [so] Is it therefore possible to see what actual elisp is being invoked...
-https://emacs.stackexchange.com/questions/14979/access-to-the-elisp-commands-behind-eshell-commands/14981#14981
+*** Tramp
+**** fest experens
+(setenv "PATH"
+				(concat "D:/shell/Putty/plink.exe ;"
+								(getenv "PATH")))
 
-Yes. They are all located in the eshell folder under Resources/elisp in the Emacs app folder. See screenshot of files on my computer. 
+								открыть с-x с-f
+//plink:pi@192.168.0.124:/
+**** Нужно сделать 
+***** настроить дайред
+дефалтное короткиф вывод имен
+*** debuging : 
+**** Edebug
+***** Instrumenting for Edebug : 
+To debug a Lisp program with Edebug, you must first instrument the Lisp code that you want to debug. A simple way to do this is to first move point into the definition of a function or macro and then do C-u C-M-x (eval-defun with a prefix argument). See Instrumenting for Edebug, for alternative ways to instrument code.  
+***** special commands of Edebug are available : 
+The special commands of Edebug are available in the source code buffer in addition to the commands of Emacs Lisp mode. For example, you can type the Edebug command SPC to execute until the next stop point. If you type SPC once after entry to fac, here is the display you will see:
+
+(defun fac (n)
+=>(if ∗(< 0 n)
+      (* n (fac (1- n)))
+    1))
+
+When Edebug stops execution after an expression, it displays the expression’s value in the echo area.
+
+Other frequently used commands are ~b~ to set a breakpoint at a stop point, ~g~ to execute until a breakpoint is reached, and ~q~ to exit Edebug and return to the top-level command loop. Type ~?~ to display a list of all Edebug commands. 
+~u~ unset brekepoint
+***** command I : 
+While Edebug is active, the command I (edebug-instrument-callee) instruments the definition of the function or macro called by the list form after point, if it is not already instrumented. This is possible only if Edebug knows where to find the source for that function; for this reason, after loading Edebug, eval-region records the position of every definition it evaluates, even if not instrumenting it. 
+***** i command : 
+See also the 
+i command (see Jumping), which steps into the call after instrumenting the function. 
+***** 19.2.4 Jumping
+The commands described in this section execute until they reach a specified location. All except i make a temporary breakpoint to establish the place to stop, then switch to go mode. Any other breakpoint reached before the intended stop point will also stop execution. See Edebug Breakpoints, for the details on breakpoints.
+
+These commands may fail to work as expected in case of nonlocal exit, as that can bypass the temporary breakpoint where you expected the program to stop.
+
+h
+
+    Proceed to the stop point near where point is (edebug-goto-here).
+f
+
+    Run the program for one expression (edebug-forward-sexp).
+o
+
+    Run the program until the end of the containing sexp (edebug-step-out).
+i
+
+    Step into the function or macro called by the form after point (edebug-step-in). 
+
+The h command proceeds to the stop point at or after the current location of point, using a temporary breakpoint.
+
+The f command runs the program forward over one expression. More precisely, it sets a temporary breakpoint at the position that forward-sexp would reach, then executes in go mode so that the program will stop at breakpoints.
+
+With a prefix argument n, the temporary breakpoint is placed n sexps beyond point. If the containing list ends before n more elements, then the place to stop is after the containing expression.
+
+You must check that the position forward-sexp finds is a place that the program will really get to. In cond, for example, this may not be true.
+
+For flexibility, the f command does forward-sexp starting at point, rather than at the stop point. If you want to execute one expression from the current stop point, first type w (edebug-where) to move point there, and then type f.
+
+The o command continues out of an expression. It places a temporary breakpoint at the end of the sexp containing point. If the containing sexp is a function definition itself, o continues until just before the last sexp in the definition. If that is where you are now, it returns from the function and then stops. In other words, this command does not exit the currently executing function unless you are positioned after the last sexp.
+
+Normally, the h, f, and o commands display “Break” and pause for edebug-sit-for-seconds before showing the result of the form just evaluated. You can avoid this pause by setting edebug-sit-on-break to nil. See Edebug Options.
+
+The i command steps into the function or macro called by the list form after point, and stops at its first stop point. Note that the form need not be the one about to be evaluated. But if the form is a function call about to be evaluated, remember to use this command before any of the arguments are evaluated, since otherwise it will be too late.
+
+The i command instruments the function or macro it’s supposed to step into, if it isn’t instrumented already. This is convenient, but keep in mind that the function or macro remains instrumented unless you explicitly arrange to deinstrument it. 
+***** different way to remove the instrumentation : 
+A different way to remove the instrumentation from a definition is to use the edebug-remove-instrumentation command. It also allows removing the instrumentation from everything that has been instrumented. 
+***** 19.2.9 Evaluation
+
+While within Edebug, you can evaluate expressions as if Edebug were not running. Edebug tries to be invisible to the expression’s evaluation and printing. Evaluation of expressions that cause side effects will work as expected, except for changes to data that Edebug explicitly saves and restores. See The Outside Context, for details on this process.
+
+e exp RET
+
+    Evaluate expression exp in the context outside of Edebug (edebug-eval-expression). That is, Edebug tries to minimize its interference with the evaluation.
+M-: exp RET
+
+    Evaluate expression exp in the context of Edebug itself (eval-expression).
+C-x C-e
+
+    Evaluate the expression before point, in the context outside of Edebug (edebug-eval-last-sexp). With the prefix argument of zero (C-u 0 C-x C-e), don’t shorten long items (like strings and lists). 
+
+Edebug supports evaluation of expressions containing references to lexically bound symbols created by the following constructs in cl.el: lexical-let, macrolet, and symbol-macrolet. 
+***** 19.2.4 Jumping
+
+The commands described in this section execute until they reach a specified location. All except i make a temporary breakpoint to establish the place to stop, then switch to go mode. Any other breakpoint reached before the intended stop point will also stop execution. See Edebug Breakpoints, for the details on breakpoints.
+
+These commands may fail to work as expected in case of nonlocal exit, as that can bypass the temporary breakpoint where you expected the program to stop.
+
+h
+
+    Proceed to the stop point near where point is (edebug-goto-here).
+f
+
+    Run the program for one expression (edebug-forward-sexp).
+o
+
+    Run the program until the end of the containing sexp (edebug-step-out).
+i
+
+    Step into the function or macro called by the form after point (edebug-step-in). 
+
+The h command proceeds to the stop point at or after the current location of point, using a temporary breakpoint.
+
+The f command runs the program forward over one expression. More precisely, it sets a temporary breakpoint at the position that forward-sexp would reach, then executes in go mode so that the program will stop at breakpoints.
+
+With a prefix argument n, the temporary breakpoint is placed n sexps beyond point. If the containing list ends before n more elements, then the place to stop is after the containing expression.
+
+You must check that the position forward-sexp finds is a place that the program will really get to. In cond, for example, this may not be true.
+
+For flexibility, the f command does forward-sexp starting at point, rather than at the stop point. If you want to execute one expression from the current stop point, first type w (edebug-where) to move point there, and then type f.
+
+The o command continues out of an expression. It places a temporary breakpoint at the end of the sexp containing point. If the containing sexp is a function definition itself, o continues until just before the last sexp in the definition. If that is where you are now, it returns from the function and then stops. In other words, this command does not exit the currently executing function unless you are positioned after the last sexp.
+
+Normally, the h, f, and o commands display “Break” and pause for edebug-sit-for-seconds before showing the result of the form just evaluated. You can avoid this pause by setting edebug-sit-on-break to nil. See Edebug Options.
+
+The i command steps into the function or macro called by the list form after point, and stops at its first stop point. Note that the form need not be the one about to be evaluated. But if the form is a function call about to be evaluated, remember to use this command before any of the arguments are evaluated, since otherwise it will be too late.
+
+The i command instruments the function or macro it’s supposed to step into, if it isn’t instrumented already. This is convenient, but keep in mind that the function or macro remains instrumented unless you explicitly arrange to deinstrument it. 
+***** 19.2.6.1 Edebug Breakpoints
+
+While using Edebug, you can specify breakpoints in the program you are testing: these are places where execution should stop. You can set a breakpoint at any stop point, as defined in Using Edebug. For setting and unsetting breakpoints, the stop point that is affected is the first one at or after point in the source code buffer. Here are the Edebug commands for breakpoints:
+
+b
+
+    Set a breakpoint at the stop point at or after point (edebug-set-breakpoint). If you use a prefix argument, the breakpoint is temporary—it turns off the first time it stops the program. An overlay with the edebug-enabled-breakpoint or edebug-disabled-breakpoint faces is put at the breakpoint.
+u
+
+    Unset the breakpoint (if any) at the stop point at or after point (edebug-unset-breakpoint).
+U
+
+    Unset any breakpoints in the current form (edebug-unset-breakpoints).
+D
+
+    Toggle whether to disable the breakpoint near point (edebug-toggle-disable-breakpoint). This command is mostly useful if the breakpoint is conditional and it would take some work to recreate the condition.
+x condition RET
+
+    Set a conditional breakpoint which stops the program only if evaluating condition produces a non-nil value (edebug-set-conditional-breakpoint). With a prefix argument, the breakpoint is temporary.
+B
+
+    Move point to the next breakpoint in the current definition (edebug-next-breakpoint). 
+
+While in Edebug, you can set a breakpoint with b and unset one with u. First move point to the Edebug stop point of your choice, then type b or u to set or unset a breakpoint there. Unsetting a breakpoint where none has been set has no effect.
+
+Re-evaluating or reinstrumenting a definition removes all of its previous breakpoints.
+
+A conditional breakpoint tests a condition each time the program gets there. Any errors that occur as a result of evaluating the condition are ignored, as if the result were nil. To set a conditional breakpoint, use x, and specify the condition expression in the minibuffer. Setting a conditional breakpoint at a stop point that has a previously established conditional breakpoint puts the previous condition expression in the minibuffer so you can edit it.
+
+You can make a conditional or unconditional breakpoint temporary by using a prefix argument with the command to set the breakpoint. When a temporary breakpoint stops the program, it is automatically unset.
+
+Edebug always stops or pauses at a breakpoint, except when the Edebug mode is Go-nonstop. In that mode, it ignores breakpoints entirely.
+
+To find out where your breakpoints are, use the B command, which moves point to the next breakpoint following point, within the same function, or to the first breakpoint if there are no following breakpoints. This command does not continue execution—it just moves point in the buffer. 
+**** (debug) 
+***** (debug) 
+debug is an autoloaded interactive compiled Lisp function in
+‘debug.el’.
+
+(debug &rest ARGS)
+
+  Probably introduced at or before Emacs version 1.2.
+
+Enter debugger.  ‘c’ returns from the debugger.
+Arguments are mainly for use when this is called from the internals
+of the evaluator.
+
+You may call with no args, or you may pass nil as the first arg and
+any other args you like.  In that case, the list of args after the
+first will be printed into the backtrace buffer.
+
+If ‘inhibit-redisplay’ is non-nil when this function is called,
+the debugger will not be entered.
+
+[back]
+***** debug-on-entry : 
+debug-on-entry is an autoloaded interactive compiled Lisp function in
+‘debug.el’.
+
+(debug-on-entry FUNCTION)
+
+  Probably introduced at or before Emacs version 1.2.
+
+Request FUNCTION to invoke debugger each time it is called.
+
+When called interactively, prompt for FUNCTION in the minibuffer.
+
+This works by modifying the definition of FUNCTION.  If you tell the
+debugger to continue, FUNCTION’s execution proceeds.  If FUNCTION is a
+normal function or a macro written in Lisp, you can also step through
+its execution.  FUNCTION can also be a primitive that is not a special
+form, in which case stepping is not possible.  Break-on-entry for
+primitive functions only works when that function is called from Lisp.
+
+Use M-x cancel-debug-on-entry to cancel the effect of this command.
+Redefining FUNCTION also cancels it.
+
+[back]
+***** backtrace : 
+backtrace is an autoloaded compiled Lisp function in ‘backtrace.el’.
+
+(backtrace)
+
+  Probably introduced at or before Emacs version 1.2.
+
+Print a trace of Lisp function calls currently active.
+Output stream used is value of ‘standard-output’.
+
+[back]
+**** ielm : 
+ielm is an autoloaded interactive Lisp function in ‘ielm.el’.
+
+(ielm &optional BUF-NAME)
+
+  Probably introduced at or before Emacs version 19.24.
+
+Interactively evaluate Emacs Lisp expressions.
+Switches to the buffer named BUF-NAME if provided (‘*ielm*’ by default),
+or creates it if it does not exist.
+See ‘inferior-emacs-lisp-mode’ for details.
+
+[back]
+
+**** lisp-interaction-mode : 
+***** (lisp-interaction-mode) : 
+lisp-interaction-mode is an interactive compiled Lisp function in
+‘elisp-mode.el’.
+(lisp-interaction-mode)
+
+  Parent mode: ‘emacs-lisp-mode’.
+  Probably introduced at or before Emacs version 21.2.
+
+Major mode for typing and evaluating Lisp forms.
+Like Lisp mode except that M-x eval-print-last-sexp evals the Lisp expression
+before point, and prints its value into the buffer, advancing point.
+Note that printing is controlled by ‘eval-expression-print-length’
+and ‘eval-expression-print-level’.
+***** Commands:
+Delete converts tabs to spaces as it moves back.
+Paragraphs are separated only by blank lines.
+Semicolons start comments.
+***** key             binding
+---             -------
+
+C-j		eval-print-last-sexp
+ESC		Prefix Command
+DEL		backward-delete-char-untabify
+
+C-M-i		completion-at-point
+C-M-q		indent-pp-sexp
+C-M-x		eval-defun
+
+C-M-q		indent-sexp
+  (that binding is currently shadowed by another mode)
+
+C-M-q		prog-indent-sexp
+  (that binding is currently shadowed by another mode)
 
 
-  So I'd like to have the actual elisp...
+***** hooks : 
+In addition to any hooks its parent mode ‘emacs-lisp-mode’ might have run,
+this mode runs the hook ‘lisp-interaction-mode-hook’, as the final or penultimate step
+during initialization.
+
+[back]
+**** litable 
+On-the-fly evaluation/substitution of emacs lisp code
+
+Inspired by Light Table's similar feature.
+
+To start this up, simply enable the litable minor mode in the buffer by calling M-x litable-mode.
+
+Litable keeps a list of pure functions as a safeguard for unwanted evaluations. A function must first be accepted into this list (using M-x litable-accept-as-pure) before it can be evaluated on-the-fly. You should take care of what function you accept as pure to avoid any unfortunate accidents. Also, note that the pure functions list persists across sessions.
+
+Not meant to be used in production yet, be warned!
+In action
+
+    Presentation of the basic prototype: http://www.youtube.com/watch?v=TgHvRcbYJ-8 [2:32] (you don't have to watch this)
+    New features, less slow awkward typing: https://www.youtube.com/watch?v=mNO-vgq3Avg [1:50]
+
+** To set on a file by file
+To set the VisualLineMode on a file by file basis using emacs local variables, try:
+    #  local variables:
+    #    eval: (visual-line-mode t)
+** Install package
+*** lisp auto code
+		#+begin_src emacs-lisp :tangle yes
+ (unless (package-installed-p 'yasnippet-snippets)
+   (package-install 'yasnippet-snippets))
+ (require 'yasnippet-snippets)
+		#+end_src
+*** устанавливать в ручную : 
+;; только если устанавливать в ручную
+;; (add-to-list 'load-path
+;;               "~/.emacs.d/plugins/yasnippet")
+*** autoload : 
+(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
+*** eval-after-load : 
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+*** describe-package (найти пакаджи на сервере и описанить)
+describe-package
+
+** load require:
+	#+begin_src emacs-lisp :tangle yes
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends '(company-irony-c-headers company-irony)))
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key "\t" 'company-complete-common)
+	#+end_src
+** Keyborde help
+*** evaluate
+**** 27.9 Evaluating Emacs Lisp Expressions
+Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
+Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
+M-:
+    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
+~C-x C-e~
+    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
+~C-M-x (in Emacs Lisp mode)~
+~M-x eval-defun~
+    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
+~M-x eval-region~
+    Evaluate all the Emacs Lisp expressions in the region.
+~M-x eval-buffer~
+    Evaluate all the Emacs Lisp expressions in the buffer. 
+
+M-: (eval-expression) reads an expression using the minibuffer, and evaluates it. (Before evaluating the expression, the current buffer switches back to the buffer that was current when you typed M-:, not the minibuffer into which you typed the expression.)
+
+The command C-x C-e (eval-last-sexp) evaluates the Emacs Lisp expression preceding point in the buffer, and displays the value in the echo area. When the result of an evaluation is an integer, it is displayed together with the value in other formats (octal, hexadecimal, and character if eval-expression-print-maximum-character, described below, allows it).
+
+If M-: or C-x C-e is given a prefix argument, it inserts the value into the current buffer at point, rather than displaying it in the echo area. If the prefix argument is zero, any integer output is inserted together with its value in other formats (octal, hexadecimal, and character). Such a prefix argument also prevents abbreviation of the output according to the variables eval-expression-print-level and eval-expression-print-length (see below). Similarly, a prefix argument of -1 overrides the effect of eval-expression-print-length.
+
+The eval-defun command is bound to C-M-x in Emacs Lisp mode. It evaluates the top-level Lisp expression containing or following point, and prints the value in the echo area. In this context, a top-level expression is referred to as a “defun”, but it need not be an actual defun (function definition). In particular, this command treats defvar expressions specially. Normally, evaluating a defvar expression does nothing if the variable it defines already has a value. But this command unconditionally resets the variable to the initial value specified by the defvar; this is convenient for debugging Emacs Lisp programs. defcustom and defface expressions are treated similarly. Note that the other commands documented in this section do not have this special feature.
+
+With a prefix argument, C-M-x instruments the function definition for Edebug, the Emacs Lisp Debugger. See Instrumenting for Edebug.
+
+The command M-x eval-region parses the text of the region as one or more Lisp expressions, evaluating them one by one. M-x eval-buffer is similar but evaluates the entire buffer.
+
+The options eval-expression-print-level and eval-expression-print-length control the maximum depth and length of lists to print in the result of the evaluation commands before abbreviating them. Supplying a zero prefix argument to eval-expression or eval-last-sexp causes lists to be printed in full. eval-expression-debug-on-error controls whether evaluation errors invoke the debugger when these commands are used; its default is t. eval-expression-print-maximum-character prevents integers which are larger than it from being displayed as characters. 
+5.31 How do I execute (“evaluate”) a piece of Emacs Lisp code?
+There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp form:
+    If you want it evaluated every time you run Emacs, put it in a file named .emacs in your home directory. This is known as “your .emacs file,” and contains all of your personal customizations.
+    You can type the form in the *scratch* buffer, and then type <LFD> (or C-j) after it. The result of evaluating the form will be inserted in the buffer.
+    ~In emacs-lisp-mode~, typing ~C-M-x~ evaluates a top-level form before or around point.
+    Typing ~C-x C-e~ in ~any buffer~ evaluates the Lisp form immediately before point and prints its value in the echo area.
+    Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
+    You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
+    The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
+**** python
+***** run unit test
+ C-c C-t [elpy-test]
+
+*** get help 
+**** get menu command 
+     Some of the commands in the menu bar have ordinary key bindings as well;
+	if so, a key binding is shown after the item itself. 
+ To view the full ~command name~ and documentation for a menu item, type ~C-h k~,
+	and then select the menu bar with the mouse in the usual way (see Key Help). 
+*** coment line 
+26.5.1 Comment Commands
+The following commands operate on comments:
+M-;
+    Insert or realign comment on current line; if the region is active, comment or uncomment the region instead (comment-dwim).
+~C-x C-;~
+    Comment or uncomment the current line (comment-line). If the region is active, comment or uncomment the lines in the region instead.
+C-u M-;
+    Kill comment on current line (comment-kill).
+C-x ;
+    Set comment column (comment-set-column).
+C-M-j
+M-j
+    Like <RET> followed by inserting and aligning a comment (comment-indent-new-line). See Multi-Line Comments.
+M-x comment-region
+C-c C-c (in C-like modes)
+    Add comment delimiters to all the lines in the region. 
+
+The command to create or align a comment is M-; (comment-dwim). The word “dwim” is an acronym for “Do What I Mean”; it indicates that this command can be used for many different jobs relating to comments, depending on the situation where you use it.
+When a region is active (see Mark), M-; either adds comment delimiters to the region, or removes them. If every line in the region is already a comment, it uncomments each of those lines by removing their comment delimiters. Otherwise, it adds comment delimiters to enclose the text in the region.
+If you supply a prefix argument to M-; when a region is active, that specifies the number of comment delimiters to add or delete. A positive argument n adds n delimiters, while a negative argument -n removes n delimiters.
+If the region is not active, and there is no existing comment on the current line, M-; adds a new comment to the current line. If the line is blank (i.e., empty or containing only whitespace characters), the comment is indented to the same position where <TAB> would indent to (see Basic Indent). If the line is non-blank, the comment is placed after the last non-whitespace character on the line. Emacs tries to fit the comment between the columns specified by the variables comment-column and comment-fill-column (see Options for Comments), if possible. Otherwise, it will choose some other suitable position, usually separated from the non-comment text by at least one space. In each case, Emacs places point after the comment's starting delimiter, so that you can start typing the comment text right away.
+You can also use M-; to align an existing comment. If a line already contains the comment-start string, M-; realigns it to the conventional alignment and moves point after the comment's starting delimiter. As an exception, comments starting in column 0 are not moved. Even when an existing comment is properly aligned, M-; is still useful for moving directly to the start of the comment text.
+~C-x C-;~ (comment-line) comments or uncomments complete lines. When a region is active (see Mark), C-x C-; either comments or uncomments the lines in the region. If the region is not active, this command comments or uncomments the line point is on. With a positive prefix argument n, it operates on n lines starting with the current one; with a negative n, it affects n preceding lines. After invoking this command with a negative argument, successive invocations with a positive argument will operate on preceding lines as if the argument were negated.
+C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
+The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
+For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
+*** Rebind keys
+**** keys to keys
+(global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
+*** Movement 
+‘C-M-a’
+‘C-M-e’
+   Move point to the beginning or end of the current function or
+[[info:emacs#Motion in C][info:emacs#Motion in C]]  
+‘C-M-f’
+     Move forward over a balanced expression (‘forward-sexp’).
+‘C-M-b’
+     Move backward over a balanced expression (‘backward-sexp’).
+‘C-M-k’
+     Kill balanced expression forward (‘kill-sexp’).
+‘C-M-t’
+     Transpose expressions (‘transpose-sexps’).
+‘C-M-@’
+‘C-M-<SPC>’
+     Put mark after following expression (‘mark-sexp’).
+‘C-M-n’
+     Move forward over a parenthetical group (‘forward-list’).
+‘C-M-p’
+     Move backward over a parenthetical group (‘backward-list’).
+‘C-M-u’
+     Move up in parenthesis structure (‘backward-up-list’).
+‘C-M-d’
+     Move down in parenthesis structure (‘down-list’).
+*** Intends 
+*** replace-string : 
+M-x replace-string RET ; RET C-q C-j.
+
+    C-q for quoted-insert,
+
+    C-j is a newline.
 
 
-Open any of those files to see the actual elisp code. For example, ls command with its normal switches is implemented in em-ls.el file by John Wiegley and its core uses expand-file-name function.
+** Environment Variable
+*** "PATH" : 
+**** Описание бага\фичи
+	 переменая енворемент обновляется только после перезапуска системы
+ тоесть после установки нового софта - он не виден даже после перезапуска емак
+ ещё могут быть проблемы посколько есть переменая пути систему
+ а есть переменая запуска емака и есть переменая рабочей деректории емака
+***** решение:
+	  установить инворемнт перемуную в ручную для запушеного еворемента
+	  из емака
+***** фича
+	  есть возможность поексмеремтиовать 
+	  если нет уверености что всё настроено как надо
+**** setenv "PATH" : 
+  ;; example of setting env var named “path”, by appending a new path to existing path
+  (setenv "PATH"
+	(concat
+	 "C:/cygwin/usr/local/bin" ";"
+	 "C:/cygwin/usr/bin" ";"
+	 "C:/cygwin/bin" ";"
+	 (getenv "PATH")
+	)
+  )
+**** getenv "PATH" : 
+ (to evaluate elisp code, select it and Alt+x eval-region.
+ [see Evaluate Emacs Lisp Code])
+	 (getenv "PATH")
+**** edit in file
+	 copy to *scratch*
+(progn
+(forward-line 3)
+(insert (getenv "PATH"))
+)
+  (setenv "PATH"
+"
 
-How to find which lisp file provides what shell command? Open eshell prompt and then type, say you want to know where kill is in elisp:
-
-which kill
-
-
-will tell you that 
-
-eshell/kill is a compiled Lisp function in `esh-proc.el'
-
-
-What other commands are available in eshell?
-
-see the [manual][2]
-
-
-
-  there is no way I know of running eshell commands as Babel "code blocks."
-
-
-There are no special eshell commands per se. Eshell mimics standard unix shell commands using existing lisp functions. You can invoke those same functions in org-babel lisp blocks without any mediating functions implemented in eshell. 
-    
-***** so find-function
-        e.g.: M-x find-function RET eshell/ls RET
-
-I like having find-function bound to C-hC-f as a variant on the standard describe-function binding (via which you can also indirectly get to the code, FYI).
-
-You could also use the following:
-#+BEGIN_SRC shell
-(defun eshell/goto (name)
-  "Visit the source code for the specified eshell command."
-  (let ((func (eshell-find-alias-function name)))
-    (if func
-        (find-function func)
-      (error "%s is not an elisp function" name))))
-#+END_SRC
-$ goto ls
-
-
-If you want to know what's implemented in elisp and what isn't, you could just ask Emacs to complete on eshell/
-
-e.g.: C-uC-ha eshell/ RET
-** Shell
-*** Описание 
-используется для запуска других процесов
-может сильно влиять на работу режимов
-поскольку процес может запускатся из eshell
-но при этом глючить в шеле
-и как результат нечего не будет работать
-просто потому что в винде
-нужно заменить на чтонить другое
-*** explicit-shell-file-name : 
-You can start an interactive shell in Emacs by typing M-x shell. 
-By default, this will start the standard Windows shell cmd.exe. 
-Emacs uses the SHELL environment variable to determine which
-program to use as the shell.  To instruct Emacs to use a non-default
-shell, you can either set this environment variable, or customize
-explicit-shell-file-name.  You can also customize
-*** shell-file-name : 
-shell-file-name to change the shell that will be used by
-subprocesses that are started with shell-command and
-related non-interactive shell commands.
-
+"
+)
+*** SHELL : 
+If the path printed by evaluating (getenv "SHELL") in Emacs points at bash
+or zsh, this should work fine.
+**** getenv : 
+(getenv "SHELL")
 "D:/Development/lisp/Emacs/libexec/emacs/26.2/x86_64-w64-mingw32/cmdproxy.exe"
-Original value was 
-"C:/msys64/home/Administrator/emacs-build/build/emacs-26.2/x86_64/nt/cmdproxy.exe"
-*** to git hub
-(setq explicit-shell-file-name "d:/Development/version-control.APP/Git/bin/sh.exe")
-(setq shell-file-name "sh")
-(setq explicit-sh.exe-args '("--noediting" "--login" "-i"))
-(setenv "SHELL" shell-file-name)
 
-# (setq explicit-sh.exe-args '("--login" "-i"))
-# (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+*** exec-path
+**** Difference between exec-path and PATH
+	 The value of environment variable “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
+	 The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
 
+(when (string-equal system-type "windows-nt")
+  (setq exec-path
+'(
+"C:/Program Files (x86)/Emacs/emacs/bin/"
+"C:/Program Files (x86)/Emacs/EmacsW32/gnuwin32/bin/"
+"C:/Windows/system32/"
+"C:/Windows/"
+"C:/Windows/System32/Wbem/"
+"C:/Windows/system32/WindowsPowerShell/v1.0/"
+)
+ ))
+**** показать exec-path
+(message exec-path)
+  (setq exec-path)
+**** set
+
+(setq exec-path (append exec-path '("D:/shell/CygWin/cygwin64/bin")))
+(setenv "PATH" (concat (getenv "PATH") "D:\\shell\\CygWin\\cygwin64\\bin"))
+
+    (setq exec-path (append exec-path '("/sw/bin")))
+    (setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
+**** Emacs Lisp Code for Setting PATH and exec-path in sync
+(when (string-equal system-type "windows-nt")
+  (let (
+        (mypaths
+         '(
+           "C:/Python27"
+           ;; "C:/Python32"
+           "C:/strawberry/c/bin"
+           "C:/strawberry/perl/site/bin"
+           "C:/strawberry/perl/bin"
+
+           "C:/Users/h3/AppData/Roaming/npm"
+           "C:/Program Files (x86)/nodejs/"
+
+           "C:/cygwin/usr/local/bin"
+           "C:/cygwin/usr/bin"
+           "C:/cygwin/bin"
+
+           "C:/Program Files (x86)/ErgoEmacs/msys/bin"
+           "C:/Program Files (x86)/Mozilla Firefox/"
+           "C:/Program Files (x86)/Opera"
+           "C:/Program Files (x86)/Safari"
+           "C:/Users/h3/AppData/Local/Google/Chrome/Application"
+           ) )
+        )
+
+    (setenv "PATH" (mapconcat 'identity mypaths ";") )
+
+    (setq exec-path (append mypaths (list "." exec-directory)) )
+    ) )
+*** Operating System Environment
+Emacs provides access to variables in the operating system environment
+through various functions.  These variables include the name of the
+system, the user’s UID, and so on.
+**** Variable: system-configuration
+ This variable holds the standard GNU configuration name for the
+ hardware/software configuration of your system, as a string.  For
+ example, a typical value for a 64-bit GNU/Linux system is
+ ‘"x86_64-unknown-linux-gnu"’.
+**** Variable: system-type
+ The value of this variable is a symbol indicating the type of operating
+ system Emacs is running on.  The possible values are:
+	We do not wish to add new symbols to make finer distinctions unless it
+	is absolutely necessary!  In fact, we hope to eliminate some of these
+	alternatives in the future.  If you need to make a finer distinction
+	than system-type allows for, you can test
+	system-configuration, e.g., against a regexp.
+***** aix
+  IBM’s AIX.
+***** berkeley-unix
+   Berkeley BSD and its variants.
+***** cygwin
+	Cygwin, a Posix layer on top of MS-Windows.
+***** 	darwin
+	 Darwin (Mac OS X).
+***** 	gnu
+	 The GNU system (using the GNU kernel, which consists of the HURD and Mach).
+***** 	gnu/linux
+	 A GNU/Linux system—that is, a variant GNU system, using the Linux
+	 kernel.  (These systems are the ones people often call “Linux”, but
+	 actually Linux is just the kernel, not the whole system.)
+***** 	gnu/kfreebsd
+	 A GNU (glibc-based) system with a FreeBSD kernel.
+***** 	hpux
+	 Hewlett-Packard HPUX operating system.
+***** 	irix
+	 Silicon Graphics Irix system.
+***** 	nacl
+	 Google Native Client (NaCl) sandboxing system.
+***** 	ms-dos
+	 Microsoft’s DOS.  Emacs compiled with DJGPP for MS-DOS binds
+	 system-type to ms-dos even when you run it on MS-Windows.
+***** 	usg-unix-v
+	 AT&T Unix System V.
+***** 	windows-nt
+	 Microsoft Windows NT, 9X and later.  The value of system-type
+	 is always windows-nt, e.g., even on Windows 10.
+**** Function: system-name
+ This function returns the name of the machine you are running on, as a
+ string.
+**** User Option: mail-host-address
+ If this variable is non-nil, it is used instead of
+ system-name for purposes of generating email addresses.  For
+ example, it is used when constructing the default value of
+ user-mail-address.  See User Identification.  (Since this is
+ done when Emacs starts up, the value actually used is the one saved when
+ Emacs was dumped.  See Building Emacs.)
+**** Command: getenv var &optional frame
+
+ This function returns the value of the environment variable var,
+ as a string.  var should be a string.  If var is undefined
+ in the environment, getenv returns nil.  It returns
+ ‘""’ if var is set but null.  Within Emacs, a list of environment
+ variables and their values is kept in the variable process-environment.
+
+
+ (getenv "USER")
+      ⇒ "lewis"
+
+
+ The shell command printenv prints all or part of the environment:
+
+
+ bash$ printenv
+ PATH=/usr/local/bin:/usr/bin:/bin
+ USER=lewis
+ TERM=xterm
+ SHELL=/bin/bash
+ HOME=/home/lewis
+ …
+**** Command: setenv variable &optional value substitute
+ This command sets the value of the environment variable named
+ variable to value.  variable should be a string.
+ Internally, Emacs Lisp can handle any string.  However, normally
+ variable should be a valid shell identifier, that is, a sequence
+ of letters, digits and underscores, starting with a letter or
+ underscore.  Otherwise, errors may occur if subprocesses of Emacs try
+ to access the value of variable.  If value is omitted or
+ nil (or, interactively, with a prefix argument), setenv
+ removes variable from the environment.  Otherwise, value
+ should be a string.
+
+ If the optional argument substitute is non-nil, Emacs
+ calls the function substitute-env-vars to expand any
+ environment variables in value.
+
+ setenv works by modifying process-environment; binding
+ that variable with let is also reasonable practice.
+
+ setenv returns the new value of variable, or nil
+ if it removed variable from the environment.
+**** Variable: process-environment
+ This variable is a list of strings, each describing one environment
+ variable.  The functions getenv and setenv work by means
+ of this variable.
+
+
+ process-environment
+ => ("PATH=/usr/local/bin:/usr/bin:/bin"
+     "USER=lewis"
+     "TERM=xterm"
+     "SHELL=/bin/bash"
+     "HOME=/home/lewis"
+     …)
+
+
+ If process-environment contains multiple elements that
+ specify the same environment variable, the first of these elements
+ specifies the variable, and the others are ignored.
+**** Variable: initial-environment
+ This variable holds the list of environment variables Emacs inherited
+ from its parent process when Emacs started.
+**** Variable: path-separator
+ This variable holds a string that says which character separates
+ directories in a search path (as found in an environment variable).  Its
+ value is ":" for Unix and GNU systems, and ";" for MS systems.
+**** Function: parse-colon-path path
+ This function takes a search path string such as the value of
+ the PATH environment variable, and splits it at the separators,
+ returning a list of directory names.  nil in this list means
+ the current directory.  Although the function’s name says
+ “colon”, it actually uses the value of path-separator.
+ (parse-colon-path ":/foo:/bar")
+      => (nil "/foo/" "/bar/")
+**** Variable: invocation-name
+ This variable holds the program name under which Emacs was invoked.  The
+ value is a string, and does not include a directory name.
+**** Variable: invocation-directory
+ This variable holds the directory from which the Emacs executable was
+ invoked, or nil if that directory cannot be determined.
+**** Variable: installation-directory
+ If non-nil, this is a directory within which to look for the
+ lib-src and etc subdirectories.  In an installed Emacs,
+ it is normally nil.  It is non-nil
+ when Emacs can’t find those directories in their standard installed
+ locations, but can find them in a directory related somehow to the one
+ containing the Emacs executable (i.e., invocation-directory).
+**** Function: load-average &optional use-float
+ This function returns the current 1-minute, 5-minute, and 15-minute
+ system load averages, in a list.  The load average indicates the
+ number of processes trying to run on the system.
+
+ By default, the values are integers that are 100 times the system load
+ averages, but if use-float is non-nil, then they are
+ returned as floating-point numbers without multiplying by 100.
+
+ If it is impossible to obtain the load average, this function signals
+ an error.  On some platforms, access to load averages requires
+ installing Emacs as setuid or setgid so that it can read kernel
+ information, and that usually isn’t advisable.
+
+ If the 1-minute load average is available, but the 5- or 15-minute
+ averages are not, this function returns a shortened list containing
+ the available averages.
+
+
+ (load-average)
+      ⇒ (169 48 36)
+ (load-average t)
+      ⇒ (1.69 0.48 0.36)
+
+
+ The shell command uptime returns similar information.
+**** Function: emacs-pid
+ This function returns the process ID of the Emacs process,
+ as an integer.
+**** Variable: tty-erase-char
+ This variable holds the erase character that was selected
+ in the system’s terminal driver, before Emacs was started.
+** Customize
+*** by menu
+To customize rainbow-delimiters mode, you can use:
+M-x customize-group rainbow-delimiters
+Color Scheme
+
+customize-group rainbow-delimiters-faces has the faces for successive nested pairs of delimiters. You can change them through emacs customize or in your color theme or dot-emacs.
+
+The face rainbow-delimiters-unmatched-face is used for unmatched closing delimiters.
+
+Zenburn and Solarized themes have their own colors for these faces.
+
+deftheme/color-theme.el: Further information is at the top of rainbow-delimiters.el.
+Stop Highlighting Certain Delimiters
+
+You can disable highlighting of any of the supported delimiter types through the customize interface, in the Toggle Delimiters section. 
+*** using command
+используя названия из меню можно подобрать подходяшию команду
+на основе примера
+	;; (custom-theme-set-faces
+	;; 'material
+	;; `(outline-1 ((t (:height 1.25 :weight bold))))
+	;; `(outline-2 ((t (:height 1.15 :weight bold))))
+	;; `(outline-3 ((t (:height 1.05 :weight bold))))
+	;; `(outline-4 ((t (:height 1.95 :weight bold))))
+	;; `(outline-5 ((t (:height 1.85 :weight bold))))
+	;; `(outline-6 ((t (:height 1.75 :weight bold))))
+	;; `(outline-7 ((t (:height 1.65 :weight bold))))
+** info\help
+*** info manual : 
+s - to seach in node of manual(not work in index)
+i - 
+g - 
+   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
+   удобная систе показиваюшая мануалки по всем установленым модам
+f1-f - show funcrion doc string
+f1-F - find funcrion in manual
+*** (apropos)
+Search Help
+найти во всём имаксе
+ иназвании функции и хелпы
+и описание вообще везде
+поиск продолжительный
+PATTERN can be a word, a list of words (separated by spaces),
+or a regexp (using some regexp special characters).  If it is a word,
+search for matches for that word as a substring.  If it is a list of words,
+search for matches for any two (or more) of those words.
+
+With C-u prefix, or if ‘apropos-do-all’ is non-nil,
+consider all symbols (if they match PATTERN).
+
+Returns list of symbols and documentation found.
+*** customize-group
+		Получить инфу по всем переменным
+		режима поскольку зачастую режима нет в мануале
+зато кажется это генерится автоматически
+и там вполне полный хелп по каждой переменной
+M-x customize-group RET company. 
+** run
+*** run multiple Emacs servers : 
+   You can run multiple Emacs servers on the same machine by giving each
+one a unique “server name”, using the variable ‘server-name’.  For
+example, ‘M-x set-variable <RET> server-name <RET> "foo" <RET>’ sets the
+server name to ‘foo’.  The ‘emacsclient’ program can specify a server by
+name, using the ‘-s’ or the ‘-f’ option (*note emacsclient Options::),
+depending on whether or not the server uses a TCP socket (*note TCP
+Emacs server::).
+
+   If you want to run multiple Emacs daemons (*note Initial Options::),
+you can give each daemon its own server name like this:
+
+       emacs --daemon=foo
+
+*** Subprocesses
+**** 36.1 Functions that Create Subprocesses
+***** three primitives : 
+	There are three primitives that create a new subprocess in which to run
+	a program.  One of them, ~make-process~, creates an asynchronous
+	process and returns a process object (see Asynchronous Processes).
+	The other two, =call-process= and =call-process-region=,
+	create a synchronous process and do not return a process object
+	(see Synchronous Processes).  There are various higher-level
+	functions that make use of these primitives to run particular types of
+	process.
+
+	Synchronous and asynchronous processes are explained in the following
+	sections.  Since the three functions are all called in a similar
+	fashion, their common arguments are described here.
+
+	In all cases, the functions specify the program to be run.  An error
+	is signaled if the file is not found or cannot be executed.  If the
+	file name is relative, the variable exec-path contains a list
+	of directories to search.  Emacs initializes exec-path when it
+	starts up, based on the value of the environment variable PATH.
+	The standard file name constructs, ‘~’, ‘.’, and ‘..’,
+	are interpreted as usual in exec-path, but environment variable
+	substitutions (‘$HOME’, etc.) are not recognized; use
+	substitute-in-file-name to perform them (see File Name Expansion).  nil in this list refers to
+	default-directory.
+
+	Executing a program can also try adding suffixes to the specified
+	name:
+***** User Option: exec-suffixes
+   This variable is a list of suffixes (strings) to try adding to the
+   specified program file name.  The list should include "" if you
+   want the name to be tried exactly as specified.  The default value is
+   system-dependent.
+
+   Please note: The argument program contains only the
+   name of the program file; it may not contain any command-line
+   arguments.  You must use a separate argument, args, to provide
+   those, as described below.
+
+   Each of the subprocess-creating functions has a buffer-or-name
+   argument that specifies where the output from the program will go.  It
+   should be a buffer or a buffer name; if it is a buffer name, that will
+   create the buffer if it does not already exist.  It can also be
+   nil, which says to discard the output, unless a custom filter
+   function handles it.  (See Filter Functions, and Read and Print.)  Normally, you should avoid having multiple processes send
+   output to the same buffer because their output would be intermixed
+   randomly.  For synchronous processes, you can send the output to a
+   file instead of a buffer (and the corresponding argument is therefore
+   more appropriately called destination).  By default, both
+   standard output and standard error streams go to the same destination,
+   but all the 3 primitives allow optionally to direct the standard error
+   stream to a different destination.
+
+   All three of the subprocess-creating functions allow to specify
+   command-line arguments for the process to run. For call-process
+   and call-process-region, these come in the form of a
+   &rest argument, args.  For make-process, both the
+   program to run and its command-line arguments are specified as a list
+   of strings.  The command-line arguments must all be strings, and they
+   are supplied to the program as separate argument strings.  Wildcard
+   characters and other shell constructs have no special meanings in
+   these strings, since the strings are passed directly to the specified
+   program.
+
+   The subprocess inherits its environment from Emacs, but you can
+   specify overrides for it with process-environment.  See System Environment.  The subprocess gets its current directory from the
+   value of default-directory.
+***** Variable: exec-directory
+   The value of this variable is a string, the name of a directory that
+   contains programs that come with GNU Emacs and are intended for Emacs
+   to invoke.  The program movemail is an example of such a program;
+   Rmail uses it to fetch new mail from an inbox.
+***** User Option: exec-path
+   The value of this variable is a list of directories to search for
+   programs to run in subprocesses.  Each element is either the name of a
+   directory (i.e., a string), or nil, which stands for the default
+   directory (which is the value of default-directory).
+   See executable-find, for the details of this search.
+
+
+   The value of exec-path is used by call-process and
+   start-process when the program argument is not an absolute
+   file name.
+
+   Generally, you should not modify exec-path directly.  Instead,
+   ensure that your PATH environment variable is set appropriately
+   before starting Emacs.  Trying to modify exec-path
+   independently of PATH can lead to confusing results.
+**** exempl
+***** shell link
+ [shell:D:\scripts\CMD\CygWin\vim.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+
+ [shell:D:\Development\lisp\HOME\emacs_Run.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+ (shell  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt")
+ [shell:D:\scripts\CMD\emagus\run_far.cmd "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\"]
+
+ [shell:D:\Development\lisp\HOME\emacs_client.cmd  "D:\tools.win\Fast\TehnoMage_fast\ActionDeck\Cooking\greentea.txt"]
+***** shell-command  : 
+ (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+
+ (shell-command "D:/Development/lisp/HOME/emacs_Run.cmd D:/tools.win/Fast/TehnoMage_fast/ActionDeck/Cooking/greentea.txt")
+
+ (shell-command "D:/shell/CygWin/cygwin64/bin/mintty.exe -p 685,680 -s 43,24  -T 'Домашнее'  -e /bin/bash -li -c '/home/BuYn/scripts/sh/vim/todo/todoHome.sh'")
+***** start-process : 
+ (start-process "12" nil "d:/Development/lisp/Emacs/bin/runemacs.exe")
+
+**** My commands 
+***** buyn-start-emagus : 
+			#+begin_src emacs-lisp :tangle yes
+	(buyn-start-emagus 
+	"D:/Development/lisp/Dropbox/Office/Progects/Vadim/Tochil/Tochil.org"
+	)
+			#+end_src
+***** buyn-cmd-start
+****** dragon - Buyn.max
+#+begin_src elisp :tangle yes
+	(buyn-cmd-start "D:/inet/browser/Comodo/Dragon/dragon.exe https://mail.google.com/mail/u/0/#inbox")
+#+end_src
+
+*** 44 Saving Emacs Sessions
+[[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
+** keyboard macro
+*** help
+**** info links
+	[[info:emacs#Keyboard Macros][info:emacs#Keyboard Macros]]
+**** keys : 
+***** base
+	‘C-u <F3>’
+	‘C-u C-x (’
+			 Re-execute last keyboard macro, then append keys to its definition.
+	‘C-u C-u <F3>’
+	‘C-u C-u C-x (’
+			 Append keys to the last keyboard macro without re-executing it.
+	‘C-x C-k r’
+			 Run the last keyboard macro on each line that begins in the region
+			 (‘apply-macro-to-region-lines’).
+***** 17.6 Editing a Keyboard Macro
+‘C-x C-k C-e’
+     Edit the last defined keyboard macro (‘kmacro-edit-macro’).
+‘C-x C-k e NAME <RET>’
+     Edit a previously defined keyboard macro NAME (‘edit-kbd-macro’).
+‘C-x C-k l’
+     Edit the last 300 keystrokes as a keyboard macro
+     (‘kmacro-edit-lossage’).
+***** name save session Bind 
+‘C-x C-k n’
+     Give a command name (for the duration of the Emacs session) to the
+     most recently defined keyboard macro (‘kmacro-name-last-macro’).
+‘C-x C-k b’
+     Bind the most recently defined keyboard macro to a key sequence
+     (for the duration of the session) (‘kmacro-bind-to-key’).
+‘M-x insert-kbd-macro’
+     Insert in the buffer a keyboard macro’s definition, as Lisp code.
+		 
+
+   Once a macro has a command name, you can save its definition in a
+file.  Then it can be used in another editing session.  First, visit the
+file you want to save the definition in.  Then use this command:
+
+     M-x insert-kbd-macro <RET> MACRONAME <RET>
+
+This inserts some Lisp code that, when executed later, will define the
+same macro with the same definition it has now.  (You don’t need to
+understand Lisp code to do this, because ‘insert-kbd-macro’ writes the
+Lisp code for you.)  Then save the file.  You can load the file later
+with ‘load-file’ (*note Lisp Libraries::).  If the file you save in is
+your init file ‘~/.emacs’ (*note Init File::) then the macro will be
+defined each time you run Emacs.
+   If you give ‘insert-kbd-macro’ a numeric argument, it makes
+additional Lisp code to record the keys (if any) that you have bound to
+MACRONAME, so that the macro will be reassigned the same keys when you
+load the file.
+
+***** ring 
+‘C-x C-k C-k’
+    Execute the keyboard macro at the head of the ring
+    (‘kmacro-end-or-call-macro-repeat’).
+‘C-x C-k C-n’
+    Rotate the keyboard macro ring to the next macro (defined earlier)
+    (‘kmacro-cycle-ring-next’).
+‘C-x C-k C-p’
+    Rotate the keyboard macro ring to the previous macro (defined
+    later) (‘kmacro-cycle-ring-previous’).
+C-x C-k C-d
+		delete it from the macro ring.
+***** 17.4 Executing Macros with Variations
+In a keyboard macro, you can create an effect similar to that of
+‘query-replace’, in that the macro asks you each time around whether to
+make a change.
+
+‘C-x q’
+     When this point is reached during macro execution, ask for
+     confirmation (‘kbd-macro-query’).
+***** 17.3 Counter The Keyboard Macro 
+****** associated counter : 
+Each keyboard macro has an associated counter, which is initialized to 0
+when you start defining the macro.  This “current counter” allows you to
+insert a number into the buffer that depends on the number of times the
+macro has been called.  The counter is normally incremented each time
+its value is inserted into the buffer.
+
+****** Insert the keyboard macro : 
+   In addition to the current counter, keyboard macros also maintain the
+“previous counter”, which records the value the current counter had last
+time it was incremented or set.  Note that incrementing the current
+counter by zero, e.g., with ‘C-u 0 C-x C-k C-i’, also records the value
+of the current counter as the previous counter value.
+
+‘C-x C-k C-i’
+     Insert the keyboard macro counter value in the buffer
+     (‘kmacro-insert-counter’).
+****** keyboard : 
+‘<F3>’
+     In a keyboard macro definition, insert the keyboard macro counter
+     value in the buffer (‘kmacro-start-macro-or-insert-counter’).
+‘C-x C-k C-c’
+     Set the keyboard macro counter (‘kmacro-set-counter’).
+‘C-x C-k C-a’
+     Add the prefix arg to the keyboard macro counter
+     (‘kmacro-add-counter’).
+‘C-x C-k C-f’
+     Specify the format for inserting the keyboard macro counter
+     (‘kmacro-set-format’).
+
+****** <F3> : 
+   When you are defining a keyboard macro, the command <F3>
+(‘kmacro-start-macro-or-insert-counter’) inserts the current value of
+the keyboard macro’s counter into the buffer, and increments the counter
+by 1.  (If you are not defining a macro, <F3> begins a macro definition
+instead.  *Note Basic Keyboard Macro::.)  You can use a numeric prefix
+argument to specify a different increment.  If you just specify a ‘C-u’
+prefix, that inserts the previous counter value, and doesn’t change the
+current value.
+
+   As an example, let us show how the keyboard macro counter can be used
+to build a numbered list.  Consider the following key sequence:
+
+     <F3> C-a <F3> . <SPC> <F4>
+
+As part of this keyboard macro definition, the string ‘0. ’ was inserted
+into the beginning of the current line.  If you now move somewhere else
+in the buffer and type <F4> to invoke the macro, the string ‘1. ’ is
+inserted at the beginning of that line.  Subsequent invocations insert
+‘2. ’, ‘3. ’, and so forth.
+
+****** C-x C-k C-i’ (‘kmacro-insert-counter’) : 
+   The command ‘C-x C-k C-i’ (‘kmacro-insert-counter’) does the same
+thing as <F3>, but it can be used outside a keyboard macro definition.
+When no keyboard macro is being defined or executed, it inserts and
+increments the counter of the macro at the head of the keyboard macro
+ring.
+
+****** ‘C-x C-k C-c’ (‘kmacro-set-counter’) : 
+   The command ‘C-x C-k C-c’ (‘kmacro-set-counter’) sets the current
+macro counter to the value of the numeric argument.  If you use it
+inside the macro, it operates on each repetition of the macro.  If you
+specify just ‘C-u’ as the prefix, while executing the macro, that resets
+the counter to the value it had at the beginning of the current
+repetition of the macro (undoing any increments so far in this
+repetition).
+
+****** ‘C-x C-k C-a’ (‘kmacro-add-counter’) : 
+   The command ‘C-x C-k C-a’ (‘kmacro-add-counter’) adds the prefix
+argument to the current macro counter.  With just ‘C-u’ as argument, it
+resets the counter to the last value inserted by any keyboard macro.
+(Normally, when you use this, the last insertion will be in the same
+macro and it will be the same counter.)
+
+****** ‘C-x C-k C-f’ (‘kmacro-set-format’) : 
+   The command ‘C-x C-k C-f’ (‘kmacro-set-format’) prompts for the
+format to use when inserting the macro counter.  The default format is
+‘%d’, which means to insert the number in decimal without any padding.
+You can exit with empty minibuffer to reset the format to this default.
+You can specify any format string that the ‘format’ function accepts and
+that makes sense with a single integer extra argument (*note
+(elisp)Formatting Strings::).  Do not put the format string inside
+double quotes when you insert it in the minibuffer.
+
+   If you use this command while no keyboard macro is being defined or
+executed, the new format affects all subsequent macro definitions.
+Existing macros continue to use the format in effect when they were
+defined.  If you set the format while defining a keyboard macro, this
+affects the macro being defined from that point on, but it does not
+affect subsequent macros.  Execution of the macro will, at each step,
+use the format in effect at that step during its definition.  Changes to
+the macro format during execution of a macro, like the corresponding
+changes during its definition, have no effect on subsequent macros.
+
+   The format set by ‘C-x C-k C-f’ does not affect insertion of numbers
+stored in registers.
+****** register as a counter : 
+   If you use a register as a counter, incrementing it on each
+repetition of the macro, that accomplishes the same thing as a keyboard
+macro counter.  *Note Number Registers::.  For most purposes, it is
+simpler to use a keyboard macro counter.
+
+
+
+***** 13.7 Keyboard Macro Registers
+If you need to execute a keyboard macro (*note Keyboard Macros::)
+frequently, it is more convenient to put it in a register or save it
+(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
+stores the last keyboard macro in register R.
+=============================
+** compare : 
+*** ediff
+The most frequently used commands to compare two files are those of ediff. You can invoke them from the “Tools > Compare (Ediff)” menu. There is a command called ediff-windows-linewise, though usually you would compare two buffers (ediff-buffers) or two files (ediff-files) or two revisions under a version control system (ediff-revision). Press n and p to navigate between diff regions; press ? to see more available commands.
+** Registers
+*** keybord help
+**** 13.2 Saving Text in Registers
+‘C-x r r R’
+     Copy the region-rectangle into register R
+     (‘copy-rectangle-to-register’).  With numeric argument, delete it
+     as well.
+‘C-x r s R’
+     Copy region into register R (‘copy-to-register’).
+‘C-x r i R’
+     Insert text from register R (‘insert-register’).
+‘M-x append-to-register <RET> R’
+     Append region to text in register R.
+
+     When register R contains text, you can use ‘C-x r +’
+     (‘increment-register’) to append to that register.  Note that
+     command ‘C-x r +’ behaves differently if R contains a number.
+     *Note Number Registers::.
+
+‘M-x prepend-to-register <RET> R’
+     Prepend region to text in register R.
+		 
+
+**** position : 
+ ‘C-x r <SPC> R’
+			Record the position of point and the current buffer in register R
+			(‘point-to-register’).
+ ‘C-x r j R’
+			Jump to the position and buffer saved in register R
+			(‘jump-to-register’).
+     (set-register R '(file . NAME))
+For example,
+     (set-register ?z '(file . "/gd/gnu/emacs/19.0/src/ChangeLog"))
+puts the file name shown in register ‘z’.
+**** 13.8 Bookmarks
+‘C-x r m <RET>’
+     Set the bookmark for the visited file, at point.
+‘C-x r m BOOKMARK <RET>’
+     Set the bookmark named BOOKMARK at point (‘bookmark-set’).
+‘C-x r M BOOKMARK <RET>’
+     Like ‘C-x r m’, but don’t overwrite an existing bookmark.
+‘C-x r b BOOKMARK <RET>’
+     Jump to the bookmark named BOOKMARK (‘bookmark-jump’).
+‘C-x r l’
+     List all bookmarks (‘list-bookmarks’).
+‘M-x bookmark-save’
+     Save all the current bookmark values in the default bookmark file.
+‘M-x bookmark-load <RET> FILENAME <RET>’
+     Load a file named FILENAME that contains a list of bookmark values.
+     You can use this command, as well as ‘bookmark-write’, to work with
+     other files of bookmark values in addition to your default bookmark
+     file.
+
+‘M-x bookmark-write <RET> FILENAME <RET>’
+     Save all the current bookmark values in the file FILENAME.
+
+‘M-x bookmark-delete <RET> BOOKMARK <RET>’
+     Delete the bookmark named BOOKMARK.
+
+‘M-x bookmark-insert-location <RET> BOOKMARK <RET>’
+     Insert in the buffer the name of the file that bookmark BOOKMARK
+     points to.
+
+‘M-x bookmark-insert <RET> BOOKMARK <RET>’
+     Insert in the buffer the _contents_ of the file that bookmark
+     BOOKMARK points to.
+
+==============
+**** 13.4 Saving Window Configurations in Registers
+‘C-x r w R’
+     Save the state of the selected frame’s windows in register R
+     (‘window-configuration-to-register’).
+‘C-x r f R’
+     Save the state of all frames, including all their windows, in
+     register R (‘frameset-to-register’).
+
+   Use ‘C-x r j R’ to restore a window or frame configuration.  This is
+  If you wish to delete these frames
+instead, use ‘C-u C-x r j R’.
+
+==============================================
+**** 13.7 Keyboard Macro Registers
+If you need to execute a keyboard macro (*note Keyboard Macros::)
+frequently, it is more convenient to put it in a register or save it
+(*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
+stores the last keyboard macro in register R.
+=============================
+**** 13.5 Keeping Numbers in Registers
+‘C-u NUMBER C-x r n R’
+     Store NUMBER into register R (‘number-to-register’).
+‘C-u NUMBER C-x r + R’
+     If R contains a number, increment the number in that register by
+     NUMBER.  Note that command ‘C-x r +’ (‘increment-register’) behaves
+     differently if R contains text.  *Note Text Registers::.
+=================================
+** Options
+*** Visual
+*** Home 
+**** 3.5 Where do I put my init file?
+***** file
+On Windows, the .emacs file may be called _emacs for backward compatibility with DOS and FAT filesystems where filenames could not start with a dot. Some users prefer to continue using such a name due to historical problems various Windows tools had in the past with file names that begin with a dot. In Emacs 22 and later, the init file may also be called .emacs.d/init.el. Many of the other files that are created by lisp packages are now stored in the .emacs.d directory too, so this keeps all your Emacs related files in one place.
+
+All the files mentioned above should go in your HOME directory. The HOME directory is determined by following the steps below:
+
+***** environment variable HOME
+    If the environment variable HOME is set, use the directory it indicates.
+***** registry
+    If the registry entry HKCU\SOFTWARE\GNU\Emacs\HOME is set, use the directory it indicates.
+    If the registry entry HKLM\SOFTWARE\GNU\Emacs\HOME is set, use the directory it indicates. Not recommended, as it results in users sharing the same HOME directory.
+***** if HOME was not set
+    If C:\.emacs exists, then use C:/. This is for backward compatibility, as previous versions defaulted to C:/ if HOME was not set.
+    Use the user's AppData directory, usually a directory called AppData under the user's profile directory, the location of which varies according to Windows version and whether the computer is part of a domain. 
+
+***** Within Emacs, ~
+Within Emacs, ~ at the beginning of a file name is expanded to your HOME directory, so you can always find your .emacs file by typing the command C-x C-f ~/.emacs. 
+*** Text Eltments
+**** Parenthesis
+***** 5.27 How do I show which parenthesis matches the one I’m looking at?
+  Call show-paren-mode in your .emacs file:
+  (show-paren-mode 1)
+
+  You can also enable this mode by selecting the ‘Paren Match Highlighting’ option from the ‘Options’ menu of the Emacs menu bar at the top of any Emacs frame.
+
+  Alternatives to this mode include:
+
+  If you’re looking at a right parenthesis (or brace or bracket) you can delete it and reinsert it. Emacs will momentarily move the cursor to the matching parenthesis.
+
+  C-M-f (forward-sexp) and C-M-b (backward-sexp) will skip over one set of balanced parentheses, so you can see which parentheses match. (You can train it to skip over balanced brackets and braces at the same time by modifying the syntax table.)
+
+  Here is some Emacs Lisp that will make the % key show the matching parenthesis, like in vi. In addition, if the cursor isn’t over a parenthesis, it simply inserts a % like normal.
+  #+BEGIN_SRC elisp
+;; By an unknown contributor
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+"Go to the matching paren if on a paren; otherwise insert %."
+    (interactive "p")
+    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+	    (t (self-insert-command (or arg 1)))))
+  #+END_SRC
 ** Folding
 *** HideShow
 Invoke HideShow mode with M-x hs-minor-mode.
@@ -4531,286 +4834,6 @@ Particular coding systems specified for certain file names:
  '(org-table ((t (:foreground "tomato"))))
  '(org-variable-pitch-face ((t (:height 1.0 :family "IM Fell English"))))
 '(variable-pitch ((t (:height 1.0 :family "IM Fell English")))))
-** Tramp
-*** fest experens
-(setenv "PATH"
-				(concat "D:/shell/Putty/plink.exe ;"
-								(getenv "PATH")))
-
-								открыть с-x с-f
-//plink:pi@192.168.0.124:/
-*** Нужно сделать 
-**** настроить дайред
-дефалтное короткиф вывод имен
-** debuging : 
-*** Edebug
-**** Instrumenting for Edebug : 
-To debug a Lisp program with Edebug, you must first instrument the Lisp code that you want to debug. A simple way to do this is to first move point into the definition of a function or macro and then do C-u C-M-x (eval-defun with a prefix argument). See Instrumenting for Edebug, for alternative ways to instrument code.  
-**** special commands of Edebug are available : 
-The special commands of Edebug are available in the source code buffer in addition to the commands of Emacs Lisp mode. For example, you can type the Edebug command SPC to execute until the next stop point. If you type SPC once after entry to fac, here is the display you will see:
-
-(defun fac (n)
-=>(if ∗(< 0 n)
-      (* n (fac (1- n)))
-    1))
-
-When Edebug stops execution after an expression, it displays the expression’s value in the echo area.
-
-Other frequently used commands are ~b~ to set a breakpoint at a stop point, ~g~ to execute until a breakpoint is reached, and ~q~ to exit Edebug and return to the top-level command loop. Type ~?~ to display a list of all Edebug commands. 
-~u~ unset brekepoint
-**** command I : 
-While Edebug is active, the command I (edebug-instrument-callee) instruments the definition of the function or macro called by the list form after point, if it is not already instrumented. This is possible only if Edebug knows where to find the source for that function; for this reason, after loading Edebug, eval-region records the position of every definition it evaluates, even if not instrumenting it. 
-**** i command : 
-See also the 
-i command (see Jumping), which steps into the call after instrumenting the function. 
-**** 19.2.4 Jumping
-The commands described in this section execute until they reach a specified location. All except i make a temporary breakpoint to establish the place to stop, then switch to go mode. Any other breakpoint reached before the intended stop point will also stop execution. See Edebug Breakpoints, for the details on breakpoints.
-
-These commands may fail to work as expected in case of nonlocal exit, as that can bypass the temporary breakpoint where you expected the program to stop.
-
-h
-
-    Proceed to the stop point near where point is (edebug-goto-here).
-f
-
-    Run the program for one expression (edebug-forward-sexp).
-o
-
-    Run the program until the end of the containing sexp (edebug-step-out).
-i
-
-    Step into the function or macro called by the form after point (edebug-step-in). 
-
-The h command proceeds to the stop point at or after the current location of point, using a temporary breakpoint.
-
-The f command runs the program forward over one expression. More precisely, it sets a temporary breakpoint at the position that forward-sexp would reach, then executes in go mode so that the program will stop at breakpoints.
-
-With a prefix argument n, the temporary breakpoint is placed n sexps beyond point. If the containing list ends before n more elements, then the place to stop is after the containing expression.
-
-You must check that the position forward-sexp finds is a place that the program will really get to. In cond, for example, this may not be true.
-
-For flexibility, the f command does forward-sexp starting at point, rather than at the stop point. If you want to execute one expression from the current stop point, first type w (edebug-where) to move point there, and then type f.
-
-The o command continues out of an expression. It places a temporary breakpoint at the end of the sexp containing point. If the containing sexp is a function definition itself, o continues until just before the last sexp in the definition. If that is where you are now, it returns from the function and then stops. In other words, this command does not exit the currently executing function unless you are positioned after the last sexp.
-
-Normally, the h, f, and o commands display “Break” and pause for edebug-sit-for-seconds before showing the result of the form just evaluated. You can avoid this pause by setting edebug-sit-on-break to nil. See Edebug Options.
-
-The i command steps into the function or macro called by the list form after point, and stops at its first stop point. Note that the form need not be the one about to be evaluated. But if the form is a function call about to be evaluated, remember to use this command before any of the arguments are evaluated, since otherwise it will be too late.
-
-The i command instruments the function or macro it’s supposed to step into, if it isn’t instrumented already. This is convenient, but keep in mind that the function or macro remains instrumented unless you explicitly arrange to deinstrument it. 
-**** different way to remove the instrumentation : 
-A different way to remove the instrumentation from a definition is to use the edebug-remove-instrumentation command. It also allows removing the instrumentation from everything that has been instrumented. 
-**** 19.2.9 Evaluation
-
-While within Edebug, you can evaluate expressions as if Edebug were not running. Edebug tries to be invisible to the expression’s evaluation and printing. Evaluation of expressions that cause side effects will work as expected, except for changes to data that Edebug explicitly saves and restores. See The Outside Context, for details on this process.
-
-e exp RET
-
-    Evaluate expression exp in the context outside of Edebug (edebug-eval-expression). That is, Edebug tries to minimize its interference with the evaluation.
-M-: exp RET
-
-    Evaluate expression exp in the context of Edebug itself (eval-expression).
-C-x C-e
-
-    Evaluate the expression before point, in the context outside of Edebug (edebug-eval-last-sexp). With the prefix argument of zero (C-u 0 C-x C-e), don’t shorten long items (like strings and lists). 
-
-Edebug supports evaluation of expressions containing references to lexically bound symbols created by the following constructs in cl.el: lexical-let, macrolet, and symbol-macrolet. 
-**** 19.2.4 Jumping
-
-The commands described in this section execute until they reach a specified location. All except i make a temporary breakpoint to establish the place to stop, then switch to go mode. Any other breakpoint reached before the intended stop point will also stop execution. See Edebug Breakpoints, for the details on breakpoints.
-
-These commands may fail to work as expected in case of nonlocal exit, as that can bypass the temporary breakpoint where you expected the program to stop.
-
-h
-
-    Proceed to the stop point near where point is (edebug-goto-here).
-f
-
-    Run the program for one expression (edebug-forward-sexp).
-o
-
-    Run the program until the end of the containing sexp (edebug-step-out).
-i
-
-    Step into the function or macro called by the form after point (edebug-step-in). 
-
-The h command proceeds to the stop point at or after the current location of point, using a temporary breakpoint.
-
-The f command runs the program forward over one expression. More precisely, it sets a temporary breakpoint at the position that forward-sexp would reach, then executes in go mode so that the program will stop at breakpoints.
-
-With a prefix argument n, the temporary breakpoint is placed n sexps beyond point. If the containing list ends before n more elements, then the place to stop is after the containing expression.
-
-You must check that the position forward-sexp finds is a place that the program will really get to. In cond, for example, this may not be true.
-
-For flexibility, the f command does forward-sexp starting at point, rather than at the stop point. If you want to execute one expression from the current stop point, first type w (edebug-where) to move point there, and then type f.
-
-The o command continues out of an expression. It places a temporary breakpoint at the end of the sexp containing point. If the containing sexp is a function definition itself, o continues until just before the last sexp in the definition. If that is where you are now, it returns from the function and then stops. In other words, this command does not exit the currently executing function unless you are positioned after the last sexp.
-
-Normally, the h, f, and o commands display “Break” and pause for edebug-sit-for-seconds before showing the result of the form just evaluated. You can avoid this pause by setting edebug-sit-on-break to nil. See Edebug Options.
-
-The i command steps into the function or macro called by the list form after point, and stops at its first stop point. Note that the form need not be the one about to be evaluated. But if the form is a function call about to be evaluated, remember to use this command before any of the arguments are evaluated, since otherwise it will be too late.
-
-The i command instruments the function or macro it’s supposed to step into, if it isn’t instrumented already. This is convenient, but keep in mind that the function or macro remains instrumented unless you explicitly arrange to deinstrument it. 
-**** 19.2.6.1 Edebug Breakpoints
-
-While using Edebug, you can specify breakpoints in the program you are testing: these are places where execution should stop. You can set a breakpoint at any stop point, as defined in Using Edebug. For setting and unsetting breakpoints, the stop point that is affected is the first one at or after point in the source code buffer. Here are the Edebug commands for breakpoints:
-
-b
-
-    Set a breakpoint at the stop point at or after point (edebug-set-breakpoint). If you use a prefix argument, the breakpoint is temporary—it turns off the first time it stops the program. An overlay with the edebug-enabled-breakpoint or edebug-disabled-breakpoint faces is put at the breakpoint.
-u
-
-    Unset the breakpoint (if any) at the stop point at or after point (edebug-unset-breakpoint).
-U
-
-    Unset any breakpoints in the current form (edebug-unset-breakpoints).
-D
-
-    Toggle whether to disable the breakpoint near point (edebug-toggle-disable-breakpoint). This command is mostly useful if the breakpoint is conditional and it would take some work to recreate the condition.
-x condition RET
-
-    Set a conditional breakpoint which stops the program only if evaluating condition produces a non-nil value (edebug-set-conditional-breakpoint). With a prefix argument, the breakpoint is temporary.
-B
-
-    Move point to the next breakpoint in the current definition (edebug-next-breakpoint). 
-
-While in Edebug, you can set a breakpoint with b and unset one with u. First move point to the Edebug stop point of your choice, then type b or u to set or unset a breakpoint there. Unsetting a breakpoint where none has been set has no effect.
-
-Re-evaluating or reinstrumenting a definition removes all of its previous breakpoints.
-
-A conditional breakpoint tests a condition each time the program gets there. Any errors that occur as a result of evaluating the condition are ignored, as if the result were nil. To set a conditional breakpoint, use x, and specify the condition expression in the minibuffer. Setting a conditional breakpoint at a stop point that has a previously established conditional breakpoint puts the previous condition expression in the minibuffer so you can edit it.
-
-You can make a conditional or unconditional breakpoint temporary by using a prefix argument with the command to set the breakpoint. When a temporary breakpoint stops the program, it is automatically unset.
-
-Edebug always stops or pauses at a breakpoint, except when the Edebug mode is Go-nonstop. In that mode, it ignores breakpoints entirely.
-
-To find out where your breakpoints are, use the B command, which moves point to the next breakpoint following point, within the same function, or to the first breakpoint if there are no following breakpoints. This command does not continue execution—it just moves point in the buffer. 
-*** (debug) 
-**** (debug) 
-debug is an autoloaded interactive compiled Lisp function in
-‘debug.el’.
-
-(debug &rest ARGS)
-
-  Probably introduced at or before Emacs version 1.2.
-
-Enter debugger.  ‘c’ returns from the debugger.
-Arguments are mainly for use when this is called from the internals
-of the evaluator.
-
-You may call with no args, or you may pass nil as the first arg and
-any other args you like.  In that case, the list of args after the
-first will be printed into the backtrace buffer.
-
-If ‘inhibit-redisplay’ is non-nil when this function is called,
-the debugger will not be entered.
-
-[back]
-**** debug-on-entry : 
-debug-on-entry is an autoloaded interactive compiled Lisp function in
-‘debug.el’.
-
-(debug-on-entry FUNCTION)
-
-  Probably introduced at or before Emacs version 1.2.
-
-Request FUNCTION to invoke debugger each time it is called.
-
-When called interactively, prompt for FUNCTION in the minibuffer.
-
-This works by modifying the definition of FUNCTION.  If you tell the
-debugger to continue, FUNCTION’s execution proceeds.  If FUNCTION is a
-normal function or a macro written in Lisp, you can also step through
-its execution.  FUNCTION can also be a primitive that is not a special
-form, in which case stepping is not possible.  Break-on-entry for
-primitive functions only works when that function is called from Lisp.
-
-Use M-x cancel-debug-on-entry to cancel the effect of this command.
-Redefining FUNCTION also cancels it.
-
-[back]
-**** backtrace : 
-backtrace is an autoloaded compiled Lisp function in ‘backtrace.el’.
-
-(backtrace)
-
-  Probably introduced at or before Emacs version 1.2.
-
-Print a trace of Lisp function calls currently active.
-Output stream used is value of ‘standard-output’.
-
-[back]
-*** ielm : 
-ielm is an autoloaded interactive Lisp function in ‘ielm.el’.
-
-(ielm &optional BUF-NAME)
-
-  Probably introduced at or before Emacs version 19.24.
-
-Interactively evaluate Emacs Lisp expressions.
-Switches to the buffer named BUF-NAME if provided (‘*ielm*’ by default),
-or creates it if it does not exist.
-See ‘inferior-emacs-lisp-mode’ for details.
-
-[back]
-
-*** lisp-interaction-mode : 
-**** (lisp-interaction-mode) : 
-lisp-interaction-mode is an interactive compiled Lisp function in
-‘elisp-mode.el’.
-(lisp-interaction-mode)
-
-  Parent mode: ‘emacs-lisp-mode’.
-  Probably introduced at or before Emacs version 21.2.
-
-Major mode for typing and evaluating Lisp forms.
-Like Lisp mode except that M-x eval-print-last-sexp evals the Lisp expression
-before point, and prints its value into the buffer, advancing point.
-Note that printing is controlled by ‘eval-expression-print-length’
-and ‘eval-expression-print-level’.
-**** Commands:
-Delete converts tabs to spaces as it moves back.
-Paragraphs are separated only by blank lines.
-Semicolons start comments.
-**** key             binding
----             -------
-
-C-j		eval-print-last-sexp
-ESC		Prefix Command
-DEL		backward-delete-char-untabify
-
-C-M-i		completion-at-point
-C-M-q		indent-pp-sexp
-C-M-x		eval-defun
-
-C-M-q		indent-sexp
-  (that binding is currently shadowed by another mode)
-
-C-M-q		prog-indent-sexp
-  (that binding is currently shadowed by another mode)
-
-
-**** hooks : 
-In addition to any hooks its parent mode ‘emacs-lisp-mode’ might have run,
-this mode runs the hook ‘lisp-interaction-mode-hook’, as the final or penultimate step
-during initialization.
-
-[back]
-*** litable 
-On-the-fly evaluation/substitution of emacs lisp code
-
-Inspired by Light Table's similar feature.
-
-To start this up, simply enable the litable minor mode in the buffer by calling M-x litable-mode.
-
-Litable keeps a list of pure functions as a safeguard for unwanted evaluations. A function must first be accepted into this list (using M-x litable-accept-as-pure) before it can be evaluated on-the-fly. You should take care of what function you accept as pure to avoid any unfortunate accidents. Also, note that the pure functions list persists across sessions.
-
-Not meant to be used in production yet, be warned!
-In action
-
-    Presentation of the basic prototype: http://www.youtube.com/watch?v=TgHvRcbYJ-8 [2:32] (you don't have to watch this)
-    New features, less slow awkward typing: https://www.youtube.com/watch?v=mNO-vgq3Avg [1:50]
-
 * Help Docs eLisp
 ** Data types
 *** varible

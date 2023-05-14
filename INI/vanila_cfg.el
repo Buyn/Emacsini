@@ -163,6 +163,15 @@
 ;; ------------------------------------------------------
 	(global-set-key (kbd "<f10>") 'buyn-menu-bar-open)
 ;; ------------------------------------------------------
+;; *EDIFF CUSTOMIZATION
+;; --------------------------------------
+
+(custom-set-variables
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ ;; Finally got around to customizing the vertical split to be the default one (last line in the config):
+ ;; '(ediff-diff-options "-w")
+ '(ediff-split-window-function 'split-window-horizontally))
+;; ------------------------------------------------------
 ;; * “Interactively Do Things” (a.k.a. ido)
 ;; ------------------------------------------------------
 (require 'ido)
