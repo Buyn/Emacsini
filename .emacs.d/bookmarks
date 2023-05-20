@@ -1,10 +1,10 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "d:/Development/lisp/HOME/ORG/tmp/tmp_links.org")
- (front-context-string . "** link to \n[[fi")
- (rear-context-string)
- (position . 9))
+ (filename . "d:/Development/lisp/Dropbox/orgs/Org-roam/default/20230520071840-new_file_form_debug.org")
+ (front-context-string . "\nВсё вроде работ")
+ (rear-context-string . "file form debug\n")
+ (position . 97))
 )

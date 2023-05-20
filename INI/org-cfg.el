@@ -160,6 +160,45 @@
 ;; --------------------------------------
 
 ;; * GRAPH ORG TOOLS
+;; --------------------------------------
 ;; (find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
 (load "~/INI/ORG/graph-tools-cfg.el")
 ;; --------------------------------------
+
+;; * ORG-ROAM CUSTOMIZATION
+;; --------------------------------------
+;; Org-Roam basic configuration
+;; (setq org-directory (concat (getenv "HOME") "/Documents/notes/"))
+;;  D:\Development\lisp\Dropbox\orgs\Org-roam\default 
+;;  D:/Development/lisp/Dropbox/orgs/Org-roam/default 
+(use-package org-roam
+	;; :disabled
+	:ensure t
+	:after org
+	:init (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
+	:custom
+	;; (org-roam-directory (file-truename org-directory))
+	;; (org-roam-directory (file-truename "D:/Development/lisp/Dropbox/orgs/Org-roam/default/"))
+	(org-roam-directory (file-truename "~/../Dropbox/orgs/Org-roam/default/"))
+	:config
+	(org-roam-setup)
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  ;; (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  ;; (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  ;; (require 'org-roam-protocol)
+	:bind ( ("C-c n f" . org-roam-node-find)
+					("C-c n l" . org-roam-buffer-toggle)
+          ("C-c n c" . org-roam-capture)
+          ("C-c n j" . org-roam-dailies-capture-today)
+					(:map org-mode-map
+								(("C-c n i" . org-roam-node-insert)
+								("C-c n o" . org-id-get-create)
+								("C-c n t" . org-roam-tag-add)
+								("C-c n g" . org-roam-graph)
+								;; ("C-c n r" . org-roam-node-random)		    
+								("C-c n a" . org-roam-alias-add)))))
+
+
+;; --------------------------------------
+;; * ------------------------------------

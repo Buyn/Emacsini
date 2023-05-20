@@ -22,8 +22,16 @@ https://www.braveclojure.com/basic-emacs/
   |__|      ||_|_|_||      |__|
  /   |      ||_|_|_||      |   \
 =================================
+
 ** progn :
 #+begin_src emacs-lisp :results output silent
+
+(setq exec-path (append exec-path '("D:/shell/msys2/msys64/usr/bin")))
+(setenv "PATH" (concat (getenv "PATH") "D:\\shell\\msys2\\usr\\mingw64\\bin"))
+(setq exec-path (append exec-path '("D:/shell/CygWin/cygwin64/bin")))
+(setenv "PATH" (concat (getenv "PATH") "D:/shell/CygWin/cygwin64/bin"))
+
+
 (custom-set-variables
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  ;; Finally got around to customizing the vertical split to be the default one (last line in the config):
@@ -831,6 +839,88 @@ D:\Development\lisp\Emacs\bin\emacs.exe
 D:\shell\Far\Far.exe D:\Development\lisp\Dropbox\Office\Progects\Audit\MFA 
 D:\shell\Far\Far.exe D:\Development\version-control\GitHub\Vadim\Tochil_mpy   
 D:\shell\Far\Far.exe 
+** initial-scratch-message
+*** 
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.
+
+
+(setq exec-path (append exec-path '("D:/shell/msys2/msys64/mingw64/bin ")))
+(setenv "PATH" (concat (getenv "PATH") "D:\\shell\\msys2\\msys64\\mingw64\\bin"))
+
+
+(setq exec-path (append exec-path '("D:/shell/msys2/msys64/usr/bin")))
+(setenv "PATH" (concat (getenv "PATH") "D:\\shell\\msys2\\usr\\mingw64\\bin"))
+
+
+
+(package-refresh-contents)
+
+(use-package org-roam
+	:ensure t
+	:after org
+	;; :disabled
+	:init (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
+	:custom
+	;; (org-roam-directory (file-truename org-directory))
+	;; (org-roam-directory (file-truename "D:/Development/lisp/Dropbox/orgs/Org-roam/default/"))
+	;; "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org"
+	(org-roam-directory (file-truename "~/../Dropbox/orgs/Org-roam/default/"))
+	:config
+	(org-roam-setup)
+	:bind (("C-c n f" . org-roam-node-find)
+					("C-c n r" . org-roam-node-random)		    
+					(:map org-mode-map
+								(("C-c n i" . org-roam-node-insert)
+								("C-c n o" . org-id-get-create)
+								("C-c n t" . org-roam-tag-add)
+								("C-c n a" . org-roam-alias-add)
+								("C-c n l" . org-roam-buffer-toggle)))))
+
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "D:/Development/lisp/Dropbox/orgs/Org-roam/default/"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
+
+
+(org-roam-db-autosync-mod)
+*** 
+initial-scratch-message
+;; * scrat 
+(setq initial-scratch-message ";; Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
+;; 
+;; | |_| |_| |           | |_| |_| |
+;; \ _____ /      o_     \ _____ /
+;; 	|     |       |_|     |     |
+;; 	|  |  |       |       |  |  |
+;; 	|   _ l _   _ | _   _ l _   |
+;; 	|  | |_| |_| ||| |_| |_| |  |
+;; 	|  |                     |  |
+;; 	|| |                     | ||
+;; 	|  |        _____        |  |
+;; 	|  |       /_|_|_\       |  |
+;; 	|  |      /|_|_|_|\      |  |
+;; 	|  |      ||_|_|_||      |  |
+;; 	|  |      ||_|_|_||      |  |
+;; 	|__|      ||_|_|_||      |__|
+;; /   |      ||_|_|_||      |   \
+;; =================================
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.
+")
 
 * Pathes
 ** init files
@@ -914,6 +1004,11 @@ D:\shell\Far\Far.exe
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
 ** org files
+*** admins 
+(find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
+
+(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
+
 *** lincks
 [[file:~/../Dropbox/orgs/weekly.org][weekly file]]
 [[file:~/../Dropbox/orgs/todo_plan.org][ToDo Plan org]]
@@ -2156,6 +2251,145 @@ D:\Development\lisp\Home\ORG\Recipes\main.org
 ")
  (setq gptel-default-mode 'org-mode)
 )
+**** Org-Roam : 
+***** configs 
+****** basic configuration : 
+  ;; Org-Roam basic configuration
+  (setq org-directory (concat (getenv "HOME") "/Documents/notes/"))
+;;  D:\Development\lisp\Dropbox\orgs\Org-roam\default 
+;;  D:/Development/lisp/Dropbox/orgs/Org-roam/default 
+
+  (use-package org-roam
+    :after org
+    :init (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
+    :custom
+    (org-roam-directory (file-truename org-directory))
+    :config
+    (org-roam-setup)
+    :bind (("C-c n f" . org-roam-node-find)
+           ("C-c n r" . org-roam-node-random)		    
+           (:map org-mode-map
+                 (("C-c n i" . org-roam-node-insert)
+                  ("C-c n o" . org-id-get-create)
+                  ("C-c n t" . org-roam-tag-add)
+                  ("C-c n a" . org-roam-alias-add)
+                  ("C-c n l" . org-roam-buffer-toggle)))))
+****** github
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "/path/to/org-files/"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
+***** docs
+****** git 
+https://github.com/org-roam/org-roam
+Org-roam GitHub Release MELPA License GPL 3
+
+Org-roam Logo
+
+Org-roam is a plain-text knowledge management system. It brings some of Roam's more powerful features into the Org-mode ecosystem.
+
+Org-roam borrows principles from the Zettelkasten method, providing a solution for non-hierarchical note-taking. It should also work as a plug-and-play solution for anyone already using Org-mode for their personal wiki.
+
+    Private and Secure: Edit your personal wiki completely offline, entirely in your control. Encrypt your notes with GPG. Take lasting notes in plain-text.
+    Networked Thought: Connect notes and thoughts together with ease using backlinks. Discover surprising and previously unseen connections in your notes with the built-in graph visualization.
+    Extensible and Powerful: Leverage Emacs' fantastic text-editing interface, and the mature Emacs and Org-mode ecosystem of packages.
+    Free and Open Source: Org-roam is licensed under the GNU General Public License version 3 or later.
+
+Org-roam Screenshot
+
+    Documentation
+    Discourse
+    Slack
+    Frequently Asked Questions
+    Changelog
+
+Installation
+
+Down below you will find basic installation instructions for how to quickly install org-roam using various environments for various purposes. For more detailed information, please read the manual.
+Using package.el
+Toggle instructions
+Using straight.el
+Toggle instructions
+Using Doom Emacs
+Toggle instructions
+Without a package manager
+Toggle instructions
+Configuration
+
+Here's a very basic sample for configuration of org-roam using use-package:
+
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "/path/to/org-files/"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
+
+Note that the file-truename function is only necessary when you use symbolic link to org-roam-directory. Org-roam won't automatically resolve symbolic link to the directory.
+Getting Started
+
+David Wilson of System Crafters has produced an introductory video that covers the basic commands:
+
+Getting Started with Org Roam - Build a Second Brain in Emacs
+Getting Help
+
+Before creating a new topic/issue, please be mindful of our time and ensure that it has not already been addressed on GitHub or on Discourse.
+
+    If you are new to Emacs and have problem setting up Org-roam, please ask your question on Slack, channel #how-do-i.
+    For quick questions, please ask them on Slack, channel #troubleshooting.
+    If something is not working as it should, or if you would like to suggest a new feature, please create a new issue.
+    If you have questions about your workflow with the slip-box method, please find a relevant topic on Discourse, or create a new one.
+
+Knowledge Bases using Org-roam
+
+    Jethro Kuan (Source)
+    Alexey Shmalko
+    Sidharth Arya
+
+Contributing
+
+To report bugs and suggest new feature use the issue tracker. If you have some code which you would like to be merged, then open a pull request. Please also see CONTRIBUTING.md.
+License
+
+Copyright © Jethro Kuan and contributors. Distributed under the GNU General Public License, Version 3.
+
+****** tutorial 
+****** Org-roam User Manual
+https://www.orgroam.com/manual.html#Links-between-Nodes
+*** Failed to verify signature archive-contents.sig:
+(setq package-check-signature nil) 
+
+(package-refresh-contents)
+не инсталится как
+(package-install gnu-elpa-keyring-update)
+только как
+download the package gnu-elpa-keyring-update and run the function with the same name, e.g. M-x package-install RET gnu-elpa-keyring-update RET.
+
+(setq package-check-signature "allow-unsigned")
 
 
 ** setings
@@ -3755,6 +3989,28 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
      (define-key company-active-map (kbd "C-:") 'helm-company)))
 *** describe-package (найти пакаджи на сервере и описанить)
 describe-package
+** Images
+
+Although Emacs is a text editor, it can also manage images. In Org mode, an image is a link to an image file. You can preview the file in your buffer or export it to your preferred format. You can also add captions and set export properties for each image.
+
+  #+caption: Image caption.
+  #+attr_html: :alt Alternative text
+  [[file:path/to/image]]
+
+If you use the Helm completion system, you can preview the image as you select it with helm-follow-mode. When you are in the Helm selection session, toggle follow mode with C-c C-f. As you move the cursor, images will appear in anoter window.
+
+To view the preview images in your document or remove the previews, you press C-c C-x C-v. You can also add #+startup: inlineimages to view images by default.
+
+To add an image, press C-c C-l, which opens the link menu. Org mode understands many types of links. We want the file type, so type file:. Press enter and select the image filename in the mini buffer. You can skip the file part with the C-u C-c C-l shortcut (adding C-u before the standard shortcut.)
+
+After you enter the image, you preview it with the org-redisplay-inline-images function or C-c C-x C-v.
+
+You open a link in Org mode with a mouse click or by pressing C-c C-o with your cursor on the link text.
+
+The images in the buffer are all shown at the same width. The article about writing articles and books with Emacs and the article about creating websites with Emacs explains how to control image with and other image properties.
+
+You can increase or decrease the size of an image with the + and - keys.
+
 
 ** load require:
 	#+begin_src emacs-lisp :tangle yes
@@ -4834,6 +5090,53 @@ Particular coding systems specified for certain file names:
  '(org-table ((t (:foreground "tomato"))))
  '(org-variable-pitch-face ((t (:height 1.0 :family "IM Fell English"))))
 '(variable-pitch ((t (:height 1.0 :family "IM Fell English")))))
+** Text fu 
+*** Checking Spelling
+
+The Emacs minor mode Flyspell provides an interface to the Hunspell spell checking software. To enable spell checking, you thus first need to ensure that Hunspell is available on your computer. Hunsell is easy to install on Linux computers, but is also available for Windows and Chromebook.
+
+The configuration below enables Flyspell for all text modes and sets Hunspell as the default checking program. The M-F7 key checks the spelling for all words in the buffer and F7 checks the word that you cursor is standing on.
+
+A more productive method is to use the C-; function. This function provides the most likely correction of the first spelling error before the cursor is. Emacs will show the list of possible corrections in the mini buffer. Repeatedly pressing C-; will cycle through the options until you get back to the original. This function prevents you from having to jump to your spelling mistakes.
+
+  ;; Spell checking
+  ;; Requires Hunspell
+  (use-package flyspell
+    :config
+    (setq ispell-program-name "hunspell"
+          ispell-default-dictionary "en_AU")
+    :hook (text-mode . flyspell-mode)
+    :bind (("M-<f7>" . flyspell-buffer)
+           ("<f7>" . flyspell-word)
+           ("C-;" . flyspell-auto-correct-previous-word)))
+
+The available English dictionaries in Hunspell are:
+
+    en_US (American)
+    en_CA (Canadian)
+    en_GB (British)
+    en_AU (Australian)
+
+Hunspell supports a lot of other dictionaries so you can install and choose your own when English is not your first language. In Linux, you can install dictionaries with your favourite package manager.
+
+If you are multilingual, then you can set a different language for each buffer by adding a file variable. You need to the text below as the last lines in your Org mode file, where you replace nederlands (Dutch) with your preferred language:
+
+,# Local Variables:
+,# ispell-local-dictionary: nederlands
+,# End:
+
+Emacs evaluates this line and activates the dictionary when you run M-x normal-mode and the next time you open the file. This dictionary only applies to the relevant file and all other buffers remain in the default language.
+*** Counting Words
+
+To count the words in a buffer, or part thereof, use the count-word-region-function, which is bound to M-==. The result appears in the minibuffer. When you select a portion of text, this function will count only the selection. Adding the C-u prefix counts the words for the hole buffer (C-u M-=).
+*** Text size
+
+To increase the height of the text in the current buffer, type C-x C-+. To decrease it, type C-x C--.
+
+To restore the default (global) face height, type C-x C-0. These keys are all bound to the text-scale-adjust funcion, which looks at the last key typed to determine which action to take.
+
+Note that this text size is only for the ease of editing and not for the final output. The size of the text in any HTML, PDF or Word document is determined by the logic of the document (headers and so on), not individual size indicators.
+
 * Help Docs eLisp
 ** Data types
 *** varible
@@ -11025,6 +11328,77 @@ To disable it again you can use:
 (quelpa-use-package-deactivate-advice)
 **** use quelpa : 
 (quelpa '(hydra :repo "abo-abo/hydra" :fetcher github))
+*** When to call package-refresh-contents in init.el
+Asked 4 years, 11 months ago
+Modified 4 years, 1 month ago
+Viewed 4k times
+3
+
+I have found the following lisp code in an init.el file. I am wondering if this code logic is correct. I am learning Elisp and have reviewed the documentation and searched Stack Overflow. If this is too basic a question to ask, please direct me to a source:
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+My understanding is that logic says that if there is no package-archive file, then refresh the cache .
+
+Following are my questions:
+
+    Does Emacs download a cache for each of the sources in the package-archive list?
+    If package-refresh-contents is called only if the cache is absent, how do we (Emacs) keep the archive current? Do we have to manually use M-x package-refresh-contents?
+
+    init-filepackage
+
+Share
+Improve this question
+Follow
+edited Jun 17, 2018 at 0:24
+Drew's user avatar
+Drew
+74.5k99 gold badges108108 silver badges224224 bronze badges
+asked Jun 16, 2018 at 22:45
+Vinod's user avatar
+Vinod
+3111 silver badge22 bronze badges
+
+    1
+    Great question, I am currently running into a completely related issue. I have configured Emacs to automatically install packages by adding them to the package-selected-packages list and then calling the package-install-selected-packages function. Is there a way to make Emacs automatically run (package-refresh-contents) when it identifies that new packages ought to be installed? Currently, Emacs freezes when a package is not found in the cache simply because the cache is not updated. – 
+    Arthur Colombini Gusmão
+    Dec 9, 2019 at 14:06
+
+Add a comment
+1 Answer
+Sorted by:
+1
+
+package-archive-content is used by use-package . it is the utility for installing packages. The snippet that you are quoting indeed refreshes the content or the list-packages in case it is empty.
+
+It isn't a cache, it is only a list.
+
+To update the list you need to manually call M-x list-packages and update it with U.
+
+This update process might take a while therefore it shouldn't really be part of the init file for every time you fire up Emacs.
+Share
+Improve this answer
+Follow
+answered Jun 17, 2018 at 13:20
+manandearth's user avatar
+manandearth
+2,04811 gold badge1111 silver badges2323 bronze badges
+
+    <f1> v package-archive-contents RET: "Cache of the contents of the Emacs Lisp Package Archive.[...]". To some extent, this is just a question of semantics of course, what exactly do you mean when you say "cache". – 
+    npostavs
+    Jun 17, 2018 at 13:49
+    @npostavs I meant if Emacs will download a copy of the Emacs Lisp Archive. It looks from your response that is what it does. – 
+    Vinod
+    Jun 18, 2018 at 3:47
+    Ah, I think the confusion here is that this variable is a cache of the package list (i.e., it is indeed "only a list" and also a cache). – 
+    npostavs
+    Jun 18, 2018 at 12:17
+    I.e. it is the "contents" in the sense of a "table of contents" at the beginning of a book. It's the list of what is available, rather than "the whole book". – 
+    phils
+    Dec 14, 2018 at 23:54
+
+
 ** web 
 *** skewer-mode
 **** use-package : 
