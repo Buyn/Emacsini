@@ -449,49 +449,67 @@ _?_ help            _c_urrent file
 					(concat "0" (number-to-string i))))))
 ;; **** defhydra
 (defhydra org-menu (:color pink)
-;; ***** hint
-    "
-						^Org-mode  Menus^          
-────────────^───────────────^───────────────────
-	_d_oneMACRO  A_r_hiv TODO    a_g_enda 
-	_t_odo set  _h_+1h _n_+13h  _q_uit   
- _s_how image _b_uffersInder
-    "
+
 ;; ***** keys
 ;; ****** one-line keys
-    ("r" org-archive-subtree)
-    ("t" org-todo "TODO")
-    ("g" org-agenda :color blue)
-    ("s" org-toggle-inline-images )
-		("q" nil) 
+    ("r" org-archive-subtree "ARhiv TODO")
+    ("t" org-todo "Todo set")
+    ("g" org-agenda "aGenda" :color blue )
+    ("s" org-toggle-inline-images "Show image")
+		("q" nil ) 
+		("o" org-roam-menu/body "Org-rOam" :color blue)
 ;; ****** d : 
     ("d" (progn
 					  ;; (nil/body) 
 						(evil-open-fold)
 					  (mac-done-copy)
 					  ;; (org-menu/body)
-					  ) 
+					  ) "DoneMACRO" 
 							:color blue)
 ;; ****** h : 
     ("h" (org--deadline-or-schedule nil 'scheduled 
 							 (curent-time-format-hh-mm 1 0))
+					"H+1h"
 					:color blue)
 ;; ****** n : 
     ("n" (org--deadline-or-schedule nil 'scheduled 
 							 (curent-time-format-hh-mm 13 0))
+					"N+13h"
 					:color blue)
 ;; ****** b Idirect buffer : 
     ("b" (progn
 						(org-tree-to-indirect-buffer)
 						(define-key evil-normal-state-map (kbd "g SPC") 
 							`org-tree-to-indirect-buffer))
+					"BuffersInder"
 					:color blue)
 ;; ***** END of def
 	)
 ;; --------------------------------------
 ;; **** Bind
 ;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
-
+;; *** Org-roam menu
+;; **** defun for Org-roam menu
+;; **** defhydra
+(defhydra org-roam-menu (:color blue)
+;; ***** keys
+;; ****** one-line keys
+    ("i" org-roam-node-insert "Insert")
+    ("c" org-roam-capture "Capture")
+    ("g" org-roam-graph "graph")
+    ("a" org-roam-alias-add "Alias Add")
+		("q" nil)
+		("I" org-id-get-create "Id get create")
+		("f" org-roam-node-find "Find")
+		("r" org-roam-buffer-toggle "Roam-buffeR")
+		("j" org-roam-dailies-capture-today "joarnal")
+		("t" org-roam-tag-add "tag-add")
+		("R" org-roam-node-random "random")
+;; ***** END of def
+	)
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
 ;; *** emacs menu
 ;; **** defhydra
 (defhydra hydra-emacs-menu (:color blue)
