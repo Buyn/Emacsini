@@ -14,6 +14,7 @@
  'org-babel-load-languages
  '((python . t)))
 ;; *** eshell evaluate
+	;; (find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 (load "~/ELs/Org/Babel/ob-eshell.el")
 ;; (use-package ob-eshell :ensure t
   ;; :defer 2
