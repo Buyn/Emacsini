@@ -8,16 +8,18 @@
 ;; * EVIL-MOD CUSTOMIZATION
 ;; --------------------------------------
 ;; ** use-package evil
+;; *** before evil load
 (global-visual-line-mode t)
 (setq evil-respect-visual-line-mode t)
 (setq evil-cross-lines t)
+;; *** use-package : 
 (use-package evil :ensure t
-  ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
+;; *** :init : 
 		;; :init
+		:init (setq evil-want-C-i-jump nil)
 		;; 	(global-visual-line-mode t)
 		;; 	(setq evil-respect-visual-line-mode nil)
-
+  ;; :bind ("C-c c" hydra-clock/body)
 ;; *** END of use-package evil
   )
 (require 'evil)

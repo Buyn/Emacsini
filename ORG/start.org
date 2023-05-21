@@ -26,26 +26,11 @@ https://www.braveclojure.com/basic-emacs/
 ** progn :
 #+begin_src emacs-lisp :results output silent
 
-(setq exec-path (append exec-path '("D:/shell/msys2/msys64/usr/bin")))
-(setenv "PATH" (concat (getenv "PATH") "D:\\shell\\msys2\\usr\\mingw64\\bin"))
-(setq exec-path (append exec-path '("D:/shell/CygWin/cygwin64/bin")))
-(setenv "PATH" (concat (getenv "PATH") "D:/shell/CygWin/cygwin64/bin"))
-
-
-(custom-set-variables
- '(ediff-window-setup-function 'ediff-setup-windows-plain)
- ;; Finally got around to customizing the vertical split to be the default one (last line in the config):
- ;; '(ediff-diff-options "-w")
- '(ediff-split-window-function 'split-window-horizontally))
-(define-key evil-normal-state-map  "j" 'evil-next-visual-line)
-(define-key evil-normal-state-map  "k" 'evil-previous-visual-line)
-(define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
-(define-key evil-normal-state-map (kbd "gk") 'previous-logical-line)
-(define-key evil-normal-state-map "gh" 'evil-first-non-blank-of-visual-line)
-(define-key evil-normal-state-map "gl" 'evil-end-of-visual-line)
-(setq evil-cross-lines t)
-
+(load "~/INI/hydra-cfg.el")
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
  #+end_src
+
+ 
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
 (global-set-key (kbd " M-g M-t M-o") 'org-tree-to-indirect-buffer)
@@ -19651,6 +19636,11 @@ Suitable functions to add to these lists might be:
 *** insert mod
 **** tab
 If you are using Evil anyways, you can use C-t and C-d to increase/decrease indent at the start of the line.
+*** remap key in normal for org mode
+#+begin_src emacs-lisp :tangle yes
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+#+end_src
+
 *** ex mode : 
 **** evil-ex-define-cmd : 
 	 (evil-ex-define-cmd "tabc[lone]" 'elscreen-clone)

@@ -178,7 +178,7 @@
 (ido-mode t)
 ;; ------------------------------------------------------
 
-;; * --------------------------------------
+;; * initial-scratch-message : 
 (setq initial-scratch-message ";; * This buffer for Lisp evaluation.
 ;; This buffer is for text that is not saved, and for Lisp evaluation.
 ;; To create a file, visit it with \\[find-file] and enter text in its buffer.
@@ -199,6 +199,8 @@
 ;; 	|__|      ||_|_|_||      |__|
 ;; /   |      ||_|_|_||      |   \\
 ;; =================================
-;; Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
+;; * Whenever I open Emacs, I feel inspired. 
+;; Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
 ")
+;; * --------------------------------------
 
