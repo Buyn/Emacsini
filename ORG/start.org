@@ -989,53 +989,19 @@ initial-scratch-message
 	(find-file-other-frame "~/ELs/tts/tts-editor/tts-editor.el")
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
-** org files
-*** admins 
-(find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
-
-(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
-
-*** lincks
-[[file:~/../Dropbox/orgs/weekly.org][weekly file]]
-[[file:~/../Dropbox/orgs/todo_plan.org][ToDo Plan org]]
-[[file:~/../Dropbox/orgs/monthly.org][Monthly file]]
-[[file:GTD.org][GTD file]]
-[[file:today.org][Today org file]]
-[[file:~/ORG/gtd/inbox.org][Inbox GTD File]]
-[[file:~/ORG/gtd/tickler.org][Tikler Todo File]]
-*** main todos
-(find-file "D:/Development/lisp/Dropbox/orgs/weekly.org")
-(find-file "~/../Dropbox/orgs/todo_main.org")
-(find-file "~/../Dropbox/orgs/todo_plan.org")
-(find-file "~/../Dropbox/orgs/todo_LongRun.org")
-*** uptown todos
-файлы для Вышгорода
-(find-file "~/../Dropbox/orgs/uptown/todo_rasps.org")
-(find-file "~/../Dropbox/orgs/uptown/todo_uplan.org")
-*** tools
-(find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
-*** captures
-(find-file-other-frame "~/../Desktop/orgs/capture/Pensieve.org")
-(find-file-other-frame "~/../Desktop/orgs/capture/astronomicon.org")
-(find-file-other-frame "~/../Desktop/orgs/capture/emagus.org")
-(find-file-other-frame "~/../Dropbox/orgs/capture/Ansible.org")
-(find-file "~/../Desktop/orgs/capture/astronomicon.org")
-(find-file "~/../Desktop/orgs/capture/Pensieve.org")
-(find-file "~/../Desktop/orgs/capture/emagus.org")
-
-*** gts 
-(find-file "~/ORG/gtd/gtd.org")
-(find-file "~/ORG/gtd/inbox.org")
-(find-file "~/ORG/gtd/tickler.org")
-*** tutor.org
-#+begin_src emacs-lisp :tangle yes
-(find-file-other-frame "D:/Development/lisp/Dropbox/Office/Progects/Tutor/Main/tutor.org")
-#+end_src
-
-#+RESULTS:
-: #<buffer tutor.org>
-
-
+** all orgs Grimoire 
+*** link
+(find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")
+*** Des 
+	Главная книга 
+отвечает за все остальные
+остальные книги рождаются здесь
+потом когда материала оказывается черезверное
+он преберается в отдельную книгу
+и эта книга содержит силки на все остальные книги
+и материалы на вощендшии пока в отдельные книги
+может быть вызана из любой книги
+шифт+ф1
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -5113,10 +5079,8 @@ If you are multilingual, then you can set a different language for each buffer b
 
 Emacs evaluates this line and activates the dictionary when you run M-x normal-mode and the next time you open the file. This dictionary only applies to the relevant file and all other buffers remain in the default language.
 *** Counting Words
-
 To count the words in a buffer, or part thereof, use the count-word-region-function, which is bound to M-==. The result appears in the minibuffer. When you select a portion of text, this function will count only the selection. Adding the C-u prefix counts the words for the hole buffer (C-u M-=).
 *** Text size
-
 To increase the height of the text in the current buffer, type C-x C-+. To decrease it, type C-x C--.
 
 To restore the default (global) face height, type C-x C-0. These keys are all bound to the text-scale-adjust funcion, which looks at the last key typed to determine which action to take.
@@ -20944,7 +20908,65 @@ Alternatively, use eval if you wish to call functions:
 All files within that directory will be treated as their own separate set of Org-roam files. Remember to run org-roam-db-sync from a file within that directory, at least once.
 
 Next: How can I stop Org-roam from creating IDs everywhere?, Previous: How do I have more than one Org-roam directory?, Up: FAQ   [Index]
+***** How to delete a node?
+****** just need delete : 
+You just need delete the file or headline of the node you want to delete. Then M-x org-roam-db-sync.
+****** calling M-x delete-file : 
+Right now, deleting a file will result in links to the current file breaking.
+If you delete the file using Emacs (with dired, or calling M-x delete-file), the cache remains consistent. If you delete the file from outside Emacs, it won’t, but is not a big issue, because running M-x org-roam-db-build-cache once more will bring it to a consistent state.
+****** handle that with a script : 
+ currently handle that with a script to remove all the references first, then I delete the file:
+#+begin_src python
 
+#!/usr/bin/env python3
+
+import re
+import os
+import subprocess
+import sys
+
+def get_id(fname):
+    with open(fname) as f:
+        content = f.read()
+        return re.findall(r":ID:\s+(.*)", content)[0]
+
+def notes_with_pattern(pat):
+    roam_folder = os.path.expanduser("~/.roam/")
+    raw = subprocess.check_output(f"rg -l {pat} {roam_folder}", shell=True).decode("utf-8")
+    return raw.splitlines()
+
+def subid(content, ident):
+    pat = f"\[\[id:{ident}\]\[(.*?)\]\]"
+    return re.sub(pat, "\\1", content)
+
+def remove_note_mention(fn, ident):
+    with open(fn) as f:
+        content = f.read()
+    newcontent = subid(content, ident)
+    with open(fn, "w") as f:
+        f.write(newcontent)
+    print(f"Edited {fn}")
+
+def delete_note(fname):
+    ident = get_id(fname)
+    print(f"Removing id {ident}")
+    to_edit = [n for n in notes_with_pattern(ident)
+               if n != fname]
+    for fn in to_edit:
+        remove_note_mention(fn, ident)
+
+if __name__ == '__main__':
+    delete_note(sys.argv[1])
+#+end_src
+
+And I call it from emacs with:
+#+begin_src emacs-lisp :tangle yes
+(defun delete-org-roam-note-references ()
+  (interactive)
+  (async-shell-command (s-concat "delete_note.py " (buffer-file-name))))
+#+end_src
+
+Note: It does not work with heading references just whole notes ones.
 
 *** Org-Roam-Ui : 
 **** git

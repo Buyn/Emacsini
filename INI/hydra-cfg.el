@@ -505,7 +505,7 @@ _?_ help            _c_urrent file
 		("SPC" org-roam-buffer-toggle "Roam-buffeR")
 		("j" org-roam-dailies-capture-today "joarnal")
 		("t" org-roam-tag-add "Tag-add")
-		("S" org-roam-ui-mode "Start\StopUI")
+		("S" org-roam-ui-mode "Start/StopUI")
 		("z" org-roam-ui-node-zoom "Zoom")
 		("s" org-roam-ui-node-local "Show-node")
 		("R" org-roam-node-random "random")
