@@ -499,7 +499,8 @@ _?_ help            _c_urrent file
     ("g" org-roam-graph "graph")
     ("a" org-roam-alias-add "Alias Add")
 		("q" nil)
-		("I" org-id-get-create "Id get create")
+		("D" org-id-get-create "iD get create")
+		("F" (dendroam-node-find-initial-input) "h-Find")
 		("f" org-roam-node-find "Find")
 		("r" org-roam-buffer-display-dedicated "dedicated-buffeR")
 		("SPC" org-roam-buffer-toggle "Roam-buffeR")
@@ -509,6 +510,8 @@ _?_ help            _c_urrent file
 		("z" org-roam-ui-node-zoom "Zoom")
 		("s" org-roam-ui-node-local "Show-node")
 		("R" org-roam-node-random "random")
+		("B" org-roam-db-sync "dB-Build")
+		
 ;; ***** END of def
 	)
 ;; --------------------------------------

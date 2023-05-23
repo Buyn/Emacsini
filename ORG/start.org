@@ -1002,6 +1002,12 @@ initial-scratch-message
 и материалы на вощендшии пока в отдельные книги
 может быть вызана из любой книги
 шифт+ф1
+** emacs orgs 
+*** 2023
+**** 05
+(find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
+(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
+
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -11276,7 +11282,6 @@ quelpa-use-package provides an advice for this purpose which can be activated th
 (quelpa-use-package-activate-advice)
 To disable it again you can use:
 (quelpa-use-package-deactivate-advice)
-**** use quelpa : 
 (quelpa '(hydra :repo "abo-abo/hydra" :fetcher github))
 *** When to call package-refresh-contents in init.el
 Asked 4 years, 11 months ago
@@ -19691,6 +19696,32 @@ global-visual-line-mode’ toggles Visual Line mode in all buffers.
  M-r							ivy-toggle-regexp-quote
  M-v							ivy-scroll-down-command
 
+*** quik help
+**** C-M-j						ivy-immediate-done
+									выбрать то что написано в страко поиска
+									а не выбраный пункт - против С-J or ret
+**** M-i							ivy-insert-current
+									вставляет в поиск выбраную пункт
+**** M-j							ivy-yank-word
+									вставить в поиск от курсора и до конца слова
+									и сдвикает курсор на следующее слово
+**** M-o							ivy-dispatching-done
+									меню на выбраном пункте
+									вставить в текс где курсор
+									или скопировать в буфер
+**** M-v							ivy-scroll-down-command
+ С-v							листать на страницу вниз и верх
+**** TAB							ivy-partial-or-done
+		Complete the minibuffer text as much as possible.
+		If the text hasn’t changed as a result, forward to ‘ivy-alt-done’.
+		дейсивие выбирается с помошью			C-M-a						ivy-read-action
+		выпольнить/вставить\копировать
+		не запоминает после закрытия меню
+**** C-c							Prefix Command
+**** S-SPC						ivy-restrict-to-matches
+**** M-RET						ivy-call
+									выполнить не закрывая окна
+
 ** org-eww
 When this module is active `org-store-link' (often on key C-c l) in
 a eww buffer stores a link to the current url of the eww buffer.
@@ -20967,6 +20998,20 @@ And I call it from emacs with:
 #+end_src
 
 Note: It does not work with heading references just whole notes ones.
+***** обработать каким-то образом все орг-роамные файлы
+
+https://org-roam.discourse.group/t/how-to-list-incomplete-entries/2444/3 Здесь - всем добавить тег draft.
+
+(dolist (f (org-roam-list-files))
+        (progn
+        (interactive)
+        (find-file f)
+        (org-roam-tag-add
+         '("draft"))
+        (save-buffer)
+        (kill-current-buffer)))
+
+
 
 *** Org-Roam-Ui : 
 **** git

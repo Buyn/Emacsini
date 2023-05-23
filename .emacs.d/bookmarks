@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "d:/Development/lisp/Dropbox/orgs/Org-roam/default/daily/2023-05-20.org")
+ (filename . "d:/Development/lisp/Dropbox/orgs/Org-roam/default/emacs.use-package.org")
  (front-context-string)
- (rear-context-string . ": 2023-05-20\n* \n")
- (position . 91))
+ (rear-context-string . "le: Use-Package\n")
+ (position . 89))
 )

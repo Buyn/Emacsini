@@ -130,6 +130,12 @@
 (add-to-list 'default-frame-alist '(height . 25))
 (add-to-list 'default-frame-alist '(width . 75))
 ;; ------------------------------------------------------
+;; ** show Emoji
+;; ------------------------------------------------------
+(when (member "Twitter Color Emoji" (font-family-list))
+  (set-fontset-font
+    t 'symbol (font-spec :family "Twitter Color Emoji") nil 'prepend))
+;; ------------------------------------------------------
 ;; ** Menu bar & key
 ;; ------------------------------------------------------
 ;; *** coments : 
