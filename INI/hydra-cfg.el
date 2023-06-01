@@ -493,7 +493,6 @@ _?_ help            _c_urrent file
 ;; **** defhydra
 (defhydra org-roam-menu (:color blue)
 ;; ***** keys
-;; ****** one-line keys
     ("i" org-roam-node-insert "Insert")
     ("c" org-roam-capture "Capture")
     ("g" org-roam-graph "graph")
@@ -510,7 +509,7 @@ _?_ help            _c_urrent file
 		("z" org-roam-ui-node-zoom "Zoom")
 		("s" org-roam-ui-node-local "Show-node")
 		("R" org-roam-node-random "random")
-		("B" org-roam-db-sync "dB-Build")
+		("B" (org-roam-db-sync 'FORCE) "dB-Build")
 		
 ;; ***** END of def
 	)

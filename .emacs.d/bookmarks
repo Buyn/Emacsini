@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "d:/Development/lisp/Dropbox/orgs/Org-roam/default/emacs.use-package.org")
+ (filename . "d:/Development/lisp/Dropbox/orgs/Org-roam/default/test.t_e_st.end_test.org")
  (front-context-string)
- (rear-context-string . "le: Use-Package\n")
- (position . 89))
+ (rear-context-string . "title: End Test\n")
+ (position . 86))
 )

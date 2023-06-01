@@ -139,7 +139,7 @@
                                                    (seq-remove #'nonspacing-mark-p
                                                                (string-glyph-decompose s)))))
                (cl-replace (title pair) (replace-regexp-in-string (car pair) (cdr pair) title)))
-      (let* ((pairs `(("[^[:alnum:][:digit:][.]]" . "_") ;; convert anything not alphanumeric
+      (let* ((pairs `(("[^[:alnum:][:digit:]\\.]" . "_") ;; convert anything not alphanumeric
                       ("__*" . "_")                   ;; remove sequential underscores
                       ("^_" . "")                     ;; remove starting underscore
                       ("_$" . "")))                   ;; remove ending underscore
