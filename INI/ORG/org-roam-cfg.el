@@ -102,6 +102,7 @@
 ;; ** defun : 
 	(defun dendroam-node-find-initial-input ()
 		(interactive)
+		(require 'org-roam)
 		(require 'dendroam)
 		(org-roam-node-find nil (if (buffer-file-name)
 													(file-name-base (buffer-file-name))

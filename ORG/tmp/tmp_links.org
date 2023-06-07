@@ -1,11 +1,11 @@
 * translate : 
 ** from ru
 #+begin_src translate 
-живое существо 
+ исторический
 #+end_src
 
 #+RESULTS:
-: Living being
+: historical
 
 
 ** from en
@@ -115,9 +115,6 @@ graph graphname {
     Type “d0” to turn the display into decimal form.
 
 * read
-:PROPERTIES:
-:ID:       eff037a6-983d-46ff-b494-34640dc9e293
-:END:
 ** 
 * AI 
 ** Hello profesor!
@@ -150,7 +147,5 @@ graph graphname {
 #+end_src
 * tmp 
 ** 
-:PROPERTIES:
-:ID:       031ac52b-8312-44a3-8812-f48d216e9cc6
-:END:
+
 

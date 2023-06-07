@@ -25,11 +25,20 @@
 ;; **** --------------------------------------
 ;; *** google-translate
 ;; **** use-package google-translate
-(use-package google-translate :ensure t
+(use-package google-translate
+  :ensure t
   :custom
   (google-translate-backend-method 'emacs)
   :config
-   (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-translation-directions-alist
+        '(("ru" . "en") ("en" . "ru")))
+  (setq google-translate-output-destination nil)
+  (setq google-translate-pop-up-buffer-set-focus t)
+  (setq google-translate-default-source-language "ru")
+  (setq google-translate-default-target-language "en")
+  (global-set-key "\C-ct" 'google-translate-smooth-translate)
+  (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))
 ;; **** --------------------------------------
 ;; *** go-translate
 ;; **** use-package go-translate

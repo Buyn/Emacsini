@@ -11,6 +11,8 @@
 							#("Ср май 18 02:21:19 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" "pikabu.ru" nil])
+ (".google.com"
+	[url-cookie "NID" "511=nj4gfrx6Vd5b8WCqqvaz1QxQBm-2hXUh0Z31SNMO7kV0czN_mSimmq91ljF01laYIKNBZUkI5agQ5OuqGkSRUzs_sSBBJ4s9l-pQNDgZ9vT3l3uN3TUU1HIJAT0IU0H077R27vSpq4xfDty0h3A1YoHlEGy-TwcmUBI7XRebGG8" "Mon, 04-Dec-2023 10:31:29 GMT" "/" ".google.com" nil])
  (".rezka.ag"
 	[url-cookie "dle_user_token" "46e4e7a0cc609ea6c0b98519640da7dc"
 							#("Ср сен 06 07:57:41 2023 GMT" 0 27
@@ -59,6 +61,14 @@
  ("medium.com"
 	[url-cookie "uid" "lo_2b5ac11fc16a" "Fri, 31 May 2024 14:24:24 GMT" "/" "medium.com" t]
 	[url-cookie "sid" "1:sZCf2GtVs6NjlNTz/j49ohWbHNWSIwvaiBW1X5Us30j1Hlmb6umQBq2mdO1IqTut" "Fri, 31 May 2024 14:24:24 GMT" "/" "medium.com" t])
+ ("en.wikipedia.org"
+	[url-cookie "WMF-Last-Access" "07-Jun-2023" "Sun, 09 Jul 2023 00:00:00 GMT" "/" "en.wikipedia.org" t]
+	[url-cookie "NetworkProbeLimit" "0.00010"
+							#("Ср июн 07 12:07:51 2023 GMT" 0 27
+								(charset windows-1251))
+							"/" "en.wikipedia.org" t])
+ (".wikipedia.org"
+	[url-cookie "WMF-Last-Access-Global" "07-Jun-2023" "Sun, 09 Jul 2023 00:00:00 GMT" "/" ".wikipedia.org" t])
  (".pikabu.ru"
 	[url-cookie "pcid" "NcImKVc4Cv2"
 							#("Ср май 12 02:21:19 2032 GMT" 0 27

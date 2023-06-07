@@ -69,8 +69,8 @@ https://www.braveclojure.com/basic-emacs/
 
  #+end_src
 #+begin_src emacs-lisp :tangle yes
-
-
+		(require 'org-roam)
+		(require 'dendroam)
 #+end_src
  
 #+begin_src emacs-lisp :results output silent
@@ -1034,6 +1034,8 @@ initial-scratch-message
 ** all orgs Grimoire 
 *** link
 (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")
+*** админс fro grimuar 
+(find-file-other-frame "~/../Dropbox/orgs/adm/2023-06-08_trans.org")
 *** Des 
 	Главная книга 
 отвечает за все остальные
@@ -2549,6 +2551,215 @@ $ goto ls
 If you want to know what's implemented in elisp and what isn't, you could just ask Emacs to complete on eshell/
 
 e.g.: C-uC-ha eshell/ RET
+***** mastering-eshell : 
+https://www.masteringemacs.org/article/complete-guide-mastering-eshell
+****** Useful Keybindings
+
+
+Eshell comes equipped with a couple of quality-of-life improvements that make interacting with Emacs and Eshell a lot easier.
+
+C-c M-b
+
+    Inserts the printed buffer name at point
+C-c M-i
+
+    Inserts the printed process name at point
+C-c M-v
+
+    Inserts an environment variable name at point
+C-c M-d
+
+    Toggles between direct input and delayed input (send on RET).
+
+    Useful for some programs that don’t work correctly with buffered input.
+****** History Interaction
+
+You can rewrite previous commands found in Eshell’s history. The syntax is similar to what you find in bash, but it’s just a subset of the most common features. It’s probably easier to refer you to the bash info manual for detailed information on how the history interaction works. I’ve included a small table below that describes most of the history syntax Eshell supports.
+
+You may also want to read my article on Shell & Comint Secrets: History commands. Although it concerns comint-mode-derived things, it’s useful to know about anyway.
+
+!!
+
+    Repeats the last command
+!ls
+
+    Repeats the last command beginning with ls
+!?ls
+
+    Repeats the last command containing ls
+!ls:n
+
+    Extract the nth argument from the last command beginning with ls
+!ls<tab>
+
+    Using pcomplete, show completion results matches ls
+^old^new
+
+    Quick substitution. Using the last command, replaceold with new and run it again. Appears to be buggy.
+$_
+
+    Returns the last parameter in the last executed command.
+
+Eshell also has some support for bash history modifiers (like !!:s/old/new/) and the bash reference on history interaction would be a good place to brush up on that.
+****** Useful Elisp Commands
+
+There are a number of useful Eshell commands that you should know about. You’re of course not limited to these commands, but they’re either really useful and general, or made specifically to plug a hole in Eshell’s feature set.
+
+listify ARGS
+
+    Parses an argument string into elisp list notation and prints it to the screen. It’s clever enough to handle both MS-DOS/Windows and POSIX-style argument syntax.
+
+    $ listify 1 2 3
+    (1 2 3)
+
+addpath PATH
+
+    Adds the argument, which must be a path, to the $PATH environment variable. If no argument is specified the existing paths are pretty-printed to the screen.
+
+    $ addpath
+    /usr/local/sbin/
+    /usr/local/bin/
+    [ ... ]
+
+    $ addpath /opt/mypath/
+    /usr/local/sbin:...:/opt/mypath/
+
+unset ENV-VAR
+
+    Unsets an existing environment variable
+find-file FILE
+
+    Finds the file FILE and opens it in Emacs. This function is Tramp aware and will therefore work remotely.
+dired DIRECTORY
+
+    Opens a dired buffer in DIRECTORY.
+calc-eval EXPR
+
+    Runs EXPR through the Emacs calculator.
+
+    $ calc-eval (+ 1 2)
+    3
+
+    Note that it does not use Emacs’s hyper-advanced symbolic, reverse-polish notation calculator (bound to M-x calc or C-x * *)
+upcase STR/downcase STR
+
+    Converts STR to upper- or lowercase.
+vc-dir DIRECTORY
+
+    Reports the status of a version controlled directory (equivalent to the status command in most VCS)
+magit
+
+    Activates M-x magit’s status page for current working directory. (If you have Magit installed, that is!)
+
+    If you have not used Magit for all your git needs, check out An introduction to Magit, an Emacs mode for Git.
+ediff-files FILE1 FILE2
+
+    Diffs FILE1 and FILE2 using ediff, one of Emacs’s diff engines.
+find-name-dired DIR PATTERN
+
+    Calls out to the external program find and asks it to find all PATTERN in DIR.
+
+    Don’t forget to escape the glob patterns you pass to PATTERN. Single quotes work well.
+
+Note that most commands work well over Tramp (more on that below) so you can definitely cd to a remote Tramp directory; invoke magit and get a magit status screen for a remote directory.
+****** Subshells
+
+There are two types of Emacs subshells. The first one is $( ... ) (also ( ... )) that evaluates Lisp.
+
+You can use $() to in-line an elisp form and use its output in much the same way as you would in bash:
+
+$ echo $(+ 1 2 3)
+6
+
+The only caveat here is you cannot use the backquote (backtick) to spawn a subshell, but that syntax was never universally supported anyway.
+
+It’s also possible (though I would not recommend it, for there are cases where it does not work) to use a standard elisp form like this:
+
+$ echo (+ 1 2 3)
+6
+
+But it does not work everywhere, so exercise caution.
+
+The other is more like an actual subshell: ${ ... }. Note that it’s not as versatile as a regular subshell that you may know from bash and the like.
+
+$ echo ${echo $(+ 1 2 3)}
+6
+****** TAB Completion
+
+Eshell has its own completion system called pcomplete. Although newer versions of Emacs invoke the generic completion-at-point command, it internally still uses pcomplete for much of the command completion.
+
+I have an article where I talk about PComplete: Context-Sensitive Completion in Emacs. If you ever want to extend Emacs’s shell completion – in newer Emacsen shell-mode also uses pcomplete behind the scenes – or understand how it works, then that article’s a good place to start.
+
+The completion system is not fool-proof, and unlike your favorite external shell it does not come with an abundance of completion libraries for every conceivable binary.
+
+Nevertheless, both TAB and C-M-i offer completion at point.
+
+And don’t forget, Emacs has both M-x man and M-x woman for manual page lookup.
+****** Bookmarks & Project Integration
+
+Emacs’s extensive bookmarking facility also works with Eshell as of Emacs 28. Create a bookmark with C-x r m and you can recall it at will with C-x r l and friends.
+
+I like this feature because you can bookmark directories and Emacs can open up an Eshell at the exact place you bookmarked.
+
+Likewise, Emacs’s project management facility C-x p can open an Eshell in your project root with C-x p e.
+****** Remote Access with Tramp
+
+Tramp (Transparent Remote Access, Multiple Protocol) is a framework for communicating across different user accounts, servers, docker containers, and much more.
+
+It’s handy, and works well. Tramp works – keeping it simple, here – by intercepting how Emacs interacts with files, directories and processes. Because it’s generic, it works with a huge range of Emacs’s features — features that are almost never coded explicitly with Tramp in mind.
+
+Eshell works well with Tramp. Provided you follow Tramp’s connection notation, you can connect to any backend Tramp supports and interface with it using Eshell.
+
+Here’s an example that changes directory to a remote server using SSH:
+
+cd /ssh:bob@initech:/srv/tps-reports/
+
+That incantation connects as user bob to the server initech and switches to its /srv/tps-reports/ directory. From that moment on, all interactions in Eshell take place through the lens of the remote connection you established through Tramp.
+
+Tramp is not perfect; nor is Eshell. But a wide range of commands work beautifully well remotely. Note that unlike an ordinary SSH connection Tramp does, in actual fact, make distinct calls via SSH every time you carry out an action.
+
+It’s not a longer-running session like you might expect, and although you can configure all of this, it’s worth bearing in mind that you’re reaching out and executing standalone actions, one at a time.
+
+If you install the third-party package docker-tramp you can also cd straight into docker containers and act on them.
+
+Using that method, you can combine it with multi-hopping, so you can SSH to a remote server then su to a different user; connect with docker; or something else entirely:
+
+$ cd /ssh:initech|su:root@localhost:/
+****** To Pseudo-Devices
+
+Eshell reimplements the following pseudo-devices:
+
+/dev/eshell
+
+    Prints the output interactively to Eshell.
+/dev/null
+
+    Sends the output to the NULL device.
+/dev/clip
+
+    Sends the output to the clipboard.
+/dev/kill
+
+    Sends the output to the kill ring.
+
+The usual redirection rules like overwrite (>) and append (>>) apply here.
+****** Redirecting Pipes to a Buffer
+
+Because Eshell has to reimplement pseudo-devices internally it is not at the mercy of dealing with just UNIX device files – it is actually capable of implementing its own pseudo-devices.
+
+A good example would be redirection to a buffer of your choosing, and that can be done with the following syntax:
+
+$ cat mylog.log >> #<buffer *scratch*>
+
+This is where the ability to insert the printed format of a buffer comes in handy. The command C-c M-b from before does the job. There is another shorthand: #<*scratch*> that achieves the same outcome.
+
+You can also output straight to an elisp variable (but be careful you don’t fry the wrong settings):
+
+$ echo foo bar baz > #'myvar
+$ echo $(cadr myvar)
+bar
+
+If you set eshell-buffer-shorthand to t you can use the shorthand #'*scratch* instead, but it means you will not be able to redirect straight to elisp symbols. I recommend you use C-c M-b and #<buffer-name-here> instead.
 *** Shell
 **** Описание 
 используется для запуска других процесов
@@ -2581,6 +2792,123 @@ Original value was
 
 # (setq explicit-sh.exe-args '("--login" "-i"))
 # (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+**** Executing Shell Commands in Emacs
+Instead of switching to your favorite shell to do some light command line-fu, why not ask Emacs to call out to your favorite shell programs instead? You can feed all or parts of your buffer through a program and capture the output in Emacs.
+By Mickey Petersen
+Updated for emacs 28
+
+A common workflow is saving a file; modifying all or parts of it, somehow, on the command line; and then re-opening it in your favorite editor. But why not let Emacs do all the heavy lifting?
+
+I have previously talked about running shells and terminal emulators in Emacs. But this time I want to talk about the other use case: executing shell commands against a region of text, and capturing the output for further editing in Emacs.
+Executing Shell Commands
+
+There’s a number of different shell commands – not to be confused with M-x shell, the Emacs inferior shell – and they are tightly integrated with Emacs’s buffer system.
+The Basics
+
+The simplest way to invoke something is to run the command shell-command, bound to the handy shortcut M-!. Any command you give it fed through an actual shell – so you gain the benefit of shell globbing with * and ? – and its output returned to you. If the output exceeds a certain size it’s sent to a separate buffer called *Shell Command Output*. Otherwise it’ll appear in the echo area.
+
+Emacs displays the exit code of the finished command in the mode line if it is non-zero. Emacs does not distinguish between output from standard error or standard output: they’ll appear as it’s emitted by the underlying command. If you want standard error sent to its own buffer you must set shell-command-default-error-buffer to the name of a buffer you want it sent to.
+
+By default Emacs executes the command synchronously. That is, the command blocks Emacs until the command has run its course. That’s probably not what you want for longer-running commands.
+
+Instead you can append an ampersand (&) if your underlying shell supports job control. Alternatively you can use the dedicated command async-shell-command, bound to M-&,. The asynchronous version uses the buffer *Async Shell Command* for its output.
+
+If you prefix the command with the universal argument, C-u, Emacs will insert the output of the shell command into the current buffer at point.
+Shell Commands on Regions
+
+Unlike the “normal” shell commands I explained before, this command works on regions of text. The region is sent via standard input to the command you give it, so you must ensure the command is capable of reading from standard input.
+
+To use it, you can invoke either shell-command-on-region or its shortcut M-|. If you want Emacs to replace the region with the output returned from the command, you can again use the universal argument C-u.
+
+Feeding a region into a command and inserting the output of that command back into a buffer is a nifty thing indeed. But if all you’re doing is, say, sorting text with sort then you should give Emacs’s own sort command a try.
+Coding Systems and Unicode
+
+One issue – it does not happen so frequently any more as everyone (in the west, anyway) is using UTF-8 – but if you get garbled characters or errors about the encoding or locale, you should read my article on working with coding systems and unicode in Emacs.
+Invoking Shell Commands from Elisp
+
+You can use the same commands you used in interactive mode in your elisp code, with the only catch that you have to fill out a few more parameters.
+
+Here’s a commented example I wrote that marks the entire buffer and feeds it to tidy, a useful utility for cleaning up and formatting HTML and XML:
+
+(defun tidy-html ()
+  "Tidies the HTML content in the buffer using `tidy'"
+  (interactive)
+  (shell-command-on-region
+   ;; beginning and end of buffer
+   (point-min)
+   (point-max)
+   ;; command and parameters
+   "tidy -i -w 120 -q"
+   ;; output buffer
+   (current-buffer)
+   ;; replace?
+   t
+   ;; name of the error buffer
+   "*Tidy Error Buffer*"
+   ;; show error buffer?
+   t))
+
+As you can see, it’s a simple thing indeed to build your own function to do this. Instead of manually figuring out how to do this – if you’re new to elisp, it’s not always super obvious – I recommend you learn how you can repeat complex commands in Emacs. It’s a genial way of learning elisp.
+
+Or if you prefer a no-code approach, then I recommend you try a keyboard macro instead. Keyboard macros can play back nearly everything.
+**** Working with Coding Systems and Unicode in Emacs
+Hwo to force Emacs to always use UTF-8 or other coding systems when you open files or interact with processes.
+By Mickey Petersen
+Updated for emacs 28
+
+Dealing with unicode in Emacs is a daily task for me. Unfortunately, I don’t have the luxury of sticking to just UTF-8 or iso-8859-1; my work involves a lot of fidgeting with a lot of coding systems local to particular regions, so I need a flexible editor that has the right defaults that will cover my most common use-cases. Unsurprisingly, Emacs is more than capable of fulfilling that role.
+
+Emacs has facilities in place for changing the coding system for a variety of things, such as processes, buffers and files. You can also force Emacs to invoke a command with a certain coding system, a concept I will get to in a moment.
+
+The most important change (for me, anyway) is to force Emacs to default to UTF-8. It’s practically a standard, at least in the West, as it is dominant on the Web; has a one-to-one mapping with ASCII; and is flexible enough to represent any unicode character, making it a world-readable format. But enough nattering about that. The biggest issue is convincing Emacs to treat files as UTF-8 by default, when no information in the file explicitly says it is.
+
+I use the following code snippet to enforce UTF-8 as the default coding system for all files, comint processes and buffers. Note that in newer versions of Emacs you only need the first line, but if you find that it’s not enough to coax all aspects of your Emacs into your coding system of choice, you can use the longer and more involved method. You’re free to replace utf-8 below with your own preferred coding system, of course.
+
+For newer Emacsen:
+
+(set-default-coding-systems 'utf-8)
+
+For older Emacsen, or if you find the above method is not enough somehow:
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+;; backwards compatibility as default-buffer-file-coding-system
+;; is deprecated in 23.2.
+(if (boundp 'buffer-file-coding-system)
+    (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+Once evaluated, Emacs will treat new files, buffers, processes, and so on as though they are UTF-8. Emacs will still use a different coding system if the file has a file-local variable like this -*- coding: euc-tw -*- near the top of the file. (See 48.2.4 Local Variables in Files in the Emacs manual.)
+
+OK, so Emacs will default to UTF-8 for everything. That’s great, but not everything is in UTF-8; how do you deal with cases where it isn’t? How do you make an exception to the proverbial rule? Well, Emacs has got it covered. The command M-x universal-coding-system-argument, bound to the handy C-x RET c, takes as an argument the coding system you want to use, and a command to execute it with. That makes it possible to open files, shells or run Emacs commands as though you were using a different coding system. Very, very useful. This command is a must-have if you have to deal with stuff encoded in strange coding systems.
+
+One problem with the universal coding system argument is that it only cares about Emacs’s settings, not those of your shell or system. That’s a problem, because tools like Python use the environment variable PYTHONIOENCODING to set the coding system for the Python interpreter.
+
+I have written the following code that advises the universal-coding-system-argument function so it also, temporarily for just that command, sets a user-supplied list of environment variables to the coding system.
+
+(defvar universal-coding-system-env-list '("PYTHONIOENCODING")
+  "List of environment variables \\[universal-coding-system-argument] should set")
+
+(defadvice universal-coding-system-argument (around provide-env-handler activate)
+  "Augments \\[universal-coding-system-argument] so it also sets environment variables
+
+Naively sets all environment variables specified in
+`universal-coding-system-env-list' to the literal string
+representation of the argument `coding-system'.
+
+No guarantees are made that the environment variables set by this advice support
+the same coding systems as Emacs."
+  (let ((process-environment (copy-alist process-environment)))
+    (dolist (extra-env universal-coding-system-env-list)
+      (setenv extra-env (symbol-name (ad-get-arg 0))))
+    ad-do-it))
+
+Insert the code into your emacs file and evaluate it, and now Emacs will also set the environment variables listed in universal-coding-system-env-list. One important thing to keep in mind is that Python and Emacs do not share a one-to-one correspondence of coding systems. There will probably be instances where obscure coding systems exist in one and not the other, or that the spelling or punctuation differ; the mapping of such names is left as an exercise to the reader.
 
 *** dired
 **** запуск dired
@@ -3594,6 +3922,74 @@ worked on this and gotten it working, please let me know!
 **** Применить шел команды 
 **** шел в отдельной панели 
 **** Просмотр изображений 
+*** Proced : 
+**** docs 
+***** Displaying and Interacting with processes using Proced
+Learn how to use Emacs's advanced process monitor, proced, and how it can replace both ps and top for all but the most esoteric of queries.
+By Mickey Petersen
+Updated for emacs 28
+
+If you’re a regular user of the commandline tools top or ps then I have good news for you: there’s an Emacs command that does that and it works on Windows too!
+
+The command is M-x proced and it is modelled on M-x dired (but it is not built on top of dired) and it does shadow most of the common navigational aids: n and p move down and up and g refreshes the buffer, for instance.
+
+It’s also feature rich; by combining the utility of ps with the sortable, columnized and interactive system of top you get the best of both worlds.
+
+What I like about it is that it’s a buffer like any other in Emacs. So if you’re keeping your eye on a handful of processes you can use highlight-phrase to highlight the strings you want to visually separate from the rest. It is also, in true Emacs tradition, very customizable – but I’ll get to that a bit later.
+Marking, Sorting, Filtering and Formatting Columns
+
+By default you will be given the short formatting but you can change the number of displayed columns by typing F. You’ll be shown a prompt where you can select from short, medium, long and verbose.
+
+You can also change the filtering – which defaults to all – by pressing f. Like the formatting key above you are given a list of common filter types. Furthermore you can filter by any of the visible columns by moving your point to it and pressing RET. It will incrementally filter so you can repeatedly filter as much as you like – this is a very handy feature. Refreshing the buffer with g does not reset it: you must change your filter with f.
+
+Like dired you can mark processes with both d and m (they do the same thing) and unmark with backspace and u. You can mark and unmark all processes with M and U. And finally you can then filter the marked processes with o.
+
+There are some specialty mark commands as well. The command t will invert your marks and C and P will mark the children or parents of the process point is on.
+
+Finally you can sort by columns as well. All the sort commands are bound to M-x proced-sort-xxx and to the prefix menu s:
+Command	Description
+s c	Sort by CPU %
+s m	Sort by Memory %
+s p	Sort by PID
+s s	Sort by Start Time
+s t	Sort by CPU Time
+s u	Sort by User
+s S	Sort by other column
+
+If you want to sort by a column not bound to a key you must use s S where you are then prompted for the name of a column to sort by.
+Sending Signals and Interacting with processes
+
+Unsurprisingly sending POSIX signals is fully supported by Emacs. This is done using the Elisp function signal-process. Because of that all signals are sent using the uid of the Emacs process proced is running in. Conceivably proced could be changed to call out to userland command kill (using an external command is supported) and, by combining it with TRAMP for sudo elevation it could kill processes owned by other users. Sadly that functionality does not currently exist but abusing the default-directory variable might work.
+
+To send a signal mark the processes you want to signal, or alternatively put your point on the target process, and press k or x. You will be shown a list of target processes and you can optionally change the default suggestion of TERM to something else.
+
+When the signal(s) have been sent you can review the log by pressing ?.
+Understanding & Customizing Proced’s Internals
+
+Proced is very flexible and it also supports the customize interface. You can access this inferface by typing M-x customize-group proced RET.
+
+Proced will use the Elisp function list-system-processes to retrieve all the known PIDs and then call process-attributes on each one of them to fetch the process details. The good news is that Proced does not parse the output of ps or /proc directly but relies on Emacs’s compatibility layer to make sense of everything: this also means it works rather well on Windows.
+
+Proced can auto update the display and you can enable this for a Proced buffer by running the command proced-toggle-auto-update and it will update every proced-auto-update-interval which is by default 5 seconds.
+
+To make Proced auto update by default you must add a hook:
+
+(defun proced-settings ()
+  (proced-toggle-auto-update))
+
+(add-hook 'proced-mode-hook 'proced-settings)
+
+You are free to customize other settings in this mode hook in much the same way you would other mode hook functions.
+
+If you’re really serious about tweaking the way the columns are displayed you can try your hand at editing the alist variable proced-grammar-alist. It controls how sorting, justification and string formatting works for each of the process attributes returned by process-attributes.
+
+You can also alter the default Proced filter by changing proced-filter from user to something else. Creating your own filter is also possible by adding to the proced-filter-alist; in fact this functionality lets you do rather complex things such as calling a custom function for every process attribute.
+
+The default sort and sort order (descending or ascending) is governed by proced-sort and proced-descent respectively.
+
+There are many more customizable options and the author of Proced, Roland Winkler, has done a great job ensuring they’re accessible from Emacs’s customize interface.
+
+It goes without saying that Proced is a both feature rich and customizable. I think it’s a very capable replacement for most ps and top use cases, but like so features in Emacs almost nobody has heard of it.
 *** eww
 ***** other
 **** 2 Basic Usage
@@ -3895,6 +4291,7 @@ Output stream used is value of ‘standard-output’.
 
 [back]
 **** ielm : 
+***** See ‘inferior-emacs-lisp-mode’ : 
 ielm is an autoloaded interactive Lisp function in ‘ielm.el’.
 
 (ielm &optional BUF-NAME)
@@ -3907,6 +4304,25 @@ or creates it if it does not exist.
 See ‘inferior-emacs-lisp-mode’ for details.
 
 [back]
+***** IELM: The Interactive Emacs-Lisp Mode C-c C-b
+
+IELM is a hidden gem. No, really: I’ve met Emacs users with decades of experience who’ve never heard of it. It really is hidden.
+
+And it’s a proper REPL. Type M-x ielm to launch it. It comes with all the useful features you would expect from an interactive shell:
+
+Multi-line editing
+
+    When you press RET IELM will check whether you did so at the end of the input, or in the middle. If it’s the latter, it’ll insert a newline and let you continue editing and writing. Great if you want to write multi-line code.
+
+    In all other instances it’ll evaluate what you wrote.
+Output Variables
+
+    The variables *, ** and *** contain the last three outputs from the shell.
+History
+
+    ielm inherits from comint mode, although it talks to no external process. That means it inherits a lot of the core functionality present in comint mode. I’ve written about comint history commands before so I won’t repeat myself here.
+
+Another useful feature is the concept of a working buffer - a buffer through which your changes are evaluated. If you type C-c C-b you can change ielm’s working buffer to one of your choosing and then all the code you evaluate thereafter is treated as if you executed it in the context of that buffer. So in this sense it works like M-:. Not only is it useful, it’s downright essential as some variables are local to a particular buffer or directory on your file system.
 
 **** lisp-interaction-mode : 
 ***** (lisp-interaction-mode) : 
@@ -3964,6 +4380,455 @@ In action
 
     Presentation of the basic prototype: http://www.youtube.com/watch?v=TgHvRcbYJ-8 [2:32] (you don't have to watch this)
     New features, less slow awkward typing: https://www.youtube.com/watch?v=mNO-vgq3Avg [1:50]
+*** Net Tools
+**** doc
+***** Using the commandline network utilities from Emacs
+How to use Emacs's selection of commandline utilities, including: ifconfig, netstat, arp, traceroute, ping, dig and more
+By Mickey Petersen
+Updated for emacs 28
+
+Unbeknownst to many, Emacs comes with a full suite of wrappers around the common GNU network utilities.
+
+Most of the utilities are just simple wrappers around their command-line equivalents, but in full technicolor; but some – like the nslookup support – also adds full Emacs comint support.
+
+Another useful feature is the built-in ffap support (it means find file at point) and it will try to determine if the point is – if used interactively with the net utils below – on a hostname or IP and default to that.
+
+The net utils library were written with the GNU libraries in mind, so Windows users may find the support a bit lacking. But you can always download the Win32 ports.
+
+Here’s a list of utilities Emacs supports; invoke with M-x. You may have to configure them to your liking, and you can do that by invoking M-x customize-group RET net-utils RET.
+
+ifconfig and ipconfig
+
+    Runs ifconfig or ipconfig
+iwconfig
+
+    Runs the iwconfig tool
+netstat
+
+    Runs the netstat tool
+arp
+
+    Runs the arp tool
+route
+
+    Runs the route tool
+traceroute
+
+    Runs the traceroute tool
+ping
+
+    Runs ping, but on most systems it may run indefinitely; adjust ping-program-options.
+nslookup-host
+
+    Runs nslookup in non-interactive mode.
+nslookup
+
+    Runs nslookup in interactive mode in Emacs as an inferior process
+dns-lookup-host
+
+    Look up the DNS information for an IP or host using host.
+run-dig and dig
+
+    Invokes the dig in interactive mode as an inferior process
+ftp
+
+    Very simple wrapper around the commandline tool ftp. You are probably better off with TRAMP for all but low-level system administration.
+smbclient and smbclient-list-shares
+
+    Runs smbclient as an inferior process or list a hosts’ shares.
+finger
+
+    Runs the finger tool
+whois and whois-reverse-lookup
+
+    Runs the whois tool but tries to guess the correct WHOIS server. You may have to tweak whois-server-tld and whois-server-list or set whois-guess-server to nil
+*** Compiling : 
+**** Compiling and running scripts in Emacs
+Whether you're compiling code, running unit tests or interacting with a program that you frequently need to rerun, the compile feature in Emacs is designed for this very purpose.
+By Mickey Petersen
+Updated for emacs 28
+
+I’ve talked about running shells and terminal emulators and executing shell commands in Emacs before, but that’s mostly used for ad hoc commands or command line spelunking.
+
+What if you want to compile or run your scripts, code or unit tests and have the errors and warnings highlighted?
+There’s a command for that…
+
+Not surprisingly, Emacs has its own compilation feature, complete with an error message parser that adds syntax highlighting and “go to next/prev error” so you can walk up and down a traceback in Python; jump to a syntax error, warning or hint in GCC; or interact with any one of several hundreds of known patterns.
+
+The simplest way to compile something is M-x compile. However, in my experience, a lot of people are put off by the default input of make -k. It leads people to think that it requires, or depends on, a Makefile somehow. That is not the case.
+
+Simply erase the text and replace it with a command of your own.
+
+So if you want to execute Python’s pytest you can type M-x compile RET pytest test_something.py RET and a new *compilation* buffer will appear with the output of the command.
+
+Emacs will parse the output and look for certain patterns – stored in the variables compilation-error-regexp-alist[-alist] – and then highlight the output in the compilation buffer with “hyperlinks” that jump to the file and line (and column, if the tool outputs it) where the error occurred.
+
+If compilation is successful – and like most things in the UNIX world, this is governed by the exit code of the program you ran – the modeline and compilation buffer will say so; likewise, if an error occurred, this is also displayed.
+
+You can jump to the next or previous error (M-x [next/previous]-error) with M-g M-n and M-g M-p – they’re bound to more keys, but I think those are the easiest ones to use. Similarly, in the compilation buffer itself (only), you can go to the next/previous file (M-x compilation-[next/previous]-file) with M-g M-} and M-g M-{, respectively, and RET jumps to the location of the error point is on.
+
+There is an undocumented convention in Emacs that commands like dired, grep, and compile can be rerun, reverted or redisplayed by typing g in the buffer.
+
+You can also type M-x recompile to rerun the same compile invocation again. I encourage you to memorize that command or, better still, bind it to a key as it’s such a frequent task.
+
+By default the compilation buffer is just a dumb display and you cannot communicate with the background process. If you pass the universal argument (C-u) you can; the buffer is switched to comint mode, and you can converse with the process as though you were running it in the shell.
+
+I generally prefer it to be interactive by default but for some inexplicable reason, that is not customizable.
+
+Instead I use this advice to toggle the comint flag on:
+
+(defadvice compile (before ad-compile-smart activate)
+  "Advises `compile' so it sets the argument COMINT to t."
+  (ad-set-arg 1 t))
+
+Multiple *Compilation* Buffers
+
+Emacs recycles the compilation buffer if it’s already present. So if you want multiple, simultaneous, M-x compile instances then I recommend you rename the buffer with C-x x r (or M-x rename-buffer.)
+Project-Based Compilation
+
+If you use Emacs’s project features (see C-x p C-h) then you’ll be happy to know that there’s a dedicated compile command for this use case. It’s bound to C-x p c.
+There’s a Minor Mode for that…
+
+The compile workflow isn’t for everyone; some people want everything in one place: their shell. Well, good news then – you can have your cake and eat it. The minor mode M-x compilation-shell-minor-mode is designed for comint buffers of all sizes and works well with M-x shell and most modes that use comint. You get the same benefits offered by compile without altering your workflow. If you compile or run interpreted stuff in your Emacs shell you’ll feel like a modern-day Prometheus with this minor mode enabled!
+
+Add this to your init file and the compilation minor mode will start when shell does.
+
+(add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+*** games
+**** Fun and Games in Emacs 
+
+A text adventure game; the game of life; tetris; and a psychoanalyst. They are just
+some of the fun and games in Emacs. 
+By [[https://www.masteringemacs.org/about][Mickey Petersen]]
+Updated for emacs 28
+,* 
+
+It’s yet another Monday and you’re hard at work on those [[https://en.wikipedia.org/wiki/Office_Space][TPS reports]] for your boss,
+Lumbergh. Why not play Emacs’s Zork-like text adventure game to take your mind
+off the tedium of work?
+
+But seriously, yes, there are both games and quirky playthings in Emacs. Some you
+have probably heard of or played before. The only thing they have in common is that
+most of them were added a long time ago: some are rather odd inclusions (as you’ll
+see below) and others were clearly written by bored employees or graduate
+students. What they all have in common is a whimsy and a casualness that I rarely
+see in Emacs today. Emacs is Serious Business now in a way that it probably
+wasn’t back in the 1980s when some of these games were written.
+
+Tower of Hanoi
+
+The [[https://en.wikipedia.org/wiki/Tower_of_Hanoi][Tower of Hanoi]] is an ancient mathematical puzzle game and one that is probably
+familiar to some of us as it is often used in Computer Science as a teaching aid
+because of its recursive and iterative solutions.
+
+Tower of Hanoi Screenshot 
+
+In Emacs there are three commands you can run to trigger the Tower of Hanoi
+puzzle: M-x hanoi with a default of 3 discs; M-x hanoi-unix and M-x hanoi-unix-64
+uses the unix timestamp, making a move each second in line with the clock, and with
+the latter pretending it uses a 64-bit clock.
+
+The Tower of Hanoi implementation in Emacs dates from the mid 1980s — an awful
+long time ago indeed. There are a few Customize options (M-x customize-group
+RET hanoi RET) such as enabling colorized discs. And when you exit the Hanoi
+buffer or type a character you are treated to a sarcastic goodbye message (see
+above.)
+
+5x5
+
+5x5 game grid 
+The 5x5 game is a logic puzzle: you are given a 5x5 grid with a central cross already
+filled-in; your goal is to fill all the cells by toggling them on and off in the right order to
+win. It’s not as easy as it sounds!
+
+To play, type M-x 5x5, and with an optional digit argument you can change the size
+of the grid. What makes this game interesting is its rather complex ability to suggest
+the next move and attempt to solve the game grid. It uses Emacs’s very own, and
+very cool, symbolic RPN calculator M-x calc (and in [[https://www.masteringemacs.org/article/fun-emacs-calc][Fun with Emacs Calc]] I use it to
+solve a simple problem.)
+
+So what I like about this game is that it comes with a very complex solver – really, you
+should read the source code with M-x find-library RET 5x5 – and a “cracker” that
+attempts to brute force solutions to the game.
+
+Try creating a bigger game grid, such as M-10 M-x 5x5, and then run one of the
+crack commands below. The crackers will attempt to iterate their way to the best
+solution. This runs in real time and is fun to watch:
+
+M-x 5x5-crack-mutating-best
+
+ Attempt to crack 5x5 by mutating the best solution.
+
+M-x 5x5-crack-mutating-current
+
+ Attempt to crack 5x5 by mutating the current solution.
+
+M-x 5x5-crack-randomly
+
+ Attempt to crack 5x5 using random solutions.
+
+M-x 5x5-crack-xor-mutate
+
+ Attempt to crack 5x5 by xoring the current and best solution.
+
+Text Animation
+
+You can display a fancy birthday present animation by running M-x
+animate-birthday-present and giving it your name. It looks rather cool!
+
+xkcd 
+
+The animate package is also used by the M-x butterfly command, a command
+added to Emacs as an homage to the [[http://www.xkcd.com][XKCD]] strip above. Of course the Emacs
+command in the strip is teeechnically not valid but the humor more than makes up
+for it.
+
+Blackbox
+
+The objective of this game I am going to quote literally:
+
+ The object of the game is to find four hidden balls by shooting rays into the black
+ box. There are four possibilities: 1) the ray will pass thru the box undisturbed, 2)
+ it will hit a ball and be absorbed, 3) it will be deflected and exit the box, or 4) be
+ deflected immediately, not even being allowed entry into the box.
+
+So, it’s a bit like the [[https://en.wikipedia.org/wiki/Battleship_(game)][Battleship]] game most of us played as kids but… for people with
+advanced degrees in physics?
+
+It’s another game that was added back in the 1980s. I suggest you read the extensive
+documentation on how to play by typing C-h f blackbox.
+
+Bubbles
+
+Bubbles game 
+
+The M-x bubbles game is rather simple: you must clear out as many “bubbles” as you
+can in as few moves as possible. When you remove bubbles the other bubbles drop
+and stick together. It’s a fun game that, as an added bonus, comes with graphics if
+you use Emacs’s GUI. It also works with your mouse.
+
+You can configure the difficulty of the game by calling M-x
+bubbles-set-game-<difficulty> where <difficulty> is one of: easy, medium,
+difficult, hard, or userdefined. Furthermore, you can alter the graphics, grid size
+and colors using Customize: M-x customize-group bubbles.
+
+For its simplicity and fun factor, this ranks as one of my favorite games in Emacs.
+
+Fortune & Cookie
+
+I like the fortune command. Snarky, unhelpful and often sarcastic “advice” mixed in
+with literature and riddles brightens up my day whenever I launch a new shell.
+
+Rather confusingly there are two packages in Emacs that does more-or-less the
+same thing: fortune and cookie1. The former is geared towards putting fortune
+cookie messages in email signatures and the latter is just a simple reader for the
+fortune format.
+
+Anyway, to use Emacs’s cookie1 package you must first tell it where to find the file by
+customizing the variable cookie-file with customize-option RET cookie RET.
+
+If you’re on Ubuntu you will have to install the fortune package first. The files are
+found in the /usr/share/games/fortunes/ directory.
+
+You can then call M-x cookie or, should you want to do this, find all matching cookies
+with M-x cookie-apropos. Yes, that’s right: Emacs has a self-documenting apropos
+command to help you find the right fortune cookie message!
+
+Decipher: Breaking Cryptograms
+
+This package perfectly captures the utilitarian nature of Emacs: it’s a package to help
+you break simple substitution ciphers (like cryptogram puzzles) using a helpful user
+interface. You just know that – more than twenty years ago – someone really had a
+dire need to break a lot of basic ciphers. It’s little things like this module that makes
+me overjoyed to use Emacs: a module of scant importance to all but a few people
+and, yet, should you need it – there it is.
+
+So how do you use it then? Well, let’s consider the “rot13” cipher: rotating characters
+by 13 places in a 26-character alphabet. It’s an easy thing to try out in Emacs with
+M-x ielm, Emacs’s REPL for [[https://www.masteringemacs.org/article/evaluating-elisp-emacs][Evaluating Elisp]]:
+
+,*** Welcome to IELM ***  Type (describe-mode) for help.
+ELISP> (rot13 "Hello, World")
+"Uryyb, Jbeyq"
+ELISP> (rot13 "Uryyb, Jbeyq")
+"Hello, World"
+ELISP>
+
+Simply put, you rotate your plaintext 13 places and you get your ciphertext; you rotate
+it another 13 and you end up where you started. This is the sort of thing this package
+can help you solve.
+
+So how can the decipher module help us here? Well, create a new buffer
+test-cipher and type in your cipher text (in my case Uryyb, Jbeyq) and then start
+deciphering with M-x decipher.
+
+cipher 
+
+You’re now presented with a rather complex interface. You can now place the point
+on any of the characters in the ciphertext on the purple line and guess what the
+character might be: Emacs will update the rest of the plaintext guess with your
+choices and tell you how the characters in the alphabet have been allocated thus far.
+
+You can then start winnowing down the options using various helper commands to
+help infer which cipher characters might correspond to the correct plaintext
+character:
+
+D
+
+ Shows a list of digrams (two-character combinations from the cipher) and their
+ frequency
+
+F
+
+ Shows the frequency of each ciphertext letter
+
+N
+
+ Shows adjacency of characters. I am not entirely sure how this works.
+
+M and R
+
+ Save and restore a checkpoint, allowing you to branch your work and explore
+ different ways of cracking the cipher.
+
+All in all, for such an esoteric task, this package is rather impressive! If you regularly
+solve cryptograms maybe this package can help?
+
+Doctor
+
+doctor 
+
+Ah, the Emacs doctor. Based on the original [[https://en.wikipedia.org/wiki/ELIZA][ELIZA]] the “Doctor” tries to
+psychoanalyze what you say. Rather fun, for a few minutes, and one of the more
+famous Emacs oddities. You can run it with M-x doctor.
+
+Yow! Zippy the Pinhead
+
+Back in the day, you could call M-x yow and get a Zippy the Pinhead quote. Sadly
+Emacs no longer proffers the wisdom of Zippy due to legal restrictions. The module’s
+still there, so if you can source a yow.lines file from an older Emacs (pre Emacs 22)
+you can still enjoy his zany sayings.
+
+There is, naturally, a M-x apropos-zippy command also for when you absolutely need
+to find the right Zippy quote.
+
+More amusingly, there’s M-x psychoanalyze-pinhead so you can pit the good M-x
+doctor against Zippy in a battle of wits.
+
+Dunnet
+
+Emacs’s very own Zork-like text adventure game. To play it, type M-x dunnet. It’s
+rather good, if short, but it’s another rather famous Emacs game that too few have
+actually played through to the end.
+
+If you find yourself with time to kill between your TPS reports then it’s a great game
+with a built-in “boss screen” as it’s text-only.
+
+Oh, and, don’t try to eat the CPU card :)
+
+Gomoku
+
+gomoku 
+
+Another game written in the 1980s. You have to connect 5 squares, tic-tac-toe style.
+You can play against Emacs with M-x gomoku. The game also supports the mouse,
+which is rather handy. You can customize the group gomoku to adjust the size of the
+grid.
+
+Game of Life
+
+[[https://en.wikipedia.org/wiki/Conway's_Game_of_Life][Conway’s Game of Life]] is a famous example of cellular automata. The Emacs
+version comes with a handful of starting patterns that you can (programmatically with
+elisp) alter by adjusting the life-patterns variable.
+
+You can trigger a game of life with M-x life. The fact that the whole thing, display
+code, comments and all, come in at less than 300 characters is also rather
+impressive.
+
+Pong, Snake and Tetris
+
+tetris 
+
+These classic games are all implemented using the Emacs package gamegrid, a
+generic framework for building grid-based games like Tetris and Snake. The great
+thing about the gamegrid package is its compatibility with both graphical and
+terminal Emacs: if you run Emacs in a GUI you get fancy graphics; if you don’t, you
+get simple ASCII art.
+
+You can run the games by typing M-x pong, M-x snake, or M-x tetris.
+
+The Tetris game in particular is rather faithfully implemented, having both gradual
+speed increase and the ability to slide blocks into place. And because you have the
+source code you can finally remove that annoying Z-shaped piece no one likes!
+
+Solitaire
+
+solitaire image 
+
+This is not the card game, unfortunately. But a peg-based game where you have to
+end up with just one stone on the board, by taking a stone (the o) and “jumping” over
+an adjacent stone into the hole (the .), removing the stone you jumped over in the
+process. Rinse and repeat until the board is empty.
+
+There is a handy solver built in called M-x solitaire-solve if you get stuck.
+
+Zone
+
+Another of my favorites. This time’s it’s a screensaver – or rather, a series of
+screensavers.
+
+Type M-x zone and watch what happens to your screen!
+
+You can configure a screensaver idle time by running M-x zone-when-idle (or calling
+it from elisp) with an idle time in seconds. You can turn it off with M-x
+zone-leave-me-alone.
+
+This one’s guaranteed to make your coworkers freak out if it kicks off while they are
+looking.
+
+Multiplication Puzzle
+
+mpuz 
+
+This is another brain-twisting puzzle game. When you run M-x mpuz you are given a
+multiplication puzzle where you have to replace the letters with numbers and ensure
+the numbers add (multiply?) up.
+
+You can run M-x mpuz-show-solution to solve the puzzle if you get stuck.
+
+Miscellaneous
+
+There are more, but they’re not the most useful or interesting:
+
+,* You can translate a region into morse code with M-x morse-region and M-x
+ unmorse-region.
+,* The Dissociated Press is a very simple command that applies something like a
+ random walk markov-chain generator to a body of text in a buffer and generates
+ nonsensical text from the source body. Try it with M-x dissociated-press.
+,* The Gamegrid package is a generic framework for building grid-based games. So
+ far only Tetris, Pong and Snake use it. It’s called gamegrid.
+,* The gametree package is a complex way of notating and tracking chess games
+ played via email.
+,* The M-x spook command inserts random words (usually into emails) designed to
+ confuse/overload the “NSA trunk trawler” – and keep in mind this module dates
+ from the 1980s and 1990s – with various words the spooks are supposedly
+ listening for. Of course, even fifteen years ago that would’ve seemed awfully
+ paranoid and quaint but not so much any more…
+
+Conclusion
+
+I love the games and playthings that ship with Emacs. A lot of them date from, well,
+let’s just call a different era: an era where whimsy was allowed or perhaps even
+encouraged. Some are known classics (like Tetris and Tower of Hanoi) and some of
+the others are fun variations on classics (like blackbox) — and yet I love that they ship
+with Emacs after all these years. I wonder if any of these would make it into Emacs’s
+codebase today; well, they probably wouldn’t — they’d be relegated to the package
+manager where, in a clean and sterile world, they no doubt belong.
+
+There’s a mandate in Emacs to move things not essential to the Emacs experience
+to ELPA, the package manager. I mean, as a developer myself, that does make
+sense, but… surely for every package removed and exiled to ELPA we chip away the
+essence of what defines Emacs?
 
 ** To set on a file by file
 To set the VisualLineMode on a file by file basis using emacs local variables, try:
@@ -4102,6 +4967,527 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 *** Rebind keys
 **** keys to keys
 (global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
+**** Mastering Key Bindings in Emacs
+Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
+By Mickey Petersen
+Updated for emacs 28
+
+Altering the key bindings in Emacs should not, on the face of it, be a difficult task. But there’s a reason why the Emacs manual has dedicated 30-odd pages to describing, in great detail, all the subtleties and nuances of how to bind keys.
+
+To save you the time of reading all of that, I’ve written a guide that covers what you need to know to bind keys to even complex commands, and a set of templates you can use in your own code. And the best thing about this guide is that you don’t need to know any elisp to get started!
+
+I’ve included a selection of handy templates near the end that you can customize and put in your init file.
+What makes up a key bind?
+
+Emacs is “self-hosting” and, depending on who you ask, close to achieving sentience. Almost all of Emacs is written in Emacs Lisp. Every function in Emacs in turn builds on smaller functions, and so on, right through all the strata of elisp until you reach the C core.
+
+Emacs’s key engine works in much the same way. Layer upon layer — or keymap upon keymap!
+
+Even elementary things like inserting characters – called self-insertion – is amenable to change. For instance, the key f is bound to self-insert-command, a special command that repeats the last typed key N times. So if you type C-u 10 f you will see ffffffffff printed on your screen. As you can see, every keypress – even basic ones like typing a character on the screen – has an associated key binding that you can modify or even remove.
+What is a Keymap?
+
+A keymap is an internal data structure used by Emacs to store keys and their associated actions. Keymaps are rarely modified directly; instead, you modify them through a set of functions that manipulate the data structure for you. Most Emacs users will never interact with keymaps aside from indirectly assigning keys to them.
+
+Every buffer and most major and minor modes have a keymap, and that keymap defines what the keys do when key sequences are sent to that buffer. Keys can be divided into three categories: undefined, prefix key, or complete key.
+
+    Undefined is self-explanatory: it does no operation when it is invoked.
+    Prefix keys are keys like C-x and C-c. They are make up part of a complete key, and each constituent part of a prefix key has its own keymap.
+    A complete key is a key combination that resolves to a valid command. Like the key g, C-x C-f, or <mouse-1>.
+
+In Emacs, a key is not limited to just your plain-as-day keys on a keyboard. Anything that can generate an input event is fair game: two-factor authentication USB sticks, as they just ‘type’ stuff like keyboard would; that Hammond organ you’re eyeing as a replacement for your regular keyboard; and of course your mouse.
+
+It is possible for Emacs to enumerate all the active minor and major mode key bindings in a buffer by typing C-h m. That command is essential if you want to learn more about what a major or minor mode can do. Likewise, you can type out parts of a complete key (say M-s) and then type C-h to get a list of all keys that belong to that prefix.
+
+If you know the name of a keymap, you can use M-x describe-keymap in Emacs 28.
+Key Bind Commands
+
+There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
+
+I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
+
+(define-key KEYMAP KEY DEF)
+
+    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
+(local-set-key KEY COMMAND)
+
+    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
+(global-set-key KEY COMMAND)
+
+    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
+(global-unset-key KEY)
+
+    Removes KEY from the global keymap
+(local-unset-key KEY)
+
+    Removes KEY from the active, local keymap.
+(use-package :bind ( ... ))
+
+    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
+
+Representing Keys in Code
+
+In order to actually bind a key you must first tell Emacs what key you intend to use. Unfortunately there’s more than one way of representing keys in Emacs: as a string, or as a vector. We won’t concern ourselves with either, as we will use a handy macro built in to Emacs called kbd. The kbd macro translates a human-readable key into a format Emacs can understand.
+
+One important point to note is that you must surround function and navigation keys with < and >:
+
+That includes F-keys, arrow keys and home row keys, like so: <home>, <f8> and <down>.
+
+(kbd "<home>")    ;; OK
+(kbd "tab")       ;; Wrong, but valid -- missing < and >
+(kbd "<tab>")     ;; OK
+(kbd "C-c p")     ;; OK
+
+Remapping Commands
+
+You can tell Emacs that you want to replace all keys pointing to a certain command with one of your own choosing by using the remap notation.
+
+You must do this instead of passing a key to the key bind function you are using. This is the best way of replacing existing commands with your own, as Emacs does the hard work of figuring out all the keys it needs to rebind.
+
+Example:
+
+(define-key (current-global-map) [remap kill-line] 'my-homemade-kill-line)
+
+Here I globally remap all keys that point to kill-line to my-homemade-kill-line.
+
+For a practical example of remapping in use, see fixing the mark commands in transient mark mode.
+Reserved Keys
+
+You can pick any keyboard combination you desire – even if that key bind is already taken, so be careful – but Emacs has set aside certain keys for use by users. Generally, all keys prefixed with C-c ? (where ? is a single character) are reserved for you, and you alone. In practice most third-party packages don’t care about the key bindings they occupy. So keep that in mind.
+
+The other set of reserved keys are the F-keys from F5 and onwards. The other two prefix keys reserved to you are hyper and super. They are remnants from ancient keyboards used in the 80s, but live on today in Emacs. Most PC-compatible keyboards won’t have a super or hyper key so some people rebind the Windows key and the Application Context key to be hyper and super instead.
+
+If you’re fortunate enough to have spent a large sum of money on a fancy mechanical keyboard, you may have keys to spare, and the firmware to rebind them as you see fit. I recommend you look into dedicated hyper or super keys; but don’t forget, you can also tell your firmware to bind a key to, say, C-M- or even a prefix key, like C-x. Be creative.
+
+Anyway. Because of Emacs’s roots, it understands these keys natively, and they have their own modifier keys: H- (e.g., H-q) for hyper; and s- for super. Note that s is super and S is shift.
+
+In Windows you can add this to your init file to enable hyper and super:
+
+(setq w32-apps-modifier 'hyper)
+(setq w32-lwindow-modifier 'super)
+(setq w32-rwindow-modifier 'hyper)
+
+In X you’ll have to play around with xmodmap or your own tool of choice.
+Keymap Lookup Order
+
+Emacs will look for keys in a certain order, and that order I have described below. Keep in mind that only active keymaps are used, and that the order is top-to-bottom. The first “match” is the keymap Emacs uses.
+
+    overriding-terminal-local-map for terminal-specific key binds.
+    overriding-local-map for keys that should override all other local keymaps. Be VERY careful if you use this!
+
+    Keymap char property at point for keymaps that are local to the character point is at.
+    Common use cases include in-buffer fields, like the ones you find in M-x customize.
+    emulation-mode-map-alists for advanced multi-mode keymap management
+    minor-mode-overriding-map-alist for overriding the keymaps used by minor modes in major modes.
+    minor-mode-map-alist is exactly like the overriding version above, but the preferred means of specifying the keymaps for minor modes.
+    Keymap text property at point is like the one above for char properties but this is for text properties only.
+    current-local-map for keymaps defined in the buffers’ current local map
+    current-global-map is the last place Emacs looks. It hosts keys that are global.
+
+But I can summarize these rules in a way that accounts for 99% of all key bindings you’re likely to care about:
+
+    First, Emacs checks if there’s a minor mode key binding;
+
+    If there isn’t, then Emacs checks if there are any local keys set.
+    Typically this local map is shared by the major mode of the current buffer. So if you want to add a key binding to python-mode, you can use local-set-key to do this.
+    And finally global keys are checked.
+
+This order confuses many new users! Most people think that a global key trumps all other keys, but that is not so.
+Global vs Local
+
+A global key is functionally identical to that of a local one, except it is declared in a “global” keymap, governed by the current-global-map function (but usually it points to the default, the global-map variable.) Therefore, you can define a global key simply by passing the current-global-map function to define-key. The other – often better – alternative is to use the designated function, global-set-key.
+
+In a similar vein, to bind a local key you can use the “designated” function local-set-key or the more general define-key. Like the global map, there exists an equivalent function current-local-map that returns the keymap local to the buffer.
+
+If you want to change major mode key bindings, you’re going to have to choose between explicitly updating its keymap with define-key, or calling it from within the major mode’s buffer with local-set-key. You can’t always interchange the two, although they’re supposed to yield the same outcome. The reason is that some major modes regenerate keymaps or outright reset them. When that happens you may have to choose one or the other.
+Defining your Command
+
+If you thought the mechanics of keymaps and keys were difficult, think again! Deciding on what you want to bind to those keys is even harder – especially so if you want the command to do very specific things, like switching to a specific buffer name. But I’ve got a few tricks up my sleeve to help you cut out most of the elisp writing by letting Emacs do all the heavy lifting.
+Invoking a command
+
+Before I talk about the how and why of Emacs commands it is important that I mention how Emacs handles interactive functions — commonly known as commands. An Emacs command has an (interactive ...) form at the top of its function body. The (interactive ...) form controls how the function must respond to user input when it’s invoked interactively. For instance, a command that prompts a user for a string must tell Emacs – using the (interactive ...) form – how to do this.
+
+All commands are executable through M-x and can therefore be bound to a key.
+
+When you bind a function to a key it is important that you keep the above in mind, as you cannot invoke a non-interactive function through a key binding — it must be a command.
+
+If it is your intent – as it so often is – to call a function, but with explicit parameter values, you must wrap it in a little helper function, like a lambda expression or even a standard defun. I have prepared templates (see below) that show you how to do this.
+Describing the command
+
+There are two ways of describing a command in elisp: the manual way, and the smart way. Let’s start out with the manual way.
+
+The manual way is to use C-h k KEY to describe what KEY is bound to; the other way is to describe a function, FUNCTION, with C-h f FUNCTION.
+
+Because Emacs is a self-documenting editor all functions, variables, keys, etc. known to Emacs are accessible through the describe-xxx commands. Type C-h C-h to see them all.
+
+With the name of the command, you can now begin the process of reading the documentation string and call it with the requisite arguments it needs to work.
+
+If you’re unsure how to do that, but you do know what you want, then you may want to give the smart way a go.
+Capturing Complex Commands
+
+The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
+
+Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
+
+Here’s a practical example: C-M-% foo RET bar RET – which does a query-replace-regexp replacing foo with bar. Now, if you type C-x ESC ESC you should see something similar to this (reformatted for clarity):
+
+(query-replace-regexp "foo" "bar" nil
+   (if (and transient-mark-mode mark-active)
+       (region-beginning))
+   (if (and transient-mark-mode mark-active)
+       (region-end)))
+
+Observe how Emacs has kindly filled in all the function arguments to query-replace-regexp, including the optional parameters. If you were to run that command again (by say pasting it into the prompt in M-:) it’ll execute it in the exact same way as when you ran it interactively.
+
+Here’s another one, this time I type C-x b *scratch* to switch to the *scratch* buffer:
+
+(switch-to-buffer "*scratch*")
+
+And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
+Keyboard Macros
+
+I’ve talked about the smart way above, but there’s an even smarter way: Keyboard macros. If you have a series of actions you want to perform, then record it in a keyboard macro!
+
+Emacs can record, and play back, almost everything. You’re not limited to shoveling text; stuff like moving files in dired, or splitting your windows and opening the right buffers in them is not only possible, but easy.
+
+I recommend you read about Emacs’s keyboard macros to see what I mean.
+Putting it all together
+
+We’re nearly done. I just need to explain a few more important concepts that confuse a lot of newbies: mode hooks and mode-specific keymaps, and then it’s on to the templates.
+
+Most major and minor modes will usually set their keys once, when the module is first loaded; that’s good news for us. That means you can use define-key to add key definitions straight into a mode’s key map. Some modes are very advanced, and have several key maps – M-x isearch is a good example – and for those you will have to mess around with the source code or info manual to find out how to add keys.
+
+Another option is M-x describe-keymap (Emacs 28+) that shows all known key maps. You can probably narrow down the ones you want that way.
+
+It’s the modes that force you to use a mode hook that’s the problem: for that you must set your keys when the mode is activated, and that takes a little bit more work.
+
+It is a convention in Emacs that all major and minor mode functions (the ones that activate the mode) end in -mode (e.g., python-mode), and it is also expected that its mode map follows a common naming scheme: xxxx-mode-map for the key map; and xxxx-mode-hook for the mode’s hook.
+
+With those mode hooks in mind, you can add a local-set-key call and, hopefully, that’s all you need to override or add keys to the right mode’s key map.
+Keymaps
+
+Modifying a keymap is dirt simple, you use define-key as I’ve mentioned before. What’s not so easy is determining what keymap to modify in the first place.
+Listing all the Mode Maps
+
+If you type this Emacs will give you an apropos buffer with all the known mode maps that follow the major mode naming scheme:
+
+C-u M-x apropos-variable RET -mode-map$ RET
+
+You can also use M-x describe-keymap and then pick the mode map you want from the candidate list.
+Quick Keymap Example
+
+Let’s say I want to extend python-mode by adding a key, I’ll use F12, that switches to the python process buffer. Currently, that’s bound to C-c C-z and M-x python-shell-switch-to-shell.
+
+(define-key python-mode-map (kbd "<f12>") 'python-shell-switch-to-shell)
+
+In order to get the command belonging to the key, I used C-h k C-c C-z.
+Creating New Keymaps
+
+If you want your own blank key maps, particularly if you want to build your own complex web of prefix keys and such, you’ll need to learn how to make your own.
+
+Luckily it’s not too hard.
+
+(defvar my-special-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "s" 'shell)
+    (define-key map "g" 'rgrep)
+    map)
+  "My special key map.")
+
+First things first. We’ll need a variable, declared with defvar so it won’t get reevaluated by accident. Not sure what I mean by that? Read my article on evaluating elisp.
+
+Next, we use a let form to bind the variable map to a sparse keymap created with make-sparse-keymap. Sparse in this case means “empty”. Inside the let form you can call define-key and assign commands to keys.
+
+There is also copy-keymap if you want to copy another keymap and modify its copy instead. In fact, there’s a whole host of functions that deal with this. But I think these two are the ones worth knowing about if you’re building your own stuff.
+
+Either way, you get a key map ready to go.
+Repeating Keys with repeat-mode
+
+Emacs 28 formalizes – the code that does it has existed in Emacs for eons – a method of making repeating key maps. If you find yourself typing C-x o over and over again to switch windows, then as of Emacs 28 you can type C-x o o o o ... ad infinitum if you enable M-x repeat-mode.
+
+The new mode is easy to retrofit onto existing Emacs key map machinery if you know how.
+Repeating Keys Example
+
+NOTE: Make sure you enable M-x repeat-mode.
+
+Consider the keys C-M-u and C-M-d. They move out or into balanced expressions, like ( ... ), [ ... ], and so on. Perfect for most programming languages.
+
+For this to work, you have to define the repeatable keys: the one-letter chords that take effect after you’ve invoked the primary key.
+
+(defvar balanced-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "u" 'backward-up-list)
+   (define-key map "d" 'down-list)
+   map)
+ "Repeating map for balanced expressions.")
+
+Next, we attach a property name and value to the commands that enable the repeating keys we defined in balanced-repeat-map:
+
+(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
+(put 'down-list 'repeat-map 'balanced-repeat-map)
+
+And that’s it! When you next type C-M-u or C-M-d you’re given the option to type u or d instead.
+Hooks
+
+A mode hook has zero-or-more functions that are called when its mode is activated. Mode-specific hooks are run when you activate that mode. That happens automatically when you open a file, or manually call M-x some-mode.
+Altering Mode Hooks
+
+Adding Hooks
+
+    You can add a mode hook using the special function add-hook that takes the name of a hook (say python-mode-hook) and the name of a function to call.
+Removing Hooks
+
+    You can remove functions from a hook variable with remove-hook. If you are experimenting you may want to remove hooks as part of your testing.
+
+    In newer Emacsen you can call it interactively, select a mode hook, and then pick the one you want to remove. That is good to know when you inevitably add lambda functions to a mode hook and now struggle with duplicate hooks!
+
+Listing all the Mode Hooks
+
+If you are unsure of the exact name of the mode hook, you can use this handy trick to list the ones Emacs can see:
+
+M-x apropos-variable RET -mode-hook$ RET
+
+That will show all mode hooks known to Emacs, including their docstring description. If you don’t see your mode it may be because Emacs hasn’t loaded it outright. You can try M-x load-library and see if you can load the package or library that way first.
+Quick Hook Example
+
+Let’s add a key (C-c q to run M-x shell) local to python-mode using a hook. For that to work we will need our special hook function, I’ve named it mp-add-python-keys, and in it we need local-set-key, the function that adds a key to the active buffer’s local map. Remember that local-set-key uses the local mode map.
+
+Next is the command that tells Emacs that we want to add a mode hook to Python.
+
+(defun mp-add-python-keys ()
+  (local-set-key (kbd "C-c q") 'shell))
+
+(add-hook 'python-mode-hook #'mp-add-python-keys)
+
+Setting Key Bindings with use-package
+
+If you use use-package then you can leverage its key binding facilities.
+
+Let’s say you like the package M-x winner-mode, a minor mode that records your window configurations and lets you undo and redo changes made to it, by you or by commands you execute.
+
+(use-package winner
+  :config
+  (winner-mode 1)
+  :bind (("M-[" . winner-undo)
+         ("M-]" . winner-redo)))
+
+The :bind property is there to do just that. Here I’ve bound M-[ and M-] to two commands. Note the structure!
+
+Another thing to keep in mind is that, unless you tell it otherwise, use-package defaults to global key bindings.
+
+If, on the other hand, you want to insert the keys into a specific key map, you need to tell use-package the map to use:
+
+(use-package eshell
+  :bind (("C-c e" . eshell)
+         :map eshell-mode-map
+         ("M-m" . eshell-bol)))
+
+Here I’ve chosen to bind C-c e to M-x eshell globally, as I have not specified a particular key map yet.
+
+Next, I declare :map eshell-mode-map and from that point on, that is the keymap use-package uses when I ask it to bind M-m to eshell-bol.
+
+So as you can see, it’s easy to bind to a variety of both global and keymap-specific maps.
+Templates
+
+Here’s a bunch of templates for various use-cases that you can cut’n’paste and use in your own code. I recommend naming things sensibly, and giving them a docstring (in-code documentation that explains what the code does) as well. The best way to avoid accidentally overriding another function with the same name, I would suggest you use a moniker or prefix. I use mp- for all of my own functions.
+
+I also urge you to avoid the temptation of plastering your code with lambda functions. They’re great, sure; but if you ever need to update or change them during your development and testing cycle, you may end up with duplicate functions in your mode hooks playing havoc.
+
+If you are unsure how to evaluate elisp, then read my article on evaluating elisp in Emacs.
+Basic Global Key Binding
+
+Binds a command to a global key binding.
+Definition
+
+(global-set-key (kbd "key-bind-here") 'interactive-command-here)
+
+Example
+
+Binds F1 to M-x shell
+
+(global-set-key (kbd "<f1>") 'shell)
+
+Add or Remove a Key to or from a Keymap
+
+Adds or removes a key and its associated command to/from an explicit keymap. Use this if you know the name of the keymap and you want to add a key to it.
+Definition
+
+Add a key to a keymap:
+
+(define-key KEYMAP (kbd "key-bind-here") 'interactive-command-here)
+
+Remove a key from a keymap:
+
+(define-key KEYMAP (kbd "key-bind-here") nil)
+
+Example
+
+Binds C-c p to python-switch-to-python
+
+(define-key python-mode-map (kbd "C-c p") 'python-shell-switch-to-shell)
+
+Complex Command Key Bind
+
+Creates a global key bind that invokes multiple commands in a row. Use this to create compound keys or invoke commands that take parameters. Uses code from the Function Template.
+Definition
+
+(defun name-of-interactive-command-here ()
+  (interactive)
+  ;;; Insert your compound commands below
+  )
+(global-set-key (kbd "key-bind-here") 'name-of-interactive-command-here)
+
+Example
+
+Switches to the *scratch* buffer and inserts “Hello, World” where point is, and switches back to where it came from.
+
+(defun switch-to-scratch-and-insert-text ()
+  (interactive)
+  (save-excursion
+    (set-buffer "*scratch*")
+    (insert "Hello, World")))
+(global-set-key (kbd "C-c i") 'switch-to-scratch-and-insert-text)
+
+Binding keys with a mode hook
+
+Use this mode hook template to bind keys that won’t work with a standard define-key template, or if the key map is reset in when the mode is initialized.
+
+If you have other, mode-specific changes, you want to apply at the same time, then this is the perfect place for you to do so.
+Definition
+
+(defun my-hook-function ()
+  ;; add your code here. it will be called every
+  ;; time the major mode is run.
+
+  )
+(add-hook 'my-mode-hook #'my-hook-function)
+
+Example
+
+Here I change the python indentation offset to 4 and make it local to that buffer with setq-local. Next, I disable eldoc-mode and I locally bind a key with local-set-key.
+
+(defun mp-my-hook-settings ()
+  (setq-local python-indent-offset 4)
+  (eldoc-mode -1)
+  (local-set-key (kbd "C-c p" 'python-shell-switch-to-shell)))
+
+(add-hook 'python-mode-hook #'mp-my-hook-settings)
+
+As you can see, this is a good place to put all your other tweaks that relate to a specific mode.
+Remapping a command
+
+This template will remap all keys that point to a specific command. Say you want to rebind kill-line, bound to C-k, but you want your code to only override the key binds that kill-line is actually bound to. Use this template to replace existing commands with those of your own, without worrying about explicitly rebinding each key.
+Definition
+
+Note: to replace a global key, you must use global-map or call current-global-map.
+
+(define-key keymap [remap original-function] 'my-own-function)
+
+Example
+
+Example here is taken from my article on fixing the mark commands in transient mark mode.
+
+I remap the keys that point to exchange-point-and-mark to my own function exchange-point-and-mark-no-activate.
+
+(defun exchange-point-and-mark-no-activate ()
+  "Identical to \\[exchange-point-and-mark] but will not activate the region."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark nil))
+
+(define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
+
+Custom Prefixes
+
+Creating a prefix is easy nowadays as you don’t have to explicitly create your own prefix keymaps, provided you use local-set-key or global-set-key. Use custom prefixes to group or categorize your commands.
+Definition
+
+(global-set-key (kbd "subkey_1 ... endkey_1") 'my-command-1)
+(global-set-key (kbd "subkey_1 ... endkey_2") 'my-command-2)
+
+Example
+
+Global keys that will insert either the time of the day, or the current date. Type C-c i d to insert the date; and C-c i t to insert the time. Type C-c i C-h to list all bound keys under the C-c i prefix.
+
+(defun mp-insert-date ()
+  (interactive)
+  (insert (format-time-string "%x")))
+
+(defun mp-insert-time ()
+  (interactive)
+  (insert (format-time-string "%X")))
+
+(global-set-key (kbd "C-c i d") 'mp-insert-date)
+(global-set-key (kbd "C-c i t") 'mp-insert-time)
+
+Repeating Key Maps with repeat-mode
+
+This feature requires Emacs 28 and that you have turned on M-x repeat-mode.
+
+Repeating keys allow you to tap one or more single keys to repeat a command once you have engaged repeat mode by first typing a key that supports repeating keys.
+
+Adding this functionality to existing commands in Emacs is easy.
+Definition
+
+For changes relating to a specific package, use this format:
+
+(defvar my-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "a" 'some-command)
+   ;; ...
+   (define-key map "z" 'another-command)
+   map)
+ "Repeating map example.")
+
+Next, we attach a property name and value to the commands that should trigger my-repeat-map:
+
+(put 'some-command 'repeat-map 'my-repeat-map)
+(put 'another-command 'repeat-map 'my-repeat-map)
+
+Example
+
+Activate this repeat map with C-M-u or C-M-d, then type d or u to move down or up.
+
+(defvar balanced-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "u" 'backward-up-list)
+   (define-key map "d" 'down-list)
+   map)
+ "Repeating map for balanced expressions.")
+
+(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
+(put 'down-list 'repeat-map 'balanced-repeat-map)
+
+Binding keys with use-package
+
+If you are already using use-package then you may as well use it to bind your keys also.
+
+You can define global and local keys this way.
+Definition
+
+For changes relating to a specific package, use this format:
+
+(use-package package-name-here
+  :bind (("kbd-here" . command-here)
+         :map some-map
+         ("kbd-here" . another-command-here)
+         :map yet-another-map
+         ("kbd-here" . some-command-here)))
+
+But if you want a place to store global keys that don’t relate to any one package, use the package name emacs instead.
+Example
+
+Here I bind C-c e to eshell globally, and M-m to eshell-bol locally.
+
+(use-package eshell
+  :bind (("C-c e" . eshell)
+         :map eshell-mode-map
+         ("M-m" . eshell-bol)))
+
+Conclusion
+
+I have covered almost every facet of key binding that most Emacs users would care to know about. If you use use-package, then it can definitely cut down on some of the tedium and help centralize your bindings with your other settings.
+
+I recommend you read why I think keyboard macros are misunderstood as it’ll further cement just how much “no-code” Emacs you can accomplish with keyboard macros and key bindings.
 *** Movement 
 ‘C-M-a’
 ‘C-M-e’
@@ -4793,6 +6179,140 @@ frequently, it is more convenient to put it in a register or save it
 (*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
 stores the last keyboard macro in register R.
 =============================
+**** Keyboard Macros are Misunderstood
+Keyboard macros are misunderstood: they are not just for text editing. You can record and play back nearly anything, so why not record your favorite window layouts and save them as a keyboard macro? Maybe open a shell and execute a few commands in it? And best of all, you can do all of this without knowing any elisp!
+By Mickey Petersen
+Updated for emacs 28
+
+What would Emacs be without Emacs Lisp? Elisp is there to help you with the bugbears that bedevil your daily life.
+
+And I think that’s great! Knowing elisp greatly expands your capabilities in Emacs. But, but, maybe you don’t know it — it’s yet another thing to learn. You may not have the time or the inclination. That’s especially true if you just want to customize or automate simple tasks.
+
+Not everyone who uses Emacs is a programmer. It has a wide audience, and that’s a really good thing, too. But that also ratchets up the difficulty if you have to pick up a programming language – possibly your first ever – to get simple things done. It’d be nice if you didn’t have to do that for simpler tasks. That’s where keyboard macros enter the frame. In Emacs they are very powerful, and as I’ll show you in a moment, more than capable of great feats of automation.
+
+Keyboard macros are misunderstood, and they can do an awful lot more than most people think they can do. They’re amazing for text editing. But they can do so much more than that. And the reason for this knowledge gap – even in people possessing much Emacs-fu – is that it’s hiding its capabilities in plain sight. That, and the siren song of elisp: it calls out to all of us, but you need not heed its call if you just want to do simple automation!
+
+Emacs’s keyboard macros can do pretty much everything you can do, except make human decisions about what to do next – but even here Emacs’s macro system has a few tricks up its sleeve.
+
+Because Emacs is able to record and play back nearly anything in a keyboard macro, you can leverage that to do things you wouldn’t normally think a keyboard macro should do, like:
+
+Modifying your window layout
+
+    Like your windows split a certain way, with certain buffers in certain places? Why not record a macro to do it for you. You can make it resize the windows, too.
+
+    And if you need it, you can create several macros. Each one turns your window layout into something specialized and specific to your immediate needs. You can mix in some frame and tab action, too!
+
+    Just make sure you start with a call to C-x 1 to reset the windows back to one when you start the recording.
+
+    Heck, you can even tell your macro to store the idealized window configuration in a register before it stops, if you’d rather recall your setup from one of those. (Window configurations are registers and they don’t persist between Emacs sessions.)
+Visit files and Special Buffers
+
+    Combined with custom window layouts, you can have Emacs open a particular file in each window. Open up a magit buffer, maybe M-x calendar, or something else entirely.
+Speed up interactions with Org mode
+
+    Do you regularly open up the Org mode agenda, only to apply filters and settings? Sure, you can customize it, but maybe you can get by with a macro.
+Call up a Shell and execute commands in it
+
+    Make it run C-u M-x shell (or Eshell, or Vterm, or…) and run some commands that you frequently need to do.
+
+    Or just call out to M-x comint-run or M-x compile for those one-off programs that you want to run. The possibilities are endless.
+Search & replace common terms
+
+    If you find yourself having to bulk edit buffers, you can record a macro to do this for you. Maybe you have to make multiple passes, or you actually have to do some text editing with a macro. (Yes, it’s obviously great at that too.)
+
+    Why not combine it with tools like M-x rgrep or Xref to find text matches across a large swathe of files, and use M-g M-n in a keyboard macro to bulk edit? Record the macro so it does one file, and then play it back and watch as it churns its way through the list of matches in your *Grep* buffer.
+
+OK, so those are just some of the things you can do with keyboard macros. And you know what, this approach will solve 80% of those annoying “I wish I knew elisp so I could solve this one problem” questions that frequently dog newer Emacs users. Window management is especially hard for beginners, particularly for those who come from IDEs with fixed layouts.
+
+What keeps people from using macros for serious work is the mistaken impression that macros are impermanent and go away when Emacs does. By default they are impermanent, but you can tell Emacs to persist them with a couple of commands. More on that in a second. That makes ’em far more useful for repeat use.
+
+But let me just quickly get the macro basics out of the way if you’re new to them.
+Keyboard Macro Basics
+
+If you’re new to them, here’s a very quick table to get you started. I’m just scratching the surface here. You can do a lot of crazy stuff with them. Just know that keyboard macro commands are named either kmacro- or they contain the word kbd. Many kmacro- commands are bound to the prefix key map C-x C-k. Explore it with C-x C-k C-h.
+Key Binding	Description
+F3	Starts macro recording, or inserts counter value
+F4	Stops macro recording or plays last macro
+C-x ( and C-x )	Starts and stops macro recording
+C-x e	Plays last macro. Give prefix arg to repeat arg times
+
+You can optionally give a prefix argument to C-x e or F4 to make it repeat the macro that many times. Use 0 to tell Emacs to run the macro until it gets an error signal. A macro plays back until it encounters an error (end of buffer, end of matches in *Grep* if you advance with M-g M-n, and so on.) Watch out if you’re waving C-g around in a macro — it terminates the recording!
+
+If you call F3 when you’re recording, it’ll insert a number from a counter and increment it. Use a universal arg (C-u) and it’ll repeat the last number without incrementing it. You can pass a numeric arg to F3 to start the recording with a different number.
+
+This feature’s obviously great for numerating lists.
+
+But call F3 with C-u twice and you’ll instead append to your last macro.
+
+You can do way more than this, but that’s the gist of it.
+Naming and Saving Keyboard Macros
+
+In order to persist a macro you have to name it first. You do that with C-x C-k n, or M-x kmacro-name-last-macro. Recorded macros enter a macro ring – much like the kill, history or undo rings – but I recommend you name them if you think you’ll use them again later. Much easier than trying to find it again with C-x C-k C-n and C-x C-k C-p. Try running a named macro by invoking it with M-x.
+
+I strongly urge you to name your macros sensibly – ideally with a prefix. I use mp-.
+
+To persist it, you can ask Emacs to spit out an interactive function (a command) that is a like-for-like Elisp representation of the macro. To do this call M-x insert-kbd-macro. Emacs will ask for a named macro and insert a code-generated, interactive function at point. I recommend you insert it in your init.el file. It’s already named and evaluated at this point.
+
+One thing that annoys me, and maybe it annoys you too, is the inconsistent command naming. The logical answer is because the kbd-named commands predate the kmacro- ones by many years.
+
+The naming scheme is inconsistent and it lacks a key binding. So let’s fix that:
+
+(require 'kmacro)
+(defalias 'kmacro-insert-macro 'insert-kbd-macro)
+(define-key kmacro-keymap (kbd "I") #'kmacro-insert-macro)
+
+Much better. Now you can find it again easily under kmacro- and it also has as its own key: C-x C-k I.
+
+There’s also a way to bind macros to keys (with C-x C-k b) or registers (with C-x C-k x) but they won’t persist. I recommend that you instead just call M-x global-set-key or M-x local-set-key if you want commands temporarily bound to keys, notwithstanding the register stuff, which is a great feature, if you are already familiar with it. But the global/local set key commands have the added advantage that you can bind keys to any command you like, and not just keyboard macro commands.
+Interactive Keyboard Macros
+
+One neat, little feature is the ability to insert a macro query flag when you are recording a macro. A macro query is only triggered when you play it back. Emacs detects the query and pauses execution and cedes control back to you. To use it, type C-x q when you’re recording. There is no visual indicator when you type it, though.
+
+On playback you are then asked to pick from one of these options when the macro reaches the query flag:
+Query Key Binding	Description
+y	Continues as normal
+n, DEL	Skips the rest of the macro
+RET	Stops the macro entirely
+C-l	Recenters the screen
+C-r	Enters recursive edit
+C-M-c	Exits recursive edit
+
+That makes it excellent for what I call interactive macros that require user input. You can place the macro query anywhere you like — even in a prompt, like query replace regexp with C-M-%. You can even prefill the prompt; Emacs will remember that also.
+
+As the table shows, you’ve a number of options when control is ceded to you. I like C-r as it breaks out of the macro into a recursive edit session. Recursive editing is Emacs’s way of letting you pause something mid-way through, only to resume it later as though you were never gone. You can nest recursive editing levels more or less as much as you’d reasonably like.
+
+You can even run a whole new macro inside a recursive editing step. You can even run the same one! It’s macros all the way down.
+
+Emacs takes you back from whence you came when you back out of a recursive edit level with C-M-c. It’ll pick up where you left off when you entered it. You can tell you’re in a recurive editing step if you see [ ] in your mode line. ESC ESC ESC breaks out of all of them, if you just want to bail out now.
+Lossage & Step-Editing Macros
+
+When you type stuff Emacs keeps a record of it. Check it out: C-h l. You can turn parts of your lossage into a keyboard macro also with C-x C-k l. You can edit the buffer and use C-c C-c to commit the contents to a macro that you can then play back.
+
+You can also edit the last macro you have set with C-x C-k C-e. Occasionally useful if you’re doing something complex and you made a slight mistake. It works the same as the lossage interface. Heck, you can create brand new macros this way also, if you’re crazy enough.
+
+The pièce de résistance is the ability to step-wise edit a macro with C-x C-k SPC. Much like a debugger, you step through each playback step and you can decide what you want to do each step of the way.
+
+The step editor is loosely modeled on the query replace interfaces (like M-% and C-M-%) so if you have some familiarity with that, your knowledge applies here too.
+Step Edit Key	Description
+C-h	Show inline help
+SPC, y	Act (apply) current command
+n, d, C-d	Skip and delete current command
+TAB	Repeatedly act (apply) this command and all similar ones
+!, c	Continue playing back the macro
+C-k	Skip and delete rest of macro
+q, C-g	Cancel step editing
+u, U	Undo once / Undo all
+i, r	Inserts / Replaces a series of commands until you enter C-j
+I, R	Inserts / Replaces a single command
+
+Stepping and editing is a supremely powerful feature that you should at least know about, even if you never use it. I find buffer editing a macro a bit easier to do as it’s easy to make a mistake step editing your macro, and before you know it you’re step editing your step edited macros. But the power of being able to step through and correct errors and insert or replace missing commands is undeniably powerful, and I’ve not even included all the commands you can use!
+Conclusion
+
+Macros are great. And you don’t need elisp to get started either. Being able to configure your window layout with a quick keyboard macro is actually a bit of a super power. If you want to do that in a way that is persistent and stable and easily interchangeable you don’t have many options beyond elisp; maybe the frameset library; and third-party packages.
+
+And that’s to say nothing, of course, of the ability of keyboard macros to edit text. They’re definitely amazing at that also. But I think it’s all too easy to only look at them in that light. And if you’re new or unfamiliar with Elisp then it’s an easy way to supercharge your Emacs by recording how you want it done.
+
+Oh, and believe me, I haven’t even scratched the surface of what you can do with keyboard macros in Emacs. So, if you do something cool with macros, I’d love to hear about it!
 ** compare : 
 *** ediff
 The most frequently used commands to compare two files are those of ediff. You can invoke them from the “Tools > Compare (Ediff)” menu. There is a command called ediff-windows-linewise, though usually you would compare two buffers (ediff-buffers) or two files (ediff-files) or two revisions under a version control system (ediff-revision). Press n and p to navigate between diff regions; press ? to see more available commands.
@@ -5134,7 +6654,68 @@ To increase the height of the text in the current buffer, type C-x C-+. To decre
 To restore the default (global) face height, type C-x C-0. These keys are all bound to the text-scale-adjust funcion, which looks at the last key typed to determine which action to take.
 
 Note that this text size is only for the ease of editing and not for the final output. The size of the text in any HTML, PDF or Word document is determined by the logic of the document (headers and so on), not individual size indicators.
+*** Highlighting by Word, Line and Regexp
+How to highlight phrases, regular expressions and lines with highligh-phrase, highligh-regexp and highlight-lines-matching-regexp.
+By Mickey Petersen
+Updated for emacs 28
 
+With Emacs’s Hi-Lock mode you can highlight by word, line or regular expression with ease. The highlighter functionality in Emacs is particularly helpful when if you are trying to do complex code refactoring or if you are fixing data or text by hand.
+
+The Emacs Hi-Lock facility is obviously – and this should come as no surprise to you if you have used Emacs for a while – very complex with lots of whiz-bang features. I’ll concern myself with the most common use-cases for Hi-Lock and leave the more advanced concepts for another time.
+Global Hi-Lock Key bindings
+
+As luck would have it, the highlighter commands are bound to easy-to-reach key bindings.
+
+M-s h . or highlight-symbol-at-point
+
+    Grabs the symbol at point and highlights it with a highlighter of your choice.
+
+    What’s a symbol? That depends on your buffer’s syntax table. It’s usually set up grab the right thing in most programming modes, but if you’re poring over log files, beware that text-mode and so on may not have a syntax table amenable to that.
+M-s h l or highlight-lines-matching-regexp
+
+    Highlights all lines matching a regular expression
+M-s h p or highlight-phrase
+
+    Highlights everything matching a phrase
+M-s h r or highlight-regexp
+
+    Highlights everything matching a regular expression.
+
+    If you use subexpressions – like this \(...\) – then, as of Emacs 27, you can give highlight-regexp a numeric prefix argument to indicate the subexpression you wish to highlight.
+M-s h u or unhighlight-regexp
+
+    Deletes the highlighter under point
+M-s h w or hi-lock-write-interactive-patterns
+
+    Inserts a list of Hi-Lock patterns into the buffer
+M-s h f or hi-lock-find-patterns
+
+    Searches for Hi-Lock patterns in the buffer to use.
+
+NOTE:All of the highlight-xxxx commands are actually just aliases for the hi-lock-xxxx commands.
+Whitespace and Casing
+
+In Emacs 28, matching is now case sensitive if – much like case folding in things like ISearch – you use an uppercase letter. So, if you want case insensitive highlighting, you should only use lower case!
+
+Another new feature in Emacs 28 is that highlight-phrase now uses a little-known feature of (again) ISearch: search-whitespace-regexp. Emacs will automatically ‘fold’ several types of whitespace characters and treat them as though they were a regular whitespace. In other words, when you use whitespace, Emacs will automatically match for other whitespace-alike characters.
+Customizing Hi-Lock
+
+If you don’t like the Hi-Lock colors they can be customized easily with M-x customize-group RET hi-lock-faces. You can of course alter the variable hi-lock-face-defaults and add your own faces.
+Persisting Highlighters
+
+There is a mechanism for storing and restoring the Hi-Locks you’ve created. If you create highlights interactively you can tell Emacs to insert those patterns into the active buffer by running M-s h w. Emacs will wrap the elisp patterns in the comment format used by the buffer (if one is defined) or ask if you no comment format is defined.
+
+The patterns should be added to the top of the file, as Emacs will only search the first 10,000 characters (customize hi-lock-file-patterns-range to change that amount) for the patterns before giving up.
+
+Emacs will not highlight patterns found in a file automatically. You must explicitly tell it to do so by manually invoking M-x hi-lock-mode or globally with global-hi-lock-mode.
+
+You can also add it to your init file:
+
+(global-hi-lock-mode 1)
+
+Emacs may ask you if you want to load the patterns if it finds any. If you find that as annoying as I do, you can add this to have Emacs always highlight any Hi-Lock patterns it finds in the file:
+
+(setq hi-lock-file-patterns-policy #'(lambda (dummy) t)) 
 * Help Docs eLisp
 ** Data types
 *** varible
@@ -8887,7 +10468,134 @@ https://drive.google.com/file/d/10mKcsFB0pDeLRM15T6QlmG4Rn979rBDl/view?usp=shari
  ((eq evil-state 'visual) (do-something))
  ((eq evil-state 'normal) (do-other-thing))
  ((eq evil-state 'insert) (do-another-thing)))
+*** Evaluating Elisp in Emacs
+You can't do much with Emacs Lisp if you can't evaluate the code you've written. Here I explain all the myriad ways of doing so: from evaluating one liners anywhere in Emacs, all the way up to a full-blown REPL.
+By Mickey Petersen
+Updated for emacs 28
 
+There are several ways of evaluating elisp code in Emacs, and picking the right approach will help you get your job done faster and more efficiently. If you’re new to elisp it’s easy to learn about one or two methods and come away disappointed or frustrated because you’re using the wrong tool for the job.
+
+Emacs is capable of evaluating elisp in a variety of ways, each with their own trade-offs and benefits, and all of them serve a distinct but important purpose. Knowing all them is important.
+Evaluating a Region or Buffer
+
+If you want to evaluate a whole file, then M-x eval-buffer is a good place to start.
+
+It’ll re-evaluate everything except special forms like defface, defcustom and defvar. The reason is that they’re usually user-facing variables that you may have customized: for instance the fonts and faces you use for text, or the options you’ve picked in the Customize interface. Blindly resetting them when you evaluate a whole buffer is a blunderbuss approach that’ll likely cause more harm than good. So, Emacs will happily set special forms like defface if they’re undefined; if they’re already set, Emacs leaves them alone.
+
+This also applies when you evaluate a region with M-x eval-region.
+
+I frequently evaluate the current buffer – and rarely regions – when I’m writing elisp. As it’s annoying to type, and because it leaves no visual indication that the evaluation took place, I have a little helper function and key binding I like to use:
+
+(defun mp-elisp-mode-eval-buffer ()
+  (interactive)
+  (message "Evaluated buffer")
+  (eval-buffer))
+
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") #'mp-elisp-mode-eval-buffer)
+(define-key lisp-interaction-mode-map (kbd "C-c C-c") #'mp-elisp-mode-eval-buffer)
+
+Pressing C-c C-c – a common key binding used for this sort of thing in other major modes – now evaluates the whole buffer in both *scratch* (more on that below) and emacs-lisp-mode buffers.
+Evaluating Expressions
+By S-Expression
+
+This is where Emacs starts to shine, for it has special tools available to it to evaluate S-expressions. An S-expression is, put simply, anything Emacs’s Lisp implementation can read, which has special meaning in Lisp. In Lisp, first you read; then you evaluate.
+
+In Emacs’s case it’s not just balanced expressions – like (message "Hello World"), though that is most likely what you’ll use it for – but other, more primitive constructs also. Those primitives include numbers such as decimal 42 , #x12 as hexadecimal and #o44 as octal; vectors, like [1 2 3]; "strings" or ordinals like ?:; and so on.
+
+To evaluate S-expressions, type C-x C-e or run M-x eval-last-sexp.
+
+Although the function is designed for S-expressions, you can ask Emacs to evaluate nearly anything this way: numbers, strings, you name it. If what you’re asking it to evaluate is invalid or malformed, Emacs will tell you.
+
+Its key binding, C-x C-e, is a global key. That means it’s available by default in most of Emacs’s major modes and, thus, buffers. That means you can safely evaluate elisp from an M-x info buffer; an M-x eww web browser session; or indeed anywhere else.
+
+So it’s designed to work in a variety of situations — provided Emacs can guess what it is you’re asking it to evaluate! As its name alludes to, it’s called evaluate last S-expression: you must put your point at the end of the thing you want to evaluate.
+
+Emacs will backtrack and find the logical beginning – the beginning of a number or string, or the opening ( that a ) belongs to – so keep that in mind when you evaluate stuff.
+
+The result of the evaluation, if there is one, is printed in your minibuffer.
+
+Prior to Emacs 28 C-x C-e would not re-evaluate special forms like defvar, defcustom and defface. That was actually rather annoying (hence the change) as more often than not you’d selectively evaluate a defvar with C-x C-e exactly because you wanted to change it.
+
+So if you’re using older versions of Emacs, beware: you must evaluate by defun (see below) to change them.
+By Form or Defun
+
+Arguably the simplest way to evaluate a form is eval-defun, bound to C-M-x. Unlike C-x C-e (in versions leading up to Emacs 28 anyway) it re-evaluates special forms like defcustom, defface or defvar.
+
+What makes C-M-x useful is that it looks for the outermost form your point is in. So if you’re deep inside a defun form, it’ll eval the whole shebang. And it’s not limited to just defun forms, of course; no, it’ll run anything, despite its name.
+
+One way to determine – until you’re familiar with how it decides what to evaluate – is to type C-M-u repeatedly inside a form until you get an error saying it can’t go up. That is the top level form Emacs evaluates when you type C-M-x.
+
+What makes it even better is its built-in support for edebug, Emacs’s elisp debugger. Using the universal argument C-u Emacs will evaluate the form as normal, but enable debug instrumentation.
+
+Emacs is clever enough to detect that if you’re edebugging a defun that it’ll trigger the next time you, or any other part of Emacs, executes that function.
+
+To remove debug instrumentation, re-evaluate the form with C-M-x but without C-u.
+
+You should memorize this command. It’s handy as you can evaluate a block of code you’re working on without moving point, and without evaluating either the region it’s in, or the whole buffer.
+By Expression
+
+The command M-x eval-expression, bound to M-:, is meant for quick, one-off evaluations. Unlike C-x C-e, an evaluated expression does not have to be a form (like this (+ 1 2 3)) but can instead be anything Emacs is capable of evaluating:
+
+    Variables, like default-directory
+    Calling functions, like (shell)
+    Evaluating complex forms, like (+ (* 3 42) 9)
+    Setting variables, like (setq foo 42)
+
+Evaluated expressions are printed to the echo area and the value prepended to the list variable values.
+
+I use it frequently when I want to quickly change a variable or see its value. Usually because I’m testing or tweaking something.
+
+What is also useful to know is that it evaluates code in the context of the buffer you called M-:. So if you’re curious about the definition of a buffer-local variable like default-directory you can switch to the buffer you want to check and use M-:. It’ll also set variables in the same context.
+
+If you use the universal argument C-u, Emacs will insert the output into the current buffer. In a similar vein, you can tell Emacs to redo the previous command it did and let you edit the command beforehand by invoking C-x M-:.
+
+C-x M-: is especially useful if you don’t know how an interactive command “works”. Try calling it after switching buffers; opening M-x dired; or doing a search and replace. Emacs spits out the elisp code required to repeat the last command. Pretty cool stuff, and it is a great way to bind complex commands to keys as I explain in my article on mastering key bindings.
+
+One thing you cannot do is invoke multiple expressions. To get around this, you can wrap the expressions in the progn form, like so: (progn (foo) (bar) (baz)).
+
+But if you find yourself in the habit of doing that frequently, you should use Emacs’s scratch buffer.
+Interactive Evaluation
+The Scratch Buffer
+
+The *scratch* buffer is created for you automatically when you launch Emacs. I’m sure you wondered what on earth that buffer was about when you first started using Emacs. It does have a few specialized commands and, unlike the major mode (emacs-lisp-mode) you activate when you open a .el elisp file, the *scratch* buffer uses lisp-interaction-mode. It’s got all the features of emacs-lisp-mode – it inherits from that major mode – but with a few sweeteners that make it useful for one-off scripts and commands.
+
+If you put point at the end of an sexp and type C-j Emacs will evaluate the expression and print the result straight into the buffer.
+
+I find it useful. I’ll quite often switch to the scratch buffer – it’s an omnipresent thing in my Emacs, as I never kill it – and store snippets of code I’m working on. If I’m hacking on a third-party library or Emacs’s own code, I will often copy the defun I’m editing into *scratch* and modify and evaluate it there. That way I’m overwriting the old function with my own, but I don’t permanently change the original source file.
+
+But the scratch buffer is a poor substitute for a proper REPL, but thankfully Emacs does come with one of those too.
+IELM: The Interactive Emacs-Lisp Mode
+
+IELM is a hidden gem. No, really: I’ve met Emacs users with decades of experience who’ve never heard of it. It really is hidden.
+
+And it’s a proper REPL. Type M-x ielm to launch it. It comes with all the useful features you would expect from an interactive shell:
+
+Multi-line editing
+
+    When you press RET IELM will check whether you did so at the end of the input, or in the middle. If it’s the latter, it’ll insert a newline and let you continue editing and writing. Great if you want to write multi-line code.
+
+    In all other instances it’ll evaluate what you wrote.
+Output Variables
+
+    The variables *, ** and *** contain the last three outputs from the shell.
+History
+
+    ielm inherits from comint mode, although it talks to no external process. That means it inherits a lot of the core functionality present in comint mode. I’ve written about comint history commands before so I won’t repeat myself here.
+
+Another useful feature is the concept of a working buffer - a buffer through which your changes are evaluated. If you type C-c C-b you can change ielm’s working buffer to one of your choosing and then all the code you evaluate thereafter is treated as if you executed it in the context of that buffer. So in this sense it works like M-:. Not only is it useful, it’s downright essential as some variables are local to a particular buffer or directory on your file system.
+From the Command Line
+
+Both the emacs and emacsclient binaries support elisp evaluation on the command line. By passing -e to either binary, Emacs evaluates the code you give it and it then returns the result. If you use several distinct calls to -e you’ll get the return value (if any) for every single call. If you want to call multiple forms in one go you’ll need special forms like progn or prog1.
+
+I recommend you use emacsclient as it’ll reuse your existing Emacs instance instead of spawning a brand new one.
+
+In fact, I use this approach to good effect in Fuzzy Finding with Emacs instead of fzf where I demonstrate how you can “send” output from pipes into Emacs and back into the shell.
+Honorable Mention: Eshell
+
+You can evaluate elisp in Eshell directly from the prompt, with some limitations. I have covered this in greater detail in my article on Mastering Eshell.
+Conclusion
+
+That just about covers evaluating code in Emacs, from one-liners to entire buffers of code. If you’re hacking elisp you want C-M-x for your everyday editing and quick debugging; if you’re inspecting state or want to change something in Emacs real quick, use M-:; if you want to evaluate a buffer or region, use eval-buffer or eval-region; and if you’re exploring elisp and want an interactive environment, use ielm.
 * Help Docs Org
 ** Welcome to Org mode
 *** Marker sibols  
@@ -21451,4 +23159,341 @@ discussion]], or open up a new one!
 **** Usage : 
 ;; Usage
 ;; Use M-x org-roam-ui-mode RET to enable the global mode. It will start a web server on http://127.0.0.1:35901/ and connect to it via a WebSocket for real-time updates.
+
+
+*** dendroam : 
+**** git 
+***** Readme
+https://github.com/vicrdguez/dendroam
+This is an attempt of bringing to bring to emacs some Dendron features hand in hand with Org Roam
+
+Make sure you check the our Discussions page where we can talk about proposals and improvements for the project
+Disclaimer
+
+This is a work in progress project in a very early stage. However it is still functional and safe to use in your org roam vault.
+
+This code only works with Org Roam v2 which is currently in public alpha.
+
+As well I’m not an elisp programmer and this is my first code using this language. Probably the code is not as efficient or elegant as it could be, but feel free to point out improvements or even contribute to them.
+Why?
+
+In my experience, pure zettelkasten is awesome for academic information, taking notes on books, and articles that are full of abstract concepts that don’t belong to any category but are inter-linked with other ideas.
+
+However since I work in the IT industry, I take a lot of notes on software and software architecture. This kind of information has a clear structure, a structure that repeats between information that belongs to an specific context. And here zettelkasten in my opinion is not the perfect fit.
+
+I ended up having lots of notes like: data types in Java, data types in c… Repeating information in the title to be able to find specific notes.
+
+This kind of note taking is really useful for me, and I think it can be useful for others which write about more structured information
+
+This hierarchies helps grouping and branching notes that are strongly connected but leaves the concept of atomic note intact, a note that you can still link with others that are related. Also, makes finding this references faster among all your notes.
+
+In addition, having this little feature set does not get in your way if you want to use just zettelkasten.
+
+For this I got hooked on Dendron’s concept of note taking but couldn’t get used to VSCode, so I decided to write some code to have some of its beautiful goodies along with the awesome Org Roam features.
+
+You can find more on the hierarchies rationale in the blog of Dendron’s creator
+Features
+
+Hierarchies are just filenames separated by dots “.”, each subsequent hierarchy is child from the former. Something like: org.refile -> refile is child of org org.refile.cfg -> cfg is child of refile
+
+Each child is a note, so we can have a folder-like structure, but much less rigid.
+Finding and creating notes
+
+This emulates the Dendron’s Lookup. Runing org-roam-node-find shows hierarchies in the minibuffer. If the note does not exist, the input is used to populate a new file.
+
+The search list will show notes with the following format:
+
+this.is.a.hierarchy:Hello World
+
+Dendroam will truncate the last child of the hierarchy for the file (which is indeed the slugified title) and will show the file title instead for better readability.
+
+For note creation you don’t need to use hypens, dendroam will change spaces for hypens for the file name, keeping the title correct:
+
+Writing:
+
+proj.dendroam.notes on dendroam
+
+as input will result in:
+
+file: proj.dendroam.notes-on-dendroam.org
+
+Note title: Notes On Dendroam
+
+Of course you can create notes without any hierarchy as you would normally do with Org Roam
+
+assets/org-roam-find.gif
+Refactor hierarchies
+
+Useful to move group of files to another hierarchy.
+
+    Running dendroam-refactor-hierarchy will prompt you with the current file hierarchy so you can change it. This will refactor all the notes that share the same hierarchy as well
+    Running dendroam-refactor-file will do the same as refactor hierarchy command but will change only the current file.
+
+    assets/org-roam-refactor.gif
+
+Time notes
+
+Time notes are sub-hierarchies of other notes that indicates the time, you might want this notes under different other notes, journal notes are a great example. In this case dendroam is integrated with org-roam-dailies, so we can still using the current functions:
+
+journal.daily.2021.04.21
+
+Or hierarchy where you capture meetings:
+
+project.customer1.meet.2021.04.21.123020 project.customer2.meet.2021.04.21.183020
+
+This makes notes easy to sort and easy to find. You can create time notes under any other note as well
+
+Scratch notes are other way of looking at time notes. This type of notes are just a dump bucket where you want to capture something on the fly. It is nothing more than a top-level hierarchy with time:
+
+scratch.2021.04.21.183020
+
+Take a look at the example:
+
+assets/dailies.gif
+
+This notes are possible using org-capture through org-roam new capture functions, so it is easy to creae new types of time notes.
+Configuration
+
+To show hierarchies in the minibuffer you must change the org-roam display template:
+
+(setq org-roam-node-display-template "${hierarchy}:${title}")
+
+In order to populate the title correctly you need to configure org roam capture templates like this:
+
+(setq org-roam-capture-templates
+      '(("d" "default" plain
+         "%?"
+         :if-new (file+head "${slug}.org"
+                            "#+title: ${hierarchy-title}\n")
+         :immediate-finish t
+         :unnarrowed t)))
+
+An example dailies configuration that works with hierarchies:
+
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* %?"
+         :if-new (file+head "journal.daily.%<%Y.%m.%d>.org"
+                            "#+title: %<%Y-%m-%d>\n"))))
+
+To allow scratch notes and time notes you need to configure a new variable defined in the dendroam code called dendroam-capture-template, that adds more templates:
+
+(setq dendroam-capture-templates
+      '(("t" "Time note" entry
+         "* %?"
+         :if-new (file+head "${current-file}.%<%Y.%m.%d>.org"
+                            "#+title: %^{title}\n"))
+        ("s" "Scratch note" entry
+         "* %?"
+         :if-new (file+head "scratch.%<%Y.%m.%d.%.%M%S%3N>.org"
+                            "#+title: %^{title}\n"))))
+
+If you want to show the current file hierarchy as an initial input when running the find command, you can use this function and then bind it to a key combination of your choice
+
+(defun dendroam-node-find-initial-input ()
+  (interactive)
+  (org-roam-node-find nil (if (buffer-file-name)
+                         (file-name-base (buffer-file-name))
+                         "")))
+
+Install
+Doom Emacs
+Load from Disk
+
+You can clone the repo and load the file into your config:
+
+(load! "<path to dendrom.el file>")
+
+Note that the code above is for doom emacs, I guess you can have the same effect with load in vanilla emacs as well. All the help you can give me on how to distribute the package is really apreciated.
+Load via github recipe
+
+Inside of your .doom.d/packages.el:
+
+(package! dendroam
+  :recipe (:host github :repo "vicrdguez/dendroam" :branch "main"))
+
+This registers dendroam as a package to use in doom. Now inside of .doom.d/config.el:
+
+(use-package! dendroam
+  :after org-roam)
+
+Future plans
+
+This code is something I use my self so I plan to keep improving it. This are the things I have in my mind now.
+
+More Dendron features:
+
+    Schema support: I’m researching how to best approach this. Using YAML files like dendron does? Not sure about elisp support for YAML. Another option is to use elisp forms to define schemas and then load them. This is open to discussion of course and I would love to know ideas on this if you have any. Feel free to show them.
+    Publishing: Having an easy and integrated way of publishing would be nice. I don’t know too much about web technologies so again, help is really apreciated.
+
+We can of course discuss about more dendron features can be useful in org roam/emacs context.
+
+Dendroam specific plans
+
+    Try to keep compatibility with org roam, and if possible add compatibility with Dendron so people can use both (of course exporting org to markdown and viceversa)
+    Some improvements to take advantage of the powerful emacs features.
+**** Configuration
+To show hierarchies in the minibuffer you must change the org-roam display template:
+
+(setq org-roam-node-display-template "${hierarchy}:${title}")
+
+In order to populate the title correctly you need to configure org roam capture templates like this:
+
+(setq org-roam-capture-templates
+      '(("d" "default" plain
+         "%?"
+         :if-new (file+head "${slug}.org"
+                            "#+title: ${hierarchy-title}\n")
+         :immediate-finish t
+         :unnarrowed t)))
+
+An example dailies configuration that works with hierarchies:
+
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* %?"
+         :if-new (file+head "journal.daily.%<%Y.%m.%d>.org"
+                            "#+title: %<%Y-%m-%d>\n"))))
+
+To allow scratch notes and time notes you need to configure a new variable defined in the dendroam code called dendroam-capture-template, that adds more templates:
+
+(setq dendroam-capture-templates
+      '(("t" "Time note" entry
+         "* %?"
+         :if-new (file+head "${current-file}.%<%Y.%m.%d>.org"
+                            "#+title: %^{title}\n"))
+        ("s" "Scratch note" entry
+         "* %?"
+         :if-new (file+head "scratch.%<%Y.%m.%d.%.%M%S%3N>.org"
+                            "#+title: %^{title}\n"))))
+
+If you want to show the current file hierarchy as an initial input when running the find command, you can use this function and then bind it to a key combination of your choice
+
+(defun dendroam-node-find-initial-input ()
+  (interactive)
+  (org-roam-node-find nil (if (buffer-file-name)
+                         (file-name-base (buffer-file-name))
+                         "")))
+**** Install
+***** Load from Disk
+Doom Emacs
+You can clone the repo and load the file into your config:
+
+(load! "<path to dendrom.el file>")
+
+Note that the code above is for doom emacs, I guess you can have the same effect with load in vanilla emacs as well. All the help you can give me on how to distribute the package is really apreciated.
+***** Load via github recipe
+
+Inside of your .doom.d/packages.el:
+
+(package! dendroam
+  :recipe (:host github :repo "vicrdguez/dendroam" :branch "main"))
+
+This registers dendroam as a package to use in doom. Now inside of .doom.d/config.el:
+
+(use-package! dendroam
+  :after org-roam)
+***** practic
+****** quelpa
+#+begin_src emacs-lisp :tangle yes
+(use-package dendroam
+	:quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
+	:ensure t
+  :after org-roam
+;; 		(quelpa '(dendroam :repo "vicrdguez/dendroam" :fetcher github))
+;; (miracle :fetcher github :repo "Saikyun/miracle"))
+	)
+#+end_src
+
+#+RESULTS:
+****** config
+#+begin_src emacs-lisp :tangle yes
+(use-package dendroam
+	:quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
+	;; :ensure t
+  :after org-roam
+	:config
+	(setq org-roam-node-display-template "${hierarchy}:${title}")
+  ;; (setq org-roam-node-display-template
+	;; 			(concat "${hierarchy}:${title}" (propertize "${tags}" 'face 'org-tag)))
+	(setq org-roam-capture-templates
+				'(("d" "default" plain
+					"%?"
+					:if-new (file+head "${slug}.org"
+															"#+title: ${hierarchy-title}\n")
+					:immediate-finish t
+					:unnarrowed t)))
+	;; dailies : 
+	;; (setq org-roam-dailies-capture-templates
+	;; 			'(("d" "default" entry
+	;; 				"* %?"
+	;; 				:if-new (file+head "journal.daily.%<%Y.%m.%d>.org"
+	;; 														"#+title: %<%Y-%m-%d>\n"))))
+	;; "Scratch note"
+	;; (setq dendroam-capture-templates
+	;; 			'(("t" "Time note" entry
+	;; 				"* %?"
+	;; 				:if-new (file+head "${current-file}.%<%Y.%m.%d>.org"
+	;; 														"#+title: %^{title}\n"))
+	;; 				("s" "Scratch note" entry
+	;; 				"* %?"
+	;; 				:if-new (file+head "scratch.%<%Y.%m.%d.%.%M%S%3N>.org"
+	;; 														"#+title: %^{title}\n"))))
+	(defun dendroam-node-find-initial-input ()
+		(interactive)
+		(org-roam-node-find nil (if (buffer-file-name)
+													(file-name-base (buffer-file-name))
+													"")))
+
+  :bind (("C-c n I" . dendroam-node-find-initial-input))
+	)
+#+end_src
+
+#+RESULTS:
+: dendroam-node-find-initial-input
+****** paire fix
+#+begin_src emacs-lisp :tangle yes
+
+(cl-defmethod org-roam-node-slug ((node org-roam-node))
+  "Return the slug of NODE."
+  (let ((title (org-roam-node-title node))
+        (slug-trim-chars '(;; Combining Diacritical Marks https://www.unicode.org/charts/PDF/U0300.pdf
+                           768 ; U+0300 COMBINING GRAVE ACCENT
+                           769 ; U+0301 COMBINING ACUTE ACCENT
+                           770 ; U+0302 COMBINING CIRCUMFLEX ACCENT
+                           771 ; U+0303 COMBINING TILDE
+                           772 ; U+0304 COMBINING MACRON
+                           774 ; U+0306 COMBINING BREVE
+                           775 ; U+0307 COMBINING DOT ABOVE
+                           776 ; U+0308 COMBINING DIAERESIS
+                           777 ; U+0309 COMBINING HOOK ABOVE
+                           778 ; U+030A COMBINING RING ABOVE
+                           779 ; U+030B COMBINING DOUBLE ACUTE ACCENT
+                           780 ; U+030C COMBINING CARON
+                           795 ; U+031B COMBINING HORN
+                           803 ; U+0323 COMBINING DOT BELOW
+                           804 ; U+0324 COMBINING DIAERESIS BELOW
+                           805 ; U+0325 COMBINING RING BELOW
+                           807 ; U+0327 COMBINING CEDILLA
+                           813 ; U+032D COMBINING CIRCUMFLEX ACCENT BELOW
+                           814 ; U+032E COMBINING BREVE BELOW
+                           816 ; U+0330 COMBINING TILDE BELOW
+                           817 ; U+0331 COMBINING MACRON BELOW
+                           )))
+    (cl-flet* ((nonspacing-mark-p (char) (memq char slug-trim-chars))
+               (strip-nonspacing-marks (s) (string-glyph-compose
+                                            (apply #'string
+                                                   (seq-remove #'nonspacing-mark-p
+                                                               (string-glyph-decompose s)))))
+               (cl-replace (title pair) (replace-regexp-in-string (car pair) (cdr pair) title)))
+      (let* ((pairs `(("[^[:alnum:][:digit:][.]]" . "_") ;; convert anything not alphanumeric
+                      ("__*" . "_")                   ;; remove sequential underscores
+                      ("^_" . "")                     ;; remove starting underscore
+                      ("_$" . "")))                   ;; remove ending underscore
+             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+        (downcase slug)))))
+
+
+#+end_src
+
 
