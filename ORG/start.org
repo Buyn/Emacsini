@@ -26,47 +26,22 @@ https://www.braveclojure.com/basic-emacs/
 ** progn :
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
-;; ** defun FIX : 
-(cl-defmethod org-roam-node-slug ((node org-roam-node))
-  "Return the slug of NODE."
-  (let ((title (org-roam-node-title node))
-        (slug-trim-chars '(;; Combining Diacritical Marks https://www.unicode.org/charts/PDF/U0300.pdf
-                           768 ; U+0300 COMBINING GRAVE ACCENT
-                           769 ; U+0301 COMBINING ACUTE ACCENT
-                           770 ; U+0302 COMBINING CIRCUMFLEX ACCENT
-                           771 ; U+0303 COMBINING TILDE
-                           772 ; U+0304 COMBINING MACRON
-                           774 ; U+0306 COMBINING BREVE
-                           775 ; U+0307 COMBINING DOT ABOVE
-                           776 ; U+0308 COMBINING DIAERESIS
-                           777 ; U+0309 COMBINING HOOK ABOVE
-                           778 ; U+030A COMBINING RING ABOVE
-                           779 ; U+030B COMBINING DOUBLE ACUTE ACCENT
-                           780 ; U+030C COMBINING CARON
-                           795 ; U+031B COMBINING HORN
-                           803 ; U+0323 COMBINING DOT BELOW
-                           804 ; U+0324 COMBINING DIAERESIS BELOW
-                           805 ; U+0325 COMBINING RING BELOW
-                           807 ; U+0327 COMBINING CEDILLA
-                           813 ; U+032D COMBINING CIRCUMFLEX ACCENT BELOW
-                           814 ; U+032E COMBINING BREVE BELOW
-                           816 ; U+0330 COMBINING TILDE BELOW
-                           817 ; U+0331 COMBINING MACRON BELOW
-                           )))
-    (cl-flet* ((nonspacing-mark-p (char) (memq char slug-trim-chars))
-               (strip-nonspacing-marks (s) (string-glyph-compose
-                                            (apply #'string
-                                                   (seq-remove #'nonspacing-mark-p
-                                                               (string-glyph-decompose s)))))
-               (cl-replace (title pair) (replace-regexp-in-string (car pair) (cdr pair) title)))
-      (let* ((pairs `(("[^[:alnum:][:digit:]\\.]" . "_") ;; convert anything not alphanumeric
-                      ("__*" . "_")                   ;; remove sequential underscores
-                      ("^_" . "")                     ;; remove starting underscore
-                      ("_$" . "")))                   ;; remove ending underscore
-             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-        (downcase slug)))))
 
-
+(use-package google-translate
+  :ensure t
+  :custom
+  (google-translate-backend-method 'emacs)
+  :config
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-translation-directions-alist
+        '(("ru" . "en") ("en" . "ru")))
+  (setq google-translate-output-destination nil)
+  (setq google-translate-pop-up-buffer-set-focus t)
+  (setq google-translate-default-source-language "ru")
+  (setq google-translate-default-target-language "en")
+  (global-set-key "\C-ct" 'google-translate-smooth-translate)
+  (defun google-translate--search-tkk () "Search TKK." (list 430675 
+2721866130)))
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)
@@ -594,10 +569,19 @@ E:\Temp\Fonts\Scary-Font.zip
 **** Важное но не срочное 
 **** Не Срочное и не важное
 *** SWOT 
-**** Strengths
-**** Weaknesses
+**** Strengths +
+**** Weaknesses -
 **** Opportunities
 **** Threats
+**** Описание
+***** вначале заполняем +-
+всё делам на плюсы и минусы
+***** потом заполняем ОТ 
+на основе +- даём ответ на вопросы
+что за возможности открываются
+какие угрозы врезультати встают
+***** если впроцесе вспоминается новое 
+за носии в + или -
 *** Туду
 **** сделать
 **** в процесе
@@ -1048,6 +1032,10 @@ initial-scratch-message
 шифт+ф1
 ** emacs orgs 
 *** 2023
+**** 06
+(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_ledger_2023-06-15.org")
+(find-file-other-frame "~/../Dropbox/orgs/adm/2023-06-08_trans.org")
+
 **** 05
 (find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
 (find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
@@ -2760,6 +2748,248 @@ $ echo $(cadr myvar)
 bar
 
 If you set eshell-buffer-shorthand to t you can use the shorthand #'*scratch* instead, but it means you will not be able to redirect straight to elisp symbols. I recommend you use C-c M-b and #<buffer-name-here> instead.
+*** calc 
+**** ref
+***** Arithmetic
+add, subtract, multiply, divide +, -, *, /
+raise to a power, nth root ^, I ^
+change sign n
+reciprocal 1/x &
+square root √x Q
+set precision p
+round off last two digits c 2
+convert to fraction, float c F, c f
+enter using algebraic notation ’ 2+3*4
+refer to previous result ’ 3*$^2
+refer to higher stack entries ’ $1*$2^2
+finish alg entry without evaluating LFD
+set mode where alg entry used by default m a
+***** Stack Commands
+Here Sn is the nth stack entry, and N is the size of the stack.
+key no prefix prefix n prefix −n
+RET copy S1 copy S1..n copy Sn
+LFD copy S2 copy Sn copy S1..n
+DEL delete S1 delete S1..n delete Sn
+M-DEL delete S2 delete Sn delete S1..n
+TAB swap S1↔S2 roll S1 to Sn roll Sn to SN
+M-TAB roll S3 to S1 roll Sn to S1 roll SN to Sn
+With a 0 prefix, these copy, delete, or reverse the entire stack.
+***** Variables
+Variable names are single digits or whole words.
+store to variable s t
+store and keep on stack s s
+recall from variable s r
+shorthands for digit variables t n, s n, r n
+unstore, exchange variable s u, s x
+edit variable s e
+***** Notations
+scientific notation 6.02e23
+minus sign in numeric entry _23 or 23 n
+fractions 3:4
+complex numbers (x, y)
+polar complex numbers (r; θ)
+vectors (commas optional) [1, 2, 3]
+matrices (or nested vectors) [1, 2; 3, 4]
+error forms (p key) 100 +/- 0.5
+interval forms [2 .. 5)
+modulo forms (M key) 6 mod 24
+HMS forms 5@ 30’ 0"
+date forms <Jul 4, 1992>
+infinity, indeterminate inf, nan
+***** Scientific Functions
+ln, log10 , logb L, H L, B
+exponential ex, 10x E, H E
+sin, cos, tan S, C, T
+arcsin, arccos, arctan I S, I C, I T
+inverse, hyperbolic prefix keys I, H
+two-argument arctan f T
+degrees, radians modes m d, m r
+pi (π) P
+factorial, double factorial !, k d
+combinations, permutations k c, H k c
+prime factorization k f
+next prime, previous prime k n, I k n
+GCD, LCM k g, k l
+random number, shuffle k r, k h
+minimum, maximum f n, f x
+error functions erf, erfc f e, I f e
+gamma, beta functions f g, f b
+incomplete gamma, beta functions f G, f B
+Bessel Jν , Yν functions f j, f y
+complex magnitude, arg, conjugate A, G, J
+real, imaginary parts f r, f i
+convert polar/rectangular c p
+***** Financial Functions
+enter percentage M-%
+convert to percentage c %
+percentage change b %
+present value b P
+future value b F
+rate of return b T
+number of payments b #
+size of payments b M
+net present value, int. rate of return b N, b I
+Above computations assume payments at end of period. Use I
+prefix for beginning of period, or H for a lump sum investment.
+straight-line depreciation b S
+sum-of-years’-digits b Y
+double declining balance b D
+***** Display
+scroll horizontally, vertically < >, { }
+home cursor o
+line numbers on/off d l
+trail display on/off t d
+scientific notation d s
+fixed-point notation d f
+floating-point (normal) notation d n
+group digits with commas d g
+For display mode commands, H prefix prevents screen redraw
+and I prefix temporarily redraws top of stack.
+***** Units
+enter with units ’ 55 mi/hr
+convert to new units, base units u c, u b
+convert temperature units u t
+simplify units expression u s
+view units table u v
+***** Common units:
+distance: m, cm, mm, km; in, ft, mi, mfi; point, lyr
+volume: l or L, ml; gal, qt, pt, cup, floz, tbsp, tsp
+mass: g, mg, kg, t; lb, oz, ton
+time: s or sec, ms, us, ns, min, hr, day, wk
+temperature: degC, degF, K
+GNU Calc Reference Card
+***** Programmer’s Functions
+binary, octal, hex display d 2, d 8, d 6
+decimal, other radix display d 0, d r
+display leading zeros d z
+entering non-decimal numbers 16#7FFF
+binary word size b w
+binary AND, OR, XOR b a, b o, b x
+binary DIFF, NOT b d, b n
+left shift b l
+logical right shift b r
+arithmetic right shift b R
+integer quotient, remainder \, %
+integer square root, logarithm f Q, f I
+floor, ceiling, round to integer F, I F, R
+***** Vector Operations
+vector of 1, 2, . . . , n v x n
+vector of n counts from a by b C-u v x
+vector of copies of a value v b
+concatenate into vector |
+pack many stack items into vector v p
+unpack vector or object v u
+length of vector (list) v l
+reverse vector v v
+sort, grade vector V S, V G
+histogram of vector data V H
+extract vector element v r
+matrix determinant, inverse V D, &
+matrix transpose, trace v t, V T
+cross, dot products V C, *
+identity matrix v i
+extract matrix row, column v r, v c
+intersection, union, diff of sets V ^, V V, V -
+cardinality of set V #
+add vectors elementwise (i.e., map +) V M +
+sum elements in vector (i.e., reduce +) V R +
+sum rows in matrix V R _ +
+sum columns in matrix V R : +
+sum elements, accumulate results V U +
+***** Algebra
+enter an algebraic formula ’ 2x+3y^2
+enter an equation ’ 2x^2=18
+symbolic (vs. numeric) mode m s
+fractions (vs. float) mode m f
+suppress evaluation of formulas m O
+return to default evaluation rules m D
+“Big” display mode d B
+C, Pascal, FORTRAN modes d C, d P, d F
+TEX, LaTEX, eqn modes d T, d L, d E
+Maxima d X
+Unformatted mode d U
+Normal language mode d N
+simplify formula a s
+put formula into rational form a n
+evaluate variables in formula =
+evaluate numerically N
+let variable equal a value in formula s l x =val
+declare properties of variable s d
+Common decls: pos, int, real, scalar, [a..b ].
+expand, collect terms a x, a c
+factor, partial fractions a f, a a
+polynomial quotient, remainder, GCD a \, a %, a g
+derivative, integral a d, a i
+taylor series a t
+principal solution to equation(s) a S
+list of solutions a P
+generic solution H a S
+apply function to both sides of eqn a M
+rewrite formula a r
+Example: a r a*b + a*c := a*(b+c)
+Example: a r sin(x)^2 := 1-cos(x)^2
+Example: a r cos(n pi) := 1 :: integer(n) :: n%2 = 0
+Example: a r [f(0) := 1, f(n) := n f(n-1) :: n > 0]
+Put rules in EvalRules to have them apply automatically.
+Put rules in AlgSimpRules to apply during a s command.
+Common markers: opt, plain, quote, eval, let, remember.
+***** Numerical Computations
+sum formula over a range a +
+product of formula over a range a *
+tabulate formula over a range a T
+integrate numerically over a range a I
+find zero of formula or equation a R
+find local min, max of formula a N, a X
+fit data to line or curve a F
+mean of data in vector or variable u M
+median of data H u M
+geometric mean of data u G
+sum, product of data u +, u *
+minimum, maximum of data u N, u X
+sample, pop. standard deviation u S, I u S
+***** Selections
+select subformula under cursor j s
+select nth subformula j n
+select more j m
+unselect this, all formulas j u, j c
+copy indicated subformula j RET
+delete indicated subformula j DEL
+commute selected terms j C
+commute term leftward, rightward j L, j R
+distribute, merge selection j D, j M
+isolate selected term in equation j I
+negate, invert term in context j N, j &
+rewrite selected term j r
+***** Graphics
+graph function or data g f
+graph 3D function or data g F
+replot current graph g p
+print current graph g P
+add curve to graph g a
+set number of data points g N
+set line, point styles g s, g S
+set log vs. linear x, y axis g l, g L
+set range for x, y axis g r, g R
+close graphics window g q
+***** Programming
+begin, end recording a macro C-x (, C-x )
+replay keyboard macro X
+read region as written-out macro C-x * m
+if, else, endif Z [, Z :, Z ]
+equal to, less than, member of a =, a <, a {
+repeat n times, break from loop Z <, Z >, Z /
+“for” loop: start, end; body, step Z (, Z )
+save, restore mode settings Z ‘, Z ’
+query user during macro Z #
+put finished macro on a key Z K
+define function with formula Z F
+edit definition Z E
+record user-defined command permanently Z P
+record variable value permanently s p
+record mode settings permanently m m
+**** ref link
+https://www.gnu.org/software/emacs/refcards/pdf/calccard.pdf
+
 *** Shell
 **** Описание 
 используется для запуска других процесов
@@ -12655,6 +12885,8 @@ keywords).
   The Emacs news and email reader.
 * Help Docs Mods
 ** use-package
+*** docs links
+https://elpa.gnu.org/packages//doc/use-package.html#Pinning-packages
 *** Getting started
 ;; This is only needed once, near the top of the file
 (eval-when-compile
@@ -12664,7 +12896,7 @@ keywords).
 
 (use-package foo)
 This loads in the package foo, but only if foo is available on your system. If not, a warning is logged to the *Messages* buffer.
-*** :init :config
+*** :init 
 **** :init : 
 Use the :init keyword to execute code before a package is loaded. It accepts one or more forms, up to the next keyword:
 
@@ -12694,7 +12926,9 @@ In this case, I want to autoload the commands isearch-moccur and isearch-all fro
 **** :init load-path : 
 :init
 	(add-to-list 'load-path "~/ELs/Org/Babel/ob-dot.el")
+*** :config
 *** Key-binding
+**** info
 Another common thing to do when loading a module is to bind a key to primary commands within that module:
 
 (use-package ace-jump-mode
@@ -12730,7 +12964,22 @@ Furthermore, remapping commands with :bind and bind-key works as expected, becau
 
 (use-package unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
+**** exempls
+***** obsidiant for mode exempl
+#+begin_src emacs-lisp :tangle yes
+  :bind (:map obsidian-mode-map
+  ;; Replace C-c C-o with Obsidian.el's implementation. It's ok to use another key binding.
+  ("C-c C-o" . obsidian-follow-link-at-point)
+  ;; Jump to backlinks
+  ("C-c C-b" . obsidian-backlink-jump)
+  ;; If you prefer you can use `obsidian-insert-link'
+  ("C-c C-l" . obsidian-insert-wikilink)
+	;; hydra menu : 
+	("C-c M-o" . 'obsidian-hydra/body 'obsidian-mode-map))
+#+end_src
+***** (bind-key (kbd "C-c M-o") 'obsidian-hydra/body 'obsidian-mode-map)
 *** Binding to keymaps
+**** info
 Normally :bind expects that commands are functions that will be autoloaded from the given package. However, this does not work if one of those commands is actually a keymap, since keymaps are not functions, and cannot be autoloaded using Emacs' autoload mechanism.
 
 To handle this case, use-package offers a special, limited variant of :bind called :bind-keymap. The only difference is that the "commands" bound to by :bind-keymap must be keymaps defined in the package, rather than command functions. This is handled behind the scenes by generating custom code that loads the package containing the keymap, and then re-executes your keypress after the first load, to reinterpret that keypress as a prefix key.
@@ -12760,6 +13009,20 @@ Multiple uses of :map may be specified. Any binding occurring before the first u
          ("M-o" . other-window)
          ("M-p" . term-send-up)
          ("M-n" . term-send-down)))
+**** exempls
+***** obsidiant for mode exempl
+#+begin_src emacs-lisp :tangle yes
+  :bind (:map obsidian-mode-map
+  ;; Replace C-c C-o with Obsidian.el's implementation. It's ok to use another key binding.
+  ("C-c C-o" . obsidian-follow-link-at-point)
+  ;; Jump to backlinks
+  ("C-c C-b" . obsidian-backlink-jump)
+  ;; If you prefer you can use `obsidian-insert-link'
+  ("C-c C-l" . obsidian-insert-wikilink)
+	;; hydra menu : 
+	("C-c M-o" . 'obsidian-hydra/body 'obsidian-mode-map))
+#+end_src
+***** (bind-key (kbd "C-c M-o") 'obsidian-hydra/body 'obsidian-mode-map)
 *** Modes and interpreters
 Similar to :bind, you can use :mode and :interpreter to establish a deferred binding within the auto-mode-alist and interpreter-mode-alist variables. The specifier to either keyword can be a cons cell, a list of cons cells, or a string or regexp:
 
@@ -12858,7 +13121,7 @@ NOTE: :when is provided as an alias for :if, and :unless foo means the same thin
 Conditional loading before :preface
 
 If you need to conditionalize a use-package form so that the condition occurs before even the :preface is executed, simply use when around the use-package form itself:
-*** Loading packages in sequence
+*** Loading packages in sequence :demand t
 Sometimes it only makes sense to configure a package after another has been loaded, because certain variables or functions are not in scope until that time. This can achieved using an :after keyword that allows a fairly rich description of the exact conditions when loading should occur. Here is an example:
 
 (use-package hydra
@@ -20260,10 +20523,66 @@ All defaults are customizable with M-x customize-group RET ob-translate.
 :dest may be a single country-code, or a comma-separated list.
 
 All defaults are customizable with M-x customize-group RET ob-translate.
-*** go-translate
-		хелпа нет
-		надо искать даженепомнюк как они работают
 *** google-translate
+**** set in
+(find-file-other-frame "~/../Dropbox/orgs/adm/2023-06-08_trans.org")
+**** google-translate-smooth-translate
+A current translation direction could be changed directly in the
+minibuffer by means of key bindings such as C-n and C-p for
+changing to the next translation direction and to the previous
+one respectively.
+**** ‘google-translate-core-ui.el’.
+Its value is nil
+
+  You can customize this variable.
+
+Documentation:
+Determines where translation output will be displayed.
+
+- If it is ‘nil’, output to temporary pop up buffer (default).
+- ‘echo-area’: output to the Echo Area.
+- ‘popup’: output to the popup tooltip using ‘popup’ package.
+- ‘kill-ring’: the output will be added in ‘kill-ring’.
+- ‘current-buffer’: the output will be inserted to current buffer.
+- ‘help’: output to help buffer.
+- ‘paragraph-overlay’: output in current buffer overlay paragraph by paragraph.
+- ‘paragraph-insert’: output will be inserted in buffer paragraph by paragraph.
+**** auto-toggling : 
+While switching among languages I noticed that I change input method quite often. Input method auto toggling allows switch on appropriate input method while switching among languages. Auto toggling will work in case of google-translate-input-method-auto-toggling is set to t and google-translate-preferable-input-methods-alist is defined properly.
+
+This variable may be defined as follow (just for example):
+
+(setq google-translate-preferable-input-methods-alist '((nil . ("en"))
+                                                        (ukrainian-programmer-dvorak . ("ru" "uk"))))
+
+In this way, input method is disabled (because of nil) for the minibuffer when source language is English. And "ukrainian-programmer-dvorak" input method is enabled when source language is Russian or Ukrainian.
+**** suport mode
+***** google-translate-mode
+****** What is this?
+
+Emacs minor mode for displaying translated text using Google Translate in real time.
+Installation
+Prerequirement
+
+This package requires google-translate.el as it's backend. Please install it first if you haven't installed yet.
+Configure .emacs
+
+Make sure that 'google-translate-mode.el' is placed in correct location which included in load-path. Add following lines to your .emacs file.
+
+(require 'google-translate-mode)
+
+You can customize time to wait before execute translate from when idle state has began.
+
+(custom-set-variables '(google-translate-mode-idle-wait-time 0.2))
+****** Usage
+
+Just enable google-translate-mode in buffer you want to translate.
+
+M-x google-translate-mode RET
+**** keys
+  (global-set-key "\C-ct" 'google-translate-smooth-translate)
+
+*** go-translate
 		хелпа нет
 		надо искать даженепомнюк как они работают
 ** yasnippet

@@ -12,6 +12,7 @@
 (setq inhibit-startup-message t) ;; hide the startup message
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(setq make-backup-files nil)
 ;; ------------------------------------------------------
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
 ;; ------------------------------------------------------
