@@ -12,7 +12,6 @@
 (setq inhibit-startup-message t) ;; hide the startup message
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(setq make-backup-files nil)
 ;; ------------------------------------------------------
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
 ;; ------------------------------------------------------
@@ -116,7 +115,9 @@
 ;; Never silently delete old backups.
 ;; (setq delete-old-versions -1)
 ;; Use version numbers for backup files.
-(setq version-control t)
+;; (setq version-control t)
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 ;; Even version controlled files get to be backed up.
 ;; (setq vc-make-backup-files t)
 ;; ------------------------------------------------------
