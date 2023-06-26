@@ -1015,6 +1015,13 @@ initial-scratch-message
 	(find-file-other-frame "~/ELs/tts/tts-editor/tts-editor.el")
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
+** Brain 
+#+begin_src emacs-lisp :tangle yes
+(setq org-brain-path "~/ORG/brain/")
+(org-brain-switch-brain "~/ORG/brain/")
+(find-file-other-frame "~/ORG/brain/index.org")
+(org-brain-visualize "index")
+#+end_src
 ** all orgs Grimoire 
 *** link
 (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")
@@ -2381,7 +2388,6 @@ download the package gnu-elpa-keyring-update and run the function with the same 
 
 (setq package-check-signature "allow-unsigned")
 
-
 ** setings
 :PROPERTIES:
 :ID:       12e089c2-d604-471e-9d1c-4157b4ffeb8f
@@ -2749,6 +2755,14 @@ bar
 
 If you set eshell-buffer-shorthand to t you can use the shorthand #'*scratch* instead, but it means you will not be able to redirect straight to elisp symbols. I recommend you use C-c M-b and #<buffer-name-here> instead.
 *** calc 
+**** Starting and Stopping
+start/stop either: C-x * *
+start/stop standard Calc C-x * c
+start/stop X keypad Calc C-x * k
+stop standard Calc q
+Calc tutorial C-x * t
+run Calc in other window C-x * o
+quick calculation in minibuffer C-x * q
 **** ref
 ***** Arithmetic
 add, subtract, multiply, divide +, -, *, /
@@ -6223,6 +6237,9 @@ you can give each daemon its own server name like this:
 #+begin_src elisp :tangle yes
 	(buyn-cmd-start "D:/inet/browser/Comodo/Dragon/dragon.exe https://mail.google.com/mail/u/0/#inbox")
 #+end_src
+
+**** shell-command-to-string : 
+(shell-command-to-string "ls") 
 
 *** 44 Saving Emacs Sessions
 [[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
@@ -9983,6 +10000,30 @@ SaltyEgg 626412
 (defun min-to-houre (min)
 		(setq min (+ min 10))
 		 (message "value is %s" min))
+** Time
+*** Timer
+**** run-with-idle-timer : 
+(run-with-idle-timer 5 nil '(lambda () (message "Hi!")))
+Command: run-at-time time repeat function &rest arg
+**** run-at-time : 
+(run-at-time "5 sec" nil '(lambda () (message "Hi!")))
+
+**** cancel-timer
+**** list-timers : 
+The list-timers command lists all the currently active timers. The command c (timer-list-cancel) will cancel the timer on the line under point. You can sort the list by column using the command S (tabulated-list-sort). 
+
+*** current-time : 
+
+(current-time-string)
+(float-time)
+
+(current-time) 
+(current-idle-time)
+** Proceses
+(list-system-processes)
+(process-attributes 7120)
+(shell-command-to-string "ls") 
+
 ** Input 
 *** read : 
 	 (read)
@@ -10176,6 +10217,8 @@ See Function Cells.
 
 			Open a new file, insert some text that contains file path.
 			Go to a line that's a file path, select it, then Alt+x x-add-prop. The region will be colored blue, and pressing Enter key on it will call x-open-me
+*** lambda : 
+(lambda (n) (* n 2))
 ** compile
 Emacs 24.3 or below
 

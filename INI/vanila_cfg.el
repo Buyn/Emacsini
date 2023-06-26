@@ -117,7 +117,7 @@
 ;; Use version numbers for backup files.
 ;; (setq version-control t)
 (setq auto-save-default nil)
-(setq make-backup-files nil)
+(setq make-backup-files t)
 ;; Even version controlled files get to be backed up.
 ;; (setq vc-make-backup-files t)
 ;; ------------------------------------------------------

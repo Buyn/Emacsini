@@ -1,0 +1,126 @@
+#+BRAIN_CHILDREN: inpak.el%20INSTALL%20PACKAGES fin.el%20FIN-MODS%20CUSTOMIZATION
+
+#+BRAIN_PARENTS: .emacs .emacs
+
+;; init.el --- Emacs configuration
+
+* Commands
+(find-file-other-frame "~/INI/init.el")
+(org-babel-tangle)
+
+* Source
+#+PROPERTY:    :tangle ~/INI/init.el
+** all
+*** INSTALL PACKAGES
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/inpak.el")
+#+end_src
+;; --------------------------------------
+*** VANILA CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/vanila_cfg.el")
+#+end_src
+;; --------------------------------------
+*** EVIL-MOD CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/evil-mod-cfg.el")
+#+end_src
+;; --------------------------------------
+*** WWW CUSTOMIZATION
+;; (with-eval-after-load 'evil
+;;   (define-key evil-motion-state-map (kbd "g l") 'evil-end-of-line))
+;; (eval-after-load "~/INI/www-cfg.el")
+;; (find-file-other-frame "~/INI/www-cfg.el") 
+;; (find-file-other-frame "~/INI/org_agend_cfg.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(use-package eww
+  :config
+	(load "~/INI/www-cfg.el"))
+#+end_src
+;; --------------------------------------
+*** INTERFACE-MODS CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/interface-mods.el")
+#+end_src
+;; --------------------------------------
+*** ORG-MODE CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/org-cfg.el")
+#+end_src
+;; --------------------------------------
+*** FIN-MODE CUSTOMIZATION>
+[[file:fin.el FIN-MODS CUSTOMIZATION.org::C-c C-v C-t to render ~/INI/FIN/fin.el][fin.el FIN-MODS CUSTOMIZATION.org]]
+(find-file-other-frame "~/INI/FIN/fin.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/FIN/fin.el")
+#+end_src
+;; --------------------------------------
+*** FRAME & WINDOWS CONTROL-MODS CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/frame-control.el")
+#+end_src
+;; --------------------------------------
+*** FOLDING-MODS CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/folding-cfg.el")
+#+end_src
+;; --------------------------------------
+*** LITERARY-MODS CUSTOMIZATION
+;; (find-file "~/INI/lit-cfg.el")
+;; (find-file-other-frame "~/INI/lit-cfg.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/lit-cfg.el")
+#+end_src
+;; --------------------------------------
+*** DEVELOPMENT-MODs CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/dev-cfg.el")
+#+end_src
+;; --------------------------------------
+*** HYDRA CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/hydra-cfg.el")
+#+end_src
+;; --------------------------------------
+*** ADVNSED SELECTIONS CUSTOMIZATION
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/advnsed-selections-cfg.el")
+#+end_src
+;; --------------------------------------
+*** LOAD BUYN's ELISP DEFUNS
+;; (find-file "~/ELs/BuYn/shell.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/ELs/BuYn/shell.el")
+#+end_src
+;; --------------------------------------
+*** NOT USED
+**** TIME TRACKING-MODs CUSTOMIZATION
+#+HEADER: :tangle no
+#+begin_src emacs-lisp 
+;; (load "~/INI/time-tracking-cfg.el")
+#+end_src
+;; --------------------------------------
+*** END OF LOAD
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(message "Load of init.el is ended")
+#+end_src
+;; --------------------------------------
+;; init.el ends here
+;; --------------------------------------
+#+end_src
+

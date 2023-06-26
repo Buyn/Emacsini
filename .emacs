@@ -21,7 +21,7 @@
  '(org-agenda-files
 	 '("d:/Development/lisp/Dropbox/Office/Research/Doc/Grimoire/Grimoire.org" "~/../Dropbox/orgs/GTD/todo_today.org" "~/../Dropbox/orgs/GTD/todo_nottoday.org"))
  '(package-selected-packages
-	 '(obsidian dendroam org-roam-ui "org-roam" gnu-elpa-keyring-update org-roam aide gptel yaml-mode "org-recipes" org-recipes projectile "chess.el" "chess" ob-dot graphviz-dot-mode jedi company-jedi fb2-mode request ahk-mode evil-mc multiple-cursors go-translate popup skewer-mode read-aloud undo-fu plantuml-mode reverse-im telega sublimity minimap minimap-mode powerline company-fuzzy miracle clojure-mode expand-region hydra flycheck lua-mode elpy rainbow-delimiters yasnippet-snippets yasnippet company quelpa-use-package outshine ob-translate material-theme ivy evil-tabs better-defaults avy)))
+	 '(hledger-mode obsidian dendroam org-roam-ui "org-roam" gnu-elpa-keyring-update org-roam aide gptel yaml-mode "org-recipes" org-recipes projectile "chess.el" "chess" ob-dot graphviz-dot-mode jedi company-jedi fb2-mode request ahk-mode evil-mc multiple-cursors go-translate popup skewer-mode read-aloud undo-fu plantuml-mode reverse-im telega sublimity minimap minimap-mode powerline company-fuzzy miracle clojure-mode expand-region hydra flycheck lua-mode elpy rainbow-delimiters yasnippet-snippets yasnippet company quelpa-use-package outshine ob-translate material-theme ivy evil-tabs better-defaults avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
