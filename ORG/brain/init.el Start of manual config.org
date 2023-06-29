@@ -6,6 +6,7 @@
 
 * Commands
 (find-file-other-frame "~/INI/init.el")
+(load "~/INI/inpak.el")
 (org-babel-tangle)
 
 * Source

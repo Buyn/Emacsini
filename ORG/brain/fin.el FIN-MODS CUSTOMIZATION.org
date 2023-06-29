@@ -1,6 +1,6 @@
 #+BRAIN_PARENTS: init.el%20Start%20of%20manual%20config
 
-Пока не вызивается из
+вызивается из
 (load "~/INI/inpak.el")
 (find-file-other-frame "~/INI/init.el")
 

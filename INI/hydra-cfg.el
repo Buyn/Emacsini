@@ -449,17 +449,17 @@ _?_ help            _c_urrent file
 					(concat "0" (number-to-string i))))))
 ;; **** defhydra
 (defhydra org-menu (:color pink)
-
 ;; ***** keys
 ;; ****** one-line keys
     ("r" org-archive-subtree "ARhiv TODO")
     ("t" org-todo "Todo set")
+    ("d" org-babel-demarcate-block "demarcate" :color blue)
     ("g" org-agenda "aGenda" :color blue )
     ("s" org-toggle-inline-images "Show image")
 		("q" nil ) 
 		("o" org-roam-menu/body "Org-rOam" :color blue)
-;; ****** d : 
-    ("d" (progn
+;; ****** D : 
+    ("D" (progn
 					  ;; (nil/body) 
 						(evil-open-fold)
 					  (mac-done-copy)
