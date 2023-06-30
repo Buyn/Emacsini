@@ -1,8 +1,11 @@
-#+BRAIN_CHILDREN: inpak.el%20INSTALL%20PACKAGES fin.el%20FIN-MODS%20CUSTOMIZATION
+#+BRAIN_CHILDREN: inpak.el%20INSTALL%20PACKAGES fin.el%20FIN-MODS%20CUSTOMIZATION hydra-cfg.el%20HYDRA%20MENU%20CUSTOMIZATION
 
 #+BRAIN_PARENTS: .emacs .emacs
 
+#+PROPERTY:    :tangle ~/INI/init.el
 ;; init.el --- Emacs configuration
+Full in org
+open it for editing
 
 * Commands
 (find-file-other-frame "~/INI/init.el")

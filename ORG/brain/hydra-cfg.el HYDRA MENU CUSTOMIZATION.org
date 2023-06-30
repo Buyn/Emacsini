@@ -1,9 +1,41 @@
+#+BRAIN_PARENTS: init.el%20Start%20of%20manual%20config
+
+
+* Commands>
+#+PROPERTY:    tangle ~/INI/hydra-cfg.el
+[[elisp:(org-babel-tangle)
+]]
+(find-file-other-frame "~/INI/hydra-cfg.el")
+(load "~/INI/hydra-cfg.el")
+(org-babel-tangle)
+from
+#+HEADER: :tangle ~/INI/hydra-cfg.el
+* Source
+:PROPERTIES:
+:header-args: :tangle  "~/INI/hydra-cfg.el"
+:END:
+** INSTALL PACKAGES
+;; --------------------------------------
+;; init.el --- Emacs configuration
+;; --------------------------------------
+;; * used in
+;;(find-file "~/INI/init.el")
+;; --------------------------------------
+;; * HYDRA CUSTOMIZATION
+;; --------------------------------------
+** use-package hydra
+#+begin_src emacs-lisp 
 (use-package hydra :ensure t
   ;; :defer 2
   ;; :bind ("C-c c" hydra-clock/body)
 ;; *** END of use-package hydra
   )
+#+end_src
 
+** Menus
+*** Main Menu 00
+**** defhydra menu00
+#+begin_src emacs-lisp 
 (defhydra spc-main-menu00 (:color blue)
 ;; ***** hint
     "
@@ -28,7 +60,10 @@
 		("p" spc-main-menu99/body)
 ;; ***** END of def
 	)
-
+#+end_src
+*** Main Menu 01
+**** defhydra spc-main-menu01
+#+begin_src emacs-lisp
 (defhydra spc-main-menu01 (:color blue)
 ;; ***** hint
     "
@@ -53,7 +88,13 @@
 	  ("l" lit-menu/body)
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+**** hydra-outline
+#+begin_src emacs-lisp
 (defhydra hydra-outline (:color pink :hint nil)
 ;; **** Hint
   "
@@ -91,7 +132,17 @@ _d_: subtree
 ;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
 ;; **** END )
 	)
+#+end_src
 
+;; --------------------------------------
+
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+**** hydra-ediff
+***** defhydra : 
+#+begin_src emacs-lisp
 (defhydra hydra-ediff (:color blue :hint nil)
   "
 ;; **** Hint
@@ -114,7 +165,18 @@ _?_ help            _c_urrent file
   ("?" (info "(ediff) Introduction"))
 ;; **** END )
 	)
+#+end_src
 
+***** doc
+;; (info "(ediff) Introduction")
+;; --------------------------------------
+
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+**** hydra-transpose
+#+begin_src emacs-lisp
 (defhydra hydra-transpose (:color red)
 ;; **** Hint
     "Transpose"
@@ -130,7 +192,78 @@ _?_ help            _c_urrent file
      ("q" nil "cancel" :color blue)
 ;; **** END )
 	)
+#+end_src
 
+;; **** doc
+;; --------------------------------------
+
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+**** occur not used                          :notUse:
+использует хук
+и нужего на захочешь потом включешь
+но что интересно очень устроен стоит покапатся
+***** Defuns
+****** Defun (defun occur-dwim ()
+#+begin_src emacs-lisp :tangle no
+(defun occur-dwim ()
+  "Call `occur' with a sane default, chosen as the thing under point or selected region"
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (let ((sym (thing-at-point 'symbol)))
+            (when (stringp sym)
+              (regexp-quote sym))))
+        regexp-history)
+  (call-interactively 'occur))
+
+;; ***** (defadvice occur-mode-goto-occurrence
+;; Keeps focus on *Occur* window, even when when target is visited via RETURN key.
+;; See hydra-occur-dwim for more options.
+(defadvice occur-mode-goto-occurrence (after occur-mode-goto-occurrence-advice activate)
+  (other-window 1)
+  (hydra-occur-dwim/body))
+
+;; ***** add-hook
+;; Focus on *Occur* window right away.
+(add-hook 'occur-hook (lambda () (other-window 1)))
+
+;; ***** (defun reattach-occur ()
+(defun reattach-occur ()
+  (if (get-buffer "*Occur*")
+    (switch-to-buffer-other-window "*Occur*")
+    (hydra-occur-dwim/body) ))
+
+;; **** defhydra hydra-occur-dwim 
+;; Used in conjunction with occur-mode-goto-occurrence-advice this helps keep
+;; focus on the *Occur* window and hides upon request in case needed later.
+(defhydra hydra-occur-dwim ()
+;; **** Hint
+  "Occur mode"
+;; **** Keys
+  ("o" occur-dwim "Start occur-dwim" :color red)
+  ("j" occur-next "Next" :color red)
+  ("k" occur-prev "Prev":color red)
+  ("h" delete-window "Hide" :color blue)
+  ("r" (reattach-occur) "Re-attach" :color red)
+;; **** END )
+	)
+;; **** doc
+;; --------------------------------------
+;; **** bind 
+;; (global-set-key (kbd "C-x o") 'hydra-occur-dwim/body)
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+
+#+end_src
+
+*** Main Menu 99
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra spc-main-menu99 (:color blue)
 ;; ***** hint
     "
@@ -152,7 +285,14 @@ _?_ help            _c_urrent file
 	("l" lit-menu/body)
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+*** Main Menu 98
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra spc-main-menu98 (:color blue)
 ;; ***** hint
     "
@@ -170,7 +310,52 @@ _?_ help            _c_urrent file
 	("p" spc-main-menu01/body)
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (global-set-key (kbd "M-<SPC>") 'spc-main-menu/body)
+*** "Apropos"                   :notUse:noMenu:
+**** defhydra hydra-apropos : 
+#+begin_src emacs-lisp :tangle no 
+(defhydra hydra-apropos (:color blue)
+  "Apropos"
+;; **** Keys
+  ("a" apropos "apropos")
+  ("c" apropos-command "cmd")
+  ("d" apropos-documentation "doc")
+  ("e" apropos-value "val")
+  ("l" apropos-library "lib")
+  ("o" apropos-user-option "option")
+  ("u" apropos-user-option "option")
+  ("v" apropos-variable "var")
+  ("i" info-apropos "info")
+  ("t" tags-apropos "tags")
+  ("z" hydra-customize-apropos/body "customize")
+;; **** END )
+	)
+#+end_src
+
+;; **** doc
+;; --------------------------------------
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+**** "Apropos (customize)"
+#+begin_src emacs-lisp :tangle no
+(defhydra hydra-customize-apropos (:color blue)
+  "Apropos (customize)"
+;; ***** Keys
+  ("a" customize-apropos "apropos")
+  ("f" customize-apropos-faces "faces")
+  ("g" customize-apropos-groups "groups")
+  ("o" customize-apropos-options "options")
+;; ***** END )
+  )
+#+end_src
+
+*** yasnippet
+#+begin_src emacs-lisp
 (defhydra hydra-yasnippet ( :color pink
 							;; :hint nil
 							)
@@ -200,7 +385,17 @@ _?_ help            _c_urrent file
   ("q" nil "quit")
 ;; **** END )
 	)
+ #+end_src
+ 
+;; **** doc
+;; --------------------------------------
 
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+*** Lit menu
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra lit-menu (:color pink)
 ;; ***** hint
     "
@@ -234,10 +429,20 @@ _?_ help            _c_urrent file
 	("q" nil) 
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+
+*** Org menu
+**** defun for Org menu
+***** mac-done-copy : 
+#+begin_src emacs-lisp
 (fset 'mac-done-copy
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("dzadd`dpza``" 0 "%d")) arg)))
+#+end_src
 
+***** curent-time-format-hh-mm : 
+#+begin_src emacs-lisp
 (defun curent-time-format-hh-mm (p-h p-m)
   "curent-time-format-hh-mm"
 	(concat
@@ -247,7 +452,10 @@ _?_ help            _c_urrent file
 			(if (> i  9)
 					(number-to-string i)
 					(concat "0" (number-to-string i))))))
+#+end_src
 
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra org-menu (:color pink)
 ;; ***** keys
 ;; ****** one-line keys
@@ -285,7 +493,14 @@ _?_ help            _c_urrent file
 					:color blue)
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+*** Org-roam menu
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra org-roam-menu (:color blue)
 ;; ***** keys
     ("i" org-roam-node-insert "Insert")
@@ -307,7 +522,14 @@ _?_ help            _c_urrent file
 		("B" (org-roam-db-sync 'FORCE) "dB-Build")
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+*** emacs menu
+**** defhydra
+#+begin_src emacs-lisp
 (defhydra hydra-emacs-menu (:color blue)
 ;; ***** hint
     "
@@ -366,7 +588,15 @@ _?_ help            _c_urrent file
 	("i" insert-register :color blue) 
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+
+*** www menu
+**** defhydra www-menu
+#+begin_src emacs-lisp
 (defhydra www-menu (:color blue)
 ;; ***** hint
     "
@@ -448,7 +678,13 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 			))
 ;; ***** END of def
 	)
+#+end_src
 
+;; --------------------------------------
+;; **** Bind
+;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+**** hydra-zoom
+#+begin_src emacs-lisp
 (defhydra hydra-zoom (:color pink)
   ;; (global-map "C-c")
   "zoom"
@@ -457,7 +693,12 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("p" www-menu/body "prev")
   ("q" nil "quit")
   )
+#+end_src
 
+;; --------------------------------------
+
+*** hydra-yank-menu:
+#+begin_src emacs-lisp
 (defhydra hydra-yank-menu (:color blue)
   ;; (global-map "C-c")
   "yank menu"
@@ -480,7 +721,13 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("q" nil "quit")
 	;; --------------------------------------
   )
+#+end_src
 
+;; --------------------------------------
+
+*** hydra-dev-menu
+**** defhydra hydra-dev-menu : 
+#+begin_src emacs-lisp
 (defhydra hydra-dev-menu (:color red)
   ;; (global-map "C-c")
   "dev menu"
@@ -494,7 +741,20 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("y" hydra-yasnippet/body "yasnippet" :color blue)
 	("q" nil "quit")
 	)
+#+end_src
 
+;; --------------------------------------
+
+**** elpy-hydra
+***** doc
+;; Two hydras for Elpy to ease the running of tests:
+;;     elpy-hydra shows a menu to run the current unit test we are in with two test runners, Django and Pytest. The current virtualenv is shown in the header and we can change it (w, "workon").
+;;     once the test is launched the second hydra shows a menu to navigate the errors and to switch to the compilation buffer.
+;; --------------------------------------
+
+;; **** Hint
+***** defhydra elpy-hydra: 
+#+begin_src emacs-lisp
 (defhydra elpy-hydra (:color blue)
   "
   Elpy in venv:
@@ -508,7 +768,13 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
 ;; **** END )
 	)
+#+end_src
 
+;; **** bind 
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; --------------------------------------
+***** defhydra elpy-nav-errors
+#+begin_src emacs-lisp
 (defhydra elpy-nav-errors (:color red)
 ;; ***** Hint
   "
@@ -525,7 +791,10 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
 ;; ***** END )
 	)
+#+end_src
 
+*** hydra-brain-org-menu
+#+begin_src emacs-lisp
 (defhydra hydra-brain-org-menu (:color blue)
   ;; (global-map "C-c")
   "Org-Brain menu"
@@ -552,7 +821,13 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("q" nil "quit")
 	;; --------------------------------------
   )
+#+end_src
 
+;; --------------------------------------
+
+
+*** hydra-help-menu
+#+begin_src emacs-lisp
 (defhydra hydra-help-menu (:color blue)
   ;; (global-map "C-c")
   "help menu"
@@ -560,7 +835,11 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("f" describe-face "describe-face")
 	("q" nil "quit")
 	)
+#+end_src
 
+;; --------------------------------------
+*** hydra-reader-menu
+#+begin_src emacs-lisp
 (setq pixel-wait 0)
 (defhydra hydra-reader-menu (:color blue)
   ;; "Reader menu spd: % 'pixel-wait"
@@ -587,7 +866,10 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 ;; **** q : 
 	("q" nil "quit"))
 ;; --------------------------------------
+#+end_src
 
+*** hydra-emaks-fonts
+#+begin_src emacs-lisp
 (defhydra hydra-emaks-fonts (:color blue)
   "fonts menu "
 ;; **** u : 
@@ -619,7 +901,17 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 			  "TimesNewRoman")
 ;; **** q : 
 	("q" nil "quit"))
+#+end_src
+;; --------------------------------------
+;; *  --------------------------------------
 
+** Bind
+*** "M-<SPC>" spc-main-menu00/body : 
+#+begin_src emacs-lisp
 (global-set-key (kbd "M-<SPC>") 'spc-main-menu00/body)
-
+#+end_src
+*** "z M-=" lit-menu/body : 
+#+begin_src emacs-lisp
 (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+#+end_src
+
