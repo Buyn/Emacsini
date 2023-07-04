@@ -80,6 +80,8 @@ hydra-cfg.el HYDRA MENU CUSTOMIZATION
 rm ~/INI/1hydra-cfg.el
 #+end_src
 
+#+RESULTS:
+
 #+begin_src eshell
 ls ~/INI/1hydra-cfg.el
 #+end_src

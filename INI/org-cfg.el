@@ -21,14 +21,15 @@
 (global-set-key [(shift f1)] (lambda () (interactive) (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")))
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+;; (global-set-key "\C-cl" 'org-store-link)
+;; (global-set-key "\C-ca" 'org-agenda)
 (setq org-hide-leading-stars t)
 (setq org-adapt-indentation nil)
-(global-reveal-mode 1)
+(setq org-startup-folded t)
+;; (global-reveal-mode nil)
 (setq org-edit-src-content-indentation 0)
-;; (global-set-key (kbd "C-c l") 'org-store-link)
-;; (global-set-key (kbd "C-c a") 'org-agenda)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)
 ;; --------------------------------------
 

@@ -1016,12 +1016,14 @@ initial-scratch-message
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
 ** Brain 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :results code silent output 
 (setq org-brain-path "~/ORG/brain/")
 (org-brain-switch-brain "~/ORG/brain/")
 (find-file-other-frame "~/ORG/brain/index.org")
 (org-brain-visualize "index")
 #+end_src
+
+
 ** all orgs Grimoire 
 *** link
 (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")
@@ -1073,12 +1075,29 @@ Warning (server): Unable to start the Emacs server.
 There is an existing Emacs server, named "server".
 To start the server in this Emacs process, stop the existing
 server or call ‘M-x server-force-delete’ to forcibly disconnect it.
+#+begin_src emacs-lisp :tangle yes
+(server-start)
+#+end_src
+
+#+RESULTS:
+
+
+
 *** server-force-delete
 server-force-delete
-*** 
+#+begin_src emacs-lisp :tangle yes
+(server-force-delete)
+#+end_src
+
+#+RESULTS:
+: Connection file "d:/Development/lisp/Home/.emacs.d/server/server" deleted
+
+
+
+*** result
 .emacs.d/server/server removed from cache
 Connection file "d:/Development/lisp/Home/.emacs.d/server/server" deleted
-*** 
+*** emacs_client
 D:\Development\lisp\HOME\emacs_client.cmd
 
 ** load init files
@@ -5098,6 +5117,60 @@ To set the VisualLineMode on a file by file basis using emacs local variables, t
      (define-key company-active-map (kbd "C-:") 'helm-company)))
 *** describe-package (найти пакаджи на сервере и описанить)
 describe-package
+** Help Docs Emacs 
+*** To set on a file by file 
+To set the VisualLineMode on a file by file basis using emacs local variables, try:
+    #  local variables:
+    #    eval: (visual-line-mode t)
+*** Install package
+**** lisp auto code
+		#+begin_src emacs-lisp :tangle yes
+ (unless (package-installed-p 'yasnippet-snippets)
+   (package-install 'yasnippet-snippets))
+ (require 'yasnippet-snippets)
+		#+end_src
+**** устанавливать в ручную : 
+;; только если устанавливать в ручную
+;; (add-to-list 'load-path
+;;               "~/.emacs.d/plugins/yasnippet")
+**** autoload : 
+(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
+**** eval-after-load : 
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+**** describe-package (найти пакаджи на сервере и описанить)
+describe-package
+
+*** load require: 
+	#+begin_src emacs-lisp :tangle yes
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends '(company-irony-c-headers company-irony)))
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key "\t" 'company-complete-common)
+	#+end_src
+*** Keyborde help 
+**** evaluate
+*****    27.9 Evaluating Emacs Lisp Expressions
+Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
+Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
+M-:
+    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
+~C-x C-e~
+    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
+~C-M-x (in Emacs Lisp mode)~
+~M-x eval-defun~
+    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
+~M-x eval-region~
+    Evaluate all the Emacs Lisp expressions in the region.
+~M-x eval-buffer~
+    Evaluate al
+
 ** Images
 
 Although Emacs is a text editor, it can also manage images. In Org mode, an image is a link to an image file. You can preview the file in your buffer or export it to your preferred format. You can also add captions and set export properties for each image.
@@ -5119,7 +5192,6 @@ You open a link in Org mode with a mouse click or by pressing C-c C-o with your 
 The images in the buffer are all shown at the same width. The article about writing articles and books with Emacs and the article about creating websites with Emacs explains how to control image with and other image properties.
 
 You can increase or decrease the size of an image with the + and - keys.
-
 
 ** load require:
 	#+begin_src emacs-lisp :tangle yes
@@ -5763,7 +5835,6 @@ M-x replace-string RET ; RET C-q C-j.
     C-q for quoted-insert,
 
     C-j is a newline.
-
 
 ** Environment Variable
 *** "PATH" : 
@@ -10017,6 +10088,9 @@ The list-timers command lists all the currently active timers. The command c (ti
 (current-time-string)
 (float-time)
 
+(format-time-string "%Y-%m-%d %H:%M:%S")
+в мане все занчения они очень шировкие
+
 (current-time) 
 (current-idle-time)
 ** Proceses
@@ -10869,7 +10943,6 @@ You can evaluate elisp in Eshell directly from the prompt, with some limitations
 Conclusion
 
 That just about covers evaluating code in Emacs, from one-liners to entire buffers of code. If you’re hacking elisp you want C-M-x for your everyday editing and quick debugging; if you’re inspecting state or want to change something in Emacs real quick, use M-:; if you want to evaluate a buffer or region, use eval-buffer or eval-region; and if you’re exploring elisp and want an interactive environment, use ielm.
-* Help Docs Org
 * Help Docs Gnus
   The Emacs news and email reader.
 * Help Docs Mods
