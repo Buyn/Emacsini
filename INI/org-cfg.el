@@ -28,6 +28,12 @@
 (setq org-hide-leading-stars t)
 (setq org-adapt-indentation nil)
 (setq org-startup-folded t)
+(setq org-link-frame-setup
+	'((vm . vm-visit-folder-other-frame)
+		(vm-imap . vm-visit-imap-folder-other-frame)
+		(gnus . org-gnus-no-new-news)
+		(file . find-file-other-frame)
+		(wl . wl-other-frame)))
 ;; (global-reveal-mode nil)
 (setq org-edit-src-content-indentation 0)
 ;; (define-key org-mode-map (kbd "M-\~") 'insert-pair)

@@ -6314,6 +6314,585 @@ you can give each daemon its own server name like this:
 
 *** 44 Saving Emacs Sessions
 [[info:emacs#Saving Emacs Sessions][info:emacs#Saving Emacs Sessions]]
+*** send region to shell : 
+**** Send region to shell in another buffer
+Asked 5 years, 6 months ago
+Modified 2 years, 5 months ago
+Viewed 2k times
+4
+
+Is this possible with stock emacs:
+
+I'm editing a .txt file that has a snippet of bash code When I do C-x b RET I can switch to a preopened M-x shell buffer named guesuser@productionServerShellSession I have the snippet of bash code selected in a .txt file. It's a multi line pipe command ending with \ on each line. I often find myself copying the region, switching buffer and pasting and pressing enter to run the snippet in shell.
+
+Can this be made easier with fewer key strokes?
+
+What I did: Researched https://stackoverflow.com/questions/6286579/emacs-shell-mode-how-to-send-region-to-shell
+
+    buffersshellregion
+
+Share
+Improve this question
+Follow
+edited Jan 4, 2018 at 14:38
+Drew's user avatar
+Drew
+74.9k99 gold badges109109 silver badges224224 bronze badges
+asked Jan 4, 2018 at 14:17
+american-ninja-warrior's user avatar
+american-ninja-warrior
+3,74322 gold badges2020 silver badges3737 bronze badges
+Add a comment
+4 Answers
+Sorted by:
+4
+
+Emacs provides the function process-send-region to do this. If your buffer always has the same name, you can hard-code it in:
+
+(defun my-send (beg end)
+  (interactive "r")
+  (process-send-region "guesuser@productionServerShellSession" beg end))
+
+The first line defines a new function, my-send, with two arguments, beg and end. The second line declares that this function is interactive, and will use the current region (that's what the "r" flag does). So when we call it, beg and end are filled with the start and end points of the active region.
+
+The last line sends that region to your shell.
+
+If you want to send the region to different buffers, you'll need to add some sort of logic to accommodate this. As a simple example, you could store your target buffer in a variable:
+
+(defun my-set-target ()
+   (interactive)
+   (setq my-target (buffer-name)))
+
+Calling this command will store the current buffer name in the variable my-target. Modifying the original command:
+
+(defun my-send (beg end)
+  (interactive "r")
+  (process-send-region my-target beg end))
+
+There are lots of ways you could smooth these out, to handle various errors (what if my-target hasn't been defined yet, or what if the region doesn't include a terminating newline, etc). But that should get you started.
+
+Actually, I've been wanting this for a while, so I made a more complete version:
+
+(defun tws-region-to-process (arg beg end)
+  "Send the current region to a process buffer.
+The first time it's called, will prompt for the buffer to
+send to. Subsequent calls send to the same buffer, unless a
+prefix argument is used (C-u), or the buffer no longer has an
+active process."
+  (interactive "P\nr")
+  (if (or arg ;; user asks for selection
+          (not (boundp 'tws-process-target)) ;; target not set
+          ;; or target is not set to an active process:
+          (not (process-live-p (get-buffer-process
+                                tws-process-target)))) 
+      (setq tws-process-target
+            (completing-read
+             "Process: "
+             (seq-map (lambda (el) (buffer-name (process-buffer el)))
+                      (process-list)))))
+  (process-send-region tws-process-target beg end))
+
+Share
+Improve this answer
+Follow
+edited Jan 4, 2018 at 18:19
+answered Jan 4, 2018 at 16:45
+Tyler's user avatar
+Tyler
+21.6k11 gold badge5050 silver badges9090 bronze badges
+
+    amazing how elisp can do so much in so few lines of code – 
+    american-ninja-warrior
+    Jan 4, 2018 at 17:22
+    I wish the it would let me specify the buffer name in the "completing-read", I have four shell buffers with ssh tunnels running in them, they are named using M-x shell , rename-buffer ... root@remoteserverShell , guest@remoteserverShell. These buffers are presented to me as shell. shell <1> shell <2>. and it would be better if the names were distinguishable – 
+    american-ninja-warrior
+    Jan 4, 2018 at 17:27 
+
+    btw this is a really cool answer overall – 
+    american-ninja-warrior
+    Jan 4, 2018 at 17:30
+    agreed - try the edited version! – 
+    Tyler
+    Jan 4, 2018 at 18:19
+    wondering about alternatives to "process-send-region" because the sent text is not echoed in the shell, so I would blindly have to press enter to realize some text was sent to the prompt – 
+    american-ninja-warrior
+    Jan 4, 2018 at 20:03
+
+Show 4 more comments
+2
+
+    You can write a command that does all of that. Someone else here will no doubt give you code for that.
+
+    Or you can use a keyboard macro: just use <f3> and <f4> to record what you are already doing and <f4> to replay it.
+
+    See the Emacs manual, node Keyboard Macros.
+
+    You can also simplify the part about recopying the region by using the secondary selection. It stays the same regardless of where the cursor is, until you change it on purpose. So you can paste/yank it any number of times, regardless of where you are.
+
+    Press and hold M- (Alt key) while you use the mouse to select the text as the secondary selection.
+
+    If you use library second-sel.el then you can use command yank-secondary (or secondary-dwim, for more flexibility) to yank (paste) the secondary selection. I bind it to C-M-y.
+
+    See the Emacs manual, node Secondary Selection.
+
+    Another way to simplify the code-copying part is to put that code in a file and insert the file each time you need the code. C-x i (command insert-file) does that.
+
+    See the Emacs manual, node Misc File Ops.
+
+Share
+Improve this answer
+Follow
+edited Jan 4, 2018 at 15:54
+answered Jan 4, 2018 at 14:38
+Drew's user avatar
+Drew
+74.9k99 gold badges109109 silver badges224224 bronze badges
+Add a comment
+2
+
+This is a modification to Tyler's solution. It addresses two issues with the original:
+
+    When a process has no buffer, which I encountered for emacs-server and ispell processes, function process-buffer returns nil, which causes function buffer-name to return the name of the current buffer, which will never be what you want, and which will clutter your completing-read selection with as many copies of the current buffer as you have processes that lack buffers.
+
+    When no process buffers exist, a message to that effect should appear.
+
+Both Tyler's original solution and this modification work not only for shell buffers, but also for term and ansi-term buffers, with a small difference. For shell buffers, the region sent will not appear in the target buffer, but for term and ansi-term buffers, that text will appear.
+
+
+(defun tws-region-to-process (arg beg end)
+  "Send the current region to a process buffer.
+The first time it's called, will prompt for the buffer to
+send to. Subsequent calls send to the same buffer, unless a
+prefix argument is used (C-u), or the buffer no longer has an
+active process."
+  (interactive "P\nr")
+  (when (or arg ;; user asks for selection
+          (not (boundp 'tws-process-target)) ;; target not set
+          ;; or target is not set to an active process:
+          (not (process-live-p (get-buffer-process tws-process-target))))
+    (let (procs buf)
+     (setq procs (remove nil (seq-map
+                  (lambda (el)
+                    (when (setq buf (process-buffer el))
+                      (buffer-name buf)))
+                  (process-list))))
+     (if (not procs) (error "No process buffers currently open.")
+      (setq tws-process-target (completing-read "Process: " procs)))))
+  (process-send-region tws-process-target beg end))
+
+What remains missing from this answer, and from Tyler's original, is how to send a region to an e-shell buffer. As Tyler mentioned in the comments, eshell uses a different approach that would require a different solution.
+Share
+Improve this answer
+Follow
+edited Jan 11, 2018 at 16:33
+answered Jan 10, 2018 at 4:46
+user1404316's user avatar
+user1404316
+76955 silver badges1212 bronze badges
+
+    interesting answer. can you see the command in the target shell buffer after it's sent? (is it echoed out). that was what bugged me in Tylers solution – 
+    american-ninja-warrior
+    Jan 10, 2018 at 13:32 
+
+    The original question referred to shell-mode, not eshell, so I'm not sure that dealing with eshell is relevant. In any case, eshell is implemented completely differently, and doesn't use an external process, so if you want to send text to it you'll have to use another route. process- or comint- functions won't do anything. – 
+    Tyler
+    Jan 10, 2018 at 19:06
+    @joshsverns: The posted solutions work not only for shell, but also for term and ansi-term. When using the solutions to send a region to a term or ansi-term process, the region text does appear. I don't know why that isn't the case when sending to a shell process. – 
+    user1404316
+    Jan 11, 2018 at 16:24
+    @Tyler: Thanks, for creating the solution function, and for the correction. – 
+    user1404316
+    Jan 11, 2018 at 16:28
+
+Add a comment
+1
+
+The philosopher's question, does Emacs extended through stock functions still constitute "stock emacs"? Here are a handful of functions for these kinds of tasks which rely only on stock Emacs (no dash, s, or whathaveyou).
+
+The idea works by defining an "on-demand window" and a setter function:
+
+(defvar my-on-demand-window nil
+  "Target on-demand window.
+
+An on-demand window is one which you wish to return to within the
+current Emacs session but whose importance doesn't warrant a
+permanent binding.")
+
+(defun my-on-demand-window-set ()
+  "Set the value of the on-demand window to current window."
+  (interactive)
+  (setq my-on-demand-window (selected-window))
+  (message "Set on-demand window to: %s" my-on-demand-window))
+
+With the window stored, you can do useful things like jump to it from anywhere:
+
+(defun my-on-demand-window-goto ()
+  "Make `my-on-demand-window' current."
+  (interactive)
+  (let ((win my-on-demand-window))
+    (unless win (error "No on-demand window set! See `my-on-demand-window-set'."))
+    (if (eq (selected-window) my-on-demand-window)
+        (error "Already in `my-on-demand-window'"))
+    (let ((frame (window-frame win)))
+      (raise-frame frame)
+      (select-frame frame)
+      (select-window win))))
+
+But more to your question, you can send a line or region to the on-demand window. It's set up here to insert the region, or the current line if no region is selected, followed by a newline-and-indent. You can modify the behavior after insert to your taste; remove newline-and-indent if you simply want to insert; use comint-send-input instead to press "RET" in a comint buffer (i.e. shell); use eshell-send-input to press "RET" in an eshell buffer; etc.
+
+(defun my-send-line-or-region (&optional beg end buff)
+  "Send region defined by BEG and END to BUFF.
+
+Use current region if BEG and END not provided.  If no region
+provided, send entire line.  Default BUFF is that displayed in
+`my-on-demand-window'."
+  (interactive (if (use-region-p)
+                   (list (region-beginning) (region-end) nil)
+                 (list nil nil nil)))
+  (let* ((beg (or beg (if (use-region-p) (region-beginning)) nil))
+         (end (or end (if (use-region-p) (region-end)) nil))
+         (substr (string-trim
+                  (or (and beg end (buffer-substring-no-properties beg end))
+                     (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
+         (buff (or buff (window-buffer my-on-demand-window))))
+    (if substr
+        (with-selected-window my-on-demand-window
+          (setq-local window-point-insertion-type t)
+          (insert substr)
+          (end-of-line)
+          (newline-and-indent))  ; <-- change this line here for behavior "after insert"
+      (error "Invalid selection"))))
+
+I bind it to a key like F5:
+
+(global-set-key (kbd "<f5>") '(lambda () (interactive) (progn (funcall 'my-send-line-or-region))))
+
+Although not stock, I would be remiss if I didn't mention right-click-context. The following binds the send region command to a mouse right-click context menu (less keystrokes, right? :). You can highlight a region with the mouse and immediately send it to the on-demand window:
+
+(use-package right-click-context
+  :config
+  (right-click-context-mode 1)
+
+  (add-to-list 'right-click-context-global-menu-tree
+               '("Send region to on-demand-window"
+                 :call (my-send-line-or-region))))
+**** Emacs Shell mode: how to send region to shell?
+Asked 12 years ago
+Modified 2 years, 7 months ago
+Viewed 12k times
+51
+
+Is there some module or command that'll let me send the current region to shell?
+
+I want to have something like Python-mode's python-send-region which sends the selected region to the currently running Python shell.
+
+    emacs
+
+Share
+Improve this question
+Follow
+edited Nov 6, 2020 at 1:28
+BinaryButterfly's user avatar
+BinaryButterfly
+18k1313 gold badges4848 silver badges8888 bronze badges
+asked Jun 8, 2011 at 23:47
+Yaroslav Bulatov's user avatar
+Yaroslav Bulatov
+57.2k2222 gold badges138138 silver badges197197 bronze badges
+
+    Good question. buddy. I am looking for the same thing and could not find anything except your post. Find hard to believe that nobody wrote a basic line and regions sender to current shell from sh scripts. Will search a bit and will write myself if wont find. – 
+    VitoshKa
+    Aug 13, 2011 at 18:50 
+
+Add a comment
+10 Answers
+Sorted by:
+54
++50
+
+Ok, wrote an easy bit. Will probably spend some time to write a complete minor mode.
+
+For time being the following function will send current line (or region if the mark is active). Does quite a good job for me:
+
+(defun sh-send-line-or-region (&optional step)
+  (interactive ())
+  (let ((proc (get-process "shell"))
+        pbuf min max command)
+    (unless proc
+      (let ((currbuff (current-buffer)))
+        (shell)
+        (switch-to-buffer currbuff)
+        (setq proc (get-process "shell"))
+        ))
+    (setq pbuff (process-buffer proc))
+    (if (use-region-p)
+        (setq min (region-beginning)
+              max (region-end))
+      (setq min (point-at-bol)
+            max (point-at-eol)))
+    (setq command (concat (buffer-substring min max) "\n"))
+    (with-current-buffer pbuff
+      (goto-char (process-mark proc))
+      (insert command)
+      (move-marker (process-mark proc) (point))
+      ) ;;pop-to-buffer does not work with save-current-buffer -- bug?
+    (process-send-string  proc command)
+    (display-buffer (process-buffer proc) t)
+    (when step 
+      (goto-char max)
+      (next-line))
+    ))
+
+(defun sh-send-line-or-region-and-step ()
+  (interactive)
+  (sh-send-line-or-region t))
+(defun sh-switch-to-process-buffer ()
+  (interactive)
+  (pop-to-buffer (process-buffer (get-process "shell")) t))
+
+(define-key sh-mode-map [(control ?j)] 'sh-send-line-or-region-and-step)
+(define-key sh-mode-map [(control ?c) (control ?z)] 'sh-switch-to-process-buffer)
+
+Enjoy.
+Share
+Improve this answer
+Follow
+edited Aug 13, 2011 at 22:57
+answered Aug 13, 2011 at 21:08
+VitoshKa's user avatar
+VitoshKa
+8,36733 gold badges3535 silver badges5959 bronze badges
+
+    Hats off, thanks a lot. Just one thing, not sure if really due to your fun (I'm new to emacs): the output doesn't auto scroll down. – 
+    deprecated
+    Mar 7, 2012 at 8:13
+    10
+    @vemv, (setq comint-scroll-to-bottom-on-output t) will solve your problem. – 
+    VitoshKa
+    Mar 7, 2012 at 11:17
+    Magic! Getting a quick answer for a relatively old question is the ultimate SO pleasure. – 
+    deprecated
+    Mar 7, 2012 at 11:39
+    There is a missing "f" in pbuf variable of the let binding. – 
+    antonio
+    Aug 18, 2022 at 8:06
+
+Add a comment
+12
+
+(defun shell-region (start end)
+  "execute region in an inferior shell"
+  (interactive "r")
+  (shell-command  (buffer-substring-no-properties start end)))
+
+Share
+Improve this answer
+Follow
+answered Jun 9, 2011 at 13:21
+Jürgen Hötzel's user avatar
+Jürgen Hötzel
+18.9k33 gold badges4242 silver badges5858 bronze badges
+
+    This is really excellent - allows me to replicate the functionality of the Acme editor that I care most about. – 
+    sea6ear
+    Nov 12, 2012 at 22:58
+
+Add a comment
+11
+
+I wrote a package that sends/pipes lines or regions of code to shell processes, basically something similar that ESS is for R. It also allows for multiple shell processes to exist, and lets you choose which one to send the region to.
+
+Have a look here: http://www.emacswiki.org/emacs/essh
+Share
+Improve this answer
+Follow
+edited Dec 11, 2011 at 18:59
+answered Dec 11, 2011 at 16:57
+linuxfever's user avatar
+linuxfever
+11111 silver badge33 bronze badges
+
+    1
+    Beautiful package! – 
+    Nisba
+    Sep 1, 2017 at 20:03
+
+Add a comment
+8
+
+M-x append-to-buffer RET
+Share
+Improve this answer
+Follow
+answered Sep 8, 2011 at 23:55
+Edwin's user avatar
+Edwin
+8111 silver badge11 bronze badge
+Add a comment
+6
+
+M-x shell-command-on-region
+
+aka.
+
+M-|
+Share
+Improve this answer
+Follow
+answered Jun 9, 2011 at 0:05
+Nemo's user avatar
+Nemo
+69.8k1010 gold badges116116 silver badges153153 bronze badges
+
+    6
+    That does something different -- it prompts for a shell command and sends selection to that command. I want the region to be sent to shell directly (ie, if I highlight "ls" and send it, it would act the same as pasting "ls" into Shell buffer) – 
+    Yaroslav Bulatov
+    Jun 9, 2011 at 2:13
+    This works fine if you just pipe it to bash, or whatever shell you want. A bit of a hack, but it lets you do it without writing any extra functions. – 
+    WLPhoenix
+    Mar 17, 2014 at 3:57
+    1
+    @WLPhoenix can you detail please ? – 
+    nicolas
+    Apr 30, 2015 at 9:13
+
+Add a comment
+2
+
+Modifying Jurgens answer above to operate on a specific buffer gives the following function, which will send the region and then switch to the buffer, displaying it in another window, the buffer named PYTHON is used for illustration. The target buffer should already be running a shell.
+
+(defun p-send(start end)
+  (interactive "r") ;;Make the custom function interactive and operative on a region
+  (append-to-buffer (get-buffer "*PYTHON*") start end) ;;append to the buffer named *PYTHON*
+  (switch-to-buffer-other-window (get-buffer "*PYTHON*")) ;;switches to the buffer
+  (execute-kbd-macro "\C-m")) ;;sends the enter keystroke to the shell
+
+Share
+Improve this answer
+Follow
+edited Feb 21, 2012 at 12:23
+answered Feb 21, 2012 at 12:14
+tjb's user avatar
+tjb
+11.4k99 gold badges6969 silver badges9191 bronze badges
+Add a comment
+1
+
+Do you want the command to be executed automatically, or just entered into the command line in preparation?
+
+M-x append-to-buffer RET will enter the selected text into the specified buffer at point, but the command would not be executed by the shell.
+
+A wrapper function for that could automatically choose *shell* for the buffer (or more smartly select/prompt based on current buffers in shell-mode), and then call append-to-buffer.
+
+You could trivially record a keyboard macro to copy the region, switch to *shell*, yank, and enter (if required).
+
+F3M-wC-xb*shell*RETC-yRETF4
+C-xC-knmy-execute-region-in-shellRET
+M-xinsert-kbd-macroRETmy-execute-region-in-shellRET
+(global-set-key (kbd "C-c e") 'my-execute-region-in-shell)
+Share
+Improve this answer
+Follow
+answered Jun 9, 2011 at 9:22
+phils's user avatar
+phils
+71k1111 gold badges152152 silver badges197197 bronze badges
+Add a comment
+1
+
+Update
+The above (brilliant and useful) answers look a bit incomplete as of mid-2020: sh-mode has a function for sending shell region to non-interactive shell with output in the minibuffer called sh-send-line-or-region-and-step.
+
+Alternatively: click Shell-script in the mode bar at the bottom of the window, then Mouse-1, then Execute region. The output is sent to the minibuffer and #<*Messages*>.
+
+If minibuffer output is not enough, there are referenced techniques to redirect output to other buffers (not only the shell one, see for example "How to redirect message/echo output to a buffer in Emacs?"). You can also execute all the script with C-c C-x. Voilà.
+Share
+Improve this answer
+Follow
+edited Nov 6, 2020 at 1:36
+BinaryButterfly's user avatar
+BinaryButterfly
+18k1313 gold badges4848 silver badges8888 bronze badges
+answered Oct 17, 2020 at 15:14
+user12030145
+Add a comment
+0
+
+Here is another solution from this post.
+
+Just copying it for convenience. The print statement is key here.
+
+(add-hook 'python-mode-hook
+      'my-python-send-statement)
+
+ (defun my-python-send-statement ()
+   (interactive)
+   (local-set-key [C-return] 'my-python-send-statement)
+   (end-of-line)
+   (set-mark (line-beginning-position))
+   (call-interactively 'python-shell-send-region)
+   (python-shell-send-string "; print()"))
+
+Share
+Improve this answer
+Follow
+answered Dec 18, 2014 at 16:41
+DJJ's user avatar
+DJJ
+2,47122 gold badges2828 silver badges5353 bronze badges
+Add a comment
+0
+
+I adapted the accepted answer for ansi-term / sane-term.
+
+Changes:
+
+    change "shell" to "ansi-term" everywhere
+    The (with-current-buffer pbuff ...) form doesn't work, because of the way that line and char modes work in terminal mode. It'll give you a read-only buffer error. Wrapping the insert in mode commands to toggle toggle line on before inserting fixes that, but is not needed because...
+    You can just use the process-send-string form by itself evidently, and the term output and cursor location reflect the change.
+
+(defun ansi-term-send-line-or-region (&optional step)
+  (interactive ())
+  (let ((proc (get-process "*ansi-term*"))
+         pbuf
+         min
+         max
+         command)
+    (unless proc
+      (let ((currbuff (current-buffer)))
+        (sane-term)
+        (switch-to-buffer currbuff)
+        (setq proc (get-process "*ansi-term*"))))
+
+    (setq pbuff (process-buffer proc))
+
+    (if (use-region-p)
+      (setq min (region-beginning)
+            max (region-end))
+      (setq min (point-at-bol)
+            max (point-at-eol)))
+
+    (setq command (concat (buffer-substring min max) "\n"))
+    (process-send-string proc command)
+    (display-buffer (process-buffer proc) t)
+    (when step
+      (goto-char max)
+      (next-line))))
+
+(defun sh-send-line-or-region-and-step ()
+  (interactive)
+  (sh-send-line-or-region t))
+(defun sh-switch-to-process-buffer ()
+  (interactive)
+  (pop-to-buffer (process-buffer (get-process "*ansi-term*")) t))
+
+(define-key sh-mode-map [(control ?j)] 'sh-send-line-or-region-and-step)
+(define-key sh-mode-map [(control ?c) (control ?z)] 'sh-switch-to-process-buffer)
+
+Share
+Improve this answer
+Follow
+
 ** keyboard macro
 *** help
 **** info links
