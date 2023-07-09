@@ -1,3 +1,5 @@
+#+BRAIN_FRIENDS: init.el%20Start%20of%20manual%20config
+
 #+BRAIN_CHILDREN: Unsorted HOME man4el2org
 
 

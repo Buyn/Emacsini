@@ -3,6 +3,8 @@
 
 
 (find-file-other-frame "~/ELs/BuYn/reader.el")
+(load "~/ELs/BuYn/reader.el")
+
 но загружается не в хидре
 думаю в литературе
 

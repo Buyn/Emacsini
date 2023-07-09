@@ -7,9 +7,12 @@
 ;; * BUYN's ELISP DEFUNS
 ;; --------------------------------------
 ;; ** varibls
-(setq highlight-start-color "lightgreen")
-(setq highlight-stop-color "lightgreen")
+(setq highlight-start-color '(:background "darkgreen"))
+(setq highlight-pointer-color '(:background "blue"))
+(setq highlight-stop-color '(:background "darkgreen"))
 ;; "blue"
+;; "lightgreen"
+;; "darkgreen"
 (setq stop-point 666)
 ;; --------------------------------------
 ;; ** functions
@@ -93,6 +96,13 @@
 и ф8 на на переключени на озвучку голосом
 		"
     (interactive)
+    (let ((overlay-highlight (make-overlay
+                              (point)
+                              (+ 1 (point))
+															)))
+        ;; (overlay-put overlay-highlight 'face '(:background 'highlight-pointer-color))
+        ;; (overlay-put overlay-highlight 'line-highlight-overlay-marker t))
+			(highlight-region (point) (+ 1 (point)) highlight-pointer-color)
 			(evil-window-bottom)
 			;; (char-after (point-at-bol))
 			;; (highlight-region (line-beginning-position) (+ (line-beginning-position) 21))
@@ -104,7 +114,7 @@
 			(next-line 9)
 			;; (evil-window-bottom)
 			(pixel-scroll-pixel-up stop-point)
-			)
+			))
 
 ;; --------------------------------------
 ;; *** find-overlays-specifying : 
@@ -153,16 +163,18 @@
 
 ;;  --------------------------------------
 ;; *** highlight-region : 
-(defun highlight-region (begin end)
+(defun highlight-region (begin end &optional color)
   (interactive)
     (let ((overlay-highlight (make-overlay
                               begin
                               end)))
-        ;; (overlay-put overlay-highlight 'face '(:background 'highlight-start-color))
         ;; (overlay-put overlay-highlight 'face '(:background "lightgreen"))
-        (overlay-put overlay-highlight 'face '(:background "green"))
-        (overlay-put overlay-highlight 'line-highlight-overlay-marker t)))
-
+        ;; (overlay-put overlay-highlight 'face '(:background "green"))
+        ;; (overlay-put overlay-highlight 'face '(:background "blue"))
+        (overlay-put overlay-highlight 'face (or color highlight-start-color))
+        ;; (overlay-put overlay-highlight 'face (or color '(:background "green")))
+        (overlay-put overlay-highlight 'line-highlight-overlay-marker t)
+				))
 
 ;;  --------------------------------------
 ;; * --------------------------------------

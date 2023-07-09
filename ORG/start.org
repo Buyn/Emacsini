@@ -26,27 +26,15 @@ https://www.braveclojure.com/basic-emacs/
 ** progn :
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
-
-(use-package google-translate
-  :ensure t
-  :custom
-  (google-translate-backend-method 'emacs)
-  :config
-  (require 'google-translate-smooth-ui)
-  (setq google-translate-translation-directions-alist
-        '(("ru" . "en") ("en" . "ru")))
-  (setq google-translate-output-destination nil)
-  (setq google-translate-pop-up-buffer-set-focus t)
-  (setq google-translate-default-source-language "ru")
-  (setq google-translate-default-target-language "en")
-  (global-set-key "\C-ct" 'google-translate-smooth-translate)
-  (defun google-translate--search-tkk () "Search TKK." (list 430675 
-2721866130)))
+(load "~/ELs/BuYn/reader.el")
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)
 		(require 'dendroam)
 #+end_src
+
+#+RESULTS:
+: dendroam
  
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
@@ -10773,6 +10761,34 @@ See Inline Functions.
 
 To undefine a function name, use fmakunbound.
 See Function Cells.
+*** def params
+**** my exempl
+(defun my-command (a &optional b)
+  (let ((b (or b 10)))
+    (+ a b)))
+
+(my-command 1)
+
+(my-command 1 2)
+**** As suggested in the comments : 
+As suggested in the comments, using unless may be preferable to or:
+
+(defun command (a &optional b)
+  (unless b (setq b default))
+  (command-body a b))
+
+Also from the comments: the more pure functional style would be to use let, as in the original question, but you don't need separate variable names:
+
+(defun my-command (a &optional b)
+  (let ((b (or b default)))
+    (command-body a b)))
+
+Of course, if the optional parameter is only needed once you should just do this:
+
+(defun my-command (a &optional b)
+    (command-body a (or b default)))
+
+
 *** return 
 **** How do you return from a function at an arbitrary point?
 	How do you return early from a function before it's ended? 
