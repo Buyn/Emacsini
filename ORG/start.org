@@ -27,6 +27,8 @@ https://www.braveclojure.com/basic-emacs/
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
 (load "~/ELs/BuYn/reader.el")
+
+(define-key evil-normal-state-map "V" 'evil-visual-line)
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)

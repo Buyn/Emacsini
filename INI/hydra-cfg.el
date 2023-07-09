@@ -572,13 +572,14 @@ _?_ help            _c_urrent file
     "
     ^Main^             ^98^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit         _R_evert-buffer
+    _q_ quit         _R_evert-buffer  _L_ong-line
                     
     _p_rev-menu                     _SPC_ _n_ext-menu    
     "
 ;; ***** keys
   ("q" nil)
 	("R" revert-buffer)
+	("L" toggle-truncate-lines)
   ("SPC" spc-main-menu99/body)
 	("n" spc-main-menu99/body)
 	("p" spc-main-menu01/body)

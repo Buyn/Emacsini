@@ -154,6 +154,11 @@
 ;; (define-key evil-normal-state-map  "gj" 'evil-next-visual-line)
 ;; (define-key evil-normal-state-map  "gk" 'evil-previous-visual-line)
 ;; --------------------------------------  }}}
+
+;; ** Visual
+(define-key evil-normal-state-map "V" 'evil-visual-line)
+;; --------------------------------------  
+
 ;; ** Grabing  {{{
 ;; *** move-line : 
 ;; **** save-column : 

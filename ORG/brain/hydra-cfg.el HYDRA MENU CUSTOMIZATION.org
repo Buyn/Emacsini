@@ -11,6 +11,13 @@
 (find-file-other-frame "~/INI/hydra-cfg.el")
 (load "~/INI/hydra-cfg.el")
 (org-babel-tangle)
+#+begin_src emacs-lisp :results output silent
+(save-buffer)
+(org-babel-tangle)
+(load "~/INI/hydra-cfg.el")
+(load "~/ELs/BuYn/reader.el")
+ #+end_src
+
 from
 #+HEADER: :tangle ~/INI/hydra-cfg.el
 * Source
@@ -838,13 +845,14 @@ _?_ help            _c_urrent file
     "
     ^Main^             ^98^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit         _R_evert-buffer
+    _q_ quit         _R_evert-buffer  _L_ong-line
                     
     _p_rev-menu                     _SPC_ _n_ext-menu    
     "
 ;; ***** keys
   ("q" nil)
 	("R" revert-buffer)
+	("L" toggle-truncate-lines)
   ("SPC" spc-main-menu99/body)
 	("n" spc-main-menu99/body)
 	("p" spc-main-menu01/body)
