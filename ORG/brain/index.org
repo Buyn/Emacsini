@@ -3,9 +3,6 @@
 #+BRAIN_CHILDREN: Unsorted HOME man4el2org
 
 
-
-
-
   init files
 * init files not in braine
 ** vanila

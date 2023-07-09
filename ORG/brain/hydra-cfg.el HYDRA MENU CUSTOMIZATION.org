@@ -198,9 +198,7 @@ from
 ;; **** Bind
 ;; (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
 **** emacs menu
-***** defhydra
-#+begin_src emacs-lisp
-(defhydra hydra-emacs-menu (:color blue)
+***** off
 ;; ***** hint
     "
                 ^Emacs-mode  Menus^          
@@ -208,6 +206,9 @@ from
      To _w_in Format    To _u_nix Format _s_av-tex2reg _W_inBuffer1251
      _q_uit       _f_onts		  _R_evert buffer  _i_ns-reg2tex _m_askSlesh
     "
+***** defhydra
+#+begin_src emacs-lisp
+(defhydra hydra-emacs-menu (:color blue)
 ;; ***** keys
 ;; ****** w : 
     ("w" (if (eq evil-state 'visual)
@@ -223,7 +224,7 @@ from
 														"\\"
 														nil
 														nil
-														(current-kill 0 "DO-NOT-MOVE"))))
+														(current-kill 0 "DO-NOT-MOVE"))) "To Win Format")
 ;; ****** u : 
     ("u" (if (eq evil-state 'visual)
 								(query-replace
@@ -238,27 +239,31 @@ from
 														"/"
 														nil
 														nil
-														(current-kill 0 "DO-NOT-MOVE"))))
+														(current-kill 0 "DO-NOT-MOVE"))) "To unix Format")
 ;; ****** m : 
     ("m" (progn
 					(unless (fboundp 'mask_win_path)
 							(load-file "~/keymac/mask_win_path.el"))
-					(mask_win_path)))
+					(mask_win_path)) "maskSlesh")
 ;; ****** f : 
-    ("f" hydra-emaks-fonts/body)
+    ("f" hydra-emaks-fonts/body "fonts")
+;; ****** E : 
+    ("E" evil-mode "evil mode")
 ;; ****** R : 
-	("R" revert-buffer) 
+	("R" revert-buffer "revert buffer") 
 ;; ****** W : 
-	("W" (revert-buffer-with-coding-system 'windows-1251)) 
+	("W" (revert-buffer-with-coding-system 'windows-1251) "win-1251") 
 ;; ****** q : 
 	("q" nil) 
 ;; ****** s : 
-	("s" copy-to-register :color blue) 
+	("s" copy-to-register "savTex2reg" :color blue ) 
 ;; ****** i : 
-	("i" insert-register :color blue) 
+	("i" insert-register "insReg2buff" :color blue ) 
 ;; ***** END of def
 	)
 #+end_src
+
+#+RESULTS:
 
 ;; --------------------------------------
 ;; **** Bind

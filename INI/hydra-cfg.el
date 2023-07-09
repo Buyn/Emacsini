@@ -29,148 +29,6 @@
 ;; ***** END of def
 	)
 
-(defhydra spc-main-menu01 (:color blue)
-;; ***** hint
-    "
-    ^Main^       01        ^Menus^          
-    ^────^─────────────────^─────^─────────
-    _q_ quit              _o_ outline 
-    _c_ calculus          _d_ ediff
-    _t_ transpose         _l_it-menu
-    _f_ occur-dwim        _SPC_ next    
-    _p_rev-menu           _n_ext-menu    
-    "
-;; ***** keys
-    ("q" nil)
-    ("SPC" spc-main-menu98/body)
-    ("c" calc)
-		("o" hydra-outline/body) 
-		("d" hydra-ediff/body) 
-		("t" hydra-transpose/body) 
-		("f" hydra-occur-dwim/body)
-		("p" spc-main-menu00/body)
-		("n" spc-main-menu98/body)
-	  ("l" lit-menu/body)
-;; ***** END of def
-	)
-
-(defhydra hydra-outline (:color pink :hint nil)
-;; **** Hint
-  "
-^Hide^             ^Show^           ^Move
-^^^^^^------------------------------------------------------
-_q_: sublevels     _a_: all         _u_: up
-_t_: body          _e_: entry       _n_: next visible
-_o_: other         _i_: children    _p_: previous visible
-_c_: entry         _k_: branches    _f_: forward same level
-_l_: leaves        _s_: subtree     _b_: backward same level
-_d_: subtree
-
-"
-;; **** Keys
-  ;; Hide
-  ("q" hide-sublevels)    ; Hide everything but the top-level headings
-  ("t" hide-body)         ; Hide everything but headings (all body lines)
-  ("o" hide-other)        ; Hide other branches
-  ("c" hide-entry)        ; Hide this entry's body
-  ("l" hide-leaves)       ; Hide body lines in this entry and sub-entries
-  ("d" hide-subtree)      ; Hide everything in this entry and sub-entries
-  ;; Show
-  ("a" show-all)          ; Show (expand) everything
-  ("e" show-entry)        ; Show this heading's body
-  ("i" show-children)     ; Show this heading's immediate child sub-headings
-  ("k" show-branches)     ; Show all sub-headings under this heading
-  ("s" show-subtree)      ; Show (expand) everything in this heading & below
-  ;; Move
-  ("u" outline-up-heading)                ; Up
-  ("n" outline-next-visible-heading)      ; Next
-  ("p" outline-previous-visible-heading)  ; Previous
-  ("f" outline-forward-same-level)        ; Forward - same level
-  ("b" outline-backward-same-level)       ; Backward - same level
-  ("z" nil "leave")
-;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
-;; **** END )
-	)
-
-(defhydra hydra-ediff (:color blue :hint nil)
-  "
-;; **** Hint
-^Buffers           Files           VC                     Ediff regions
-----------------------------------------------------------------------
-_b_uffers           _f_iles (_=_)       _r_evisions              _l_inewise
-_B_uffers (3-way)   _F_iles (3-way)                           _w_ordwise
-_?_ help            _c_urrent file                            
-"
-;; **** Keys
-  ("b" ediff-buffers)
-  ("B" ediff-buffers3)
-  ("=" ediff-files)
-  ("f" ediff-files)
-  ("F" ediff-files3)
-  ("c" ediff-current-file)
-  ("r" ediff-revision)
-  ("l" ediff-regions-linewise)
-  ("w" ediff-regions-wordwise)
-  ("?" (info "(ediff) Introduction"))
-;; **** END )
-	)
-
-(defhydra hydra-transpose (:color red)
-;; **** Hint
-    "Transpose"
-;; **** Keys
-     ("c" transpose-chars "characters")
-     ("w" transpose-words "words")
-     ("o" org-transpose-words "Org mode words")
-     ("l" transpose-lines "lines")
-     ("s" transpose-sentences "sentences")
-     ("e" org-transpose-elements "Org mode elements")
-     ("p" transpose-paragraphs "paragraphs")
-     ("t" org-table-transpose-table-at-point "Org mode table")
-     ("q" nil "cancel" :color blue)
-;; **** END )
-	)
-
-(defhydra spc-main-menu99 (:color blue)
-;; ***** hint
-    "
-    ^Main^             ^99^             ^  Menus^          
-    ^─────^────────────^──^─────────────^───────^─────────
-    _q_uit            _i_n       _h_elp 
-    ^^                _j_ump     _l_it-menu
-    _p_rev-menu       _n_ext-menu    
-    "
-;; ***** keys
-    ("q" nil)
-    ("i" org-clock-in)
-    ("j" org-clock-goto)
-    ("o" org-clock-out)
-	("h" hydra-help-menu/body)
-    ;; ("r" org-clock-report)
-	("n" spc-main-menu00/body)
-	("p" spc-main-menu98/body)
-	("l" lit-menu/body)
-;; ***** END of def
-	)
-
-(defhydra spc-main-menu98 (:color blue)
-;; ***** hint
-    "
-    ^Main^             ^98^             ^  Menus^          
-    ^─────^────────────^──^─────────────^───────^─────────
-    _q_ quit         _R_evert-buffer
-                    
-    _p_rev-menu                     _SPC_ _n_ext-menu    
-    "
-;; ***** keys
-  ("q" nil)
-	("R" revert-buffer)
-  ("SPC" spc-main-menu99/body)
-	("n" spc-main-menu99/body)
-	("p" spc-main-menu01/body)
-;; ***** END of def
-	)
-
 (defhydra hydra-yasnippet ( :color pink
 							;; :hint nil
 							)
@@ -199,40 +57,6 @@ _?_ help            _c_urrent file
   ("a" yas-reload-all)
   ("q" nil "quit")
 ;; **** END )
-	)
-
-(defhydra lit-menu (:color pink)
-;; ***** hint
-    "
-                ^OrphoGrammus  Menus^ z M-=         
-    ────────────^───────────────────^───────────────────
-     _[_ prev err    _]_ next err    _w_ word
-     _p_rev cor err  _n_ext cor err  
-     _f_lyspell      _c_omment chek  _q_uit
-     _a_ll buffer    _r_egion cheak
-     _R_u-RU    _D_ictonar chenge    _E_n-US
-    "
-;; ***** keys
-    ("[" evil-prev-flyspell-error :color pink)
-    ("]" evil-next-flyspell-error :color pink)
-    ("n" flyspell-auto-correct-word :color pink)
-    ("p" flyspell-auto-correct-previous-word :color pink)
-    ("f" flyspell-mode :color pink)
-    ("c" flyspell-prog-mode)
-    ("a" flyspell-buffer)
-    ;; ("R" ispell-change-dictionary "ru_RU")
-    ("R" (progn
-						(ispell-change-dictionary "ru_RU")
-					  (flyspell-mode t)))
-    ("D" ispell-change-dictionary)
-    ("E" (progn
-						(ispell-change-dictionary "en_US")
-					  (flyspell-mode t)))
-		;; ispell-change-dictionary "en_US")
-    ("r" ispell-region)
-    ("w" ispell-word :color pink)
-	("q" nil) 
-;; ***** END of def
 	)
 
 (fset 'mac-done-copy
@@ -309,13 +133,6 @@ _?_ help            _c_urrent file
 	)
 
 (defhydra hydra-emacs-menu (:color blue)
-;; ***** hint
-    "
-                ^Emacs-mode  Menus^          
-    ────────────^─────────────────^───────────────────
-     To _w_in Format    To _u_nix Format _s_av-tex2reg _W_inBuffer1251
-     _q_uit       _f_onts		  _R_evert buffer  _i_ns-reg2tex _m_askSlesh
-    "
 ;; ***** keys
 ;; ****** w : 
     ("w" (if (eq evil-state 'visual)
@@ -331,7 +148,7 @@ _?_ help            _c_urrent file
 														"\\"
 														nil
 														nil
-														(current-kill 0 "DO-NOT-MOVE"))))
+														(current-kill 0 "DO-NOT-MOVE"))) "To Win Format")
 ;; ****** u : 
     ("u" (if (eq evil-state 'visual)
 								(query-replace
@@ -346,26 +163,60 @@ _?_ help            _c_urrent file
 														"/"
 														nil
 														nil
-														(current-kill 0 "DO-NOT-MOVE"))))
+														(current-kill 0 "DO-NOT-MOVE"))) "To unix Format")
 ;; ****** m : 
     ("m" (progn
 					(unless (fboundp 'mask_win_path)
 							(load-file "~/keymac/mask_win_path.el"))
-					(mask_win_path)))
+					(mask_win_path)) "maskSlesh")
 ;; ****** f : 
-    ("f" hydra-emaks-fonts/body)
+    ("f" hydra-emaks-fonts/body "fonts")
+;; ****** E : 
+    ("E" evil-mode "evil mode")
 ;; ****** R : 
-	("R" revert-buffer) 
+	("R" revert-buffer "revert buffer") 
 ;; ****** W : 
-	("W" (revert-buffer-with-coding-system 'windows-1251)) 
+	("W" (revert-buffer-with-coding-system 'windows-1251) "win-1251") 
 ;; ****** q : 
 	("q" nil) 
 ;; ****** s : 
-	("s" copy-to-register :color blue) 
+	("s" copy-to-register "savTex2reg" :color blue ) 
 ;; ****** i : 
-	("i" insert-register :color blue) 
+	("i" insert-register "insReg2buff" :color blue ) 
 ;; ***** END of def
 	)
+
+(defhydra hydra-emaks-fonts (:color blue)
+  "fonts menu "
+;; **** u : 
+	("u" (set-frame-font "Ubuntu Mono" nil nil)
+			  "UbuntuMono")
+;; **** c : 
+	("c" (set-frame-font "comic sans ms" nil nil)
+			  "ComicSansMS")
+;; **** C : 
+	("C" (set-frame-font "comic Mono" nil nil)
+			  "ComicMono")
+;; **** p : 
+	("p" (set-frame-font "Papyrus" nil nil)
+			  "Papyrus")
+;; **** P : 
+	("P" (set-frame-font "Comic Papyrus" nil nil)
+			  "ComicPapyrus")
+;; **** e : 
+	("e" (set-frame-font "Edwardian Script ITC" nil nil)
+			  "EdwardianS")
+;; **** b : 
+	("b" (set-frame-font "Bamboo" nil nil)
+			  "Bamboo")
+;; **** k : 
+	("k" (set-frame-font "Celtic Knots" nil nil)
+			  "KelticKnots")
+;; **** t : 
+	("t" (set-frame-font "Times New Roman" nil nil)
+			  "TimesNewRoman")
+;; **** q : 
+	("q" nil "quit"))
 
 (defhydra www-menu (:color blue)
 ;; ***** hint
@@ -553,14 +404,6 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	;; --------------------------------------
   )
 
-(defhydra hydra-help-menu (:color blue)
-  ;; (global-map "C-c")
-  "help menu"
-	("a" apropos "apropos")
-	("f" describe-face "describe-face")
-	("q" nil "quit")
-	)
-
 (setq pixel-wait 0)
 (defhydra hydra-reader-menu (:color blue)
   ;; "Reader menu spd: % 'pixel-wait"
@@ -588,37 +431,189 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
 	("q" nil "quit"))
 ;; --------------------------------------
 
-(defhydra hydra-emaks-fonts (:color blue)
-  "fonts menu "
-;; **** u : 
-	("u" (set-frame-font "Ubuntu Mono" nil nil)
-			  "UbuntuMono")
-;; **** c : 
-	("c" (set-frame-font "comic sans ms" nil nil)
-			  "ComicSansMS")
-;; **** C : 
-	("C" (set-frame-font "comic Mono" nil nil)
-			  "ComicMono")
-;; **** p : 
-	("p" (set-frame-font "Papyrus" nil nil)
-			  "Papyrus")
-;; **** P : 
-	("P" (set-frame-font "Comic Papyrus" nil nil)
-			  "ComicPapyrus")
-;; **** e : 
-	("e" (set-frame-font "Edwardian Script ITC" nil nil)
-			  "EdwardianS")
-;; **** b : 
-	("b" (set-frame-font "Bamboo" nil nil)
-			  "Bamboo")
-;; **** k : 
-	("k" (set-frame-font "Celtic Knots" nil nil)
-			  "KelticKnots")
-;; **** t : 
-	("t" (set-frame-font "Times New Roman" nil nil)
-			  "TimesNewRoman")
-;; **** q : 
-	("q" nil "quit"))
+(defhydra spc-main-menu01 (:color blue)
+;; ***** hint
+    "
+    ^Main^       01        ^Menus^          
+    ^────^─────────────────^─────^─────────
+    _q_ quit              _o_ outline 
+    _c_ calculus          _d_ ediff
+    _t_ transpose         _l_it-menu
+    _f_ occur-dwim        _SPC_ next    
+    _p_rev-menu           _n_ext-menu    
+    "
+;; ***** keys
+    ("q" nil)
+    ("SPC" spc-main-menu98/body)
+    ("c" calc)
+		("o" hydra-outline/body) 
+		("d" hydra-ediff/body) 
+		("t" hydra-transpose/body) 
+		("f" hydra-occur-dwim/body)
+		("p" spc-main-menu00/body)
+		("n" spc-main-menu98/body)
+	  ("l" lit-menu/body)
+;; ***** END of def
+	)
+
+(defhydra hydra-outline (:color pink :hint nil)
+;; **** Hint
+  "
+^Hide^             ^Show^           ^Move
+^^^^^^------------------------------------------------------
+_q_: sublevels     _a_: all         _u_: up
+_t_: body          _e_: entry       _n_: next visible
+_o_: other         _i_: children    _p_: previous visible
+_c_: entry         _k_: branches    _f_: forward same level
+_l_: leaves        _s_: subtree     _b_: backward same level
+_d_: subtree
+
+"
+;; **** Keys
+  ;; Hide
+  ("q" hide-sublevels)    ; Hide everything but the top-level headings
+  ("t" hide-body)         ; Hide everything but headings (all body lines)
+  ("o" hide-other)        ; Hide other branches
+  ("c" hide-entry)        ; Hide this entry's body
+  ("l" hide-leaves)       ; Hide body lines in this entry and sub-entries
+  ("d" hide-subtree)      ; Hide everything in this entry and sub-entries
+  ;; Show
+  ("a" show-all)          ; Show (expand) everything
+  ("e" show-entry)        ; Show this heading's body
+  ("i" show-children)     ; Show this heading's immediate child sub-headings
+  ("k" show-branches)     ; Show all sub-headings under this heading
+  ("s" show-subtree)      ; Show (expand) everything in this heading & below
+  ;; Move
+  ("u" outline-up-heading)                ; Up
+  ("n" outline-next-visible-heading)      ; Next
+  ("p" outline-previous-visible-heading)  ; Previous
+  ("f" outline-forward-same-level)        ; Forward - same level
+  ("b" outline-backward-same-level)       ; Backward - same level
+  ("z" nil "leave")
+;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
+;; **** END )
+	)
+
+(defhydra hydra-ediff (:color blue :hint nil)
+  "
+;; **** Hint
+^Buffers           Files           VC                     Ediff regions
+----------------------------------------------------------------------
+_b_uffers           _f_iles (_=_)       _r_evisions              _l_inewise
+_B_uffers (3-way)   _F_iles (3-way)                           _w_ordwise
+_?_ help            _c_urrent file                            
+"
+;; **** Keys
+  ("b" ediff-buffers)
+  ("B" ediff-buffers3)
+  ("=" ediff-files)
+  ("f" ediff-files)
+  ("F" ediff-files3)
+  ("c" ediff-current-file)
+  ("r" ediff-revision)
+  ("l" ediff-regions-linewise)
+  ("w" ediff-regions-wordwise)
+  ("?" (info "(ediff) Introduction"))
+;; **** END )
+	)
+
+(defhydra hydra-transpose (:color red)
+;; **** Hint
+    "Transpose"
+;; **** Keys
+     ("c" transpose-chars "characters")
+     ("w" transpose-words "words")
+     ("o" org-transpose-words "Org mode words")
+     ("l" transpose-lines "lines")
+     ("s" transpose-sentences "sentences")
+     ("e" org-transpose-elements "Org mode elements")
+     ("p" transpose-paragraphs "paragraphs")
+     ("t" org-table-transpose-table-at-point "Org mode table")
+     ("q" nil "cancel" :color blue)
+;; **** END )
+	)
+
+(defhydra lit-menu (:color pink)
+;; ***** hint
+    "
+                ^OrphoGrammus  Menus^ z M-=         
+    ────────────^───────────────────^───────────────────
+     _[_ prev err    _]_ next err    _w_ word
+     _p_rev cor err  _n_ext cor err  
+     _f_lyspell      _c_omment chek  _q_uit
+     _a_ll buffer    _r_egion cheak
+     _R_u-RU    _D_ictonar chenge    _E_n-US
+    "
+;; ***** keys
+    ("[" evil-prev-flyspell-error :color pink)
+    ("]" evil-next-flyspell-error :color pink)
+    ("n" flyspell-auto-correct-word :color pink)
+    ("p" flyspell-auto-correct-previous-word :color pink)
+    ("f" flyspell-mode :color pink)
+    ("c" flyspell-prog-mode)
+    ("a" flyspell-buffer)
+    ;; ("R" ispell-change-dictionary "ru_RU")
+    ("R" (progn
+						(ispell-change-dictionary "ru_RU")
+					  (flyspell-mode t)))
+    ("D" ispell-change-dictionary)
+    ("E" (progn
+						(ispell-change-dictionary "en_US")
+					  (flyspell-mode t)))
+		;; ispell-change-dictionary "en_US")
+    ("r" ispell-region)
+    ("w" ispell-word :color pink)
+	("q" nil) 
+;; ***** END of def
+	)
+
+(defhydra spc-main-menu98 (:color blue)
+;; ***** hint
+    "
+    ^Main^             ^98^             ^  Menus^          
+    ^─────^────────────^──^─────────────^───────^─────────
+    _q_ quit         _R_evert-buffer
+                    
+    _p_rev-menu                     _SPC_ _n_ext-menu    
+    "
+;; ***** keys
+  ("q" nil)
+	("R" revert-buffer)
+  ("SPC" spc-main-menu99/body)
+	("n" spc-main-menu99/body)
+	("p" spc-main-menu01/body)
+;; ***** END of def
+	)
+
+(defhydra spc-main-menu99 (:color blue)
+;; ***** hint
+    "
+    ^Main^             ^99^             ^  Menus^          
+    ^─────^────────────^──^─────────────^───────^─────────
+    _q_uit            _i_n       _h_elp 
+    ^^                _j_ump     _l_it-menu
+    _p_rev-menu       _n_ext-menu    
+    "
+;; ***** keys
+    ("q" nil)
+    ("i" org-clock-in)
+    ("j" org-clock-goto)
+    ("o" org-clock-out)
+	("h" hydra-help-menu/body)
+    ;; ("r" org-clock-report)
+	("n" spc-main-menu00/body)
+	("p" spc-main-menu98/body)
+	("l" lit-menu/body)
+;; ***** END of def
+	)
+
+(defhydra hydra-help-menu (:color blue)
+  ;; (global-map "C-c")
+  "help menu"
+	("a" apropos "apropos")
+	("f" describe-face "describe-face")
+	("q" nil "quit")
+	)
 
 (global-set-key (kbd "M-<SPC>") 'spc-main-menu00/body)
 
