@@ -23,7 +23,7 @@
 	(org-roam-setup)
   ;; If you're using a vertical completion framework, you might want a more informative completion interface пологаю 10 максимальное количство символо для тагов - можно убрать
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-	(require 'dendroam)
+	;; (require 'dendroam)
   ;; (org-roam-db-autosync-mode)
   ;; If using org-roam-protocol
   ;; (require 'org-roam-protocol)
@@ -47,6 +47,7 @@
 	;; :disabled
   ;; :straight
   ;;   (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+	;; :demand t
 	;; :after org-roam
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
@@ -72,6 +73,7 @@
 	;; :quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
 	:ensure t
   :after org-roam
+	:demand t
 ;; ** config : 
 	:config
 	(setq org-roam-node-display-template "${hierarchy}:${title}")
@@ -84,6 +86,7 @@
 															"#+title: ${hierarchy-title}\n")
 					:immediate-finish t
 					:unnarrowed t)))
+	;; :after org-roam
 	;; dailies : 
 	;; (setq org-roam-dailies-capture-templates
 	;; 			'(("d" "default" entry

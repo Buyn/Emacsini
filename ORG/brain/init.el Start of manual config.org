@@ -5,7 +5,9 @@
 #+BRAIN_PARENTS: .emacs .emacs
 
 #+PROPERTY:    :tangle ~/INI/init.el
+
 ;; init.el --- Emacs configuration
+
 Full in org
 open it for editing
 
