@@ -2,16 +2,14 @@
 
 #+BRAIN_PARENTS: init.el%20Start%20of%20manual%20config
 
-:header-args: :tangle  "~/INI/hydra-cfg.el"
 
 * Commands>
-#+PROPERTY:    tangle ~/INI/hydra-cfg.el
 [[elisp:(org-babel-tangle)
 ]]
 (find-file-other-frame "~/INI/hydra-cfg.el")
 (load "~/INI/hydra-cfg.el")
 (org-babel-tangle)
-#+begin_src emacs-lisp :results output silent
+#+begin_src emacs-lisp :results output silent :tangle no
 (save-buffer)
 (org-babel-tangle)
 (load "~/INI/hydra-cfg.el")
@@ -20,6 +18,10 @@
 
 from
 #+HEADER: :tangle ~/INI/hydra-cfg.el
+
+#+PROPERTY:    tangle ~/INI/hydra-cfg.el
+
+:header-args: :tangle  "~/INI/hydra-cfg.el"
 * Source
 :PROPERTIES:
 :header-args: :tangle  "~/INI/hydra-cfg.el"
@@ -93,9 +95,9 @@ from
   ("i" yas-insert-snippet :color blue)
   ("w" yas-wrap-around-region :color blue)
   ("f" yas-visit-snippet-file :color blue)
-  ("n" yas-new-snippet)
+  ("n" yas-new-snippet :color blue)
   ("t" yas-tryout-snippet)
-  ("l" yas-describe-tables)
+  ("l" yas-describe-tables :color blue)
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all)
@@ -103,6 +105,9 @@ from
 ;; **** END )
 	)
  #+end_src
+
+ #+RESULTS:
+ : hydra-yasnippet/body
  
 ;; **** doc
 ;; --------------------------------------

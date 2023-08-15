@@ -138,6 +138,10 @@
 		(highlight-indentation-mode t)
 ;; *** projectile-mode : 
 		(projectile-mode +1)
+		(define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
+					(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
+		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
+
 ;; *** outshine-mode : 
 		;; #'outshine-mode on in outshine cfg
 		;; (find-file-other-frame "~/INI/outshine_cfg.el")

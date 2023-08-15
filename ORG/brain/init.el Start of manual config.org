@@ -20,23 +20,34 @@ open it for editing
 #+PROPERTY:    :tangle ~/INI/init.el
 ** all
 *** INSTALL PACKAGES
+(find-file-other-frame "~/INI/vanila_cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/inpak.el")
 #+end_src
 ;; --------------------------------------
 *** VANILA CUSTOMIZATION
+(find-file-other-frame "~/INI/vanila_cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/vanila_cfg.el")
 #+end_src
 ;; --------------------------------------
 *** EVIL-MOD CUSTOMIZATION
+	[[elisp:(find-file-other-frame "~/INI/evil-mod-cfg.el")]["~/INI/evil-mod-cfg.el"]]
+	(find-file-other-frame "~/INI/evil-mod-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/evil-mod-cfg.el")
 #+end_src
 ;; --------------------------------------
+		[[elisp:(find-file-other-frame "~/INI/Evil/evil-tabs-cfg.el")]["~/INI/Evil/evil-tabs-cfg.el"]]
+		(find-file-other-frame "~/INI/Evil/evil-tabs-cfg.el")
+		[[elisp:(find-file-other-frame "~/ELs/Evil/evil-respect-input.el")]["~/ELs/Evil/evil-respect-input.el"]]
+		(find-file-other-frame "~/ELs/Evil/evil-respect-input.el")
+
+	(find-file-other-frame "~/ELs/Evil/onecharadd.el") not used
+	(find-file-other-frame "~/ELs/Evil/copylines.el") пока нет
 *** WWW CUSTOMIZATION
 ;; (with-eval-after-load 'evil
 ;;   (define-key evil-motion-state-map (kbd "g l") 'evil-end-of-line))
@@ -57,6 +68,13 @@ open it for editing
 #+end_src
 ;; --------------------------------------
 *** ORG-MODE CUSTOMIZATION
+(find-file-other-frame "~/INI/org-cfg.el")
+	(find-file-other-frame "~/INI/ORG/org-roam-cfg.el")
+	(find-file-other-frame "~/INI/org_agend_cfg.el")
+	(find-file-other-frame "~/INI/babel-cfg.el")
+		(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
+	(find-file-other-frame "~/INI/org-brain-cfg.el")
+	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/org-cfg.el")
@@ -91,11 +109,25 @@ open it for editing
 #+end_src
 ;; --------------------------------------
 *** DEVELOPMENT-MODs CUSTOMIZATION
+(find-file-other-frame "~/INI/dev-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/dev-cfg.el")
 #+end_src
 ;; --------------------------------------
+	(find-file-other-frame "~/INI/autocomplete-cfg.el")
+	(find-file-other-frame "~/INI/snippets-cfg.el")
+	(find-file-other-frame "~/INI/delimiters-cfg.el")
+	(find-file-other-frame "~/INI/js-cfg.el") 
+	(find-file-other-frame "~/INI/lua-cfg.el")
+	(find-file-other-frame "~/INI/python-cfg.el")
+	(find-file-other-frame "~/INI/dev/csharp-cfg.el")
+	(find-file-other-frame "~/INI/dev/clojure-cfg.el")
+	(find-file-other-frame "~/INI/dev/autohotkey-cfg.el")
+	(find-file-other-frame "~/INI/dev/unity-cfg.el")
+	(find-file-other-frame "~/INI/dev/formats-mods-cfg.el")
+	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
+	(find-file-other-frame "~/INI/flycheck-cfg.el")
 *** HYDRA CUSTOMIZATION
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 

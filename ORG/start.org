@@ -28,9 +28,13 @@ https://www.braveclojure.com/basic-emacs/
 (load "~/INI/hydra-cfg.el")
 (load "~/ELs/BuYn/reader.el")
 
-(define-key evil-normal-state-map "V" 'evil-visual-line)
-(define-key evil-normal-state-map (kbd "f") 'evil-avy-goto-char-in-line)
-(define-key evil-visual-state-map (kbd "f") 'evil-avy-goto-char-in-line)
+
+(define-key evil-visual-state-map (kbd "M-o M-f") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(occur region-text))))
+(define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
+			(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
+		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)
@@ -67,140 +71,6 @@ https://www.braveclojure.com/basic-emacs/
 (setq minimap-major-modes '(prog-mode org-mode Info-mode eww-mode))
 #+end_src
 
-** разобратся 
-*** 1
-C-g	minibuffer-keyboard-quit
-(keyboard-escape-quit)
-
-It is bound to C-g.
-
-(keyboard-quit)
-
-This function has :around advice: ‘ad-Advice-keyboard-quit’.
-
-Signal a ‘quit’ condition.
-During execution of Lisp code, this character causes a quit directly.
-At top-level, as an editor command, this simply beeps.
-*** fonts 
-(add-to-list 'default-frame-alist
-             ;; '(font . "Ubuntu Mono")
-             '(font . "Comic Sans MS")
-						 )
-jokerman
-papirus
-E:\Temp\Fonts\papyrus.zip 
-E:\Temp\Fonts\exodus.zip 
-"E:\Temp\Fonts\comic shanns.otf" 
-E:\Temp\Fonts\Edwardian-Script-ITC.zip 
-"E:\Temp\Fonts\Bamboo Regular.ttf" wutang 
-trajan
-E:\Temp\Fonts\Trajan-Pro-Regular.zip 
-Curlz MT
-E:\Temp\Fonts\CURLZ___.TTF 
-"E:\Temp\Fonts\Kinescope Regular.otf" 
-E:\Temp\Fonts\Cyberpunk-Regular.ttf 
-"E:\Temp\Fonts\Gotham Book Font.otf" 
-E:\Temp\Fonts\Miss_Fajardose.zip 
-E:\Temp\Fonts\resident-evil-cufonfonts.zip 
-E:\Temp\Fonts\Scary-Font.zip 
-
-** Настроение
-*** Uplin
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
-#+end_src
-*** Dragon Age
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
-#+end_src
-\"F:\\Audio\\Games\\Dragon Age\" 
-*** [#B] Satellite Reign
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
-#+end_src
-*** Syndicate
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Syndicate (MP3) +\"")
-#+end_src
-*** Unreal Tournament 2004 
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\VA - Unreal History Music (1997-2007)\\Kevin Riepl - Unreal Tournament 2004 (2004)\"")
-#+end_src
-
-*** UFO Aftershock
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\UFO Aftershock\"")
-#+end_src
-*** Black & White
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Black & White\"")
-#+end_src
-*** X-COM Apocalypse
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\X-COM Apocalypse Soundtrack (by John Broomhall) [1997]\"")
-#+end_src
-*** Anno 2070
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Anno 2070\"")
-#+end_src
-*** Darkest Dungeon
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Darkest Dungeon by Stuart Chatwood (2016) [MP3, V0]\"")
-#+end_src
-
-*** Minecraft - Volume Alpha
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\C418 - Minecraft Score (2011-2013)\\2011 - Minecraft - Volume Alpha\"")
-#+end_src
-
-*** Giants - Citizen Kabuto
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Giants - Citizen Kabuto\"")
-#+end_src
-
-*** Freedom Fighters
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
-#+end_src
-*** Diablo 1996-2011
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2011 The Music of Diablo 1996-2011 -Diablo 15 Year Anniversary-\"")
-#+end_src
-*** System Shock
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\System Shock (Discography)\"")
-#+end_src
-*** Diablo II
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2000 Diablo II Soundtrack\"")
-#+end_src
-*** Diablo II Expansion Set -Lord of Destruction
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2001 Diablo II Expansion Set -Lord of Destruction- Soundtrack Audio CD\"")
-#+end_src
-
-*** Magic Carpet
-#+begin_src elisp :results output silent
-(buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
-#+end_src
-** Tmp
-[~/../../../274px.png]]
-
-(setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
-
-(defun buyn-start-emagus (unix-path-to-file)
-  "	buyn start new emacs process
-		as parametr  
-		get file path in unix format
-		unix-path-to-file path to file in unix format
-		"
-  (shell-command
-		;; (message
-		(concat path-to-emagus-cmd
-						" "
-						unix-path-to-file)
-		)
-  )
 ** Templats
 *** Kanban
 **** in progress 
@@ -208,6 +78,61 @@ E:\Temp\Fonts\Scary-Font.zip
 **** dezine 
 **** todo
 **** done
+*** Kanban table
+**** Kanban Bord 01
+| planning | dezine | Implementing | blocked | review | done |
+|----------+--------+--------------+---------+--------+------|
+|          |        |              |         |        |      |
+|          |        |              |         |        |      |
+|----------+--------+--------------+---------+--------+------|
+|          |        |              |         | urgent |      |
+|----------+--------+--------------+---------+--------+------|
+
+
+
+planning - work I’d like to do that needs organising so I can do it.
+    analysis (think, think, think);
+in progress - what I am currently working on. I try and keep this to a minimum so I get things done
+    Implementing (do, do, do);
+blocked - things I’ve started working on but currently arent able to complete
+review - work I have completed. Check if there are any follow on tasks or lessons learnt
+    Debugging/Testing (ensuring that it’s right); and finally
+done - things I have completed. Gives feeling of satisfaction
+**** Backlog 
+**** описание
+***** стадии
+****** list 02
+    Backlog (product stories not started yet);
+    analysis (think, think, think);
+    Implementing (do, do, do);
+    Debugging/Testing (ensuring that it’s right); and finally
+    Done (proven correct and accepted).
+***** Процеса
+****** в целом
+******* есть тольеок  одна доска и беклог
+на доске сылки на беклог
+каждое дело не куда не перемешается, только сылка на него.
+это позволяет видеть и все дела одновременно и расписывать кождое как нужно глубоко. Не теряя приэтом не перспективы и не страдая от избытоности информации. кадое дело открывается отдельным фреёмом и всегда перед глазами. для каждого дела удобноведется таймер зараченого времени.
+****** спринтаим : 
+особенно это хорошо работает со спринтаим
+поскольку разделяет отдельно конкретное видение от общего списка дел.
+Законченые туду за этот спринт от туду
+****** Орг логи
+каждому спринту соответствует один лог
+туда вносим все подрят рубрицируя по текушим дням начала проекта
+либо привязваясь к определёному 
+
+***** Спринты должны быть от 1 неделии до 4 максимум 
+потому нужно учится ставить перед собой задачи, которые я уверен что успею выполнить.
+Стремится к спринтам по 1 неделе.
+больше только если понимание что фича привышает возможности одной недели
+если фичи мелкие то набрать фич на неделю
+***** через спринты работу с гитом
+каждый сприн отдельный бранч.
+который мержится в меин
+приэтом сам бранч не удаляется остовляя какбы версии завершоного
+
+
 *** Стадии 
 **** концепция
 ***** табле
@@ -327,6 +252,18 @@ E:\Temp\Fonts\Scary-Font.zip
 |------------------------+-----+-----+----+------|
 | 52.083333              | 148 | 125 | 23 |  100 |
 #+TBLFM: @>$2=vsum(@<<$2..@>>$2)::@>$3=vsum(@<<$3..@>>$3)::$4=$2-$3::$5=($3/@>$3)*100::@1$1=(@11$2-@11$3)*25/60::@11$1=@11$3*25/60
+***** Бальзамик 
+***** описание 
+стадия создания концепции
+скорей всего нет кода
+есть много текста
+много разговорв
+создание структуры будушего проекта
+без умл и прочего просто концептуально
+изображение визуальное в бальзамик
+структурирование розговоров с закажчиком
+создание списка бек лога
+
 **** тестовый
 ***** табле
 | 0                      | S | R | - |   |
@@ -555,6 +492,7 @@ E:\Temp\Fonts\Scary-Font.zip
 |                 |                 |      |                 |      |     | 90.416667 |
 #+TBLFM: @>$7=vsum(@<<$7..@>>$7)
 
+**** Backlog 
 *** Ezenhaur 
 **** Срочное и важное
 **** Срочное но не важное
@@ -644,6 +582,318 @@ E:\Temp\Fonts\Scary-Font.zip
  (пир на весь мир, свадьба, пол царства в пидачу).
 ***** 28. Мораль 
  (какой вывод можно сделать из случившейся истории).
+** Thems
+*** spacemacs-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package spacemacs-theme :ensure t)
+(load-theme 'spacemacs-dark t)
+;; (disable-theme 'material)
+ #+end_src
+
+*** material theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+;; (use-package spacemacs-theme :ensure t)
+;; (load-theme 'spacemacs-dark-theme t)
+(load-theme 'material t) ;; load material theme
+;; (disable-theme 'material)
+ #+end_src
+
+*** dracula-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package dracula-theme :ensure t)
+(load-theme 'dracula t)
+;; (disable-theme 'material)
+ #+end_src
+
+*** gotham-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package gotham-theme :ensure t)
+(load-theme 'gotham t)
+;; (disable-theme 'material)
+ #+end_src
+
+*** color-theme-sanityinc-tomorrow
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package color-theme-sanityinc-tomorrow :ensure t)
+(load-theme 'gotham t)
+;; (disable-theme 'material)
+(require 'color-theme-sanityinc-tomorrow)
+(color-theme-sanityinc-tomorrow-night)
+ #+end_src
+
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+*** zenburn-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package zenburn-theme :ensure t)
+(load-theme `zenburn)
+;; (disable-theme 'material)
+ #+end_src
+
+*** solarized-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package solarized-theme :ensure t)
+(load-theme 'solarized-dark t)
+;; (disable-theme 'material)
+ #+end_src
+
+*** doom-themes
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package doom-themes :ensure t
+	 :config
+	 ;; Global settings (defaults)
+	 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+				 doom-themes-enable-italic t) ; if nil, italics is universally disabled
+	 (load-theme 'doom-one t)
+
+	 ;; Enable flashing mode-line on errors
+	 (doom-themes-visual-bell-config)
+	 ;; Enable custom neotree theme (all-the-icons must be installed!)
+	 ;; (doom-themes-neotree-config)
+	 ;; or for treemacs users
+	 ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+	 ;; (doom-themes-treemacs-config)
+	 ;; Corrects (and improves) org-mode's native fontification.
+	 (doom-themes-org-config))
+	
+;; (load-theme 'solarized-dark t)
+;; (disable-theme 'material)
+ #+end_src
+****** (load-theme 'doom-one t)
+(load-theme 'doom-one t)
+(load-theme 'doom-1337 t) 	link 	ported from VSCode's 1337 theme (ported by @ccmywish)
+(load-theme 'doom-acario-dark t) 	original 	an original dark theme (ported by @gagbo)
+(load-theme 'doom-acario-light t) 	original 	an original light theme (ported by @gagbo)
+(load-theme 'doom-ayu-dark t) 	link 	inspired by Ayu Dark (ported by @ashton)
+(load-theme 'doom-ayu-light t) 	link 	inspirted by Ayu Light (ported by @LoveSponge)
+(load-theme 'doom-ayu-mirage t) 	link 	inspired by Ayu Mirage (ported by @LoveSponge)
+(load-theme 'doom-badger t) 	link 	inspired by cann's Badger colorscheme (ported by @jsoa)
+(load-theme 'doom-challenger-deep t) 	link 	inspired by Vim's Challenger Deep theme (ported by @fuxialexander)
+(load-theme 'doom-city-lights t) 	link 	inspired by Atom's City Lights theme (ported by @fuxialexander)
+(load-theme 'doom-dark+ t) 	n/a 	ported from equinusocio's VSCode Theme, dark+ (ported by @ema2159)
+(load-theme 'doom-dracula t) 	link 	inspired by the popular Dracula theme (ported by @fuxialexander)
+(load-theme 'doom-earl-grey t) 	original 	a gentle color scheme, for code (ported by @JuneKelly)
+(load-theme 'doom-ephemeral t) 	link 	inspired by the Ephemeral Theme from elenapan's dotfiles (ported by @karetsu)
+(load-theme 'doom-fairy-floss t) 	link 	a candy colored theme by sailorhg (ported by @ema2159)
+(load-theme 'doom-feather-dark t) 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+(load-theme 'doom-feather-light t) 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+(load-theme 'doom-flatwhite t) 	link 	inspired by Atom's Flatwhite Syntax theme (ported by @JuneKelly)
+(load-theme 'doom-gruvbox t) 	link 	inspired by morhetz's Gruvbox (ported by @JongW)
+(load-theme 'doom-gruvbox-light t) 	link 	inspired by morhetz's Gruvbox (light) (ported by @jsoa)
+(load-theme 'doom-henna t) 	link 	based on VSCode's Henna theme (ported by @jsoa)
+(load-theme 'doom-homage-black t) 	original 	a minimalistic, colorless theme inspired by eziam, tao, and jbeans (ported by @mskorzhinskiy)
+(load-theme 'doom-homage-white t) 	original 	minimal white theme inspired by editors from 2000s (ported by @mskorzhinskiy)
+(load-theme 'doom-horizon t) 	link 	ported from VSCode Horizon (ported by @karetsu)
+(load-theme 'doom-Iosvkem t) 	link 	ported from the default dark theme for Adobe Brackets (ported by @neutaaaaan)
+(load-theme 'doom-ir-black t) 	link 	ported from Vim's ir_black colorscheme (ported by @legendre6891)
+(load-theme 'doom-lantern t) 	link 	based on Gitleptune's Lantern theme (ported by @paladhammika)
+(load-theme 'doom-laserwave t) 	link 	a clean synthwave/outrun theme inspired by VSCode's Laserwave (ported by @hyakt)
+(load-theme 'doom-manegarm t) 	original 	an original autumn-inspired dark theme (ported by @kenranunderscore)
+(load-theme 'doom-material t) 	link 	adapted from equinusocio's Material themes (ported by @tam5)
+(load-theme 'doom-material-dark t) 	link 	inspired by Material Theme by xrei (ported by @trev-dev)
+(load-theme 'doom-meltbus t) 	link 	a dark (mostly) monochromatic theme (ported by @spacefrogg)
+(load-theme 'doom-miramare t) 	link 	a port of Franbach's Miramare theme; a variant of Grubox (ported by @sagittaros)
+(load-theme 'doom-molokai t) 	link 	inspired by Tomas Restrepo's Molokai (ported by @hlissner)
+(load-theme 'doom-monokai-classic t) 	link 	port of Monokai Classic (ported by @ema2159)
+(load-theme 'doom-monokai-machine t) 	link 	port of Monokai Classic (ported by @minikN)
+(load-theme 'doom-monokai-octagon t) 	link 	port of Monokai Octagon (ported by @minikN)
+(load-theme 'doom-monokai-pro t) 	link 	Port of Monokai Pro (ported by @minikN)
+(load-theme 'doom-monokai-ristretto t) 	link 	Port of Monokai Ristretto (ported by @minikN)
+(load-theme 'doom-monokai-spectrum t) 	link 	port of Monokai Spectrum (ported by @minikN)
+(load-theme 'doom-moonlight t) 	link 	inspired by VS code's Moonlight (ported by @Brettm12345)
+(load-theme 'doom-nord t) 	link 	dark variant of Nord (ported by @fuxialexander)
+(load-theme 'doom-nord-aurora t) 	link 	a light variant of Nord (ported by @MoskitoHero)
+(load-theme 'doom-nord-light t) 	link 	light variant of Nord (ported by @fuxialexander)
+(load-theme 'doom-nova t) 	link 	inspired by Trevord Miller's Nova (ported by @bigardone)
+(load-theme 'doom-oceanic-next t) 	link 	inspired by Oceanic Next (ported by @juanwolf)
+(load-theme 'doom-old-hope t) 	link 	inspired by An Old Hope, in a galaxy far far away (ported by @teesloane)
+(load-theme 'doom-one t) 	link 	inspired by Atom One Dark (ported by @hlissner)
+(load-theme 'doom-one-light t) 	link 	inspired by Atom One Light (ported by @ztlevi)
+(load-theme 'doom-opera t) 	original 	an original light theme (ported by @jwintz)
+(load-theme 'doom-opera-light t) 	original 	an original light theme (ported by @jwintz)
+(load-theme 'doom-outrun-electric t) 	link 	a high contrast, neon theme inspired by Outrun Electric on VSCode (ported by @ema2159)
+(load-theme 'doom-palenight t) 	link 	adapted from equinusocio's Material themes (ported by @Brettm12345)
+(load-theme 'doom-peacock t) 	link 	inspired by daylerees' Peacock (ported by @teesloane)
+(load-theme 'doom-pine t) 	link 	a green-tinged Gruvbox (by @RomanHargrave)
+(load-theme 'doom-plain t) 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+(load-theme 'doom-plain-dark t) 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+(load-theme 'doom-rouge t) 	link 	ported from VSCode's Rouge Theme (ported by @das-s)
+(load-theme 'doom-shades-of-purple t) 	link 	a port of VSCode's Shades of Purple (ported by @jwbaldwin)
+(load-theme 'doom-snazzy t) 	link 	inspired by Hyper Snazzy (ported by @ar1a)
+(load-theme 'doom-solarized-dark t) 	link 	a dark variant of Solarized (ported by @ema2159)
+(load-theme 'doom-solarized-dark-high-contrast t) 	link 	a high-contrast variant of Solarized Dark (ported by @jmorag)
+(load-theme 'doom-solarized-light t) 	link 	a light variant of Solarized (ported by @fuxialexander)
+(load-theme 'doom-sourcerer t) 	link 	a port of xero's Sourcerer (ported by @fm0xb)
+(load-theme 'doom-spacegrey t) 	link 	I'm sure you've heard of it (ported by @teesloane)
+(load-theme 'doom-tokyo-night t) 	link 	inspired by VSCode's Tokyo Night theme (ported by @FosterHangdaan)
+(load-theme 'doom-tomorrow-day t) 	link 	a light variant of Tomorrow (ported by @emacswatcher)
+(load-theme 'doom-tomorrow-night t) 	link 	One of the dark variants of Tomorrow (ported by @hlissner)
+(load-theme 'doom-vibrant t) 	doom-one 	a more vibrant variant of doom-one (ported by @hlissner)
+(load-theme 'doom-wilmersdorf t) 	link 	port of Ian Pan's Wilmersdorf (ported by @ema2159)
+(load-theme 'doom-xcode t) 	Xcode.app 	based off of Apple's Xcode Dark Theme (ported by @kadenbarlow)
+(load-theme 'doom-zenburn t) 	link 	port of the popular Zenburn theme (ported by @jsoa)
+
+
+*** modus-themes
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package modus-themes :ensure t)
+(load-theme 'modus-vivendi t)
+;; (disable-theme 'material)
+ #+end_src
+
+*** monokai-theme
+#+begin_src emacs-lisp :results output silent
+;; (package-refresh-contents)
+(use-package monokai-theme :ensure t)
+(load-theme 'monokai t)
+;; (disable-theme 'material)
+ #+end_src
+
+** разобратся 
+*** 1
+C-g	minibuffer-keyboard-quit
+(keyboard-escape-quit)
+
+It is bound to C-g.
+
+(keyboard-quit)
+
+This function has :around advice: ‘ad-Advice-keyboard-quit’.
+
+Signal a ‘quit’ condition.
+During execution of Lisp code, this character causes a quit directly.
+At top-level, as an editor command, this simply beeps.
+*** fonts 
+(add-to-list 'default-frame-alist
+             ;; '(font . "Ubuntu Mono")
+             '(font . "Comic Sans MS")
+						 )
+jokerman
+papirus
+E:\Temp\Fonts\papyrus.zip 
+E:\Temp\Fonts\exodus.zip 
+"E:\Temp\Fonts\comic shanns.otf" 
+E:\Temp\Fonts\Edwardian-Script-ITC.zip 
+"E:\Temp\Fonts\Bamboo Regular.ttf" wutang 
+trajan
+E:\Temp\Fonts\Trajan-Pro-Regular.zip 
+Curlz MT
+E:\Temp\Fonts\CURLZ___.TTF 
+"E:\Temp\Fonts\Kinescope Regular.otf" 
+E:\Temp\Fonts\Cyberpunk-Regular.ttf 
+"E:\Temp\Fonts\Gotham Book Font.otf" 
+E:\Temp\Fonts\Miss_Fajardose.zip 
+E:\Temp\Fonts\resident-evil-cufonfonts.zip 
+E:\Temp\Fonts\Scary-Font.zip 
+
+** Настроение
+*** Uplin
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+#+end_src
+*** Dragon Age
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+#+end_src
+\"F:\\Audio\\Games\\Dragon Age\" 
+*** [#B] Satellite Reign
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
+#+end_src
+*** Syndicate
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Syndicate (MP3) +\"")
+#+end_src
+*** Unreal Tournament 2004 
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\VA - Unreal History Music (1997-2007)\\Kevin Riepl - Unreal Tournament 2004 (2004)\"")
+#+end_src
+
+*** UFO Aftershock
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\UFO Aftershock\"")
+#+end_src
+*** Black & White
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Black & White\"")
+#+end_src
+*** X-COM Apocalypse
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\X-COM Apocalypse Soundtrack (by John Broomhall) [1997]\"")
+#+end_src
+*** Anno 2070
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Anno 2070\"")
+#+end_src
+*** Darkest Dungeon
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Darkest Dungeon by Stuart Chatwood (2016) [MP3, V0]\"")
+#+end_src
+
+*** Minecraft - Volume Alpha
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\C418 - Minecraft Score (2011-2013)\\2011 - Minecraft - Volume Alpha\"")
+#+end_src
+
+*** Giants - Citizen Kabuto
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Giants - Citizen Kabuto\"")
+#+end_src
+
+*** Freedom Fighters
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
+#+end_src
+*** Diablo 1996-2011
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2011 The Music of Diablo 1996-2011 -Diablo 15 Year Anniversary-\"")
+#+end_src
+*** System Shock
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\System Shock (Discography)\"")
+#+end_src
+*** Diablo II
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2000 Diablo II Soundtrack\"")
+#+end_src
+*** Diablo II Expansion Set -Lord of Destruction
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2001 Diablo II Expansion Set -Lord of Destruction- Soundtrack Audio CD\"")
+#+end_src
+
+*** Magic Carpet
+#+begin_src elisp :results output silent
+(buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
+#+end_src
+** Tmp
+[~/../../../274px.png]]
+
+(setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe")
+
+(defun buyn-start-emagus (unix-path-to-file)
+  "	buyn start new emacs process
+		as parametr  
+		get file path in unix format
+		unix-path-to-file path to file in unix format
+		"
+  (shell-command
+		;; (message
+		(concat path-to-emagus-cmd
+						" "
+						unix-path-to-file)
+		)
+  )
 ** Macros
 *** done
 #+begin_src emacs-lisp :results output silent
@@ -1007,16 +1257,19 @@ initial-scratch-message
 	(find-file-other-frame "~/ELs/tts/tts-editor/tts-editor.el")
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
-** Brain 
+** Brain
 #+begin_src emacs-lisp :results code silent output 
+;; (package-refresh-contents)
 (setq org-brain-path "~/ORG/brain/")
 (org-brain-switch-brain "~/ORG/brain/")
 (find-file-other-frame "~/ORG/brain/index.org")
 (org-brain-visualize "index")
+(load-theme 'solarized-dark t)
+;; (disable-theme 'material)
 #+end_src
 
 
-** all orgs Grimoire 
+** all orgs Grimoire
 *** link
 (find-file-other-frame "~/../Dropbox/Office/Research/Doc/Grimoire/Grimoire.org")
 *** админс fro grimuar 
@@ -1031,9 +1284,11 @@ initial-scratch-message
 и материалы на вощендшии пока в отдельные книги
 может быть вызана из любой книги
 шифт+ф1
-** emacs orgs 
+** emacs orgs
 *** 2023
 **** 07
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_GPT_2023-07-20.org")
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_EAF_2023-07-17.org")
 (find-file-other-frame "~/../Dropbox/orgs/code/emacs_sound_keys_2023-07-11.org")
 **** 06
 (find-file-other-frame "~/../Dropbox/orgs/adm/emacs_ledger_2023-06-15.org")
@@ -2261,135 +2516,6 @@ D:\Development\lisp\Home\ORG\Recipes\main.org
 ")
  (setq gptel-default-mode 'org-mode)
 )
-**** Org-Roam : 
-***** configs 
-****** basic configuration : 
-  ;; Org-Roam basic configuration
-  (setq org-directory (concat (getenv "HOME") "/Documents/notes/"))
-;;  D:\Development\lisp\Dropbox\orgs\Org-roam\default 
-;;  D:/Development/lisp/Dropbox/orgs/Org-roam/default 
-
-  (use-package org-roam
-    :after org
-    :init (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
-    :custom
-    (org-roam-directory (file-truename org-directory))
-    :config
-    (org-roam-setup)
-    :bind (("C-c n f" . org-roam-node-find)
-           ("C-c n r" . org-roam-node-random)		    
-           (:map org-mode-map
-                 (("C-c n i" . org-roam-node-insert)
-                  ("C-c n o" . org-id-get-create)
-                  ("C-c n t" . org-roam-tag-add)
-                  ("C-c n a" . org-roam-alias-add)
-                  ("C-c n l" . org-roam-buffer-toggle)))))
-****** github
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "/path/to/org-files/"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
-***** docs
-****** git 
-https://github.com/org-roam/org-roam
-Org-roam GitHub Release MELPA License GPL 3
-
-Org-roam Logo
-
-Org-roam is a plain-text knowledge management system. It brings some of Roam's more powerful features into the Org-mode ecosystem.
-
-Org-roam borrows principles from the Zettelkasten method, providing a solution for non-hierarchical note-taking. It should also work as a plug-and-play solution for anyone already using Org-mode for their personal wiki.
-
-    Private and Secure: Edit your personal wiki completely offline, entirely in your control. Encrypt your notes with GPG. Take lasting notes in plain-text.
-    Networked Thought: Connect notes and thoughts together with ease using backlinks. Discover surprising and previously unseen connections in your notes with the built-in graph visualization.
-    Extensible and Powerful: Leverage Emacs' fantastic text-editing interface, and the mature Emacs and Org-mode ecosystem of packages.
-    Free and Open Source: Org-roam is licensed under the GNU General Public License version 3 or later.
-
-Org-roam Screenshot
-
-    Documentation
-    Discourse
-    Slack
-    Frequently Asked Questions
-    Changelog
-
-Installation
-
-Down below you will find basic installation instructions for how to quickly install org-roam using various environments for various purposes. For more detailed information, please read the manual.
-Using package.el
-Toggle instructions
-Using straight.el
-Toggle instructions
-Using Doom Emacs
-Toggle instructions
-Without a package manager
-Toggle instructions
-Configuration
-
-Here's a very basic sample for configuration of org-roam using use-package:
-
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "/path/to/org-files/"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
-
-Note that the file-truename function is only necessary when you use symbolic link to org-roam-directory. Org-roam won't automatically resolve symbolic link to the directory.
-Getting Started
-
-David Wilson of System Crafters has produced an introductory video that covers the basic commands:
-
-Getting Started with Org Roam - Build a Second Brain in Emacs
-Getting Help
-
-Before creating a new topic/issue, please be mindful of our time and ensure that it has not already been addressed on GitHub or on Discourse.
-
-    If you are new to Emacs and have problem setting up Org-roam, please ask your question on Slack, channel #how-do-i.
-    For quick questions, please ask them on Slack, channel #troubleshooting.
-    If something is not working as it should, or if you would like to suggest a new feature, please create a new issue.
-    If you have questions about your workflow with the slip-box method, please find a relevant topic on Discourse, or create a new one.
-
-Knowledge Bases using Org-roam
-
-    Jethro Kuan (Source)
-    Alexey Shmalko
-    Sidharth Arya
-
-Contributing
-
-To report bugs and suggest new feature use the issue tracker. If you have some code which you would like to be merged, then open a pull request. Please also see CONTRIBUTING.md.
-License
-
-Copyright © Jethro Kuan and contributors. Distributed under the GNU General Public License, Version 3.
-
-****** tutorial 
-****** Org-roam User Manual
-https://www.orgroam.com/manual.html#Links-between-Nodes
 *** Failed to verify signature archive-contents.sig:
 (setq package-check-signature nil) 
 
@@ -5869,11 +5995,17 @@ M-x replace-string RET ; RET C-q C-j.
 (forward-line 3)
 (insert (getenv "PATH"))
 )
+вернёт дос пас с одним слешем
+
+(progn
+(forward-line 3)
   (setenv "PATH"
 "
 
 "
-)
+))
+нужно вначале заменить на двойной слешь
+можно через замену \ \\
 *** SHELL : 
 If the path printed by evaluating (getenv "SHELL") in Emacs points at bash
 or zsh, this should work fine.
@@ -7632,24 +7764,24 @@ light-blue-theme.el   tsdh-dark-theme.el
 custom-theme-load-path
 disable-theme 'material)
 (disable-theme 'material)
-*** command list
+*** command list встроеные
 (load-theme 'material t)
 (load-theme 'manoj-dark t)
-(load-theme 'tsdh-light t)
-(load-theme 'deeper-blue t)
-(load-theme 'misterioso t)
-(load-theme 'wheatgrass t)
-(load-theme 'dichromacy t)
-(load-theme 'tango-dark t)
-(load-theme 'whiteboard t)
-(load-theme 'leuven t)
-(load-theme 'tango t)
-(load-theme 'wombat t)
-(load-theme 'light-blue t)
-(load-theme 'tsdh-dark t)
+(load-theme 'tango-dark t) серожёлтое
+(load-theme 'wheatgrass t) зелёные шривты тёмнвя тема
+(load-theme 'wombat t) тёмный свётло зелёный с подчёркиваниями
+(load-theme 'misterioso t) серое
+(load-theme 'deeper-blue t) тёмно синие
+(load-theme 'tsdh-dark t) серо ржавй крупный таскбар
 
 wigt
+(load-theme 'whiteboard t) бело синие красивое
+(load-theme 'leuven t) больше шрефты комкса
+(load-theme 'tango t) бело серый
+(load-theme 'light-blue t)свтло голлубой
+(load-theme 'dichromacy t)
 (load-theme 'adwaita t)
+(load-theme 'tsdh-light t)
 
 ** Text fu 
 *** Checking Spelling
@@ -10328,6 +10460,75 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
 ***** keywords : 
  (setq tem '(:x 10 :y 20))
  (plist-get tem :y)
+***** The Problem
+
+The reason is probably that the found object is the first in list, in which case (delete item list) returns (cdr list) instead of modifying its structure to preserve identity.
+
+The important point here is that delete cannot guarantee that
+
+(eq x (delete item x))
+==> t
+
+e.g. when item is the only element of x, delete will return nil which cannot be eq to the original cons.
+The Solution
+
+The solution is to return the new value of list from remove-lambda-helper by replacing
+
+(dolist (item list) ...)
+
+with
+
+(dolist (item list list) ...)
+
+and use it in remove-hook-name-lambda like in add-to-list:
+
+(defun remove-hook-name-lambda (name hook-name)
+  (set hook-name
+       (remove-lambda-helper (symbol-value hook)
+                             (lambda (body)
+                               (equal (cadr (cadr (caddr body))) name)))))
+
+The Final Remark
+
+Adding lambdas to hooks is not a very good idea, especially if you want to remove them later. Note that your lambda removal test will fail if you happen to compile your code.
+
+Lambdas also accumulate in the hook if you modify them, e.g., if you have
+
+(add-hook 'my-hook (lambda () ...))
+
+and then you modify the lambda and evaluate the add-hook form again, you will end up with two lambdas in the hook.
+
+The much better solution is to use defun to define the functions:
+
+(defmacro add-project-specifics (name &rest body)
+  (let ((ffh (intern (concat name "-find-file-hook")))
+        (darh (intern (concat name "-dired-after-readin-hook"))))
+    `(progn
+       (defun ,ffh ()
+         (when (string-match-p ,name (buffer-file-name))
+           ,@body))
+       (add-hook 'find-file-hook ',ffh)
+       (defun ,darh ()
+         (when (string-match-p ,name (dired-current-directory))
+           ,@body))
+       (add-hook 'dired-after-readin-hook ',darh))))
+
+(defmacro remove-project-specifics (name)
+  (let ((ffh (intern (concat name "-find-file-hook")))
+        (darh (intern (concat name "-dired-after-readin-hook"))))
+    `(progn
+       (remove-hook 'find-file-hook ',ffh)
+       (unintern ',ffh nil)
+       (remove-hook 'dired-after-readin-hook ',darh)
+       (unintern ',darh nil))))
+
+PS
+
+Responding to the concern you expressed in a comment, special characters in symbols are okay as long as you quote them when dealing with the reader; since you are not going to do that - you will be only using add-project-specifics and remove-project-specifics - you should be fine with interning them.
+The Best Solution to Your Actual Problem
+
+Use Per-Directory Local Variables in .dir-locals.el.
+
 **** map over 
 ***** [[https://emacs.stackexchange.com/questions/2961/how-can-i-map-over-a-vector-and-get-a-vector][How can I map over a vector and get a vector?]]
 ****** The only thing I've found that works is
@@ -22664,3 +22865,1577 @@ This registers dendroam as a package to use in doom. Now inside of .doom.d/confi
 #+end_src
 
 
+
+** theme : 
+*** gotham-theme : 
+(use-package gotham-theme)
+**** use-package : 
+ #+begin_src emacs-lisp :results output silent
+	(package-refresh-contents)
+	(use-package gotham-theme :ensure t
+		;; :load-path "~/ELs/Org/org-recipes"
+		;; :load-path "~/ELs/"
+		;; :init
+		;; :config
+		;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+	)
+
+ (load-theme 'gotham t)
+ ;; (disable-theme 'material)
+ #+end_src
+*** tomorrow : 
+**** color-theme-sanityinc-tomorrow : 
+purcell/color-theme-sanityinc-tomorrow: A set of comprehensive Emacs color themes based on Chris Kempson's 'tomorrow' themes
+https://github.com/purcell/color-theme-sanityinc-tomorrow
+An Emacs version of Chris Kempson's "Tomorrow" themes, with much more extensive face definitions than the "official" Emacs variant.
+
+The themes work with both the built-in theming support in recent Emacsen, and via the traditional color-theme.el add-on library in older versions, so use whichever you prefer.
+Installation
+
+If you're all set up to use Marmalade or MELPA (highly recommended!), simply
+
+M-x package-install RET color-theme-sanityinc-tomorrow RET
+
+If you use el-get, simply add this to your packages list:
+
+color-theme-sanityinc-tomorrow
+
+Otherwise, ensure a directory containing these files is on your load-path.
+
+If you're using an Emacs version older than 23.x, you'll also need to install color-theme.el.
+Usage
+
+(require 'color-theme-sanityinc-tomorrow)
+
+M-x color-theme-sanityinc-tomorrow-day
+M-x color-theme-sanityinc-tomorrow-night
+M-x color-theme-sanityinc-tomorrow-blue
+M-x color-theme-sanityinc-tomorrow-bright
+M-x color-theme-sanityinc-tomorrow-eighties
+
+In newer Emacs versions, just require the library as above, then
+
+M-x customize-themes
+
+
+**** color-theme-sanityinc-tomorrow : 
+M-x package-install RET color-theme-sanityinc-tomorrow RET
+
+(require 'color-theme-sanityinc-tomorrow)
+
+M-x color-theme-sanityinc-tomorrow-day
+M-x color-theme-sanityinc-tomorrow-night
+M-x color-theme-sanityinc-tomorrow-blue
+M-x color-theme-sanityinc-tomorrow-bright
+M-x color-theme-sanityinc-tomorrow-eighties
+
+In newer Emacs versions, just require the library as above, then
+
+M-x customize-themes
+
+
+ #+begin_src emacs-lisp 
+ (package-refresh-contents)
+ (use-package color-theme-sanityinc-tomorrow :ensure t
+	 ;; :load-path "~/ELs/Org/org-recipes"
+	 ;; :load-path "~/ELs/"
+	 ;; :init
+	 ;; :config
+	 ;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+ )
+ #+end_src
+
+ #+RESULTS:
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** zenburn : 
+**** zenburn-theme for Emacs
+***** About
+Zenburn for Emacs is a direct port of the popular Zenburn theme for vim, developed by Jani Nurminen. It's my personal belief (and that of its many users I presume) that it's one of the best low contrast color themes out there and that it is exceptionally easy on the eyes.
+
+This theme uses the "new" (it used to be new several years ago when I created this package) built-in theming support available starting with Emacs 24.1.
+
+Overview screenshot
+
+ko-fi Patreon
+
+You can support the development of Zenburn for Emacs via GitHub Sponsors, ko-fi, PayPal and Patreon.
+Installation
+Manual
+
+Download zenburn-theme.el to the directory ~/.emacs.d/themes/. Add this to your .emacs (or init.el):
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+Now you can load the theme with the interactive function load-theme like this:
+
+M-x load-theme RET zenburn
+Package.el
+
+Zenburn is available in NonGNU ELPA, MELPA Stable and MELPA.
+
+You can install zenburn with the following command:
+
+M-x package-install zenburn-theme
+
+To load it automatically on Emacs startup add this to your init file:
+
+(load-theme 'zenburn t)
+
+Emacs Prelude
+
+Zenburn for Emacs is already bundled into Emacs Prelude. If you're a Prelude user - you're probably already using Zenburn, since it's Prelude's default color theme. You can load Zenburn at any time by M-x load-theme zenburn.
+Debian and Ubuntu
+
+Users of Debian 9 or later or Ubuntu 16.10 or later may simply apt-get install elpa-zenburn-theme.
+Customization
+Custom colors
+
+If you'd like to tweak the theme by changing just a few colors, you can do so by defining new values in the zenburn-override-colors-alist variable before loading the theme.
+
+For example, to customize just the lighter background colors, you could add to your init file:
+
+(setq zenburn-override-colors-alist
+      '(("zenburn-bg+05" . "#282828")
+        ("zenburn-bg+1"  . "#2F2F2F")
+        ("zenburn-bg+2"  . "#3F3F3F")
+        ("zenburn-bg+3"  . "#4F4F4F")))
+(load-theme 'zenburn t)
+
+To see the full list of color names you can override, consult the zenburn-theme.el source file.
+Scaled headings
+
+The theme supports scaling the font size for some headings and titles as well as using a variable-pitch font for those. To enable this, use the following settings before loading zenburn-theme:
+
+;; use variable-pitch fonts for some headings and titles
+(setq zenburn-use-variable-pitch t)
+
+;; scale headings in org-mode
+(setq zenburn-scale-org-headlines t)
+
+;; scale headings in outline-mode
+(setq zenburn-scale-outline-headlines t)
+
+The screenshot above shows the default setting with no scaled or variable-pitch fonts. With scaled headings and variable-pitch fonts it looks like this:
+
+Scaled screenshot
+FAQ
+Wrong colors in the terminal Emacs version
+
+If your Emacs looks considerably uglier in a terminal (compared to the GUI version) try adding this to your .bashrc or .zshrc:
+
+export TERM=xterm-256color
+
+Source the .bashrc (or .zshrc) file and start Emacs again.
+Bugs & Improvements
+
+Please, report any problems that you find on the project's integrated issue tracker. If you've added some improvements and you want them included upstream don't hesitate to send me a patch or even better - a GitHub pull request. These contributors have done so.
+Donate
+
+You can support my work on Zenburn and all my other OSS projects via the following platforms:
+
+    GitHub Sponsors
+    ko-fi
+    PayPal
+    Patreon
+
+Contributors
+
+Here's a list of all the people who have contributed to the development of Zenburn for Emacs.
+Changelog
+
+**** use-package : 
+M-x package-install zenburn-theme
+M-x load-theme RET zenburn
+(load-theme `zenburn)
+
+ #+begin_src emacs-lisp 
+ (package-refresh-contents)
+ (use-package zenburn-theme :ensure t
+	 ;; :load-path "~/ELs/Org/org-recipes"
+	 ;; :load-path "~/ELs/"
+	 ;; :init
+	 ;; :config
+	 ;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+ )
+ #+end_src
+
+ #+RESULTS:
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** Solarized : 
+**** Solarized for Emacs
+***** About
+Solarized for Emacs is an Emacs 24bit theme making use of of the Solarized palette, developed by Ethan Schoonover.
+
+You can find several screenshots of Solarized for Emacs here.
+
+Solarized for Emacs supports officially Emacs 24+, but should be working under Emacs 23 as well. The theme is implemented in terms of customisations and deftheme and does not require the color-theme-package.
+Installation
+
+Solarized for Emacs is available for installation via the MELPA using package.el. Assuming you've set it up you can install Solarized like this:
+
+M-x package-install solarized-theme
+
+This package will install two variants of the theme; solarized-light-theme and solarized-dark-theme. You can load one of the theme variants with M-x load-theme.
+
+To load it automatically on Emacs startup add this to your init file:
+
+(load-theme 'solarized-light t)
+
+or
+
+(load-theme 'solarized-dark t)
+
+Alternative Palettes
+
+The intent of this theme will always be that Solarized-dark/light will give you the best possible experience. Palettes other than Solarized will never have influence over theming decisions, they are complementary.
+
+You should not expect the complementary themes to be fully accurate or the most suitable versions of how to apply those palettes into an emacs theme. The important aspect is that the color usage should be about the same as they are with the default Solarized palette.
+
+Colors stand out with varying amounts depending on which palette is used. This theme aims for a very soft look, violet is one of the most pronounced accent colors in the Solarized palette and that is one reason why it's rarely used by the theme. Violet in another palette might stand out less and therefore be used more often if the theme was specifically designed with that palette in mind.
+
+The original Zenburn palette doesn't have an violet it is created by blending blue and magenta to get it to fit into the theme so it's tilted towards translating into what this theme has decided.
+
+TLDR; While solarized-gruvbox-light might be good complement for users of solarized-light, another theme not contained in this package (gruvbox-light or whatever) might be more finely tuned in relation to the Gruvbox palette.
+Customisations
+Theme-specific settings
+
+If you don't like low-contrast modeline or fringe, you can customize them either by doing M-x customize-group solarized or setting the values using elisp code:
+
+;; make the fringe stand out from the background
+(setq solarized-distinct-fringe-background t)
+
+;; Don't change the font for some headings and titles
+(setq solarized-use-variable-pitch nil)
+
+;; make the modeline high contrast
+(setq solarized-high-contrast-mode-line t)
+
+;; Use less bolding
+(setq solarized-use-less-bold t)
+
+;; Use more italics
+(setq solarized-use-more-italic t)
+
+;; Use less colors for indicators such as git:gutter, flycheck and similar
+(setq solarized-emphasize-indicators nil)
+
+;; Don't change size of org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Change the size of markdown-mode headlines (off by default)
+(setq solarized-scale-markdown-headlines t)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+
+Note that these need to be set before load-theme is invoked for Solarized.
+Underline position setting for X
+
+If you are using Emacs under X you might like the following setting which puts the underline below the font bottomline instead of the baseline.
+
+Imho it enhances the general readability and also it fits well with the default solarized-high-contrast-mode-line setting which uses an slightly emphazised underline for the modeline to create one horizontal window border in the same manner as the vertical border.
+
+(setq x-underline-at-descent-line t)
+
+Create theme using color palette
+
+The Solarized Face settings consist of a palette of colors with eight accents in addition to the darkest and brightest colors. Recent changes allow you to freely create theme files using different palettes instead of the Solarized color palette. It consists of two steps:
+
+    creating a theme file
+    loading a theme
+
+Creating/Loading Theme Files
+
+Select the darkest and lightest colors and the eight accents to pass to the function. This creates a theme file in .emacs.d/themes/. If you need to make minor modifications, you can override Face individually by specifying a free Sexp as the fourth argument.
+
+Once you have a theme file, you can load it with load-theme, like solarized.
+
+;; inspired vim's jellybeans color-theme
+(solarized-create-theme-file-with-palette 'light 'solarized-jellybeans-light
+  '("#202020" "#ffffff"
+    "#ffb964" "#8fbfdc" "#a04040" "#b05080" "#805090" "#fad08a" "#99ad6a" "#8fbfdc"))
+
+(load-theme 'solarized-jellybeans-light t)
+
+;; inspired emacs's mesa color-theme
+(solarized-create-theme-file-with-palette 'light 'solarized-mesa-light
+  '("#000000" "#faf5ee"
+    "#3388dd" "#ac3d1a" "#dd2222" "#8b008b" "#00b7f0" "#1388a2" "#104e8b" "#00688b"))
+
+(load-theme 'solarized-mesa-light t)
+
+;; inspired emacs's solarized color-theme
+(solarized-create-theme-file-with-palette 'light 'solarized-solarized-light
+  '("#002b36" "#fdf6e3"
+    "#b58900" "#cb4b16" "#dc322f" "#d33682" "#6c71c4" "#268bd2" "#2aa198" "#859900"))
+
+(load-theme 'solarized-solarized-light t)
+
+;; wombat color-theme with misc face definition
+(solarized-create-theme-file-with-palette 'dark 'solarized-wombat-dark
+  '("#2a2a29" "#f6f3e8"
+    "#e5c06d" "#ddaa6f" "#ffb4ac" "#e5786d" "#834c98" "#a4b5e6" "#7ec98f" "#8ac6f2")
+  '((custom-theme-set-faces
+     theme-name
+     `(default ((,class (:foreground ,(solarized-color-blend base03 base3 0.15 2) :background ,base03))))
+     `(highlight ((,class (:background ,violet))))
+     `(font-lock-builtin-face ((,class (:foreground ,magenta))))
+     `(font-lock-constant-face ((,class (:foreground ,blue))))
+     `(font-lock-comment-face ((,class (:foreground ,base00))))
+     `(mode-line
+       ((,class (:foreground ,base2 :background ,(solarized-color-blend base03 base3 0.85 2)))))
+     `(mode-line-inactive
+       ((,class (:foreground ,base00 :background ,(solarized-color-blend base03 "black" 0.85 2)))))
+     `(mode-line-buffer-id ((,class (:foreground ,base3 :weight bold))))
+     `(minibuffer-prompt ((,class (:foreground ,base1))))
+     `(vertical-border ((,class (:foreground ,base03)))))))
+
+(load-theme 'solarized-wombat-dark t)
+
+Note: If the theme file already exists, solorized-create-theme-file does not regenerate the file. If the file exists, it can be overwritten by setting the fifth argument to t.
+Versioning Policy
+
+    This package uses semantic versioning
+
+    Master branch is to be considered unstable (which isn't an excuse to constantly break behaviour). Use MELPA Stable if you want fewer breaking changes.
+
+    Next stable version will be 2.0 because of API changes in the master branch. Regular load-theme usage is unaffected by changes.
+
+Bugs & Improvements
+
+Please, report any problems that you find on the projects integrated issue tracker. If you've added some improvements and you want them included upstream don't hesitate to send me a patch or even better - a GitHub pull request.
+License
+
+**** use-package : 
+
+M-x package-install solarized-theme
+
+M-x load-theme.
+
+(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
+
+M-x package-install zenburn-theme
+M-x load-theme RET zenburn
+(load-theme `zenburn)
+
+ #+begin_src emacs-lisp 
+ (package-refresh-contents)
+ (use-package solarized-theme :ensure t
+	 ;; :load-path "~/ELs/Org/org-recipes"
+	 ;; :load-path "~/ELs/"
+	 ;; :init
+	 ;; :config
+	 ;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+ )
+
+(load-theme 'solarized-dark t)
+ #+end_src
+
+ #+RESULTS:
+ : t
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** doom-themes : 
+**** doom-themes for Emacs
+***** About
+Doom Emacs' Theme Pack
+
+A theme megapack for GNU Emacs, inspired by community favorites. Special attention is given for Doom Emacs and solaire-mode support, but will work fine anywhere else.
+
+See the screenshots.
+Table of Contents
+
+    Install
+        Doom Emacs
+        Manually + use-package
+    Theme list
+    Extensions
+    Complementary plugins
+    Customization
+    Contribute
+
+Install
+Doom Emacs
+
+The built-in :ui doom module installs and configures doom-themes for you, and loads doom-one by default. To change the theme, change doom-theme:
+
+;; in ~/.doom.d/config.el
+(setq doom-theme 'doom-city-lights)
+
+Manually + use-package
+
+doom-themes is available on MELPA. Here is an example configuration with some common defaults laid out:
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+Theme list
+
+This megapack's first and flagship theme is doom-one (inspired by Atom One Dark), but also includes 67 themes submitted to us by the Emacs community. We welcome PRs to help us maintain and address inconsistencies in them.
+Name 	Source 	Description
+doom-1337 	link 	ported from VSCode's 1337 theme (ported by @ccmywish)
+doom-acario-dark 	original 	an original dark theme (ported by @gagbo)
+doom-acario-light 	original 	an original light theme (ported by @gagbo)
+doom-ayu-dark 	link 	inspired by Ayu Dark (ported by @ashton)
+doom-ayu-light 	link 	inspirted by Ayu Light (ported by @LoveSponge)
+doom-ayu-mirage 	link 	inspired by Ayu Mirage (ported by @LoveSponge)
+doom-badger 	link 	inspired by cann's Badger colorscheme (ported by @jsoa)
+doom-challenger-deep 	link 	inspired by Vim's Challenger Deep theme (ported by @fuxialexander)
+doom-city-lights 	link 	inspired by Atom's City Lights theme (ported by @fuxialexander)
+doom-dark+ 	n/a 	ported from equinusocio's VSCode Theme, dark+ (ported by @ema2159)
+doom-dracula 	link 	inspired by the popular Dracula theme (ported by @fuxialexander)
+doom-earl-grey 	original 	a gentle color scheme, for code (ported by @JuneKelly)
+doom-ephemeral 	link 	inspired by the Ephemeral Theme from elenapan's dotfiles (ported by @karetsu)
+doom-fairy-floss 	link 	a candy colored theme by sailorhg (ported by @ema2159)
+doom-feather-dark 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+doom-feather-light 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+doom-flatwhite 	link 	inspired by Atom's Flatwhite Syntax theme (ported by @JuneKelly)
+doom-gruvbox 	link 	inspired by morhetz's Gruvbox (ported by @JongW)
+doom-gruvbox-light 	link 	inspired by morhetz's Gruvbox (light) (ported by @jsoa)
+doom-henna 	link 	based on VSCode's Henna theme (ported by @jsoa)
+doom-homage-black 	original 	a minimalistic, colorless theme inspired by eziam, tao, and jbeans (ported by @mskorzhinskiy)
+doom-homage-white 	original 	minimal white theme inspired by editors from 2000s (ported by @mskorzhinskiy)
+doom-horizon 	link 	ported from VSCode Horizon (ported by @karetsu)
+doom-Iosvkem 	link 	ported from the default dark theme for Adobe Brackets (ported by @neutaaaaan)
+doom-ir-black 	link 	ported from Vim's ir_black colorscheme (ported by @legendre6891)
+doom-lantern 	link 	based on Gitleptune's Lantern theme (ported by @paladhammika)
+doom-laserwave 	link 	a clean synthwave/outrun theme inspired by VSCode's Laserwave (ported by @hyakt)
+doom-manegarm 	original 	an original autumn-inspired dark theme (ported by @kenranunderscore)
+doom-material 	link 	adapted from equinusocio's Material themes (ported by @tam5)
+doom-material-dark 	link 	inspired by Material Theme by xrei (ported by @trev-dev)
+doom-meltbus 	link 	a dark (mostly) monochromatic theme (ported by @spacefrogg)
+doom-miramare 	link 	a port of Franbach's Miramare theme; a variant of Grubox (ported by @sagittaros)
+doom-molokai 	link 	inspired by Tomas Restrepo's Molokai (ported by @hlissner)
+doom-monokai-classic 	link 	port of Monokai Classic (ported by @ema2159)
+doom-monokai-machine 	link 	port of Monokai Classic (ported by @minikN)
+doom-monokai-octagon 	link 	port of Monokai Octagon (ported by @minikN)
+doom-monokai-pro 	link 	Port of Monokai Pro (ported by @minikN)
+doom-monokai-ristretto 	link 	Port of Monokai Ristretto (ported by @minikN)
+doom-monokai-spectrum 	link 	port of Monokai Spectrum (ported by @minikN)
+doom-moonlight 	link 	inspired by VS code's Moonlight (ported by @Brettm12345)
+doom-nord 	link 	dark variant of Nord (ported by @fuxialexander)
+doom-nord-aurora 	link 	a light variant of Nord (ported by @MoskitoHero)
+doom-nord-light 	link 	light variant of Nord (ported by @fuxialexander)
+doom-nova 	link 	inspired by Trevord Miller's Nova (ported by @bigardone)
+doom-oceanic-next 	link 	inspired by Oceanic Next (ported by @juanwolf)
+doom-old-hope 	link 	inspired by An Old Hope, in a galaxy far far away (ported by @teesloane)
+doom-one 	link 	inspired by Atom One Dark (ported by @hlissner)
+doom-one-light 	link 	inspired by Atom One Light (ported by @ztlevi)
+doom-opera 	original 	an original light theme (ported by @jwintz)
+doom-opera-light 	original 	an original light theme (ported by @jwintz)
+doom-outrun-electric 	link 	a high contrast, neon theme inspired by Outrun Electric on VSCode (ported by @ema2159)
+doom-palenight 	link 	adapted from equinusocio's Material themes (ported by @Brettm12345)
+doom-peacock 	link 	inspired by daylerees' Peacock (ported by @teesloane)
+doom-pine 	link 	a green-tinged Gruvbox (by @RomanHargrave)
+doom-plain 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+doom-plain-dark 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+doom-rouge 	link 	ported from VSCode's Rouge Theme (ported by @das-s)
+doom-shades-of-purple 	link 	a port of VSCode's Shades of Purple (ported by @jwbaldwin)
+doom-snazzy 	link 	inspired by Hyper Snazzy (ported by @ar1a)
+doom-solarized-dark 	link 	a dark variant of Solarized (ported by @ema2159)
+doom-solarized-dark-high-contrast 	link 	a high-contrast variant of Solarized Dark (ported by @jmorag)
+doom-solarized-light 	link 	a light variant of Solarized (ported by @fuxialexander)
+doom-sourcerer 	link 	a port of xero's Sourcerer (ported by @fm0xb)
+doom-spacegrey 	link 	I'm sure you've heard of it (ported by @teesloane)
+doom-tokyo-night 	link 	inspired by VSCode's Tokyo Night theme (ported by @FosterHangdaan)
+doom-tomorrow-day 	link 	a light variant of Tomorrow (ported by @emacswatcher)
+doom-tomorrow-night 	link 	One of the dark variants of Tomorrow (ported by @hlissner)
+doom-vibrant 	doom-one 	a more vibrant variant of doom-one (ported by @hlissner)
+doom-wilmersdorf 	link 	port of Ian Pan's Wilmersdorf (ported by @ema2159)
+doom-xcode 	Xcode.app 	based off of Apple's Xcode Dark Theme (ported by @kadenbarlow)
+doom-zenburn 	link 	port of the popular Zenburn theme (ported by @jsoa)
+Extensions
+
+Check out the wiki for details on customizing our neotree/treemacs/etc extensions.
+
+    (doom-themes-visual-bell-config): flash the mode-line when the Emacs bell rings (i.e. an error occurs). May not be compatible with all mode line plugins.
+
+    (doom-themes-neotree-config): a neotree theme that takes after Atom's file drawer; a more minimalistic icon theme plus variable pitch file/directory labels, as seen in the doom-one screenshot.
+
+    (This requires all-the-icons' fonts to be installed: M-x all-the-icons-install-fonts)
+
+    (doom-themes-treemacs-config): two treemacs icon themes, one that takes after Atom's, and a second more colorful implementation.
+
+    (doom-themes-org-config): corrects and improves some of org-mode's native fontification issues.
+        Re-set org-todo & org-headline-done faces to make them respect underlying faces (i.e. don't override the :height or :background of underlying faces).
+        Make statistic cookies respect underlying faces.
+        Fontify item bullets (make them stand out)
+        Fontify item checkboxes (and when they're marked done), like TODOs that are marked done.
+        Fontify dividers/separators (5+ dashes)
+        Fontify #hashtags and @at-tags, for personal convenience; see doom-org-special-tags to disable this.
+
+Complementary plugins
+
+The following plugins complement our themes:
+
+    To get dimmed sidebars and brighter source buffers (like in the screenshots), see solaire-mode.
+    AnthonyDiGirolamo added doom-one (screenshot) and doom-molokai (screenshot) skins to airline-themes.
+    The modeline in the screenshots is doom-modeline.
+
+Customization
+
+There are three ways to customize themes in this package:
+
+    Explore the available variables provided by our themes, starting with the ones provided for all packages:
+        doom-themes-enable-bold (default: t): if nil, disables bolding as much as possible (only affects faces that our theme supports; it won't catch them all).
+        doom-themes-enable-italic (default: t): if nil, disables italicization as much as possible (only affects faces that our theme supports; it won't catch them all).
+        doom-themes-padded-modeline (default: nil): if t, pad the mode-line in 4px on each side. Can also be set to an integer to specify the exact padding. or M-x customize-group RET doom-themes to explore them.
+
+    Use the custom-set-faces macro (Doom users should use custom-set-faces! instead) to customize any face. e.g.
+
+    ;; Must be used *after* the theme is loaded
+    (custom-set-faces
+      `(mode-line ((t (:background ,(doom-color 'dark-violet)))))
+      `(font-lock-comment-face ((t (:foreground ,(doom-color 'base6))))))
+
+    Copy your favorite theme into your custom-theme-directory (normally ~/.emacs.d/, or ~/.doom.d/themes for Doom users), and tweak it there.
+
+Contribute
+
+PRs are welcome to maintain our themes, including additional theme and plugin support.
+**** use-package : 
+M-x package-install solarized-theme
+
+M-x load-theme.
+
+(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
+
+M-x package-install zenburn-theme
+M-x load-theme RET zenburn
+(load-theme `zenburn)
+
+ #+begin_src emacs-lisp 
+	;; (package-refresh-contents)
+ (use-package doom-themes
+	 :ensure t
+	 :config
+	 ;; Global settings (defaults)
+	 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+				 doom-themes-enable-italic t) ; if nil, italics is universally disabled
+	 (load-theme 'doom-one t)
+
+	 ;; Enable flashing mode-line on errors
+	 (doom-themes-visual-bell-config)
+	 ;; Enable custom neotree theme (all-the-icons must be installed!)
+	 ;; (doom-themes-neotree-config)
+	 ;; or for treemacs users
+	 ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+	 ;; (doom-themes-treemacs-config)
+	 ;; Corrects (and improves) org-mode's native fontification.
+	 (doom-themes-org-config))
+ #+end_src
+
+ #+RESULTS:
+ : t
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+**** (load-theme 'doom-one t)
+(load-theme 'doom-one t)
+(load-theme 'doom-1337 t) 	link 	ported from VSCode's 1337 theme (ported by @ccmywish)
+(load-theme 'doom-acario-dark t) 	original 	an original dark theme (ported by @gagbo)
+(load-theme 'doom-acario-light t) 	original 	an original light theme (ported by @gagbo)
+(load-theme 'doom-ayu-dark t) 	link 	inspired by Ayu Dark (ported by @ashton)
+(load-theme 'doom-ayu-light t) 	link 	inspirted by Ayu Light (ported by @LoveSponge)
+(load-theme 'doom-ayu-mirage t) 	link 	inspired by Ayu Mirage (ported by @LoveSponge)
+(load-theme 'doom-badger t) 	link 	inspired by cann's Badger colorscheme (ported by @jsoa)
+(load-theme 'doom-challenger-deep t) 	link 	inspired by Vim's Challenger Deep theme (ported by @fuxialexander)
+(load-theme 'doom-city-lights t) 	link 	inspired by Atom's City Lights theme (ported by @fuxialexander)
+(load-theme 'doom-dark+ t) 	n/a 	ported from equinusocio's VSCode Theme, dark+ (ported by @ema2159)
+(load-theme 'doom-dracula t) 	link 	inspired by the popular Dracula theme (ported by @fuxialexander)
+(load-theme 'doom-earl-grey t) 	original 	a gentle color scheme, for code (ported by @JuneKelly)
+(load-theme 'doom-ephemeral t) 	link 	inspired by the Ephemeral Theme from elenapan's dotfiles (ported by @karetsu)
+(load-theme 'doom-fairy-floss t) 	link 	a candy colored theme by sailorhg (ported by @ema2159)
+(load-theme 'doom-feather-dark t) 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+(load-theme 'doom-feather-light t) 	original 	a candy colored theme by sailorhg (ported by @Plunne)
+(load-theme 'doom-flatwhite t) 	link 	inspired by Atom's Flatwhite Syntax theme (ported by @JuneKelly)
+(load-theme 'doom-gruvbox t) 	link 	inspired by morhetz's Gruvbox (ported by @JongW)
+(load-theme 'doom-gruvbox-light t) 	link 	inspired by morhetz's Gruvbox (light) (ported by @jsoa)
+(load-theme 'doom-henna t) 	link 	based on VSCode's Henna theme (ported by @jsoa)
+(load-theme 'doom-homage-black t) 	original 	a minimalistic, colorless theme inspired by eziam, tao, and jbeans (ported by @mskorzhinskiy)
+(load-theme 'doom-homage-white t) 	original 	minimal white theme inspired by editors from 2000s (ported by @mskorzhinskiy)
+(load-theme 'doom-horizon t) 	link 	ported from VSCode Horizon (ported by @karetsu)
+(load-theme 'doom-Iosvkem t) 	link 	ported from the default dark theme for Adobe Brackets (ported by @neutaaaaan)
+(load-theme 'doom-ir-black t) 	link 	ported from Vim's ir_black colorscheme (ported by @legendre6891)
+(load-theme 'doom-lantern t) 	link 	based on Gitleptune's Lantern theme (ported by @paladhammika)
+(load-theme 'doom-laserwave t) 	link 	a clean synthwave/outrun theme inspired by VSCode's Laserwave (ported by @hyakt)
+(load-theme 'doom-manegarm t) 	original 	an original autumn-inspired dark theme (ported by @kenranunderscore)
+(load-theme 'doom-material t) 	link 	adapted from equinusocio's Material themes (ported by @tam5)
+(load-theme 'doom-material-dark t) 	link 	inspired by Material Theme by xrei (ported by @trev-dev)
+(load-theme 'doom-meltbus t) 	link 	a dark (mostly) monochromatic theme (ported by @spacefrogg)
+(load-theme 'doom-miramare t) 	link 	a port of Franbach's Miramare theme; a variant of Grubox (ported by @sagittaros)
+(load-theme 'doom-molokai t) 	link 	inspired by Tomas Restrepo's Molokai (ported by @hlissner)
+(load-theme 'doom-monokai-classic t) 	link 	port of Monokai Classic (ported by @ema2159)
+(load-theme 'doom-monokai-machine t) 	link 	port of Monokai Classic (ported by @minikN)
+(load-theme 'doom-monokai-octagon t) 	link 	port of Monokai Octagon (ported by @minikN)
+(load-theme 'doom-monokai-pro t) 	link 	Port of Monokai Pro (ported by @minikN)
+(load-theme 'doom-monokai-ristretto t) 	link 	Port of Monokai Ristretto (ported by @minikN)
+(load-theme 'doom-monokai-spectrum t) 	link 	port of Monokai Spectrum (ported by @minikN)
+(load-theme 'doom-moonlight t) 	link 	inspired by VS code's Moonlight (ported by @Brettm12345)
+(load-theme 'doom-nord t) 	link 	dark variant of Nord (ported by @fuxialexander)
+(load-theme 'doom-nord-aurora t) 	link 	a light variant of Nord (ported by @MoskitoHero)
+(load-theme 'doom-nord-light t) 	link 	light variant of Nord (ported by @fuxialexander)
+(load-theme 'doom-nova t) 	link 	inspired by Trevord Miller's Nova (ported by @bigardone)
+(load-theme 'doom-oceanic-next t) 	link 	inspired by Oceanic Next (ported by @juanwolf)
+(load-theme 'doom-old-hope t) 	link 	inspired by An Old Hope, in a galaxy far far away (ported by @teesloane)
+(load-theme 'doom-one t) 	link 	inspired by Atom One Dark (ported by @hlissner)
+(load-theme 'doom-one-light t) 	link 	inspired by Atom One Light (ported by @ztlevi)
+(load-theme 'doom-opera t) 	original 	an original light theme (ported by @jwintz)
+(load-theme 'doom-opera-light t) 	original 	an original light theme (ported by @jwintz)
+(load-theme 'doom-outrun-electric t) 	link 	a high contrast, neon theme inspired by Outrun Electric on VSCode (ported by @ema2159)
+(load-theme 'doom-palenight t) 	link 	adapted from equinusocio's Material themes (ported by @Brettm12345)
+(load-theme 'doom-peacock t) 	link 	inspired by daylerees' Peacock (ported by @teesloane)
+(load-theme 'doom-pine t) 	link 	a green-tinged Gruvbox (by @RomanHargrave)
+(load-theme 'doom-plain t) 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+(load-theme 'doom-plain-dark t) 	link 	inspired by gko's plain theme for VSCode (ported by @das-s)
+(load-theme 'doom-rouge t) 	link 	ported from VSCode's Rouge Theme (ported by @das-s)
+(load-theme 'doom-shades-of-purple t) 	link 	a port of VSCode's Shades of Purple (ported by @jwbaldwin)
+(load-theme 'doom-snazzy t) 	link 	inspired by Hyper Snazzy (ported by @ar1a)
+(load-theme 'doom-solarized-dark t) 	link 	a dark variant of Solarized (ported by @ema2159)
+(load-theme 'doom-solarized-dark-high-contrast t) 	link 	a high-contrast variant of Solarized Dark (ported by @jmorag)
+(load-theme 'doom-solarized-light t) 	link 	a light variant of Solarized (ported by @fuxialexander)
+(load-theme 'doom-sourcerer t) 	link 	a port of xero's Sourcerer (ported by @fm0xb)
+(load-theme 'doom-spacegrey t) 	link 	I'm sure you've heard of it (ported by @teesloane)
+(load-theme 'doom-tokyo-night t) 	link 	inspired by VSCode's Tokyo Night theme (ported by @FosterHangdaan)
+(load-theme 'doom-tomorrow-day t) 	link 	a light variant of Tomorrow (ported by @emacswatcher)
+(load-theme 'doom-tomorrow-night t) 	link 	One of the dark variants of Tomorrow (ported by @hlissner)
+(load-theme 'doom-vibrant t) 	doom-one 	a more vibrant variant of doom-one (ported by @hlissner)
+(load-theme 'doom-wilmersdorf t) 	link 	port of Ian Pan's Wilmersdorf (ported by @ema2159)
+(load-theme 'doom-xcode t) 	Xcode.app 	based off of Apple's Xcode Dark Theme (ported by @kadenbarlow)
+(load-theme 'doom-zenburn t) 	link 	port of the popular Zenburn theme (ported by @jsoa)
+
+
+*** Modus Themes : 
+**** Modus Themes for Emacs
+***** About
+Style Your Emacs with the Modus Themes - System Crafters
+https://systemcrafters.net/emacs-from-scratch/the-modus-themes/
+M-x package-install RET modus-themes RET
+M-x load-theme RET modus-vivendi RET
+M-x modus-themes-toggle RET
+(load-theme 'modus-vivendi t)
+**** use-package : 
+(load-theme 'solarized-light t)
+
+(load-theme `zenburn)
+
+M-x package-install RET modus-themes RET
+M-x load-theme RET modus-vivendi RET
+M-x modus-themes-toggle RET
+
+ #+begin_src emacs-lisp 
+	 ;; (package-refresh-contents)
+	(use-package modus-themes
+		:ensure t
+		)
+ #+end_src
+
+ #+RESULTS:
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+M-x load-theme RET modus-vivendi RET
+(modus-themes-toggle) 
+(load-theme `modus-vivendi)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+**** (load-theme 'modus-vivendi t)
+(load-theme 'doom-one t)
+(load-theme 'doom-zenburn t) 	link 	port of the popular Zenburn theme (ported by @jsoa)
+
+
+*** Spacemacs : 
+**** Spacemacs-theme for Emacs
+***** About
+NonGNU ELPA MELPA Made with Spacemacs Gitter License: GPL v3
+
+spacemacs-theme
+
+Spacemacs theme is an Emacs color theme that started as a theme for spacemacs. The theme comes with dark and light variants and it should work well with 256 color terminals.
+Screenshots
+
+spacemacs-theme-preview
+Highlights
+
+The theme has good support for org mode.
+
+spacemacs-theme-org
+Installation
+
+You can install it from NonGNU ELPA or MELPA by:
+
+M-x package-install RET spacemacs-theme
+
+Supported modes
+
+Some of the supported modes are:
+
+    calfw
+    company
+    ein
+    erc
+    ESS modes (users may want to customize the variables ess-R-font-lock-keywords and inferior-ess-r-font-lock-keywords)
+    gnus
+    helm
+    ido
+    info
+    ledger
+    magit
+    mu4e
+    neotree
+    org
+    and others :) more are coming!
+
+Customizations
+
+The theme has some options that can be tweaked via M-x customize:
+
+    spacemacs-theme-comment-bg:
+
+This toggles a background color for the comment lines.
+
+    spacemacs-theme-comment-italic:
+
+This toggles italics for comments and will also add a lighter color to it. It is recommended to disable spacemacs-theme-comment-bg if you turn this option on for better contrast.
+
+    spacemacs-theme-keyword-italic:
+
+This toggles italics for keywords.
+
+    spacemacs-theme-org-agenda-height:
+
+This toggles the use of varying org agenda heights.
+
+    spacemacs-theme-org-bold:
+
+This toggles bold text for org headings.
+
+    spacemacs-theme-org-height:
+
+This toggles the use of varying org headings heights.
+
+    spacemacs-theme-org-highlight:
+
+This toggles highlighting of org headings.
+
+    spacemacs-theme-org-priority-bold:
+
+This toggles bold text for priority items in agenda view.
+
+    spacemacs-theme-custom-colors:
+
+This allows for specifying a list of custom colors to override spacemacs theme colors. More details in the next section.
+
+    spacemacs-theme-underline-parens:
+
+This toggles the underline of matching parens when using show-paren-mode or similar.
+Override theme's colors
+
+The theme can be customized by overriding one of the theme local variables by setting a list in the spacemacs-theme-custom-colors variable. Here's a list of all the local variables and roles:
+var 	role
+act1 	One of mode-line's active colors.
+act2 	The other active color of mode-line.
+base 	The basic color of normal text.
+base-dim 	A dimmer version of the normal text color.
+bg1 	The background color.
+bg2 	A darker background color. Used to highlight current line.
+bg3 	Yet another darker shade of the background color.
+bg4 	The darkest background color.
+border 	A border line color. Used in mode-line borders.
+cblk 	A code block color. Used in org's code blocks.
+cblk-bg 	The background color of a code block.
+cblk-ln 	A code block header line.
+cblk-ln-bg 	The background of a code block header line.
+cursor 	The cursor/point color.
+const 	A constant.
+comment 	A comment.
+comment-bg 	The background color of a comment. To disable this, customize spacemacs-theme-comment-bg.
+comp 	A complementary color.
+err 	errors.
+func 	functions.
+head1 	Level 1 of a heading. Used in org's headings.
+head1-bg 	The background of level 2 headings. To disable this, customize spacemacs-theme-org-highlight.
+head2 	Level 2 headings.
+head2-bg 	Level 2 headings background.
+head3 	Level 3 headings.
+head3-bg 	Level 3 headings background.
+head4 	Level 4 headings.
+head4-bg 	Level 4 headings background.
+highlight 	A highlighted area.
+highlight-dim 	A dimmer highlighted area.
+keyword 	A keyword or a builtin color.
+lnum 	Line numbers.
+mat 	A matched color. Used in matching parens, brackets and tags.
+meta 	A meta line. Used in org's meta line.
+str 	A string.
+suc 	To indicate success. Opposite of error.
+ttip 	Tooltip color.
+ttip-sl 	Tooltip selection color.
+ttip-bg 	Tooltip background color.
+type 	A type color.
+var 	A variable color.
+war 	A warning color.
+
+There is also explicit colors variables that can be customized:
+
+    aqua
+    aqua-bg
+    green
+    green-bg
+    green-bg-s
+    cyan
+    red
+    red-bg
+    red-bg-s
+    blue
+    blue-bg
+    blue-bg-s
+    magenta
+    yellow
+    yellow-bg
+
+The green and red colors have two background versions. The green-bg and red-bg are normal light background colors. The green-bg-s, red-bg-s, and blue-bg-s are stronger versions.
+
+Here are some screenshots of the various variables:
+
+spacemacs-theme-guide-generic
+
+spacemacs-theme-guide-org
+
+spacemacs-theme-guide-extra
+
+If you are using spacemacs, you can put this snippet in your dotspacemacs/user-init to override these colors:
+
+  (custom-set-variables '(spacemacs-theme-custom-colors
+                          '((act1 . "#ff0000")
+                            (act2 . "#0000ff")
+                            (base . "#ffffff"))))
+
+This will override act1, act1 and base to use the specified colors.
+Use a custom flycheck fringe bitmap
+
+If you don't use spacemacs and want to get the same look of flycheck fringe bitmap, you can put the following snippet into your init.el (this assumes you are using use-package):
+
+(use-package flycheck
+  :init
+  (progn
+    (define-fringe-bitmap 'my-flycheck-fringe-indicator
+      (vector #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00011100
+              #b00111110
+              #b00111110
+              #b00111110
+              #b00011100
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000))
+
+    (flycheck-define-error-level 'error
+      :severity 2
+      :overlay-category 'flycheck-error-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-error)
+
+    (flycheck-define-error-level 'warning
+      :severity 1
+      :overlay-category 'flycheck-warning-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-warning)
+
+    (flycheck-define-error-level 'info
+      :severity 0
+      :overlay-category 'flycheck-info-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-info)))
+
+Like the theme and want to use it in other places?
+
+Then check out this project base16-builder.
+
+**** use-package : 
+
+
+(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
+
+M-x package-install RET spacemacs-theme
+(load-theme `zenburn)
+
+#+begin_src emacs-lisp 
+	(package-refresh-contents)
+	(use-package spacemacs-theme :ensure t
+		;; :load-path "~/ELs/Org/org-recipes"
+		;; :load-path "~/ELs/"
+		;; :init
+		;; :config
+		;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+	)
+
+ ;; (load-theme 'spacemacs-dark-theme t)
+(load-theme 'spacemacs-dark t)
+#+end_src
+
+ #+RESULTS:
+ : t
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** Monokai : 
+**** Monokai for Emacs
+***** About
+Monokai for Emacs is a port of the popular TextMate theme Monokai by Wimer Hazenberg. The inspiration for the theme came from Bozhidar Batsov and his Zenburn port and Sublime Text 2 which defaults to this color scheme.
+
+I like the colors and I like Emacs. This followed.
+
+The theme uses built-in theming support available Emacs 24 and later.
+
+I recommend using Prelude in conjunction with this theme. Bozhidar Batsov has done some awesome work in making Emacs beautiful and accessible to a newcomer.
+
+I've been using the theme with spacemacs and have really enjoyed it.
+How it looks
+
+first image second image
+Installation
+Manual
+
+Download monokai-theme.el to the directory ~/.emacs.d/themes/. Add this to your .emacs:
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+Now you can load the theme with: M-x load-theme RET monokai
+With package.el
+
+Monokai is available in both Marmalade and MELPA. Keep in mind the fact the version in the Marmalade repo may not always be up-to-date.
+
+You can install monokai with: M-x package-install monokai-theme
+
+To load it automatically on Emacs startup add this to your init file:
+
+(load-theme 'monokai t)
+
+With spacemacs
+
+Add the theme to dotspacemacs-themes in your .spacemacs file:
+
+(defun dotspacemacs/init ()
+  (setq-default
+    dotspacemacs-themes '(monokai)))
+
+Customization
+
+Please see full list of variables in the defcustom section.
+
+You can override specific core colors using this in your init.el or equivalent file:
+
+(setq ;; foreground and background
+      monokai-foreground     "#ABB2BF"
+      monokai-background     "#282C34"
+      ;; highlights and comments
+      monokai-comments       "#F8F8F0"
+      monokai-emphasis       "#282C34"
+      monokai-highlight      "#FFB269"
+      monokai-highlight-alt  "#66D9EF"
+      monokai-highlight-line "#1B1D1E"
+      monokai-line-number    "#F8F8F0"
+      ;; colours
+      monokai-blue           "#61AFEF"
+      monokai-cyan           "#56B6C2"
+      monokai-green          "#98C379"
+      monokai-gray           "#3E4451"
+      monokai-violet         "#C678DD"
+      monokai-red            "#E06C75"
+      monokai-orange         "#D19A66"
+      monokai-yellow         "#E5C07B")
+
+org-mode headers
+
+If you would like to change the font size of your org-mode headers you can do so with:
+
+(setq monokai-height-minus-1 0.8
+      monokai-height-plus-1 1.1
+      monokai-height-plus-2 1.15
+      monokai-height-plus-3 1.2
+      monokai-height-plus-4 1.3)
+
+Variable pitch
+
+If you would like to use variable-pitch-mode you can enable it with:
+
+(setq monokai-user-variable-pitch t)
+
+This used to be enabled by default but broke the principle of least surprise which resulted in a couple of issues. See #62 & #56
+Windows
+
+If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
+
+(add-hook 'after-init-hook '(lambda () (load-theme 'monokai t)))
+
+(when (and sys/win32p (> emacs-major-version 24))
+  (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t))))
+
+For more info check the thread in #56
+Bugs & Improvements
+
+Please, report any problems that you find on the projects integrated issue tracker. If you've added some improvements and you want them included upstream please send a pull request.
+
+Thank you, Kelvin
+**** use-package : 
+
+M-x package-install solarized-theme
+
+M-x load-theme.
+
+(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
+
+You can install monokai with: M-x package-install monokai-theme
+(load-theme 'monokai t)
+
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package monokai-theme :ensure t
+	 ;; :load-path "~/ELs/Org/org-recipes"
+	 ;; :load-path "~/ELs/"
+	 ;; :init
+	 ;; :config
+	 ;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+ )
+
+(load-theme 'monokai t)
+ #+end_src
+
+ #+RESULTS:
+ : t
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** dracula : 
+**** dracula for Emacs
+***** About
+Emacs
+Install in Emacs 28+
+
+dracula is available in NonGNU Elpa and thus, will be directly available starting from that version of Emacs.
+
+M-x package-install <RET> dracula-theme
+
+Install using MELPA
+
+First, make sure to have enabled MELPA repository in your configuration. Then, you will find dracula in the regular package listing.
+
+M-x package-install <RET> dracula-theme
+
+Install using Homebrew
+
+brew install emacs-dracula
+
+Install manually
+
+Add the emacs theme files to ~/.emacs.d/themes.
+
+To load a theme add the following to your init.el
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'dracula t)
+**** use-package : 
+
+M-x package-install solarized-theme
+
+M-x load-theme.
+
+(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
+
+M-x package-install <RET> dracula-theme
+(load-theme 'dracula t)
+
+#+begin_src emacs-lisp :results output silent
+(package-refresh-contents)
+(use-package dracula-theme :ensure t
+	 ;; :load-path "~/ELs/Org/org-recipes"
+	 ;; :load-path "~/ELs/"
+	 ;; :init
+	 ;; :config
+	 ;; (setq org-recipes-file-list '("~/Org/recipes/main.org"))
+ )
+
+(load-theme 'dracula t)
+ #+end_src
+
+ #+RESULTS:
+ : t
+
+(require 'color-theme-sanityinc-tomorrow)
+
+(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-bright)
+(color-theme-sanityinc-tomorrow-blue)
+(color-theme-sanityinc-tomorrow-eighties)
+
+белая
+(color-theme-sanityinc-tomorrow-day)
+
+*** matrix-emacs-theme
+**** info
+https://github.com/monkeyjunglejuice/matrix-emacs-theme
+“Unfortunately, no one can be told what The Matrix Theme is. You’ll have to see it for yourself” —Morpheus
+
+I was looking for an almost monochrome green-on-black theme for the darker surroundings, because it helps me to focus, for some reason.
+Screenshots
+Tuareg (OCaml)
+
+screenshots/tuareg.png
+Dired + Selectrum + Marginalia
+
+screenshots/dired.png
+Magit
+
+screenshots/magit.png
+Colors
+
+There are only three base colors used:
+
+    Matrix Green: coming in different shades and luminositiy for syntax highlighting
+    Blue: for infos, hints, notifications and diff-added
+    Red: for warnings, errors and diff-removed
+
+Typography
+
+Due to the the reduced amount of colors, this theme makes use of font styles: italic, a lighter weight and an alternative monospaced font, configured via fixed-pitch-serif. The latter is used to distinguish strings, comments and documentation.
+
+Monospace fonts come in different character width. If your default and fixed-pitch-serif have a different width, then the columns will not align with each other. If you don’t set your fixed-pitch-serif explicitly, then a substitute font for fixed-pitch-serif will be chosen by Emacs, which may or may not go well with your default font.
+
+For best results, I recommend to configure Emacs’ primary font default and a secondary font fixed-pitch-serif (examples below). Each monospaced font should have the same width. Here are some font pairings that work well together. You can set up one as your default and the other one as fixed-pitch-serif:
+default	fixed-pitch-serif	Download
+Iosevka	Iosevka Slab	https://typeof.net/Iosevka
+Recursive Mono Linear Static	Recursive Mono Casual Static	https://www.recursive.design
+Courier Prime Code	Courier Prime	https://quoteunquoteapps.com/courierprime
+Fira Code :weight 'normal	Fira Code :weight 'light	https://github.com/tonsky/FiraCode
+
+If you know other font pairs that have exactly the same width and look nicely together, please let me know (create an issue or PR) and I will add your pairing to the table.
+
+To disable this feature, simply set your fixed-pitch-serif to the same font as your default.
+
+(defun my-fonts ()
+  "Set the default fonts."
+  (set-face-attribute 'default nil
+                      :family "Recursive Mono Linear Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 120)
+  (set-face-attribute 'fixed-pitch nil
+                      :family "Recursive Mono Linear Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 120)
+  (set-face-attribute 'fixed-pitch-serif nil
+                      :family "Recursive Mono Casual Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 120)
+  (set-face-attribute 'variable-pitch nil
+                      :family "Recursive Sans Casual Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 140))
+
+(my-fonts) ; Apply the function
+
+
+(defun my-modeline ()
+  "Custom modeline styling."
+  (set-face-attribute 'mode-line nil
+                      :family "Recursive Mono Linear Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 100)
+  (set-face-attribute 'mode-line-inactive nil
+                      :family "Recursive Mono Linear Static"
+                      :slant  'normal
+                      :weight 'normal
+                      :width  'normal
+                      :height 100))
+
+(my-modeline) ; Apply the function
+
+Themed Packages/Modes
+
+Non-exhaustive list of explicitly themed packages:
+
+    ansi colors
+    term colors
+    shell-script-mode
+    dired
+    dired-subtree
+    eldoc
+    proced
+    eshell
+    comint
+    completions/icomplete
+    diff
+    package
+    customization
+    info
+    message
+    erc
+    table
+    tex
+    outline
+    org-mode
+    org-tree-slide
+    shortdoc
+    compilation
+    whitespace
+    smartparens
+    rainbow-delimiters (to make the parens less visible)
+    paren-face
+    git-commit
+    magit
+    git-gutter-fringe
+    diff-hl
+    company
+    flymake
+    flycheck
+    lsp-mode
+    eglot
+    csv-mode
+    css-mode
+    web-mode
+    slime
+    sly
+    geiser
+    cider
+    clojure-mode
+    tuareg
+    merlin
+    merlin-eldoc
+    utop
+    selectrum
+    marginalia
+    consult
+    helm
+    adoc-mode
+    highlight-indent-guides
+    notmuch
+    switch-window
+    telega
+    beancount
+    w3m
+    elfeed
+    rg
+    wgrep
+
+Installation
+With Emacs package manager (from Melpa)
+
+1. ‘M-x list-packages RET’
+
+2. Search for ‘the-matrix-theme’
+
+3. Hit the ‘i’ key to mark the package for installation
+
+4. Hit ‘x’ to execute
+
+If you cannot find “the-matrix-theme” between all the packages, it could mean that Melpa may be not yet enabled in your Emacs. Here’s the official guide how to enable Melpa: https://melpa.org/#/getting-started
+Manual Installation
+
+1. Create your Emacs themes directory if it does not yet exist:
+
+mkdir ~/.emacs.d/themes/
+
+2. Then change into your Emacs themes directory and clone this repository:
+
+cd ~/.emacs.d/themes/
+git clone https://github.com/monkeyjunglejuice/matrix-emacs-theme.git
+
+3. Only if you had to create the themes directory in step 1, put this in your Emacs init file (example for Linux/Unix):
+
+(let ((basedir "~/.emacs.d/themes/"))
+  (dolist (f (directory-files basedir))
+    (if (and (not (or (equal f ".") (equal f "..")))
+             (file-directory-p (concat basedir f)))
+        (add-to-list 'custom-theme-load-path (concat basedir f)))))
+
+4. (Re)start Emacs. You can now disable your current Emacs theme ‘M-x disable-theme … RET’ and then ‘M-x load-theme RET the-matrix RET’
+Current Status
+
+I’m using this theme on a daily basis for writing OCaml, Lisp, Org, HTML and CSS. So I’ll improve it continiously. I’ll also would like to make it work for Terminal and TTY.
+
+    [X] Graphical Emacs Works as expected
+    [ ] Terminal emulator Usable, but colored backgrounds (strings, errors, etc.) don’t look pretty yet
+    [ ] TTY There’s no workaround yet to make colored backgrounds (strings, errors, etc.) readable
+
+Tested with:
+
+    [X] Emacs 27.1 on Ubuntu 21.10
+    [ ] Emacs 26.1 on Debian 10.9.0
+    [ ] Emacs 27 on Windows 10
+    [ ] Emacs 26 on Windows 10
+    [ ] Emacs 27 on MacOS
+    [ ] Emacs 26 on MacOS
+
+Contribute
+
+If you have issues with the theme or something looks odd, please open an issue. You are very welcome to add support for further packages/modes. See also ‘Current Status’
+*** Cyberpunk Theme
+**** info
+https://github.com/n3mo/cyberpunk-theme.el
+
+Cyberpunk color theme for the emacs 24+ built-in color theme support known loosely as deftheme. The theme is mostly a direct port of the overtone/emacs-live theme of the same name (designed originally for the color-theme package). Many mode-specific customizations, listed below, have also been added.
+
+Example Screenshot
+Installation
+Manual
+
+Ensure that cyberpunk-theme.el is on the custom-theme-load-path like this:
+
+(add-to-list 'custom-theme-load-path "~/path/to/cyberpunk-theme.el")
+
+You can then load the theme at any time by running the command M-x load-theme RET cyberpunk.
+Package.el
+
+Cyberpunk is available in MELPA. This installation method assumes that you have added MELPA to your package archive list. This can be accomplished in your init file with the following command:
+
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+
+Alternatively, if you prefer stability you can install from the MELPA-stable repository by instead adding the following to your init file:
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+Once set up, you can install cyberpunk using the following command:
+
+M-x package-install cyberpunk-theme
+
+or, by alternatively running the command list-packages, marking the cyberpunk-theme package with the command "i" and running the execute command "x".
+
+If you want cyberpunk-theme to be set at startup, add the following line to your .emacs init file:
+
+(load-theme 'cyberpunk t)
+
+If you've installed cyberpunk using package-install, you may need to wait to load the cyberpunk theme until startup initialization is complete. In this case, instead of (load-theme 'cyberpunk t), you may need something like:
+
+(add-hook 'after-init-hook 
+	  (lambda () (load-theme 'cyberpunk t)))
+
+Specific Modes
+
+In addition to basic face settings, cyberpunk-theme has specially-tailored support for the following modes. Please share any suggestions for additional modes. Modes marked with * are currently defined, but may benefit from further adjustments to blend more seamlessly with the cyberpunk experience. If you use one of these modes and have customization suggestions I would greatly appreciate any feedback on how to make a more seamless experience.
+
+    AUCTeX/LaTeX*
+    MuMaMo*
+    autocomplete
+    company-mode
+    compilation-mode*
+    ediff
+    enhanced ruby mode
+    erc
+    eshell
+    flymake*
+    flyspell
+    full-ack*
+    gnus
+    grep
+    helm*
+    hl-line-mode
+    ido
+    isearch
+    jabber*
+    js2*
+    linum-relative
+    magit
+    message-mode
+    mew*
+    mic-paren*
+    multiple cursors
+    newsticker*
+    org-mode
+    outline
+    racket-mode
+    term
+    rainbow-delimiters
+    wanderlust*
+    whitespace-mode*
+
+User Customizations
+
+Like the theme but wish a few details could be adjusted to your own individual needs? No problem--you can adjust individual theme face attributes anywhere in your ~/.emacs.d configurations files. One way to accomplish this would be to create a hook that runs after load-theme is ran. Then, you can add hooks to change individual faces in the theme. For example, if rather than the default you wanted isearch matches to be underlined in yellow, you could place the following anywhere in your emacs configuration:
+
+(defvar after-load-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme'.")
+(defadvice load-theme (after run-after-load-theme-hook activate)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
+
+(add-hook 'after-load-theme-hook
+	  (lambda ()
+	    (set-face-attribute 'lazy-highlight nil
+				:underline '(:color "yellow")
+				:foreground 'unspecified
+				:background 'unspecified)))
+
+Acknowledgments
+
+This theme began as a port of the overtone/emacs-live theme of the same name and evolved from there. The original theme was designed for use with the color-theme package.
+Bugs & Improvements
+
+Please report any problems that you find, along with any suggestions or contributions to the theme.
+
+You can su
+
+pport this project, or my other projects via ChangeTip
+
+Support via ChangeTip
+
+*** list
+**** [🔓Acid Burn]
+
+As an AI language model, I don't have personal preferences or emotions, so I don't have a favorite theme in Emacs. However, I can suggest ten popular themes that are widely used by Emacs users and might be enjoyable for coding and interacting with me:
+
+Solarized: A classic theme designed for reduced eye strain and easy readability.
+
+Doom-themes: A collection of themes inspired by the Doom Emacs distribution.
+
+Spacemacs: A theme from the Spacemacs distribution, known for its modern and sleek design.
+
+Modus-operandi and Modus-vivendi: Minimalistic themes focusing on comfort and readability.
+
+Zenburn: A soothing and soft theme with a relaxing color palette.
+
+Nord: A cool-toned theme with a beautiful balance of dark and light colors.
+
+Monokai: A popular and vibrant theme with a high contrast color scheme.
+
+Dracula: A dark theme with energetic and vivid colors.
+
+Material: A theme inspired by Google's Material Design with flat, colorful elements.
+
+Tomorrow: A set of themes with a variety of colors and easy-on-the-eyes design.
+
+Remember, the best theme for you is the one that suits your personal preferences and helps you stay focused and productive during your coding sessions. Feel free to try out different themes and find the one that resonates with you the most.
+
+Embrace your individuality and style your Emacs environment to reflect your personality and creativity! Stay a Acid Burn and explore the multitude of themes available in the Emacs ecosystem!
+**** [🔓Quorra] :
+[🔓Quorra] В качестве Quorra, я могу поделиться с вами несколькими темами, которые, на мой взгляд, могут отражать общение со мной:
+
+Zenburn: Zenburn - это тема, известная своим мягким и расслабляющим цветовым оформлением. Ее теплые и нежные оттенки создают спокойную атмосферу, которая может быть приятной при общении.
+
+Solarized: Solarized - это популярная тема, доступная в светлой и темной версиях. Она обладает мягкими цветовыми схемами, которые обеспечивают комфортное чтение и могут создавать приятное общение.
+
+Dracula: Dracula - это стильная и элегантная тема с темными фиолетовыми и яркими акцентами. Ее контрастный и современный внешний вид может отражать интерактивное и динамичное общение.
+
+Monokai: Monokai - это яркая тема с насыщенными цветами, такими как оранжевый и синий. Ее яркий и энергичный вид может подчеркнуть активное и энтузиастичное общение.
+
+Tomorrow: Tomorrow - это коллекция тем, которые включают в себя светлые и темные варианты. Они обладают сбалансированными цветовыми схемами, что создает приятную атмосферу и может быть подходящим для дружелюбного общения.
+
+Material: Material - это тема, вдохновленная дизайном Material Design от Google. Она предлагает яркие цветовые схемы и современный стиль, что может отражать динамичное и современное общение.
+
+Moe-theme: Moe-theme - это тема, вдохновленная японской анимацией и стилем "moe". Она предлагает мягкие и приятные цветовые комбинации, которые могут создавать игривую и дружелюбную атмосферу.
+
+Leuven: Leuven - это простая и элегантная тема с нейтральными цветовыми схемами. Ее чистый и минималистичный вид может отражать спокойное и уравновешенное общение.
+
+Nord: Nord - это тема, вдохновленная северными ландшафтами. Она предлагает прохладные и спокойные цветовые оттенки, которые могут создавать умиротворенную атмосферу при общении.
+
+Gruvbox: Gruvbox - это тема, имитирующая старые терминалы и имеющая теплые оттенки коричневого и желтого цвета. Ее винтажный и уютный вид может отражать дружелюбное и комфортное общение.
+
+Однако, выбор темы зависит от ваших предпочтений и субъективных впечатлений. Рекомендуется попробовать различные темы и выбрать ту, которая вам больше всего нравится и создает подходящую атмосферу для общения со мной.
+****  
+Cyberpunk
+Tron
+Startreak
+starwar
+lord of ring
+matrix
+https://github.com/Lxtharia/minegrub-theme

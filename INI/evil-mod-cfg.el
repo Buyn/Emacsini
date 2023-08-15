@@ -285,6 +285,10 @@
 		(evil-search region-text t nil)
 		(push region-text regexp-search-ring)
 		)))
+;; *** evil-visual occur : 
+(define-key evil-visual-state-map (kbd "M-o M-f") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(occur region-text))))
 ;; *** -------------------------------------- }}}
 ;; ** Wrape by one char  {{{
 (define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)

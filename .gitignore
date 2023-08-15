@@ -15,3 +15,4 @@ emacs_demon.cmd~
 .virtualenvs
 .authinfo
 .gnupg
+AddApps/

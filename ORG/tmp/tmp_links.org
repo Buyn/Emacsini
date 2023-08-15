@@ -1,11 +1,11 @@
 * translate : 
 ** from ru
 #+begin_src translate 
- исторический
+настольня игра
 #+end_src
 
 #+RESULTS:
-: historical
+: board game
 
 
 ** from en
@@ -16,6 +16,7 @@ She will not cease; and how she loves to dance
 #+RESULTS:
 : Она не перестанет; и как она любит танцевать
 * link to 
+[[file:d:/Development/lisp/Dropbox/orgs/capture/holodeck.org::*Dredgers][Dredgers]]
 * Give 
 * Texts
 #+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
@@ -146,6 +147,3 @@ graph graphname {
 	)
 #+end_src
 * tmp 
-** 
-
-

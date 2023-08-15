@@ -71,9 +71,9 @@
 ;; ** use-package : 
 (use-package dendroam
 	;; :quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
-	:ensure t
+	;; :ensure t
   :after org-roam
-	:demand t
+	;; :demand t
 ;; ** config : 
 	:config
 	(setq org-roam-node-display-template "${hierarchy}:${title}")

@@ -26,6 +26,7 @@
 ;; (global-set-key "\C-cl" 'org-store-link)
 ;; (global-set-key "\C-ca" 'org-agenda)
 (setq org-hide-leading-stars t)
+(setq org-tags-column -60)
 (setq org-adapt-indentation nil)
 (setq org-startup-folded t)
 (setq org-link-frame-setup
