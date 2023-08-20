@@ -252,10 +252,11 @@
 (define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
+(define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
 ;; *** eval: 
 (define-key evil-normal-state-map (kbd "M-e M-l") 'eval-last-sexp)
 (define-key evil-normal-state-map (kbd "M-e M-e") 'eval-defun)
-;; **** search-forward & sexp M-e M-j : 
+;; *** search-forward & sexp M-e M-j : 
 (define-key evil-normal-state-map (kbd "M-e M-j") 
 		'(lambda() (interactive)
 					(move-beginning-of-line nil)
@@ -266,6 +267,14 @@
 						(eval-last-sexp nil))
 					))
 ;; -------------------------------------- }}}
+;; *** literal programing: 
+(fset 'get-named-link
+   (kmacro-lambda-form [?y ?\C-c ?l] 0 "%d"))
+(fset 'insert-named-link
+   (kmacro-lambda-form [?\C-c ?\C-l return return ?\C-y return] 0 "%d"))
+(define-key evil-visual-state-map (kbd "M-e M-f M-l") 'get-named-link)
+(define-key evil-normal-state-map (kbd "M-e M-f M-l") 'insert-named-link)
+;; (global-set-key (kbd "<f5>") 'ins_bufer_next)
 ;; ** find&replace  {{{
 ;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)

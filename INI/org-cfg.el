@@ -104,14 +104,14 @@
 (setq org-log-done t)
 ;; ** ORG binding : 
 ;; *** ORG heders : 
-(define-key evil-normal-state-map
-			[C-S-return] 'org-insert-subheading)
+;; (define-key evil-normal-state-map
+;; 			[C-S-return] 'org-insert-subheading)
 (define-key org-mode-map
-			[C-S-return] 'org-insert-subheading)
-(define-key evil-normal-state-map
-			[C-M-return] 'org-insert-todo-heading-respect-content)
-(define-key org-mode-map
-			[C-M-return] 'org-insert-todo-heading-respect-content)
+			[S-M-return] 'org-insert-subheading)
+;; (define-key evil-normal-state-map
+;; 			[C-M-return] 'org-insert-todo-heading-respect-content)
+;; (define-key org-mode-map
+;; 			[C-M-return] 'org-insert-todo-heading-respect-content)
 ;; *** ORG Foldings
 ;; **** foldings on lavel navigations
 (define-key evil-normal-state-map "zj" 'org-forward-element)

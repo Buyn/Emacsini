@@ -25,16 +25,22 @@ https://www.braveclojure.com/basic-emacs/
 
 ** progn :
 #+begin_src emacs-lisp :results output silent
-(load "~/INI/hydra-cfg.el")
-(load "~/ELs/BuYn/reader.el")
+;; (load "~/INI/hydra-cfg.el")
+;; (load "~/ELs/BuYn/reader.el")
 
 
-(define-key evil-visual-state-map (kbd "M-o M-f") '(lambda() (interactive)
-	(let ((region-text (buffer-substring (region-beginning) (region-end))))
-		(occur region-text))))
-(define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
-			(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
-		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
+(fset 'get-named-link
+   (kmacro-lambda-form [?y ?\C-c ?l] 0 "%d"))
+(fset 'insert-named-link
+   (kmacro-lambda-form [?\C-c ?\C-l return return ?\C-y return] 0 "%d"))
+(define-key evil-visual-state-map (kbd "M-e M-f M-l") 'get-named-link)
+(define-key evil-normal-state-map (kbd "M-e M-f M-l") 'insert-named-link)
+;; (define-key evil-visual-state-map (kbd "M-o M-f") '(lambda() (interactive)
+;; 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+;; 		(occur region-text))))
+;; (define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
+;; 			(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
+;; 		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)
@@ -7139,11 +7145,7 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Frame-Layout.html
 https://gitlab.com/andreyorst/infinite.el
 
 ** keyboard macro
-*** help
-**** info links
-	[[info:emacs#Keyboard Macros][info:emacs#Keyboard Macros]]
-**** keys : 
-***** base
+*** base
 	‘C-u <F3>’
 	‘C-u C-x (’
 			 Re-execute last keyboard macro, then append keys to its definition.
@@ -7153,6 +7155,26 @@ https://gitlab.com/andreyorst/infinite.el
 	‘C-x C-k r’
 			 Run the last keyboard macro on each line that begins in the region
 			 (‘apply-macro-to-region-lines’).
+
+- C-x C-k SPC. Much like a debugger, you step through each playback step and you can decide what you want to do each step of the way.
+	применятся к последнему записаному макросу
+	The step editor is loosely modeled on the query replace interfaces (like M-% and C-M-%) so if you have some familiarity with that, your knowledge applies here too.
+	Step Edit Key	Description
+	C-h	Show inline help
+	SPC, y	Act (apply) current command
+	n, d, C-d	Skip and delete current command
+	TAB	Repeatedly act (apply) this command and all similar ones
+	!, c	Continue playing back the macro
+	C-k	Skip and delete rest of macro
+	q, C-g	Cancel step editing
+	u, U	Undo once / Undo all
+	i, r	Inserts / Replaces a series of commands until you enter C-j
+	I, R	Inserts / Replaces a single command
+
+*** help
+**** info links
+	[[info:emacs#Keyboard Macros][info:emacs#Keyboard Macros]]
+**** keys : 
 ***** 17.6 Editing a Keyboard Macro
 ‘C-x C-k C-e’
      Edit the last defined keyboard macro (‘kmacro-edit-macro’).
@@ -7321,6 +7343,14 @@ frequently, it is more convenient to put it in a register or save it
 (*note Save Keyboard Macro::).  ‘C-x C-k x R’ (‘kmacro-to-register’)
 stores the last keyboard macro in register R.
 =============================
+**** execute 
+***** фром скрипт
+    ("m" (progn
+					(unless (fboundp 'mask_win_path)
+							(load-file "~/keymac/mask_win_path.el"))
+					(mask_win_path)) "maskSlesh")
+
+*** docs
 **** Keyboard Macros are Misunderstood
 Keyboard macros are misunderstood: they are not just for text editing. You can record and play back nearly anything, so why not record your favorite window layouts and save them as a keyboard macro? Maybe open a shell and execute a few commands in it? And best of all, you can do all of this without knowing any elisp!
 By Mickey Petersen

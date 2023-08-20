@@ -34,6 +34,16 @@
 							#("Вт сен 06 07:57:41 2022 GMT" 0 27
 								(charset windows-1251))
 							"/" ".rezka.ag" nil])
+ ("on.ft.com"
+	[url-cookie "_bit" "n7gira-f8a41c47476518990d-00Q" "Mon, 12 Feb 2024 18:27:10 GMT" "/" "on.ft.com" nil])
+ ("ft.trib.al"
+	[url-cookie "tribal" "lTSvERvtQeWLUod3jjOfIw==" "Fri, 06 Jan 2034 23:13:40 GMT" "/" "ft.trib.al" nil])
+ (".ft.com"
+	[url-cookie "FTAllocation" "a4816cc2-14fc-4c5e-a5e9-4dca2f350e63" "Thu, 15 Aug 2024 18:27:12 GMT" "/" ".ft.com" nil]
+	[url-cookie "spoor-id" "3f8d1386-8034-4868-a052-91dd773ab5d8"
+							#("Сб авг 13 18:27:09 2033 GMT" 0 27
+								(charset windows-1251))
+							"/" ".ft.com" nil])
  (".pikabu.ru"
 	[url-cookie "grex2" "%7B%22com_active_members_hide_20220418%22%3A%22gr1%22%7D"
 							#("Сб авг 13 02:21:19 2022 GMT" 0 27
@@ -64,26 +74,21 @@
 	[url-cookie "uid" "lo_2b5ac11fc16a" "Fri, 31 May 2024 14:24:24 GMT" "/" "medium.com" t]
 	[url-cookie "sid" "1:sZCf2GtVs6NjlNTz/j49ohWbHNWSIwvaiBW1X5Us30j1Hlmb6umQBq2mdO1IqTut" "Fri, 31 May 2024 14:24:24 GMT" "/" "medium.com" t])
  ("en.wikipedia.org"
-	[url-cookie "WMF-Last-Access" "14-Jul-2023" "Tue, 15 Aug 2023 00:00:00 GMT" "/" "en.wikipedia.org" t]
 	[url-cookie "NetworkProbeLimit" "0.001"
 							#("Пт июл 14 11:01:50 2023 GMT" 0 27
 								(charset windows-1251))
 							"/" "en.wikipedia.org" t])
- (".wikipedia.org"
-	[url-cookie "WMF-Last-Access-Global" "14-Jul-2023" "Tue, 15 Aug 2023 00:00:00 GMT" "/" ".wikipedia.org" t])
- ("app.gumroad.com"
-	[url-cookie "_mkra_stck" "mysql%3A1692033146.9006386"
-							#("Пн авг 14 17:12:30 2023 GMT" 0 27
+ ("t.co"
+	[url-cookie "muc" "a6765a51-e475-492c-8167-495a76cf207c"
+							#("Пт авг 15 18:27:05 2025 GMT" 0 27
 								(charset windows-1251))
-							"/" "app.gumroad.com" t])
- (".gumroad.com"
-	[url-cookie "_gumroad_guid" "e01c5b98-a463-40c9-8181-9ef4569b6ab8" "Sun, 14 Aug 2033 17:12:21 GMT" "/" ".gumroad.com" t]
-	[url-cookie "_gumroad_app_session" "rU6FdOoVwt9t2vbKCWsNNJAJHEBD%2FADbFLc%2BxSbHT326rhCW2bkoqUnsIs5jnoQen4d%2BaM6JnnPY5NhXEs%2FVNhD3UD16OBYIsWF9BX%2FghojMyRADSLiDfmeqdiw7og98INVrQSnX4dmJkFWMkIZFeW50haJEptkZkZ9EU5kcyIHgGXpdyEDxSmh8jR%2BYhavaIFUcWBWP66b1x4WROLsxCmeBDA1lAucTJkWgPwVBRbqZNh5UyxVBbMu0bsayfenBbXssYoJklcwy2%2Freuz2MoPbi8vltumjHj0UMlxOt5NFF0yKH7LFHvCKvpEEGbYyhJb6iyJt2ncOXZYLEckOsAnDtzTIgCWUZWnCG08Ns%2FEwPVO6poIbDhbCL--DNbO8e8mb3D2r%2FaP--lDMHy4SsnjGkV%2BOUPNAtfA%3D%3D" "Sun, 14 Aug 2033 17:12:23 GMT" "/" ".gumroad.com" t])
- ("pythoncourses.gumroad.com"
-	[url-cookie "_mkra_stck" "mysql%3A1692033148.5724304"
-							#("Пн авг 14 17:12:32 2023 GMT" 0 27
+							"/" "t.co" t]
+	[url-cookie "muc_ads" "a6765a51-e475-492c-8167-495a76cf207c"
+							#("Пт авг 15 18:27:05 2025 GMT" 0 27
 								(charset windows-1251))
-							"/" "pythoncourses.gumroad.com" t])
+							"/" "t.co" t])
+ (".trib.al"
+	[url-cookie "t" "kEng9rT3SNSqjXvqKNu3GA==" "Fri, 06 Jan 2034 23:13:40 GMT" "/" ".trib.al" t])
  (".pikabu.ru"
 	[url-cookie "pcid" "NcImKVc4Cv2"
 							#("Ср май 12 02:21:19 2032 GMT" 0 27

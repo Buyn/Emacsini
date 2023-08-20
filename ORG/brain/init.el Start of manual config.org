@@ -69,17 +69,17 @@ open it for editing
 ;; --------------------------------------
 *** ORG-MODE CUSTOMIZATION
 (find-file-other-frame "~/INI/org-cfg.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(load "~/INI/org-cfg.el")
+#+end_src
+;; --------------------------------------
 	(find-file-other-frame "~/INI/ORG/org-roam-cfg.el")
 	(find-file-other-frame "~/INI/org_agend_cfg.el")
 	(find-file-other-frame "~/INI/babel-cfg.el")
 		(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
 	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
-#+HEADER: :tangle ~/INI/init.el
-#+begin_src emacs-lisp 
-(load "~/INI/org-cfg.el")
-#+end_src
-;; --------------------------------------
 *** FIN-MODE CUSTOMIZATION>
 [[file:fin.el FIN-MODS CUSTOMIZATION.org::C-c C-v C-t to render ~/INI/FIN/fin.el][fin.el FIN-MODS CUSTOMIZATION.org]]
 (find-file-other-frame "~/INI/FIN/fin.el")
@@ -89,11 +89,16 @@ open it for editing
 #+end_src
 ;; --------------------------------------
 *** FRAME & WINDOWS CONTROL-MODS CUSTOMIZATION
+	(find-file-other-frame "~/INI/frame-control.el")
+															WINDMOVE
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/frame-control.el")
 #+end_src
 ;; --------------------------------------
+		(find-file-other-frame "~/INI/fullscreen-cfg.el")
+		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
+		minimap-mode loading
 *** FOLDING-MODS CUSTOMIZATION
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
@@ -129,6 +134,7 @@ open it for editing
 	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
 	(find-file-other-frame "~/INI/flycheck-cfg.el")
 *** HYDRA CUSTOMIZATION
+(find-file-other-frame "~/INI/hydra-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/hydra-cfg.el")
