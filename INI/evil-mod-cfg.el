@@ -271,10 +271,9 @@
 (fset 'get-named-link
    (kmacro-lambda-form [?y ?\C-c ?l] 0 "%d"))
 (fset 'insert-named-link
-   (kmacro-lambda-form [?\C-c ?\C-l return return ?\C-y return] 0 "%d"))
+   (kmacro-lambda-form [?\C-c ?\C-l return ?\C-y return] 0 "%d"))
 (define-key evil-visual-state-map (kbd "M-e M-f M-l") 'get-named-link)
 (define-key evil-normal-state-map (kbd "M-e M-f M-l") 'insert-named-link)
-;; (global-set-key (kbd "<f5>") 'ins_bufer_next)
 ;; ** find&replace  {{{
 ;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)

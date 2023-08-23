@@ -1,6 +1,6 @@
 #+BRAIN_FRIENDS: index
 
-#+BRAIN_CHILDREN: inpak.el%20INSTALL%20PACKAGES fin.el%20FIN-MODS%20CUSTOMIZATION hydra-cfg.el%20HYDRA%20MENU%20CUSTOMIZATION
+#+BRAIN_CHILDREN: inpak.el%20INSTALL%20PACKAGES fin.el%20FIN-MODS%20CUSTOMIZATION hydra-cfg.el%20HYDRA%20MENU%20CUSTOMIZATION org-mode%20org-cfg.el%20org
 
 #+BRAIN_PARENTS: .emacs .emacs
 
@@ -77,9 +77,14 @@ open it for editing
 	(find-file-other-frame "~/INI/ORG/org-roam-cfg.el")
 	(find-file-other-frame "~/INI/org_agend_cfg.el")
 	(find-file-other-frame "~/INI/babel-cfg.el")
-		(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
+	(find-file-other-frame "~/ORG/brain/babel-cfg.el")
+	(find-file-other-frame "~/ORG/brain/babel-cfg.el org.org")
+		tangled (find-file-other-frame "~/INI/babel-cfg.el")
+			(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el") отключили
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
 	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")
+from (find-file "~/INI/folding-cfg.el")
+	(find-file-other-frame "~/INI/outshine_cfg.el")
 *** FIN-MODE CUSTOMIZATION>
 [[file:fin.el FIN-MODS CUSTOMIZATION.org::C-c C-v C-t to render ~/INI/FIN/fin.el][fin.el FIN-MODS CUSTOMIZATION.org]]
 (find-file-other-frame "~/INI/FIN/fin.el")
@@ -100,11 +105,13 @@ open it for editing
 		(find-file-other-frame "~/INI/frames/minimap-cfg.el")
 		minimap-mode loading
 *** FOLDING-MODS CUSTOMIZATION
+;; (find-file "~/INI/folding-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/folding-cfg.el")
 #+end_src
 ;; --------------------------------------
+	(find-file-other-frame "~/INI/outshine_cfg.el")
 *** LITERARY-MODS CUSTOMIZATION
 ;; (find-file "~/INI/lit-cfg.el")
 ;; (find-file-other-frame "~/INI/lit-cfg.el")
@@ -133,6 +140,8 @@ open it for editing
 	(find-file-other-frame "~/INI/dev/formats-mods-cfg.el")
 	(find-file-other-frame "~/INI/c-mode-cfg.el") not used
 	(find-file-other-frame "~/INI/flycheck-cfg.el")
+from (find-file "~/INI/folding-cfg.el")
+	(find-file-other-frame "~/INI/outshine_cfg.el")
 *** HYDRA CUSTOMIZATION
 (find-file-other-frame "~/INI/hydra-cfg.el")
 #+HEADER: :tangle ~/INI/init.el

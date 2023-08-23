@@ -33,6 +33,7 @@ graph graphname {
 
 * Calc 
 ** sandbox
+*** (* (/ : 
 #+BEGIN_SRC elisp
 (* 
 	(/ 0.02 100)
@@ -104,6 +105,26 @@ graph graphname {
 
 #+RESULTS:
 : 0
+*** (/ : 
+#+BEGIN_SRC elisp
+	(- (/ 40000 12) (/ 30000 12))
+#+END_SRC
+
+#+RESULTS:
+: 833
+*** $
+#+BEGIN_SRC elisp
+(* 
+	(/
+	 30000
+	 12)
+	30
+	)
+#+END_SRC
+
+#+RESULTS:
+: 75000
+
 ** Conveert 
 (format "%x" 1000)  ; decimal to hex. Returns a
 (format "%d" #xe8) ; hex a to decimal. Returns 10.
