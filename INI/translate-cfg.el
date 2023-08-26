@@ -37,7 +37,11 @@
   (setq google-translate-pop-up-buffer-set-focus t)
   (setq google-translate-default-source-language "ru")
   (setq google-translate-default-target-language "en")
-  (global-set-key "\C-ct" 'google-translate-smooth-translate)
+  ;; (global-set-key "\C-ct" 'google-translate-smooth-translate)
+	(define-key evil-normal-state-map (kbd "M-a M-l M-o") 'google-translate-smooth-translate)
+	(define-key evil-normal-state-map (kbd "M-a M-l M-l") 'google-translate-at-point)
+	(define-key evil-normal-state-map (kbd "M-a M-l M-j") 'google-translate-at-point)
+	(define-key evil-normal-state-map (kbd "M-a M-l M-k") 'google-translate-at-point-reverse)
   (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))
 ;; **** --------------------------------------
 ;; *** go-translate

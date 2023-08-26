@@ -48,19 +48,6 @@ open it for editing
 
 	(find-file-other-frame "~/ELs/Evil/onecharadd.el") not used
 	(find-file-other-frame "~/ELs/Evil/copylines.el") пока нет
-*** WWW CUSTOMIZATION
-;; (with-eval-after-load 'evil
-;;   (define-key evil-motion-state-map (kbd "g l") 'evil-end-of-line))
-;; (eval-after-load "~/INI/www-cfg.el")
-;; (find-file-other-frame "~/INI/www-cfg.el") 
-;; (find-file-other-frame "~/INI/org_agend_cfg.el")
-#+HEADER: :tangle ~/INI/init.el
-#+begin_src emacs-lisp 
-(use-package eww
-  :config
-	(load "~/INI/www-cfg.el"))
-#+end_src
-;; --------------------------------------
 *** INTERFACE-MODS CUSTOMIZATION
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
@@ -119,6 +106,11 @@ from (find-file "~/INI/folding-cfg.el")
 #+begin_src emacs-lisp 
 (load "~/INI/lit-cfg.el")
 #+end_src
+	(find-file-other-frame "~/INI/translate-cfg.el")
+	(find-file-other-frame "~/INI/lit-cfg/grammer-cfg.el") not et
+	(find-file-other-frame "~/INI/lit-cfg/read-aloud-cfg.el") 
+	(find-file-other-frame "~/INI/lit-cfg/reader-cfg.el")
+	(find-file-other-frame "~/ELs/BuYn/reader.el")
 ;; --------------------------------------
 *** DEVELOPMENT-MODs CUSTOMIZATION
 (find-file-other-frame "~/INI/dev-cfg.el")
@@ -149,7 +141,22 @@ from (find-file "~/INI/folding-cfg.el")
 (load "~/INI/hydra-cfg.el")
 #+end_src
 ;; --------------------------------------
+*** WWW CUSTOMIZATION
+(find-file-other-frame "~/INI/www-cfg.el") 
+;; (with-eval-after-load 'evil
+;;   (define-key evil-motion-state-map (kbd "g l") 'evil-end-of-line))
+;; (eval-after-load "~/INI/www-cfg.el")
+;; (find-file-other-frame "~/INI/www-cfg.el") 
+;; (find-file-other-frame "~/INI/org_agend_cfg.el")
+#+HEADER: :tangle ~/INI/init.el
+#+begin_src emacs-lisp 
+(use-package eww
+  :config
+	(load "~/INI/www-cfg.el"))
+#+end_src
+;; --------------------------------------
 *** ADVNSED SELECTIONS CUSTOMIZATION
+(find-file-other-frame "~/INI/advnsed-selections-cfg.el")
 #+HEADER: :tangle ~/INI/init.el
 #+begin_src emacs-lisp 
 (load "~/INI/advnsed-selections-cfg.el")

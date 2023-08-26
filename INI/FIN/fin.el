@@ -21,7 +21,7 @@
     (interactive)
     (hledger-backward-entry)
     (hledger-pulse-momentary-current-entry))
-  :bind (("C-c j" . hledger-jentry)
+  :bind (("C-c M-j" . hledger-jentry)
          :map hledger-mode-map
 				 ("C-c e" . hledger-run-command)
          ("M-N" . hledger/prev-entry)

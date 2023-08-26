@@ -8,6 +8,7 @@
 
     (eshell . t)
 
+    (shell       . t)
     (clojure     . t)
     (lua         . t)
     (sql        . t)

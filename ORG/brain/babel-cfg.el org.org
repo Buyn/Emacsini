@@ -75,7 +75,9 @@ from (find-file-other-frame "~/INI/org-cfg.el")
     (emacs-lisp . t)
 :tangle no 
     (cpp         . t)
+
     #+begin_src emacs-lisp
+    (shell       . t)
     (clojure     . t)
     (lua         . t)
     (sql        . t)

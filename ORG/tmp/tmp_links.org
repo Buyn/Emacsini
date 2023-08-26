@@ -1,20 +1,20 @@
 * translate : 
 ** from ru
 #+begin_src translate 
-настольня игра
+голюцинации
 #+end_src
 
 #+RESULTS:
-: board game
+: hollucinations
 
 
 ** from en
 #+begin_src translate :dest ru
-She will not cease; and how she loves to dance
+: hallucinations
 #+end_src
 
 #+RESULTS:
-: Она не перестанет; и как она любит танцевать
+: : галлюцинации
 * link to 
 [[file:d:/Development/lisp/Dropbox/orgs/capture/holodeck.org::*Dredgers][Dredgers]]
 * Give 
@@ -140,6 +140,8 @@ graph graphname {
 ** 
 * AI 
 ** Hello profesor!
+toggle-debug-on-error
+
 * progn 
 #+begin_src emacs-lisp results output silent
 (setq org-hide-leading-stars t)
