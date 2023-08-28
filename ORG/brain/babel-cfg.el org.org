@@ -1,4 +1,6 @@
 #+BRAIN_PARENTS: org-mode%20org-cfg.el%20org
+
+
 * Commands
 ** execute-src-block : 
 (save-excursion (progn (org-babel-goto-named-src-block "auto-tangle-block") (org-babel-execute-src-block)))

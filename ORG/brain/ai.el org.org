@@ -1,0 +1,98 @@
+#+BRAIN_PARENTS: init.el%20Start%20of%20manual%20config
+
+
+* Commands
+** execute-src-block : 
+(save-excursion (progn (org-babel-goto-named-src-block "auto-tangle-block") (org-babel-execute-src-block)))
+(save-excursion (let () (org-babel-goto-named-src-block "auto-tangle-block") (org-babel-execute-src-block)))
+and then name the block you want to execute automatically:
+
+** find-file : 
+(find-file-other-frame "~/ORG/brain/ai.el org.org")
+from (find-file-other-frame "~/INI/init.el")
+[[file:init.el Start of manual config.org::*all][init org]]
+
+(load "~/INI/babel-cfg.el")
+(org-babel-tangle)
+
+[[elisp:(org-babel-tangle)]]
+
+** auto-tangle-block : 
+#+NAME: auto-tangle-block
+#+begin_src emacs-lisp :results output silent :tangle no
+(setq org-src-preserve-indentation t)
+(untabify (point-min) (point-max))
+(save-buffer)
+(org-babel-tangle)
+(find-file-other-frame "~/INI/ai/ai.el")
+(load "~/INI/ai/ai.el")
+;; (load "~/INI/hydra-cfg.el")
+;; (load "~/ELs/BuYn/reader.el")
+ #+end_src
+
+* Source
+:PROPERTIES:
+:header-args: :tangle  "~/INI/ai/ai.el"
+:END:
+** comments 
+(find-file-other-frame "~/INI/ia/ai.el")
+;; --------------------------------------
+;; init.el --- Emacs configuration
+;; --------------------------------------
+;; * used in
+;; (find-file "~/INI/init.el")
+;; --------------------------------------
+** GPT Setup
+*** use-package gpt
+  (setq gpt-openai-engine "gpt-4")
+#+begin_src elisp
+(use-package gpt
+ :ensure t
+ :config
+  ;; (setq gpt-openai-key "sk-*")
+  (setq gpt-openai-engine "gpt-3.5-turbo")
+  (define-key evil-normal-state-map (kbd "M-a M-j M-o") 'gpt-dwim)
+  )
+
+#+end_src
+
+#+RESULTS:
+: t
+*** setq gpt-command-history
+**** def
+(setq gpt-command-history `(#("sumurize это на руский" 0 22 (ivy-index 0))
+                            #("sumurize" 0 8
+   (ivy-index 0))
+ #("Write a haiku about Emacs." 0 26
+   (ivy-index 0))))
+*** сделать по разным модам
+**** орг
+**** пайсон
+**** лисп 
+**** хтмл 
+*** возможно загружать из гидры
+aji
+
+** Gptel Setup
+*** use-package gptel
+  (custom-set-variables '(gptel-model "gpt-3.5-turbo"))
+#+begin_src emacs-lisp
+(use-package gptel
+ :ensure t
+ :config
+  (custom-set-variables '(gptel-model "gpt-3.5-turbo-16k"))
+  (define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-system-prompt)
+  (define-key evil-normal-state-map (kbd "M-a M-j M-j") 'gptel-send)
+  (define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-mode)
+  ;; (setq gpt-openai-key "sk-*")
+  (setq gptel-default-mode 'org-mode)
+)
+#+end_src
+
+#+RESULTS:
+: t
+*** (gptel-system-prompt)
+(gptel-system-prompt)
+You are a helpful assistant. Answer as concisely as possible.
+Reply only with shell commands and no prose.
+You are a poet. Reply only in verse.

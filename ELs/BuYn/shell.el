@@ -9,7 +9,7 @@
 ;; ** varibls
 ;; (setq path-to-emagus-cmd "d:/Development/lisp/Emacs/bin/runemacs.exe") 
 (setq path-to-emagus-cmd "D:/Development/lisp/Home/emacs_Run_home.cmd") 
-(setq path-to-far "D:/shell/FAR/Far.exe")
+(setq path-to-far "D://shell//FAR//Far.exe")
 (setq path-to-emagus-client "d:/Development/lisp/Emacs/bin/emacsclientw.exe -n -c -a ''") 
 (setq path-to-emagus-client-buyn "d:/Development/lisp/Emacs/bin/emacsclientw.exe -n -c -a 'buyn'") 
 ;; ** functions

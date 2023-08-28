@@ -48,6 +48,7 @@
 ;; **** use-package go-translate
 (use-package go-translate :ensure t
   ;; :init
+	:disabled
   :config
 	(setq go-translate-local-language "ru")
 	(setq go-translate-target-language "en")

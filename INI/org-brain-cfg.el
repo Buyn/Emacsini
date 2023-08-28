@@ -72,7 +72,7 @@
 ;; 8 If you feel that org-brain-visualize is too cluttered, you may want to set
 ;;  org-brain-show-resources and/or org-brain-show-text to nil.
   ;; (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12)
+  (setq org-brain-title-max-length 23)
 ;; 9 If you have very long entry names, org-brain-visualize may take a lot of horizontal
 ;;  space. You can cap the shown length of entry titles, by setting
 ;;  org-brain-title-max-length.

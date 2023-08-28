@@ -1,7 +1,5 @@
+;; * HYDRA CUSTOMIZATION
 (use-package hydra :ensure t
-  ;; :defer 2
-  ;; :bind ("C-c c" hydra-clock/body)
-;; *** END of use-package hydra
   )
 
 (defhydra spc-main-menu00 (:color blue)
@@ -20,18 +18,18 @@
     ("w" www-menu/body)
     ("e" hydra-emacs-menu/body)
     ("SPC" spc-main-menu01/body )
-		("y" hydra-yank-menu/body)
-		("n" spc-main-menu01/body)
-		("s" hydra-yasnippet/body )
-		("r" hydra-reader-menu/body )
-		("b" hydra-brain-org-menu/body)
-		("p" spc-main-menu99/body)
+    ("y" hydra-yank-menu/body)
+    ("n" spc-main-menu01/body)
+    ("s" hydra-yasnippet/body )
+    ("r" hydra-reader-menu/body )
+    ("b" hydra-brain-org-menu/body)
+    ("p" spc-main-menu99/body)
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-yasnippet ( :color pink
-							;; :hint nil
-							)
+              ;; :hint nil
+              )
 ;; **** Hint
   "
               ^YASnippets^
@@ -57,20 +55,20 @@
   ("a" yas-reload-all)
   ("q" nil "quit")
 ;; **** END )
-	)
+  )
 
 (fset 'mac-done-copy
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("dzadd`dpza``" 0 "%d")) arg)))
 
 (defun curent-time-format-hh-mm (p-h p-m)
   "curent-time-format-hh-mm"
-	(concat
-		(number-to-string (+ p-h (nth 2 (decode-time))))
-		":"
-		(let ((i (+ p-m (nth 1 (decode-time)))))
-			(if (> i  9)
-					(number-to-string i)
-					(concat "0" (number-to-string i))))))
+  (concat
+    (number-to-string (+ p-h (nth 2 (decode-time))))
+    ":"
+    (let ((i (+ p-m (nth 1 (decode-time)))))
+      (if (> i  9)
+          (number-to-string i)
+          (concat "0" (number-to-string i))))))
 
 (defhydra org-menu (:color pink)
 ;; ***** keys
@@ -80,35 +78,35 @@
     ("d" org-babel-demarcate-block "demarcate" :color blue)
     ("g" org-agenda "aGenda" :color blue )
     ("s" org-toggle-inline-images "Show image")
-		("q" nil ) 
-		("o" org-roam-menu/body "Org-rOam" :color blue)
+    ("q" nil ) 
+    ("o" org-roam-menu/body "Org-rOam" :color blue)
 ;; ****** D : 
     ("D" (progn
-					  ;; (nil/body) 
-						(evil-open-fold)
-					  (mac-done-copy)
-					  ;; (org-menu/body)
-					  ) "DoneMACRO" 
-							:color blue)
+            ;; (nil/body) 
+            (evil-open-fold)
+            (mac-done-copy)
+            ;; (org-menu/body)
+            ) "DoneMACRO" 
+              :color blue)
 ;; ****** h : 
     ("h" (org--deadline-or-schedule nil 'scheduled 
-							 (curent-time-format-hh-mm 1 0))
-					"H+1h"
-					:color blue)
+               (curent-time-format-hh-mm 1 0))
+          "H+1h"
+          :color blue)
 ;; ****** n : 
     ("n" (org--deadline-or-schedule nil 'scheduled 
-							 (curent-time-format-hh-mm 13 0))
-					"N+13h"
-					:color blue)
+               (curent-time-format-hh-mm 13 0))
+          "N+13h"
+          :color blue)
 ;; ****** b Idirect buffer : 
     ("b" (progn
-						(org-tree-to-indirect-buffer)
-						(define-key evil-normal-state-map (kbd "g SPC") 
-							`org-tree-to-indirect-buffer))
-					"BuffersInder"
-					:color blue)
+            (org-tree-to-indirect-buffer)
+            (define-key evil-normal-state-map (kbd "g SPC") 
+              `org-tree-to-indirect-buffer))
+          "BuffersInder"
+          :color blue)
 ;; ***** END of def
-	)
+  )
 
 (defhydra org-roam-menu (:color blue)
 ;; ***** keys
@@ -116,116 +114,117 @@
     ("c" org-roam-capture "Capture")
     ("g" org-roam-graph "graph")
     ("a" org-roam-alias-add "Alias Add")
-		("q" nil)
-		("D" org-id-get-create "iD get create")
-		("F" (dendroam-node-find-initial-input) "h-Find")
-		("f" org-roam-node-find "Find")
-		("r" org-roam-buffer-display-dedicated "dedicated-buffeR")
-		("SPC" org-roam-buffer-toggle "Roam-buffeR")
-		("j" org-roam-dailies-capture-today "joarnal")
-		("t" org-roam-tag-add "Tag-add")
-		("S" org-roam-ui-mode "Start/StopUI")
-		("z" org-roam-ui-node-zoom "Zoom")
-		("s" org-roam-ui-node-local "Show-node")
-		("R" org-roam-node-random "random")
-		("B" (org-roam-db-sync 'FORCE) "dB-Build")
+    ("q" nil)
+    ("D" org-id-get-create "iD get create")
+    ("F" (dendroam-node-find-initial-input) "h-Find")
+    ("f" org-roam-node-find "Find")
+    ("r" org-roam-buffer-display-dedicated "dedicated-buffeR")
+    ("SPC" org-roam-buffer-toggle "Roam-buffeR")
+    ("j" org-roam-dailies-capture-today "joarnal")
+    ("t" org-roam-tag-add "Tag-add")
+    ("S" org-roam-ui-mode "Start/StopUI")
+    ("z" org-roam-ui-node-zoom "Zoom")
+    ("s" org-roam-ui-node-local "Show-node")
+    ("R" org-roam-node-random "random")
+    ("B" (org-roam-db-sync 'FORCE) "dB-Build")
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-emacs-menu (:color blue)
 ;; ***** keys
 ;; ****** w : 
     ("w" (if (eq evil-state 'visual)
-								(query-replace
-														"/"
-														"\\"
-														nil
-														(region-beginning)
-														(region-end)
-														(current-kill 0 "DO-NOT-MOVE"))
-								(query-replace
-														"/"
-														"\\"
-														nil
-														nil
-														(current-kill 0 "DO-NOT-MOVE"))) "To Win Format")
+                (query-replace
+                            "/"
+                            "\\"
+                            nil
+                            (region-beginning)
+                            (region-end)
+                            (current-kill 0 "DO-NOT-MOVE"))
+                (query-replace
+                            "/"
+                            "\\"
+                            nil
+                            nil
+                            (current-kill 0 "DO-NOT-MOVE"))) "To Win Format")
 ;; ****** u : 
     ("u" (if (eq evil-state 'visual)
-								(query-replace
-														"\\"
-														"/"
-														nil
-														(region-beginning)
-														(region-end)
-														(current-kill 0 "DO-NOT-MOVE"))
-								(query-replace
-														"\\"
-														"/"
-														nil
-														nil
-														(current-kill 0 "DO-NOT-MOVE"))) "To unix Format")
+                (query-replace
+                            "\\"
+                            "/"
+                            nil
+                            (region-beginning)
+                            (region-end)
+                            (current-kill 0 "DO-NOT-MOVE"))
+                (query-replace
+                            "\\"
+                            "/"
+                            nil
+                            nil
+                            (current-kill 0 "DO-NOT-MOVE"))) "To unix Format")
 ;; ****** m : 
     ("m" (progn
-					(unless (fboundp 'mask_win_path)
-							(load-file "~/keymac/mask_win_path.el"))
-					(mask_win_path)) "maskSlesh")
+          (unless (fboundp 'mask_win_path)
+              (load-file "~/keymac/mask_win_path.el"))
+          (mask_win_path)) "maskSlesh")
 ;; ****** f : 
     ("f" hydra-emaks-fonts/body "fonts")
 ;; ****** E : 
     ("E" evil-mode "evil mode")
 ;; ****** R : 
-	("R" revert-buffer "revert buffer") 
+  ("R" revert-buffer "revert buffer") 
 ;; ****** W : 
-	("W" (revert-buffer-with-coding-system 'windows-1251) "win-1251") 
+  ("W" (revert-buffer-with-coding-system 'windows-1251) "win-1251") 
 ;; ****** q : 
-	("q" nil) 
+  ("q" nil) 
 ;; ****** s : 
-	("s" copy-to-register "savTex2reg" :color blue ) 
+  ("s" copy-to-register "savTex2reg" :color blue ) 
 ;; ****** i : 
-	("i" insert-register "insReg2buff" :color blue ) 
+  ("i" insert-register "insReg2buff" :color blue ) 
+  ("L" menu-bar--toggle-truncate-long-lines "long-lines")
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-emaks-fonts (:color blue)
   "fonts menu "
 ;; **** u : 
-	("u" (set-frame-font "Ubuntu Mono" nil nil)
-			  "UbuntuMono")
+  ("u" (set-frame-font "Ubuntu Mono" nil nil)
+        "UbuntuMono")
 ;; **** c : 
-	("c" (set-frame-font "comic sans ms" nil nil)
-			  "ComicSansMS")
+  ("c" (set-frame-font "comic sans ms" nil nil)
+        "ComicSansMS")
 ;; **** C : 
-	("C" (set-frame-font "comic Mono" nil nil)
-			  "ComicMono")
+  ("C" (set-frame-font "comic Mono" nil nil)
+        "ComicMono")
 ;; **** p : 
-	("p" (set-frame-font "Papyrus" nil nil)
-			  "Papyrus")
+  ("p" (set-frame-font "Papyrus" nil nil)
+        "Papyrus")
 ;; **** P : 
-	("P" (set-frame-font "Comic Papyrus" nil nil)
-			  "ComicPapyrus")
+  ("P" (set-frame-font "Comic Papyrus" nil nil)
+        "ComicPapyrus")
 ;; **** e : 
-	("e" (set-frame-font "Edwardian Script ITC" nil nil)
-			  "EdwardianS")
+  ("e" (set-frame-font "Edwardian Script ITC" nil nil)
+        "EdwardianS")
 ;; **** b : 
-	("b" (set-frame-font "Bamboo" nil nil)
-			  "Bamboo")
+  ("b" (set-frame-font "Bamboo" nil nil)
+        "Bamboo")
 ;; **** k : 
-	("k" (set-frame-font "Celtic Knots" nil nil)
-			  "KelticKnots")
+  ("k" (set-frame-font "Celtic Knots" nil nil)
+        "KelticKnots")
 ;; **** t : 
-	("t" (set-frame-font "Times New Roman" nil nil)
-			  "TimesNewRoman")
+  ("t" (set-frame-font "Times New Roman" nil nil)
+        "TimesNewRoman")
 ;; **** q : 
-	("q" nil "quit"))
+  ("q" nil "quit"))
 
 (defhydra www-menu (:color blue)
 ;; ***** hint
     "
-													^WWW  Menus^          
+                          ^WWW  Menus^          
 ──────────────────────────^──────────^───────────────────────
 _d_el buffer   _L_ist      _B_ookmarks  _v_isual  _r_enameBuf
 _S_earchOtherF _s_earch    _E_WordOthrF _W_itch     _p_ast&go          
-_Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit    
+_Y_ankPageUrl  _f_rameLink              _z_oom    _q_uit    
     "
 ;; ***** keys
 ;; ****** one-line keys
@@ -237,68 +236,68 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
     ("d" (kill-buffer (current-buffer)) :color red)
     ("z" hydra-zoom/body)
     ("r" rename-buffer)
-	("q" nil) 
+  ("q" nil) 
 ;; ****** "v" : 
     ("v" (progn
-			;; (global-visual-line-mode t)
-			(setq truncate-lines nil)
-			(setq line-move-visual t)
-			(setq word-wrap t)
-		   )
-	 )
+      ;; (global-visual-line-mode t)
+      (setq truncate-lines nil)
+      (setq line-move-visual t)
+      (setq word-wrap t)
+       )
+   )
 ;; ****** "s" : 
     ("s"  (
-			let (buffer-name-to-close (buffer-name))
-					(if (use-region-p)
-						(eww (buffer-substring
-								(region-beginning)
-								(region-end)))
-						(eww (buffer-substring
-								(line-beginning-position)
-								(line-beginning-position 2))))
-					(switch-to-buffer buffer-name-to-close)))
+      let (buffer-name-to-close (buffer-name))
+          (if (use-region-p)
+            (eww (buffer-substring
+                (region-beginning)
+                (region-end)))
+            (eww (buffer-substring
+                (line-beginning-position)
+                (line-beginning-position 2))))
+          (switch-to-buffer buffer-name-to-close)))
 ;; ****** "S" : 
     ("S"  (
-			let (buffer-name-to-close (buffer-name))
-					(evil-window-split)
-					(if (use-region-p)
-						(eww (buffer-substring
-								(region-beginning)
-								(region-end)))
-						(eww (buffer-substring
-								(line-beginning-position)
-								(line-beginning-position 2))))
-					(evil-quit)
-					(switch-to-buffer-other-frame buffer-name-to-close)))
+      let (buffer-name-to-close (buffer-name))
+          (evil-window-split)
+          (if (use-region-p)
+            (eww (buffer-substring
+                (region-beginning)
+                (region-end)))
+            (eww (buffer-substring
+                (line-beginning-position)
+                (line-beginning-position 2))))
+          (evil-quit)
+          (switch-to-buffer-other-frame buffer-name-to-close)))
 ;; ****** "E" : 
     ("E"  (
-			let (buffer-name-to-close (buffer-name))
-					(evil-window-split)
-					(if (use-region-p)
-							(eww-search-words)
-						(progn 
-								;; According to C-h f region-active-p, it seems that you should use use-region-p instead.
-								;; EDIT: I think that rebinding the key to the new command is a cleaner approach than the advice (other commands may be relying on the original version of eww-search).
-								;; (line-beginning-position)
-								;; (line-beginning-position 2)
-								;; (eww-search-words)))
-								(eww (read-string "Query: ")))
-					(evil-quit)
-					(switch-to-buffer-other-frame buffer-name-to-close))))
+      let (buffer-name-to-close (buffer-name))
+          (evil-window-split)
+          (if (use-region-p)
+              (eww-search-words)
+            (progn 
+                ;; According to C-h f region-active-p, it seems that you should use use-region-p instead.
+                ;; EDIT: I think that rebinding the key to the new command is a cleaner approach than the advice (other commands may be relying on the original version of eww-search).
+                ;; (line-beginning-position)
+                ;; (line-beginning-position 2)
+                ;; (eww-search-words)))
+                (eww (read-string "Query: ")))
+          (evil-quit)
+          (switch-to-buffer-other-frame buffer-name-to-close))))
 ;; ****** "Y" : 
     ("Y" (progn  
-			(setq x-select-enable-clipboard t)
-			(eww-copy-page-url)
-			(setq x-select-enable-clipboard nil)
-			))
+      (setq x-select-enable-clipboard t)
+      (eww-copy-page-url)
+      (setq x-select-enable-clipboard nil)
+      ))
 ;; ****** "p" : 
-	("p" (progn  
-			(setq x-select-enable-clipboard t)
-			(eww (current-kill 0 "DO-NOT-MOVE"))
-			(setq x-select-enable-clipboard nil)
-			))
+  ("p" (progn  
+      (setq x-select-enable-clipboard t)
+      (eww (current-kill 0 "DO-NOT-MOVE"))
+      (setq x-select-enable-clipboard nil)
+      ))
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-zoom (:color pink)
   ;; (global-map "C-c")
@@ -313,38 +312,41 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ;; (global-map "C-c")
   "yank menu"
   ("y" (progn  
-			(setq x-select-enable-clipboard t)
-			(kill-new (current-kill 0 "DO-NOT-MOVE"))
-			;; (message last-clip)
-			(setq x-select-enable-clipboard nil)
-			)
-		"reg2clipbord")
+      (setq x-select-enable-clipboard t)
+      (kill-new (current-kill 0 "DO-NOT-MOVE"))
+      ;; (message last-clip)
+      (setq x-select-enable-clipboard nil)
+      )
+    "reg2clipbord")
   ("s" (copy-to-buffer) "send2Buff")
   ("w" (progn  
-			(setq x-select-enable-clipboard t)
-			;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
-			;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
-			(org-eww-copy-for-org-mode)
-			(setq x-select-enable-clipboard nil)
-			)
-		"web-page2Org")
+      (setq x-select-enable-clipboard t)
+      ;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
+      ;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
+      (org-eww-copy-for-org-mode)
+      (setq x-select-enable-clipboard nil)
+      )
+    "web-page2Org")
   ("q" nil "quit")
-	;; --------------------------------------
+  ;; --------------------------------------
   )
 
 (defhydra hydra-dev-menu (:color red)
   ;; (global-map "C-c")
   "dev menu"
-	("c" company-mode "company")
-	("f" program-mode-hook-customize "fuze")
-	("o" outshine-mode "outshine")
-	("e" elpy-hydra/body "elpy" :color blue)
-	("p" python-mode "pyton")
-	("d" rainbow-delimiters-mode "delimiters")
-	("l" display-line-numbers-mode "line-numbers")
-	("y" hydra-yasnippet/body "yasnippet" :color blue)
-	("q" nil "quit")
-	)
+  ("c" company-mode "company")
+  ("f" program-mode-hook-customize "fuze")
+  ("o" outshine-mode "outshine")
+  ("e" elpy-hydra/body "elpy" :color blue)
+  ("p" python-mode "pyton")
+  ("d" rainbow-delimiters-mode "delimiters")
+  ("t" 
+(save-excursion (progn (org-babel-goto-named-src-block "auto-tangle-block") (org-babel-execute-src-block)))
+ "execute tangle" :color blue)
+  ("L" display-line-numbers-mode "line-numbers")
+  ("y" hydra-yasnippet/body "yasnippet" :color blue)
+  ("q" nil "quit")
+  )
 
 (defhydra elpy-hydra (:color blue)
   "
@@ -358,7 +360,7 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("q" nil "quit")
   ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
 ;; **** END )
-	)
+  )
 
 (defhydra elpy-nav-errors (:color red)
 ;; ***** Hint
@@ -375,33 +377,33 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   ("q" nil "quit")
   ("Q" (kill-buffer "*compilation*") "quit and kill compilation buffer" :color blue)
 ;; ***** END )
-	)
+  )
 
 (defhydra hydra-brain-org-menu (:color blue)
   ;; (global-map "C-c")
   "Org-Brain menu"
   ("i" (org-brain-get-id)
-		"addID2header")
+    "addID2header")
   ("I" (org-brain-headline-to-file)
-		"addID2All")
+    "addID2All")
   ("v" (org-brain-visualize "index")
-		"2index")
+    "2index")
   ("V" (org-brain-entry-at-pt)
-		"visualize-org")
+    "visualize-org")
   ("R" (org-brain-rename-file)
-		"rename-file")
+    "rename-file")
   ("U" (org-brain-update-id-location)
-		"updateID")
+    "updateID")
   ("F" (org-brain-headline-to-file)
-		"Hline2file")
+    "Hline2file")
   ;; ("w" (progn  
-	;; 		;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
-	;; 		;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
-	;; 		(org-eww-copy-for-org-mode)
-	;; 		)
-		;; "web-page2Org")
+  ;;    ;; (find-file-other-frame "~/ELs/org-eww/org-eww.el")
+  ;;    ;; (require 'org-eww "~/ELs/org-eww/org-eww.el")
+  ;;    (org-eww-copy-for-org-mode)
+  ;;    )
+    ;; "web-page2Org")
   ("q" nil "quit")
-	;; --------------------------------------
+  ;; --------------------------------------
   )
 
 (setq pixel-wait 0)
@@ -410,25 +412,25 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
   "Reader menu "
   ;; "Reader menu spd: %(* 10 (- 1 pixel-wait))"
 ;; **** r : 
-	("r" (if (bound-and-true-p pixel-scroll-mode)
-					(buyn-reader-end)
-					(buyn-reader-start))
-			  "toggle reader")
+  ("r" (if (bound-and-true-p pixel-scroll-mode)
+          (buyn-reader-end)
+          (buyn-reader-start))
+        "toggle reader")
 ;; **** f : 
-	("f" (setq pixel-wait (- pixel-wait 0.1))
-					(format "faster spd:%s" (- 1 pixel-wait)) :color pink)
+  ("f" (setq pixel-wait (- pixel-wait 0.1))
+          (format "faster spd:%s" (- 1 pixel-wait)) :color pink)
 ;; **** s : 
-	("s" (setq pixel-wait (+ pixel-wait 0.1)) "slower":color pink)
+  ("s" (setq pixel-wait (+ pixel-wait 0.1)) "slower":color pink)
 ;; **** t : 
-	("t" read-aloud-this "aloudThis")
+  ("t" read-aloud-this "aloudThis")
 ;; **** B : 
-	("B" read-aloud-buf "aloudBuffer")
+  ("B" read-aloud-buf "aloudBuffer")
 ;; **** s : 
-	("S" read-aloud-stop "StopAloud")
+  ("S" read-aloud-stop "StopAloud")
 ;; **** E : 
-	("E" read-aloud-change-engine "AloudEngine")
+  ("E" read-aloud-change-engine "AloudEngine")
 ;; **** q : 
-	("q" nil "quit"))
+  ("q" nil "quit"))
 ;; --------------------------------------
 
 (defhydra spc-main-menu01 (:color blue)
@@ -446,15 +448,15 @@ _Y_ankPageUrl  _f_rameLink              _z_oom		_q_uit
     ("q" nil)
     ("SPC" spc-main-menu98/body)
     ("c" calc)
-		("o" hydra-outline/body) 
-		("d" hydra-ediff/body) 
-		("t" hydra-transpose/body) 
-		("f" hydra-occur-dwim/body)
-		("p" spc-main-menu00/body)
-		("n" spc-main-menu98/body)
-	  ("l" lit-menu/body)
+    ("o" hydra-outline/body) 
+    ("d" hydra-ediff/body) 
+    ("t" hydra-transpose/body) 
+    ("f" hydra-occur-dwim/body)
+    ("p" spc-main-menu00/body)
+    ("n" spc-main-menu98/body)
+    ("l" lit-menu/body)
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-outline (:color pink :hint nil)
 ;; **** Hint
@@ -492,7 +494,7 @@ _d_: subtree
   ("z" nil "leave")
 ;; (global-set-key (kbd "C-c #") 'hydra-outline/body) ; by example
 ;; **** END )
-	)
+  )
 
 (defhydra hydra-ediff (:color blue :hint nil)
   "
@@ -515,7 +517,7 @@ _?_ help            _c_urrent file
   ("w" ediff-regions-wordwise)
   ("?" (info "(ediff) Introduction"))
 ;; **** END )
-	)
+  )
 
 (defhydra hydra-transpose (:color red)
 ;; **** Hint
@@ -531,7 +533,7 @@ _?_ help            _c_urrent file
      ("t" org-table-transpose-table-at-point "Org mode table")
      ("q" nil "cancel" :color blue)
 ;; **** END )
-	)
+  )
 
 (defhydra lit-menu (:color pink)
 ;; ***** hint
@@ -554,18 +556,18 @@ _?_ help            _c_urrent file
     ("a" flyspell-buffer)
     ;; ("R" ispell-change-dictionary "ru_RU")
     ("R" (progn
-						(ispell-change-dictionary "ru_RU")
-					  (flyspell-mode t)))
+            (ispell-change-dictionary "ru_RU")
+            (flyspell-mode t)))
     ("D" ispell-change-dictionary)
     ("E" (progn
-						(ispell-change-dictionary "en_US")
-					  (flyspell-mode t)))
-		;; ispell-change-dictionary "en_US")
+            (ispell-change-dictionary "en_US")
+            (flyspell-mode t)))
+    ;; ispell-change-dictionary "en_US")
     ("r" ispell-region)
     ("w" ispell-word :color pink)
-	("q" nil) 
+  ("q" nil) 
 ;; ***** END of def
-	)
+  )
 
 (defhydra spc-main-menu98 (:color blue)
 ;; ***** hint
@@ -573,27 +575,27 @@ _?_ help            _c_urrent file
     ^Main^             ^98^             ^  Menus^          
     ^─────^────────────^──^─────────────^───────^─────────
     _q_ quit  _R_evert-buffer  _L_ong-line 
-		_K_eyboard-sound  off_k_eyboard-sound 
+    _K_eyboard-sound  off_k_eyboard-sound 
     _p_rev-menu                     _SPC_ _n_ext-menu    
     "
 ;; ***** keys
   ("q" nil)
-	("R" revert-buffer)
-	("L" toggle-truncate-lines)
-	("K" (progn
-			(require 'async)
-			(defun play-keyboard-sound ()
-				(interactive)
-				(async-start
-					(play-sound-file "E:/Temp/wav/selectric-move.wav")))
-				(add-hook 'pre-command-hook 'play-keyboard-sound)))
+  ("R" revert-buffer)
+  ("L" toggle-truncate-lines)
+  ("K" (progn
+      (require 'async)
+      (defun play-keyboard-sound ()
+        (interactive)
+        (async-start
+          (play-sound-file "E:/Temp/wav/selectric-move.wav")))
+        (add-hook 'pre-command-hook 'play-keyboard-sound)))
 
-	("k" (remove-hook 'pre-command-hook 'play-keyboard-sound))
+  ("k" (remove-hook 'pre-command-hook 'play-keyboard-sound))
   ("SPC" spc-main-menu99/body)
-	("n" spc-main-menu99/body)
-	("p" spc-main-menu01/body)
+  ("n" spc-main-menu99/body)
+  ("p" spc-main-menu01/body)
 ;; ***** END of def
-	)
+  )
 
 (defhydra spc-main-menu99 (:color blue)
 ;; ***** hint
@@ -609,21 +611,21 @@ _?_ help            _c_urrent file
     ("i" org-clock-in)
     ("j" org-clock-goto)
     ("o" org-clock-out)
-	("h" hydra-help-menu/body)
+  ("h" hydra-help-menu/body)
     ;; ("r" org-clock-report)
-	("n" spc-main-menu00/body)
-	("p" spc-main-menu98/body)
-	("l" lit-menu/body)
+  ("n" spc-main-menu00/body)
+  ("p" spc-main-menu98/body)
+  ("l" lit-menu/body)
 ;; ***** END of def
-	)
+  )
 
 (defhydra hydra-help-menu (:color blue)
   ;; (global-map "C-c")
   "help menu"
-	("a" apropos "apropos")
-	("f" describe-face "describe-face")
-	("q" nil "quit")
-	)
+  ("a" apropos "apropos")
+  ("f" describe-face "describe-face")
+  ("q" nil "quit")
+  )
 
 (global-set-key (kbd "M-<SPC>") 'spc-main-menu00/body)
 

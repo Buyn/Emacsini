@@ -274,6 +274,10 @@
    (kmacro-lambda-form [?\C-c ?\C-l return ?\C-y return] 0 "%d"))
 (define-key evil-visual-state-map (kbd "M-e M-f M-l") 'get-named-link)
 (define-key evil-normal-state-map (kbd "M-e M-f M-l") 'insert-named-link)
+;; ** Regs Macross
+(define-key evil-normal-state-map (kbd "q") 'evil-execute-macro)
+(define-key evil-normal-state-map (kbd "Q Q") 'evil-record-macro)
+
 ;; ** find&replace  {{{
 ;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
