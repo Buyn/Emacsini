@@ -34,9 +34,38 @@ https://www.braveclojure.com/basic-emacs/
 (define-key evil-normal-state-map (kbd "Q Q") 'evil-record-macro)
 
 
+(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
+					(evil-window-vsplit)
+					(ivy-switch-buffer)))
+(define-key evil-normal-state-map "Zh" 'evil-window-vsplit)
+(define-key evil-normal-state-map "ZL"
+					'(lambda() (interactive)
+						(evil-window-vsplit)
+						(windmove-right)))
+(define-key evil-normal-state-map "Zl"
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-right
+						(ivy-switch-buffer))))
+(define-key evil-normal-state-map "ZK"
+					'(lambda() (interactive)
+						(evil-window-split)
+						(ivy-switch-buffer)))
+(define-key evil-normal-state-map "Zk" 'evil-window-split)
+(define-key evil-normal-state-map "ZJ" 
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-down)))
+(define-key evil-normal-state-map "Zj" 
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-down)
+						(ivy-switch-buffer)))
+
 (load "~/INI/ai/ai.el")
 (load "~/INI/translate-cfg.el")
 (load "~/.emacs.d/elpa/gptel-20230411.549/gptel.el")
+(load "~/../Dropbox/backup/file.el")
 
 
 ;; (fset 'get-named-link
@@ -51,6 +80,8 @@ https://www.braveclojure.com/basic-emacs/
 ;; (define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
 ;; 			(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
 ;; 		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
+(kill-buffer (current-buffer))
+(evil-quit)
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)

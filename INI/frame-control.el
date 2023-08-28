@@ -188,19 +188,47 @@
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 
+;; ** Split in new window {{{
+(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
+					(evil-window-vsplit)
+					(ivy-switch-buffer)))
+(define-key evil-normal-state-map "Zh" 'evil-window-vsplit)
+(define-key evil-normal-state-map "ZL"
+					'(lambda() (interactive)
+						(evil-window-vsplit)
+						(windmove-right)))
+(define-key evil-normal-state-map "Zl"
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-right
+						(ivy-switch-buffer))))
+(define-key evil-normal-state-map "ZK"
+					'(lambda() (interactive)
+						(evil-window-split)
+						(ivy-switch-buffer)))
+(define-key evil-normal-state-map "Zk" 'evil-window-split)
+(define-key evil-normal-state-map "ZJ" 
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-down)))
+(define-key evil-normal-state-map "Zj" 
+					'(lambda() (interactive)
+						(evil-window-split)
+						(windmove-down)
+						(ivy-switch-buffer)))
 ;; ** Buffer control  {{{
 (define-key evil-normal-state-map "ZI" '(lambda() (interactive)
 					(ivy-switch-buffer)))
-(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
-					;; (previous-buffer)))
-					(evil-prev-buffer)))
-(define-key evil-normal-state-map "ZL" '(lambda() (interactive)
-					(evil-next-buffer)))
+;; (define-key evil-normal-state-map "Zh" '(lambda() (interactive)
+;; 					;; (previous-buffer)))
+;; 					(evil-prev-buffer)))
+;; (define-key evil-normal-state-map "Zl" '(lambda() (interactive)
+;; 					(evil-next-buffer)))
 (define-key evil-normal-state-map "ZF" 'find-file-other-frame)
-(define-key evil-normal-state-map "ZK" '(lambda() (interactive)
-					(unbury-buffer)))
-(define-key evil-normal-state-map "ZJ" '(lambda() (interactive)
-					(bury-buffer)))
+;; (define-key evil-normal-state-map "Zk" '(lambda() (interactive)
+;; 					(unbury-buffer)))
+;; (define-key evil-normal-state-map "Zj" '(lambda() (interactive)
+;; 					(bury-buffer)))
 (define-key evil-normal-state-map "Zn" '(lambda() (interactive)
 					(evil-buffer-new 0 "*new*")))
 ;; --------------------------------------

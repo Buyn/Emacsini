@@ -16,7 +16,7 @@
 #+RESULTS:
 : : галлюцинации
 * link to 
-[[file:d:/Development/lisp/Dropbox/orgs/capture/holodeck.org::*Dredgers][Dredgers]]
+[[file:d:/Development/lisp/Dropbox/orgs/capture/Necroteuch.org::*Arch AI agent backlog][Arch AI agent backlog]]
 * Give 
 * Texts
 #+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
