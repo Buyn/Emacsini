@@ -216,6 +216,8 @@
 						(evil-window-split)
 						(windmove-down)
 						(ivy-switch-buffer)))
+(define-key evil-normal-state-map (kbd "Z S-<SPC> S-<SPC>") 'delete-other-windows)
+
 ;; ** Buffer control  {{{
 (define-key evil-normal-state-map "ZI" '(lambda() (interactive)
 					(ivy-switch-buffer)))

@@ -30,6 +30,18 @@ https://www.braveclojure.com/basic-emacs/
 
 (load "~/INI/babel-cfg.el")
 
+
+(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
+	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(evil-normal-state)
+		(query-replace
+			region-text
+			(read-string (concat "replace(" region-text "):")
+						nil
+						nil
+						(current-kill 0 "DO-NOT-MOVE"))
+			))))
+
 (define-key evil-normal-state-map (kbd "q") 'evil-execute-macro)
 (define-key evil-normal-state-map (kbd "Q Q") 'evil-record-macro)
 
@@ -61,6 +73,7 @@ https://www.braveclojure.com/basic-emacs/
 						(evil-window-split)
 						(windmove-down)
 						(ivy-switch-buffer)))
+(define-key evil-normal-state-map (kbd "Z S-<SPC> S-<SPC>") 'delete-other-windows)
 
 (load "~/INI/ai/ai.el")
 (load "~/INI/translate-cfg.el")
