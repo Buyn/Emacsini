@@ -282,6 +282,7 @@
 ;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
+		(exchange-point-and-mark)
 		(evil-normal-state)
 		(query-replace
 			region-text
