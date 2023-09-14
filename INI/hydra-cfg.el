@@ -630,3 +630,8 @@ _?_ help            _c_urrent file
 (global-set-key (kbd "M-<SPC>") 'spc-main-menu00/body)
 
 (define-key evil-normal-state-map (kbd "z M-=") 'lit-menu/body)
+
+(define-key evil-normal-state-map (kbd "M-a M-j M-o") 'lit-menu/body)
+
+(define-key evil-visual-state-map (kbd "M-a M-l M-w") 'ispell-region)
+(define-key evil-normal-state-map (kbd "M-a M-l M-w") 'ispell-word)

@@ -30,6 +30,8 @@ https://www.braveclojure.com/basic-emacs/
 
 (load "~/INI/babel-cfg.el")
 
+(define-key evil-visual-state-map (kbd "M-a M-l M-w") 'ispell-region)
+(define-key evil-normal-state-map (kbd "M-a M-l M-w") 'ispell-word)
 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
