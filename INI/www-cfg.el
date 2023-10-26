@@ -75,6 +75,10 @@
 ;; (define-key eww-mode-map (kbd "C-RET") 'open-link-in-new-frame)
 (define-key eww-mode-map (kbd "o o") 'eww)
 (define-key eww-mode-map (kbd "O O") 'eww-browse-with-external-browser)
+(define-key eww-mode-map (kbd "SPC") 'buyn-reader-go)
+(define-key eww-mode-map (kbd "S-SPC") 'evil-scroll-up)
+(define-key eww-mode-map (kbd "<f8>") 'read-aloud-buf)
+(define-key eww-mode-map (kbd "<f9>") 'read-aloud-stop)
 ;; --------------------------------------
 
 ;; ** hooks : 
@@ -86,7 +90,7 @@
 ;; (add-hook 'eww-mode-hook 'buyn-eww-hook)
 ;; *** eww-mode-hook : 
 ;; (add-hook 'eww-mode-hook #'toggle-word-wrap)
-;; (add-hook 'eww-mode-hook #'visual-line-mode)
+;; (add-hook 'eww-mode-hook #'buyn-reader-start)
 ;; --------------------------------------
 
 ;; *  --------------------------------------

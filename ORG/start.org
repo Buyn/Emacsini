@@ -30,6 +30,12 @@ https://www.braveclojure.com/basic-emacs/
 
 (load "~/INI/babel-cfg.el")
 
+(define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-system-prompt)
+(define-key evil-normal-state-map (kbd "M-a M-j M-j") 'gptel-send)
+(define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-menu)
+(define-key evil-normal-state-map (kbd "M-a M-j h") 'gptel-system-prompt)
+(define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-mode)
+
 (define-key evil-visual-state-map (kbd "M-a M-l M-w") 'ispell-region)
 (define-key evil-normal-state-map (kbd "M-a M-l M-w") 'ispell-word)
 
@@ -194,8 +200,11 @@ done - things I have completed. Gives feeling of satisfaction
 каждый сприн отдельный бранч.
 который мержится в меин
 приэтом сам бранч не удаляется остовляя какбы версии завершоного
-
-
+*** Ка.За.Ч.Ка
+**** КАк?
+**** ЗАчем?
+**** Что? 
+**** КудА? 
 *** Стадии Stages
 **** Concept Stage
 ***** табле
@@ -1285,6 +1294,19 @@ initial-scratch-message
 ;; (disable-theme 'material)
 #+end_src
 
+** emacs orgs
+*** 2023
+**** 07
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_GPT_2023-07-20.org")
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_EAF_2023-07-17.org")
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_sound_keys_2023-07-11.org")
+**** 06
+(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_ledger_2023-06-15.org")
+(find-file-other-frame "~/../Dropbox/orgs/adm/2023-06-08_trans.org")
+
+**** 05
+(find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
+(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
 
 ** init files
 *** root
@@ -1382,20 +1404,6 @@ initial-scratch-message
 и материалы на вощендшии пока в отдельные книги
 может быть вызана из любой книги
 шифт+ф1
-** emacs orgs
-*** 2023
-**** 07
-(find-file-other-frame "~/../Dropbox/orgs/code/emacs_GPT_2023-07-20.org")
-(find-file-other-frame "~/../Dropbox/orgs/code/emacs_EAF_2023-07-17.org")
-(find-file-other-frame "~/../Dropbox/orgs/code/emacs_sound_keys_2023-07-11.org")
-**** 06
-(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_ledger_2023-06-15.org")
-(find-file-other-frame "~/../Dropbox/orgs/adm/2023-06-08_trans.org")
-
-**** 05
-(find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
-(find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
-
 ** exempl
 (find-file "~/../hi.txt")
 *Help Docs Emacs 
@@ -1425,7 +1433,6 @@ server or call ‘M-x server-force-delete’ to forcibly disconnect it.
 #+begin_src emacs-lisp :tangle yes
 (server-start)
 #+end_src
-
 #+RESULTS:
 
 

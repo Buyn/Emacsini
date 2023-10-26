@@ -32,6 +32,9 @@ toggle-debug-on-error
 
 #+RESULTS:
 : : галлюцинации
+* remamber 
+** агомониан
+** робомон 
 * link to 
 [[file:d:/Development/lisp/Dropbox/orgs/capture/holodeck.org::*Archmage Rises :][Archmage Rises :]]
 * Give 

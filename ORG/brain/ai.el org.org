@@ -83,7 +83,9 @@ aji
   (custom-set-variables '(gptel-model "gpt-3.5-turbo-16k"))
   (define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-system-prompt)
   (define-key evil-normal-state-map (kbd "M-a M-j M-j") 'gptel-send)
-  (define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-mode)
+  (define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-menu)
+  (define-key evil-normal-state-map (kbd "M-a M-j h") 'gptel-system-prompt)
+  (define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-mode)
   ;; (setq gpt-openai-key "sk-*")
   (setq gptel-default-mode 'org-mode)
 )
@@ -91,7 +93,44 @@ aji
 
 #+RESULTS:
 : t
-*** (gptel-system-prompt)
+*** error
+**** googlet
+gptel let: Wrong number of arguments: setq, 1
+**** toggle-debug-on-error : 
+    Try using M-x toggle-debug-on-error, then include the resulting backtrace into the question. – 
+    wasamasa
+    Oct 31, 2016 at 10:58
+    I finally find the problem is caused by using 'subfigure' package in my latex file. And this problem has been solved by changing 'subfigure.el'. And specific salutation is given in link. Hope this helps. – 
+    Raymond
+    Oct 31, 2016 at 11:02
+
+Add a comment
+2 Answers
+Sorted by:
+2
+
+As I said in https://emacs.stackexchange.com/questions/28155/unable-to-update-packages-on-emacs-25-1#comment43164_28155 one of the changes in emacs is that now setq requires an even number of arguments. If you set the debug-on-error variable to t then when you get this error you should enter the debugger and see where the error is coming from. Adding nil as a final argument should resolve your problem.
+
+ (setq in-src-block nil)
+ (setq in-src-block )
+**** я этог не ожидал но я его подченил 
+[[file:~/.emacs.d/elpa/gptel-20230411.549/gptel.el::letrec ((in-src-block nil]]
+поменял исходник с
+  (letrec ((in-src-block)
+на
+  (letrec ((in-src-block nil)
+*** Docs 
+**** Promts
+***** gptel--system-message
+(setq gptel--system-message "You are a large language model living in Emacs and a helpful assistant.")
+***** gptel-menu
+откроет меню с настройками 
+  (define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-menu)
+***** 
+  (define-key evil-normal-state-map (kbd "M-a M-j h") 'gptel-system-prompt)
+***** 
+  (define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-mode)
+** (gptel-system-prompt)
 (gptel-system-prompt)
 You are a helpful assistant. Answer as concisely as possible.
 Reply only with shell commands and no prose.

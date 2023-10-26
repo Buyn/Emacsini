@@ -26,11 +26,12 @@
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(fci-rule-color "#37474f")
+ '(gptel-model "gpt-3.5-turbo-16k")
  '(hl-sexp-background-color "#1c1f26")
  '(org-agenda-files
 	 '("d:/Development/lisp/Dropbox/Office/Research/Doc/Grimoire/Grimoire.org" "~/../Dropbox/orgs/GTD/todo_today.org" "~/../Dropbox/orgs/GTD/todo_nottoday.org"))
  '(package-selected-packages
-	 '(doom-themes hledger-mode obsidian dendroam org-roam-ui "org-roam" gnu-elpa-keyring-update org-roam aide gptel yaml-mode "org-recipes" org-recipes projectile "chess.el" "chess" ob-dot graphviz-dot-mode jedi company-jedi fb2-mode request ahk-mode evil-mc multiple-cursors go-translate popup skewer-mode read-aloud undo-fu plantuml-mode reverse-im telega sublimity minimap minimap-mode powerline company-fuzzy miracle clojure-mode expand-region hydra flycheck lua-mode elpy rainbow-delimiters yasnippet-snippets yasnippet company quelpa-use-package outshine ob-translate material-theme ivy evil-tabs better-defaults avy))
+	 '(leafy leafy-mode doom-themes hledger-mode obsidian dendroam org-roam-ui "org-roam" gnu-elpa-keyring-update org-roam aide gptel yaml-mode "org-recipes" org-recipes projectile "chess.el" "chess" ob-dot graphviz-dot-mode jedi company-jedi fb2-mode request ahk-mode evil-mc multiple-cursors go-translate popup skewer-mode read-aloud undo-fu plantuml-mode reverse-im telega sublimity minimap minimap-mode powerline company-fuzzy miracle clojure-mode expand-region hydra flycheck lua-mode elpy rainbow-delimiters yasnippet-snippets yasnippet company quelpa-use-package outshine ob-translate material-theme ivy evil-tabs better-defaults avy))
  '(safe-local-variable-values
 	 '((eval let nil
 					 (org-babel-goto-named-src-block "startblock")

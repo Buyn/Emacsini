@@ -10,7 +10,7 @@
 ;; ** fb2-mode
 ;; *** load
 ;; (add-to-list 'load-path "~/ELs/Readers/fb2-mode")
-;; *** use-package read-aloud : 
+;; *** use-package fb2-mode : 
 (use-package fb2-mode
 	;; :ensure t
 	:load-path "~/ELs/Readers/fb2-mode"
@@ -19,6 +19,12 @@
 	:config
 (add-to-list 'auto-mode-alist '("\\.fb2\\'" . fb2-mode))
 (add-to-list 'auto-mode-alist '("\\.fb\\'" . fb2-mode))
+
+;; (define-key fb2-mode-map (kbd "<f9>") 'read-aloud-stop)
+;; (define-key fb2-mode-map (kbd "SPC") 'buyn-reader-go)
+;; (define-key fb2-mode-map (kbd "S-SPC") 'evil-scroll-up)
+
+;; (add-hook 'fb2-mode-hook #'toggle-word-wrap)
 ;; *** ===========END========= ) : 
 	)
 ;; *** Docs
