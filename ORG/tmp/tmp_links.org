@@ -36,13 +36,7 @@ toggle-debug-on-error
 ** агомониан
 ** робомон 
 * link to 
-
-
-[[file:d:/Development/lisp/init/INI/AI/ai.el:::disable]]
-
-[[file:d:/Development/lisp/init/INI/dev/clojure-cfg.el:::disable]]
-[[file:d:/Development/lisp/init/INI/autocomplete-cfg.el:::disabled]]
-
+[[file:d:/Development/lisp/Dropbox/Office/Research/game/brain/mudrog.org::*Emacs+mud+rogalike][Emacs+mud+rogalike]]
 * Give 
 * Texts
 #+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng

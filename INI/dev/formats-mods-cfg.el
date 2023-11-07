@@ -13,7 +13,7 @@
 ;; (find-file-other-frame "~/ELs/formats/YAML/yaml-mode.el")
 ;; *** use-package read-aloud : 
 (use-package yaml-mode
-	;; :ensure t
+	:ensure t
 	:load-path "~/ELs/formats/YAML/yaml-mode.el"
 	;; :init
 ;; *** :config : 

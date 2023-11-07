@@ -80,6 +80,7 @@
 (use-package jedi 
 	:ensure t
 	;; :init
+  ;; :disabled
 	;; (elpy-enable)
 	:config
 	; move quick-help tooltips to the minibuffer

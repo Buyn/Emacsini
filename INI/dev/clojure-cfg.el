@@ -13,7 +13,9 @@
 ;; (unless (package-installed-p 'clojure-mode)
 ;;   (package-install 'clojure-mode))
 (require 'use-package)
-(use-package clojure-mode :ensure t
+(use-package clojure-mode
+	:ensure t
+	;; :disabled
 ;; *** :config
 	;; :config
 	;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)

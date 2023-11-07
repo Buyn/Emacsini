@@ -66,7 +66,9 @@
 ;; *** --------------------------------------
 
 ;; ** COMPANY GRAPHVIZ DOT:
-(use-package company-graphviz-dot)
+(use-package company-graphviz-dot
+	:disabled
+	:ensure t)
 ;;  --------------------------------------
 ;; * DITAA MODE
 (use-package ob-ditaa 
