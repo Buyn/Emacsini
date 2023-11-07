@@ -79,3 +79,50 @@
 	(find-file-other-frame "~/ELs/tts/tts-editor/tts-editor.el")
 	(find-file-other-frame "~/ELs/BuYn/tts.el")
 	----- not auto loadet -----
+* visdot
+** use-package
+#+begin_src elisp :results output silent
+(use-package a :ensure t)
+(use-package xmlgen :ensure t)
+
+(load "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+(find-file-other-frame "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+
+
+(use-package a :ensure t)
+(use-package xmlgen :ensure t)
+(find-file-other-frame "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+(load "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+
+(find-file-other-frame "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+(find-file-other-frame "D:/Development/lisp/Dropbox/Office/Research/game/brain/1.dot")
+(load "D:/Development/lisp/Home/ELs/Org/Brain/org-brain-export/org-brain-export.el")
+
+
+M-x org-brain-export-dot	Export whole brain to dot format.
+M-x org-brain-export-dot-entry	Export current entry to dot. Respects descendants/ancestors in mind-map mode.
+
+#+begin_src elisp :results output silent
+(org-brain-export-dot "D:/Development/lisp/Dropbox/Office/Research/game/1.dot")
+(find-file-other-frame "D:/Development/lisp/Dropbox/Office/Research/game/1.dot")
+#+end_src
+
+#+RESULTS:
+: #<buffer 1.dot>
+
+
+** src 
+#+begin_src elisp :results output silent
+(org-brain-export-dot "E:/Temp/dot/emacs.dot")
+(find-file-other-frame "E:/Temp/dot/emacs.dot")
+#+end_src
+
+(find-file-other-frame "E:/Temp/dot/game.dot")
+** png 
+E:\Temp\dot\emacs.png 
+

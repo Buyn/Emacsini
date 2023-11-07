@@ -70,8 +70,8 @@
 ;; * DENDROAM CUSTOMIZATION
 ;; ** use-package : 
 (use-package dendroam
-	;; :quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
-	;; :ensure t
+	:quelpa (dendroam :repo "vicrdguez/dendroam" :fetcher github)
+	:ensure t
   :after org-roam
 	;; :demand t
 ;; ** config : 

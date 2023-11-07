@@ -24,6 +24,13 @@
 	(define-key evil-normal-state-map (kbd "M-f") 'avy-goto-word-1)
 	)
 ;; --------------------------------------
+;; * WHICH-KEY CUSTOMIZATION
+;; --------------------------------------
+(use-package which-key
+	:ensure t
+	:config
+		(which-key-mode))
+;; --------------------------------------
 
 ;;  --------------------------------------
 ;; * POWERLINE CUSTOMIZATION

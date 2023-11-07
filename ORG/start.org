@@ -30,65 +30,10 @@ https://www.braveclojure.com/basic-emacs/
 
 (load "~/INI/babel-cfg.el")
 
-(define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-system-prompt)
-(define-key evil-normal-state-map (kbd "M-a M-j M-j") 'gptel-send)
-(define-key evil-normal-state-map (kbd "M-a M-j M-h") 'gptel-menu)
-(define-key evil-normal-state-map (kbd "M-a M-j h") 'gptel-system-prompt)
-(define-key evil-normal-state-map (kbd "M-a M-j M-S-h") 'gptel-mode)
-
-(define-key evil-visual-state-map (kbd "M-a M-l M-w") 'ispell-region)
-(define-key evil-normal-state-map (kbd "M-a M-l M-w") 'ispell-word)
-
-(define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
-	(let ((region-text (buffer-substring (region-beginning) (region-end))))
-		(exchange-point-and-mark)
-		(evil-normal-state)
-		(query-replace
-			region-text
-			(read-string (concat "replace(" region-text "):")
-						nil
-						nil
-						(current-kill 0 "DO-NOT-MOVE"))
-			))))
-
-(define-key evil-normal-state-map (kbd "q") 'evil-execute-macro)
-(define-key evil-normal-state-map (kbd "Q Q") 'evil-record-macro)
-
-
-(define-key evil-normal-state-map "ZH" '(lambda() (interactive)
-					(evil-window-vsplit)
-					(ivy-switch-buffer)))
-(define-key evil-normal-state-map "Zh" 'evil-window-vsplit)
-(define-key evil-normal-state-map "ZL"
-					'(lambda() (interactive)
-						(evil-window-vsplit)
-						(windmove-right)))
-(define-key evil-normal-state-map "Zl"
-					'(lambda() (interactive)
-						(evil-window-split)
-						(windmove-right
-						(ivy-switch-buffer))))
-(define-key evil-normal-state-map "ZK"
-					'(lambda() (interactive)
-						(evil-window-split)
-						(ivy-switch-buffer)))
-(define-key evil-normal-state-map "Zk" 'evil-window-split)
-(define-key evil-normal-state-map "ZJ" 
-					'(lambda() (interactive)
-						(evil-window-split)
-						(windmove-down)))
-(define-key evil-normal-state-map "Zj" 
-					'(lambda() (interactive)
-						(evil-window-split)
-						(windmove-down)
-						(ivy-switch-buffer)))
-(define-key evil-normal-state-map (kbd "Z S-<SPC> S-<SPC>") 'delete-other-windows)
-
-(load "~/INI/ai/ai.el")
-(load "~/INI/translate-cfg.el")
-(load "~/.emacs.d/elpa/gptel-20230411.549/gptel.el")
-(load "~/../Dropbox/backup/file.el")
-
+(use-package which-key
+	:ensure t
+	:config
+		(which-key-mode))
 
 ;; (fset 'get-named-link
 ;;    (kmacro-lambda-form [?y ?\C-c ?l] 0 "%d"))
@@ -1284,13 +1229,17 @@ initial-scratch-message
 ** Brain
 #+begin_src emacs-lisp :results code silent output 
 ;; (package-refresh-contents)
+(org-brain-switch-brain "~/ORG/brain/")
 (setq org-brain-path "~/ORG/brain/")
 (setq org-id-track-globally t)
 (setq org-id-locations-file "~/ORG/brain/.org-id-locations")
-(org-brain-switch-brain "~/ORG/brain/")
 (find-file-other-frame "~/ORG/brain/index.org")
+(setq org-brain-data-file "~/ORG/brain/.org-brain-data.el");not need
 (org-brain-visualize "index")
+
+(use-package solarized-theme :ensure t)
 (load-theme 'solarized-dark t)
+
 ;; (disable-theme 'material)
 #+end_src
 
