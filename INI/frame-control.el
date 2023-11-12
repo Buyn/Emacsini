@@ -165,7 +165,7 @@
 ;; --------------------------------------
 ;; ** FRAMS CLOSE  {{{
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
-					(delete-frame)))
+					(kill-buffer (current-buffer))))
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)
 					(kill-buffer (current-buffer))
 					(evil-quit)))
@@ -178,15 +178,14 @@
 					(kill-buffer (current-buffer))
 					(evil-quit)))
 (define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					))
+					(evil-quit)))
 (define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
 					(evil-quit)
 					(org-save-all-org-buffers)))
 (define-key evil-normal-state-map "ZC" '(lambda() (interactive)
 					(save-buffer)
 					(kill-buffer (current-buffer))
-					(evil-quit)))
+					))
 
 ;; ** Split in new window {{{
 (define-key evil-normal-state-map "ZH" '(lambda() (interactive)

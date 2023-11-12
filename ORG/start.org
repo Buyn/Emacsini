@@ -1102,6 +1102,32 @@ open macros file
 (find-file-other-frame "~/keymac/convert-ru-point.el")
 #+end_src
 
+*** functions +-
+**** lisp
+#+begin_src emacs-lisp  :results output silent
+(defun buyn-org-table-change ( value)
+	(org-table-get-field nil (number-to-string (+ value (string-to-number (org-table-get-field))))))
+
+(global-set-key (kbd "<f5>") '(lambda () (interactive)
+																(buyn-org-table-change -1)
+																(org-table-recalculate)))
+
+(global-set-key (kbd "<f6>") '(lambda () (interactive)
+																(buyn-org-table-change 1)
+																(org-table-recalculate)))
+
+
+
+#+end_src
+**** load-file 
+#+begin_src emacs-lisp :results output silent
+(load-file "~/keymac/function-+.el")
+#+end_src
+
+**** find-file-other-frame : 
+#+begin_src emacs-lisp :results output silent
+(find-file-other-frame "~/keymac/function-+.el")
+#+end_src
 ** Calc
 *** random
 **** exempls
