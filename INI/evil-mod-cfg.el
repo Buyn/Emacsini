@@ -344,6 +344,8 @@
 ;; -------------------------------------- 
 ;; ** TAB on c-i not used
 ;; (define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
+;; ** Undo and Redo
+(evil-set-undo-system 'undo-redo)
 ;; -------------------------------------- 
 ;; -------------------------------------- 
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  

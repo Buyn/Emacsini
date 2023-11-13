@@ -43,6 +43,8 @@ https://www.braveclojure.com/basic-emacs/
 	:config
 		(which-key-mode))
 
+(evil-set-undo-system 'undo-redo)
+
 (define-key evil-normal-state-map "ZD" '(lambda() (interactive)
 					(kill-buffer (current-buffer))))
 (define-key evil-normal-state-map "ZX" '(lambda() (interactive)
