@@ -24,6 +24,36 @@
 	(define-key evil-normal-state-map (kbd "M-f") 'avy-goto-word-1)
 	)
 ;; --------------------------------------
+;; * DIMINISH CUSTOMIZATION
+;; --------------------------------------
+(use-package diminish
+  :ensure t
+  :init
+  (diminish 'which-key-mode)
+  ;; (diminish 'linum-relative-mode)
+  ;; (diminish 'hungry-delete-mode)
+  ;; (diminish 'subword-mode)
+  ;; (diminish 'beacon-mode)
+  ;; (diminish 'irony-mode)
+  ;; (diminish 'page-break-lines-mode)
+  ;; (diminish 'auto-revert-mode)
+  (diminish 'rainbow-delimiters-mode)
+  (diminish 'rainbow-mode)
+  (diminish 'org-roam-ui-mode)
+  (diminish 'yas-minor-mode)
+  ;; (diminish 'yas-minor-mode)
+  ;; (diminish 'flycheck-mode)
+  (diminish 'ivy-mode)
+  (diminish 'outshine-mode)
+  ;; (diminish 'outline-mode)
+  (diminish 'company-fuzzy-mode " CpF")
+  (diminish 'outline-minor-mode)
+  (diminish 'ComFuz-mode)
+	;; (diminish 'subword-mode)
+	(diminish 'visual-line-mode)
+  ;; (diminish '+3-mode)
+  (diminish 'helm-mode))
+;; --------------------------------------
 ;; * WHICH-KEY CUSTOMIZATION
 ;; --------------------------------------
 (use-package which-key

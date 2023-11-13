@@ -67,8 +67,33 @@ https://www.braveclojure.com/basic-emacs/
 					(save-buffer)
 					(kill-buffer (current-buffer))
 					))
+
+(use-package diminish
+  :ensure t
+  :init
+  (diminish 'which-key-mode)
+  ;; (diminish 'linum-relative-mode)
+  ;; (diminish 'hungry-delete-mode)
+  ;; (diminish 'subword-mode)
+  ;; (diminish 'beacon-mode)
+  ;; (diminish 'irony-mode)
+  ;; (diminish 'page-break-lines-mode)
+  ;; (diminish 'auto-revert-mode)
+  (diminish 'rainbow-delimiters-mode)
+  (diminish 'rainbow-mode)
+  (diminish 'org-roam-ui-mode)
+  (diminish 'yas-minor-mode)
+  ;; (diminish 'yas-minor-mode)
+  ;; (diminish 'flycheck-mode)
+  (diminish 'ivy-mode)
+	(diminish 'subword-mode)
+	(diminish 'visual-line-mode)
+  ;; (diminish '+3-mode)
+  (diminish 'helm-mode))
+
 (kill-buffer (current-buffer))
 (evil-quit)
+
  #+end_src
 #+begin_src emacs-lisp :tangle yes
 		(require 'org-roam)
