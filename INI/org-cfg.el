@@ -151,9 +151,11 @@
 ;; *** ORG Table
 ;; (global-set-key (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; move to 
-;; org-mode-map), which is an interactive autoloaded compiled Lisp
 ;; (define-key evil-normal-state-map (kbd "C-c <C-return>") 'org-table-insert-row)
 (define-key org-mode-map (kbd "C-c <C-return>") 'org-table-insert-row)
+;; (global-unset-key (kbd "<S-UP>"))
+;; (define-key org-mode-map (kbd "<S-UP>") 'org-table-move-cell-up)
+
 ;; ** ORG agenda customization
 (use-package org-agenda
   :config

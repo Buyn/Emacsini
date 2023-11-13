@@ -342,8 +342,8 @@
 ;; ** toggle input method in evil normal state
 (define-key evil-normal-state-map(kbd "C-\\") 'toggle-input-method)
 ;; -------------------------------------- 
-;; ** TAB on c-i
-(define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
+;; ** TAB on c-i not used
+;; (define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
 ;; -------------------------------------- 
 ;; -------------------------------------- 
 ;; * EVIL COMMANDS RESPECT INPUT METHOD  

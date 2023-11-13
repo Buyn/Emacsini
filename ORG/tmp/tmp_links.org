@@ -14,7 +14,6 @@ toggle-debug-on-error
 ** 
 ** Answer always in English.
 , answer like a Gamemaster.
-
 * translate : 
 ** from ru
 #+begin_src translate 

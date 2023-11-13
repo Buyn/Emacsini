@@ -33,6 +33,11 @@ https://www.braveclojure.com/basic-emacs/
 (setq google-translate-translation-directions-alist
 			'(("ru" . "en") ("en" . "ru") ("ru" . "uk")))
 
+;; (define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
+;; (yas-expand &optional ARG1)
+	
+(define-key evil-insert-state-map (kbd "<tab>") 'yas-expand)
+
 (use-package which-key
 	:ensure t
 	:config
