@@ -270,7 +270,10 @@ aункции для работы все отсюда
     ("SPC" org-roam-buffer-toggle "Roam-buffeR")
     ("j" org-roam-dailies-capture-today "joarnal")
     ("t" org-roam-tag-add "Tag-add")
-    ("S" org-roam-ui-mode "Start/StopUI")
+    ("S"
+		 (progn
+			 (org-roam-ui-mode)
+			 (message "server start on: http://127.0.0.1:35901/")) "Start/StopUI")
     ("z" org-roam-ui-node-zoom "Zoom")
     ("s" org-roam-ui-node-local "Show-node")
     ("R" org-roam-node-random "random")
@@ -278,6 +281,9 @@ aункции для работы все отсюда
 ;; ***** END of def
   )
 #+end_src
+
+#+RESULTS:
+: org-roam-menu/body
 
 ;; --------------------------------------
 ;; **** Bind
