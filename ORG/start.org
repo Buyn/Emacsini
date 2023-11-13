@@ -30,23 +30,36 @@ https://www.braveclojure.com/basic-emacs/
 
 (load "~/INI/babel-cfg.el")
 
+(setq google-translate-translation-directions-alist
+			'(("ru" . "en") ("en" . "ru") ("ru" . "uk")))
+
 (use-package which-key
 	:ensure t
 	:config
 		(which-key-mode))
 
-;; (fset 'get-named-link
-;;    (kmacro-lambda-form [?y ?\C-c ?l] 0 "%d"))
-;; (fset 'insert-named-link
-;;    (kmacro-lambda-form [?\C-c ?\C-l return ?\C-y return] 0 "%d"))
-;; (define-key evil-visual-state-map (kbd "M-e M-f M-l") 'get-named-link)
-;; (define-key evil-normal-state-map (kbd "M-e M-f M-l") 'insert-named-link)
-;; (define-key evil-visual-state-map (kbd "M-o M-f") '(lambda() (interactive)
-;; 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
-;; 		(occur region-text))))
-;; (define-key evil-visual-state-map (kbd "M-e M-p M-o") '(lambda() (interactive)
-;; 			(projectile-multi-occur (buffer-substring (region-beginning) (region-end)))))
-;; 		(define-key evil-normal-state-map (kbd "M-e M-p M-o") 'projectile-multi-occur)
+(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
+					(kill-buffer (current-buffer))))
+(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+(define-key evil-normal-state-map "ZW" '(lambda() (interactive)
+					(evil-quit)))
+(define-key evil-normal-state-map "ZE" '(lambda() (interactive)
+					(save-buffer)
+					(evil-quit)))
+(global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
+					(kill-buffer (current-buffer))
+					(evil-quit)))
+(define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
+					(evil-quit)))
+(define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
+					(evil-quit)
+					(org-save-all-org-buffers)))
+(define-key evil-normal-state-map "ZC" '(lambda() (interactive)
+					(save-buffer)
+					(kill-buffer (current-buffer))
+					))
 (kill-buffer (current-buffer))
 (evil-quit)
  #+end_src
