@@ -1,8 +1,56 @@
+[[elisp:(let () (org-babel-goto-named-src-block "startblock") (org-babel-execute-src-block))][Open all from src block]]
 * Wellcome! Don`t panic!
 ** Set
 #-*- mode: org -*-
 #+STARTUP: overview 
 #+TODO: TODO DONE
+
+*** startblock
+работает только в первой строке фала
+но не в один из файлов из орг моде саптура добовлять не смтоит
+поскольку они подгружаются и проверяются в неожиданые моменты
+что будт приводить к выполнеию скрипта
+# -*- eval: (let () (org-babel-goto-named-src-block "startblock") (org-babel-execute-src-block)); -*-
+(let () (org-babel-goto-named-src-block "startblock") (org-babel-execute-src-block))
+(progn (org-babel-goto-named-src-block "startblock") (org-babel-execute-src-block))
+and then name the block you want to execute automatically:
+#+NAME: startblock
+#+BEGIN_SRC emacs-lisp :results output silent
+(set-frame-position nil
+										(car buyn-monitr-1-position-3)
+										(cadr buyn-monitr-1-position-3))
+
+;; (load-file "~/keymac/mac-done-copy.el")
+;; (find-file-other-frame "~/../Dropbox/orgs/GTD/todo_nottoday.org")
+;; (find-file-other-frame "~/../Dropbox/orgs/GTD/todo_onceuponatime.org")
+
+;; (find-file-other-frame "~/../Dropbox/orgs/GTD/todo_today.org")
+
+;; (run-at-time "5 sec" nil '(lambda ()
+;; 	(let	((fname "todo_nottoday.org"))
+;; 							(let ((fobject (buyn-get-frame-by-name fname)))
+;; 									(set-frame-size fobject 75 25)
+;; 									(set-frame-position fobject
+;; 																			(car buyn-monitr-1-position-7)
+;; 																			(cadr buyn-monitr-1-position-7))))
+;; 	(let	((fname "todo_onceuponatime.org"))
+;; 				(let ((fobject (buyn-get-frame-by-name fname)))
+;; 						(set-frame-size fobject 75 25)
+;; 						(set-frame-position fobject
+;; 																(car buyn-monitr-1-position-1)
+;; 																(cadr buyn-monitr-1-position-1))))
+;; 	(let	((fname "todo_today.org"))
+;; 				(let ((fobject (buyn-get-frame-by-name fname)))
+;; 						(set-frame-size fobject 75 25)
+;; 						(set-frame-position fobject
+;; 																(car buyn-monitr-1-position-9)
+;; 																(cadr buyn-monitr-1-position-9))))))
+
+(evil-close-folds)
+#+END_SRC
+
+#+RESULTS: startblock
+: Hi from block
 ** Like a craftsman entering his workshop :
 Whenever I open Emacs, I feel inspired. Like a craftsman entering his workshop, I feel a realm of possibility open before me. I feel the comfort of an environment that has evolved over time to fit me perfectly—an assortment of packages and key bindings that help me bring ideas to life day after day.
 https://www.braveclojure.com/basic-emacs/
@@ -26,70 +74,7 @@ https://www.braveclojure.com/basic-emacs/
 ** progn :
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
-;; (load "~/ELs/BuYn/reader.el")
 
-(load "~/INI/babel-cfg.el")
-
-(setq google-translate-translation-directions-alist
-			'(("ru" . "en") ("en" . "ru") ("ru" . "uk")))
-
-;; (define-key evil-insert-state-map (kbd "C-i") 'tab-to-tab-stop)
-;; (yas-expand &optional ARG1)
-	
-(define-key evil-insert-state-map (kbd "<tab>") 'yas-expand)
-
-(use-package which-key
-	:ensure t
-	:config
-		(which-key-mode))
-
-(evil-set-undo-system 'undo-redo)
-
-(define-key evil-normal-state-map "ZD" '(lambda() (interactive)
-					(kill-buffer (current-buffer))))
-(define-key evil-normal-state-map "ZX" '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					(evil-quit)))
-(define-key evil-normal-state-map "ZW" '(lambda() (interactive)
-					(evil-quit)))
-(define-key evil-normal-state-map "ZE" '(lambda() (interactive)
-					(save-buffer)
-					(evil-quit)))
-(global-set-key (kbd " M-g M-t M-z M-x") '(lambda() (interactive)
-					(kill-buffer (current-buffer))
-					(evil-quit)))
-(define-key evil-normal-state-map "ZQ" '(lambda() (interactive)
-					(evil-quit)))
-(define-key evil-normal-state-map "ZZ" '(lambda() (interactive)
-					(evil-quit)
-					(org-save-all-org-buffers)))
-(define-key evil-normal-state-map "ZC" '(lambda() (interactive)
-					(save-buffer)
-					(kill-buffer (current-buffer))
-					))
-
-(use-package diminish
-  :ensure t
-  :init
-  (diminish 'which-key-mode)
-  ;; (diminish 'linum-relative-mode)
-  ;; (diminish 'hungry-delete-mode)
-  ;; (diminish 'subword-mode)
-  ;; (diminish 'beacon-mode)
-  ;; (diminish 'irony-mode)
-  ;; (diminish 'page-break-lines-mode)
-  ;; (diminish 'auto-revert-mode)
-  (diminish 'rainbow-delimiters-mode)
-  (diminish 'rainbow-mode)
-  (diminish 'org-roam-ui-mode)
-  (diminish 'yas-minor-mode)
-  ;; (diminish 'yas-minor-mode)
-  ;; (diminish 'flycheck-mode)
-  (diminish 'ivy-mode)
-	(diminish 'subword-mode)
-	(diminish 'visual-line-mode)
-  ;; (diminish '+3-mode)
-  (diminish 'helm-mode))
 
 (kill-buffer (current-buffer))
 (evil-quit)

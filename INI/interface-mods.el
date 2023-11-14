@@ -28,7 +28,9 @@
 ;; --------------------------------------
 (use-package diminish
   :ensure t
-  :init
+	:demand t
+  ;; :init
+	:config
   (diminish 'which-key-mode)
   ;; (diminish 'linum-relative-mode)
   ;; (diminish 'hungry-delete-mode)

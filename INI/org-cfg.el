@@ -89,6 +89,7 @@
 ;; https://orgmode.org/manual/Capture-templates.html#Capture-templates
 ;; ** --------------     Defult Propertys
 ;; --------------------------------------
+(setq org-fold-core-style 'overlays)
 (setq org-enforce-todo-dependencies t)
 ;; Should unfinished children block state changes in the parent? 
 (setq org-enforce-todo-checkbox-dependencies t)
