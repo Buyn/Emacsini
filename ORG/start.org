@@ -5523,6 +5523,28 @@ For C-like modes, you can configure the exact effect of M-; by setting the varia
 					;; (kill-ring-save (region-beginning) (region-end))
 					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
 					(setq x-select-enable-clipboard nil)))
+**** Key Bind Commands
+There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
+I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
+
+(define-key KEYMAP KEY DEF)
+
+    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
+(local-set-key KEY COMMAND)
+
+    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
+(global-set-key KEY COMMAND)
+
+    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
+(global-unset-key KEY)
+
+    Removes KEY from the global keymap
+(local-unset-key KEY)
+
+    Removes KEY from the active, local keymap.
+(use-package :bind ( ... ))
+
+    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
 **** Mastering Key Bindings in Emacs
 ***** By Mickey Petersen
 Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
