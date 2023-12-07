@@ -75,18 +75,31 @@ https://www.braveclojure.com/basic-emacs/
 #+begin_src emacs-lisp :results output silent
 (load "~/INI/hydra-cfg.el")
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(define-key evil-normal-state-map (kbd "G") nil)
+(define-key evil-normal-state-map (kbd "G G") 'evil-goto-line)
+
+
+(use-package hyperbole
+	:ensure t
+	;; :config
+	(define-key hyperbole-mode-map (kbd "M-<return>") `nil)
+	(define-key hyperbole-mode-map (kbd "C-h C-h") `nil)
+	(define-key hyperbole-mode-map (kbd "C-h C-h C-o") `hkey-either)
+	(define-key hyperbole-mode-map (kbd "C-h C-h C-S-O") `hkey-help)
+	;; 	(hyperbole-mode 1)
+		)
 
 (kill-buffer (current-buffer))
 (evil-quit)
 
  #+end_src
-#+begin_src emacs-lisp :tangle yes
-		(require 'org-roam)
-		(require 'dendroam)
-#+end_src
 
-#+RESULTS:
-: dendroam
+
+"agend.org" 
+"Start_org.cmd" 
+"Start_org.cmd#go" 
  
 #+begin_src emacs-lisp :results output silent
 (setq org-indirect-buffer-display `new-frame)
@@ -877,85 +890,140 @@ E:\Temp\Fonts\Miss_Fajardose.zip
 E:\Temp\Fonts\resident-evil-cufonfonts.zip 
 E:\Temp\Fonts\Scary-Font.zip 
 
-** Настроение
+** Настроение playlist
 *** Uplin
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Dragon Age
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Uplink - The Soundtrack\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 \"F:\\Audio\\Games\\Dragon Age\" 
 *** [#B] Satellite Reign
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Satellite Reign by Russell Shaw & Protector 101 (2015) [MP3, V0]\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Syndicate
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Syndicate (MP3) +\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Unreal Tournament 2004 
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\VA - Unreal History Music (1997-2007)\\Kevin Riepl - Unreal Tournament 2004 (2004)\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 
 *** UFO Aftershock
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\UFO Aftershock\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Black & White
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Black & White\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** X-COM Apocalypse
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\X COM (MP3) +\\X-COM Apocalypse Soundtrack (by John Broomhall) [1997]\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Anno 2070
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Anno 2070\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Darkest Dungeon
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Darkest Dungeon by Stuart Chatwood (2016) [MP3, V0]\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 
 *** Minecraft - Volume Alpha
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\C418 - Minecraft Score (2011-2013)\\2011 - Minecraft - Volume Alpha\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 
 *** Giants - Citizen Kabuto
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Giants - Citizen Kabuto\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 
 *** Freedom Fighters
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Freedom Fighters\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Diablo 1996-2011
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2011 The Music of Diablo 1996-2011 -Diablo 15 Year Anniversary-\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** System Shock
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\System Shock (Discography)\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Diablo II
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2000 Diablo II Soundtrack\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 *** Diablo II Expansion Set -Lord of Destruction
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\2000-2014 Diablo Collection by Blizzard Sound Team\\2001 Diablo II Expansion Set -Lord of Destruction- Soundtrack Audio CD\"")
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
 #+end_src
 
 *** Magic Carpet
 #+begin_src elisp :results output silent
 (buyn-cmd-start "aim \"F:\\Audio\\Games\\Magic Carpet\"")
-#+end_src
+(evil-previous-line)
+(org-cycle)
+(delete-other-windows)
+#+end_src 
+
 ** Tmp
 [~/../../../274px.png]]
 
@@ -2727,8 +2795,42 @@ Replace With: ^J
 
 So how does it work? Well, we tell Emacs to search for any two or more newlines that are at the beginning of a string – where each line is considered a string by Emacs – and because we search for two or more we skip the ones that only have a single newline. So if there are 10 newlines in a row, we replace them all in one fell swoop with a single newline. You can omit the replacement newline to remove them altogether!
 * Help Docs Emacs
-** Tools 
+** Tools
 *** debuging : 
+**** ielm : 
+***** See ‘inferior-emacs-lisp-mode’ : 
+ielm is an autoloaded interactive Lisp function in ‘ielm.el’.
+
+(ielm &optional BUF-NAME)
+
+  Probably introduced at or before Emacs version 19.24.
+
+Interactively evaluate Emacs Lisp expressions.
+Switches to the buffer named BUF-NAME if provided (‘*ielm*’ by default),
+or creates it if it does not exist.
+See ‘inferior-emacs-lisp-mode’ for details.
+
+[back]
+***** IELM: The Interactive Emacs-Lisp Mode C-c C-b
+
+IELM is a hidden gem. No, really: I’ve met Emacs users with decades of experience who’ve never heard of it. It really is hidden.
+
+And it’s a proper REPL. Type M-x ielm to launch it. It comes with all the useful features you would expect from an interactive shell:
+
+Multi-line editing
+
+    When you press RET IELM will check whether you did so at the end of the input, or in the middle. If it’s the latter, it’ll insert a newline and let you continue editing and writing. Great if you want to write multi-line code.
+
+    In all other instances it’ll evaluate what you wrote.
+Output Variables
+
+    The variables *, ** and *** contain the last three outputs from the shell.
+History
+
+    ielm inherits from comint mode, although it talks to no external process. That means it inherits a lot of the core functionality present in comint mode. I’ve written about comint history commands before so I won’t repeat myself here.
+
+Another useful feature is the concept of a working buffer - a buffer through which your changes are evaluated. If you type C-c C-b you can change ielm’s working buffer to one of your choosing and then all the code you evaluate thereafter is treated as if you executed it in the context of that buffer. So in this sense it works like M-:. Not only is it useful, it’s downright essential as some variables are local to a particular buffer or directory on your file system.
+
 **** toggle-debug-on-error
 (toggle-debug-on-error)
 debug-on-error t
@@ -2930,40 +3032,6 @@ Print a trace of Lisp function calls currently active.
 Output stream used is value of ‘standard-output’.
 
 [back]
-**** ielm : 
-***** See ‘inferior-emacs-lisp-mode’ : 
-ielm is an autoloaded interactive Lisp function in ‘ielm.el’.
-
-(ielm &optional BUF-NAME)
-
-  Probably introduced at or before Emacs version 19.24.
-
-Interactively evaluate Emacs Lisp expressions.
-Switches to the buffer named BUF-NAME if provided (‘*ielm*’ by default),
-or creates it if it does not exist.
-See ‘inferior-emacs-lisp-mode’ for details.
-
-[back]
-***** IELM: The Interactive Emacs-Lisp Mode C-c C-b
-
-IELM is a hidden gem. No, really: I’ve met Emacs users with decades of experience who’ve never heard of it. It really is hidden.
-
-And it’s a proper REPL. Type M-x ielm to launch it. It comes with all the useful features you would expect from an interactive shell:
-
-Multi-line editing
-
-    When you press RET IELM will check whether you did so at the end of the input, or in the middle. If it’s the latter, it’ll insert a newline and let you continue editing and writing. Great if you want to write multi-line code.
-
-    In all other instances it’ll evaluate what you wrote.
-Output Variables
-
-    The variables *, ** and *** contain the last three outputs from the shell.
-History
-
-    ielm inherits from comint mode, although it talks to no external process. That means it inherits a lot of the core functionality present in comint mode. I’ve written about comint history commands before so I won’t repeat myself here.
-
-Another useful feature is the concept of a working buffer - a buffer through which your changes are evaluated. If you type C-c C-b you can change ielm’s working buffer to one of your choosing and then all the code you evaluate thereafter is treated as if you executed it in the context of that buffer. So in this sense it works like M-:. Not only is it useful, it’s downright essential as some variables are local to a particular buffer or directory on your file system.
-
 **** lisp-interaction-mode : 
 ***** (lisp-interaction-mode) : 
 lisp-interaction-mode is an interactive compiled Lisp function in
@@ -5404,43 +5472,9 @@ M-:
     Evaluate all the Emacs Lisp expressions in the region.
 ~M-x eval-buffer~
     Evaluate al
-
-** Images
-
-Although Emacs is a text editor, it can also manage images. In Org mode, an image is a link to an image file. You can preview the file in your buffer or export it to your preferred format. You can also add captions and set export properties for each image.
-
-  #+caption: Image caption.
-  #+attr_html: :alt Alternative text
-  [[file:path/to/image]]
-
-If you use the Helm completion system, you can preview the image as you select it with helm-follow-mode. When you are in the Helm selection session, toggle follow mode with C-c C-f. As you move the cursor, images will appear in anoter window.
-
-To view the preview images in your document or remove the previews, you press C-c C-x C-v. You can also add #+startup: inlineimages to view images by default.
-
-To add an image, press C-c C-l, which opens the link menu. Org mode understands many types of links. We want the file type, so type file:. Press enter and select the image filename in the mini buffer. You can skip the file part with the C-u C-c C-l shortcut (adding C-u before the standard shortcut.)
-
-After you enter the image, you preview it with the org-redisplay-inline-images function or C-c C-x C-v.
-
-You open a link in Org mode with a mouse click or by pressing C-c C-o with your cursor on the link text.
-
-The images in the buffer are all shown at the same width. The article about writing articles and books with Emacs and the article about creating websites with Emacs explains how to control image with and other image properties.
-
-You can increase or decrease the size of an image with the + and - keys.
-
-** load require:
-	#+begin_src emacs-lisp :tangle yes
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony-c-headers company-irony)))
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(global-set-key "\t" 'company-complete-common)
-	#+end_src
-** Keyborde help
-*** evaluate
-**** 27.9 Evaluating Emacs Lisp Expressions
+*** Keyborde help
+**** evaluate
+***** 27.9 Evaluating Emacs Lisp Expressions
 Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
 Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
 M-:
@@ -5477,17 +5511,17 @@ There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp fo
     Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
     You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
     The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
-**** python
-***** run unit test
+***** python
+****** run unit test
  C-c C-t [elpy-test]
 
-*** get help 
-**** get menu command 
+**** get help 
+***** get menu command 
      Some of the commands in the menu bar have ordinary key bindings as well;
 	if so, a key binding is shown after the item itself. 
  To view the full ~command name~ and documentation for a menu item, type ~C-h k~,
 	and then select the menu bar with the mouse in the usual way (see Key Help). 
-*** coment line 
+**** coment line 
 26.5.1 Comment Commands
 The following commands operate on comments:
 M-;
@@ -5514,67 +5548,15 @@ You can also use M-; to align an existing comment. If a line already contains th
 C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
 The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
 For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
-*** Rebind keys
-**** keys to keys
+**** Rebind keys
+***** keys to keys
 (global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
-**** lambda : 
+***** lambda : 
 (define-key evil-normal-state-map (kbd "M-c M-y") '(lambda() (interactive)
 					(setq x-select-enable-clipboard t)
 					;; (kill-ring-save (region-beginning) (region-end))
 					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
 					(setq x-select-enable-clipboard nil)))
-**** Key Bind Commands
-There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
-I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
-
-(define-key KEYMAP KEY DEF)
-
-    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
-(local-set-key KEY COMMAND)
-
-    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
-(global-set-key KEY COMMAND)
-
-    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
-(global-unset-key KEY)
-
-    Removes KEY from the global keymap
-(local-unset-key KEY)
-
-    Removes KEY from the active, local keymap.
-(use-package :bind ( ... ))
-
-    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
-**** Mastering Key Bindings in Emacs
-***** By Mickey Petersen
-Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
-Updated for emacs 28
-
-Altering the key bindings in Emacs should not, on the face of it, be a difficult task. But there’s a reason why the Emacs manual has dedicated 30-odd pages to describing, in great detail, all the subtleties and nuances of how to bind keys.
-
-To save you the time of reading all of that, I’ve written a guide that covers what you need to know to bind keys to even complex commands, and a set of templates you can use in your own code. And the best thing about this guide is that you don’t need to know any elisp to get started!
-
-I’ve included a selection of handy templates near the end that you can customize and put in your init file.
-***** What makes up a key bind?
-Emacs is “self-hosting” and, depending on who you ask, close to achieving sentience. Almost all of Emacs is written in Emacs Lisp. Every function in Emacs in turn builds on smaller functions, and so on, right through all the strata of elisp until you reach the C core.
-
-Emacs’s key engine works in much the same way. Layer upon layer — or keymap upon keymap!
-
-Even elementary things like inserting characters – called self-insertion – is amenable to change. For instance, the key f is bound to self-insert-command, a special command that repeats the last typed key N times. So if you type C-u 10 f you will see ffffffffff printed on your screen. As you can see, every keypress – even basic ones like typing a character on the screen – has an associated key binding that you can modify or even remove.
-***** What is a Keymap?
-A keymap is an internal data structure used by Emacs to store keys and their associated actions. Keymaps are rarely modified directly; instead, you modify them through a set of functions that manipulate the data structure for you. Most Emacs users will never interact with keymaps aside from indirectly assigning keys to them.
-
-Every buffer and most major and minor modes have a keymap, and that keymap defines what the keys do when key sequences are sent to that buffer. Keys can be divided into three categories: undefined, prefix key, or complete key.
-
-    Undefined is self-explanatory: it does no operation when it is invoked.
-    Prefix keys are keys like C-x and C-c. They are make up part of a complete key, and each constituent part of a prefix key has its own keymap.
-    A complete key is a key combination that resolves to a valid command. Like the key g, C-x C-f, or <mouse-1>.
-
-In Emacs, a key is not limited to just your plain-as-day keys on a keyboard. Anything that can generate an input event is fair game: two-factor authentication USB sticks, as they just ‘type’ stuff like keyboard would; that Hammond organ you’re eyeing as a replacement for your regular keyboard; and of course your mouse.
-
-It is possible for Emacs to enumerate all the active minor and major mode key bindings in a buffer by typing C-h m. That command is essential if you want to learn more about what a major or minor mode can do. Likewise, you can type out parts of a complete key (say M-s) and then type C-h to get a list of all keys that belong to that prefix.
-
-If you know the name of a keymap, you can use M-x describe-keymap in Emacs 28.
 ***** Key Bind Commands
 There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
 I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
@@ -5597,7 +5579,59 @@ I recommend you familiarize yourself with these, as they’re the ones you’re 
 (use-package :bind ( ... ))
 
     If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
-***** Representing Keys in Code (kbd)
+***** Mastering Key Bindings in Emacs
+****** By Mickey Petersen
+Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
+Updated for emacs 28
+
+Altering the key bindings in Emacs should not, on the face of it, be a difficult task. But there’s a reason why the Emacs manual has dedicated 30-odd pages to describing, in great detail, all the subtleties and nuances of how to bind keys.
+
+To save you the time of reading all of that, I’ve written a guide that covers what you need to know to bind keys to even complex commands, and a set of templates you can use in your own code. And the best thing about this guide is that you don’t need to know any elisp to get started!
+
+I’ve included a selection of handy templates near the end that you can customize and put in your init file.
+****** What makes up a key bind?
+Emacs is “self-hosting” and, depending on who you ask, close to achieving sentience. Almost all of Emacs is written in Emacs Lisp. Every function in Emacs in turn builds on smaller functions, and so on, right through all the strata of elisp until you reach the C core.
+
+Emacs’s key engine works in much the same way. Layer upon layer — or keymap upon keymap!
+
+Even elementary things like inserting characters – called self-insertion – is amenable to change. For instance, the key f is bound to self-insert-command, a special command that repeats the last typed key N times. So if you type C-u 10 f you will see ffffffffff printed on your screen. As you can see, every keypress – even basic ones like typing a character on the screen – has an associated key binding that you can modify or even remove.
+****** What is a Keymap?
+A keymap is an internal data structure used by Emacs to store keys and their associated actions. Keymaps are rarely modified directly; instead, you modify them through a set of functions that manipulate the data structure for you. Most Emacs users will never interact with keymaps aside from indirectly assigning keys to them.
+
+Every buffer and most major and minor modes have a keymap, and that keymap defines what the keys do when key sequences are sent to that buffer. Keys can be divided into three categories: undefined, prefix key, or complete key.
+
+    Undefined is self-explanatory: it does no operation when it is invoked.
+    Prefix keys are keys like C-x and C-c. They are make up part of a complete key, and each constituent part of a prefix key has its own keymap.
+    A complete key is a key combination that resolves to a valid command. Like the key g, C-x C-f, or <mouse-1>.
+
+In Emacs, a key is not limited to just your plain-as-day keys on a keyboard. Anything that can generate an input event is fair game: two-factor authentication USB sticks, as they just ‘type’ stuff like keyboard would; that Hammond organ you’re eyeing as a replacement for your regular keyboard; and of course your mouse.
+
+It is possible for Emacs to enumerate all the active minor and major mode key bindings in a buffer by typing C-h m. That command is essential if you want to learn more about what a major or minor mode can do. Likewise, you can type out parts of a complete key (say M-s) and then type C-h to get a list of all keys that belong to that prefix.
+
+If you know the name of a keymap, you can use M-x describe-keymap in Emacs 28.
+****** Key Bind Commands
+There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
+I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
+
+(define-key KEYMAP KEY DEF)
+
+    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
+(local-set-key KEY COMMAND)
+
+    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
+(global-set-key KEY COMMAND)
+
+    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
+(global-unset-key KEY)
+
+    Removes KEY from the global keymap
+(local-unset-key KEY)
+
+    Removes KEY from the active, local keymap.
+(use-package :bind ( ... ))
+
+    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
+****** Representing Keys in Code (kbd)
 In order to actually bind a key you must first tell Emacs what key you intend to use. Unfortunately there’s more than one way of representing keys in Emacs: as a string, or as a vector. We won’t concern ourselves with either, as we will use a handy macro built in to Emacs called kbd. The kbd macro translates a human-readable key into a format Emacs can understand.
 
 One important point to note is that you must surround function and navigation keys with < and >:
@@ -5608,7 +5642,7 @@ That includes F-keys, arrow keys and home row keys, like so: <home>, <f8> and <d
 (kbd "tab")       ;; Wrong, but valid -- missing < and >
 (kbd "<tab>")     ;; OK
 (kbd "C-c p")     ;; OK
-***** Remapping Commands
+****** Remapping Commands
 
 You can tell Emacs that you want to replace all keys pointing to a certain command with one of your own choosing by using the remap notation.
 
@@ -5621,7 +5655,7 @@ Example:
 Here I globally remap all keys that point to kill-line to my-homemade-kill-line.
 
 For a practical example of remapping in use, see fixing the mark commands in transient mark mode.
-***** Reserved Keys
+****** Reserved Keys
 You can pick any keyboard combination you desire – even if that key bind is already taken, so be careful – but Emacs has set aside certain keys for use by users. Generally, all keys prefixed with C-c ? (where ? is a single character) are reserved for you, and you alone. In practice most third-party packages don’t care about the key bindings they occupy. So keep that in mind.
 
 The other set of reserved keys are the F-keys from F5 and onwards. The other two prefix keys reserved to you are hyper and super. They are remnants from ancient keyboards used in the 80s, but live on today in Emacs. Most PC-compatible keyboards won’t have a super or hyper key so some people rebind the Windows key and the Application Context key to be hyper and super instead.
@@ -5637,7 +5671,7 @@ In Windows you can add this to your init file to enable hyper and super:
 (setq w32-rwindow-modifier 'hyper)
 
 In X you’ll have to play around with xmodmap or your own tool of choice.
-***** Keymap Lookup Order
+****** Keymap Lookup Order
 
 Emacs will look for keys in a certain order, and that order I have described below. Keep in mind that only active keymaps are used, and that the order is top-to-bottom. The first “match” is the keymap Emacs uses.
 
@@ -5662,16 +5696,16 @@ But I can summarize these rules in a way that accounts for 99% of all key bindin
     And finally global keys are checked.
 
 This order confuses many new users! Most people think that a global key trumps all other keys, but that is not so.
-***** Global vs Local
+****** Global vs Local
 A global key is functionally identical to that of a local one, except it is declared in a “global” keymap, governed by the current-global-map function (but usually it points to the default, the global-map variable.) Therefore, you can define a global key simply by passing the current-global-map function to define-key. The other – often better – alternative is to use the designated function, global-set-key.
 
 In a similar vein, to bind a local key you can use the “designated” function local-set-key or the more general define-key. Like the global map, there exists an equivalent function current-local-map that returns the keymap local to the buffer.
 
 If you want to change major mode key bindings, you’re going to have to choose between explicitly updating its keymap with define-key, or calling it from within the major mode’s buffer with local-set-key. You can’t always interchange the two, although they’re supposed to yield the same outcome. The reason is that some major modes regenerate keymaps or outright reset them. When that happens you may have to choose one or the other.
-***** Defining your Command
+****** Defining your Command
 
 If you thought the mechanics of keymaps and keys were difficult, think again! Deciding on what you want to bind to those keys is even harder – especially so if you want the command to do very specific things, like switching to a specific buffer name. But I’ve got a few tricks up my sleeve to help you cut out most of the elisp writing by letting Emacs do all the heavy lifting.
-***** Invoking a command
+****** Invoking a command
 
 Before I talk about the how and why of Emacs commands it is important that I mention how Emacs handles interactive functions — commonly known as commands. An Emacs command has an (interactive ...) form at the top of its function body. The (interactive ...) form controls how the function must respond to user input when it’s invoked interactively. For instance, a command that prompts a user for a string must tell Emacs – using the (interactive ...) form – how to do this.
 
@@ -5680,7 +5714,7 @@ All commands are executable through M-x and can therefore be bound to a key.
 When you bind a function to a key it is important that you keep the above in mind, as you cannot invoke a non-interactive function through a key binding — it must be a command.
 
 If it is your intent – as it so often is – to call a function, but with explicit parameter values, you must wrap it in a little helper function, like a lambda expression or even a standard defun. I have prepared templates (see below) that show you how to do this.
-***** Describing the command
+****** Describing the command
 There are two ways of describing a command in elisp: the manual way, and the smart way. Let’s start out with the manual way.
 The manual way is to use C-h k KEY to describe what KEY is bound to; the other way is to describe a function, FUNCTION, with C-h f FUNCTION.
 
@@ -5689,7 +5723,7 @@ Because Emacs is a self-documenting editor all functions, variables, keys, etc. 
 With the name of the command, you can now begin the process of reading the documentation string and call it with the requisite arguments it needs to work.
 
 If you’re unsure how to do that, but you do know what you want, then you may want to give the smart way a go.
-***** Capturing Complex Commands
+****** Capturing Complex Commands
 The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
 Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
 
@@ -5708,13 +5742,13 @@ Here’s another one, this time I type C-x b *scratch* to switch to the *scratch
 (switch-to-buffer "*scratch*")
 
 And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
-***** Keyboard Macros
+****** Keyboard Macros
 I’ve talked about the smart way above, but there’s an even smarter way: Keyboard macros. If you have a series of actions you want to perform, then record it in a keyboard macro!
 
 Emacs can record, and play back, almost everything. You’re not limited to shoveling text; stuff like moving files in dired, or splitting your windows and opening the right buffers in them is not only possible, but easy.
 
 I recommend you read about Emacs’s keyboard macros to see what I mean.
-***** Putting it all together
+****** Putting it all together
 We’re nearly done. I just need to explain a few more important concepts that confuse a lot of newbies: mode hooks and mode-specific keymaps, and then it’s on to the templates.
 
 Most major and minor modes will usually set their keys once, when the module is first loaded; that’s good news for us. That means you can use define-key to add key definitions straight into a mode’s key map. Some modes are very advanced, and have several key maps – M-x isearch is a good example – and for those you will have to mess around with the source code or info manual to find out how to add keys.
@@ -5726,8 +5760,8 @@ It’s the modes that force you to use a mode hook that’s the problem: for tha
 It is a convention in Emacs that all major and minor mode functions (the ones that activate the mode) end in -mode (e.g., python-mode), and it is also expected that its mode map follows a common naming scheme: xxxx-mode-map for the key map; and xxxx-mode-hook for the mode’s hook.
 
 With those mode hooks in mind, you can add a local-set-key call and, hopefully, that’s all you need to override or add keys to the right mode’s key map.
-***** Keymaps
-****** Listing all the Mode Maps
+****** Keymaps
+******* Listing all the Mode Maps
 Modifying a keymap is dirt simple, you use define-key as I’ve mentioned before. What’s not so easy is determining what keymap to modify in the first place.
 
 If you type this Emacs will give you an apropos buffer with all the known mode maps that follow the major mode naming scheme:
@@ -5735,13 +5769,13 @@ If you type this Emacs will give you an apropos buffer with all the known mode m
 C-u M-x apropos-variable RET -mode-map$ RET
 
 You can also use M-x describe-keymap and then pick the mode map you want from the candidate list.
-****** Quick Keymap Example
+******* Quick Keymap Example
 Let’s say I want to extend python-mode by adding a key, I’ll use F12, that switches to the python process buffer. Currently, that’s bound to C-c C-z and M-x python-shell-switch-to-shell.
 
 (define-key python-mode-map (kbd "<f12>") 'python-shell-switch-to-shell)
 
 In order to get the command belonging to the key, I used C-h k C-c C-z.
-****** Creating New Keymaps
+******* Creating New Keymaps
 If you want your own blank key maps, particularly if you want to build your own complex web of prefix keys and such, you’ll need to learn how to make your own.
 
 Luckily it’s not too hard.
@@ -5760,11 +5794,11 @@ Next, we use a let form to bind the variable map to a sparse keymap created with
 There is also copy-keymap if you want to copy another keymap and modify its copy instead. In fact, there’s a whole host of functions that deal with this. But I think these two are the ones worth knowing about if you’re building your own stuff.
 
 Either way, you get a key map ready to go.
-****** Repeating Keys with repeat-mode
+******* Repeating Keys with repeat-mode
 Emacs 28 formalizes – the code that does it has existed in Emacs for eons – a method of making repeating key maps. If you find yourself typing C-x o over and over again to switch windows, then as of Emacs 28 you can type C-x o o o o ... ad infinitum if you enable M-x repeat-mode.
 
 The new mode is easy to retrofit onto existing Emacs key map machinery if you know how.
-****** Repeating Keys Example
+******* Repeating Keys Example
 NOTE: Make sure you enable M-x repeat-mode.
 Consider the keys C-M-u and C-M-d. They move out or into balanced expressions, like ( ... ), [ ... ], and so on. Perfect for most programming languages.
 
@@ -5787,20 +5821,20 @@ Hooks
 
 A mode hook has zero-or-more functions that are called when its mode is activated. Mode-specific hooks are run when you activate that mode. That happens automatically when you open a file, or manually call M-x some-mode.
 Altering Mode Hooks
-***** Adding Hooks
+****** Adding Hooks
     You can add a mode hook using the special function add-hook that takes the name of a hook (say python-mode-hook) and the name of a function to call.
-****** Removing Hooks
+******* Removing Hooks
 
     You can remove functions from a hook variable with remove-hook. If you are experimenting you may want to remove hooks as part of your testing.
 
     In newer Emacsen you can call it interactively, select a mode hook, and then pick the one you want to remove. That is good to know when you inevitably add lambda functions to a mode hook and now struggle with duplicate hooks!
-****** Listing all the Mode Hooks
+******* Listing all the Mode Hooks
 If you are unsure of the exact name of the mode hook, you can use this handy trick to list the ones Emacs can see:
 
 M-x apropos-variable RET -mode-hook$ RET
 
 That will show all mode hooks known to Emacs, including their docstring description. If you don’t see your mode it may be because Emacs hasn’t loaded it outright. You can try M-x load-library and see if you can load the package or library that way first.
-****** Quick Hook Example
+******* Quick Hook Example
 Let’s add a key (C-c q to run M-x shell) local to python-mode using a hook. For that to work we will need our special hook function, I’ve named it mp-add-python-keys, and in it we need local-set-key, the function that adds a key to the active buffer’s local map. Remember that local-set-key uses the local mode map.
 
 Next is the command that tells Emacs that we want to add a mode hook to Python.
@@ -5809,7 +5843,7 @@ Next is the command that tells Emacs that we want to add a mode hook to Python.
   (local-set-key (kbd "C-c q") 'shell))
 
 (add-hook 'python-mode-hook #'mp-add-python-keys)
-***** Setting Key Bindings with use-package
+****** Setting Key Bindings with use-package
 If you use use-package then you can leverage its key binding facilities.
 
 Let’s say you like the package M-x winner-mode, a minor mode that records your window configurations and lets you undo and redo changes made to it, by you or by commands you execute.
@@ -5836,14 +5870,14 @@ Here I’ve chosen to bind C-c e to M-x eshell globally, as I have not specified
 Next, I declare :map eshell-mode-map and from that point on, that is the keymap use-package uses when I ask it to bind M-m to eshell-bol.
 
 So as you can see, it’s easy to bind to a variety of both global and keymap-specific maps.
-***** Templates
 ****** Templates
+******* Templates
 Here’s a bunch of templates for various use-cases that you can cut’n’paste and use in your own code. I recommend naming things sensibly, and giving them a docstring (in-code documentation that explains what the code does) as well. The best way to avoid accidentally overriding another function with the same name, I would suggest you use a moniker or prefix. I use mp- for all of my own functions.
 
 I also urge you to avoid the temptation of plastering your code with lambda functions. They’re great, sure; but if you ever need to update or change them during your development and testing cycle, you may end up with duplicate functions in your mode hooks playing havoc.
 
 If you are unsure how to evaluate elisp, then read my article on evaluating elisp in Emacs.
-****** Basic Global Key Binding
+******* Basic Global Key Binding
 Binds a command to a global key binding.
 Definition
 
@@ -5854,14 +5888,14 @@ Example
 Binds F1 to M-x shell
 
 (global-set-key (kbd "<f1>") 'shell)
-****** Add or Remove a Key to or from a Keymap
+******* Add or Remove a Key to or from a Keymap
 
 Adds or removes a key and its associated command to/from an explicit keymap. Use this if you know the name of the keymap and you want to add a key to it.
 Definition
-****** Add a key to a keymap:
+******* Add a key to a keymap:
 
 (define-key KEYMAP (kbd "key-bind-here") 'interactive-command-here)
-****** Remove a key from a keymap:
+******* Remove a key from a keymap:
 
 (define-key KEYMAP (kbd "key-bind-here") nil)
 
@@ -5870,7 +5904,7 @@ Example
 Binds C-c p to python-switch-to-python
 
 (define-key python-mode-map (kbd "C-c p") 'python-shell-switch-to-shell)
-****** Complex Command Key Bind
+******* Complex Command Key Bind
 Creates a global key bind that invokes multiple commands in a row. Use this to create compound keys or invoke commands that take parameters. Uses code from the Function Template.
 Definition
 
@@ -5890,7 +5924,7 @@ Switches to the *scratch* buffer and inserts “Hello, World” where point is, 
     (set-buffer "*scratch*")
     (insert "Hello, World")))
 (global-set-key (kbd "C-c i") 'switch-to-scratch-and-insert-text)
-****** Binding keys with a mode hook
+******* Binding keys with a mode hook
 
 Use this mode hook template to bind keys that won’t work with a standard define-key template, or if the key map is reset in when the mode is initialized.
 
@@ -5916,7 +5950,7 @@ Here I change the python indentation offset to 4 and make it local to that buffe
 (add-hook 'python-mode-hook #'mp-my-hook-settings)
 
 As you can see, this is a good place to put all your other tweaks that relate to a specific mode.
-****** Remapping a command
+******* Remapping a command
 This template will remap all keys that point to a specific command. Say you want to rebind kill-line, bound to C-k, but you want your code to only override the key binds that kill-line is actually bound to. Use this template to replace existing commands with those of your own, without worrying about explicitly rebinding each key.
 Definition
 
@@ -5937,7 +5971,7 @@ I remap the keys that point to exchange-point-and-mark to my own function exchan
   (deactivate-mark nil))
 
 (define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
-****** Custom Prefixes
+******* Custom Prefixes
 Creating a prefix is easy nowadays as you don’t have to explicitly create your own prefix keymaps, provided you use local-set-key or global-set-key. Use custom prefixes to group or categorize your commands.
 Definition
 
@@ -5958,7 +5992,7 @@ Global keys that will insert either the time of the day, or the current date. Ty
 
 (global-set-key (kbd "C-c i d") 'mp-insert-date)
 (global-set-key (kbd "C-c i t") 'mp-insert-time)
-****** Repeating Key Maps with repeat-mode
+******* Repeating Key Maps with repeat-mode
 This feature requires Emacs 28 and that you have turned on M-x repeat-mode.
 
 Repeating keys allow you to tap one or more single keys to repeat a command once you have engaged repeat mode by first typing a key that supports repeating keys.
@@ -5994,7 +6028,7 @@ Activate this repeat map with C-M-u or C-M-d, then type d or u to move down or u
 
 (put 'backward-up-list 'repeat-map 'balanced-repeat-map)
 (put 'down-list 'repeat-map 'balanced-repeat-map)
-****** Binding keys with use-package
+******* Binding keys with use-package
 If you are already using use-package then you may as well use it to bind your keys also.
 You can define global and local keys this way.
 Definition
@@ -6016,11 +6050,11 @@ Here I bind C-c e to eshell globally, and M-m to eshell-bol locally.
   :bind (("C-c e" . eshell)
          :map eshell-mode-map
          ("M-m" . eshell-bol)))
-***** Conclusion
+****** Conclusion
 I have covered almost every facet of key binding that most Emacs users would care to know about. If you use use-package, then it can definitely cut down on some of the tedium and help centralize your bindings with your other settings.
 
 I recommend you read why I think keyboard macros are misunderstood as it’ll further cement just how much “no-code” Emacs you can accomplish with keyboard macros and key bindings.
-*** Emacs Movement 
+**** Emacs Movement 
 ‘C-M-a’
 ‘C-M-e’
    Move point to the beginning or end of the current function or
@@ -6044,15 +6078,15 @@ I recommend you read why I think keyboard macros are misunderstood as it’ll fu
      Move up in parenthesis structure (‘backward-up-list’).
 ‘C-M-d’
      Move down in parenthesis structure (‘down-list’).
-*** Intends 
-*** replace-string : 
+**** Intends 
+**** replace-string : 
 M-x replace-string RET ; RET C-q C-j.
 
     C-q for quoted-insert,
 
     C-j is a newline.
 
-*** repeat-complex-command : C-x ESC ESC or C-x M-:.
+**** repeat-complex-command : C-x ESC ESC or C-x M-:.
 The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
 Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
 
@@ -6071,6 +6105,727 @@ Here’s another one, this time I type C-x b *scratch* to switch to the *scratch
 (switch-to-buffer "*scratch*")
 
 And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
+*** info\help
+**** info manual : 
+m - show and serch in node menu of refarace
+i - show and go in index of nods ancors ferst resort
+g - show and go in nods title ferst resort
+s - to seach in eche node of manual text(not work in index) last resort
+f1 -d apropos docs
+f1 -a apropos command
+(apropos) if neded поиск продолжительный
+f1 - R fast open manual
+   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
+   удобная систе показиваюшая мануалки по всем установленым модам
+f1-f - show funcrion doc string
+f1-F - find funcrion in manual
+**** f1-i Info s-H keys ib info-mode 
+Minor modes enabled in this buffer: Evil-Local Font-Lock
+Isearch-Fold-Quotes Text-Scale Visual-Line Yas
+
+The major mode is Info mode defined in info.el:
+
+Info mode provides commands for browsing through the Info documentation tree.
+Documentation in Info is divided into "nodes", each of which discusses
+one topic and contains references to other nodes which discuss related
+topics.  Info has commands to follow the references and show you other nodes.
+
+h	Invoke the Info tutorial.
+q	Quit Info: reselect previously selected buffer.
+
+Selecting other nodes:
+<mouse-2>
+	Follow a node reference you click on.
+	  This works with menu items, cross references, and
+	  the "next", "previous" and "up", depending on where you click.
+RET	Follow a node reference near point, like <mouse-2>.
+n	Move to the "next" node of this node.
+p	Move to the "previous" node of this node.
+^	Move "up" from this node.
+m	Pick menu item specified by name (or abbreviation).
+	  Picking a menu item causes another node to be selected.
+d	Go to the Info directory node.
+<	Go to the Top node of this file.
+>	Go to the final node in this file.
+[	Go backward one node, considering all nodes as forming one sequence.
+]	Go forward one node, considering all nodes as forming one sequence.
+TAB	Move cursor to next cross-reference or menu item.
+C-M-i	Move cursor to previous cross-reference or menu item.
+f	Follow a cross reference.  Reads name of reference.
+l	Move back in history to the last node you were at.
+r	Move forward in history to the node you returned from after using l.
+L	Go to menu of visited nodes.
+T	Go to table of contents of the current Info file.
+
+Moving within a node:
+SPC	Normally, scroll forward a full screen.
+	  Once you scroll far enough in a node that its menu appears on the
+	  screen but after point, the next scroll moves into its first
+	  subnode.  When after all menu items (or if there is no menu),
+	  move up to the parent node.
+DEL	Normally, scroll backward.  If the beginning of the buffer is
+	  already visible, try to go to the previous menu entry, or up
+	  if there is none.
+b	Go to beginning of node.
+e	Go to end of node.
+
+Advanced commands:
+s	Search through this Info file for specified regexp,
+	  and select the node in which the next occurrence is found.
+S	Search through this Info file for specified regexp case-sensitively.
+C-s, C-M-s	Use Isearch to search through multiple Info nodes.
+i	Search for a topic in this manual’s Index and go to index entry.
+,	(comma) Move to the next match from a previous i command.
+I	Look for a string and display the index node with results.
+M-x info-apropos	Look for a string in the indices of all manuals.
+g	Move to node specified by name.
+	  You may include a filename as well, as (FILENAME)NODENAME.
+1 .. 9	Pick first ... ninth item in node’s menu.
+	  Every third ‘*’ is highlighted to help pick the right number.
+c	Put name of current Info node in the kill ring.
+M-n	Select a new cloned Info buffer in another window.
+C-u C-h i	Move to new Info file with completion.
+C-u N C-h i	Select Info buffer with prefix number in the name *info*<N>.
+
+In addition to any hooks its parent mode ‘special-mode’ might have
+run, this mode runs the hook ‘Info-mode-hook’, as the final or
+penultimate step during initialization.
+
+Other commands for this mode, not bound to any keys:
+
+`Info-history-back-menu'
+`Info-history-forward-menu'
+`Info-last-menu-item'
+`Info-last-preorder'
+`Info-mouse-follow-link'
+`Info-mouse-scroll-down'
+`Info-mouse-scroll-up'
+`Info-next-menu-item'
+`Info-next-preorder'
+`Info-search-backward'
+`Info-search-next'
+`Info-undefined'
+
+Global minor modes enabled: Auto-Encryption Blink-Cursor Display-Time
+Electric-Indent Electric-Pair Evil Evil-Tabs File-Name-Shadow
+Global-Eldoc Global-Evil-Tabs Global-Font-Lock Global-Visual-Line
+Hyperbole Ivy Org-Roam-Db-Autosync Projectile Pyvenv Reverse-Im
+Savehist Show-Paren Tooltip Transient-Mark Which-Key Yas-Global
+
+
+Evil-Local minor mode (no indicator):
+Minor mode for setting up Evil in a single buffer.
+
+This is a minor mode.  If called interactively, toggle the
+‘Evil-Local mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘evil-local-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Font-Lock minor mode (no indicator):
+Toggle syntax highlighting in this buffer (Font Lock mode).
+
+When Font Lock mode is enabled, text is fontified as you type it:
+
+ - Comments are displayed in ‘font-lock-comment-face’;
+ - Strings are displayed in ‘font-lock-string-face’;
+ - Certain other expressions are displayed in other faces
+   according to the value of the variable ‘font-lock-keywords’.
+
+To customize the faces (colors, fonts, etc.) used by Font Lock for
+fontifying different parts of buffer text, use M-x customize-face.
+
+You can enable Font Lock mode in any major mode automatically by
+turning on in the major mode’s hook.  For example, put in your
+~/.emacs:
+
+ (add-hook 'c-mode-hook 'turn-on-font-lock)
+
+Alternatively, you can use Global Font Lock mode to automagically
+turn on Font Lock mode in buffers whose major mode supports it
+and whose major mode is one of ‘font-lock-global-modes’.  For
+example, put in your ~/.emacs:
+
+ (global-font-lock-mode t)
+
+Where major modes support different levels of fontification, you
+can use the variable ‘font-lock-maximum-decoration’ to specify
+which level you generally prefer.  When you turn Font Lock mode
+on/off the buffer is fontified/defontified.
+
+To add your own highlighting for some major mode, and modify the
+highlighting selected automatically via the variable
+‘font-lock-maximum-decoration’, you can use
+‘font-lock-add-keywords’.
+
+To fontify a buffer, without turning on Font Lock mode and
+regardless of buffer size, you can use M-x font-lock-fontify-buffer.
+
+To fontify a block (the function or paragraph containing point,
+or a number of lines around point), perhaps because modification
+on the current line caused syntactic change on other lines, you
+can use M-x font-lock-fontify-block.
+
+You can set your own default settings for some mode, by setting a
+buffer local value for ‘font-lock-defaults’, via its mode hook.
+
+The above is the default behavior of ‘font-lock-mode’; you may
+specify your own function which is called when ‘font-lock-mode’
+is toggled via ‘font-lock-function’.
+
+This is a minor mode.  If called interactively, toggle the
+‘Font-Lock mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘font-lock-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Isearch-Fold-Quotes minor mode (no indicator):
+Minor mode to aid searching for ` characters in help modes.
+
+This is a minor mode.  If called interactively, toggle the
+‘Isearch-Fold-Quotes mode’ mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘isearch-fold-quotes-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Text-Scale minor mode (indicator +3):
+Minor mode for displaying buffer text in a larger/smaller font.
+
+The amount of scaling is determined by the variable
+‘text-scale-mode-amount’: one step scales the global default
+face size by the value of the variable ‘text-scale-mode-step’
+(a negative amount shrinks the text).
+
+The ‘text-scale-increase’, ‘text-scale-decrease’, and
+‘text-scale-set’ functions may be used to interactively modify
+the variable ‘text-scale-mode-amount’ (they also enable or
+disable ‘text-scale-mode’ as necessary).
+
+If ‘text-scale-remap-header-line’ is non-nil, also change
+the font size of the header line.
+
+This is a minor mode.  If called interactively, toggle the
+‘Text-Scale mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘text-scale-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Visual-Line minor mode (no indicator):
+Toggle visual line based editing (Visual Line mode) in the current buffer.
+
+When Visual Line mode is enabled, ‘word-wrap’ is turned on in
+this buffer, and simple editing commands are redefined to act on
+visual lines, not logical lines.  See Info node ‘Visual Line
+Mode’ for details.
+Turning on this mode disables line truncation set up by
+variables ‘truncate-lines’ and ‘truncate-partial-width-windows’.
+
+This is a minor mode.  If called interactively, toggle the
+‘Visual-Line mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘visual-line-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Key             Binding
+
+<remap> <kill-line>							 kill-visual-line
+<remap> <move-beginning-of-line> beginning-of-visual-line
+<remap> <move-end-of-line>			 end-of-visual-line
+
+
+
+Yas minor mode (no indicator):
+Toggle YASnippet mode.
+
+When YASnippet mode is enabled, ‘yas-expand’, normally bound to
+the TAB key, expands snippets of code depending on the major
+mode.
+
+With no argument, this command toggles the mode.
+positive prefix argument turns on the mode.
+Negative prefix argument turns off the mode.
+
+Key bindings:
+
+Key             Binding
+
+C-c & C-n				yas-new-snippet
+C-c & C-s				yas-insert-snippet
+C-c & C-v				yas-visit-snippet-file
+
+
+This is a minor mode.  If called interactively, toggle the ‘yas
+minor mode’ mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘yas-minor-mode’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Auto-Encryption minor mode (no indicator):
+Toggle automatic file encryption/decryption (Auto Encryption mode).
+
+This is a global minor mode.  If called interactively, toggle the
+‘Auto-Encryption mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'auto-encryption-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Blink-Cursor minor mode (no indicator):
+Toggle cursor blinking (Blink Cursor mode).
+
+If the value of ‘blink-cursor-blinks’ is positive (10 by default),
+the cursor stops blinking after that number of blinks, if Emacs
+gets no input during that time.
+
+See also ‘blink-cursor-interval’ and ‘blink-cursor-delay’.
+
+This command is effective only on graphical frames.  On text-only
+terminals, cursor blinking is controlled by the terminal.
+
+This is a global minor mode.  If called interactively, toggle the
+‘Blink-Cursor mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'blink-cursor-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Display-Time minor mode (no indicator):
+Toggle display of time, load level, and mail flag in mode lines.
+
+When Display Time mode is enabled, it updates every minute (you
+can control the number of seconds between updates by customizing
+‘display-time-interval’).  If ‘display-time-day-and-date’ is
+non-nil, the current day and date are displayed as well.  This
+runs the normal hook ‘display-time-hook’ after each update.
+
+This is a global minor mode.  If called interactively, toggle the
+‘Display-Time mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'display-time-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Electric-Indent minor mode (no indicator):
+Toggle on-the-fly reindentation of text lines (Electric Indent mode).
+
+When enabled, this reindents whenever the hook ‘electric-indent-functions’
+returns non-nil, or if you insert one of the "electric characters".
+The electric characters normally include the newline, but can
+also include other characters as needed by the major mode; see
+‘electric-indent-chars’ for the actual list.
+
+By "reindent" we mean remove any existing indentation, and then
+indent the line according to context and rules of the major mode.
+
+This is a global minor mode.  To toggle the mode in a single buffer,
+use ‘electric-indent-local-mode’.
+
+This is a global minor mode.  If called interactively, toggle the
+‘Electric-Indent mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'electric-indent-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Electric-Pair minor mode (no indicator):
+Toggle automatic parens pairing (Electric Pair mode).
+
+Electric Pair mode is a global minor mode.  When enabled, typing
+an open parenthesis automatically inserts the corresponding
+closing parenthesis, and vice versa.  (Likewise for brackets, etc.).
+If the region is active, the parentheses (brackets, etc.) are
+inserted around the region instead.
+
+To toggle the mode in a single buffer, use ‘electric-pair-local-mode’.
+
+This is a global minor mode.  If called interactively, toggle the
+‘Electric-Pair mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'electric-pair-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Evil minor mode (no indicator):
+Toggle Evil-Local mode in all buffers.
+With prefix ARG, enable Evil mode if ARG is positive; otherwise,
+disable it.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Evil-Local mode is enabled in all buffers where ‘evil-initialize’
+would do it.
+
+See ‘evil-local-mode’ for more information on Evil-Local mode.
+
+
+Evil-Tabs minor mode (no indicator):
+Integrating Vim-style tabs for Evil mode users.
+
+This is a global minor mode.  If called interactively, toggle the
+‘Evil-Tabs mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'evil-tabs-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+File-Name-Shadow minor mode (no indicator):
+Toggle file-name shadowing in minibuffers (File-Name Shadow mode).
+
+File-Name Shadow mode is a global minor mode.  When enabled, any
+part of a filename being read in the minibuffer that would be
+ignored (because the result is passed through
+‘substitute-in-file-name’) is given the properties in
+‘file-name-shadow-properties’, which can be used to make that
+portion dim, invisible, or otherwise less visually noticeable.
+
+This is a global minor mode.  If called interactively, toggle the
+‘File-Name-Shadow mode’ mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'file-name-shadow-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Global-Eldoc minor mode (no indicator):
+Toggle Eldoc mode in all buffers.
+With prefix ARG, enable Global Eldoc mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Eldoc mode is enabled in all buffers where ‘turn-on-eldoc-mode’ would
+do it.
+
+See ‘eldoc-mode’ for more information on Eldoc mode.
+
+
+Global-Evil-Tabs minor mode (no indicator):
+Toggle Evil-Tabs mode in all buffers.
+With prefix ARG, enable Global Evil-Tabs mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Evil-Tabs mode is enabled in all buffers where
+‘turn-on-evil-tabs-mode’ would do it.
+
+See ‘evil-tabs-mode’ for more information on Evil-Tabs mode.
+
+
+Global-Font-Lock minor mode (no indicator):
+Toggle Font-Lock mode in all buffers.
+With prefix ARG, enable Global Font-Lock mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Font-Lock mode is enabled in all buffers where
+‘turn-on-font-lock-if-desired’ would do it.
+
+See ‘font-lock-mode’ for more information on Font-Lock mode.
+
+
+Global-Visual-Line minor mode (no indicator):
+Toggle Visual-Line mode in all buffers.
+With prefix ARG, enable Global Visual-Line mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Visual-Line mode is enabled in all buffers where
+‘turn-on-visual-line-mode’ would do it.
+
+See ‘visual-line-mode’ for more information on Visual-Line mode.
+
+
+Hyperbole minor mode (indicator Hypb):
+Toggle Hyperbole global minor mode, the Everyday Hypertextual Information Manager.
+
+When Hyperbole mode is enabled, the ‘hyperbole-mode’ variable
+is non-nil, Hyperbole menus are enabled, as are Hyperbole keys.
+
+Invoke the Hyperbole minibuffer menu with C-h h.  See the
+Info documentation at "(hyperbole)Top".
+
+
+Key             Binding
+
+										hkey-either
+S-<double-mouse-2>			action-mouse-key-emacs
+S-<double-mouse-3>			assist-mouse-key-emacs
+S-<down-mouse-2>				action-key-depress-emacs
+S-<down-mouse-3>				assist-key-depress-emacs
+S-<drag-mouse-2>				action-mouse-key-emacs
+S-<drag-mouse-3>				assist-mouse-key-emacs
+S-<mouse-2>							action-mouse-key-emacs
+S-<mouse-3>							assist-mouse-key-emacs
+S-<triple-mouse-2>			action-mouse-key-emacs
+S-<triple-mouse-3>			assist-mouse-key-emacs
+<double-mouse-1>				hui-select-thing-with-mouse
+<triple-mouse-1>				hui-select-thing-with-mouse
+
+<mode-line> S-<down-mouse-2>		action-key-depress-emacs
+<mode-line> S-<down-mouse-3>		assist-key-depress-emacs
+<mode-line> S-<drag-mouse-2>		action-mouse-key-emacs
+<mode-line> S-<drag-mouse-3>		assist-mouse-key-emacs
+<mode-line> S-<mouse-2>					action-mouse-key-emacs
+<mode-line> S-<mouse-3>					assist-mouse-key-emacs
+
+<vertical-line> S-<down-mouse-2> action-key-depress-emacs
+<vertical-line> S-<down-mouse-3> assist-key-depress-emacs
+<vertical-line> S-<drag-mouse-2> action-mouse-key-emacs
+<vertical-line> S-<drag-mouse-3> assist-mouse-key-emacs
+<vertical-line> S-<mouse-2>			 action-mouse-key-emacs
+<vertical-line> S-<mouse-3>			 assist-mouse-key-emacs
+
+<right-fringe> S-<down-mouse-2>	action-key-depress-emacs
+<right-fringe> S-<down-mouse-3>	assist-key-depress-emacs
+<right-fringe> S-<drag-mouse-2>	action-mouse-key-emacs
+<right-fringe> S-<drag-mouse-3>	assist-mouse-key-emacs
+<right-fringe> S-<mouse-2>			action-mouse-key-emacs
+<right-fringe> S-<mouse-3>			assist-mouse-key-emacs
+
+<left-fringe> S-<down-mouse-2>	action-key-depress-emacs
+<left-fringe> S-<down-mouse-3>	assist-key-depress-emacs
+<left-fringe> S-<drag-mouse-2>	action-mouse-key-emacs
+<left-fringe> S-<drag-mouse-3>	assist-mouse-key-emacs
+<left-fringe> S-<mouse-2>				action-mouse-key-emacs
+<left-fringe> S-<mouse-3>				assist-mouse-key-emacs
+
+<header-line> S-<down-mouse-2>	action-key-depress-emacs
+<header-line> S-<down-mouse-3>	assist-key-depress-emacs
+<header-line> S-<drag-mouse-2>	action-mouse-key-emacs
+<header-line> S-<drag-mouse-3>	assist-mouse-key-emacs
+<header-line> S-<mouse-2>				action-mouse-key-emacs
+<header-line> S-<mouse-3>				assist-mouse-key-emacs
+
+C-<insertchar>	hui-kill-ring-save
+  (Remapped via <remap> <kill-ring-save>)
+
+C-h A						hkey-help
+
+M-o							hkey-operate
+ESC <return>		hkey-either
+
+C-c RET					hui-select-thing
+C-c .						hui-select-goto-matching-delimiter
+C-c /						hui-search-web
+C-c @						hycontrol-windows-grid
+C-c \						hycontrol-enable-windows-mode
+
+C-x r s					hui-copy-to-register
+
+C-h C-h C-o			hkey-either
+C-h C-h C-S-o		hkey-help
+
+
+This is a global minor mode.  If called interactively, toggle the
+‘Hyperbole mode’ mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is ‘toggle’.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate ‘(default-value 'hyperbole-mode)’.
+
+The mode’s hook is called both when the mode is enabled and when
+it is disabled.
+
+
+Ivy minor mode (no indicator):
+Toggle Ivy mode on or off.
+Turn Ivy mode on if ARG is positive, off otherwise.
+Turning on Ivy mode sets ‘completing-read-function’ to
+‘ivy-completing-read’.
+
+**** (apropos)
+Search Help
+найти во всём имаксе
+ иназвании функции и хелпы
+и описание вообще везде
+поиск продолжительный
+PATTERN can be a word, a list of words (separated by spaces),
+or a regexp (using some regexp special characters).  If it is a word,
+search for matches for that word as a substring.  If it is a list of words,
+search for matches for any two (or more) of those words.
+
+With C-u prefix, or if ‘apropos-do-all’ is non-nil,
+consider all symbols (if they match PATTERN).
+
+Returns list of symbols and documentation found.
+**** list of all keys that belong to that
+It is possible for Emacs to enumerate all the active minor and major mode key
+bindings in a buffer by typing C-h m. That command is essential if you want to learn
+more about what a major or minor mode can do. Likewise, you can type out parts of a
+complete key (say M-s) and then type C-h to get a list of all keys that belong to that
+prefix : 
+prefix.
+
+**** customize-group
+		Получить инфу по всем переменным
+		режима поскольку зачастую режима нет в мануале
+зато кажется это генерится автоматически
+и там вполне полный хелп по каждой переменной
+M-x customize-group RET company. 
+**** links helps\tutorials
+***** doom tutorial
+https://youtube.com/playlist?list=PLPNohcoOBa5FT65hMZL6SkFmbyqFaLe3b
+** Images
+
+Although Emacs is a text editor, it can also manage images. In Org mode, an image is a link to an image file. You can preview the file in your buffer or export it to your preferred format. You can also add captions and set export properties for each image.
+
+  #+caption: Image caption.
+  #+attr_html: :alt Alternative text
+  [[file:path/to/image]]
+
+If you use the Helm completion system, you can preview the image as you select it with helm-follow-mode. When you are in the Helm selection session, toggle follow mode with C-c C-f. As you move the cursor, images will appear in anoter window.
+
+To view the preview images in your document or remove the previews, you press C-c C-x C-v. You can also add #+startup: inlineimages to view images by default.
+
+To add an image, press C-c C-l, which opens the link menu. Org mode understands many types of links. We want the file type, so type file:. Press enter and select the image filename in the mini buffer. You can skip the file part with the C-u C-c C-l shortcut (adding C-u before the standard shortcut.)
+
+After you enter the image, you preview it with the org-redisplay-inline-images function or C-c C-x C-v.
+
+You open a link in Org mode with a mouse click or by pressing C-c C-o with your cursor on the link text.
+
+The images in the buffer are all shown at the same width. The article about writing articles and books with Emacs and the article about creating websites with Emacs explains how to control image with and other image properties.
+
+You can increase or decrease the size of an image with the + and - keys.
+
+** load require:
+	#+begin_src emacs-lisp :tangle yes
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends '(company-irony-c-headers company-irony)))
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key "\t" 'company-complete-common)
+	#+end_src
 ** Environment Variable
 *** "PATH" : 
 **** Описание бага\фичи
@@ -6385,47 +7140,6 @@ You can disable highlighting of any of the supported delimiter types through the
 	;; `(outline-5 ((t (:height 1.85 :weight bold))))
 	;; `(outline-6 ((t (:height 1.75 :weight bold))))
 	;; `(outline-7 ((t (:height 1.65 :weight bold))))
-** info\help
-*** info manual : 
-s - to seach in node of manual(not work in index)
-i - 
-g - 
-   Check out the info manual for Org Mode with C-h i (info) to learn more, including how to customize the number of days initially displayed and what day your week starts on. 
-   удобная систе показиваюшая мануалки по всем установленым модам
-f1-f - show funcrion doc string
-f1-F - find funcrion in manual
-*** (apropos)
-Search Help
-найти во всём имаксе
- иназвании функции и хелпы
-и описание вообще везде
-поиск продолжительный
-PATTERN can be a word, a list of words (separated by spaces),
-or a regexp (using some regexp special characters).  If it is a word,
-search for matches for that word as a substring.  If it is a list of words,
-search for matches for any two (or more) of those words.
-
-With C-u prefix, or if ‘apropos-do-all’ is non-nil,
-consider all symbols (if they match PATTERN).
-
-Returns list of symbols and documentation found.
-*** list of all keys that belong to that
-It is possible for Emacs to enumerate all the active minor and major mode key
-bindings in a buffer by typing C-h m. That command is essential if you want to learn
-more about what a major or minor mode can do. Likewise, you can type out parts of a
-complete key (say M-s) and then type C-h to get a list of all keys that belong to that
-prefix : 
-prefix.
-
-*** customize-group
-		Получить инфу по всем переменным
-		режима поскольку зачастую режима нет в мануале
-зато кажется это генерится автоматически
-и там вполне полный хелп по каждой переменной
-M-x customize-group RET company. 
-*** links helps\tutorials
-**** doom tutorial
-https://youtube.com/playlist?list=PLPNohcoOBa5FT65hMZL6SkFmbyqFaLe3b
 ** Hooks
 *** SOF 
 **** add-hook : 
@@ -7619,7 +8333,7 @@ Macros are great. And you don’t need elisp to get started either. Being able t
 And that’s to say nothing, of course, of the ability of keyboard macros to edit text. They’re definitely amazing at that also. But I think it’s all too easy to only look at them in that light. And if you’re new or unfamiliar with Elisp then it’s an easy way to supercharge your Emacs by recording how you want it done.
 
 Oh, and believe me, I haven’t even scratched the surface of what you can do with keyboard macros in Emacs. So, if you do something cool with macros, I’d love to hear about it!
-** compare : 
+** compare :
 *** ediff
 The most frequently used commands to compare two files are those of ediff. You can invoke them from the “Tools > Compare (Ediff)” menu. There is a command called ediff-windows-linewise, though usually you would compare two buffers (ediff-buffers) or two files (ediff-files) or two revisions under a version control system (ediff-revision). Press n and p to navigate between diff regions; press ? to see more available commands.
 ** Registers
@@ -7947,7 +8661,7 @@ wigt
 (load-theme 'adwaita t)
 (load-theme 'tsdh-light t)
 
-** Text fu 
+** Text fu
 *** Checking Spelling
 
 The Emacs minor mode Flyspell provides an interface to the Hunspell spell checking software. To enable spell checking, you thus first need to ensure that Hunspell is available on your computer. Hunsell is easy to install on Linux computers, but is also available for Windows and Chromebook.
@@ -8837,7 +9551,6 @@ To replace only the first match (if any), make REGEXP match up to \'
 and replace a sub-expression, e.g.
   (replace-regexp-in-string "\\(foo\\).*\\'" "bar" " foo foo" nil nil 1)
     => " bar foo"
-
 
 *** Lisp Symbol
 **** Xah Lee. : 
@@ -10605,7 +11318,7 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
 ***** get
  (plist-get '(x 1 y 2) 'y) ; 2
  (plist-get '(x 1 y 2) 'b) ; nil
-***** set 
+***** set
  ;; create a property list xx
  (setq xx '(a 1 b 2))
 
@@ -10615,13 +11328,13 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
  (plist-get xx 'b) ; 3
  xx
  ;; (a 1 b 3)
-***** cheak 
+***** cheak
  (setq xx '(a 1 b 2))
 
  ;; check if a key exist
  (plist-member xx 'b)
  ;; (b 2)
-***** keywords : 
+***** keywords :
  (setq tem '(:x 10 :y 20))
  (plist-get tem :y)
 ***** The Problem
@@ -18719,7 +19432,6 @@ You can mix Creole with the following HTML tags:
  If you are using SVG rendering and plantuml-preview shows you an empty buffer, chances are something is wrong with the PlantUML output. While inside the preview buffer, hit C-c C-c to switch to the textual mode and see if the output is valid SVG.
 **** setings FAQ 
 ***** I want to generate huge diagrams!
-
 PlantUML limits image width and height to 4096. There is an environment variable that you can set to override this limit: PLANTUML_LIMIT_SIZE. You have to define this variable before launching PlantUML, something like:
 
 set PLANTUML_LIMIT_SIZE=8192

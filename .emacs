@@ -15,11 +15,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+	 '("f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(gptel-model "gpt-3.5-turbo-16k")
  '(package-selected-packages
-	 '(hyperbole diminish solarized-theme obsidian doom-themes yaml-mode yasnippet-snippets skewer-mode reverse-im read-aloud rainbow-delimiters quelpa-use-package projectile powerline plantuml-mode outshine org-roam-ui org-brain ob-translate miracle minimap material-theme lua-mode jedi ivy hydra hledger-mode graphviz-dot-mode gptel gpt flycheck expand-region evil-tabs elpy company-jedi company-fuzzy better-defaults avy ahk-mode)))
+	 '(diminish solarized-theme obsidian doom-themes yaml-mode yasnippet-snippets skewer-mode reverse-im read-aloud rainbow-delimiters quelpa-use-package projectile powerline plantuml-mode outshine org-roam-ui org-brain ob-translate miracle minimap material-theme lua-mode jedi ivy hydra hledger-mode graphviz-dot-mode gptel gpt flycheck expand-region evil-tabs elpy company-jedi company-fuzzy better-defaults avy ahk-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
