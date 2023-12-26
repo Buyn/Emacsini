@@ -81,15 +81,15 @@ https://www.braveclojure.com/basic-emacs/
 (define-key evil-normal-state-map (kbd "G G") 'evil-goto-line)
 
 
-(use-package hyperbole
-	:ensure t
-	;; :config
-	(define-key hyperbole-mode-map (kbd "M-<return>") `nil)
-	(define-key hyperbole-mode-map (kbd "C-h C-h") `nil)
-	(define-key hyperbole-mode-map (kbd "C-h C-h C-o") `hkey-either)
-	(define-key hyperbole-mode-map (kbd "C-h C-h C-S-O") `hkey-help)
-	;; 	(hyperbole-mode 1)
-		)
+;; (use-package hyperbole
+;; 	:ensure t
+;; 	;; :config
+;; 	(define-key hyperbole-mode-map (kbd "M-<return>") `nil)
+;; 	(define-key hyperbole-mode-map (kbd "C-h C-h") `nil)
+;; 	(define-key hyperbole-mode-map (kbd "C-h C-h C-o") `hkey-either)
+;; 	(define-key hyperbole-mode-map (kbd "C-h C-h C-S-O") `hkey-help)
+;; 	;; 	(hyperbole-mode 1)
+;; 		)
 
 (kill-buffer (current-buffer))
 (evil-quit)
@@ -1381,7 +1381,9 @@ initial-scratch-message
 (find-file-other-frame "~/../Dropbox/orgs/adm/cygwin_gcc.org")
 (find-file-other-frame "~/../Dropbox/orgs/adm/emacs_org-roam_2023-05-19.org")
 
-** init files
+** init files C+c C+o
+[[elisp:(find-file-other-frame "~/ORG/brain/index.org")][init files not in braine]]
+(find-file-other-frame "~/ORG/brain/index.org")
 *** root
 (find-file-other-frame "~/.emacs")
 	(find-file-other-frame "~/INI/init.el")
@@ -5456,655 +5458,6 @@ describe-package
 (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key "\t" 'company-complete-common)
 	#+end_src
-*** Keyborde help 
-**** evaluate
-*****    27.9 Evaluating Emacs Lisp Expressions
-Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
-Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
-M-:
-    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
-~C-x C-e~
-    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
-~C-M-x (in Emacs Lisp mode)~
-~M-x eval-defun~
-    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
-~M-x eval-region~
-    Evaluate all the Emacs Lisp expressions in the region.
-~M-x eval-buffer~
-    Evaluate al
-*** Keyborde help
-**** evaluate
-***** 27.9 Evaluating Emacs Lisp Expressions
-Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
-Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
-M-:
-    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
-~C-x C-e~
-    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
-~C-M-x (in Emacs Lisp mode)~
-~M-x eval-defun~
-    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
-~M-x eval-region~
-    Evaluate all the Emacs Lisp expressions in the region.
-~M-x eval-buffer~
-    Evaluate all the Emacs Lisp expressions in the buffer. 
-
-M-: (eval-expression) reads an expression using the minibuffer, and evaluates it. (Before evaluating the expression, the current buffer switches back to the buffer that was current when you typed M-:, not the minibuffer into which you typed the expression.)
-
-The command C-x C-e (eval-last-sexp) evaluates the Emacs Lisp expression preceding point in the buffer, and displays the value in the echo area. When the result of an evaluation is an integer, it is displayed together with the value in other formats (octal, hexadecimal, and character if eval-expression-print-maximum-character, described below, allows it).
-
-If M-: or C-x C-e is given a prefix argument, it inserts the value into the current buffer at point, rather than displaying it in the echo area. If the prefix argument is zero, any integer output is inserted together with its value in other formats (octal, hexadecimal, and character). Such a prefix argument also prevents abbreviation of the output according to the variables eval-expression-print-level and eval-expression-print-length (see below). Similarly, a prefix argument of -1 overrides the effect of eval-expression-print-length.
-
-The eval-defun command is bound to C-M-x in Emacs Lisp mode. It evaluates the top-level Lisp expression containing or following point, and prints the value in the echo area. In this context, a top-level expression is referred to as a “defun”, but it need not be an actual defun (function definition). In particular, this command treats defvar expressions specially. Normally, evaluating a defvar expression does nothing if the variable it defines already has a value. But this command unconditionally resets the variable to the initial value specified by the defvar; this is convenient for debugging Emacs Lisp programs. defcustom and defface expressions are treated similarly. Note that the other commands documented in this section do not have this special feature.
-
-With a prefix argument, C-M-x instruments the function definition for Edebug, the Emacs Lisp Debugger. See Instrumenting for Edebug.
-
-The command M-x eval-region parses the text of the region as one or more Lisp expressions, evaluating them one by one. M-x eval-buffer is similar but evaluates the entire buffer.
-
-The options eval-expression-print-level and eval-expression-print-length control the maximum depth and length of lists to print in the result of the evaluation commands before abbreviating them. Supplying a zero prefix argument to eval-expression or eval-last-sexp causes lists to be printed in full. eval-expression-debug-on-error controls whether evaluation errors invoke the debugger when these commands are used; its default is t. eval-expression-print-maximum-character prevents integers which are larger than it from being displayed as characters. 
-5.31 How do I execute (“evaluate”) a piece of Emacs Lisp code?
-There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp form:
-    If you want it evaluated every time you run Emacs, put it in a file named .emacs in your home directory. This is known as “your .emacs file,” and contains all of your personal customizations.
-    You can type the form in the *scratch* buffer, and then type <LFD> (or C-j) after it. The result of evaluating the form will be inserted in the buffer.
-    ~In emacs-lisp-mode~, typing ~C-M-x~ evaluates a top-level form before or around point.
-    Typing ~C-x C-e~ in ~any buffer~ evaluates the Lisp form immediately before point and prints its value in the echo area.
-    Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
-    You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
-    The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
-***** python
-****** run unit test
- C-c C-t [elpy-test]
-
-**** get help 
-***** get menu command 
-     Some of the commands in the menu bar have ordinary key bindings as well;
-	if so, a key binding is shown after the item itself. 
- To view the full ~command name~ and documentation for a menu item, type ~C-h k~,
-	and then select the menu bar with the mouse in the usual way (see Key Help). 
-**** coment line 
-26.5.1 Comment Commands
-The following commands operate on comments:
-M-;
-    Insert or realign comment on current line; if the region is active, comment or uncomment the region instead (comment-dwim).
-~C-x C-;~
-    Comment or uncomment the current line (comment-line). If the region is active, comment or uncomment the lines in the region instead.
-C-u M-;
-    Kill comment on current line (comment-kill).
-C-x ;
-    Set comment column (comment-set-column).
-C-M-j
-M-j
-    Like <RET> followed by inserting and aligning a comment (comment-indent-new-line). See Multi-Line Comments.
-M-x comment-region
-C-c C-c (in C-like modes)
-    Add comment delimiters to all the lines in the region. 
-
-The command to create or align a comment is M-; (comment-dwim). The word “dwim” is an acronym for “Do What I Mean”; it indicates that this command can be used for many different jobs relating to comments, depending on the situation where you use it.
-When a region is active (see Mark), M-; either adds comment delimiters to the region, or removes them. If every line in the region is already a comment, it uncomments each of those lines by removing their comment delimiters. Otherwise, it adds comment delimiters to enclose the text in the region.
-If you supply a prefix argument to M-; when a region is active, that specifies the number of comment delimiters to add or delete. A positive argument n adds n delimiters, while a negative argument -n removes n delimiters.
-If the region is not active, and there is no existing comment on the current line, M-; adds a new comment to the current line. If the line is blank (i.e., empty or containing only whitespace characters), the comment is indented to the same position where <TAB> would indent to (see Basic Indent). If the line is non-blank, the comment is placed after the last non-whitespace character on the line. Emacs tries to fit the comment between the columns specified by the variables comment-column and comment-fill-column (see Options for Comments), if possible. Otherwise, it will choose some other suitable position, usually separated from the non-comment text by at least one space. In each case, Emacs places point after the comment's starting delimiter, so that you can start typing the comment text right away.
-You can also use M-; to align an existing comment. If a line already contains the comment-start string, M-; realigns it to the conventional alignment and moves point after the comment's starting delimiter. As an exception, comments starting in column 0 are not moved. Even when an existing comment is properly aligned, M-; is still useful for moving directly to the start of the comment text.
-~C-x C-;~ (comment-line) comments or uncomments complete lines. When a region is active (see Mark), C-x C-; either comments or uncomments the lines in the region. If the region is not active, this command comments or uncomments the line point is on. With a positive prefix argument n, it operates on n lines starting with the current one; with a negative n, it affects n preceding lines. After invoking this command with a negative argument, successive invocations with a positive argument will operate on preceding lines as if the argument were negated.
-C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
-The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
-For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
-**** Rebind keys
-***** keys to keys
-(global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
-***** lambda : 
-(define-key evil-normal-state-map (kbd "M-c M-y") '(lambda() (interactive)
-					(setq x-select-enable-clipboard t)
-					;; (kill-ring-save (region-beginning) (region-end))
-					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
-					(setq x-select-enable-clipboard nil)))
-***** Key Bind Commands
-There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
-I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
-
-(define-key KEYMAP KEY DEF)
-
-    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
-(local-set-key KEY COMMAND)
-
-    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
-(global-set-key KEY COMMAND)
-
-    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
-(global-unset-key KEY)
-
-    Removes KEY from the global keymap
-(local-unset-key KEY)
-
-    Removes KEY from the active, local keymap.
-(use-package :bind ( ... ))
-
-    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
-***** Mastering Key Bindings in Emacs
-****** By Mickey Petersen
-Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
-Updated for emacs 28
-
-Altering the key bindings in Emacs should not, on the face of it, be a difficult task. But there’s a reason why the Emacs manual has dedicated 30-odd pages to describing, in great detail, all the subtleties and nuances of how to bind keys.
-
-To save you the time of reading all of that, I’ve written a guide that covers what you need to know to bind keys to even complex commands, and a set of templates you can use in your own code. And the best thing about this guide is that you don’t need to know any elisp to get started!
-
-I’ve included a selection of handy templates near the end that you can customize and put in your init file.
-****** What makes up a key bind?
-Emacs is “self-hosting” and, depending on who you ask, close to achieving sentience. Almost all of Emacs is written in Emacs Lisp. Every function in Emacs in turn builds on smaller functions, and so on, right through all the strata of elisp until you reach the C core.
-
-Emacs’s key engine works in much the same way. Layer upon layer — or keymap upon keymap!
-
-Even elementary things like inserting characters – called self-insertion – is amenable to change. For instance, the key f is bound to self-insert-command, a special command that repeats the last typed key N times. So if you type C-u 10 f you will see ffffffffff printed on your screen. As you can see, every keypress – even basic ones like typing a character on the screen – has an associated key binding that you can modify or even remove.
-****** What is a Keymap?
-A keymap is an internal data structure used by Emacs to store keys and their associated actions. Keymaps are rarely modified directly; instead, you modify them through a set of functions that manipulate the data structure for you. Most Emacs users will never interact with keymaps aside from indirectly assigning keys to them.
-
-Every buffer and most major and minor modes have a keymap, and that keymap defines what the keys do when key sequences are sent to that buffer. Keys can be divided into three categories: undefined, prefix key, or complete key.
-
-    Undefined is self-explanatory: it does no operation when it is invoked.
-    Prefix keys are keys like C-x and C-c. They are make up part of a complete key, and each constituent part of a prefix key has its own keymap.
-    A complete key is a key combination that resolves to a valid command. Like the key g, C-x C-f, or <mouse-1>.
-
-In Emacs, a key is not limited to just your plain-as-day keys on a keyboard. Anything that can generate an input event is fair game: two-factor authentication USB sticks, as they just ‘type’ stuff like keyboard would; that Hammond organ you’re eyeing as a replacement for your regular keyboard; and of course your mouse.
-
-It is possible for Emacs to enumerate all the active minor and major mode key bindings in a buffer by typing C-h m. That command is essential if you want to learn more about what a major or minor mode can do. Likewise, you can type out parts of a complete key (say M-s) and then type C-h to get a list of all keys that belong to that prefix.
-
-If you know the name of a keymap, you can use M-x describe-keymap in Emacs 28.
-****** Key Bind Commands
-There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
-I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
-
-(define-key KEYMAP KEY DEF)
-
-    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
-(local-set-key KEY COMMAND)
-
-    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
-(global-set-key KEY COMMAND)
-
-    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
-(global-unset-key KEY)
-
-    Removes KEY from the global keymap
-(local-unset-key KEY)
-
-    Removes KEY from the active, local keymap.
-(use-package :bind ( ... ))
-
-    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
-****** Representing Keys in Code (kbd)
-In order to actually bind a key you must first tell Emacs what key you intend to use. Unfortunately there’s more than one way of representing keys in Emacs: as a string, or as a vector. We won’t concern ourselves with either, as we will use a handy macro built in to Emacs called kbd. The kbd macro translates a human-readable key into a format Emacs can understand.
-
-One important point to note is that you must surround function and navigation keys with < and >:
-
-That includes F-keys, arrow keys and home row keys, like so: <home>, <f8> and <down>.
-
-(kbd "<home>")    ;; OK
-(kbd "tab")       ;; Wrong, but valid -- missing < and >
-(kbd "<tab>")     ;; OK
-(kbd "C-c p")     ;; OK
-****** Remapping Commands
-
-You can tell Emacs that you want to replace all keys pointing to a certain command with one of your own choosing by using the remap notation.
-
-You must do this instead of passing a key to the key bind function you are using. This is the best way of replacing existing commands with your own, as Emacs does the hard work of figuring out all the keys it needs to rebind.
-
-Example:
-
-(define-key (current-global-map) [remap kill-line] 'my-homemade-kill-line)
-
-Here I globally remap all keys that point to kill-line to my-homemade-kill-line.
-
-For a practical example of remapping in use, see fixing the mark commands in transient mark mode.
-****** Reserved Keys
-You can pick any keyboard combination you desire – even if that key bind is already taken, so be careful – but Emacs has set aside certain keys for use by users. Generally, all keys prefixed with C-c ? (where ? is a single character) are reserved for you, and you alone. In practice most third-party packages don’t care about the key bindings they occupy. So keep that in mind.
-
-The other set of reserved keys are the F-keys from F5 and onwards. The other two prefix keys reserved to you are hyper and super. They are remnants from ancient keyboards used in the 80s, but live on today in Emacs. Most PC-compatible keyboards won’t have a super or hyper key so some people rebind the Windows key and the Application Context key to be hyper and super instead.
-
-If you’re fortunate enough to have spent a large sum of money on a fancy mechanical keyboard, you may have keys to spare, and the firmware to rebind them as you see fit. I recommend you look into dedicated hyper or super keys; but don’t forget, you can also tell your firmware to bind a key to, say, C-M- or even a prefix key, like C-x. Be creative.
-
-Anyway. Because of Emacs’s roots, it understands these keys natively, and they have their own modifier keys: H- (e.g., H-q) for hyper; and s- for super. Note that s is super and S is shift.
-
-In Windows you can add this to your init file to enable hyper and super:
-
-(setq w32-apps-modifier 'hyper)
-(setq w32-lwindow-modifier 'super)
-(setq w32-rwindow-modifier 'hyper)
-
-In X you’ll have to play around with xmodmap or your own tool of choice.
-****** Keymap Lookup Order
-
-Emacs will look for keys in a certain order, and that order I have described below. Keep in mind that only active keymaps are used, and that the order is top-to-bottom. The first “match” is the keymap Emacs uses.
-
-    overriding-terminal-local-map for terminal-specific key binds.
-    overriding-local-map for keys that should override all other local keymaps. Be VERY careful if you use this!
-
-    Keymap char property at point for keymaps that are local to the character point is at.
-    Common use cases include in-buffer fields, like the ones you find in M-x customize.
-    emulation-mode-map-alists for advanced multi-mode keymap management
-    minor-mode-overriding-map-alist for overriding the keymaps used by minor modes in major modes.
-    minor-mode-map-alist is exactly like the overriding version above, but the preferred means of specifying the keymaps for minor modes.
-    Keymap text property at point is like the one above for char properties but this is for text properties only.
-    current-local-map for keymaps defined in the buffers’ current local map
-    current-global-map is the last place Emacs looks. It hosts keys that are global.
-
-But I can summarize these rules in a way that accounts for 99% of all key bindings you’re likely to care about:
-
-    First, Emacs checks if there’s a minor mode key binding;
-
-    If there isn’t, then Emacs checks if there are any local keys set.
-    Typically this local map is shared by the major mode of the current buffer. So if you want to add a key binding to python-mode, you can use local-set-key to do this.
-    And finally global keys are checked.
-
-This order confuses many new users! Most people think that a global key trumps all other keys, but that is not so.
-****** Global vs Local
-A global key is functionally identical to that of a local one, except it is declared in a “global” keymap, governed by the current-global-map function (but usually it points to the default, the global-map variable.) Therefore, you can define a global key simply by passing the current-global-map function to define-key. The other – often better – alternative is to use the designated function, global-set-key.
-
-In a similar vein, to bind a local key you can use the “designated” function local-set-key or the more general define-key. Like the global map, there exists an equivalent function current-local-map that returns the keymap local to the buffer.
-
-If you want to change major mode key bindings, you’re going to have to choose between explicitly updating its keymap with define-key, or calling it from within the major mode’s buffer with local-set-key. You can’t always interchange the two, although they’re supposed to yield the same outcome. The reason is that some major modes regenerate keymaps or outright reset them. When that happens you may have to choose one or the other.
-****** Defining your Command
-
-If you thought the mechanics of keymaps and keys were difficult, think again! Deciding on what you want to bind to those keys is even harder – especially so if you want the command to do very specific things, like switching to a specific buffer name. But I’ve got a few tricks up my sleeve to help you cut out most of the elisp writing by letting Emacs do all the heavy lifting.
-****** Invoking a command
-
-Before I talk about the how and why of Emacs commands it is important that I mention how Emacs handles interactive functions — commonly known as commands. An Emacs command has an (interactive ...) form at the top of its function body. The (interactive ...) form controls how the function must respond to user input when it’s invoked interactively. For instance, a command that prompts a user for a string must tell Emacs – using the (interactive ...) form – how to do this.
-
-All commands are executable through M-x and can therefore be bound to a key.
-
-When you bind a function to a key it is important that you keep the above in mind, as you cannot invoke a non-interactive function through a key binding — it must be a command.
-
-If it is your intent – as it so often is – to call a function, but with explicit parameter values, you must wrap it in a little helper function, like a lambda expression or even a standard defun. I have prepared templates (see below) that show you how to do this.
-****** Describing the command
-There are two ways of describing a command in elisp: the manual way, and the smart way. Let’s start out with the manual way.
-The manual way is to use C-h k KEY to describe what KEY is bound to; the other way is to describe a function, FUNCTION, with C-h f FUNCTION.
-
-Because Emacs is a self-documenting editor all functions, variables, keys, etc. known to Emacs are accessible through the describe-xxx commands. Type C-h C-h to see them all.
-
-With the name of the command, you can now begin the process of reading the documentation string and call it with the requisite arguments it needs to work.
-
-If you’re unsure how to do that, but you do know what you want, then you may want to give the smart way a go.
-****** Capturing Complex Commands
-The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
-Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
-
-Here’s a practical example: C-M-% foo RET bar RET – which does a query-replace-regexp replacing foo with bar. Now, if you type C-x ESC ESC you should see something similar to this (reformatted for clarity):
-
-(query-replace-regexp "foo" "bar" nil
-   (if (and transient-mark-mode mark-active)
-       (region-beginning))
-   (if (and transient-mark-mode mark-active)
-       (region-end)))
-
-Observe how Emacs has kindly filled in all the function arguments to query-replace-regexp, including the optional parameters. If you were to run that command again (by say pasting it into the prompt in M-:) it’ll execute it in the exact same way as when you ran it interactively.
-
-Here’s another one, this time I type C-x b *scratch* to switch to the *scratch* buffer:
-
-(switch-to-buffer "*scratch*")
-
-And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
-****** Keyboard Macros
-I’ve talked about the smart way above, but there’s an even smarter way: Keyboard macros. If you have a series of actions you want to perform, then record it in a keyboard macro!
-
-Emacs can record, and play back, almost everything. You’re not limited to shoveling text; stuff like moving files in dired, or splitting your windows and opening the right buffers in them is not only possible, but easy.
-
-I recommend you read about Emacs’s keyboard macros to see what I mean.
-****** Putting it all together
-We’re nearly done. I just need to explain a few more important concepts that confuse a lot of newbies: mode hooks and mode-specific keymaps, and then it’s on to the templates.
-
-Most major and minor modes will usually set their keys once, when the module is first loaded; that’s good news for us. That means you can use define-key to add key definitions straight into a mode’s key map. Some modes are very advanced, and have several key maps – M-x isearch is a good example – and for those you will have to mess around with the source code or info manual to find out how to add keys.
-
-Another option is M-x describe-keymap (Emacs 28+) that shows all known key maps. You can probably narrow down the ones you want that way.
-
-It’s the modes that force you to use a mode hook that’s the problem: for that you must set your keys when the mode is activated, and that takes a little bit more work.
-
-It is a convention in Emacs that all major and minor mode functions (the ones that activate the mode) end in -mode (e.g., python-mode), and it is also expected that its mode map follows a common naming scheme: xxxx-mode-map for the key map; and xxxx-mode-hook for the mode’s hook.
-
-With those mode hooks in mind, you can add a local-set-key call and, hopefully, that’s all you need to override or add keys to the right mode’s key map.
-****** Keymaps
-******* Listing all the Mode Maps
-Modifying a keymap is dirt simple, you use define-key as I’ve mentioned before. What’s not so easy is determining what keymap to modify in the first place.
-
-If you type this Emacs will give you an apropos buffer with all the known mode maps that follow the major mode naming scheme:
-
-C-u M-x apropos-variable RET -mode-map$ RET
-
-You can also use M-x describe-keymap and then pick the mode map you want from the candidate list.
-******* Quick Keymap Example
-Let’s say I want to extend python-mode by adding a key, I’ll use F12, that switches to the python process buffer. Currently, that’s bound to C-c C-z and M-x python-shell-switch-to-shell.
-
-(define-key python-mode-map (kbd "<f12>") 'python-shell-switch-to-shell)
-
-In order to get the command belonging to the key, I used C-h k C-c C-z.
-******* Creating New Keymaps
-If you want your own blank key maps, particularly if you want to build your own complex web of prefix keys and such, you’ll need to learn how to make your own.
-
-Luckily it’s not too hard.
-
-(defvar my-special-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map "s" 'shell)
-    (define-key map "g" 'rgrep)
-    map)
-  "My special key map.")
-
-First things first. We’ll need a variable, declared with defvar so it won’t get reevaluated by accident. Not sure what I mean by that? Read my article on evaluating elisp.
-
-Next, we use a let form to bind the variable map to a sparse keymap created with make-sparse-keymap. Sparse in this case means “empty”. Inside the let form you can call define-key and assign commands to keys.
-
-There is also copy-keymap if you want to copy another keymap and modify its copy instead. In fact, there’s a whole host of functions that deal with this. But I think these two are the ones worth knowing about if you’re building your own stuff.
-
-Either way, you get a key map ready to go.
-******* Repeating Keys with repeat-mode
-Emacs 28 formalizes – the code that does it has existed in Emacs for eons – a method of making repeating key maps. If you find yourself typing C-x o over and over again to switch windows, then as of Emacs 28 you can type C-x o o o o ... ad infinitum if you enable M-x repeat-mode.
-
-The new mode is easy to retrofit onto existing Emacs key map machinery if you know how.
-******* Repeating Keys Example
-NOTE: Make sure you enable M-x repeat-mode.
-Consider the keys C-M-u and C-M-d. They move out or into balanced expressions, like ( ... ), [ ... ], and so on. Perfect for most programming languages.
-
-For this to work, you have to define the repeatable keys: the one-letter chords that take effect after you’ve invoked the primary key.
-
-(defvar balanced-repeat-map
- (let ((map (make-sparse-keymap)))
-   (define-key map "u" 'backward-up-list)
-   (define-key map "d" 'down-list)
-   map)
- "Repeating map for balanced expressions.")
-
-Next, we attach a property name and value to the commands that enable the repeating keys we defined in balanced-repeat-map:
-
-(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
-(put 'down-list 'repeat-map 'balanced-repeat-map)
-
-And that’s it! When you next type C-M-u or C-M-d you’re given the option to type u or d instead.
-Hooks
-
-A mode hook has zero-or-more functions that are called when its mode is activated. Mode-specific hooks are run when you activate that mode. That happens automatically when you open a file, or manually call M-x some-mode.
-Altering Mode Hooks
-****** Adding Hooks
-    You can add a mode hook using the special function add-hook that takes the name of a hook (say python-mode-hook) and the name of a function to call.
-******* Removing Hooks
-
-    You can remove functions from a hook variable with remove-hook. If you are experimenting you may want to remove hooks as part of your testing.
-
-    In newer Emacsen you can call it interactively, select a mode hook, and then pick the one you want to remove. That is good to know when you inevitably add lambda functions to a mode hook and now struggle with duplicate hooks!
-******* Listing all the Mode Hooks
-If you are unsure of the exact name of the mode hook, you can use this handy trick to list the ones Emacs can see:
-
-M-x apropos-variable RET -mode-hook$ RET
-
-That will show all mode hooks known to Emacs, including their docstring description. If you don’t see your mode it may be because Emacs hasn’t loaded it outright. You can try M-x load-library and see if you can load the package or library that way first.
-******* Quick Hook Example
-Let’s add a key (C-c q to run M-x shell) local to python-mode using a hook. For that to work we will need our special hook function, I’ve named it mp-add-python-keys, and in it we need local-set-key, the function that adds a key to the active buffer’s local map. Remember that local-set-key uses the local mode map.
-
-Next is the command that tells Emacs that we want to add a mode hook to Python.
-
-(defun mp-add-python-keys ()
-  (local-set-key (kbd "C-c q") 'shell))
-
-(add-hook 'python-mode-hook #'mp-add-python-keys)
-****** Setting Key Bindings with use-package
-If you use use-package then you can leverage its key binding facilities.
-
-Let’s say you like the package M-x winner-mode, a minor mode that records your window configurations and lets you undo and redo changes made to it, by you or by commands you execute.
-
-(use-package winner
-  :config
-  (winner-mode 1)
-  :bind (("M-[" . winner-undo)
-         ("M-]" . winner-redo)))
-
-The :bind property is there to do just that. Here I’ve bound M-[ and M-] to two commands. Note the structure!
-
-Another thing to keep in mind is that, unless you tell it otherwise, use-package defaults to global key bindings.
-
-If, on the other hand, you want to insert the keys into a specific key map, you need to tell use-package the map to use:
-
-(use-package eshell
-  :bind (("C-c e" . eshell)
-         :map eshell-mode-map
-         ("M-m" . eshell-bol)))
-
-Here I’ve chosen to bind C-c e to M-x eshell globally, as I have not specified a particular key map yet.
-
-Next, I declare :map eshell-mode-map and from that point on, that is the keymap use-package uses when I ask it to bind M-m to eshell-bol.
-
-So as you can see, it’s easy to bind to a variety of both global and keymap-specific maps.
-****** Templates
-******* Templates
-Here’s a bunch of templates for various use-cases that you can cut’n’paste and use in your own code. I recommend naming things sensibly, and giving them a docstring (in-code documentation that explains what the code does) as well. The best way to avoid accidentally overriding another function with the same name, I would suggest you use a moniker or prefix. I use mp- for all of my own functions.
-
-I also urge you to avoid the temptation of plastering your code with lambda functions. They’re great, sure; but if you ever need to update or change them during your development and testing cycle, you may end up with duplicate functions in your mode hooks playing havoc.
-
-If you are unsure how to evaluate elisp, then read my article on evaluating elisp in Emacs.
-******* Basic Global Key Binding
-Binds a command to a global key binding.
-Definition
-
-(global-set-key (kbd "key-bind-here") 'interactive-command-here)
-
-Example
-
-Binds F1 to M-x shell
-
-(global-set-key (kbd "<f1>") 'shell)
-******* Add or Remove a Key to or from a Keymap
-
-Adds or removes a key and its associated command to/from an explicit keymap. Use this if you know the name of the keymap and you want to add a key to it.
-Definition
-******* Add a key to a keymap:
-
-(define-key KEYMAP (kbd "key-bind-here") 'interactive-command-here)
-******* Remove a key from a keymap:
-
-(define-key KEYMAP (kbd "key-bind-here") nil)
-
-Example
-
-Binds C-c p to python-switch-to-python
-
-(define-key python-mode-map (kbd "C-c p") 'python-shell-switch-to-shell)
-******* Complex Command Key Bind
-Creates a global key bind that invokes multiple commands in a row. Use this to create compound keys or invoke commands that take parameters. Uses code from the Function Template.
-Definition
-
-(defun name-of-interactive-command-here ()
-  (interactive)
-  ;;; Insert your compound commands below
-  )
-(global-set-key (kbd "key-bind-here") 'name-of-interactive-command-here)
-
-Example
-
-Switches to the *scratch* buffer and inserts “Hello, World” where point is, and switches back to where it came from.
-
-(defun switch-to-scratch-and-insert-text ()
-  (interactive)
-  (save-excursion
-    (set-buffer "*scratch*")
-    (insert "Hello, World")))
-(global-set-key (kbd "C-c i") 'switch-to-scratch-and-insert-text)
-******* Binding keys with a mode hook
-
-Use this mode hook template to bind keys that won’t work with a standard define-key template, or if the key map is reset in when the mode is initialized.
-
-If you have other, mode-specific changes, you want to apply at the same time, then this is the perfect place for you to do so.
-Definition
-
-(defun my-hook-function ()
-  ;; add your code here. it will be called every
-  ;; time the major mode is run.
-
-  )
-(add-hook 'my-mode-hook #'my-hook-function)
-
-Example
-
-Here I change the python indentation offset to 4 and make it local to that buffer with setq-local. Next, I disable eldoc-mode and I locally bind a key with local-set-key.
-
-(defun mp-my-hook-settings ()
-  (setq-local python-indent-offset 4)
-  (eldoc-mode -1)
-  (local-set-key (kbd "C-c p" 'python-shell-switch-to-shell)))
-
-(add-hook 'python-mode-hook #'mp-my-hook-settings)
-
-As you can see, this is a good place to put all your other tweaks that relate to a specific mode.
-******* Remapping a command
-This template will remap all keys that point to a specific command. Say you want to rebind kill-line, bound to C-k, but you want your code to only override the key binds that kill-line is actually bound to. Use this template to replace existing commands with those of your own, without worrying about explicitly rebinding each key.
-Definition
-
-Note: to replace a global key, you must use global-map or call current-global-map.
-
-(define-key keymap [remap original-function] 'my-own-function)
-
-Example
-
-Example here is taken from my article on fixing the mark commands in transient mark mode.
-
-I remap the keys that point to exchange-point-and-mark to my own function exchange-point-and-mark-no-activate.
-
-(defun exchange-point-and-mark-no-activate ()
-  "Identical to \\[exchange-point-and-mark] but will not activate the region."
-  (interactive)
-  (exchange-point-and-mark)
-  (deactivate-mark nil))
-
-(define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
-******* Custom Prefixes
-Creating a prefix is easy nowadays as you don’t have to explicitly create your own prefix keymaps, provided you use local-set-key or global-set-key. Use custom prefixes to group or categorize your commands.
-Definition
-
-(global-set-key (kbd "subkey_1 ... endkey_1") 'my-command-1)
-(global-set-key (kbd "subkey_1 ... endkey_2") 'my-command-2)
-
-Example
-
-Global keys that will insert either the time of the day, or the current date. Type C-c i d to insert the date; and C-c i t to insert the time. Type C-c i C-h to list all bound keys under the C-c i prefix.
-
-(defun mp-insert-date ()
-  (interactive)
-  (insert (format-time-string "%x")))
-
-(defun mp-insert-time ()
-  (interactive)
-  (insert (format-time-string "%X")))
-
-(global-set-key (kbd "C-c i d") 'mp-insert-date)
-(global-set-key (kbd "C-c i t") 'mp-insert-time)
-******* Repeating Key Maps with repeat-mode
-This feature requires Emacs 28 and that you have turned on M-x repeat-mode.
-
-Repeating keys allow you to tap one or more single keys to repeat a command once you have engaged repeat mode by first typing a key that supports repeating keys.
-
-Adding this functionality to existing commands in Emacs is easy.
-Definition
-
-For changes relating to a specific package, use this format:
-
-(defvar my-repeat-map
- (let ((map (make-sparse-keymap)))
-   (define-key map "a" 'some-command)
-   ;; ...
-   (define-key map "z" 'another-command)
-   map)
- "Repeating map example.")
-
-Next, we attach a property name and value to the commands that should trigger my-repeat-map:
-
-(put 'some-command 'repeat-map 'my-repeat-map)
-(put 'another-command 'repeat-map 'my-repeat-map)
-
-Example
-
-Activate this repeat map with C-M-u or C-M-d, then type d or u to move down or up.
-
-(defvar balanced-repeat-map
- (let ((map (make-sparse-keymap)))
-   (define-key map "u" 'backward-up-list)
-   (define-key map "d" 'down-list)
-   map)
- "Repeating map for balanced expressions.")
-
-(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
-(put 'down-list 'repeat-map 'balanced-repeat-map)
-******* Binding keys with use-package
-If you are already using use-package then you may as well use it to bind your keys also.
-You can define global and local keys this way.
-Definition
-For changes relating to a specific package, use this format:
-
-(use-package package-name-here
-  :bind (("kbd-here" . command-here)
-         :map some-map
-         ("kbd-here" . another-command-here)
-         :map yet-another-map
-         ("kbd-here" . some-command-here)))
-
-But if you want a place to store global keys that don’t relate to any one package, use the package name emacs instead.
-Example
-
-Here I bind C-c e to eshell globally, and M-m to eshell-bol locally.
-
-(use-package eshell
-  :bind (("C-c e" . eshell)
-         :map eshell-mode-map
-         ("M-m" . eshell-bol)))
-****** Conclusion
-I have covered almost every facet of key binding that most Emacs users would care to know about. If you use use-package, then it can definitely cut down on some of the tedium and help centralize your bindings with your other settings.
-
-I recommend you read why I think keyboard macros are misunderstood as it’ll further cement just how much “no-code” Emacs you can accomplish with keyboard macros and key bindings.
-**** Emacs Movement 
-‘C-M-a’
-‘C-M-e’
-   Move point to the beginning or end of the current function or
-[[info:emacs#Motion in C][info:emacs#Motion in C]]  
-‘C-M-f’
-     Move forward over a balanced expression (‘forward-sexp’).
-‘C-M-b’
-     Move backward over a balanced expression (‘backward-sexp’).
-‘C-M-k’
-     Kill balanced expression forward (‘kill-sexp’).
-‘C-M-t’
-     Transpose expressions (‘transpose-sexps’).
-‘C-M-@’
-‘C-M-<SPC>’
-     Put mark after following expression (‘mark-sexp’).
-‘C-M-n’
-     Move forward over a parenthetical group (‘forward-list’).
-‘C-M-p’
-     Move backward over a parenthetical group (‘backward-list’).
-‘C-M-u’
-     Move up in parenthesis structure (‘backward-up-list’).
-‘C-M-d’
-     Move down in parenthesis structure (‘down-list’).
-**** Intends 
-**** replace-string : 
-M-x replace-string RET ; RET C-q C-j.
-
-    C-q for quoted-insert,
-
-    C-j is a newline.
-
-**** repeat-complex-command : C-x ESC ESC or C-x M-:.
-The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
-Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
-
-Here’s a practical example: C-M-% foo RET bar RET – which does a query-replace-regexp replacing foo with bar. Now, if you type C-x ESC ESC you should see something similar to this (reformatted for clarity):
-
-(query-replace-regexp "foo" "bar" nil
-   (if (and transient-mark-mode mark-active)
-       (region-beginning))
-   (if (and transient-mark-mode mark-active)
-       (region-end)))
-
-Observe how Emacs has kindly filled in all the function arguments to query-replace-regexp, including the optional parameters. If you were to run that command again (by say pasting it into the prompt in M-:) it’ll execute it in the exact same way as when you ran it interactively.
-
-Here’s another one, this time I type C-x b *scratch* to switch to the *scratch* buffer:
-
-(switch-to-buffer "*scratch*")
-
-And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
 *** info\help
 **** info manual : 
 m - show and serch in node menu of refarace
@@ -6793,6 +6146,644 @@ M-x customize-group RET company.
 **** links helps\tutorials
 ***** doom tutorial
 https://youtube.com/playlist?list=PLPNohcoOBa5FT65hMZL6SkFmbyqFaLe3b
+** Keyborde help 
+*** evaluate
+**** 27.9 Evaluating Emacs Lisp Expressions
+Emacs Lisp mode is the major mode for editing Emacs Lisp. Its mode command is M-x emacs-lisp-mode.
+Emacs provides several commands for evaluating Emacs Lisp expressions. You can use these commands in Emacs Lisp mode, to test your Emacs Lisp code as it is being written. For example, after re-writing a function, you can evaluate the function definition to make it take effect for subsequent function calls. These commands are also available globally, and can be used outside Emacs Lisp mode.
+M-:
+    Read a single Emacs Lisp expression in the minibuffer, evaluate it, and print the value in the echo area (eval-expression).
+~C-x C-e~
+    Evaluate the Emacs Lisp expression ~before point~, and print the value in the echo area (eval-last-sexp).
+~C-M-x (in Emacs Lisp mode)~
+~M-x eval-defun~
+    Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
+~M-x eval-region~
+    Evaluate all the Emacs Lisp expressions in the region.
+~M-x eval-buffer~
+    Evaluate all the Emacs Lisp expressions in the buffer. 
+
+M-: (eval-expression) reads an expression using the minibuffer, and evaluates it. (Before evaluating the expression, the current buffer switches back to the buffer that was current when you typed M-:, not the minibuffer into which you typed the expression.)
+
+The command C-x C-e (eval-last-sexp) evaluates the Emacs Lisp expression preceding point in the buffer, and displays the value in the echo area. When the result of an evaluation is an integer, it is displayed together with the value in other formats (octal, hexadecimal, and character if eval-expression-print-maximum-character, described below, allows it).
+
+If M-: or C-x C-e is given a prefix argument, it inserts the value into the current buffer at point, rather than displaying it in the echo area. If the prefix argument is zero, any integer output is inserted together with its value in other formats (octal, hexadecimal, and character). Such a prefix argument also prevents abbreviation of the output according to the variables eval-expression-print-level and eval-expression-print-length (see below). Similarly, a prefix argument of -1 overrides the effect of eval-expression-print-length.
+
+The eval-defun command is bound to C-M-x in Emacs Lisp mode. It evaluates the top-level Lisp expression containing or following point, and prints the value in the echo area. In this context, a top-level expression is referred to as a “defun”, but it need not be an actual defun (function definition). In particular, this command treats defvar expressions specially. Normally, evaluating a defvar expression does nothing if the variable it defines already has a value. But this command unconditionally resets the variable to the initial value specified by the defvar; this is convenient for debugging Emacs Lisp programs. defcustom and defface expressions are treated similarly. Note that the other commands documented in this section do not have this special feature.
+
+With a prefix argument, C-M-x instruments the function definition for Edebug, the Emacs Lisp Debugger. See Instrumenting for Edebug.
+
+The command M-x eval-region parses the text of the region as one or more Lisp expressions, evaluating them one by one. M-x eval-buffer is similar but evaluates the entire buffer.
+
+The options eval-expression-print-level and eval-expression-print-length control the maximum depth and length of lists to print in the result of the evaluation commands before abbreviating them. Supplying a zero prefix argument to eval-expression or eval-last-sexp causes lists to be printed in full. eval-expression-debug-on-error controls whether evaluation errors invoke the debugger when these commands are used; its default is t. eval-expression-print-maximum-character prevents integers which are larger than it from being displayed as characters. 
+5.31 How do I execute (“evaluate”) a piece of Emacs Lisp code?
+There are a number of ways to execute (evaluate, in Lisp lingo) an Emacs Lisp form:
+    If you want it evaluated every time you run Emacs, put it in a file named .emacs in your home directory. This is known as “your .emacs file,” and contains all of your personal customizations.
+    You can type the form in the *scratch* buffer, and then type <LFD> (or C-j) after it. The result of evaluating the form will be inserted in the buffer.
+    ~In emacs-lisp-mode~, typing ~C-M-x~ evaluates a top-level form before or around point.
+    Typing ~C-x C-e~ in ~any buffer~ evaluates the Lisp form immediately before point and prints its value in the echo area.
+    Typing M-: or M-x eval-expression allows you to type a Lisp form in the minibuffer which will be evaluated once you press <RET>.
+    You can use M-x load-file to have Emacs evaluate all the Lisp forms in a file. (To do this from Lisp use the function load instead.)
+    The functions load-library, eval-region, eval-buffer, require, and autoload are also useful; see Emacs Lisp documentation, if you want to learn more about them. 
+**** python
+***** run unit test
+ C-c C-t [elpy-test]
+*** code formating 
+**** A command to properly indent the code
+in a region is customarily bound to ‘M-C-\’.  Indentation is designed so
+that you can see which elements of a list belong to which list—elements
+of a sub-list are indented more than the elements of the enclosing list.
+*** get help 
+**** get menu command 
+     Some of the commands in the menu bar have ordinary key bindings as well;
+	if so, a key binding is shown after the item itself. 
+ To view the full ~command name~ and documentation for a menu item, type ~C-h k~,
+	and then select the menu bar with the mouse in the usual way (see Key Help). 
+*** coment line 
+26.5.1 Comment Commands
+The following commands operate on comments:
+M-;
+    Insert or realign comment on current line; if the region is active, comment or uncomment the region instead (comment-dwim).
+~C-x C-;~
+    Comment or uncomment the current line (comment-line). If the region is active, comment or uncomment the lines in the region instead.
+C-u M-;
+    Kill comment on current line (comment-kill).
+C-x ;
+    Set comment column (comment-set-column).
+C-M-j
+M-j
+    Like <RET> followed by inserting and aligning a comment (comment-indent-new-line). See Multi-Line Comments.
+M-x comment-region
+C-c C-c (in C-like modes)
+    Add comment delimiters to all the lines in the region. 
+
+The command to create or align a comment is M-; (comment-dwim). The word “dwim” is an acronym for “Do What I Mean”; it indicates that this command can be used for many different jobs relating to comments, depending on the situation where you use it.
+When a region is active (see Mark), M-; either adds comment delimiters to the region, or removes them. If every line in the region is already a comment, it uncomments each of those lines by removing their comment delimiters. Otherwise, it adds comment delimiters to enclose the text in the region.
+If you supply a prefix argument to M-; when a region is active, that specifies the number of comment delimiters to add or delete. A positive argument n adds n delimiters, while a negative argument -n removes n delimiters.
+If the region is not active, and there is no existing comment on the current line, M-; adds a new comment to the current line. If the line is blank (i.e., empty or containing only whitespace characters), the comment is indented to the same position where <TAB> would indent to (see Basic Indent). If the line is non-blank, the comment is placed after the last non-whitespace character on the line. Emacs tries to fit the comment between the columns specified by the variables comment-column and comment-fill-column (see Options for Comments), if possible. Otherwise, it will choose some other suitable position, usually separated from the non-comment text by at least one space. In each case, Emacs places point after the comment's starting delimiter, so that you can start typing the comment text right away.
+You can also use M-; to align an existing comment. If a line already contains the comment-start string, M-; realigns it to the conventional alignment and moves point after the comment's starting delimiter. As an exception, comments starting in column 0 are not moved. Even when an existing comment is properly aligned, M-; is still useful for moving directly to the start of the comment text.
+~C-x C-;~ (comment-line) comments or uncomments complete lines. When a region is active (see Mark), C-x C-; either comments or uncomments the lines in the region. If the region is not active, this command comments or uncomments the line point is on. With a positive prefix argument n, it operates on n lines starting with the current one; with a negative n, it affects n preceding lines. After invoking this command with a negative argument, successive invocations with a positive argument will operate on preceding lines as if the argument were negated.
+C-u M-; (comment-dwim with a prefix argument) kills any comment on the current line, along with the whitespace before it. Since the comment is saved to the kill ring, you can reinsert it on another line by moving to the end of that line, doing C-y, and then M-; to realign the comment. You can achieve the same effect as C-u M-; by typing M-x comment-kill (comment-dwim actually calls comment-kill as a subroutine when it is given a prefix argument).
+The command M-x comment-region is equivalent to calling M-; on an active region, except that it always acts on the region, even if the mark is inactive. In C mode and related modes, this command is bound to C-c C-c. The command M-x uncomment-region uncomments each line in the region; a numeric prefix argument specifies the number of comment delimiters to remove (negative arguments specify the number of comment delimiters to add).
+For C-like modes, you can configure the exact effect of M-; by setting the variables c-indent-comment-alist and c-indent-comments-syntactically-p. For example, on a line ending in a closing brace, M-; puts the comment one space after the brace rather than at comment-column. For full details see Comment Commands. 
+*** Rebind keys
+**** keys to keys
+(global-set-key (kbd "<f7>") (kbd "C-u C-c C-c"))
+**** lambda : 
+(define-key evil-normal-state-map (kbd "M-c M-y") '(lambda() (interactive)
+					(setq x-select-enable-clipboard t)
+					;; (kill-ring-save (region-beginning) (region-end))
+					(kill-ring-save (line-beginning-position) (line-beginning-position 2))
+					(setq x-select-enable-clipboard nil)))
+**** Key Bind Commands
+There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
+I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
+
+(define-key KEYMAP KEY DEF)
+
+    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
+(local-set-key KEY COMMAND)
+
+    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
+(global-set-key KEY COMMAND)
+
+    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
+(global-unset-key KEY)
+
+    Removes KEY from the global keymap
+(local-unset-key KEY)
+
+    Removes KEY from the active, local keymap.
+(use-package :bind ( ... ))
+
+    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
+**** Mastering Key Bindings in Emacs
+***** By Mickey Petersen
+Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
+Updated for emacs 28
+
+Altering the key bindings in Emacs should not, on the face of it, be a difficult task. But there’s a reason why the Emacs manual has dedicated 30-odd pages to describing, in great detail, all the subtleties and nuances of how to bind keys.
+
+To save you the time of reading all of that, I’ve written a guide that covers what you need to know to bind keys to even complex commands, and a set of templates you can use in your own code. And the best thing about this guide is that you don’t need to know any elisp to get started!
+
+I’ve included a selection of handy templates near the end that you can customize and put in your init file.
+***** What makes up a key bind?
+Emacs is “self-hosting” and, depending on who you ask, close to achieving sentience. Almost all of Emacs is written in Emacs Lisp. Every function in Emacs in turn builds on smaller functions, and so on, right through all the strata of elisp until you reach the C core.
+
+Emacs’s key engine works in much the same way. Layer upon layer — or keymap upon keymap!
+
+Even elementary things like inserting characters – called self-insertion – is amenable to change. For instance, the key f is bound to self-insert-command, a special command that repeats the last typed key N times. So if you type C-u 10 f you will see ffffffffff printed on your screen. As you can see, every keypress – even basic ones like typing a character on the screen – has an associated key binding that you can modify or even remove.
+***** What is a Keymap?
+A keymap is an internal data structure used by Emacs to store keys and their associated actions. Keymaps are rarely modified directly; instead, you modify them through a set of functions that manipulate the data structure for you. Most Emacs users will never interact with keymaps aside from indirectly assigning keys to them.
+
+Every buffer and most major and minor modes have a keymap, and that keymap defines what the keys do when key sequences are sent to that buffer. Keys can be divided into three categories: undefined, prefix key, or complete key.
+
+    Undefined is self-explanatory: it does no operation when it is invoked.
+    Prefix keys are keys like C-x and C-c. They are make up part of a complete key, and each constituent part of a prefix key has its own keymap.
+    A complete key is a key combination that resolves to a valid command. Like the key g, C-x C-f, or <mouse-1>.
+
+In Emacs, a key is not limited to just your plain-as-day keys on a keyboard. Anything that can generate an input event is fair game: two-factor authentication USB sticks, as they just ‘type’ stuff like keyboard would; that Hammond organ you’re eyeing as a replacement for your regular keyboard; and of course your mouse.
+
+It is possible for Emacs to enumerate all the active minor and major mode key bindings in a buffer by typing C-h m. That command is essential if you want to learn more about what a major or minor mode can do. Likewise, you can type out parts of a complete key (say M-s) and then type C-h to get a list of all keys that belong to that prefix.
+
+If you know the name of a keymap, you can use M-x describe-keymap in Emacs 28.
+***** Key Bind Commands
+There are several ways you can define (or undefine) keys, as the table below shows, but in reality there are dozens of ways you can hack the keymaps.
+I recommend you familiarize yourself with these, as they’re the ones you’re more likely to encounter:
+
+(define-key KEYMAP KEY DEF)
+
+    Defines a key against a keyboard map. Use this if you want to change a keymap that isn’t the current buffer map.
+(local-set-key KEY COMMAND)
+
+    Binds a key to the local keymap used by the active buffer, unlike define-key which takes an explicit keymap to bind a key against.
+(global-set-key KEY COMMAND)
+
+    Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
+(global-unset-key KEY)
+
+    Removes KEY from the global keymap
+(local-unset-key KEY)
+
+    Removes KEY from the active, local keymap.
+(use-package :bind ( ... ))
+
+    If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
+***** Representing Keys in Code (kbd)
+In order to actually bind a key you must first tell Emacs what key you intend to use. Unfortunately there’s more than one way of representing keys in Emacs: as a string, or as a vector. We won’t concern ourselves with either, as we will use a handy macro built in to Emacs called kbd. The kbd macro translates a human-readable key into a format Emacs can understand.
+
+One important point to note is that you must surround function and navigation keys with < and >:
+
+That includes F-keys, arrow keys and home row keys, like so: <home>, <f8> and <down>.
+
+(kbd "<home>")    ;; OK
+(kbd "tab")       ;; Wrong, but valid -- missing < and >
+(kbd "<tab>")     ;; OK
+(kbd "C-c p")     ;; OK
+***** Remapping Commands
+
+You can tell Emacs that you want to replace all keys pointing to a certain command with one of your own choosing by using the remap notation.
+
+You must do this instead of passing a key to the key bind function you are using. This is the best way of replacing existing commands with your own, as Emacs does the hard work of figuring out all the keys it needs to rebind.
+
+Example:
+
+(define-key (current-global-map) [remap kill-line] 'my-homemade-kill-line)
+
+Here I globally remap all keys that point to kill-line to my-homemade-kill-line.
+
+For a practical example of remapping in use, see fixing the mark commands in transient mark mode.
+***** Reserved Keys
+You can pick any keyboard combination you desire – even if that key bind is already taken, so be careful – but Emacs has set aside certain keys for use by users. Generally, all keys prefixed with C-c ? (where ? is a single character) are reserved for you, and you alone. In practice most third-party packages don’t care about the key bindings they occupy. So keep that in mind.
+
+The other set of reserved keys are the F-keys from F5 and onwards. The other two prefix keys reserved to you are hyper and super. They are remnants from ancient keyboards used in the 80s, but live on today in Emacs. Most PC-compatible keyboards won’t have a super or hyper key so some people rebind the Windows key and the Application Context key to be hyper and super instead.
+
+If you’re fortunate enough to have spent a large sum of money on a fancy mechanical keyboard, you may have keys to spare, and the firmware to rebind them as you see fit. I recommend you look into dedicated hyper or super keys; but don’t forget, you can also tell your firmware to bind a key to, say, C-M- or even a prefix key, like C-x. Be creative.
+
+Anyway. Because of Emacs’s roots, it understands these keys natively, and they have their own modifier keys: H- (e.g., H-q) for hyper; and s- for super. Note that s is super and S is shift.
+
+In Windows you can add this to your init file to enable hyper and super:
+
+(setq w32-apps-modifier 'hyper)
+(setq w32-lwindow-modifier 'super)
+(setq w32-rwindow-modifier 'hyper)
+
+In X you’ll have to play around with xmodmap or your own tool of choice.
+***** Keymap Lookup Order
+
+Emacs will look for keys in a certain order, and that order I have described below. Keep in mind that only active keymaps are used, and that the order is top-to-bottom. The first “match” is the keymap Emacs uses.
+
+    overriding-terminal-local-map for terminal-specific key binds.
+    overriding-local-map for keys that should override all other local keymaps. Be VERY careful if you use this!
+
+    Keymap char property at point for keymaps that are local to the character point is at.
+    Common use cases include in-buffer fields, like the ones you find in M-x customize.
+    emulation-mode-map-alists for advanced multi-mode keymap management
+    minor-mode-overriding-map-alist for overriding the keymaps used by minor modes in major modes.
+    minor-mode-map-alist is exactly like the overriding version above, but the preferred means of specifying the keymaps for minor modes.
+    Keymap text property at point is like the one above for char properties but this is for text properties only.
+    current-local-map for keymaps defined in the buffers’ current local map
+    current-global-map is the last place Emacs looks. It hosts keys that are global.
+
+But I can summarize these rules in a way that accounts for 99% of all key bindings you’re likely to care about:
+
+    First, Emacs checks if there’s a minor mode key binding;
+
+    If there isn’t, then Emacs checks if there are any local keys set.
+    Typically this local map is shared by the major mode of the current buffer. So if you want to add a key binding to python-mode, you can use local-set-key to do this.
+    And finally global keys are checked.
+
+This order confuses many new users! Most people think that a global key trumps all other keys, but that is not so.
+***** Global vs Local
+A global key is functionally identical to that of a local one, except it is declared in a “global” keymap, governed by the current-global-map function (but usually it points to the default, the global-map variable.) Therefore, you can define a global key simply by passing the current-global-map function to define-key. The other – often better – alternative is to use the designated function, global-set-key.
+
+In a similar vein, to bind a local key you can use the “designated” function local-set-key or the more general define-key. Like the global map, there exists an equivalent function current-local-map that returns the keymap local to the buffer.
+
+If you want to change major mode key bindings, you’re going to have to choose between explicitly updating its keymap with define-key, or calling it from within the major mode’s buffer with local-set-key. You can’t always interchange the two, although they’re supposed to yield the same outcome. The reason is that some major modes regenerate keymaps or outright reset them. When that happens you may have to choose one or the other.
+***** Defining your Command
+
+If you thought the mechanics of keymaps and keys were difficult, think again! Deciding on what you want to bind to those keys is even harder – especially so if you want the command to do very specific things, like switching to a specific buffer name. But I’ve got a few tricks up my sleeve to help you cut out most of the elisp writing by letting Emacs do all the heavy lifting.
+***** Invoking a command
+
+Before I talk about the how and why of Emacs commands it is important that I mention how Emacs handles interactive functions — commonly known as commands. An Emacs command has an (interactive ...) form at the top of its function body. The (interactive ...) form controls how the function must respond to user input when it’s invoked interactively. For instance, a command that prompts a user for a string must tell Emacs – using the (interactive ...) form – how to do this.
+
+All commands are executable through M-x and can therefore be bound to a key.
+
+When you bind a function to a key it is important that you keep the above in mind, as you cannot invoke a non-interactive function through a key binding — it must be a command.
+
+If it is your intent – as it so often is – to call a function, but with explicit parameter values, you must wrap it in a little helper function, like a lambda expression or even a standard defun. I have prepared templates (see below) that show you how to do this.
+***** Describing the command
+There are two ways of describing a command in elisp: the manual way, and the smart way. Let’s start out with the manual way.
+The manual way is to use C-h k KEY to describe what KEY is bound to; the other way is to describe a function, FUNCTION, with C-h f FUNCTION.
+
+Because Emacs is a self-documenting editor all functions, variables, keys, etc. known to Emacs are accessible through the describe-xxx commands. Type C-h C-h to see them all.
+
+With the name of the command, you can now begin the process of reading the documentation string and call it with the requisite arguments it needs to work.
+
+If you’re unsure how to do that, but you do know what you want, then you may want to give the smart way a go.
+***** Capturing Complex Commands
+The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
+Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
+
+Here’s a practical example: C-M-% foo RET bar RET – which does a query-replace-regexp replacing foo with bar. Now, if you type C-x ESC ESC you should see something similar to this (reformatted for clarity):
+
+(query-replace-regexp "foo" "bar" nil
+   (if (and transient-mark-mode mark-active)
+       (region-beginning))
+   (if (and transient-mark-mode mark-active)
+       (region-end)))
+
+Observe how Emacs has kindly filled in all the function arguments to query-replace-regexp, including the optional parameters. If you were to run that command again (by say pasting it into the prompt in M-:) it’ll execute it in the exact same way as when you ran it interactively.
+
+Here’s another one, this time I type C-x b *scratch* to switch to the *scratch* buffer:
+
+(switch-to-buffer "*scratch*")
+
+And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
+***** Keyboard Macros
+I’ve talked about the smart way above, but there’s an even smarter way: Keyboard macros. If you have a series of actions you want to perform, then record it in a keyboard macro!
+
+Emacs can record, and play back, almost everything. You’re not limited to shoveling text; stuff like moving files in dired, or splitting your windows and opening the right buffers in them is not only possible, but easy.
+
+I recommend you read about Emacs’s keyboard macros to see what I mean.
+***** Putting it all together
+We’re nearly done. I just need to explain a few more important concepts that confuse a lot of newbies: mode hooks and mode-specific keymaps, and then it’s on to the templates.
+
+Most major and minor modes will usually set their keys once, when the module is first loaded; that’s good news for us. That means you can use define-key to add key definitions straight into a mode’s key map. Some modes are very advanced, and have several key maps – M-x isearch is a good example – and for those you will have to mess around with the source code or info manual to find out how to add keys.
+
+Another option is M-x describe-keymap (Emacs 28+) that shows all known key maps. You can probably narrow down the ones you want that way.
+
+It’s the modes that force you to use a mode hook that’s the problem: for that you must set your keys when the mode is activated, and that takes a little bit more work.
+
+It is a convention in Emacs that all major and minor mode functions (the ones that activate the mode) end in -mode (e.g., python-mode), and it is also expected that its mode map follows a common naming scheme: xxxx-mode-map for the key map; and xxxx-mode-hook for the mode’s hook.
+
+With those mode hooks in mind, you can add a local-set-key call and, hopefully, that’s all you need to override or add keys to the right mode’s key map.
+***** Keymaps
+****** Listing all the Mode Maps
+Modifying a keymap is dirt simple, you use define-key as I’ve mentioned before. What’s not so easy is determining what keymap to modify in the first place.
+
+If you type this Emacs will give you an apropos buffer with all the known mode maps that follow the major mode naming scheme:
+
+C-u M-x apropos-variable RET -mode-map$ RET
+
+You can also use M-x describe-keymap and then pick the mode map you want from the candidate list.
+****** Quick Keymap Example
+Let’s say I want to extend python-mode by adding a key, I’ll use F12, that switches to the python process buffer. Currently, that’s bound to C-c C-z and M-x python-shell-switch-to-shell.
+
+(define-key python-mode-map (kbd "<f12>") 'python-shell-switch-to-shell)
+
+In order to get the command belonging to the key, I used C-h k C-c C-z.
+****** Creating New Keymaps
+If you want your own blank key maps, particularly if you want to build your own complex web of prefix keys and such, you’ll need to learn how to make your own.
+
+Luckily it’s not too hard.
+
+(defvar my-special-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "s" 'shell)
+    (define-key map "g" 'rgrep)
+    map)
+  "My special key map.")
+
+First things first. We’ll need a variable, declared with defvar so it won’t get reevaluated by accident. Not sure what I mean by that? Read my article on evaluating elisp.
+
+Next, we use a let form to bind the variable map to a sparse keymap created with make-sparse-keymap. Sparse in this case means “empty”. Inside the let form you can call define-key and assign commands to keys.
+
+There is also copy-keymap if you want to copy another keymap and modify its copy instead. In fact, there’s a whole host of functions that deal with this. But I think these two are the ones worth knowing about if you’re building your own stuff.
+
+Either way, you get a key map ready to go.
+****** Repeating Keys with repeat-mode
+Emacs 28 formalizes – the code that does it has existed in Emacs for eons – a method of making repeating key maps. If you find yourself typing C-x o over and over again to switch windows, then as of Emacs 28 you can type C-x o o o o ... ad infinitum if you enable M-x repeat-mode.
+
+The new mode is easy to retrofit onto existing Emacs key map machinery if you know how.
+****** Repeating Keys Example
+NOTE: Make sure you enable M-x repeat-mode.
+Consider the keys C-M-u and C-M-d. They move out or into balanced expressions, like ( ... ), [ ... ], and so on. Perfect for most programming languages.
+
+For this to work, you have to define the repeatable keys: the one-letter chords that take effect after you’ve invoked the primary key.
+
+(defvar balanced-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "u" 'backward-up-list)
+   (define-key map "d" 'down-list)
+   map)
+ "Repeating map for balanced expressions.")
+
+Next, we attach a property name and value to the commands that enable the repeating keys we defined in balanced-repeat-map:
+
+(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
+(put 'down-list 'repeat-map 'balanced-repeat-map)
+
+And that’s it! When you next type C-M-u or C-M-d you’re given the option to type u or d instead.
+Hooks
+
+A mode hook has zero-or-more functions that are called when its mode is activated. Mode-specific hooks are run when you activate that mode. That happens automatically when you open a file, or manually call M-x some-mode.
+Altering Mode Hooks
+***** Adding Hooks
+    You can add a mode hook using the special function add-hook that takes the name of a hook (say python-mode-hook) and the name of a function to call.
+****** Removing Hooks
+
+    You can remove functions from a hook variable with remove-hook. If you are experimenting you may want to remove hooks as part of your testing.
+
+    In newer Emacsen you can call it interactively, select a mode hook, and then pick the one you want to remove. That is good to know when you inevitably add lambda functions to a mode hook and now struggle with duplicate hooks!
+****** Listing all the Mode Hooks
+If you are unsure of the exact name of the mode hook, you can use this handy trick to list the ones Emacs can see:
+
+M-x apropos-variable RET -mode-hook$ RET
+
+That will show all mode hooks known to Emacs, including their docstring description. If you don’t see your mode it may be because Emacs hasn’t loaded it outright. You can try M-x load-library and see if you can load the package or library that way first.
+****** Quick Hook Example
+Let’s add a key (C-c q to run M-x shell) local to python-mode using a hook. For that to work we will need our special hook function, I’ve named it mp-add-python-keys, and in it we need local-set-key, the function that adds a key to the active buffer’s local map. Remember that local-set-key uses the local mode map.
+
+Next is the command that tells Emacs that we want to add a mode hook to Python.
+
+(defun mp-add-python-keys ()
+  (local-set-key (kbd "C-c q") 'shell))
+
+(add-hook 'python-mode-hook #'mp-add-python-keys)
+***** Setting Key Bindings with use-package
+If you use use-package then you can leverage its key binding facilities.
+
+Let’s say you like the package M-x winner-mode, a minor mode that records your window configurations and lets you undo and redo changes made to it, by you or by commands you execute.
+
+(use-package winner
+  :config
+  (winner-mode 1)
+  :bind (("M-[" . winner-undo)
+         ("M-]" . winner-redo)))
+
+The :bind property is there to do just that. Here I’ve bound M-[ and M-] to two commands. Note the structure!
+
+Another thing to keep in mind is that, unless you tell it otherwise, use-package defaults to global key bindings.
+
+If, on the other hand, you want to insert the keys into a specific key map, you need to tell use-package the map to use:
+
+(use-package eshell
+  :bind (("C-c e" . eshell)
+         :map eshell-mode-map
+         ("M-m" . eshell-bol)))
+
+Here I’ve chosen to bind C-c e to M-x eshell globally, as I have not specified a particular key map yet.
+
+Next, I declare :map eshell-mode-map and from that point on, that is the keymap use-package uses when I ask it to bind M-m to eshell-bol.
+
+So as you can see, it’s easy to bind to a variety of both global and keymap-specific maps.
+***** Templates
+****** Templates
+Here’s a bunch of templates for various use-cases that you can cut’n’paste and use in your own code. I recommend naming things sensibly, and giving them a docstring (in-code documentation that explains what the code does) as well. The best way to avoid accidentally overriding another function with the same name, I would suggest you use a moniker or prefix. I use mp- for all of my own functions.
+
+I also urge you to avoid the temptation of plastering your code with lambda functions. They’re great, sure; but if you ever need to update or change them during your development and testing cycle, you may end up with duplicate functions in your mode hooks playing havoc.
+
+If you are unsure how to evaluate elisp, then read my article on evaluating elisp in Emacs.
+****** Basic Global Key Binding
+Binds a command to a global key binding.
+Definition
+
+(global-set-key (kbd "key-bind-here") 'interactive-command-here)
+
+Example
+
+Binds F1 to M-x shell
+
+(global-set-key (kbd "<f1>") 'shell)
+****** Add or Remove a Key to or from a Keymap
+
+Adds or removes a key and its associated command to/from an explicit keymap. Use this if you know the name of the keymap and you want to add a key to it.
+Definition
+****** Add a key to a keymap:
+
+(define-key KEYMAP (kbd "key-bind-here") 'interactive-command-here)
+****** Remove a key from a keymap:
+
+(define-key KEYMAP (kbd "key-bind-here") nil)
+
+Example
+
+Binds C-c p to python-switch-to-python
+
+(define-key python-mode-map (kbd "C-c p") 'python-shell-switch-to-shell)
+****** Complex Command Key Bind
+Creates a global key bind that invokes multiple commands in a row. Use this to create compound keys or invoke commands that take parameters. Uses code from the Function Template.
+Definition
+
+(defun name-of-interactive-command-here ()
+  (interactive)
+  ;;; Insert your compound commands below
+  )
+(global-set-key (kbd "key-bind-here") 'name-of-interactive-command-here)
+
+Example
+
+Switches to the *scratch* buffer and inserts “Hello, World” where point is, and switches back to where it came from.
+
+(defun switch-to-scratch-and-insert-text ()
+  (interactive)
+  (save-excursion
+    (set-buffer "*scratch*")
+    (insert "Hello, World")))
+(global-set-key (kbd "C-c i") 'switch-to-scratch-and-insert-text)
+****** Binding keys with a mode hook
+
+Use this mode hook template to bind keys that won’t work with a standard define-key template, or if the key map is reset in when the mode is initialized.
+
+If you have other, mode-specific changes, you want to apply at the same time, then this is the perfect place for you to do so.
+Definition
+
+(defun my-hook-function ()
+  ;; add your code here. it will be called every
+  ;; time the major mode is run.
+
+  )
+(add-hook 'my-mode-hook #'my-hook-function)
+
+Example
+
+Here I change the python indentation offset to 4 and make it local to that buffer with setq-local. Next, I disable eldoc-mode and I locally bind a key with local-set-key.
+
+(defun mp-my-hook-settings ()
+  (setq-local python-indent-offset 4)
+  (eldoc-mode -1)
+  (local-set-key (kbd "C-c p" 'python-shell-switch-to-shell)))
+
+(add-hook 'python-mode-hook #'mp-my-hook-settings)
+
+As you can see, this is a good place to put all your other tweaks that relate to a specific mode.
+****** Remapping a command
+This template will remap all keys that point to a specific command. Say you want to rebind kill-line, bound to C-k, but you want your code to only override the key binds that kill-line is actually bound to. Use this template to replace existing commands with those of your own, without worrying about explicitly rebinding each key.
+Definition
+
+Note: to replace a global key, you must use global-map or call current-global-map.
+
+(define-key keymap [remap original-function] 'my-own-function)
+
+Example
+
+Example here is taken from my article on fixing the mark commands in transient mark mode.
+
+I remap the keys that point to exchange-point-and-mark to my own function exchange-point-and-mark-no-activate.
+
+(defun exchange-point-and-mark-no-activate ()
+  "Identical to \\[exchange-point-and-mark] but will not activate the region."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark nil))
+
+(define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
+****** Custom Prefixes
+Creating a prefix is easy nowadays as you don’t have to explicitly create your own prefix keymaps, provided you use local-set-key or global-set-key. Use custom prefixes to group or categorize your commands.
+Definition
+
+(global-set-key (kbd "subkey_1 ... endkey_1") 'my-command-1)
+(global-set-key (kbd "subkey_1 ... endkey_2") 'my-command-2)
+
+Example
+
+Global keys that will insert either the time of the day, or the current date. Type C-c i d to insert the date; and C-c i t to insert the time. Type C-c i C-h to list all bound keys under the C-c i prefix.
+
+(defun mp-insert-date ()
+  (interactive)
+  (insert (format-time-string "%x")))
+
+(defun mp-insert-time ()
+  (interactive)
+  (insert (format-time-string "%X")))
+
+(global-set-key (kbd "C-c i d") 'mp-insert-date)
+(global-set-key (kbd "C-c i t") 'mp-insert-time)
+****** Repeating Key Maps with repeat-mode
+This feature requires Emacs 28 and that you have turned on M-x repeat-mode.
+
+Repeating keys allow you to tap one or more single keys to repeat a command once you have engaged repeat mode by first typing a key that supports repeating keys.
+
+Adding this functionality to existing commands in Emacs is easy.
+Definition
+
+For changes relating to a specific package, use this format:
+
+(defvar my-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "a" 'some-command)
+   ;; ...
+   (define-key map "z" 'another-command)
+   map)
+ "Repeating map example.")
+
+Next, we attach a property name and value to the commands that should trigger my-repeat-map:
+
+(put 'some-command 'repeat-map 'my-repeat-map)
+(put 'another-command 'repeat-map 'my-repeat-map)
+
+Example
+
+Activate this repeat map with C-M-u or C-M-d, then type d or u to move down or up.
+
+(defvar balanced-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "u" 'backward-up-list)
+   (define-key map "d" 'down-list)
+   map)
+ "Repeating map for balanced expressions.")
+
+(put 'backward-up-list 'repeat-map 'balanced-repeat-map)
+(put 'down-list 'repeat-map 'balanced-repeat-map)
+****** Binding keys with use-package
+If you are already using use-package then you may as well use it to bind your keys also.
+You can define global and local keys this way.
+Definition
+For changes relating to a specific package, use this format:
+
+(use-package package-name-here
+  :bind (("kbd-here" . command-here)
+         :map some-map
+         ("kbd-here" . another-command-here)
+         :map yet-another-map
+         ("kbd-here" . some-command-here)))
+
+But if you want a place to store global keys that don’t relate to any one package, use the package name emacs instead.
+Example
+
+Here I bind C-c e to eshell globally, and M-m to eshell-bol locally.
+
+(use-package eshell
+  :bind (("C-c e" . eshell)
+         :map eshell-mode-map
+         ("M-m" . eshell-bol)))
+***** Conclusion
+I have covered almost every facet of key binding that most Emacs users would care to know about. If you use use-package, then it can definitely cut down on some of the tedium and help centralize your bindings with your other settings.
+
+I recommend you read why I think keyboard macros are misunderstood as it’ll further cement just how much “no-code” Emacs you can accomplish with keyboard macros and key bindings.
+*** Emacs Movement 
+‘C-M-a’
+‘C-M-e’
+   Move point to the beginning or end of the current function or
+[[info:emacs#Motion in C][info:emacs#Motion in C]]  
+‘C-M-f’
+     Move forward over a balanced expression (‘forward-sexp’).
+‘C-M-b’
+     Move backward over a balanced expression (‘backward-sexp’).
+‘C-M-k’
+     Kill balanced expression forward (‘kill-sexp’).
+‘C-M-t’
+     Transpose expressions (‘transpose-sexps’).
+‘C-M-@’
+‘C-M-<SPC>’
+     Put mark after following expression (‘mark-sexp’).
+‘C-M-n’
+     Move forward over a parenthetical group (‘forward-list’).
+‘C-M-p’
+     Move backward over a parenthetical group (‘backward-list’).
+‘C-M-u’
+     Move up in parenthesis structure (‘backward-up-list’).
+‘C-M-d’
+     Move down in parenthesis structure (‘down-list’).
+*** Intends 
+с-t
+*** replace-string : 
+M-x replace-string RET ; RET C-q C-j.
+
+    C-q for quoted-insert,
+
+    C-j is a newline.
+
+*** repeat-complex-command : C-x ESC ESC or C-x M-:.
+The smart way has a name, or rather a command: repeat-complex-command, and it is conveniently bound to the key C-x ESC ESC and C-x M-:.
+Because Emacs and elisp are, in effect, one and the same, it’s no surprise that Emacs keeps a running tally of the commands you’re executing, and when. That’s why M-x repeat-complex-command is able to represent the Lisp form of the last command you executed. When you invoke C-x ESC ESC you’re given the equivalent form in Elisp with the function arguments (if any) filled out for you. Emacs knows which arguments go where because of the (interactive ...) form: it knows which function argument belongs to which interactive user-facing prompt.
+
+Here’s a practical example: C-M-% foo RET bar RET – which does a query-replace-regexp replacing foo with bar. Now, if you type C-x ESC ESC you should see something similar to this (reformatted for clarity):
+
+(query-replace-regexp "foo" "bar" nil
+   (if (and transient-mark-mode mark-active)
+       (region-beginning))
+   (if (and transient-mark-mode mark-active)
+       (region-end)))
+
+Observe how Emacs has kindly filled in all the function arguments to query-replace-regexp, including the optional parameters. If you were to run that command again (by say pasting it into the prompt in M-:) it’ll execute it in the exact same way as when you ran it interactively.
+
+Here’s another one, this time I type C-x b *scratch* to switch to the *scratch* buffer:
+
+(switch-to-buffer "*scratch*")
+
+And there you have it. Obviously the commands seen here are the interactive commands. Stuff like replacing strings in a buffer is normally done with specialist elisp functions that don’t require user input, but that may not be a big deal if you are writing your own quick-and-dirty key binds.
 ** Images
 
 Although Emacs is a text editor, it can also manage images. In Org mode, an image is a link to an image file. You can preview the file in your buffer or export it to your preferred format. You can also add captions and set export properties for each image.
@@ -9164,7 +9155,7 @@ Emacs may ask you if you want to load the patterns if it finds any. If you find 
 *** String 
 **** Conversion
 ***** 4.6 Conversion of Characters and Strings
-****** section describes : 
+****** section describes:
 	 This section describes functions for converting between characters, strings and
 	 integers. format (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Formatting-Strings.html#Formatting-Strings][Formatting Strings]]) and prin1-to-string (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Output-Functions.html#Output-Functions][Output Functions]])
 	 can also convert Lisp objects into strings. read-from-string (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Input-Functions.html#Input-Functions][Input Functions]]) can
@@ -9223,7 +9214,7 @@ Emacs may ask you if you want to load the patterns if it finds any. If you find 
 		0), except that it returns 0 if the string is empty. (The value is also 0 when the first
 		character of string is the null character, ASCII code 0.) This function may be
 		eliminated in the future if it does not seem useful enough to retain. 
-****** some other functions that can convert : 
+****** some other functions that can convert:
 	 Here are some other functions that can convert to or from a string: 
 ******* concat
 		 This function converts a vector or a list into a string. See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Strings.html#Creating-Strings][Creating Strings]]. 
@@ -9234,6 +9225,17 @@ Emacs may ask you if you want to load the patterns if it finds any. If you find 
 ******* byte-to-string
 		 This function converts a byte of character data into a unibyte string. See
 		 [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Converting-Representations.html#Converting-Representations][Converting Representations]]. 
+***** list to string
+(mapconcat 'identity '("" "......" "..##.." "......" ""))
+
+"........##........"
+
+в строку с разделением
+
+(mapconcat 'identity '("foo" "bar") " ")
+
+"foo bar"
+
 **** 34.6.2 Simple Match Data Access
 *****  section explains : 
  This section explains how to use the match data to find out what was matched by the
@@ -9456,7 +9458,6 @@ together, or by taking them apart.
 	[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Building-Lists.html#Building-Lists][Building Lists]]. For concatenating individual command-line arguments into a string
 	to be used as a shell command, see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Shell-Arguments.html#Shell-Arguments][combine-and-quote-strings]]. 
 *****  Function: split-string string &optional separators omit-nulls trim
-
 	This function splits string into substrings based on the regular expression
 	separators (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regular-Expressions.html#Regular-Expressions][Regular Expressions]]). Each match for separators defines a
 	splitting point; the substrings between splitting points are made into a list, which is
@@ -9527,6 +9528,16 @@ together, or by taking them apart.
  Variable: split-string-default-separators
 
 	The default value of separators for split-string. Its usual value is "[ \f\t\n\r\v]+". 
+	
+test-txt
+"
+......
+..##..
+......
+"
+(mapconcat 'identity (split-string test-txt "\n"))
+"........##........"
+
 **** Modefing 
 ***** replace in string : 
 ****** replace-regexp-in-string : 
@@ -11328,6 +11339,14 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
  (plist-get xx 'b) ; 3
  xx
  ;; (a 1 b 3)
+***** list
+для того чтоб заполнить через выполнение функции
+иначе оно заполнится как лист - тоесть та буде (make-tile :dchar "..")
+а не рузультат выполнения
+(setq ttiles (list
+							:empty (make-tile :dchar "..")
+							:stone (make-tile :dchar "##")))
+
 ***** cheak
  (setq xx '(a 1 b 2))
 
@@ -11919,10 +11938,191 @@ The list-timers command lists all the currently active timers. The command c (ti
 (list-system-processes)
 (process-attributes 7120)
 (shell-command-to-string "ls") 
+** sintax 
+*** 10.4 Backquote
+==============
+
+“Backquote constructs” allow you to quote a list, but selectively
+evaluate elements of that list.  In the simplest case, it is identical
+to the special form ‘quote’ (described in the previous section; *note
+Quoting::).  For example, these two forms yield identical results:
+
+     `(a list of (+ 2 3) elements)
+          ⇒ (a list of (+ 2 3) elements)
+     '(a list of (+ 2 3) elements)
+          ⇒ (a list of (+ 2 3) elements)
+
+   The special marker ‘,’ inside of the argument to backquote indicates
+a value that isn’t constant.  The Emacs Lisp evaluator evaluates the
+argument of ‘,’, and puts the value in the list structure:
+
+     `(a list of ,(+ 2 3) elements)
+          ⇒ (a list of 5 elements)
+
+Substitution with ‘,’ is allowed at deeper levels of the list structure
+also.  For example:
+
+     `(1 2 (3 ,(+ 4 5)))
+          ⇒ (1 2 (3 9))
+
+   You can also “splice” an evaluated value into the resulting list,
+using the special marker ‘,@’.  The elements of the spliced list become
+elements at the same level as the other elements of the resulting list.
+The equivalent code without using ‘`’ is often unreadable.  Here are
+some examples:
+
+     (setq some-list '(2 3))
+          ⇒ (2 3)
+     (cons 1 (append some-list '(4) some-list))
+          ⇒ (1 2 3 4 2 3)
+     `(1 ,@some-list 4 ,@some-list)
+          ⇒ (1 2 3 4 2 3)
+
+     (setq list '(hack foo bar))
+          ⇒ (hack foo bar)
+     (cons 'use
+       (cons 'the
+         (cons 'words (append (cdr list) '(as elements)))))
+          ⇒ (use the words foo bar as elements)
+     `(use the words ,@(cdr list) as elements)
+          ⇒ (use the words foo bar as elements)
+
+   If a subexpression of a backquote construct has no substitutions or
+splices, it acts like ‘quote’ in that it yields conses, vectors and
+strings that might be shared and should not be modified.  *Note
+Self-Evaluating Forms::.
+*** 10.2.1 Self-Evaluating Forms
+----------------------------
+
+A “self-evaluating form” is any form that is not a list or symbol.
+Self-evaluating forms evaluate to themselves: the result of evaluation
+is the same object that was evaluated.  Thus, the number 25 evaluates to
+25, and the string ‘"foo"’ evaluates to the string ‘"foo"’.  Likewise,
+evaluating a vector does not cause evaluation of the elements of the
+vector—it returns the same vector with its contents unchanged.
+
+     '123               ; A number, shown without evaluation.
+          ⇒ 123
+     123                ; Evaluated as usual—result is the same.
+          ⇒ 123
+     (eval '123)        ; Evaluated "by hand"—result is the same.
+          ⇒ 123
+     (eval (eval '123)) ; Evaluating twice changes nothing.
+          ⇒ 123
+
+   A self-evaluating form yields a value that becomes part of the
+program, and you should not try to modify it via ‘setcar’, ‘aset’ or
+similar operations.  The Lisp interpreter might unify the constants
+yielded by your program’s self-evaluating forms, so that these constants
+might share structure.  *Note Mutability::.
+
+   It is common to write numbers, characters, strings, and even vectors
+in Lisp code, taking advantage of the fact that they self-evaluate.
+However, it is quite unusual to do this for types that lack a read
+syntax, because there’s no way to write them textually.  It is possible
+to construct Lisp expressions containing these types by means of a Lisp
+program.  Here is an example:
+
+     ;; Build an expression containing a buffer object.
+     (setq print-exp (list 'print (current-buffer)))
+          ⇒ (print #<buffer eval.texi>)
+     ;; Evaluate it.
+     (eval print-exp)
+          ⊣ #<buffer eval.texi>
+          ⇒ #<buffer eval.texi>
+*** 10.3 Quoting
+============
+
+The special form ‘quote’ returns its single argument, as written,
+without evaluating it.  This provides a way to include constant symbols
+and lists, which are not self-evaluating objects, in a program.  (It is
+not necessary to quote self-evaluating objects such as numbers, strings,
+and vectors.)
+
+ -- Special Form: quote object
+     This special form returns OBJECT, without evaluating it.  The
+     returned value might be shared and should not be modified.  *Note
+     Self-Evaluating Forms::.
+
+   Because ‘quote’ is used so often in programs, Lisp provides a
+convenient read syntax for it.  An apostrophe character (‘'’) followed
+by a Lisp object (in read syntax) expands to a list whose first element
+is ‘quote’, and whose second element is the object.  Thus, the read
+syntax ‘'x’ is an abbreviation for ‘(quote x)’.
+
+   Here are some examples of expressions that use ‘quote’:
+
+     (quote (+ 1 2))
+          ⇒ (+ 1 2)
+     (quote foo)
+          ⇒ foo
+     'foo
+          ⇒ foo
+     ''foo
+          ⇒ 'foo
+     '(quote foo)
+          ⇒ 'foo
+     ['foo]
+          ⇒ ['foo]
+
+   Although the expressions ‘(list '+ 1 2)’ and ‘'(+ 1 2)’ both yield
+lists equal to ‘(+ 1 2)’, the former yields a freshly-minted mutable
+list whereas the latter yields a list built from conses that might be
+shared and should not be modified.  *Note Self-Evaluating Forms::.
+
+   Other quoting constructs include ‘function’ (*note Anonymous
+Functions::), which causes an anonymous lambda expression written in
+Lisp to be compiled, and ‘`’ (*note Backquote::), which is used to quote
+only part of a list, while computing and substituting other parts.
+** Byte-Compiled Code : 
+*** 17.1 Performance of Byte-Compiled Code
+======================================
+
+A byte-compiled function is not as efficient as a primitive function
+written in C, but runs much faster than the version written in Lisp.
+Here is an example:
+
+     (defun silly-loop (n)
+       "Return the time, in seconds, to run N iterations of a loop."
+       (let ((t1 (float-time)))
+         (while (> (setq n (1- n)) 0))
+         (- (float-time) t1)))
+     ⇒ silly-loop
+
+     (silly-loop 50000000)
+     ⇒ 5.200886011123657
+
+     (byte-compile 'silly-loop)
+     ⇒ [Compiled code not shown]
+
+     (silly-loop 50000000)
+     ⇒ 0.6239290237426758
+
+   In this example, the interpreted code required more than 5 seconds to
+run, whereas the byte-compiled code required less than 1 second.  These
+results are representative, but actual results may vary.
+
+
 
 ** Input 
 *** read : 
 	 (read)
+** File 
+*** save
+**** text 
+(with-temp-file "test.txt"
+  (insert "hello"))
+**** structure 
+(with-temp-file "mudRog.txt" (prin1 *avatar* (current-buffer)))
+*** read
+**** stuct
+(defun read-from-file (filename)
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (cl-assert (eq (point) (point-min)))
+    (read (current-buffer))))
+
+
 ** Functions : 
 *** 13.4 Defining Functions
 We usually give a name to a function when it is first created.  This

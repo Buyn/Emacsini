@@ -66,7 +66,7 @@
 	    (file+headline "~/org/gtd/inbox.org" "Tasks")
 	    "* TODO %i%?")
 	("l" "links to transfer" entry
-	    (file+headline "~/org/tmp/tmp_links.org" "Tasks")
+	    (file+headline "~/org/tmp/tmp_links.org" "link to")
 	    "* TODO %i%?")
 	("s" "Sandbox" entry
 	    (file+headline "~/org/tmp/sandbox.org" )

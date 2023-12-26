@@ -25,7 +25,7 @@
 (require 'evil)
 (evil-mode t)
 ;; --------------------------------------
-;; ** Setings  {{{
+;; ** Setings
 ;; (setq evil-mode-line-format nil
 ;;       evil-insert-state-cursor '(bar "White")
 ;;       evil-visual-state-cursor '(box "#F86155"))
@@ -36,7 +36,7 @@
 ;; (define-key evil-normal-state-map "c" nil)
 ;; (define-key evil-motion-state-map "cu" 'universal-argument)
 ;; -------------------------------------- }}}
-;; ** Clipboard  {{{
+;; ** Clipboard
 (setq x-select-enable-clipboard nil)
 ;; (fset 'evil-visual-update-x-selection 'ignore)
 ;; (setq save-interprogram-paste-before-kill t)
@@ -146,7 +146,12 @@
 (define-key evil-insert-state-map (kbd "M-p ") '(lambda() (interactive)
 				(yank)))
 ;; -------------------------------------- }}}
-;; ** Movements  {{{
+;; ** Registers Clipboard
+(define-key evil-normal-state-map (kbd "M-y M-f") 'evil-use-register)
+(define-key evil-visual-state-map (kbd "M-y M-f") 'evil-use-register)
+(define-key evil-normal-state-map (kbd "M-p M-f") 'evil-use-register)
+(define-key evil-visual-state-map (kbd "M-p M-f") 'evil-use-register)
+;; ** Movements
 (define-key evil-normal-state-map "gh" 'evil-first-non-blank-of-visual-line)
 (define-key evil-normal-state-map "gl" 'evil-end-of-visual-line)
 (define-key evil-normal-state-map (kbd "gj") 'next-logical-line)
@@ -166,7 +171,7 @@
 (define-key evil-normal-state-map "V" 'evil-visual-line)
 ;; --------------------------------------  
 
-;; ** Grabing  {{{
+;; ** Grabing
 ;; *** move-line : 
 ;; **** save-column : 
 (defmacro save-column (&rest body)
@@ -251,7 +256,7 @@
 ;; **** FIXME: move selected
 ;; **** TODO: meta m+p copy line \ selection
 ;; -------------------------------------- }}}
-;; ** Devolopment  {{{
+;; ** Devolopment
 (define-key evil-normal-state-map (kbd "M-e M-f M-f") 'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "M-e M-f M-F") 'xref-find-definitions-other-frame)
 (define-key evil-normal-state-map (kbd "M-e M-f M-e") 'evil-goto-definition)
@@ -281,7 +286,7 @@
 (define-key evil-normal-state-map (kbd "q") 'evil-execute-macro)
 (define-key evil-normal-state-map (kbd "Q") nil)
 (define-key evil-normal-state-map (kbd "QQ") 'evil-record-macro)
-;; ** find&replace  {{{
+;; ** find&replace
 ;; *** evil-visual <f7> : 
 (define-key evil-visual-state-map (kbd "<f7>") '(lambda() (interactive)
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
@@ -306,7 +311,7 @@
 	(let ((region-text (buffer-substring (region-beginning) (region-end))))
 		(occur region-text))))
 ;; *** -------------------------------------- }}}
-;; ** Wrape by one char  {{{
+;; ** Wrape by one char
 (define-key evil-visual-state-map (kbd "M-+") '(lambda() (interactive)
 		(let (
 						(start-region-beginning (region-beginning))
@@ -321,7 +326,7 @@
 						)
 				)))
 ;; -------------------------------------- }}}
-;; ** Insert State {{{
+;; ** Insert State
 ;; *** Insert State F2 save {{{
 (define-key evil-insert-state-map (quote [f2]) '(lambda() (interactive)
 												  (save-buffer)
