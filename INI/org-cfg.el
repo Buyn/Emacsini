@@ -149,6 +149,9 @@
 					(outline-up-heading 1)
 					(hide-subtree)
 					))
+;; *** ORG babel
+(define-key org-mode-map (kbd "M-e M-i") 'org-edit-special)
+(org-edit-special &optional ARG)
 ;; *** ORG Table
 ;; (global-set-key (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; move to 

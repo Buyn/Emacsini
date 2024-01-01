@@ -18,10 +18,11 @@
 	(find-file-other-frame "~/ELs/Evil/onecharadd.el") not used
 	(find-file-other-frame "~/ELs/Evil/copylines.el") пока нет
 ** Orgs
-(find-file-other-frame "~/INI/org-cfg.el")
+in org +(find-file-other-frame "~/INI/org-cfg.el")+
 	(find-file-other-frame "~/INI/ORG/org-roam-cfg.el")
 	(find-file-other-frame "~/INI/org_agend_cfg.el")
-	(find-file-other-frame "~/INI/babel-cfg.el")
+	in org +(find-file-other-frame "~/INI/babel-cfg.el")+
+		(find-file-other-frame "~/ORG/brain/babel-cfg.el org.org")
 		(find-file-other-frame "~/ELs/Org/Babel/ob-eshell.el")
 	(find-file-other-frame "~/INI/org-brain-cfg.el")
 	(find-file-other-frame "~/INI/ORG/graph-tools-cfg.el")

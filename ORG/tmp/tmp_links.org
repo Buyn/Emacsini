@@ -274,7 +274,6 @@ n^2 -1
 *** 
 
 * link to 
-[[file:d:/Development/lisp/Dropbox/Office/Research/game/brain/mudrog.org::*Emacs+mud+rogalike][Emacs+mud+rogalike]]
 * Give 
 * Texts
 #+begin_src dot :file e:\Temp\my-dot-diagram.png :cmdline -Kdot -Tpng
@@ -515,6 +514,3 @@ prod-16mine
 
 	#+RESULTS:
 	[[file:e:\Temp\my-diagram.txt]]
-* Tasks
-** TODO 
-[[file:d:/Development/lisp/Dropbox/orgs/capture/emagus.org::*emacs+cultist simulator][emacs+cultist simulator]]

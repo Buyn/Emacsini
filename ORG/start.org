@@ -1,4 +1,5 @@
 [[elisp:(let () (org-babel-goto-named-src-block "startblock") (org-babel-execute-src-block))][Open all from src block]]
+progn
 * Wellcome! Don`t panic!
 ** Set
 #-*- mode: org -*-
@@ -26,25 +27,43 @@ and then name the block you want to execute automatically:
 
 ;; (find-file-other-frame "~/../Dropbox/orgs/GTD/todo_today.org")
 
-;; (run-at-time "5 sec" nil '(lambda ()
-;; 	(let	((fname "todo_nottoday.org"))
-;; 							(let ((fobject (buyn-get-frame-by-name fname)))
-;; 									(set-frame-size fobject 75 25)
-;; 									(set-frame-position fobject
-;; 																			(car buyn-monitr-1-position-7)
-;; 																			(cadr buyn-monitr-1-position-7))))
-;; 	(let	((fname "todo_onceuponatime.org"))
-;; 				(let ((fobject (buyn-get-frame-by-name fname)))
-;; 						(set-frame-size fobject 75 25)
-;; 						(set-frame-position fobject
-;; 																(car buyn-monitr-1-position-1)
-;; 																(cadr buyn-monitr-1-position-1))))
-;; 	(let	((fname "todo_today.org"))
-;; 				(let ((fobject (buyn-get-frame-by-name fname)))
-;; 						(set-frame-size fobject 75 25)
-;; 						(set-frame-position fobject
-;; 																(car buyn-monitr-1-position-9)
-;; 																(cadr buyn-monitr-1-position-9))))))
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_GPT_2023-07-20.org")
+(find-file-other-frame "~/ORG/brain/index.org")
+
+
+(org-brain-switch-brain "~/ORG/brain/")
+(setq org-brain-path "~/ORG/brain/")
+(setq org-id-track-globally t)
+(setq org-id-locations-file "~/ORG/brain/.org-id-locations")
+(find-file-other-frame "~/ORG/brain/index.org")
+(setq org-brain-data-file "~/ORG/brain/.org-brain-data.el");not need
+(org-brain-visualize "index")
+
+(run-at-time "5 sec" nil '(lambda ()
+	(let	((fname "emacs_GPT_2023-07-20.org"))
+							(let ((fobject (buyn-get-frame-by-name fname)))
+									(set-frame-size fobject 75 25)
+									(set-frame-position fobject
+																			(car buyn-monitr-1-position-7)
+																			(cadr buyn-monitr-1-position-7))))
+
+	(let	((fname "index.org"))
+				(let ((fobject (buyn-get-frame-by-name fname)))
+						(set-frame-size fobject 75 25)
+						(set-frame-position fobject
+																(car buyn-monitr-2-position-7)
+																(cadr buyn-monitr-2-position-7))))
+	(let	((fname "*org-brain*"))
+				(let ((fobject (buyn-get-frame-by-name fname)))
+						(set-frame-size fobject 75 25)
+						(set-frame-position fobject
+																(car buyn-monitr-2-position-4)
+																(cadr buyn-monitr-2-position-4))))))
+
+(use-package solarized-theme :ensure t)
+(load-theme 'solarized-dark t)
+
+;; (disable-theme 'material)
 
 (evil-close-folds)
 #+END_SRC
@@ -77,9 +96,13 @@ https://www.braveclojure.com/basic-emacs/
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(define-key evil-normal-state-map (kbd "G") nil)
-(define-key evil-normal-state-map (kbd "G G") 'evil-goto-line)
 
+(define-key org-mode-map (kbd "M-e M-i") 'org-edit-special)
+
+(define-key evil-normal-state-map (kbd "M-y M-f") 'evil-use-register)
+(define-key evil-visual-state-map (kbd "M-y M-f") 'evil-use-register)
+(define-key evil-normal-state-map (kbd "M-p M-f") 'evil-use-register)
+(define-key evil-visual-state-map (kbd "M-p M-f") 'evil-use-register)
 
 ;; (use-package hyperbole
 ;; 	:ensure t
@@ -135,6 +158,7 @@ https://www.braveclojure.com/basic-emacs/
 **** dezine 
 **** todo
 **** done
+**** backlog 
 *** Kanban table
 **** Kanban Bord 01
 | planning | dezine | Implementing | blocked | review | done |
@@ -1365,6 +1389,7 @@ initial-scratch-message
 (load-theme 'solarized-dark t)
 
 ;; (disable-theme 'material)
+(find-file-other-frame "~/../Dropbox/orgs/code/emacs_GPT_2023-07-20.org")
 #+end_src
 
 ** emacs orgs
