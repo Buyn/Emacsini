@@ -151,6 +151,8 @@
 					))
 ;; *** ORG babel
 (define-key org-mode-map (kbd "M-e M-i") 'org-edit-special)
+(define-key org-src-mode-map (kbd "M-e M-i") 'org-edit-src-exit)
+
 ;; *** ORG Table
 ;; (global-set-key (kbd "C-c <C-return>") 'org-table-insert-row)
 ;; move to 

@@ -98,6 +98,7 @@ https://www.braveclojure.com/basic-emacs/
 
 
 (define-key org-mode-map (kbd "M-e M-i") 'org-edit-special)
+(define-key org-src-mode-map (kbd "M-e M-i") 'org-edit-src-exit)
 
 (define-key evil-normal-state-map (kbd "M-y M-f") 'evil-use-register)
 (define-key evil-visual-state-map (kbd "M-y M-f") 'evil-use-register)
@@ -6275,6 +6276,7 @@ I recommend you familiarize yourself with these, as they’re the ones you’re 
     Binds a key to the global keymap, making it available in all buffers (with a caveat – see below.)
 (global-unset-key KEY)
 
+
     Removes KEY from the global keymap
 (local-unset-key KEY)
 
@@ -6282,6 +6284,10 @@ I recommend you familiarize yourself with these, as they’re the ones you’re 
 (use-package :bind ( ... ))
 
     If you use use-package, a declarative configuration tool then you may prefer to bind your keys using its declarative notation. It’s similar to how the other commands work.
+**** unbind 
+
+(unbind-key (kbd "<f5> O") MudRog-mode-map)
+
 **** Mastering Key Bindings in Emacs
 ***** By Mickey Petersen
 Creating or altering key bindings in Emacs is an elusive task for new Emacs users, as you're forced to write elisp. Learn how to create key bindings from scratch, or simply use some of my ready-made templates to get you started.
@@ -9177,7 +9183,7 @@ Emacs may ask you if you want to load the patterns if it finds any. If you find 
  bindings are therefore not cleared by changing major modes.  Permanent
  locals are appropriate for data pertaining to where the file came from
  or how to save it, rather than with how to edit the contents.
-*** String 
+*** String
 **** Conversion
 ***** 4.6 Conversion of Characters and Strings
 ****** section describes:
@@ -9995,7 +10001,7 @@ and replace a sub-expression, e.g.
 
  (symbol-value 'abracadabra)
 			=> 5
-*** Sequences 
+*** Sequences
 **** 6.1 Sequences
 	Next: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Arrays.html#Arrays][Arrays]], Up: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Sequences-Arrays-Vectors.html#Sequences-Arrays-Vectors][Sequences Arrays Vectors]]   [[[https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#SEC_Contents][Contents]]][[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Index.html#Index][Index]]]
 	This section describes functions that accept any kind of sequence. 
@@ -10854,6 +10860,42 @@ and replace a sub-expression, e.g.
 	For more info on sequences, see the Elisp manual, Info node Sequences Arrays
 	Vectors.
 **** lists
+***** 7.2.1 Find the Length of a List: length
+
+You can find out how many elements there are in a list by using the Lisp function length, as in the following examples:
+
+(length '(buttercup))
+     ⇒ 1
+
+
+(length '(daisy buttercup))
+     ⇒ 2
+
+
+(length (cons 'violet '(daisy buttercup)))
+     ⇒ 3
+
+In the third example, the cons function is used to construct a three element list which is then passed to the length function as its argument.
+
+We can also use length to count the number of elements in an empty list:
+
+(length ())
+     ⇒ 0
+
+As you would expect, the number of elements in an empty list is zero.
+
+An interesting experiment is to find out what happens if you try to find the length of no list at all; that is, if you try to call length without giving it an argument, not even an empty list:
+
+(length )
+
+What you see, if you evaluate this, is the error message
+
+Lisp error: (wrong-number-of-arguments length 0)
+
+This means that the function receives the wrong number of arguments, zero, when it expects some other number of arguments. In this case, one argument is expected, the argument being a list whose length the function is measuring. (Note that one list is one argument, even if the list has many elements inside it.)
+
+The part of the error message that says ‘length’ is the name of the function. 
+
 ***** 5.4 Building Cons Cells and Lists
 Many functions build lists, as lists reside at the very heart of Lisp. cons is the fundamental list-building function; however, it is interesting to note that list is used more times in the source code for Emacs than cons.
 ****** Function: cons object1 object2
@@ -11017,7 +11059,6 @@ Many functions build lists, as lists reside at the very heart of Lisp. cons is t
  (4)
 
  There is no strictly equivalent way to add an element to the end of a list. You can use (append listname (list newelt)), which creates a whole new list by copying listname and adding newelt to its end. Or you can use (nconc listname (list newelt)), which modifies listname by following all the CDRs and then replacing the terminating nil. Compare this to adding an element to the beginning of a list with cons, which neither copies nor modifies the list.
-
 ***** Create Number Sequence (Range)
  (number-sequence n m step) -> returns a list of a range of numbers, from n to m, in increment of step.
  ;; creating a range of numbers
@@ -11364,6 +11405,8 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
  (plist-get xx 'b) ; 3
  xx
  ;; (a 1 b 3)
+
+(lax-plist-put read-aloud-engines "jampal.en"
 ***** list
 для того чтоб заполнить через выполнение функции
 иначе оно заполнится как лист - тоесть та буде (make-tile :dchar "..")
@@ -11371,6 +11414,24 @@ It's not included with Emacs, but a lot of Emacs users already have it installed
 (setq ttiles (list
 							:empty (make-tile :dchar "..")
 							:stone (make-tile :dchar "##")))
+***** remove 
+(setq student '(:name "john"
+		:age 13
+		:class 4
+		:tests (:maths 100
+			 :science 98
+			 :drama 13)))
+
+(map-delete student :age)
+
+(null (plist-get student :age))  ;; ==> t
+
+student
+
+(:name "john" :class 4 :tests (:maths 100 :science 98 :drama 13))
+
+(:name "john" :age 13 :class 4 :tests (:maths 100 :science 98 :drama 13))
+
 
 ***** cheak
  (setq xx '(a 1 b 2))
@@ -11449,6 +11510,348 @@ Responding to the concern you expressed in a comment, special characters in symb
 The Best Solution to Your Actual Problem
 
 Use Per-Directory Local Variables in .dir-locals.el.
+
+**** alist 
+***** 5.8 Association Lists
+****** An association list, or alist for short : 
+An association list, or alist for short, records a mapping from keys to values. It is a list of cons cells called associations: the CAR of each cons cell is the key, and the CDR is the associated value.6
+
+Here is an example of an alist. The key pine is associated with the value cones; the key oak is associated with acorns; and the key maple is associated with seeds.
+
+((pine . cones)
+ (oak . acorns)
+ (maple . seeds))
+
+Both the values and the keys in an alist may be any Lisp objects. For example, in the following alist, the symbol a is associated with the number 1, and the string "b" is associated with the list (2 3), which is the CDR of the alist element:
+
+((a . 1) ("b" 2 3))
+
+Sometimes it is better to design an alist to store the associated value in the CAR of the CDR of the element. Here is an example of such an alist:
+
+((rose red) (lily white) (buttercup yellow))
+
+Here we regard red as the value associated with rose. One advantage of this kind of alist is that you can store other related information—even a list of other items—in the CDR of the CDR. One disadvantage is that you cannot use rassq (see below) to find the element containing a given value. When neither of these considerations is important, the choice is a matter of taste, as long as you are consistent about it for any given alist.
+
+The same alist shown above could be regarded as having the associated value in the CDR of the element; the value associated with rose would be the list (red).
+
+Association lists are often used to record information that you might otherwise keep on a stack, since new associations may be added easily to the front of the list. When searching an association list for an association with a given key, the first one found is returned, if there is more than one.
+
+In Emacs Lisp, it is not an error if an element of an association list is not a cons cell. The alist search functions simply ignore such elements. Many other versions of Lisp signal errors in such cases.
+
+Note that property lists are similar to association lists in several respects. A property list behaves like an association list in which each key can occur only once. See Property Lists, for a comparison of property lists and association lists.
+****** Function: assoc key alist &optional testfn ¶
+
+    This function returns the first association for key in alist, comparing key against the alist elements using testfn if it is a function, and equal otherwise (see Equality Predicates). If testfn is a function, it is called with two arguments: the CAR of an element from alist and key. The function returns nil if no association in alist has a CAR equal to key, as tested by testfn. For example:
+
+    (setq trees '((pine . cones) (oak . acorns) (maple . seeds)))
+         ⇒ ((pine . cones) (oak . acorns) (maple . seeds))
+    (assoc 'oak trees)
+         ⇒ (oak . acorns)
+    (cdr (assoc 'oak trees))
+         ⇒ acorns
+    (assoc 'birch trees)
+         ⇒ nil
+
+    Here is another example, in which the keys and values are not symbols:
+
+    (setq needles-per-cluster
+          '((2 "Austrian Pine" "Red Pine")
+            (3 "Pitch Pine")
+            (5 "White Pine")))
+
+    (cdr (assoc 3 needles-per-cluster))
+         ⇒ ("Pitch Pine")
+    (cdr (assoc 2 needles-per-cluster))
+         ⇒ ("Austrian Pine" "Red Pine")
+
+The function assoc-string is much like assoc except that it ignores certain differences between strings. See Comparison of Characters and Strings.
+****** Function: rassoc value alist ¶
+
+    This function returns the first association with value value in alist. It returns nil if no association in alist has a CDR equal to value.
+
+    rassoc is like assoc except that it compares the CDR of each alist association instead of the CAR. You can think of this as reverse assoc, finding the key for a given value. 
+****** Function: assq key alist ¶
+    This function is like assoc in that it returns the first association for key in alist, but it makes the comparison using eq. assq returns nil if no association in alist has a CAR eq to key. This function is used more often than assoc, since eq is faster than equal and most alists use symbols as keys. See Equality Predicates.
+
+    (setq trees '((pine . cones) (oak . acorns) (maple . seeds)))
+         ⇒ ((pine . cones) (oak . acorns) (maple . seeds))
+    (assq 'pine trees)
+         ⇒ (pine . cones)
+
+    On the other hand, assq is not usually useful in alists where the keys may not be symbols:
+
+    (setq leaves
+          '(("simple leaves" . oak)
+            ("compound leaves" . horsechestnut)))
+
+    (assq "simple leaves" leaves)
+         ⇒ Unspecified; might be nil or ("simple leaves" . oak).
+    (assoc "simple leaves" leaves)
+         ⇒ ("simple leaves" . oak)
+****** Function: alist-get key alist &optional default remove testfn ¶
+    This function is similar to assq. It finds the first association (key . value) by comparing key with alist elements, and, if found, returns the value of that association. If no association is found, the function returns default. Comparison of key against alist elements uses the function specified by testfn, defaulting to eq.
+
+    This is a generalized variable (see Generalized Variables) that can be used to change a value with setf. When using it to set a value, optional argument remove non-nil means to remove key’s association from alist if the new value is eql to default. 
+****** Function: rassq value alist ¶
+
+    This function returns the first association with value value in alist. It returns nil if no association in alist has a CDR eq to value.
+
+    rassq is like assq except that it compares the CDR of each alist association instead of the CAR. You can think of this as reverse assq, finding the key for a given value.
+
+    For example:
+
+    (setq trees '((pine . cones) (oak . acorns) (maple . seeds)))
+
+    (rassq 'acorns trees)
+         ⇒ (oak . acorns)
+    (rassq 'spores trees)
+         ⇒ nil
+
+    rassq cannot search for a value stored in the CAR of the CDR of an element:
+
+    (setq colors '((rose red) (lily white) (buttercup yellow)))
+
+    (rassq 'white colors)
+         ⇒ nil
+
+    In this case, the CDR of the association (lily white) is not the symbol white, but rather the list (white). This becomes clearer if the association is written in dotted pair notation:
+
+    (lily white) ≡ (lily . (white))
+****** Function: assoc-default key alist &optional test default ¶
+
+    This function searches alist for a match for key. For each element of alist, it compares the element (if it is an atom) or the element’s CAR (if it is a cons) against key, by calling test with two arguments: the element or its CAR, and key. The arguments are passed in that order so that you can get useful results using string-match with an alist that contains regular expressions (see Regular Expression Searching). If test is omitted or nil, equal is used for comparison.
+
+    If an alist element matches key by this criterion, then assoc-default returns a value based on this element. If the element is a cons, then the value is the element’s CDR. Otherwise, the return value is default.
+
+    If no alist element matches key, assoc-default returns nil. 
+****** Function: copy-alist alist ¶
+
+    This function returns a two-level deep copy of alist: it creates a new copy of each association, so that you can alter the associations of the new alist without changing the old one.
+
+    (setq needles-per-cluster
+          '((2 . ("Austrian Pine" "Red Pine"))
+            (3 . ("Pitch Pine"))
+
+            (5 . ("White Pine"))))
+    ⇒
+    ((2 "Austrian Pine" "Red Pine")
+     (3 "Pitch Pine")
+     (5 "White Pine"))
+
+    (setq copy (copy-alist needles-per-cluster))
+    ⇒
+    ((2 "Austrian Pine" "Red Pine")
+     (3 "Pitch Pine")
+     (5 "White Pine"))
+
+    (eq needles-per-cluster copy)
+         ⇒ nil
+    (equal needles-per-cluster copy)
+         ⇒ t
+    (eq (car needles-per-cluster) (car copy))
+         ⇒ nil
+    (cdr (car (cdr needles-per-cluster)))
+         ⇒ ("Pitch Pine")
+
+    (eq (cdr (car (cdr needles-per-cluster)))
+        (cdr (car (cdr copy))))
+         ⇒ t
+
+    This example shows how copy-alist makes it possible to change the associations of one copy without affecting the other:
+
+    (setcdr (assq 3 copy) '("Martian Vacuum Pine"))
+    (cdr (assq 3 needles-per-cluster))
+         ⇒ ("Pitch Pine")
+****** Function: assq-delete-all key alist ¶
+
+    This function deletes from alist all the elements whose CAR is eq to key, much as if you used delq to delete each such element one by one. It returns the shortened alist, and often modifies the original list structure of alist. For correct results, use the return value of assq-delete-all rather than looking at the saved value of alist.
+
+    (setq alist (list '(foo 1) '(bar 2) '(foo 3) '(lose 4)))
+         ⇒ ((foo 1) (bar 2) (foo 3) (lose 4))
+    (assq-delete-all 'foo alist)
+         ⇒ ((bar 2) (lose 4))
+    alist
+         ⇒ ((foo 1) (bar 2) (lose 4))
+****** Function: assoc-delete-all key alist &optional test ¶
+
+    This function is like assq-delete-all except that it accepts an optional argument test, a predicate function to compare the keys in alist. If omitted or nil, test defaults to equal. As assq-delete-all, this function often modifies the original list structure of alist. 
+****** Function: rassq-delete-all value alist ¶
+
+    This function deletes from alist all the elements whose CDR is eq to value. It returns the shortened alist, and often modifies the original list structure of alist. rassq-delete-all is like assq-delete-all except that it compares the CDR of each alist association instead of the CAR. 
+
+Macro: let-alist alist body ¶
+
+    Creates a binding for each symbol used as keys the association list alist, prefixed with dot. This can be useful when accessing several items in the same association list, and it’s best understood through a simple example:
+
+    (setq colors '((rose . red) (lily . white) (buttercup . yellow)))
+    (let-alist colors
+      (if (eq .rose 'red)
+          .lily))
+         ⇒ white
+
+    The body is inspected at compilation time, and only the symbols that appear in body with a ‘.’ as the first character in the symbol name will be bound. Finding the keys is done with assq, and the cdr of the return value of this assq is assigned as the value for the binding.
+
+    Nested association lists is supported:
+
+    (setq colors '((rose . red) (lily (belladonna . yellow) (brindisi . pink))))
+    (let-alist colors
+      (if (eq .rose 'red)
+          .lily.belladonna))
+         ⇒ yellow
+
+    Nesting let-alist inside each other is allowed, but the code in the inner let-alist can’t access the variables bound by the outer let-alist. 
+
+Footnotes
+(6)
+
+This usage of “key” is not related to the term “key sequence”; it means a value used to look up an item in a table. In this case, the table is the alist, and the alist associations are the items.
+
+**** 5.7 Using Lists as Sets
+***** unordered mathematical set—simply : 
+A list can represent an unordered mathematical set—simply consider a value an element of a set if it appears in the list, and ignore the order of the list. To form the union of two sets, use append (as long as you don’t mind having duplicate elements). You can remove equal duplicates using delete-dups or seq-uniq. Other useful functions for sets include memq and delq, and their equal versions, member and delete.
+
+    Common Lisp note: Common Lisp has functions union (which avoids duplicate elements) and intersection for set operations. In Emacs Lisp, variants of these facilities are provided by the cl-lib library. See Lists as Sets in Common Lisp Extensions. 
+
+***** Function: memq object list ¶
+    This function tests to see whether object is a member of list. If it is, memq returns a list starting with the first occurrence of object. Otherwise, it returns nil. The letter ‘q’ in memq says that it uses eq to compare object against the elements of the list. For example:
+
+    (memq 'b '(a b c b a))
+         ⇒ (b c b a)
+
+    (memq '(2) '((1) (2)))    ; The two (2)s need not be eq.
+         ⇒ Unspecified; might be nil or ((2)).
+
+***** Function: delq object list ¶
+
+    This function destructively removes all elements eq to object from list, and returns the resulting list. The letter ‘q’ in delq says that it uses eq to compare object against the elements of the list, like memq and remq.
+
+    Typically, when you invoke delq, you should use the return value by assigning it to the variable which held the original list. The reason for this is explained below. 
+
+The delq function deletes elements from the front of the list by simply advancing down the list, and returning a sublist that starts after those elements. For example:
+
+(delq 'a '(a b c)) ≡ (cdr '(a b c))
+
+When an element to be deleted appears in the middle of the list, removing it involves changing the CDRs (see Altering the CDR of a List).
+
+(setq sample-list (list 'a 'b 'c '(4)))
+     ⇒ (a b c (4))
+
+(delq 'a sample-list)
+     ⇒ (b c (4))
+
+sample-list
+     ⇒ (a b c (4))
+
+(delq 'c sample-list)
+     ⇒ (a b (4))
+
+sample-list
+     ⇒ (a b (4))
+
+Note that (delq 'c sample-list) modifies sample-list to splice out the third element, but (delq 'a sample-list) does not splice anything—it just returns a shorter list. Don’t assume that a variable which formerly held the argument list now has fewer elements, or that it still holds the original list! Instead, save the result of delq and use that. Most often we store the result back into the variable that held the original list:
+
+(setq flowers (delq 'rose flowers))
+
+In the following example, the (list 4) that delq attempts to match and the (4) in the sample-list are equal but not eq:
+
+(delq (list 4) sample-list)
+     ⇒ (a c (4))
+
+If you want to delete elements that are equal to a given value, use delete (see below).
+
+***** Function: remq object list ¶
+
+    This function returns a copy of list, with all elements removed which are eq to object. The letter ‘q’ in remq says that it uses eq to compare object against the elements of list.
+
+    (setq sample-list (list 'a 'b 'c 'a 'b 'c))
+         ⇒ (a b c a b c)
+
+    (remq 'a sample-list)
+         ⇒ (b c b c)
+
+    sample-list
+         ⇒ (a b c a b c)
+
+***** Function: memql object list ¶
+
+    The function memql tests to see whether object is a member of list, comparing members with object using eql, so floating-point elements are compared by value. If object is a member, memql returns a list starting with its first occurrence in list. Otherwise, it returns nil.
+
+    Compare this with memq:
+
+    (memql 1.2 '(1.1 1.2 1.3))  ; 1.2 and 1.2 are eql.
+         ⇒ (1.2 1.3)
+
+    (memq 1.2 '(1.1 1.2 1.3))  ; The two 1.2s need not be eq.
+         ⇒ Unspecified; might be nil or (1.2 1.3).
+
+The following three functions are like memq, delq and remq, but use equal rather than eq to compare elements. See Equality Predicates.
+
+***** Function: member object list ¶
+
+    The function member tests to see whether object is a member of list, comparing members with object using equal. If object is a member, member returns a list starting with its first occurrence in list. Otherwise, it returns nil.
+
+    Compare this with memq:
+
+    (member '(2) '((1) (2)))  ; (2) and (2) are equal.
+         ⇒ ((2))
+
+    (memq '(2) '((1) (2)))    ; The two (2)s need not be eq.
+         ⇒ Unspecified; might be nil or (2).
+
+    ;; Two strings with the same contents are equal.
+    (member "foo" '("foo" "bar"))
+         ⇒ ("foo" "bar")
+
+***** Function: delete object sequence ¶
+
+    This function removes all elements equal to object from sequence, and returns the resulting sequence.
+
+    If sequence is a list, delete is to delq as member is to memq: it uses equal to compare elements with object, like member; when it finds an element that matches, it cuts the element out just as delq would. As with delq, you should typically use the return value by assigning it to the variable which held the original list.
+
+    If sequence is a vector or string, delete returns a copy of sequence with all elements equal to object removed.
+
+    For example:
+
+    (setq l (list '(2) '(1) '(2)))
+    (delete '(2) l)
+         ⇒ ((1))
+    l
+         ⇒ ((2) (1))
+    ;; If you want to change l reliably,
+    ;; write (setq l (delete '(2) l)).
+
+    (setq l (list '(2) '(1) '(2)))
+    (delete '(1) l)
+         ⇒ ((2) (2))
+    l
+         ⇒ ((2) (2))
+    ;; In this case, it makes no difference whether you set l,
+    ;; but you should do so for the sake of the other case.
+
+    (delete '(2) [(2) (1) (2)])
+         ⇒ [(1)]
+
+***** Function: remove object sequence ¶
+
+    This function is the non-destructive counterpart of delete. It returns a copy of sequence, a list, vector, or string, with elements equal to object removed. For example:
+
+    (remove '(2) '((2) (1) (2)))
+         ⇒ ((1))
+
+    (remove '(2) [(2) (1) (2)])
+         ⇒ [(1)]
+
+    Common Lisp note: The functions member, delete and remove in GNU Emacs Lisp are derived from Maclisp, not Common Lisp. The Common Lisp versions do not use equal to compare elements. 
+
+***** Function: member-ignore-case object list ¶
+
+    This function is like member, except that object should be a string and that it ignores differences in letter-case and text representation: upper-case and lower-case letters are treated as equal, and unibyte strings are converted to multibyte prior to comparison. 
+
+***** Function: delete-dups list ¶
+
+    This function destructively removes all equal duplicates from list, stores the result in list and returns it. Of several equal occurrences of an element in list, delete-dups keeps the first one. See seq-uniq for non-destructive operation (see Sequences). 
+
+See also the function add-to-list, in Modifying List Variables, for a way to add an element to a list stored in a variable and used as a set. 
 
 **** map over 
 ***** [[https://emacs.stackexchange.com/questions/2961/how-can-i-map-over-a-vector-and-get-a-vector][How can I map over a vector and get a vector?]]
@@ -11557,6 +11960,279 @@ Use Per-Directory Local Variables in .dir-locals.el.
 		 (list v0 v))
 	 ;; => ([1 2 3 4] [2 3 4 5])
 	 [[https://emacs.stackexchange.com/a/45946][share]]
+*** defstruct
+**** 11 Structures info
+***** structure mechanism provides : 
+The Common Lisp structure mechanism provides a general way to define data types similar to C’s struct types. A structure is a Lisp object containing some number of slots, each of which can hold any Lisp data object. Functions are provided for accessing and setting the slots, creating or copying structure objects, and recognizing objects of a particular structure type.
+
+In true Common Lisp, each structure type is a new type distinct from all existing Lisp types. Since the underlying Emacs Lisp system provides no way to create new distinct types, this package implements structures as vectors (or lists upon request) with a special “tag” symbol to identify them.
+***** Macro: cl-defstruct name slots… ¶
+
+    The cl-defstruct form defines a new structure type called name, with the specified slots. (The slots may begin with a string which documents the structure type.) In the simplest case, name and each of the slots are symbols. For example,
+
+    (cl-defstruct person first-name age sex)
+
+    defines a struct type called person that contains three slots. Given a person object p, you can access those slots by calling (person-first-name p), (person-age p), and (person-sex p). You can also change these slots by using setf on any of these place forms, for example:
+
+    (cl-incf (person-age birthday-boy))
+
+    You can create a new person by calling make-person, which takes keyword arguments :first-name, :age, and :sex to specify the initial values of these slots in the new object. (Omitting any of these arguments leaves the corresponding slot “undefined”, according to the Common Lisp standard; in Emacs Lisp, such uninitialized slots are filled with nil.)
+***** copy-person : 
+    Given a person, (copy-person p) makes a new object of the same type whose slots are eq to those of p.
+***** person-p : 
+    Given any Lisp object x, (person-p x) returns true if x is a person, and false otherwise.
+
+    Accessors like person-first-name normally check their arguments (effectively using person-p) and signal an error if the argument is the wrong type. This check is affected by (optimize (safety …)) declarations. Safety level 1, the default, uses a somewhat optimized check that will detect all incorrect arguments, but may use an uninformative error message (e.g., “expected a vector” instead of “expected a person”). Safety level 0 omits all checks except as provided by the underlying aref call; safety levels 2 and 3 do rigorous checking that will always print a descriptive error message for incorrect inputs. See Declarations.
+
+    (setq dave (make-person :first-name "Dave" :sex 'male))
+         ⇒ [cl-struct-person "Dave" nil male]
+    (setq other (copy-person dave))
+         ⇒ [cl-struct-person "Dave" nil male]
+    (eq dave other)
+         ⇒ nil
+    (eq (person-first-name dave) (person-first-name other))
+         ⇒ t
+    (person-p dave)
+         ⇒ t
+    (person-p [1 2 3 4])
+         ⇒ nil
+    (person-p "Bogus")
+         ⇒ nil
+    (person-p '[cl-struct-person counterfeit person object])
+         ⇒ t
+
+***** slot-options : 
+    In general, name is either a name symbol or a list of a name symbol followed by any number of structure options; each slot is either a slot symbol or a list of the form ‘(slot-name default-value slot-options…)’. The default-value is a Lisp form that is evaluated any time an instance of the structure type is created without specifying that slot’s value.
+
+    (cl-defstruct person
+         (first-name nil :read-only t)
+         age
+         (sex 'unknown))
+    slot-options is a list of keyword-value pairs, where the following keywords can be used:
+
+    :read-only
+
+        A non-nil value means the slot should not be setf-able; the slot’s value is determined when the object is created and does not change afterward.
+    :type
+
+        The expected type of the values held in this slot.
+    :documentation
+
+        A documentation string describing the slot. 
+
+    Other slot options are currently ignored.
+
+    For obscure historical reasons, structure options take a different form than slot options. A structure option is either a keyword symbol, or a list beginning with a keyword symbol possibly followed by arguments. (By contrast, slot options are key-value pairs not enclosed in lists.)
+
+    (cl-defstruct (person (:constructor create-person)
+                          (:type list)
+                          :named)
+         first-name age sex)
+
+    The following structure options are recognized.
+
+    :conc-name
+
+        The argument is a symbol whose print name is used as the prefix for the names of slot accessor functions. The default is the name of the struct type followed by a hyphen. The option (:conc-name p-) would change this prefix to p-. Specifying nil as an argument means no prefix, so that the slot names themselves are used to name the accessor functions.
+    :constructor
+
+        In the simple case, this option takes one argument which is an alternate name to use for the constructor function. The default is make-name, e.g., make-person. The above example changes this to create-person. Specifying nil as an argument means that no standard constructor should be generated at all.
+
+        In the full form of this option, the constructor name is followed by an arbitrary argument list. See Program Structure, for a description of the format of Common Lisp argument lists. All options, such as &rest and &key, are supported. The argument names should match the slot names; each slot is initialized from the corresponding argument. Slots whose names do not appear in the argument list are initialized based on the default-value in their slot descriptor. Also, &optional and &key arguments that don’t specify defaults take their defaults from the slot descriptor. It is valid to include arguments that don’t correspond to slot names; these are useful if they are referred to in the defaults for optional, keyword, or &aux arguments that do correspond to slots.
+
+        You can specify any number of full-format :constructor options on a structure. The default constructor is still generated as well unless you disable it with a simple-format :constructor option.
+
+        (cl-defstruct
+            (person
+             (:constructor nil)   ; no default constructor
+             (:constructor new-person
+                           (first-name sex &optional (age 0)))
+             (:constructor new-hound (&key (first-name "Rover")
+                                           (dog-years 0)
+                                      &aux (age (* 7 dog-years))
+                                           (sex 'canine))))
+            first-name age sex)
+
+        The first constructor here takes its arguments positionally rather than by keyword. (In official Common Lisp terminology, constructors that work By Order of Arguments instead of by keyword are called “BOA constructors”. No, I’m not making this up.) For example, (new-person "Jane" 'female) generates a person whose slots are "Jane", 0, and female, respectively.
+
+        The second constructor takes two keyword arguments, :name, which initializes the name slot and defaults to "Rover", and :dog-years, which does not itself correspond to a slot but which is used to initialize the age slot. The sex slot is forced to the symbol canine with no syntax for overriding it.
+    :copier
+
+        The argument is an alternate name for the copier function for this type. The default is copy-name. nil means not to generate a copier function. (In this implementation, all copier functions are simply synonyms for copy-sequence.)
+    :predicate
+
+        The argument is an alternate name for the predicate that recognizes objects of this type. The default is name-p. nil means not to generate a predicate function. (If the :type option is used without the :named option, no predicate is ever generated.)
+
+        In true Common Lisp, typep is always able to recognize a structure object even if :predicate was used. In this package, cl-typep simply looks for a function called typename-p, so it will work for structure types only if they used the default predicate name.
+    :include
+
+        This option implements a very limited form of C++-style inheritance. The argument is the name of another structure type previously created with cl-defstruct. The effect is to cause the new structure type to inherit all of the included structure’s slots (plus, of course, any new slots described by this struct’s slot descriptors). The new structure is considered a “specialization” of the included one. In fact, the predicate and slot accessors for the included type will also accept objects of the new type.
+
+        If there are extra arguments to the :include option after the included-structure name, these options are treated as replacement slot descriptors for slots in the included structure, possibly with modified default values. Borrowing an example from Steele:
+
+        (cl-defstruct person first-name (age 0) sex)
+                ⇒ person
+        (cl-defstruct (astronaut (:include person (age 45)))
+             helmet-size
+             (favorite-beverage 'tang))
+                ⇒ astronaut
+
+        (setq joe (make-person :first-name "Joe"))
+             ⇒ [cl-struct-person "Joe" 0 nil]
+        (setq buzz (make-astronaut :first-name "Buzz"))
+             ⇒ [cl-struct-astronaut "Buzz" 45 nil nil tang]
+
+        (list (person-p joe) (person-p buzz))
+             ⇒ (t t)
+        (list (astronaut-p joe) (astronaut-p buzz))
+             ⇒ (nil t)
+
+        (person-first-name buzz)
+             ⇒ "Buzz"
+        (astronaut-first-name joe)
+             ⇒ error: "astronaut-first-name accessing a non-astronaut"
+
+        Thus, if astronaut is a specialization of person, then every astronaut is also a person (but not the other way around). Every astronaut includes all the slots of a person, plus extra slots that are specific to astronauts. Operations that work on people (like person-first-name) work on astronauts just like other people.
+    :noinline
+
+        If this option is present, this structure’s functions will not be inlined, even functions that normally would.
+    :print-function
+
+        In full Common Lisp, this option allows you to specify a function that is called to print an instance of the structure type. The Emacs Lisp system offers no hooks into the Lisp printer which would allow for such a feature, so this package simply ignores :print-function.
+    :type
+
+        The argument should be one of the symbols vector or list. This tells which underlying Lisp data type should be used to implement the new structure type. Records are used by default, but (:type vector) will cause structure objects to be stored as vectors and (:type list) lists instead.
+
+        The record and vector representations for structure objects have the advantage that all structure slots can be accessed quickly, although creating them are a bit slower in Emacs Lisp. Lists are easier to create, but take a relatively long time accessing the later slots.
+    :named
+
+        This option, which takes no arguments, causes a characteristic “tag” symbol to be stored at the front of the structure object. Using :type without also using :named will result in a structure type stored as plain vectors or lists with no identifying features.
+
+        The default, if you don’t specify :type explicitly, is to use records, which are always tagged. Therefore, :named is only useful in conjunction with :type.
+
+        (cl-defstruct (person1) first-name age sex)
+        (cl-defstruct (person2 (:type list) :named) first-name age sex)
+        (cl-defstruct (person3 (:type list)) first-name age sex)
+        (cl-defstruct (person4 (:type vector)) first-name age sex)
+
+        (setq p1 (make-person1))
+             ⇒ #s(person1 nil nil nil)
+        (setq p2 (make-person2))
+             ⇒ (person2 nil nil nil)
+        (setq p3 (make-person3))
+             ⇒ (nil nil nil)
+        (setq p4 (make-person4))
+             ⇒ [nil nil nil]
+
+        (person1-p p1)
+             ⇒ t
+        (person2-p p2)
+             ⇒ t
+        (person3-p p3)
+             ⇒ error: function person3-p undefined
+
+        Since unnamed structures don’t have tags, cl-defstruct is not able to make a useful predicate for recognizing them. Also, accessors like person3-first-name will be generated but they will not be able to do any type checking. The person3-first-name function, for example, will simply be a synonym for car in this case. By contrast, person2-first-name is able to verify that its argument is indeed a person2 object before proceeding.
+    :initial-offset
+
+        The argument must be a nonnegative integer. It specifies a number of slots to be left “empty” at the front of the structure. If the structure is named, the tag appears at the specified position in the list or vector; otherwise, the first slot appears at that position. Earlier positions are filled with nil by the constructors and ignored otherwise. If the type :includes another type, then :initial-offset specifies a number of slots to be skipped between the last slot of the included type and the first new slot. 
+
+Except as noted, the cl-defstruct facility of this package is entirely compatible with that of Common Lisp.
+
+The cl-defstruct package also provides a few structure introspection functions.
+
+***** Function: cl-struct-sequence-type struct-type ¶
+
+    This function returns the underlying data structure for struct-type, which is a symbol. It returns record, vector or list, or nil if struct-type is not actually a structure. 
+
+***** Function: cl-struct-slot-info struct-type ¶
+
+    This function returns a list of slot descriptors for structure struct-type. Each entry in the list is (name . opts), where name is the name of the slot and opts is the list of slot options given to defstruct. Dummy entries represent the slots used for the struct name and that are skipped to implement :initial-offset. 
+
+***** Function: cl-struct-slot-offset struct-type slot-name ¶
+
+    Return the offset of slot slot-name in struct-type. The returned zero-based slot index is relative to the start of the structure data type and is adjusted for any structure name and :initial-offset slots. Signal error if struct struct-type does not contain slot-name. 
+
+***** Function: cl-struct-slot-value struct-type slot-name inst ¶
+
+    Return the value of slot slot-name in inst of struct-type. struct and slot-name are symbols. inst is a structure instance. This routine is also a setf place. Can signal the same errors as cl-struct-slot-offset. 
+**** defstruct : 
+(defstruct person
+name
+age
+waist-size
+favorite-color)
+**** defstruct defvalue : 
+(defstruct monster (health (randval 10)))
+
+Let’s try creating some monsters:
+> (make-monster)
+#S(MONSTER :HEALTH 7)
+> (make-monster)
+#S(MONSTER :HEALTH 2)
+> (make-monster)
+#S(MONSTER :HEALTH 5)
+**** defstruct :include monster 
+(defstruct (orc (:include monster)) (club-level (randval 8)))
+(push #'make-orc *monster-builders*)
+
+
+(defmethod monster-show ((m orc))
+(princ "A wicked orc with a level ")
+(princ (orc-club-level m))
+(princ " club"))
+
+(defmethod monster-attack ((m orc))
+(let ((x (randval (orc-club-level m))))
+(princ "An orc swings his club at you and knocks off ")
+(princ x)
+(princ " of your health points. ")
+(decf *player-health* x)))
+**** defparameter : 
+Having defined this structure, we can create instances of a person using
+the make-person command, a special function that defstruct has automatically
+created for us:
+> (defparameter *bob* (make-person :name "Bob"
+:age 35
+:waist-size 32
+:favorite-color "blue"))
+*BOB*
+Now when we enter *bob* into the REPL, we see our new person marked as
+a structure with the #S prefix. We also see that the structure is of type person, and
+the values of each of its properties (name, age, waist size, and favorite-color):
+> *bob*
+#S(PERSON :NAME "Bob" :AGE 35 :WAIST-SIZE 32 :FAVORITE-COLOR "blue")
+**** defparameter *that-guy* #S : 
+The Lisp reader can also create a person directly from the printed repre-
+sentation of the person, another great example of the print/read symmetry
+in Lisp:
+� > (defparameter *that-guy* #S(person :name "Bob" :age 35 :waist-size 32
+:favorite-color "blue"))
+� > (person-age *that-guy*)
+35
+Here, we’re creating a new variable called *that-guy*, and we set its value
+using only the printed representation of the person �. This variable now has
+a real person structure in it, just as if we had used the make-person function �.
+As you can see, defstruct is quite a powerful command that can be used
+to build special functions that make it easy to create instances of a new object
+and access its propertie
+**** setf (person-age  : 
+(person-age *bob*)
+35
+We can also use setf with these commands to change Bob’s age. (Happy
+birthday, Bob!)
+> (setf (person-age *bob*) 36)
+**** defmethod : 
+> (defmethod add ((a number) (b number))
+(+ a b))
+ADD
+> (defmethod add ((a list) (b list))
+(append a b))
+ADD
+> (add 3 4)
+7
+> (add '(a b) '(c d))
+(A B C D)
+
 ** Comparison : 
 *** 4.5 Comparison of Characters and Strings
 **** Function: char-equal character1 character2
@@ -12099,8 +12775,9 @@ shared and should not be modified.  *Note Self-Evaluating Forms::.
 Functions::), which causes an anonymous lambda expression written in
 Lisp to be compiled, and ‘`’ (*note Backquote::), which is used to quote
 only part of a list, while computing and substituting other parts.
-** Byte-Compiled Code : 
-*** 17.1 Performance of Byte-Compiled Code
+** Performance : 
+*** Byte-Compiled Code : 
+**** 17.1 Performance of Byte-Compiled Code
 ======================================
 
 A byte-compiled function is not as efficient as a primitive function
@@ -12126,6 +12803,113 @@ Here is an example:
    In this example, the interpreted code required more than 5 seconds to
 run, whereas the byte-compiled code required less than 1 second.  These
 results are representative, but actual results may vary.
+*** test
+**** benchmark-run
+***** (benchmark-run  (print-world))
+(0.210012 1 0.20101199999999153)
+(0.010001 0 0.0)
+(0.011 0 0.0) [4 times]
+(0.012001 0 0.0)
+(0.009001 0 0.0)
+(0.010001 0 0.0)
+
+***** benchmark-run (cl-loop : 
+(benchmark-run (cl-loop for i below (* 1000 1000) sum i))
+**** Benchmark
+
+The most straightforward options is the built-in benchmark package. Its usage is remarkably simple:
+
+(benchmark 100 (form (to be evaluated)))
+
+It’s autoloaded, so you don’t even need to require it.
+не интерактивное
+тоесть например если требуется проверить что быстрее печатает
+оно не печатает и сделает это быстро и значит не показательно
+но нет! странно но оно печает но приэтом 0
+**** Benchstat
+Benchmarking is not only about getting the numbers, it is also about making decisions based on result analysis.
+
+There is benchstat.el package on MELPA which you can use to get features that benchstat program provides.
+
+It implements comparison-based benchmarking where you examine X performance properties against Y.
+
+Benchstat functions can be viewed as a benchmark-run-compiled wrapper that not only collects the information, but gives it back in easy to read an interpret format. It includes:
+
+    Elapsed time delta between X and Y
+    Mean average time
+    Allocations amount
+
+Very simple usage example:
+
+(require 'benchstat)
+
+;; Decide how much repetitions is needed.
+;; This is the same as `benchmark-run-compiled` REPETITIONS argument.
+(defconst repetitions 1000000)
+
+;; Collect old code profile.
+(benchstat-run :old repetitions (list 1 2))
+;; Collect new code profile.
+(benchstat-run :new repetitions (cons 1 2))
+
+;; Display the results.
+;; Can be run interactively by `M-x benchstat-compare'.
+(benchstat-compare)
+
+The benchstat-compare will render results in a temporary buffer:
+
+name   old time/op    new time/op    delta
+Emacs    44.2ms ± 6%    25.0ms ±15%  -43.38%  (p=0.000 n=10+10)
+
+name   old allocs/op  new allocs/op  delta
+Emacs      23.0 ± 0%      11.4 ± 5%  -50.43%  (p=0.000 n=10+10)
+
+You will need benchstat program binary though. If you used Go programming language, most likely you have one in your system already. Otherwise there is an option of compiling it from the sources.
+
+Precompiled binary for linux/amd64 can be found at github release page.
+**** init.el : 
+If you're measuring init.el, you will probably be interested in the emacs startup profiler. –
+Wilfred Hughes
+Oct 1, 2014 at 9:58
+Macros are awesome. This deserves more votes. – 
+Malabarba
+Oct 1, 2014 at 12:58
+2
+Emacs records the total init time. You can show it with the command emacs-init-time. – 
+Joe
+Oct 1, 2014 at 13:21
+1
+@WilfredHughes yes, I do use esup and I like it. But once again, the interest of such a thing as with-timer is not so much to profile something thorougly. The real interest is that you always have profiling information. Whenever I start emacs, I have a buch of lines in my *Messages* buffer that tell me which part took how long. If I detect anything abnormal, I can then use any of the more adequate tools to profile and optimize things. – 
+François Févotte
+Oct 1, 2014 at 14:20
+@JoeS Yes, emacs-init-time does produce interesting information. However, it only gives an inclusive elapsed time, without the possibility to break down individual parts of the initialization. – 
+François Févotte
+**** Profiling
+
+Benchmark is good at overall tests, but if you’re having performance problems it doesn’t tell you which functions are causing the problem. For that, you have the (also built-in) profiler.
+
+    Start it with M-x profiler-start.
+    Do some time consuming operations.
+    Get the report with M-x profiler-report.
+
+You should be taken to a buffer with a navigatable tree of function calls.
+Profiler screenshot
+Share
+Improve this answer
+Follow
+edited Oct 1, 2014 at 10:05
+answered Oct 1, 2014 at 9:36
+Malabarba's user avatar
+Malabarba
+23k66 gold badges7979 silver badges164164 bronze badges
+
+    benchmark function doesn't seem to work: when I do inside an opened .c file (benchmark 100 (c-font-lock-fontify-region 0 17355)), I keep getting void-function jit-lock-bounds. – 
+    Hi-Angel
+    Mar 6, 2019 at 22:38
+    1
+    FTR: as an alternative to benchmark there are functions benchmark-run and benchmark-run-compiled. For me the main difference was that both functions actually work (see the prev. comment) :Ь – 
+    Hi-Angel
+    Mar 8, 2019 at 16:44
 
 
 

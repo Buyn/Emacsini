@@ -1,6 +1,7 @@
 * Tasks
-** TODO Find way to esy oprn this file                                :Learn:
-  
+** TODO Find way to esy oprn this file        :Learn:
+ скопировать этот фаил в дропбокс 
    [[file:~/INI/js-cfg.el::(yas/initialize)]]
-** TODO is contekst is mandatori
-  
+** TODO Передать маме Апле моно блок
+*** Предложить маме такую возможность
+** TODO Перевести и настроить себе делку
